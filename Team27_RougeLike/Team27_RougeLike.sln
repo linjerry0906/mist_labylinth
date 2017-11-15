@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Team27_RougeLike", "Team27_RougeLike\Team27_RougeLike\Team27_RougeLike.csproj", "{07E2731C-C523-4F95-8783-F1DCB43423C5}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Team27_RougeLikeContent", "Team27_RougeLike\Team27_RougeLikeContent\Team27_RougeLikeContent.contentproj", "{2E0FBB49-9D3A-4D29-B7F5-8325684AF7CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07E2731C-C523-4F95-8783-F1DCB43423C5}.Debug|x86.ActiveCfg = Debug|x86
+		{07E2731C-C523-4F95-8783-F1DCB43423C5}.Debug|x86.Build.0 = Debug|x86
+		{07E2731C-C523-4F95-8783-F1DCB43423C5}.Release|x86.ActiveCfg = Release|x86
+		{07E2731C-C523-4F95-8783-F1DCB43423C5}.Release|x86.Build.0 = Release|x86
+		{2E0FBB49-9D3A-4D29-B7F5-8325684AF7CD}.Debug|x86.ActiveCfg = Debug|x86
+		{2E0FBB49-9D3A-4D29-B7F5-8325684AF7CD}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
