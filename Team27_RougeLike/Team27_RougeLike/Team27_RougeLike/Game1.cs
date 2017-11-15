@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Team27_RougeLike.Device;
 
 namespace Team27_RougeLike
 {
@@ -16,8 +17,8 @@ namespace Team27_RougeLike
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private GameDevice gameDevice;
 
         public Game1()
         {
@@ -34,6 +35,7 @@ namespace Team27_RougeLike
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            gameDevice = new GameDevice(Content, GraphicsDevice);
 
             base.Initialize();
         }
@@ -45,7 +47,6 @@ namespace Team27_RougeLike
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -57,6 +58,7 @@ namespace Team27_RougeLike
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            gameDevice.UnloadContent();
         }
 
         /// <summary>
@@ -72,6 +74,7 @@ namespace Team27_RougeLike
                 this.Exit();
 
             // TODO: Add your update logic here
+            gameDevice.Update();
 
             base.Update(gameTime);
         }
