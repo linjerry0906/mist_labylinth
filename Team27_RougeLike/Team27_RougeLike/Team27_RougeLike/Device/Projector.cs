@@ -13,7 +13,7 @@ namespace Team27_RougeLike.Device
         private Viewport viewport;
 
         private Matrix world;
-        private Matrix view;
+        private Matrix projection;
         private Matrix lookat;
 
         private Vector3 position;
@@ -24,7 +24,7 @@ namespace Team27_RougeLike.Device
 
             position = new Vector3(0, 0, 1);
             world = Matrix.CreateWorld(Vector3.Zero, Vector3.Forward, Vector3.Up);
-            view = Matrix.CreatePerspectiveFieldOfView(
+            projection = Matrix.CreatePerspectiveFieldOfView(
                 (float)(45 * Math.PI / 180),
                 viewport.AspectRatio,
                 0.1f,
@@ -42,9 +42,9 @@ namespace Team27_RougeLike.Device
         /// <summary>
         /// ビューマトリックス
         /// </summary>
-        public Matrix View
+        public Matrix Projection
         {
-            get { return view; }
+            get { return projection; }
         }
         /// <summary>
         /// 注目点
@@ -59,6 +59,11 @@ namespace Team27_RougeLike.Device
         public Vector3 Position
         {
             get { return position; }
+        }
+
+        public Viewport ViewPort
+        {
+            get { return viewport; }
         }
     }
 }
