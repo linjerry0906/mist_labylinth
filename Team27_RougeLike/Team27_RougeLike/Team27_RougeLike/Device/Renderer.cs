@@ -16,6 +16,9 @@ namespace Team27_RougeLike.Device
         private ContentManager contentManager;  // コンテンツ管理者
         private GraphicsDevice graphicsDevice;  // グラフィック機器
         private SpriteBatch spriteBatch;        // スプライト一括
+        private BasicEffect basicEffect;        // 3D描画用
+
+        private Projector mainProjector;        // メインプロジェクター
 
         // Dictionaryで複数の画像を管理
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
@@ -30,6 +33,17 @@ namespace Team27_RougeLike.Device
             contentManager = content;
             graphicsDevice = graphics;
             spriteBatch = new SpriteBatch(graphicsDevice);
+            basicEffect = new BasicEffect(graphicsDevice);
+
+            mainProjector = new Projector();
+        }
+
+        /// <summary>
+        /// メインプロジェクター
+        /// </summary>
+        public Projector MainProjector
+        {
+            get { return mainProjector; }
         }
 
         /// <summary>
@@ -79,6 +93,51 @@ namespace Team27_RougeLike.Device
             // Dictionary登録情報をクリア
             textures.Clear();
         }
+
+        #region 3D用
+
+        /// <summary>
+        /// DepthStencil, Cull, AlphaBlend, Color
+        /// </summary>
+        public void DefaultRenderSetting()
+        {
+            graphicsDevice.DepthStencilState = DepthStencilState.Default;
+            graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
+            graphicsDevice.BlendState = BlendState.AlphaBlend;
+            basicEffect.VertexColorEnabled = true;
+        }
+
+        /// <summary>
+        /// メインプロジェクターにレンダリング
+        /// </summary>
+        public void RendererMainProjector()
+        {
+            graphicsDevice.Viewport = mainProjector.ViewPort;
+            basicEffect.World = mainProjector.World;
+            basicEffect.View = mainProjector.LookAt;
+            basicEffect.Projection = mainProjector.Projection;
+        }
+
+        /// <summary>
+        /// ポリゴンを描画する
+        /// </summary>
+        /// <param name="name">テクスチャ</param>
+        /// <param name="vertices">頂点</param>
+        /// <param name="alpha">透明度</param>
+        public void DrawPolygon(string name, VertexPositionColorTexture[] vertices, float alpha = 1)
+        {
+            basicEffect.Alpha = alpha;
+            //basicEffect.Texture = textures[name];         //登録していないためにコメントアウト
+            foreach (var effect in basicEffect.CurrentTechnique.Passes)
+            {
+                effect.Apply();
+            }
+            graphicsDevice.DrawUserPrimitives<VertexPositionColorTexture>(PrimitiveType.TriangleStrip, vertices, 0, 2);
+        }
+
+        #endregion
+
+        #region 2D用
 
         /// <summary>
         /// 描画開始
@@ -252,5 +311,7 @@ namespace Team27_RougeLike.Device
                 position.X += 32;
             }
         }
+
+        #endregion
     }
 }

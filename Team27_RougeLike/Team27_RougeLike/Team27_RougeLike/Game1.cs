@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Team27_RougeLike.Device;
+using Team27_RougeLike.Def;
+using Team27_RougeLike.Object;
+using Team27_RougeLike.Map;
 
 namespace Team27_RougeLike
 {
@@ -20,10 +23,17 @@ namespace Team27_RougeLike
         private GraphicsDeviceManager graphics;
         private GameDevice gameDevice;
 
+        private Cube cube;
+        private MapGenerator mapGenerator;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = Def.WindowDef.WINDOW_WIDTH;
+            graphics.PreferredBackBufferHeight = Def.WindowDef.WINDOW_HEIGHT;
+            Window.Title = Def.WindowDef.WINDOW_NAME;
         }
 
         /// <summary>
@@ -36,6 +46,8 @@ namespace Team27_RougeLike
         {
             // TODO: Add your initialization logic here
             gameDevice = new GameDevice(Content, GraphicsDevice);
+            cube = new Cube(Vector3.Zero, new Vector3(1, 1, 1), gameDevice);
+            mapGenerator = new MapGenerator(gameDevice);
 
             base.Initialize();
         }
@@ -72,9 +84,9 @@ namespace Team27_RougeLike
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || 
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-
             // TODO: Add your update logic here
             gameDevice.Update();
+            mapGenerator.Update();
 
             base.Update(gameTime);
         }
@@ -88,6 +100,8 @@ namespace Team27_RougeLike
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            cube.Draw();
+            mapGenerator.Draw();
 
             base.Draw(gameTime);
         }
