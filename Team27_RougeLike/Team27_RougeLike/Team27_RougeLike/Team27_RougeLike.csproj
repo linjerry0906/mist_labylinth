@@ -57,6 +57,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Def\WindowDef.cs" />
     <Compile Include="Device\GameDevice.cs" />
     <Compile Include="Device\InputState.cs" />
     <Compile Include="Device\Renderer.cs" />

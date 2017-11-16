@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Team27_RougeLike.Device;
+using Team27_RougeLike.Def;
 
 namespace Team27_RougeLike
 {
@@ -24,6 +25,10 @@ namespace Team27_RougeLike
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = Def.WindowDef.WINDOW_WIDTH;
+            graphics.PreferredBackBufferHeight = Def.WindowDef.WINDOW_HEIGHT;
+            Window.Title = Def.WindowDef.WINDOW_NAME;
         }
 
         /// <summary>
