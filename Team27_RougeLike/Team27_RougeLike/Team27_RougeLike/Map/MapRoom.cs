@@ -1,4 +1,8 @@
-﻿using System;
+﻿//--------------------------------------------------------------------------------------------------
+// 作成者：林　佳叡
+// 作成日：2017.11.17
+//--------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +12,6 @@ using Team27_RougeLike.Device;
 
 namespace Team27_RougeLike.Map
 {
-
     class MapRoom
     {
         private enum Direction
@@ -19,14 +22,13 @@ namespace Team27_RougeLike.Map
             Zminus
         }
 
-        private float tileSize = 2;
-
         private int id;
         private int widthCell;
         private int lengthCell;
         private int xCell;
         private int zCell;
 
+        //Debug表示用
         private Cube cube;
         private GameDevice gameDevice;
 
@@ -39,8 +41,8 @@ namespace Team27_RougeLike.Map
             this.zCell = zCell;
 
             cube = new Cube(
-                new Vector3(xCell * tileSize, 0, zCell * tileSize),
-                new Vector3(widthCell * tileSize / 2.0f, 0.5f, lengthCell * tileSize / 2.0f),
+                new Vector3(xCell * MapDef.TILE_SIZE, 0, zCell * MapDef.TILE_SIZE),
+                new Vector3(widthCell * MapDef.TILE_SIZE / 2.0f, 0.5f, lengthCell * MapDef.TILE_SIZE / 2.0f),
                 gameDevice);
             this.gameDevice = gameDevice;
         }
@@ -85,8 +87,8 @@ namespace Team27_RougeLike.Map
             }
 
             cube = new Cube(
-                new Vector3(xCell * tileSize, 0, zCell * tileSize),
-                new Vector3(widthCell * tileSize / 2.0f, 0.5f, lengthCell * tileSize / 2.0f),
+                new Vector3(xCell * MapDef.TILE_SIZE, 0, zCell * MapDef.TILE_SIZE),
+                new Vector3(widthCell * MapDef.TILE_SIZE / 2.0f, 0.5f, lengthCell * MapDef.TILE_SIZE / 2.0f),
                 gameDevice);
         }
 
@@ -111,6 +113,11 @@ namespace Team27_RougeLike.Map
             return Direction.Zminus;
         }
 
+        public int ID
+        {
+            get { return id; }
+        }
+
         public int Length
         {
             get { return lengthCell; }
@@ -119,6 +126,16 @@ namespace Team27_RougeLike.Map
         public int Width
         {
             get { return widthCell; } 
+        }
+
+        public int XCell
+        {
+            get { return xCell; }
+        }
+
+        public int ZCell
+        {
+            get { return zCell; }
         }
 
         /// <summary>

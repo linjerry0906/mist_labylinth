@@ -1,4 +1,8 @@
-﻿using System;
+﻿//--------------------------------------------------------------------------------------------------
+// 作成者：林　佳叡
+// 作成日：2017.11.17
+//--------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,10 +19,12 @@ namespace Team27_RougeLike.Map
             Discrete,
             SelectMainRoom,
         }
-        private readonly int MAX_ROOM_SIZE = 16;
-        private readonly int MIN_ROOM_SIZE = 2;
+
         private int limitHeight;
         private int limitWidth;
+
+        private int minXRoomIndex = 0;      //マップのスタート点X用
+        private int minZRoomIndex = 0;      //マップのスタート点Z用
 
         private GameDevice gameDevice;
         private List<MapRoom> rooms;
@@ -31,6 +37,7 @@ namespace Team27_RougeLike.Map
             rooms = new List<MapRoom>();
             mainRoom = new List<MapRoom>();
             this.gameDevice = gameDevice;
+
             limitWidth = gameDevice.Random.Next(50, 151);
             limitHeight = 200 - limitWidth;
 
@@ -40,10 +47,12 @@ namespace Team27_RougeLike.Map
         /// <summary>
         /// 正規分布
         /// </summary>
-        /// <param name="radius">半径</param>
+        /// <param name="width">横サイズ</param>
+        /// <param name="height">縦サイズ</param>
         /// <returns></returns>
         private Point RandomPointInCircle(float width, float height)
         {
+            //ネットのソースを使用
             float t = (float)(2 * Math.PI * gameDevice.Random.NextDouble());
             float u = (float)(gameDevice.Random.NextDouble() + gameDevice.Random.NextDouble());
             float r = (u > 1) ? 2 - u: u;
@@ -74,8 +83,8 @@ namespace Team27_RougeLike.Map
                 rooms.Add(
                     new MapRoom(
                         rooms.Count,
-                        gameDevice.Random.Next(MIN_ROOM_SIZE, MAX_ROOM_SIZE) * 2,
-                        gameDevice.Random.Next(MIN_ROOM_SIZE, MAX_ROOM_SIZE) * 2,
+                        gameDevice.Random.Next(MapDef.MIN_ROOM_SIZE, MapDef.MAX_ROOM_SIZE) * 2,
+                        gameDevice.Random.Next(MapDef.MIN_ROOM_SIZE, MapDef.MAX_ROOM_SIZE) * 2,
                         pos.X,
                         pos.Y,
                         gameDevice));
@@ -110,13 +119,23 @@ namespace Team27_RougeLike.Map
         {
             foreach (MapRoom r in rooms)
             {
-                if(r.Length > (int)(MAX_ROOM_SIZE * 2 * 0.7f) &&
-                   r.Width > (int)(MAX_ROOM_SIZE * 2 * 0.7f))
+                if(r.Length > (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.7f) &&
+                   r.Width > (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.7f))
                 {
                     r.SetColor(Color.Red);
                     mainRoom.Add(r);
                 }
+                if (r.XCell - r.Width < rooms[minXRoomIndex].XCell - rooms[minXRoomIndex].Width)
+                {
+                    minXRoomIndex = r.ID;
+                }
+                if (r.ZCell - r.Length < rooms[minZRoomIndex].ZCell - rooms[minZRoomIndex].Length)
+                {
+                    minZRoomIndex = r.ID;
+                }
             }
+            rooms[minXRoomIndex].SetColor(Color.Black);
+            rooms[minZRoomIndex].SetColor(Color.Black);
         }
 
         public void Draw()
