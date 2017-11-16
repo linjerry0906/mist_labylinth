@@ -39,6 +39,14 @@ namespace Team27_RougeLike.Device
         }
 
         /// <summary>
+        /// メインプロジェクター
+        /// </summary>
+        public Projector MainProjector
+        {
+            get { return mainProjector; }
+        }
+
+        /// <summary>
         /// 画像の読み込み
         /// </summary>
         /// <param name="name">アセット名</param>
@@ -88,6 +96,9 @@ namespace Team27_RougeLike.Device
 
         #region 3D用
 
+        /// <summary>
+        /// DepthStencil, Cull, AlphaBlend, Color
+        /// </summary>
         public void DefaultRenderSetting()
         {
             graphicsDevice.DepthStencilState = DepthStencilState.Default;
@@ -96,6 +107,9 @@ namespace Team27_RougeLike.Device
             basicEffect.VertexColorEnabled = true;
         }
 
+        /// <summary>
+        /// メインプロジェクターにレンダリング
+        /// </summary>
         public void RendererMainProjector()
         {
             graphicsDevice.Viewport = mainProjector.ViewPort;
@@ -104,6 +118,12 @@ namespace Team27_RougeLike.Device
             basicEffect.Projection = mainProjector.Projection;
         }
 
+        /// <summary>
+        /// ポリゴンを描画する
+        /// </summary>
+        /// <param name="name">テクスチャ</param>
+        /// <param name="vertices">頂点</param>
+        /// <param name="alpha">透明度</param>
         public void DrawPolygon(string name, VertexPositionColorTexture[] vertices, float alpha = 1)
         {
             basicEffect.Alpha = alpha;

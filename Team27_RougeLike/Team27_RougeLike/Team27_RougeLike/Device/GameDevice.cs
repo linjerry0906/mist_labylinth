@@ -9,10 +9,11 @@ namespace Team27_RougeLike.Device
 {
     class GameDevice
     {
-        private InputState input;
-        private Renderer renderer;
-        private Random random;
-        private Sound sound;
+        private InputState  input;
+        private Renderer    renderer;
+        private Random      random;
+        private Sound       sound;
+        private Projector   mainProjector;
 
         public InputState InputState
         {
@@ -30,6 +31,11 @@ namespace Team27_RougeLike.Device
         {
             get { return sound; }
         }
+        public Projector MainProjector
+        {
+            get { return mainProjector; }
+        }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -40,6 +46,7 @@ namespace Team27_RougeLike.Device
             // フィールド生成
             input = new InputState();
             renderer = new Renderer(content, graphics);
+            mainProjector = renderer.MainProjector;
             sound = new Sound(content);
             random = new Random();
         }
