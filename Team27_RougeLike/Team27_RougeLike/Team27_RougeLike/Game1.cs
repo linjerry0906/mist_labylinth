@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Def;
+using Team27_RougeLike.Object;
 
 namespace Team27_RougeLike
 {
@@ -20,6 +21,8 @@ namespace Team27_RougeLike
     {
         private GraphicsDeviceManager graphics;
         private GameDevice gameDevice;
+
+        private Cube cube;
 
         public Game1()
         {
@@ -41,6 +44,7 @@ namespace Team27_RougeLike
         {
             // TODO: Add your initialization logic here
             gameDevice = new GameDevice(Content, GraphicsDevice);
+            cube = new Cube(Vector3.Zero, new Vector3(1, 1, 1), gameDevice);
 
             base.Initialize();
         }
@@ -93,6 +97,7 @@ namespace Team27_RougeLike
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            cube.Draw();
 
             base.Draw(gameTime);
         }

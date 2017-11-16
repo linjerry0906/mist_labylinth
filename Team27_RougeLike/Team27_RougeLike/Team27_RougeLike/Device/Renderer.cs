@@ -91,8 +91,9 @@ namespace Team27_RougeLike.Device
         public void DefaultRenderSetting()
         {
             graphicsDevice.DepthStencilState = DepthStencilState.Default;
-            graphicsDevice.RasterizerState = RasterizerState.CullNone;
+            graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
             graphicsDevice.BlendState = BlendState.AlphaBlend;
+            basicEffect.VertexColorEnabled = true;
         }
 
         public void RendererMainProjector()
@@ -106,7 +107,7 @@ namespace Team27_RougeLike.Device
         public void DrawPolygon(string name, VertexPositionColorTexture[] vertices, float alpha = 1)
         {
             basicEffect.Alpha = alpha;
-            basicEffect.Texture = textures[name];
+            //basicEffect.Texture = textures[name];         //登録していないためにコメントアウト
             foreach (var effect in basicEffect.CurrentTechnique.Passes)
             {
                 effect.Apply();

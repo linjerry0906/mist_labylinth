@@ -60,9 +60,11 @@
     <Compile Include="Def\WindowDef.cs" />
     <Compile Include="Device\GameDevice.cs" />
     <Compile Include="Device\InputState.cs" />
+    <Compile Include="Device\Projector.cs" />
     <Compile Include="Device\Renderer.cs" />
     <Compile Include="Device\SaveData.cs" />
     <Compile Include="Device\Sound.cs" />
+    <Compile Include="Object\Cube.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
