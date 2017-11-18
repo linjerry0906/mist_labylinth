@@ -138,6 +138,36 @@ namespace Team27_RougeLike.Map
             get { return zCell; }
         }
 
+        public int MinX
+        {
+            get { return xCell - widthCell / 2; }
+        }
+
+        public int MaxX
+        {
+            get { return xCell + widthCell / 2; }
+        }
+
+        public int MinZ
+        {
+            get { return ZCell - lengthCell / 2; }
+        }
+
+        public int MaxZ
+        {
+            get { return ZCell + lengthCell / 2; }
+        }
+
+        public Point Cell()
+        {
+            return new Point(xCell, zCell);
+        }
+
+        public Vector2 Position()
+        {
+            return new Vector2(xCell, zCell);
+        }
+
         /// <summary>
         /// Debug用
         /// </summary>

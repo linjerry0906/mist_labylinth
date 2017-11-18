@@ -11,7 +11,7 @@ namespace Team27_RougeLike.Map
 {
     static class MapDef
     {
-        public static readonly float TILE_SIZE = 2;
+        public static readonly float TILE_SIZE = 1;
 
         public static readonly int MAX_ROOM_SIZE = 16;
         public static readonly int MIN_ROOM_SIZE = 2;
