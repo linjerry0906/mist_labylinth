@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.11.17
+// 作成日：2017.11.17 ～ 2017.11.19
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace Team27_RougeLike.Map
             LinkRoom,           //メインの部屋を接続する
             CreateHall,         //通路を生成
             ChooseSubRoom,      //通路上のサブ部屋を追加
-            WriteToArray,
+            WriteToArray,       //書き出し
         }
 
         private int dungeonSize;            //マップの大きさ
@@ -49,11 +49,13 @@ namespace Team27_RougeLike.Map
             edges = new List<Edge>();
             this.gameDevice = gameDevice;
 
-            dungeonSize = 50;
+            //ToDo：外でサイズを指定できるようにする
+            dungeonSize = 250;       //ダンジョンのサイズ
+            //正規分布の楕円形の縦と横
             limitWidth = gameDevice.Random.Next(dungeonSize / 4, dungeonSize * 3 / 4);
             limitHeight = dungeonSize - limitWidth;
 
-            currentState = GenerateState.GenerateRoom;
+            currentState = GenerateState.GenerateRoom;      //生成状態
         }
 
         /// <summary>
@@ -65,9 +67,12 @@ namespace Team27_RougeLike.Map
         private Point RandomPointInCircle(float width, float height)
         {
             //ネットのソースを使用
+            //任意の円の角度（ラジアン）
             float t = (float)(2 * Math.PI * gameDevice.Random.NextDouble());
+            //半径決定（単位円内に集約）
             float u = (float)(gameDevice.Random.NextDouble() + gameDevice.Random.NextDouble());
             float r = (u > 1) ? 2 - u: u;
+            //単位円内の点×指定の縦、横
             return new Point((int)(width * r * Math.Cos(t)), (int)(height * r * Math.Sin(t)));
         }
 
@@ -75,79 +80,90 @@ namespace Team27_RougeLike.Map
         {
             switch (currentState)
             {
-                case GenerateState.GenerateRoom:
+                case GenerateState.GenerateRoom:        //部屋生成
                     UpdateGenerate();
                     break;
-                case GenerateState.Discrete:
+                case GenerateState.Discrete:            //部屋離散
                     UpdateDiscrete();
                     break;
-                case GenerateState.SelectMainRoom:
+                case GenerateState.SelectMainRoom:      //メイン部屋を選択
                     UpdateSelectMainRoom();
                     break;
-                case GenerateState.LinkRoom:
+                case GenerateState.LinkRoom:            //メイン部屋を接続
                     UpdateLinkRoom();
                     break;
-                case GenerateState.CreateHall:
+                case GenerateState.CreateHall:          //廊下を生成
                     UpdateCreateHall();
                     break;
-                case GenerateState.ChooseSubRoom:
+                case GenerateState.ChooseSubRoom:       //サブの部屋を選択
                     UpdateChooseSubRoom();
                     break;
-                case GenerateState.WriteToArray:
+                case GenerateState.WriteToArray:        //マップチップ生成
                     break;
             }
         }
 
+        /// <summary>
+        /// 部屋を生成
+        /// </summary>
         private void UpdateGenerate()
         {
-            if (rooms.Count < dungeonSize)
+            if (rooms.Count < dungeonSize)      //指定のサイズまで部屋を生成し続ける
             {
                 Point pos = RandomPointInCircle(limitWidth, limitHeight);
                 rooms.Add(
                     new MapRoom(
-                        rooms.Count,
-                        gameDevice.Random.Next(MapDef.MIN_ROOM_SIZE, MapDef.MAX_ROOM_SIZE) * 2,
-                        gameDevice.Random.Next(MapDef.MIN_ROOM_SIZE, MapDef.MAX_ROOM_SIZE) * 2,
-                        pos.X,
-                        pos.Y,
+                        rooms.Count,            //部屋番号
+                        gameDevice.Random.Next(MapDef.MIN_ROOM_SIZE, MapDef.MAX_ROOM_SIZE) * 2,     //横サイズ（2で割れるように）
+                        gameDevice.Random.Next(MapDef.MIN_ROOM_SIZE, MapDef.MAX_ROOM_SIZE) * 2,     //縦サイズ
+                        pos.X,                  //X座標
+                        pos.Y,                  //Z座標
                         gameDevice));
             }
             else
             {
-                currentState = GenerateState.Discrete;
+                currentState = GenerateState.Discrete;      //部屋を離散する
             }
         }
 
+        /// <summary>
+        /// 部屋を離散
+        /// </summary>
         private void UpdateDiscrete()
         {
-            int Counter = 0;
+            int counter = 0;        //部屋が重なる数
             foreach (MapRoom r1 in rooms)
             {
                 foreach (MapRoom r2 in rooms)
                 {
-                    if (r1 == r2 || !r1.RoomCollision(r2))
+                    if (r1 == r2 || !r1.RoomCollision(r2))  //同じ部屋は判断しない、当たってないと知らせない
                         continue;
-                    Counter++;
-                    r1.Hit(r2);
-                    r2.Hit(r1);
+                    counter++;      //当たっている部屋まだある
+                    r1.Hit(r2);     //位置修正
+                    r2.Hit(r1);     //位置修正
                 }
             }
-            if (Counter <= 0)
+            if (counter <= 0)       //全部修正完了すると次の段階へ移行
             {
                 currentState = GenerateState.SelectMainRoom;
             }
         }
 
+        /// <summary>
+        /// メインとなる部屋を記録
+        /// </summary>
         private void UpdateSelectMainRoom()
         {
             foreach (MapRoom r in rooms)
             {
-                if(r.Length > (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.6f) &&
-                   r.Width > (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.6f))
+                //縦横サイズが指定より大きい場合
+                if(r.Length > (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.65f) &&
+                   r.Width > (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.65f))
                 {
-                    r.SetColor(Color.Red);
-                    mainRoom.Add(r);
+                    r.SetColor(Color.Red);      //Debug情報
+                    mainRoom.Add(r);            //リストに追加
                 }
+                //マップチップの大きさを確定する
                 if (r.MinX < rooms[minXRoomIndex].MinX)
                 {
                     minXRoomIndex = r.ID;
@@ -165,44 +181,54 @@ namespace Team27_RougeLike.Map
                     maxZRoomIndex = r.ID;
                 }
             }
+            //Debug情報
             rooms[minXRoomIndex].SetColor(Color.Black);
             rooms[minZRoomIndex].SetColor(Color.Black);
             rooms[maxXRoomIndex].SetColor(Color.Black);
             rooms[maxZRoomIndex].SetColor(Color.Black);
 
-            currentState = GenerateState.LinkRoom;
+            currentState = GenerateState.LinkRoom;      //次の段階へ移行
         }
 
+        /// <summary>
+        /// メインとなる部屋を繋ぐ（島がないように）
+        /// </summary>
         private void UpdateLinkRoom()
         {
             for (int i = 0; i < mainRoom.Count - 1; i++)
             {
-                int minIndex = i + 1;
-                for (int j = i + 1; j < mainRoom.Count; j++)
+                int minIndex = i + 1;   //残りの部屋と一番近い部屋の番号
+                for (int j = i + 1; j < mainRoom.Count; j++)        //残りの部屋との距離判定
                 {
+                    //今記録している部屋との距離より近い場合
                     if ((mainRoom[i].Position() - mainRoom[minIndex].Position()).Length()
                          > (mainRoom[i].Position() - mainRoom[j].Position()).Length())
                     {
-                        minIndex = j;
+                        minIndex = j;   //部屋番号を指定する
                     }
                 }
+                //繋ぐ線を追加
                 Edge edge = new Edge(mainRoom[i].Cell(), mainRoom[minIndex].Cell(), gameDevice);
                 if (!edges.Contains(edge))
                 {
                     edges.Add(edge);
                 }
             }
-            currentState = GenerateState.CreateHall;
+            currentState = GenerateState.CreateHall;    //次の段階へ移行
         }
 
+        /// <summary>
+        /// 廊下を追加
+        /// </summary>
         private void UpdateCreateHall()
         {
             foreach(Edge e in edges)
             {
+                //線分の中点
                 Point center = new Point(
                     (e.FirstPoint.X + e.SecondPoint.X) / 2,
                     (e.FirstPoint.Y + e.SecondPoint.Y) / 2);
-
+                //一つの線分について四つの廊下がある
                 //横その一
                 MapRoom hall = new MapRoom(
                     halls.Count,
@@ -244,42 +270,39 @@ namespace Team27_RougeLike.Map
                 hall.SetColor(Color.Blue);
                 halls.Add(hall);
             }
-            currentState = GenerateState.ChooseSubRoom;
+            currentState = GenerateState.ChooseSubRoom;     //次の段階へ移行
         }
 
+        /// <summary>
+        /// サブとなる部屋を選択
+        /// </summary>
         private void UpdateChooseSubRoom()
         {
             foreach (MapRoom hall in halls)
             {
-                foreach (MapRoom r in rooms)
+                foreach (MapRoom r in rooms)    //全部の部屋と廊下と判定
                 {
-                    if (mainRoom.Contains(r))
-                    {
+                    if (mainRoom.Contains(r))   //メインの部屋は判定しない
                         continue;
-                    }
-                    if (hall.RoomCollision(r))
+                    if (hall.RoomCollision(r))  //当たっていたらメインに追加
                     {
-                        r.SetColor(Color.Gold);
+                        r.SetColor(Color.Gold); //Debug情報
                         mainRoom.Add(r);
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Debug 表示
+        /// </summary>
         public void Draw()
         {
             foreach (MapRoom r in rooms)
             {
                 r.Draw();
             }
-            if (currentState != GenerateState.ChooseSubRoom)
-            {
-                foreach (Edge e in edges)
-                {
-                    e.Draw();
-                }
-            }
-            foreach(MapRoom r in halls)
+            foreach (MapRoom r in halls)
             {
                 r.Draw();
             }

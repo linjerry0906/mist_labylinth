@@ -14,12 +14,19 @@ namespace Team27_RougeLike.Map
 {
     class Edge
     {
+        //エッジの端点
         private Point firstPoint;
         private Point secondPoint;
 
         //debug表示
         private Renderer renderer;
 
+        /// <summary>
+        /// エッジ（辺）
+        /// </summary>
+        /// <param name="first">端点1</param>
+        /// <param name="second">端点2</param>
+        /// <param name="gameDevice">Debug表示用</param>
         public Edge(Point first, Point second, GameDevice gameDevice)
         {
             firstPoint = first;
@@ -28,6 +35,9 @@ namespace Team27_RougeLike.Map
             renderer = gameDevice.Renderer;
         }
 
+        /// <summary>
+        /// Debug表示用
+        /// </summary>
         public void Draw()
         {
             VertexPositionColor[] vertices = new VertexPositionColor[2];
@@ -36,11 +46,17 @@ namespace Team27_RougeLike.Map
             renderer.DrawLine(vertices);
         }
 
+        /// <summary>
+        /// 端点1
+        /// </summary>
         public Point FirstPoint
         {
             get { return firstPoint; }
         }
 
+        /// <summary>
+        /// 端点2
+        /// </summary>
         public Point SecondPoint
         {
             get { return secondPoint; }
