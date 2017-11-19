@@ -22,6 +22,7 @@ namespace Team27_RougeLike.Map
             CreateHall,         //通路を生成
             ChooseSubRoom,      //通路上のサブ部屋を追加
             WriteToArray,       //書き出し
+            End,                //処理完了
         }
 
         private int dungeonSize;            //マップの大きさ
@@ -39,6 +40,8 @@ namespace Team27_RougeLike.Map
         private List<MapRoom> halls;        //通路
         private List<Edge> edges;           //接続計算用の辺
 
+        private int[,] mapChip;             //マップチップ
+
         private GenerateState currentState;     //現在の生成状態
 
         public MapGenerator(GameDevice gameDevice)
@@ -47,10 +50,11 @@ namespace Team27_RougeLike.Map
             mainRoom = new List<MapRoom>();
             halls = new List<MapRoom>();
             edges = new List<Edge>();
+            mapChip = new int[1,1];
             this.gameDevice = gameDevice;
 
             //ToDo：外でサイズを指定できるようにする
-            dungeonSize = 250;       //ダンジョンのサイズ
+            dungeonSize = 120;       //ダンジョンのサイズ
             //正規分布の楕円形の縦と横
             limitWidth = gameDevice.Random.Next(dungeonSize / 4, dungeonSize * 3 / 4);
             limitHeight = dungeonSize - limitWidth;
@@ -99,6 +103,9 @@ namespace Team27_RougeLike.Map
                     UpdateChooseSubRoom();
                     break;
                 case GenerateState.WriteToArray:        //マップチップ生成
+                    UpdateWriteToArray();
+                    break;
+                case GenerateState.End:
                     break;
             }
         }
@@ -291,6 +298,60 @@ namespace Team27_RougeLike.Map
                     }
                 }
             }
+            currentState = GenerateState.WriteToArray;
+        }
+
+        /// <summary>
+        /// マップチップに書き出す
+        /// </summary>
+        private void UpdateWriteToArray()
+        {
+            //縦と横のマス数でマップチップの配列を生成
+            int width = rooms[maxXRoomIndex].MaxX - rooms[minXRoomIndex].MinX + 1;
+            int length = rooms[maxZRoomIndex].MaxZ - rooms[minZRoomIndex].MinZ + 1;
+            mapChip = new int[length + 2, width + 2];   //四つの辺に壁を置く
+
+            int minX = rooms[minXRoomIndex].MinX;
+            int minZ = rooms[minZRoomIndex].MinZ;
+
+            foreach (MapRoom r in mainRoom)             //メインの部屋を先に置く
+            {
+                for (int z = r.MinZ - minZ + 1; z < r.MaxZ - minZ + 1; z++)
+                {
+                    for (int x = r.MinX - minX + 1; x < r.MaxX - minX + 1; x++)
+                    {
+                        mapChip[z, x] = 1;
+                    }
+                }
+            }
+            foreach (MapRoom r in halls)                 //廊下を置く
+            {
+                for (int z = r.MinZ - minZ + 1; z < r.MaxZ - minZ + 1; z++)
+                {
+                    for (int x = r.MinX - minX + 1; x < r.MaxX - minX + 1; x++)
+                    {
+                        mapChip[z, x] = 1;
+                    }
+                }
+            }
+            currentState = GenerateState.End;
+        }
+
+        /// <summary>
+        /// 生成が終わっているか
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEnd()
+        {
+            return currentState == GenerateState.End;
+        }
+
+        /// <summary>
+        /// マップチップ
+        /// </summary>
+        public int[,] MapChip
+        {
+            get { return mapChip; }
         }
 
         /// <summary>

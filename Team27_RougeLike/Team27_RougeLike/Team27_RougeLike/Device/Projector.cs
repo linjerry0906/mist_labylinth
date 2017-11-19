@@ -27,8 +27,8 @@ namespace Team27_RougeLike.Device
         {
             viewport = new Viewport(0, 0, Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT);
 
-            position = new Vector3(400, 400, 400);
-            target = Vector3.Zero;
+            position = new Vector3(150, 700, 400);
+            target = new Vector3(150, 0, 200);
             world = Matrix.CreateWorld(Vector3.Zero, Vector3.Forward, Vector3.Up);
             projection = Matrix.CreatePerspectiveFieldOfView(
                 (float)(45 * Math.PI / 180),

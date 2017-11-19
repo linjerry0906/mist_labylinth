@@ -23,8 +23,8 @@ namespace Team27_RougeLike
         private GraphicsDeviceManager graphics;
         private GameDevice gameDevice;
 
-        private Cube cube;
         private MapGenerator mapGenerator;
+        private DungeonMap map;
 
         public Game1()
         {
@@ -46,8 +46,8 @@ namespace Team27_RougeLike
         {
             // TODO: Add your initialization logic here
             gameDevice = new GameDevice(Content, GraphicsDevice);
-            cube = new Cube(Vector3.Zero, new Vector3(1, 1, 1), gameDevice);
             mapGenerator = new MapGenerator(gameDevice);
+            map = new DungeonMap(gameDevice);
 
             base.Initialize();
         }
@@ -86,7 +86,17 @@ namespace Team27_RougeLike
                 this.Exit();
             // TODO: Add your update logic here
             gameDevice.Update();
-            mapGenerator.Update();
+
+            if (!mapGenerator.IsEnd())
+            {
+                mapGenerator.Update();
+            }
+            else if(map.MapChip.Length < 2)
+            {
+                map = new DungeonMap(mapGenerator.MapChip, gameDevice);
+                map.Initialize();
+            }
+
 
             base.Update(gameTime);
         }
@@ -100,8 +110,9 @@ namespace Team27_RougeLike
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            cube.Draw();
             mapGenerator.Draw();
+
+            map.Draw();
 
             base.Draw(gameTime);
         }

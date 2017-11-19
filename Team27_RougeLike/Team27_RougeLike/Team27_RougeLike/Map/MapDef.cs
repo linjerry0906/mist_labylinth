@@ -12,10 +12,10 @@ namespace Team27_RougeLike.Map
     static class MapDef
     {
         //マップチップ一つのサイズ
-        public static readonly float TILE_SIZE = 1;
+        public static readonly float TILE_SIZE = 2;
 
         //部屋生成する時にランダムサイズの最大最小値
-        public static readonly int MAX_ROOM_SIZE = 16;
+        public static readonly int MAX_ROOM_SIZE = 10;
         public static readonly int MIN_ROOM_SIZE = 2;
     }
 }
