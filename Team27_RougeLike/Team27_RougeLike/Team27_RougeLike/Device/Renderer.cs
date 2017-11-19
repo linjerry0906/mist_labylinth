@@ -135,6 +135,19 @@ namespace Team27_RougeLike.Device
             graphicsDevice.DrawUserPrimitives<VertexPositionColorTexture>(PrimitiveType.TriangleStrip, vertices, 0, 2);
         }
 
+        /// <summary>
+        /// Debug用
+        /// </summary>
+        public void DrawLine(VertexPositionColor[] vertices, float alpha = 1)
+        {
+            basicEffect.Alpha = alpha;
+            foreach (var effect in basicEffect.CurrentTechnique.Passes)
+            {
+                effect.Apply();
+            }
+            graphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineList, vertices, 0, 1);
+        }
+
         #endregion
 
         #region 2D用

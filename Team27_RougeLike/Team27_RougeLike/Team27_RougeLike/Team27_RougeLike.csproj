@@ -64,6 +64,9 @@
     <Compile Include="Device\Renderer.cs" />
     <Compile Include="Device\SaveData.cs" />
     <Compile Include="Device\Sound.cs" />
+    <Compile Include="Map\DungeonMap.cs" />
+    <Compile Include="Map\Edge.cs" />
+    <Compile Include="Map\MapDef.cs" />
     <Compile Include="Map\MapGenerator.cs" />
     <Compile Include="Map\MapRoom.cs" />
     <Compile Include="Object\Cube.cs" />
