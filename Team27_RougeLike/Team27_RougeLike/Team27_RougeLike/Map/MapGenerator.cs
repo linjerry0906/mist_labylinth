@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.11.17 ～ 2017.11.19
+// 作成日：2017.11.17 ～ 2017.11.20
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -21,6 +21,7 @@ namespace Team27_RougeLike.Map
             LinkRoom,           //メインの部屋を接続する
             CreateHall,         //通路を生成
             ChooseSubRoom,      //通路上のサブ部屋を追加
+            CheckMapSize,       //マップサイズを確定
             WriteToArray,       //書き出し
             End,                //処理完了
         }
@@ -102,6 +103,9 @@ namespace Team27_RougeLike.Map
                 case GenerateState.ChooseSubRoom:       //サブの部屋を選択
                     UpdateChooseSubRoom();
                     break;
+                case GenerateState.CheckMapSize:
+                    UpdateCheckMapSize();
+                    break;
                 case GenerateState.WriteToArray:        //マップチップ生成
                     UpdateWriteToArray();
                     break;
@@ -164,35 +168,13 @@ namespace Team27_RougeLike.Map
             foreach (MapRoom r in rooms)
             {
                 //縦横サイズが指定より大きい場合
-                if(r.Length > (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.65f) &&
+                if (r.Length > (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.65f) &&
                    r.Width > (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.65f))
                 {
                     r.SetColor(Color.Red);      //Debug情報
                     mainRoom.Add(r);            //リストに追加
                 }
-                //マップチップの大きさを確定する
-                if (r.MinX < rooms[minXRoomIndex].MinX)
-                {
-                    minXRoomIndex = r.ID;
-                }
-                else if (r.MaxX > rooms[maxXRoomIndex].MaxX)
-                {
-                    maxXRoomIndex = r.ID;
-                }
-                if (r.MinZ < rooms[minZRoomIndex].MinZ)
-                {
-                    minZRoomIndex = r.ID;
-                }
-                else if(r.MaxZ > rooms[maxZRoomIndex].MaxZ)
-                {
-                    maxZRoomIndex = r.ID;
-                }
             }
-            //Debug情報
-            rooms[minXRoomIndex].SetColor(Color.Black);
-            rooms[minZRoomIndex].SetColor(Color.Black);
-            rooms[maxXRoomIndex].SetColor(Color.Black);
-            rooms[maxZRoomIndex].SetColor(Color.Black);
 
             currentState = GenerateState.LinkRoom;      //次の段階へ移行
         }
@@ -298,6 +280,45 @@ namespace Team27_RougeLike.Map
                     }
                 }
             }
+            currentState = GenerateState.CheckMapSize;
+        }
+
+        /// <summary>
+        /// マップのサイズを確定
+        /// </summary>
+        private void UpdateCheckMapSize()
+        {
+            minXRoomIndex = mainRoom[0].ID;     //最大最小値を先頭に設定
+            maxXRoomIndex = mainRoom[0].ID;
+            minZRoomIndex = mainRoom[0].ID;
+            maxZRoomIndex = mainRoom[0].ID;
+
+            foreach (MapRoom r in mainRoom)     //部屋ごとに辺を比較する
+            {
+                if (r.MinX < mainRoom.Find((MapRoom min) => min.ID == minXRoomIndex).MinX)
+                {
+                    minXRoomIndex = r.ID;
+                }
+                else if (r.MaxX > mainRoom.Find((MapRoom max) => max.ID == maxXRoomIndex).MaxX)
+                {
+                    maxXRoomIndex = r.ID;
+                }
+                if (r.MinZ < mainRoom.Find((MapRoom min) => min.ID == minZRoomIndex).MinZ)
+                {
+                    minZRoomIndex = r.ID;
+                }
+                else if (r.MaxZ > mainRoom.Find((MapRoom max) => max.ID == maxZRoomIndex).MaxZ)
+                {
+                    maxZRoomIndex = r.ID;
+                }
+            }
+
+            //Debug情報
+            rooms[minXRoomIndex].SetColor(Color.Black);
+            rooms[minZRoomIndex].SetColor(Color.Black);
+            rooms[maxXRoomIndex].SetColor(Color.Black);
+            rooms[maxZRoomIndex].SetColor(Color.Black);
+
             currentState = GenerateState.WriteToArray;
         }
 

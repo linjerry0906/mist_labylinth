@@ -1,4 +1,8 @@
-﻿using System;
+﻿//--------------------------------------------------------------------------------------------------
+// 作成者：林　佳叡
+// 作成日：2017.11.19
+//--------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +17,7 @@ namespace Team27_RougeLike.Map
         private GameDevice gameDevice;
 
         private List<Cube> mapBlocks;       //モデルに変更可
-        private int[,] mapChip;
+        private int[,] mapChip;             //マップチップ
 
         public DungeonMap(GameDevice gameDevice)
         {
@@ -60,16 +64,25 @@ namespace Team27_RougeLike.Map
             }
         }
 
+        /// <summary>
+        /// マップチップ
+        /// </summary>
         public int[,] MapChip
         {
             get { return mapChip; }
         }
 
+        /// <summary>
+        /// マップオブジェクトを消す
+        /// </summary>
         public void Clear()
         {
             mapBlocks.Clear();
         }
 
+        /// <summary>
+        /// マップを描画
+        /// </summary>
         public void Draw()
         {
             foreach (Cube c in mapBlocks)
