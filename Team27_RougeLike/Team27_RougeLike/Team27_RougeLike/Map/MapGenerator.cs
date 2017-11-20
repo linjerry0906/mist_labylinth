@@ -55,10 +55,10 @@ namespace Team27_RougeLike.Map
             this.gameDevice = gameDevice;
 
             //ToDo：外でサイズを指定できるようにする
-            dungeonSize = 120;       //ダンジョンのサイズ
-            //正規分布の楕円形の縦と横
-            limitWidth = gameDevice.Random.Next(dungeonSize / 4, dungeonSize * 3 / 4);
-            limitHeight = dungeonSize - limitWidth;
+            dungeonSize = 130;       //ダンジョンのサイズ
+            //正規分布の楕円形の縦と横(集約させるためにさらに2を割る)
+            limitWidth = (gameDevice.Random.Next(dungeonSize / 4, dungeonSize * 3 / 4)) / 2;
+            limitHeight = (dungeonSize - limitWidth) / 2;
 
             currentState = GenerateState.GenerateRoom;      //生成状態
         }

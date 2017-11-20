@@ -116,7 +116,7 @@ namespace Team27_RougeLike
             // TODO: Add your drawing code here
             mapGenerator.Draw();
 
-            //map.Draw();
+            map.Draw();
 
             foreach(ModelMesh mesh in m.Meshes)
             {
