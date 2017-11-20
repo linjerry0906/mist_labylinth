@@ -115,8 +115,8 @@ namespace Team27_RougeLike.Map
 
             //Debug 表示用
             cube = new Cube(
-                new Vector3(xCell * MapDef.TILE_SIZE, 0, zCell * MapDef.TILE_SIZE),
-                new Vector3(widthCell * MapDef.TILE_SIZE / 2.0f, 0.5f, lengthCell * MapDef.TILE_SIZE / 2.0f),
+                new Vector3(xCell, 0, zCell),
+                new Vector3(widthCell / 2.0f, 0.5f, lengthCell / 2.0f),
                 gameDevice);
         }
 
