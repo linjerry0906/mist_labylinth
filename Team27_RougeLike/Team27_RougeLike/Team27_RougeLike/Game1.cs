@@ -25,7 +25,8 @@ namespace Team27_RougeLike
 
         private MapGenerator mapGenerator;
         private DungeonMap map;
-
+        private Model m;
+        private float r = 0;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -61,6 +62,7 @@ namespace Team27_RougeLike
             // Create a new SpriteBatch, which can be used to draw textures.
 
             // TODO: use this.Content to load your game content here
+            m = Content.Load<Model>("testModel");
         }
 
         /// <summary>
@@ -97,6 +99,8 @@ namespace Team27_RougeLike
                 map.Initialize();
             }
 
+            r++;
+            r = (r > 360) ? r - 360 : r;
 
             base.Update(gameTime);
         }
@@ -112,7 +116,22 @@ namespace Team27_RougeLike
             // TODO: Add your drawing code here
             mapGenerator.Draw();
 
-            map.Draw();
+            //map.Draw();
+
+            foreach(ModelMesh mesh in m.Meshes)
+            {
+                foreach(BasicEffect effect in mesh.Effects)
+                {
+                    effect.EnableDefaultLighting();
+                    effect.World = 
+                        Matrix.CreateScale(new Vector3(100, 100, 100)) * 
+                        Matrix.CreateRotationX(MathHelper.ToRadians(r)) * 
+                        gameDevice.Renderer.MainProjector.World;
+                    effect.View = gameDevice.Renderer.MainProjector.LookAt;
+                    effect.Projection = gameDevice.Renderer.MainProjector.Projection;
+                }
+                mesh.Draw();
+            }
 
             base.Draw(gameTime);
         }
