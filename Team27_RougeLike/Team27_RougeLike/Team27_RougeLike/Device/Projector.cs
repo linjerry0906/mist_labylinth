@@ -27,8 +27,9 @@ namespace Team27_RougeLike.Device
         {
             viewport = new Viewport(0, 0, Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT);
 
-            position = new Vector3(150, 700, 400);
-            target = new Vector3(150, 0, 200);
+            position = new Vector3(0, 30, 20);
+            //position = new Vector3(0, 700, 500);
+            target = new Vector3(0, 0, 0);
             world = Matrix.CreateWorld(Vector3.Zero, Vector3.Forward, Vector3.Up);
             projection = Matrix.CreatePerspectiveFieldOfView(
                 (float)(45 * Math.PI / 180),
@@ -45,7 +46,7 @@ namespace Team27_RougeLike.Device
         public void Focus(Vector3 target)
         {
             float distance = (this.target - target).Length();
-            if (distance < 5.0f)                            //距離が小さすぎると追跡を行わない
+            if (distance < 0.5f)                            //距離が小さすぎると追跡を行わない
             {
                 return;
             }

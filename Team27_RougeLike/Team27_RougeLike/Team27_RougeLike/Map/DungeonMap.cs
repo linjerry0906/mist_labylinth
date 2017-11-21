@@ -1,12 +1,13 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.11.19
+// 作成日：2017.11.19 ~ 2017.11.21
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input; //Debug
 using Team27_RougeLike.Object;
 using Team27_RougeLike.Device;
 
@@ -19,12 +20,19 @@ namespace Team27_RougeLike.Map
         private List<Cube> mapBlocks;       //モデルに変更可
         private int[,] mapChip;             //マップチップ
 
+        private List<Cube> mapBlocksToDraw; //描画するマップ
+        private Point position;             //描画中心座標
+        private int radius = 20;            //描画半径
+
         public DungeonMap(GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
 
             mapChip = new int[1, 1];
             mapBlocks = new List<Cube>();
+            mapBlocksToDraw = new List<Cube>();
+
+            position = new Point(0, 0);
         }
 
         public DungeonMap(int[,] mapChip, GameDevice gameDevice)
@@ -33,26 +41,32 @@ namespace Team27_RougeLike.Map
 
             this.mapChip = mapChip;
             mapBlocks = new List<Cube>();
+            mapBlocksToDraw = new List<Cube>();
+
+            position = new Point(0, 0);
         }
 
+        /// <summary>
+        /// マップのオブジェクトを生成
+        /// </summary>
         public void Initialize()
         {
-            if (mapBlocks.Count > 0)
+            if (mapBlocks.Count > 0)    //マップの状態があった場合は生成しない
                 return;
-            for (int i = 0; i < mapChip.GetLength(0); i++)
+            for (int i = 0; i < mapChip.GetLength(0); i++)          //マップのY軸
             {
-                for (int j = 0; j < mapChip.GetLength(1); j++)
+                for (int j = 0; j < mapChip.GetLength(1); j++)      //マップのX軸
                 {
-                    if (mapChip[i, j] == 0)
+                    if (mapChip[i, j] == 0)             //TODO：未定義ブロック　0：壁
                     {
                         Cube c = new Cube(
                             new Vector3(j * MapDef.TILE_SIZE, 0, i * MapDef.TILE_SIZE),
-                            new Vector3(MapDef.TILE_SIZE / 2.0f, 2.0f, MapDef.TILE_SIZE / 2.0f),
+                            new Vector3(MapDef.TILE_SIZE / 2.0f, 4.0f, MapDef.TILE_SIZE / 2.0f),
                             gameDevice);
                         c.SetColor(Color.Chocolate);
                         mapBlocks.Add(c);
                     }
-                    else if (mapChip[i, j] == 1)
+                    else if (mapChip[i, j] == 1)        //TODO：未定義ブロック　1：地面
                     {
                         Cube c = new Cube(
                             new Vector3(j * MapDef.TILE_SIZE, 0, i * MapDef.TILE_SIZE),
@@ -62,6 +76,71 @@ namespace Team27_RougeLike.Map
                     }
                 }
             }
+        }
+
+        public void FocusCenter(Vector3 worldPosition)
+        {
+            int x = (int)((MapDef.TILE_SIZE / 2.0f + worldPosition.X) / MapDef.TILE_SIZE);
+            int z = (int)((MapDef.TILE_SIZE / 2.0f + worldPosition.Z) / MapDef.TILE_SIZE);
+
+            position.X = x;
+            position.Y = z;
+            ClampFocusPoint();
+        }
+
+        /// <summary>
+        /// 描画領域の更新
+        /// </summary>
+        public void Update()
+        {
+            mapBlocksToDraw.Clear();
+
+            for (int y = position.Y - radius; y <= position.Y + radius; y++)        //Y軸
+            {
+                if (y < 0 || y > mapChip.GetLength(0) - 1)                          //マップのサイズ外はスキップ
+                    continue;
+                for (int x = position.X - radius; x <= position.X + radius; x++)    //X軸
+                {
+                    if (x < 0 || x > mapChip.GetLength(1) - 1)                      //マップのサイズ外はスキップ
+                        continue;
+                    int index = y * mapChip.GetLength(1) + x;                       //Add順でIndexの計算
+                    mapBlocksToDraw.Add(mapBlocks[index]);                          //描画部分に追加
+                }
+            }
+
+            //Move();     //Debug移動用
+            ClampFocusPoint();
+        }
+
+        /// <summary>
+        /// Debug移動用
+        /// </summary>
+        private void Move()
+        {
+            if (gameDevice.InputState.GetKeyTrigger(Keys.Up))
+            {
+                position.Y--;
+            }
+            else if (gameDevice.InputState.GetKeyTrigger(Keys.Down))
+            {
+                position.Y++;
+            }
+            else if (gameDevice.InputState.GetKeyTrigger(Keys.Right))
+            {
+                position.X++;
+            }
+            else if (gameDevice.InputState.GetKeyTrigger(Keys.Left))
+            {
+                position.X--;
+            }
+        }
+
+        private void ClampFocusPoint()
+        {
+            position.Y = (position.Y < 0) ? 0 : position.Y;
+            position.Y = (position.Y >= mapChip.GetLength(0)) ? mapChip.GetLength(0) - 1 : position.Y;
+            position.X = (position.X < 0) ? 0 : position.X;
+            position.X = (position.X >= mapChip.GetLength(1)) ? mapChip.GetLength(1) - 1 : position.X;
         }
 
         /// <summary>
@@ -78,6 +157,7 @@ namespace Team27_RougeLike.Map
         public void Clear()
         {
             mapBlocks.Clear();
+            mapBlocksToDraw.Clear();
         }
 
         /// <summary>
@@ -85,7 +165,7 @@ namespace Team27_RougeLike.Map
         /// </summary>
         public void Draw()
         {
-            foreach (Cube c in mapBlocks)
+            foreach (Cube c in mapBlocksToDraw)     //描画領域しか描画しない
             {
                 c.Draw();
             }

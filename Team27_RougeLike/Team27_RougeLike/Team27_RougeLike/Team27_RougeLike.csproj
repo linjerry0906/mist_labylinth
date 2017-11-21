@@ -69,6 +69,7 @@
     <Compile Include="Map\MapDef.cs" />
     <Compile Include="Map\MapGenerator.cs" />
     <Compile Include="Map\MapRoom.cs" />
+    <Compile Include="Object\Actor\Character.cs" />
     <Compile Include="Object\Cube.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

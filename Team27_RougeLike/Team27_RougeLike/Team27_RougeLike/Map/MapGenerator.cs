@@ -55,10 +55,10 @@ namespace Team27_RougeLike.Map
             this.gameDevice = gameDevice;
 
             //ToDo：外でサイズを指定できるようにする
-            dungeonSize = 120;       //ダンジョンのサイズ
-            //正規分布の楕円形の縦と横
-            limitWidth = gameDevice.Random.Next(dungeonSize / 4, dungeonSize * 3 / 4);
-            limitHeight = dungeonSize - limitWidth;
+            dungeonSize = 130;       //ダンジョンのサイズ
+            //正規分布の楕円形の縦と横(集約させるためにさらに2を割る)
+            limitWidth = (gameDevice.Random.Next(dungeonSize / 4, dungeonSize * 3 / 4)) / 2;
+            limitHeight = (dungeonSize - limitWidth) / 2;
 
             currentState = GenerateState.GenerateRoom;      //生成状態
         }
@@ -221,7 +221,7 @@ namespace Team27_RougeLike.Map
                 //横その一
                 MapRoom hall = new MapRoom(
                     halls.Count,
-                    Math.Abs(e.FirstPoint.X - e.SecondPoint.X) + 1,
+                    Math.Abs(e.FirstPoint.X - e.SecondPoint.X) + 2,
                     2,
                     center.X,
                     e.FirstPoint.Y,
@@ -231,7 +231,7 @@ namespace Team27_RougeLike.Map
                 //横その二
                 hall = new MapRoom(
                     halls.Count,
-                    Math.Abs(e.FirstPoint.X - e.SecondPoint.X) + 1,
+                    Math.Abs(e.FirstPoint.X - e.SecondPoint.X) + 2,
                     2,
                     center.X,
                     e.SecondPoint.Y,
@@ -242,7 +242,7 @@ namespace Team27_RougeLike.Map
                 hall = new MapRoom(
                     halls.Count,
                     2,
-                    Math.Abs(e.FirstPoint.Y - e.SecondPoint.Y) + 1,
+                    Math.Abs(e.FirstPoint.Y - e.SecondPoint.Y) + 2,
                     e.FirstPoint.X,
                     center.Y,
                     gameDevice);
@@ -252,7 +252,7 @@ namespace Team27_RougeLike.Map
                 hall = new MapRoom(
                     halls.Count,
                     2,
-                    Math.Abs(e.FirstPoint.Y - e.SecondPoint.Y) + 1,
+                    Math.Abs(e.FirstPoint.Y - e.SecondPoint.Y) + 2,
                     e.SecondPoint.X,
                     center.Y,
                     gameDevice);
@@ -273,7 +273,7 @@ namespace Team27_RougeLike.Map
                 {
                     if (mainRoom.Contains(r))   //メインの部屋は判定しない
                         continue;
-                    if (hall.RoomCollision(r))  //当たっていたらメインに追加
+                    if (hall.RoomCollision(r) && (r.Length > MapDef.MAX_ROOM_SIZE * 2 * 0.3f || r.Width > MapDef.MAX_ROOM_SIZE * 2 * 0.3f))  //当たっていたらメインに追加
                     {
                         r.SetColor(Color.Gold); //Debug情報
                         mainRoom.Add(r);

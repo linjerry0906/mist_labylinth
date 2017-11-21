@@ -30,3 +30,4 @@ D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team
 D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.xml
 D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.exe
 D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.pdb
+D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\testModel.xnb
