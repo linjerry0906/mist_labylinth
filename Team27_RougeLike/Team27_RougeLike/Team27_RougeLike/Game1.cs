@@ -98,6 +98,10 @@ namespace Team27_RougeLike
                 map = new DungeonMap(mapGenerator.MapChip, gameDevice);
                 map.Initialize();
             }
+            else
+            {
+                map.Update();
+            }
 
             r++;
             r = (r > 360) ? r - 360 : r;
@@ -124,7 +128,7 @@ namespace Team27_RougeLike
                 {
                     effect.EnableDefaultLighting();
                     effect.World = 
-                        Matrix.CreateScale(new Vector3(100, 100, 100)) * 
+                        Matrix.CreateScale(new Vector3(30, 30, 30)) * 
                         Matrix.CreateRotationX(MathHelper.ToRadians(r)) * 
                         gameDevice.Renderer.MainProjector.World;
                     effect.View = gameDevice.Renderer.MainProjector.LookAt;
