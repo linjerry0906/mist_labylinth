@@ -12,6 +12,7 @@ using Team27_RougeLike.Device;
 using Team27_RougeLike.Def;
 using Team27_RougeLike.Object;
 using Team27_RougeLike.Map;
+using Team27_RougeLike.Object.Actor;
 
 namespace Team27_RougeLike
 {
@@ -25,6 +26,9 @@ namespace Team27_RougeLike
 
         private MapGenerator mapGenerator;
         private DungeonMap map;
+
+        private Character player;
+
         private Model m;
         private float r = 0;
         public Game1()
@@ -49,6 +53,7 @@ namespace Team27_RougeLike
             gameDevice = new GameDevice(Content, GraphicsDevice);
             mapGenerator = new MapGenerator(gameDevice);
             map = new DungeonMap(gameDevice);
+            player = new Character(new Vector3(0, 1.5f, 0), gameDevice);
 
             base.Initialize();
         }
@@ -88,6 +93,7 @@ namespace Team27_RougeLike
                 this.Exit();
             // TODO: Add your update logic here
             gameDevice.Update();
+            player.Update();
 
             if (!mapGenerator.IsEnd())
             {
@@ -100,6 +106,7 @@ namespace Team27_RougeLike
             }
             else
             {
+                map.FocusCenter(player.Position);
                 map.Update();
             }
 
@@ -136,6 +143,8 @@ namespace Team27_RougeLike
                 }
                 mesh.Draw();
             }
+
+            player.Draw();
 
             base.Draw(gameTime);
         }

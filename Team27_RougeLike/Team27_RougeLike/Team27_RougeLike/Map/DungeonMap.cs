@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.11.19
+// 作成日：2017.11.19 ~ 2017.11.21
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -61,7 +61,7 @@ namespace Team27_RougeLike.Map
                     {
                         Cube c = new Cube(
                             new Vector3(j * MapDef.TILE_SIZE, 0, i * MapDef.TILE_SIZE),
-                            new Vector3(MapDef.TILE_SIZE / 2.0f, 2.0f, MapDef.TILE_SIZE / 2.0f),
+                            new Vector3(MapDef.TILE_SIZE / 2.0f, 4.0f, MapDef.TILE_SIZE / 2.0f),
                             gameDevice);
                         c.SetColor(Color.Chocolate);
                         mapBlocks.Add(c);
@@ -76,6 +76,16 @@ namespace Team27_RougeLike.Map
                     }
                 }
             }
+        }
+
+        public void FocusCenter(Vector3 worldPosition)
+        {
+            int x = (int)((MapDef.TILE_SIZE / 2.0f + worldPosition.X) / MapDef.TILE_SIZE);
+            int z = (int)((MapDef.TILE_SIZE / 2.0f + worldPosition.Z) / MapDef.TILE_SIZE);
+
+            position.X = x;
+            position.Y = z;
+            ClampFocusPoint();
         }
 
         /// <summary>
@@ -98,7 +108,8 @@ namespace Team27_RougeLike.Map
                 }
             }
 
-            Move();     //Debug移動用
+            //Move();     //Debug移動用
+            ClampFocusPoint();
         }
 
         /// <summary>
@@ -109,23 +120,27 @@ namespace Team27_RougeLike.Map
             if (gameDevice.InputState.GetKeyTrigger(Keys.Up))
             {
                 position.Y--;
-                position.Y = (position.Y < 0) ? 0 : position.Y;
             }
             else if (gameDevice.InputState.GetKeyTrigger(Keys.Down))
             {
                 position.Y++;
-                position.Y = (position.Y >= mapChip.GetLength(0)) ? mapChip.GetLength(0) - 1 : position.Y;
             }
             else if (gameDevice.InputState.GetKeyTrigger(Keys.Right))
             {
                 position.X++;
-                position.X = (position.X >= mapChip.GetLength(1)) ? mapChip.GetLength(1) - 1 : position.X;
             }
             else if (gameDevice.InputState.GetKeyTrigger(Keys.Left))
             {
                 position.X--;
-                position.X = (position.X < 0) ? 0 : position.X;
             }
+        }
+
+        private void ClampFocusPoint()
+        {
+            position.Y = (position.Y < 0) ? 0 : position.Y;
+            position.Y = (position.Y >= mapChip.GetLength(0)) ? mapChip.GetLength(0) - 1 : position.Y;
+            position.X = (position.X < 0) ? 0 : position.X;
+            position.X = (position.X >= mapChip.GetLength(1)) ? mapChip.GetLength(1) - 1 : position.X;
         }
 
         /// <summary>
