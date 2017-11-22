@@ -22,14 +22,16 @@ namespace Team27_RougeLike.Device
 
         private Vector3 target;         //注目目標
         private Vector3 position;       //プロジェクターの位置
+        private Vector3 baseDistance;   //注目目標との相対位置関係
         
         public Projector()
         {
             viewport = new Viewport(0, 0, Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT);
 
             position = new Vector3(0, 30, 20);
-            //position = new Vector3(0, 700, 500);
+            //position = new Vector3(0, 700, 500);      //Debug広い視野
             target = new Vector3(0, 0, 0);
+            baseDistance = new Vector3(20, 30, 20);
             world = Matrix.CreateWorld(Vector3.Zero, Vector3.Forward, Vector3.Up);
             projection = Matrix.CreatePerspectiveFieldOfView(
                 (float)(45 * Math.PI / 180),
@@ -61,9 +63,22 @@ namespace Team27_RougeLike.Device
         /// <param name="speed">スピード</param>
         private void Move(Vector3 velocity, float speed)
         {
-            velocity.Normalize();               //
+            velocity.Normalize();
             position += (velocity * speed);
             target += (velocity * speed);
+            lookat = Matrix.CreateLookAt(position, target, Vector3.Up);
+        }
+
+        /// <summary>
+        /// Y軸に対して回転
+        /// </summary>
+        /// <param name="angle">回転角度</param>
+        public void Rotate(float angle)
+        {
+            position = new Vector3(
+                target.X + baseDistance.X * (float)Math.Sin(MathHelper.ToRadians(angle)), 
+                target.Y + baseDistance.Y, 
+                target.Z + baseDistance.Z * (float)Math.Cos(MathHelper.ToRadians(angle)));
             lookat = Matrix.CreateLookAt(position, target, Vector3.Up);
         }
 
@@ -101,6 +116,51 @@ namespace Team27_RougeLike.Device
         public Viewport ViewPort
         {
             get { return viewport; }
+        }
+
+        /// <summary>
+        /// プロジェクター向いている方向の上方向（単位ベクトル）
+        /// </summary>
+        public Vector3 Front
+        {
+            get
+            {
+                Vector3 front = new Vector3(target.X - position.X, 0, target.Z - position.Z);
+                front.Normalize();
+                return front;
+            }
+        }
+        /// <summary>
+        /// プロジェクター向いている方向の下方向（単位ベクトル）
+        /// </summary>
+        public Vector3 Back
+        {
+            get
+            {
+                Vector3 front = new Vector3(target.X - position.X, 0, target.Z - position.Z);
+                front.Normalize();
+                return -front;
+            }
+        }
+        public Vector3 Right
+        {
+            get
+            {
+                Vector3 front = new Vector3(target.X - position.X, 0, target.Z - position.Z);
+                Vector3 right = Vector3.Cross(front, Vector3.Up);
+                right.Normalize();
+                return right;
+            }
+        }
+        public Vector3 Left
+        {
+            get
+            {
+                Vector3 front = new Vector3(target.X - position.X, 0, target.Z - position.Z);
+                Vector3 left = Vector3.Cross(front, Vector3.Up);
+                left.Normalize();
+                return -left;
+            }
         }
     }
 }

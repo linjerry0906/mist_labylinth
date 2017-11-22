@@ -45,19 +45,19 @@ namespace Team27_RougeLike.Object.Actor
             velocity = Vector3.Zero;
             if (input.GetKeyState(Keys.W))
             {
-                velocity.Z = -1;
+                velocity += projector.Front;
             }
             if (input.GetKeyState(Keys.S))
             {
-                velocity.Z = 1;
+                velocity += projector.Back;
             }
             if (input.GetKeyState(Keys.A))
             {
-                velocity.X = -1;
+                velocity += projector.Left;
             }
             if (input.GetKeyState(Keys.D))
             {
-                velocity.X = 1;
+                velocity += projector.Right;
             }
             if (velocity.Length() > 0)
             {
