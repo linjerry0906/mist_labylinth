@@ -273,7 +273,9 @@ namespace Team27_RougeLike.Map
                 {
                     if (mainRoom.Contains(r))   //メインの部屋は判定しない
                         continue;
-                    if (hall.RoomCollision(r) && (r.Length > MapDef.MAX_ROOM_SIZE * 2 * 0.3f || r.Width > MapDef.MAX_ROOM_SIZE * 2 * 0.3f))  //当たっていたらメインに追加
+                    //当たっていたらメインに追加
+                    if (hall.RoomCollision(r) && 
+                        (r.Length > MapDef.MAX_ROOM_SIZE * 2 * 0.3f || r.Width > MapDef.MAX_ROOM_SIZE * 2 * 0.3f))
                     {
                         r.SetColor(Color.Gold); //Debug情報
                         mainRoom.Add(r);
