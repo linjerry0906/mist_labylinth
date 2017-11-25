@@ -31,6 +31,7 @@ namespace Team27_RougeLike
 
         private Model m;
         private float r = 0;
+        private float angle = 0;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -108,6 +109,18 @@ namespace Team27_RougeLike
             {
                 map.FocusCenter(player.Position);
                 map.Update();
+            }
+            if (gameDevice.InputState.GetKeyTrigger(Keys.Q))
+            {
+                angle += 45;
+                angle = (angle > 360) ? angle - 360 : angle;
+                gameDevice.MainProjector.Rotate(angle);
+            }
+            else if (gameDevice.InputState.GetKeyTrigger(Keys.E))
+            {
+                angle -= 45;
+                angle = (angle < 0) ? angle + 360 : angle;
+                gameDevice.MainProjector.Rotate(angle);
             }
 
             r++;
