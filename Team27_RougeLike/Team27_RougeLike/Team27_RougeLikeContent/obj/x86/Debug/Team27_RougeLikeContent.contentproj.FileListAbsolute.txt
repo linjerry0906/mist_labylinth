@@ -1,2 +1,1 @@
-D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\obj\x86\Debug\Team27_RougeLikeContent.contentprojResolveAssemblyReference.cache
 D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\obj\x86\Debug\Team27_RougeLikeContent.contentprojResolveAssemblyReference.cache
