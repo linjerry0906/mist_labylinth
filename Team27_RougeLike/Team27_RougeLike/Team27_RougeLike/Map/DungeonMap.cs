@@ -15,14 +15,14 @@ namespace Team27_RougeLike.Map
 {
     class DungeonMap
     {
-        private GameDevice gameDevice;
+        private GameDevice gameDevice;      //Debug可視化用
 
         private List<Cube> mapBlocks;       //モデルに変更可
         private int[,] mapChip;             //マップチップ
 
         private List<Cube> mapBlocksToDraw; //描画するマップ
         private Point position;             //描画中心座標
-        private int radius = 20;            //描画半径
+        private int radius = 10;            //描画半径
 
         public DungeonMap(GameDevice gameDevice)
         {
@@ -78,6 +78,10 @@ namespace Team27_RougeLike.Map
             }
         }
 
+        /// <summary>
+        /// 描画の中心位置を設定
+        /// </summary>
+        /// <param name="worldPosition"></param>
         public void FocusCenter(Vector3 worldPosition)
         {
             int x = (int)((MapDef.TILE_SIZE / 2.0f + worldPosition.X) / MapDef.TILE_SIZE);
@@ -108,8 +112,7 @@ namespace Team27_RougeLike.Map
                 }
             }
 
-            //Move();     //Debug移動用
-            ClampFocusPoint();
+            ClampFocusPoint();      //配列を中に納める
         }
 
         /// <summary>
@@ -135,6 +138,9 @@ namespace Team27_RougeLike.Map
             }
         }
 
+        /// <summary>
+        /// 配列の長さを超えないように設定
+        /// </summary>
         private void ClampFocusPoint()
         {
             position.Y = (position.Y < 0) ? 0 : position.Y;

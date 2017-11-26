@@ -142,6 +142,9 @@ namespace Team27_RougeLike.Device
                 return -front;
             }
         }
+        /// <summary>
+        /// プロジェクター向いている方向の右方向（単位ベクトル）
+        /// </summary>
         public Vector3 Right
         {
             get
@@ -152,6 +155,9 @@ namespace Team27_RougeLike.Device
                 return right;
             }
         }
+        /// <summary>
+        /// プロジェクター向いている方向の左方向（単位ベクトル）
+        /// </summary>
         public Vector3 Left
         {
             get

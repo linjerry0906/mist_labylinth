@@ -74,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Utility\Motion.cs" />
+    <Compile Include="Utility\Range.cs" />
+    <Compile Include="Utility\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
