@@ -1,4 +1,9 @@
-﻿using System;
+﻿//--------------------------------------------------------------------------------------------------
+// 作成者：林　佳叡
+// 作成日：2017.11.16 ～ 2017.11.26
+// 作成部分：3D描画
+//--------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +41,7 @@ namespace Team27_RougeLike.Device
             basicEffect = new BasicEffect(graphicsDevice);
 
             mainProjector = new Projector();
+            DefaultRenderSetting();
         }
 
         /// <summary>
@@ -102,9 +108,9 @@ namespace Team27_RougeLike.Device
         public void DefaultRenderSetting()
         {
             graphicsDevice.DepthStencilState = DepthStencilState.Default;
-            graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
-            graphicsDevice.BlendState = BlendState.AlphaBlend;
-            basicEffect.VertexColorEnabled = true;
+            graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;  //カーリング
+            graphicsDevice.BlendState = BlendState.AlphaBlend;                      //アルファブレンド
+            basicEffect.VertexColorEnabled = true;                                  //頂点色を有効
         }
 
         /// <summary>
@@ -133,6 +139,64 @@ namespace Team27_RougeLike.Device
                 effect.Apply();
             }
             graphicsDevice.DrawUserPrimitives<VertexPositionColorTexture>(PrimitiveType.TriangleStrip, vertices, 0, 2);
+        }
+
+        /// <summary>
+        /// スクリーンに向いてポリゴンを描画
+        /// </summary>
+        /// <param name="name">アセット名</param>
+        /// <param name="position">位置</param>
+        /// <param name="size">ポリゴンのサイズ</param>
+        /// <param name="rect">アセットのUV</param>
+        /// <param name="color">ポリゴンの色</param>
+        /// <param name="alpha">アルファ値</param>
+        public void DrawPolygon(string name, Vector3 position, Vector2 size, Rectangle rect, Color color,float alpha = 1)
+        {
+            graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
+            Vector3 axis = Vector3.Cross(mainProjector.Front, mainProjector.Right);     //回転軸
+            axis.Normalize();
+            basicEffect.TextureEnabled = true;                                          //テクスチャ有効
+            int textureHeight = textures[name].Height;                                  //テクスチャのサイズを取得
+            int textureWidth = textures[name].Width;
+            //四つの頂点を設定
+            VertexPositionColorTexture[] vertices = new VertexPositionColorTexture[4];
+            vertices[0] = new VertexPositionColorTexture(
+                position + Vector3.Left * size.X / 2 + Vector3.Up * size.Y / 2,
+                color,
+                new Vector2(
+                    rect.X * 1.0f / textureWidth,
+                    (rect.Y + rect.Height) * 1.0f / textureHeight));
+            vertices[1] = new VertexPositionColorTexture(
+                position + Vector3.Left * size.X / 2 + Vector3.Down * size.Y / 2,
+                color,
+                new Vector2(
+                    rect.X * 1.0f / textureWidth,
+                    rect.Y * 1.0f / textureHeight));
+            vertices[2] = new VertexPositionColorTexture(
+                position + Vector3.Right * size.X / 2 + Vector3.Up * size.Y / 2,
+                color,
+                new Vector2(
+                    (rect.X + rect.Width) * 1.0f / textureWidth,
+                    (rect.Y + rect.Height) * 1.0f / textureHeight));
+            vertices[3] = new VertexPositionColorTexture(
+                position + Vector3.Right * size.X / 2 + Vector3.Down * size.Y / 2,
+                color,
+                new Vector2(
+                    (rect.X + rect.Width) * 1.0f / textureWidth,
+                    rect.Y * 1.0f / textureHeight));
+
+            basicEffect.Alpha = alpha;                  //アルファ値を指定
+            basicEffect.Texture = textures[name];       //テクスチャを指定
+            Matrix world = 
+                Matrix.CreateBillboard(position, mainProjector.Position, axis, mainProjector.Front) * 
+                Matrix.CreateTranslation(position);     //ビルボードマトリクス
+            basicEffect.World = world;
+            foreach (var effect in basicEffect.CurrentTechnique.Passes)
+            {
+                effect.Apply();
+            }
+            graphicsDevice.DrawUserPrimitives<VertexPositionColorTexture>(PrimitiveType.TriangleStrip, vertices, 0, 2);
+            basicEffect.TextureEnabled = false;
         }
 
         /// <summary>
