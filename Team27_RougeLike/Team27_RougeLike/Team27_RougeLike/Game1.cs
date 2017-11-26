@@ -13,6 +13,7 @@ using Team27_RougeLike.Def;
 using Team27_RougeLike.Object;
 using Team27_RougeLike.Map;
 using Team27_RougeLike.Object.Actor;
+using Team27_RougeLike.Utility;
 
 namespace Team27_RougeLike
 {
@@ -32,6 +33,9 @@ namespace Team27_RougeLike
         private Model m;
         private float r = 0;
         private float angle = 0;
+
+        private Motion motion;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -55,6 +59,12 @@ namespace Team27_RougeLike
             mapGenerator = new MapGenerator(gameDevice);
             map = new DungeonMap(gameDevice);
             player = new Character(new Vector3(0, 1.5f, 0), gameDevice);
+            motion = new Motion();
+            for(int i = 0; i < 6; i++)
+            {
+                motion.Add(i, new Rectangle(i * 64, 0, 64, 64));
+            }
+            motion.Initialize(new Range(0, 5), new Timer(0.1f));
 
             base.Initialize();
         }
@@ -69,6 +79,7 @@ namespace Team27_RougeLike
 
             // TODO: use this.Content to load your game content here
             m = Content.Load<Model>("testModel");
+            gameDevice.Renderer.LoadTexture("test");
         }
 
         /// <summary>
@@ -95,6 +106,7 @@ namespace Team27_RougeLike
             // TODO: Add your update logic here
             gameDevice.Update();
             player.Update();
+            motion.Update(gameTime);
 
             if (!mapGenerator.IsEnd())
             {
@@ -138,26 +150,28 @@ namespace Team27_RougeLike
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            mapGenerator.Draw();
+            //mapGenerator.Draw();
 
-            map.Draw();
+            //map.Draw();
 
-            foreach(ModelMesh mesh in m.Meshes)
-            {
-                foreach(BasicEffect effect in mesh.Effects)
-                {
-                    effect.EnableDefaultLighting();
-                    effect.World = 
-                        Matrix.CreateScale(new Vector3(30, 30, 30)) * 
-                        Matrix.CreateRotationX(MathHelper.ToRadians(r)) * 
-                        gameDevice.Renderer.MainProjector.World;
-                    effect.View = gameDevice.Renderer.MainProjector.LookAt;
-                    effect.Projection = gameDevice.Renderer.MainProjector.Projection;
-                }
-                mesh.Draw();
-            }
+            //foreach(ModelMesh mesh in m.Meshes)
+            //{
+            //    foreach(BasicEffect effect in mesh.Effects)
+            //    {
+            //        effect.EnableDefaultLighting();
+            //        effect.World = 
+            //            Matrix.CreateScale(new Vector3(30, 30, 30)) * 
+            //            Matrix.CreateRotationX(MathHelper.ToRadians(r)) * 
+            //            gameDevice.Renderer.MainProjector.World;
+            //        effect.View = gameDevice.Renderer.MainProjector.LookAt;
+            //        effect.Projection = gameDevice.Renderer.MainProjector.Projection;
+            //    }
+            //    mesh.Draw();
+            //}
 
             player.Draw();
+
+            gameDevice.Renderer.DrawPolygon("test", Vector3.Zero, new Vector2(10, 10), motion.DrawingRange(), Color.White);
 
             base.Draw(gameTime);
         }
