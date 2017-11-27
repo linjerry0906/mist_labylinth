@@ -116,6 +116,10 @@ namespace Team27_RougeLike
             {
                 map = new DungeonMap(mapGenerator.MapChip, gameDevice);
                 map.Initialize();
+                player.Position = new Vector3(
+                    map.EntryPoint.X * MapDef.TILE_SIZE,
+                    0.05f,
+                    map.EntryPoint.Y * MapDef.TILE_SIZE);
             }
             else
             {
@@ -150,24 +154,9 @@ namespace Team27_RougeLike
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            //mapGenerator.Draw();
+            mapGenerator.Draw();
 
-            //map.Draw();
-
-            //foreach(ModelMesh mesh in m.Meshes)
-            //{
-            //    foreach(BasicEffect effect in mesh.Effects)
-            //    {
-            //        effect.EnableDefaultLighting();
-            //        effect.World = 
-            //            Matrix.CreateScale(new Vector3(30, 30, 30)) * 
-            //            Matrix.CreateRotationX(MathHelper.ToRadians(r)) * 
-            //            gameDevice.Renderer.MainProjector.World;
-            //        effect.View = gameDevice.Renderer.MainProjector.LookAt;
-            //        effect.Projection = gameDevice.Renderer.MainProjector.Projection;
-            //    }
-            //    mesh.Draw();
-            //}
+            map.Draw();
 
             player.Draw();
 

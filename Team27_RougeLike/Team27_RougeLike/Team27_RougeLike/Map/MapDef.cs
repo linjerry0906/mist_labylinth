@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.11.17
+// 作成日：2017.11.17 ~ 2017.11.27
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -17,5 +17,13 @@ namespace Team27_RougeLike.Map
         //部屋生成する時にランダムサイズの最大最小値
         public static readonly int MAX_ROOM_SIZE = 6;
         public static readonly int MIN_ROOM_SIZE = 1;
+
+        public enum BlockDef
+        {
+            Wall = 0,
+            Space = 1,
+            Entry = 2,
+            Exit = 3,
+        }
     }
 }

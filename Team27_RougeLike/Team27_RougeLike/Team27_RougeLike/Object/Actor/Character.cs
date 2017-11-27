@@ -68,6 +68,7 @@ namespace Team27_RougeLike.Object.Actor
         public Vector3 Position
         {
             get { return position; }
+            set { position = value; }
         }
 
         public void Draw()

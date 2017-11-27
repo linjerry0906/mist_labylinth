@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.11.17 ～ 2017.11.20
+// 作成日：2017.11.17 ～ 2017.11.27
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -23,6 +23,7 @@ namespace Team27_RougeLike.Map
             ChooseSubRoom,      //通路上のサブ部屋を追加
             CheckMapSize,       //マップサイズを確定
             WriteToArray,       //書き出し
+            SetEventPoint,      //入口や出口などの設置
             End,                //処理完了
         }
 
@@ -103,11 +104,14 @@ namespace Team27_RougeLike.Map
                 case GenerateState.ChooseSubRoom:       //サブの部屋を選択
                     UpdateChooseSubRoom();
                     break;
-                case GenerateState.CheckMapSize:
+                case GenerateState.CheckMapSize:        //マップサイズを確定
                     UpdateCheckMapSize();
                     break;
                 case GenerateState.WriteToArray:        //マップチップ生成
                     UpdateWriteToArray();
+                    break;
+                case GenerateState.SetEventPoint:
+                    UpdateSetEventPoint();
                     break;
                 case GenerateState.End:
                     break;
@@ -217,19 +221,8 @@ namespace Team27_RougeLike.Map
                 Point center = new Point(
                     (e.FirstPoint.X + e.SecondPoint.X) / 2,
                     (e.FirstPoint.Y + e.SecondPoint.Y) / 2);
-                //一つの線分について四つの廊下がある
-                //横その一
+                //横
                 MapRoom hall = new MapRoom(
-                    halls.Count,
-                    Math.Abs(e.FirstPoint.X - e.SecondPoint.X) + 2,
-                    2,
-                    center.X,
-                    e.FirstPoint.Y,
-                    gameDevice);
-                hall.SetColor(Color.Blue);
-                halls.Add(hall);
-                //横その二
-                hall = new MapRoom(
                     halls.Count,
                     Math.Abs(e.FirstPoint.X - e.SecondPoint.X) + 2,
                     2,
@@ -238,22 +231,12 @@ namespace Team27_RougeLike.Map
                     gameDevice);
                 hall.SetColor(Color.Blue);
                 halls.Add(hall);
-                //縦その一
+                //縦
                 hall = new MapRoom(
                     halls.Count,
                     2,
                     Math.Abs(e.FirstPoint.Y - e.SecondPoint.Y) + 2,
                     e.FirstPoint.X,
-                    center.Y,
-                    gameDevice);
-                hall.SetColor(Color.Blue);
-                halls.Add(hall);
-                //縦その二
-                hall = new MapRoom(
-                    halls.Count,
-                    2,
-                    Math.Abs(e.FirstPoint.Y - e.SecondPoint.Y) + 2,
-                    e.SecondPoint.X,
                     center.Y,
                     gameDevice);
                 hall.SetColor(Color.Blue);
@@ -343,7 +326,7 @@ namespace Team27_RougeLike.Map
                 {
                     for (int x = r.MinX - minX + 1; x < r.MaxX - minX + 1; x++)
                     {
-                        mapChip[z, x] = 1;
+                        mapChip[z, x] = (int)MapDef.BlockDef.Space;
                     }
                 }
             }
@@ -353,10 +336,43 @@ namespace Team27_RougeLike.Map
                 {
                     for (int x = r.MinX - minX + 1; x < r.MaxX - minX + 1; x++)
                     {
-                        mapChip[z, x] = 1;
+                        mapChip[z, x] = (int)MapDef.BlockDef.Space;
                     }
                 }
             }
+            currentState = GenerateState.SetEventPoint;
+        }
+
+        /// <summary>
+        /// 入口と出口などの座標をマップチップに書き込む
+        /// ToDo：モンスターが湧く所
+        /// </summary>
+        public void UpdateSetEventPoint()
+        {
+            //違う部屋に設定（ランダム）
+            int entryRoom = gameDevice.Random.Next(0, mainRoom.Count);
+            int exitRoom = gameDevice.Random.Next(0, mainRoom.Count);
+            if(mainRoom.Count > 2)
+            {
+                while (exitRoom == entryRoom)
+                {
+                    exitRoom = gameDevice.Random.Next(0, mainRoom.Count);
+                }
+            }
+            //マップのX, Y最小値
+            int minX = rooms[minXRoomIndex].MinX;
+            int minZ = rooms[minZRoomIndex].MinZ;
+
+            Point entryPoint = new Point(
+                gameDevice.Random.Next(mainRoom[entryRoom].MinX - minX + 2, mainRoom[entryRoom].MaxX - minX),
+                gameDevice.Random.Next(mainRoom[entryRoom].MinZ - minZ + 2, mainRoom[entryRoom].MaxZ - minZ));
+            Point exitPoint = new Point(
+                gameDevice.Random.Next(mainRoom[exitRoom].MinX - minX + 2, mainRoom[exitRoom].MaxX - minX),
+                gameDevice.Random.Next(mainRoom[exitRoom].MinZ - minZ + 2, mainRoom[exitRoom].MaxZ - minZ));
+
+            mapChip[entryPoint.Y, entryPoint.X] = (int)MapDef.BlockDef.Entry;
+            mapChip[exitPoint.Y, exitPoint.X] = (int)MapDef.BlockDef.Exit;
+
             currentState = GenerateState.End;
         }
 
