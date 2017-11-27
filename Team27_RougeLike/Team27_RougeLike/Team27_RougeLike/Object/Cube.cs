@@ -79,6 +79,11 @@ namespace Team27_RougeLike.Object
             //renderer.DrawPolygon("", vertices);
         }
 
+        public BoundingBox Collision
+        {
+            get{ return new BoundingBox(position - size, position + size); }
+        }
+
         public void SetColor(Color color)
         {
             this.color = color;

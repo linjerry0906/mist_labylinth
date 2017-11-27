@@ -28,13 +28,9 @@ namespace Team27_RougeLike
         private MapGenerator mapGenerator;
         private DungeonMap map;
 
-        private Character player;
+        private Player player;
 
-        private Model m;
-        private float r = 0;
         private float angle = 0;
-
-        private Motion motion;
 
         public Game1()
         {
@@ -58,13 +54,7 @@ namespace Team27_RougeLike
             gameDevice = new GameDevice(Content, GraphicsDevice);
             mapGenerator = new MapGenerator(gameDevice);
             map = new DungeonMap(gameDevice);
-            player = new Character(new Vector3(0, 1.5f, 0), gameDevice);
-            motion = new Motion();
-            for(int i = 0; i < 6; i++)
-            {
-                motion.Add(i, new Rectangle(i * 64, 0, 64, 64));
-            }
-            motion.Initialize(new Range(0, 5), new Timer(0.1f));
+            player = new Player(new Vector3(0, 1.5f, 0), gameDevice);
 
             base.Initialize();
         }
@@ -78,7 +68,6 @@ namespace Team27_RougeLike
             // Create a new SpriteBatch, which can be used to draw textures.
 
             // TODO: use this.Content to load your game content here
-            m = Content.Load<Model>("testModel");
             gameDevice.Renderer.LoadTexture("test");
         }
 
@@ -105,8 +94,7 @@ namespace Team27_RougeLike
                 this.Exit();
             // TODO: Add your update logic here
             gameDevice.Update();
-            player.Update();
-            motion.Update(gameTime);
+            player.Update(gameTime);
 
             if (!mapGenerator.IsEnd())
             {
@@ -116,18 +104,19 @@ namespace Team27_RougeLike
             {
                 map = new DungeonMap(mapGenerator.MapChip, gameDevice);
                 map.Initialize();
-                /*
+
                 player.Position = new Vector3(
                     map.EntryPoint.X * MapDef.TILE_SIZE,
-                    0.05f,
+                    1.5f,
                     map.EntryPoint.Y * MapDef.TILE_SIZE);
-                    */
             }
             else
             {
                 map.FocusCenter(player.Position);
                 map.Update();
+                map.MapCollision(player);
             }
+
             if (gameDevice.InputState.GetKeyTrigger(Keys.Q))
             {
                 angle += 45;
@@ -140,9 +129,6 @@ namespace Team27_RougeLike
                 angle = (angle < 0) ? angle + 360 : angle;
                 gameDevice.MainProjector.Rotate(angle);
             }
-
-            r++;
-            r = (r > 360) ? r - 360 : r;
 
             base.Update(gameTime);
         }
@@ -161,8 +147,6 @@ namespace Team27_RougeLike
             map.Draw();
 
             player.Draw();
-
-            gameDevice.Renderer.DrawPolygon("test", player.Position, new Vector2(10, 10), motion.DrawingRange(), Color.White);
 
             base.Draw(gameTime);
         }

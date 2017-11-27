@@ -69,7 +69,8 @@
     <Compile Include="Map\MapDef.cs" />
     <Compile Include="Map\MapGenerator.cs" />
     <Compile Include="Map\MapRoom.cs" />
-    <Compile Include="Object\Actor\Character.cs" />
+    <Compile Include="Object\Actor\Player.cs" />
+    <Compile Include="Object\CollisionSphere.cs" />
     <Compile Include="Object\Cube.cs" />
     <Compile Include="Object\Item\EquipmentEffect.cs" />
     <Compile Include="Object\Item\Item.cs" />

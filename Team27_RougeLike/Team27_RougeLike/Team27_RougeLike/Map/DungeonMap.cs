@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input; //Debug
 using Team27_RougeLike.Object;
 using Team27_RougeLike.Device;
+using Team27_RougeLike.Object.Actor;
 
 namespace Team27_RougeLike.Map
 {
@@ -68,8 +69,8 @@ namespace Team27_RougeLike.Map
                     {
                         case (int)MapDef.BlockDef.Wall:
                             c = new Cube(
-                                new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
-                                new Vector3(MapDef.TILE_SIZE / 2.0f, 4.0f, MapDef.TILE_SIZE / 2.0f),
+                                new Vector3(x * MapDef.TILE_SIZE, 2, y * MapDef.TILE_SIZE),
+                                new Vector3(MapDef.TILE_SIZE / 2.0f, 2.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
                             c.SetColor(new Color(80, 40, 10));
                             mapBlocks.Add(c);
@@ -123,7 +124,7 @@ namespace Team27_RougeLike.Map
 
             currentPosition.X = x;
             currentPosition.Y = z;
-            ClampFocusPoint();          //エラーが内容に配列の中に納める
+            ClampPoint(ref currentPosition.X, ref currentPosition.Y);          //エラーがないように配列の中に納める
         }
 
         /// <summary>
@@ -137,6 +138,7 @@ namespace Team27_RougeLike.Map
             previousPosition = currentPosition;         //前フレームのPositionを設定
             mapBlocksToDraw.Clear();
 
+            ClampPoint(ref currentPosition.X, ref currentPosition.Y);                       //エラーがないように配列の中に納める
             for (int y = currentPosition.Y - radius; y <= currentPosition.Y + radius; y++)        //Y軸
             {
                 if (y < 0 || y > mapChip.GetLength(0) - 1)                          //マップのサイズ外はスキップ
@@ -149,19 +151,19 @@ namespace Team27_RougeLike.Map
                     mapBlocksToDraw.Add(mapBlocks[index]);                          //描画部分に追加
                 }
             }
-
-            ClampFocusPoint();      //配列を中に納める
         }
 
         /// <summary>
         /// 配列の長さを超えないように設定
         /// </summary>
-        private void ClampFocusPoint()
+        /// <param name="x">X ユニット</param>
+        /// <param name="y">Y ユニット</param>
+        private void ClampPoint(ref int x, ref int y)
         {
-            currentPosition.Y = (currentPosition.Y < 0) ? 0 : currentPosition.Y;
-            currentPosition.Y = (currentPosition.Y >= mapChip.GetLength(0)) ? mapChip.GetLength(0) - 1 : currentPosition.Y;
-            currentPosition.X = (currentPosition.X < 0) ? 0 : currentPosition.X;
-            currentPosition.X = (currentPosition.X >= mapChip.GetLength(1)) ? mapChip.GetLength(1) - 1 : currentPosition.X;
+            y = (y < 0) ? 0 : y;
+            y = (y >= mapChip.GetLength(0)) ? mapChip.GetLength(0) - 1 : y;
+            x = (x < 0) ? 0 : x;
+            x = (x >= mapChip.GetLength(1)) ? mapChip.GetLength(1) - 1 : x;
         }
 
         /// <summary>
@@ -179,6 +181,34 @@ namespace Team27_RougeLike.Map
         {
             mapBlocks.Clear();
             mapBlocksToDraw.Clear();
+        }
+
+        /// <summary>
+        /// Debug暫定　Todo：PlayerをCharacterに置き換える
+        /// </summary>
+        /// <param name="player"></param>
+        public void MapCollision(Player player)
+        {
+            int x = (int)((MapDef.TILE_SIZE / 2.0f + player.Position.X) / MapDef.TILE_SIZE);
+            int z = (int)((MapDef.TILE_SIZE / 2.0f + player.Position.Z) / MapDef.TILE_SIZE);
+
+            ClampPoint(ref x, ref z);
+
+            for (int mapchipZ = z - 1; mapchipZ <= z + 1; mapchipZ++)
+            {
+                if (mapchipZ < 0 || mapchipZ > mapChip.GetLength(0) - 1)
+                    continue;
+                for (int mapchipX = x - 1; mapchipX <= x + 1; mapchipX++)
+                {
+                    if (mapchipX < 0 || mapchipX > mapChip.GetLength(1) - 1)
+                        continue;
+                    int index = mapchipZ * mapChip.GetLength(1) + mapchipX;
+                    if (player.Collision.IsCollision(mapBlocks[index].Collision))
+                    {
+                        player.Collision.Hit(mapBlocks[index].Collision);
+                    }
+                }
+            }
         }
 
         /// <summary>

@@ -5,44 +5,53 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
+using Team27_RougeLike.Utility;
 
 namespace Team27_RougeLike.Object.Actor
 {
-    class Character
+    class Player
     {
         private GameDevice gameDevice;
         private Projector projector;
         private InputState input;
-        private Vector3 position;
-        private Vector3 velocity;
-        private Cube cube;
 
-        public Character(Vector3 position, GameDevice gameDevice)
+        private CollisionSphere collision;
+        private Vector3 velocity;
+
+        private Motion motion;
+
+        public Player(Vector3 position, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
-            this.position = position;
             input = gameDevice.InputState;
             projector = gameDevice.MainProjector;
+
+            collision = new CollisionSphere(position, 2.5f);
             velocity = Vector3.Zero;
 
-            cube = new Cube(position, new Vector3(0.5f, 0.5f, 0.5f), gameDevice);
-            cube.SetColor(Color.Blue);
+            motion = new Motion();
+            for (int i = 0; i < 6; i++)
+            {
+                motion.Add(i, new Rectangle(i * 64, 0, 64, 64));
+            }
+            motion.Initialize(new Range(0, 5), new Timer(0.1f));
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             Move();
 
-            position += velocity * 0.3f;
-            cube = new Cube(position, new Vector3(0.5f, 0.5f, 0.5f), gameDevice);
-            cube.SetColor(Color.Blue);
+            collision.Force(velocity, 0.3f);
 
-            projector.Focus(position);
+            projector.Focus(collision.Position);
+
+            motion.Update(gameTime);
         }
 
         private void Move()
         {
             velocity = Vector3.Zero;
+            velocity -= new Vector3(0, 1 / 6.0f, 0);
             if (input.GetKeyState(Keys.W))
             {
                 velocity += projector.Front;
@@ -67,15 +76,18 @@ namespace Team27_RougeLike.Object.Actor
 
         public Vector3 Position
         {
-            get { return position; }
-            set { position = value; }
+            get { return collision.Position; }
+            set { collision.Position = value; }
         }
 
         public void Draw()
         {
-            cube.Draw();
+            gameDevice.Renderer.DrawPolygon("test", collision.Position, new Vector2(5, 5), motion.DrawingRange(), Color.White);
         }
 
-
+        public CollisionSphere Collision
+        {
+            get { return collision; }
+        }
     }
 }
