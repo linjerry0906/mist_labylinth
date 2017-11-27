@@ -161,25 +161,25 @@ namespace Team27_RougeLike.Device
             //四つの頂点を設定
             VertexPositionColorTexture[] vertices = new VertexPositionColorTexture[4];
             vertices[0] = new VertexPositionColorTexture(
-                position + Vector3.Left * size.X / 2 + Vector3.Up * size.Y / 2,
+                Vector3.Left * size.X / 2 + Vector3.Up * size.Y / 2,
                 color,
                 new Vector2(
                     rect.X * 1.0f / textureWidth,
                     (rect.Y + rect.Height) * 1.0f / textureHeight));
             vertices[1] = new VertexPositionColorTexture(
-                position + Vector3.Left * size.X / 2 + Vector3.Down * size.Y / 2,
+                Vector3.Left * size.X / 2 + Vector3.Down * size.Y / 2,
                 color,
                 new Vector2(
                     rect.X * 1.0f / textureWidth,
                     rect.Y * 1.0f / textureHeight));
             vertices[2] = new VertexPositionColorTexture(
-                position + Vector3.Right * size.X / 2 + Vector3.Up * size.Y / 2,
+                Vector3.Right * size.X / 2 + Vector3.Up * size.Y / 2,
                 color,
                 new Vector2(
                     (rect.X + rect.Width) * 1.0f / textureWidth,
                     (rect.Y + rect.Height) * 1.0f / textureHeight));
             vertices[3] = new VertexPositionColorTexture(
-                position + Vector3.Right * size.X / 2 + Vector3.Down * size.Y / 2,
+                Vector3.Right * size.X / 2 + Vector3.Down * size.Y / 2,
                 color,
                 new Vector2(
                     (rect.X + rect.Width) * 1.0f / textureWidth,
@@ -187,10 +187,8 @@ namespace Team27_RougeLike.Device
 
             basicEffect.Alpha = alpha;                  //アルファ値を指定
             basicEffect.Texture = textures[name];       //テクスチャを指定
-            Matrix world = 
-                Matrix.CreateBillboard(position, mainProjector.Position, axis, mainProjector.Front) * 
-                Matrix.CreateTranslation(position);     //ビルボードマトリクス
-            basicEffect.World = world;
+            basicEffect.World = 
+                Matrix.CreateBillboard(position, mainProjector.Position, axis, mainProjector.Front); //ビルボードマトリクス 
             foreach (var effect in basicEffect.CurrentTechnique.Passes)
             {
                 effect.Apply();

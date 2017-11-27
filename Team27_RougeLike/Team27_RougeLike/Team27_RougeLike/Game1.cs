@@ -116,10 +116,12 @@ namespace Team27_RougeLike
             {
                 map = new DungeonMap(mapGenerator.MapChip, gameDevice);
                 map.Initialize();
+                /*
                 player.Position = new Vector3(
                     map.EntryPoint.X * MapDef.TILE_SIZE,
                     0.05f,
                     map.EntryPoint.Y * MapDef.TILE_SIZE);
+                    */
             }
             else
             {
@@ -160,7 +162,7 @@ namespace Team27_RougeLike
 
             player.Draw();
 
-            gameDevice.Renderer.DrawPolygon("test", Vector3.Zero, new Vector2(10, 10), motion.DrawingRange(), Color.White);
+            gameDevice.Renderer.DrawPolygon("test", player.Position, new Vector2(10, 10), motion.DrawingRange(), Color.White);
 
             base.Draw(gameTime);
         }
