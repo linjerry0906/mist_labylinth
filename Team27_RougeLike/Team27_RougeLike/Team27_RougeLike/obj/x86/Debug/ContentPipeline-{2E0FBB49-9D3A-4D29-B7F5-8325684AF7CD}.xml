@@ -10,8 +10,13 @@
       <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\testModel.xnb</Output>
       <Time>2017-11-28T00:37:26.5124375+09:00</Time>
       <Dependency>
+<<<<<<< HEAD
         <Key>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\testModel_0.xml</Key>
         <Value>2017-11-28T00:37:51.4609042+09:00</Value>
+=======
+        <Key>D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\testModel_0.xml</Key>
+        <Value>2017-11-28T09:03:32.7131828+09:00</Value>
+>>>>>>> リン
       </Dependency>
     </Item>
     <Item>

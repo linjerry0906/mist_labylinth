@@ -96,8 +96,10 @@ namespace Team27_RougeLike
             gameDevice.Update();
             player.Update(gameTime);
 
+            //map ÇÃê∂ê¨Ç©ÇÁÉQÅ[ÉÄÇ‹Ç≈
             if (!mapGenerator.IsEnd())
             {
+                player.Position = new Vector3(0, 40, 40);
                 mapGenerator.Update();
             }
             else if(map.MapChip.Length < 2)
@@ -107,7 +109,7 @@ namespace Team27_RougeLike
 
                 player.Position = new Vector3(
                     map.EntryPoint.X * MapDef.TILE_SIZE,
-                    1.5f,
+                    MapDef.TILE_SIZE + 5,
                     map.EntryPoint.Y * MapDef.TILE_SIZE);
             }
             else
@@ -117,6 +119,7 @@ namespace Team27_RougeLike
                 map.MapCollision(player);
             }
 
+            //Rotate Test
             if (gameDevice.InputState.GetKeyTrigger(Keys.Q))
             {
                 angle += 45;

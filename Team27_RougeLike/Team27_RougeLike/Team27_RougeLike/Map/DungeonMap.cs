@@ -1,13 +1,14 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.11.19 ~ 2017.11.27
+// 作成日：2017.11.19 ~ 2017.11.29
+// 内容  ：マップの実体
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input; //Debug
+using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Object;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Object.Actor;
@@ -65,20 +66,21 @@ namespace Team27_RougeLike.Map
                 for (int x = 0; x < mapChip.GetLength(1); x++)      //マップのX軸
                 {
                     Cube c;
+                    //ブロック定義で生成
                     switch (mapChip[y, x])
                     {
                         case (int)MapDef.BlockDef.Wall:
                             c = new Cube(
-                                new Vector3(x * MapDef.TILE_SIZE, 2, y * MapDef.TILE_SIZE),
-                                new Vector3(MapDef.TILE_SIZE / 2.0f, 2.0f, MapDef.TILE_SIZE / 2.0f),
+                                new Vector3(x * MapDef.TILE_SIZE, MapDef.TILE_SIZE, y * MapDef.TILE_SIZE),
+                                new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE * 2, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
-                            c.SetColor(new Color(80, 40, 10));
+                            c.SetColor(new Color(60, 40, 10));
                             mapBlocks.Add(c);
                             break;
                         case (int)MapDef.BlockDef.Space:
                             c = new Cube(
                                 new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
-                                new Vector3(MapDef.TILE_SIZE / 2.0f, 0.1f, MapDef.TILE_SIZE / 2.0f),
+                                new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
                             c.SetColor(new Color(10, 10, 10));
                             mapBlocks.Add(c);
@@ -87,7 +89,7 @@ namespace Team27_RougeLike.Map
                             entryPoint = new Point(x, y);
                             c = new Cube(
                                 new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
-                                new Vector3(MapDef.TILE_SIZE / 2.0f, 0.1f, MapDef.TILE_SIZE / 2.0f),
+                                new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
                             c.SetColor(new Color(0, 60, 60));
                             mapBlocks.Add(c);
@@ -95,7 +97,7 @@ namespace Team27_RougeLike.Map
                         case (int)MapDef.BlockDef.Exit:
                             c = new Cube(
                                 new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
-                                new Vector3(MapDef.TILE_SIZE / 2.0f, 1.5f, MapDef.TILE_SIZE / 2.0f),
+                                new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
                             c.SetColor(new Color(60, 0, 0));
                             mapBlocks.Add(c);
@@ -160,10 +162,10 @@ namespace Team27_RougeLike.Map
         /// <param name="y">Y ユニット</param>
         private void ClampPoint(ref int x, ref int y)
         {
-            y = (y < 0) ? 0 : y;
-            y = (y >= mapChip.GetLength(0)) ? mapChip.GetLength(0) - 1 : y;
-            x = (x < 0) ? 0 : x;
-            x = (x >= mapChip.GetLength(1)) ? mapChip.GetLength(1) - 1 : x;
+            y = (y < 0) ? 0 : y;                                                //Yの最小値
+            y = (y >= mapChip.GetLength(0)) ? mapChip.GetLength(0) - 1 : y;     //Yの最大値
+            x = (x < 0) ? 0 : x;                                                //Xの最小値
+            x = (x >= mapChip.GetLength(1)) ? mapChip.GetLength(1) - 1 : x;     //Xの最大値
         }
 
         /// <summary>
@@ -189,23 +191,39 @@ namespace Team27_RougeLike.Map
         /// <param name="player"></param>
         public void MapCollision(Player player)
         {
-            int x = (int)((MapDef.TILE_SIZE / 2.0f + player.Position.X) / MapDef.TILE_SIZE);
-            int z = (int)((MapDef.TILE_SIZE / 2.0f + player.Position.Z) / MapDef.TILE_SIZE);
+            float floatX = ((MapDef.TILE_SIZE / 2.0f + player.Position.X) / MapDef.TILE_SIZE);      //そのマスの左右半分
+            float floatZ = ((MapDef.TILE_SIZE / 2.0f + player.Position.Z) / MapDef.TILE_SIZE);      //そのマスの上下半分
+            int x = (int)((MapDef.TILE_SIZE / 2.0f + player.Position.X) / MapDef.TILE_SIZE);        //マス：X
+            int z = (int)((MapDef.TILE_SIZE / 2.0f + player.Position.Z) / MapDef.TILE_SIZE);        //マス：Y
+            //判定半径（キャラクターのサイズにより違う）
+            int collisionRange = (int)(player.Collision.Radius * 2 / MapDef.TILE_SIZE) + 1;
+            Point checkDir = new Point(0, 0);           //判定基準点
+            if (floatX - x > 0.5f)      //int型を引くと値は0～1まで　判定方向もわかる
+                checkDir.X = 0;         //右半分と判定する場合は基準変動なし
+            else
+                checkDir.X = -1 * collisionRange;       //左半分と判定する場合は基準をずらす
+            if (floatZ - z > 0.5f)      //X軸と同じ
+                checkDir.Y = 0;
+            else
+                checkDir.Y = -1 * collisionRange;
 
-            ClampPoint(ref x, ref z);
+            x += checkDir.X;            //基準をずらす
+            z += checkDir.Y;
 
-            for (int mapchipZ = z - 1; mapchipZ <= z + 1; mapchipZ++)
+            ClampPoint(ref x, ref z);   //エラー対策
+
+            for (int mapchipZ = z; mapchipZ <= z + collisionRange; mapchipZ++)   //基準から半径の長さのマスと判定
             {
-                if (mapchipZ < 0 || mapchipZ > mapChip.GetLength(0) - 1)
+                if (mapchipZ < 0 || mapchipZ > mapChip.GetLength(0) - 1)         //エラー対策
                     continue;
-                for (int mapchipX = x - 1; mapchipX <= x + 1; mapchipX++)
+                for (int mapchipX = x; mapchipX <= x +  collisionRange; mapchipX++)
                 {
-                    if (mapchipX < 0 || mapchipX > mapChip.GetLength(1) - 1)
+                    if (mapchipX < 0 || mapchipX > mapChip.GetLength(1) - 1)     //エラー対策
                         continue;
-                    int index = mapchipZ * mapChip.GetLength(1) + mapchipX;
-                    if (player.Collision.IsCollision(mapBlocks[index].Collision))
+                    int index = mapchipZ * mapChip.GetLength(1) + mapchipX;      //添え字を計算
+                    if (player.Collision.IsCollision(mapBlocks[index].Collision))       //当たっていれば
                     {
-                        player.Collision.Hit(mapBlocks[index].Collision);
+                        player.Collision.Hit(mapBlocks[index].Collision);       　//キャラクターの位置修正
                     }
                 }
             }

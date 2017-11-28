@@ -17,6 +17,8 @@ namespace Team27_RougeLike.Object.Actor
 
         private CollisionSphere collision;
         private Vector3 velocity;
+        private readonly float MAX_SPEED = 0.3f;
+        private float speed;
 
         private Motion motion;
 
@@ -28,6 +30,7 @@ namespace Team27_RougeLike.Object.Actor
 
             collision = new CollisionSphere(position, 2.5f);
             velocity = Vector3.Zero;
+            speed = 0;
 
             motion = new Motion();
             for (int i = 0; i < 6; i++)
@@ -41,7 +44,8 @@ namespace Team27_RougeLike.Object.Actor
         {
             Move();
 
-            collision.Force(velocity, 0.3f);
+            collision.Force(velocity, speed);
+            collision.Force(-Vector3.UnitY, 1 / 6.0f);
 
             projector.Focus(collision.Position);
 
@@ -50,22 +54,25 @@ namespace Team27_RougeLike.Object.Actor
 
         private void Move()
         {
-            velocity = Vector3.Zero;
-            velocity -= new Vector3(0, 1 / 6.0f, 0);
+            speed = (speed > 0) ? speed - 0.01f : 0;
             if (input.GetKeyState(Keys.W))
             {
+                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
                 velocity += projector.Front;
             }
             if (input.GetKeyState(Keys.S))
             {
+                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
                 velocity += projector.Back;
             }
             if (input.GetKeyState(Keys.A))
             {
+                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
                 velocity += projector.Left;
             }
             if (input.GetKeyState(Keys.D))
             {
+                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
                 velocity += projector.Right;
             }
             if (velocity.Length() > 0)
