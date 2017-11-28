@@ -28,16 +28,16 @@ namespace Team27_RougeLike.Device
         {
             viewport = new Viewport(0, 0, Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT);
 
-            position = new Vector3(0, 30, 20);
+            position = new Vector3(0, 8, 10);
             //position = new Vector3(0, 700, 500);      //Debug広い視野
             target = new Vector3(0, 0, 0);
-            baseDistance = new Vector3(20, 30, 20);
+            baseDistance = new Vector3(10, 8, 10);
             world = Matrix.CreateWorld(Vector3.Zero, Vector3.Forward, Vector3.Up);
             projection = Matrix.CreatePerspectiveFieldOfView(
-                (float)(45 * Math.PI / 180),
-                viewport.AspectRatio,
-                0.1f,
-                1000.0f);
+                (float)(100 * Math.PI / 180),   //FOV
+                viewport.AspectRatio,           //Aspect
+                0.1f,                           //近い
+                1000.0f);                       //遠い
             lookat = Matrix.CreateLookAt(position, target, Vector3.Up);
         } 
 
@@ -48,12 +48,12 @@ namespace Team27_RougeLike.Device
         public void Focus(Vector3 target)
         {
             float distance = (this.target - target).Length();
-            if (distance < 0.5f)                            //距離が小さすぎると追跡を行わない
+            if (distance < 0.7f)                            //距離が小さすぎると追跡を行わない
             {
                 return;
             }
 
-            Move(target - this.target, 0.03f * distance);   //移動させる
+            Move(target - this.target, 0.1f * distance);   //移動させる
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace Team27_RougeLike.Device
         private void Move(Vector3 velocity, float speed)
         {
             velocity.Normalize();
-            position += (velocity * speed);
+            position += (velocity * speed);         //移動
             target += (velocity * speed);
-            lookat = Matrix.CreateLookAt(position, target, Vector3.Up);
+            lookat = Matrix.CreateLookAt(position, target, Vector3.Up);     //マトリクス更新
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Team27_RougeLike.Device
                 target.X + baseDistance.X * (float)Math.Sin(MathHelper.ToRadians(angle)), 
                 target.Y + baseDistance.Y, 
                 target.Z + baseDistance.Z * (float)Math.Cos(MathHelper.ToRadians(angle)));
-            lookat = Matrix.CreateLookAt(position, target, Vector3.Up);
+            lookat = Matrix.CreateLookAt(position, target, Vector3.Up);     //マトリクス更新
         }
 
         /// <summary>

@@ -249,6 +249,11 @@ namespace Team27_RougeLike.Device
             spriteBatch.Draw(textures[name], position, Color.White * alpha);
         }
 
+        public void DrawTexture(RenderTarget2D texture, Vector2 position, float alpha = 1.0f)
+        {
+            spriteBatch.Draw(texture, position, Color.White * alpha);
+        }
+
         /// <summary>
         /// 画像の描画（指定範囲）
         /// </summary>

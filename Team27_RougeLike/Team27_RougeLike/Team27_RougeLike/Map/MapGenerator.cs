@@ -1,6 +1,7 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
 // 作成日：2017.11.17 ～ 2017.11.27
+// 内容  ：ダンジョンをランダムで自動生成
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -110,7 +111,7 @@ namespace Team27_RougeLike.Map
                 case GenerateState.WriteToArray:        //マップチップ生成
                     UpdateWriteToArray();
                     break;
-                case GenerateState.SetEventPoint:
+                case GenerateState.SetEventPoint:       //ランダムで特殊なマスを設置
                     UpdateSetEventPoint();
                     break;
                 case GenerateState.End:
@@ -322,9 +323,9 @@ namespace Team27_RougeLike.Map
 
             foreach (MapRoom r in mainRoom)             //メインの部屋を先に置く
             {
-                for (int z = r.MinZ - minZ + 1; z < r.MaxZ - minZ + 1; z++)
+                for (int z = r.MinZ - minZ + 1; z < r.MaxZ - minZ + 1; z++)         //基準となる部屋の座標を引く
                 {
-                    for (int x = r.MinX - minX + 1; x < r.MaxX - minX + 1; x++)
+                    for (int x = r.MinX - minX + 1; x < r.MaxX - minX + 1; x++)     //基準となる部屋の座標を引く
                     {
                         mapChip[z, x] = (int)MapDef.BlockDef.Space;
                     }
@@ -332,9 +333,9 @@ namespace Team27_RougeLike.Map
             }
             foreach (MapRoom r in halls)                 //廊下を置く
             {
-                for (int z = r.MinZ - minZ + 1; z < r.MaxZ - minZ + 1; z++)
+                for (int z = r.MinZ - minZ + 1; z < r.MaxZ - minZ + 1; z++)         //基準となる部屋の座標を引く
                 {
-                    for (int x = r.MinX - minX + 1; x < r.MaxX - minX + 1; x++)
+                    for (int x = r.MinX - minX + 1; x < r.MaxX - minX + 1; x++)     //基準となる部屋の座標を引く
                     {
                         mapChip[z, x] = (int)MapDef.BlockDef.Space;
                     }
@@ -350,25 +351,33 @@ namespace Team27_RougeLike.Map
         public void UpdateSetEventPoint()
         {
             //違う部屋に設定（ランダム）
-            int entryRoom = gameDevice.Random.Next(0, mainRoom.Count);
-            int exitRoom = gameDevice.Random.Next(0, mainRoom.Count);
-            if(mainRoom.Count > 2)
+            int entryRoom = gameDevice.Random.Next(0, mainRoom.Count);      //入口の部屋（添え字）
+            //メインの部屋ではないと選択しなおし
+            while ((mainRoom[entryRoom].Width < (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.65f) &&
+                         mainRoom[entryRoom].Length < (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.65f)))
             {
-                while (exitRoom == entryRoom)
-                {
-                    exitRoom = gameDevice.Random.Next(0, mainRoom.Count);
-                }
+                entryRoom = gameDevice.Random.Next(0, mainRoom.Count);
             }
-            //マップのX, Y最小値
+            int exitRoom = gameDevice.Random.Next(0, mainRoom.Count);       //出口の部屋（添え字）
+            //メインの部屋ではないと選択しなおし、入口の部屋とかぶると選択しなおし
+            while ((exitRoom == entryRoom) &&
+                       (mainRoom[exitRoom].Width < (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.65f) &&
+                        mainRoom[entryRoom].Length < (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.65f)))
+            {
+                exitRoom = gameDevice.Random.Next(0, mainRoom.Count);
+            }
+
+            //マップのX, Y最小値   基準座標
             int minX = rooms[minXRoomIndex].MinX;
             int minZ = rooms[minZRoomIndex].MinZ;
 
+            //部屋内の乱数座標を設定（壁とつながっていないマス）
             Point entryPoint = new Point(
                 gameDevice.Random.Next(mainRoom[entryRoom].MinX - minX + 2, mainRoom[entryRoom].MaxX - minX),
                 gameDevice.Random.Next(mainRoom[entryRoom].MinZ - minZ + 2, mainRoom[entryRoom].MaxZ - minZ));
             Point exitPoint = new Point(
-                gameDevice.Random.Next(mainRoom[exitRoom].MinX - minX + 2, mainRoom[exitRoom].MaxX - minX),
-                gameDevice.Random.Next(mainRoom[exitRoom].MinZ - minZ + 2, mainRoom[exitRoom].MaxZ - minZ));
+                gameDevice.Random.Next(mainRoom[exitRoom].MinX - minX + 2, mainRoom[exitRoom].MaxX - minX - 2),
+                gameDevice.Random.Next(mainRoom[exitRoom].MinZ - minZ + 2, mainRoom[exitRoom].MaxZ - minZ - 2));
 
             mapChip[entryPoint.Y, entryPoint.X] = (int)MapDef.BlockDef.Entry;
             mapChip[exitPoint.Y, exitPoint.X] = (int)MapDef.BlockDef.Exit;
