@@ -78,8 +78,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Scene\DungeonScene.cs" />
+    <Compile Include="Scene\GameManager.cs" />
     <Compile Include="Scene\IScrene.cs" />
+    <Compile Include="Scene\LoadMap.cs" />
     <Compile Include="Scene\SceneManager.cs" />
+    <Compile Include="Scene\Title.cs" />
     <Compile Include="Utility\Motion.cs" />
     <Compile Include="Utility\Range.cs" />
     <Compile Include="Utility\Timer.cs" />

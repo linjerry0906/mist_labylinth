@@ -9,28 +9,47 @@ namespace Team27_RougeLike.Device
 {
     class GameDevice
     {
-        private InputState  input;
-        private Renderer    renderer;
-        private Random      random;
-        private Sound       sound;
-        private Projector   mainProjector;
+        private InputState  input;              //インプット
+        private Renderer    renderer;           //レンダラー
+        private Random      random;             //ランダム
+        private Sound       sound;              //サウンド
+        private Projector   mainProjector;      //メインプロジェクター
 
+        /// <summary>
+        /// インプット
+        /// </summary>
         public InputState InputState
         {
             get { return input; }
         }
+
+        /// <summary>
+        /// レンダラー
+        /// </summary>
         public Renderer Renderer
         {
             get { return renderer; }
         }
+
+        /// <summary>
+        /// ランダム
+        /// </summary>
         public Random Random
         {
             get { return random; }
         }
+
+        /// <summary>
+        /// サウンド
+        /// </summary>
         public Sound Sound
         {
             get { return sound; }
         }
+
+        /// <summary>
+        /// メインのプロジェクター
+        /// </summary>
         public Projector MainProjector
         {
             get { return mainProjector; }

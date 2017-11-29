@@ -59,8 +59,6 @@ namespace Team27_RougeLike.Map
         /// </summary>
         public void Initialize()
         {
-            if (mapBlocks.Count > 0)    //マップの状態があった場合は生成しない
-                return;
             for (int y = 0; y < mapChip.GetLength(0); y++)          //マップのY軸
             {
                 for (int x = 0; x < mapChip.GetLength(1); x++)      //マップのX軸
@@ -181,6 +179,7 @@ namespace Team27_RougeLike.Map
         /// </summary>
         public void Clear()
         {
+            mapChip = null;
             mapBlocks.Clear();
             mapBlocksToDraw.Clear();
         }
