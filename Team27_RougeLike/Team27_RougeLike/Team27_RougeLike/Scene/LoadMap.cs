@@ -7,27 +7,43 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Team27_RougeLike.Device;
+using Team27_RougeLike.Map;
 
 namespace Team27_RougeLike.Scene
 {
     class LoadMap : IScene
     {
-        private GameDevice gameDevice;
+        private GameDevice gameDevice;          //デバイス系管理者
+        private Renderer renderer;
+        private GameManager gameManager;        //ゲーム情報管理者
 
-        private bool endFlag;
+        private bool endFlag;                   //シーンの終わるフラグ
 
-        public LoadMap(GameDevice gameDevice)
+        private MapGenerator mapGenerator;      //マップ生成者
+
+        public LoadMap(GameManager gameManager, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
+            this.gameManager = gameManager;
+
+            renderer = gameDevice.Renderer;
         }
         public void Draw()
         {
+            //ToDo：Loading画面
+            renderer.Begin();
+            renderer.DrawTexture("test", Vector2.Zero);
+            renderer.End();
         }
 
         public void Initialize(SceneType scene)
         {
             endFlag = false;
+
+            //ToDo：GameManagerから今の進捗状況によってマップのサイズを指定
+            mapGenerator = new MapGenerator(130, gameDevice);
         }
 
         public bool IsEnd()
@@ -42,10 +58,20 @@ namespace Team27_RougeLike.Scene
 
         public void Shutdown()
         {
+            mapGenerator = null;            //マップ生成者のメモリーを解放
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
+            if (!mapGenerator.IsEnd())      //生成が終わってなかったら生成し続ける
+            {
+                mapGenerator.Update();
+            }
+            else
+            {
+                gameManager.GenerateMapInstance(mapGenerator.MapChip);      //実体を生成し、シーンを終わらせる
+                endFlag = true;
+            }
         }
     }
 }

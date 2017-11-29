@@ -9,11 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Team27_RougeLike.Device;
-using Team27_RougeLike.Def;
-using Team27_RougeLike.Object;
-using Team27_RougeLike.Map;
-using Team27_RougeLike.Object.Actor;
-using Team27_RougeLike.Utility;
+using Team27_RougeLike.Scene;
 
 namespace Team27_RougeLike
 {
@@ -25,10 +21,8 @@ namespace Team27_RougeLike
         private GraphicsDeviceManager graphics;
         private GameDevice gameDevice;
 
-        private MapGenerator mapGenerator;
-        private DungeonMap map;
-
-        private Player player;
+        private GameManager gameManager;
+        private SceneManager sceneManager;
 
         private float angle = 0;
 
@@ -52,9 +46,12 @@ namespace Team27_RougeLike
         {
             // TODO: Add your initialization logic here
             gameDevice = new GameDevice(Content, GraphicsDevice);
-            mapGenerator = new MapGenerator(gameDevice);
-            map = new DungeonMap(gameDevice);
-            player = new Player(new Vector3(0, 1.5f, 0), gameDevice);
+            gameManager = new GameManager(gameDevice);
+
+            sceneManager = new SceneManager(gameDevice);
+            sceneManager.AddScene(SceneType.LoadMap, new LoadMap(gameManager, gameDevice));
+            sceneManager.AddScene(SceneType.Dungeon, new DungeonScene(gameManager, gameDevice));
+            sceneManager.Change(SceneType.LoadMap);
 
             base.Initialize();
         }
@@ -94,41 +91,18 @@ namespace Team27_RougeLike
                 this.Exit();
             // TODO: Add your update logic here
             gameDevice.Update();
-            player.Update(gameTime);
-
-            //map ÇÃê∂ê¨Ç©ÇÁÉQÅ[ÉÄÇ‹Ç≈
-            if (!mapGenerator.IsEnd())
-            {
-                player.Position = new Vector3(0, 40, 40);
-                mapGenerator.Update();
-            }
-            else if(map.MapChip.Length < 2)
-            {
-                map = new DungeonMap(mapGenerator.MapChip, gameDevice);
-                map.Initialize();
-
-                player.Position = new Vector3(
-                    map.EntryPoint.X * MapDef.TILE_SIZE,
-                    MapDef.TILE_SIZE + 5,
-                    map.EntryPoint.Y * MapDef.TILE_SIZE);
-            }
-            else
-            {
-                map.FocusCenter(player.Position);
-                map.Update();
-                map.MapCollision(player);
-            }
+            sceneManager.Update(gameTime);
 
             //Rotate Test
-            if (gameDevice.InputState.GetKeyTrigger(Keys.Q))
+            if (gameDevice.InputState.GetKeyState(Keys.Q))
             {
-                angle += 45;
+                angle += 1;
                 angle = (angle > 360) ? angle - 360 : angle;
                 gameDevice.MainProjector.Rotate(angle);
             }
-            else if (gameDevice.InputState.GetKeyTrigger(Keys.E))
+            else if (gameDevice.InputState.GetKeyState(Keys.E))
             {
-                angle -= 45;
+                angle -= 1;
                 angle = (angle < 0) ? angle + 360 : angle;
                 gameDevice.MainProjector.Rotate(angle);
             }
@@ -145,11 +119,7 @@ namespace Team27_RougeLike
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            mapGenerator.Draw();
-
-            map.Draw();
-
-            player.Draw();
+            sceneManager.Draw();
 
             base.Draw(gameTime);
         }

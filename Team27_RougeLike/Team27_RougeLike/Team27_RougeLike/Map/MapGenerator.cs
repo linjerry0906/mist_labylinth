@@ -47,7 +47,12 @@ namespace Team27_RougeLike.Map
 
         private GenerateState currentState;     //現在の生成状態
 
-        public MapGenerator(GameDevice gameDevice)
+        /// <summary>
+        /// ダンジョンを自動生成するクラス
+        /// </summary>
+        /// <param name="dungeonSize">ダンジョンの大きさ</param>
+        /// <param name="gameDevice">ゲームディバイス</param>
+        public MapGenerator(int dungeonSize, GameDevice gameDevice)
         {
             rooms = new List<MapRoom>();
             mainRoom = new List<MapRoom>();
@@ -55,9 +60,8 @@ namespace Team27_RougeLike.Map
             edges = new List<Edge>();
             mapChip = new int[1,1];
             this.gameDevice = gameDevice;
+            this.dungeonSize = dungeonSize;       //ダンジョンのサイズ
 
-            //ToDo：外でサイズを指定できるようにする
-            dungeonSize = 130;       //ダンジョンのサイズ
             //正規分布の楕円形の縦と横(集約させるためにさらに2を割る)
             limitWidth = (gameDevice.Random.Next(dungeonSize / 4, dungeonSize * 3 / 4)) / 2;
             limitHeight = (dungeonSize - limitWidth) / 2;
@@ -348,7 +352,7 @@ namespace Team27_RougeLike.Map
         /// 入口と出口などの座標をマップチップに書き込む
         /// ToDo：モンスターが湧く所
         /// </summary>
-        public void UpdateSetEventPoint()
+        private void UpdateSetEventPoint()
         {
             //違う部屋に設定（ランダム）
             int entryRoom = gameDevice.Random.Next(0, mainRoom.Count);      //入口の部屋（添え字）

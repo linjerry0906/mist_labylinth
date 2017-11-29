@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Team27_RougeLike.Device;
 
 namespace Team27_RougeLike.Scene
@@ -46,7 +47,7 @@ namespace Team27_RougeLike.Scene
         {
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
         }
     }

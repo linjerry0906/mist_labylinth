@@ -47,7 +47,7 @@ namespace Team27_RougeLike.Object.Actor
             collision.Force(velocity, speed);
             collision.Force(-Vector3.UnitY, 1 / 6.0f);
 
-            projector.Focus(collision.Position);
+            projector.Trace(collision.Position);
 
             motion.Update(gameTime);
         }
@@ -84,7 +84,6 @@ namespace Team27_RougeLike.Object.Actor
         public Vector3 Position
         {
             get { return collision.Position; }
-            set { collision.Position = value; }
         }
 
         public void Draw()

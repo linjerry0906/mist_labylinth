@@ -42,10 +42,10 @@ namespace Team27_RougeLike.Device
         } 
 
         /// <summary>
-        /// 注目するターゲット
+        /// 追尾するターゲット
         /// </summary>
         /// <param name="target">注目する場所</param>
-        public void Focus(Vector3 target)
+        public void Trace(Vector3 target)
         {
             float distance = (this.target - target).Length();
             if (distance < 0.7f)                            //距離が小さすぎると追跡を行わない
