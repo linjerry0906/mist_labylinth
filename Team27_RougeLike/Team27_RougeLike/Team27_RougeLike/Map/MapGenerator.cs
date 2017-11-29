@@ -373,11 +373,11 @@ namespace Team27_RougeLike.Map
 
             //部屋内の乱数座標を設定（壁とつながっていないマス）
             Point entryPoint = new Point(
-                gameDevice.Random.Next(mainRoom[entryRoom].MinX - minX + 2, mainRoom[entryRoom].MaxX - minX),
-                gameDevice.Random.Next(mainRoom[entryRoom].MinZ - minZ + 2, mainRoom[entryRoom].MaxZ - minZ));
+                gameDevice.Random.Next(mainRoom[entryRoom].MinX - minX + 1, mainRoom[entryRoom].MaxX - minX),
+                gameDevice.Random.Next(mainRoom[entryRoom].MinZ - minZ + 1, mainRoom[entryRoom].MaxZ - minZ));
             Point exitPoint = new Point(
-                gameDevice.Random.Next(mainRoom[exitRoom].MinX - minX + 2, mainRoom[exitRoom].MaxX - minX - 2),
-                gameDevice.Random.Next(mainRoom[exitRoom].MinZ - minZ + 2, mainRoom[exitRoom].MaxZ - minZ - 2));
+                gameDevice.Random.Next(mainRoom[exitRoom].MinX - minX + 1, mainRoom[exitRoom].MaxX - minX),
+                gameDevice.Random.Next(mainRoom[exitRoom].MinZ - minZ + 1, mainRoom[exitRoom].MaxZ - minZ));
 
             mapChip[entryPoint.Y, entryPoint.X] = (int)MapDef.BlockDef.Entry;
             mapChip[exitPoint.Y, exitPoint.X] = (int)MapDef.BlockDef.Exit;
