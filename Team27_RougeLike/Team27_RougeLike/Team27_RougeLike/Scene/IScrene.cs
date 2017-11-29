@@ -10,6 +10,7 @@ namespace Team27_RougeLike.Scene
         Title,
         Load,
         Town,
+        LoadMap,
         Dungeon,
         Pause
     }
@@ -19,10 +20,8 @@ namespace Team27_RougeLike.Scene
         void Initialize(SceneType scene);
         void Update();
         void Draw();
-        void IsEnd();
         void Shutdown();
-
-        bool isEnd();
+        bool IsEnd();
         SceneType Next();
     }
 }
