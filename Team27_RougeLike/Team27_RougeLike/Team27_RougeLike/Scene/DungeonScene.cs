@@ -74,6 +74,9 @@ namespace Team27_RougeLike.Scene
 
         public void Shutdown()
         {
+            if (nextScene == SceneType.Pause)       //次のシーンがPauseだったらShutdownしない
+                return;
+
             map.Clear();
             map = null;
             gameManager.ReleaseMap();
