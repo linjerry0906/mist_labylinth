@@ -122,6 +122,9 @@ namespace Team27_RougeLike.Device
             basicEffect.World = mainProjector.World;
             basicEffect.View = mainProjector.LookAt;
             basicEffect.Projection = mainProjector.Projection;
+            basicEffect.FogEnabled = true;
+            basicEffect.FogStart = 40;
+            basicEffect.FogEnd = 200;
         }
 
         /// <summary>
