@@ -15,7 +15,7 @@ namespace Team27_RougeLike.Map
         public static readonly float TILE_SIZE = 20;
 
         //部屋生成する時にランダムサイズの最大最小値
-        public static readonly int MAX_ROOM_SIZE = 6;
+        public static readonly int MAX_ROOM_SIZE = 3;
         public static readonly int MIN_ROOM_SIZE = 1;
 
         //ブロックの定義

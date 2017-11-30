@@ -25,6 +25,8 @@ namespace Team27_RougeLike.Scene
         private DungeonMap map;
         private Player player;          //テスト
 
+        private float fogNear;
+
         public DungeonScene(GameManager gameManager, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
@@ -40,6 +42,8 @@ namespace Team27_RougeLike.Scene
         {
             endFlag = false;
             nextScene = SceneType.LoadMap;
+            gameDevice.Renderer.StartFog();
+            fogNear = 200;
 
             if (lastScene == SceneType.Pause)
                 return;
@@ -80,6 +84,7 @@ namespace Team27_RougeLike.Scene
             map.Clear();
             map = null;
             gameManager.ReleaseMap();
+            gameDevice.Renderer.EndFog();
         }
 
         public void Update(GameTime gameTime)
@@ -93,6 +98,22 @@ namespace Team27_RougeLike.Scene
             {
                 endFlag = true;
                 nextScene = SceneType.LoadMap;
+            }
+
+            fogNear = (fogNear > 2) ?  fogNear-0.1f : fogNear;
+            gameDevice.Renderer.FogManager.SetNear(fogNear);
+            gameDevice.Renderer.FogManager.SetFar(fogNear + 160);
+            gameDevice.Renderer.StartFog();
+            if (gameDevice.InputState.GetKeyTrigger(Microsoft.Xna.Framework.Input.Keys.F))
+            {
+                if (gameDevice.Renderer.FogManager.IsActive())
+                {
+                    gameDevice.Renderer.EndFog();
+                }
+                else
+                {
+                    gameDevice.Renderer.StartFog();
+                }
             }
         }
     }

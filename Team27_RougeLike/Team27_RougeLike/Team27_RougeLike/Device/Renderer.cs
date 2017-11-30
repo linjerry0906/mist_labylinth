@@ -22,6 +22,7 @@ namespace Team27_RougeLike.Device
         private GraphicsDevice graphicsDevice;  // グラフィック機器
         private SpriteBatch spriteBatch;        // スプライト一括
         private BasicEffect basicEffect;        // 3D描画用
+        private FogManager fogManager;          // 霧の管理者
 
         private Projector mainProjector;        // メインプロジェクター
 
@@ -39,6 +40,7 @@ namespace Team27_RougeLike.Device
             graphicsDevice = graphics;
             spriteBatch = new SpriteBatch(graphicsDevice);
             basicEffect = new BasicEffect(graphicsDevice);
+            fogManager = new FogManager();
 
             mainProjector = new Projector();
             DefaultRenderSetting();
@@ -122,9 +124,6 @@ namespace Team27_RougeLike.Device
             basicEffect.World = mainProjector.World;
             basicEffect.View = mainProjector.LookAt;
             basicEffect.Projection = mainProjector.Projection;
-            basicEffect.FogEnabled = true;
-            basicEffect.FogStart = 40;
-            basicEffect.FogEnd = 200;
         }
 
         /// <summary>
@@ -135,8 +134,9 @@ namespace Team27_RougeLike.Device
         /// <param name="alpha">透明度</param>
         public void DrawPolygon(string name, VertexPositionColorTexture[] vertices, float alpha = 1)
         {
+            basicEffect.TextureEnabled = true;
             basicEffect.Alpha = alpha;
-            //basicEffect.Texture = textures[name];         //登録していないためにコメントアウト
+            basicEffect.Texture = textures[name];         //登録していないためにコメントアウト
             foreach (var effect in basicEffect.CurrentTechnique.Passes)
             {
                 effect.Apply();
@@ -211,6 +211,27 @@ namespace Team27_RougeLike.Device
                 effect.Apply();
             }
             graphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineList, vertices, 0, 1);
+        }
+
+        #endregion
+
+        #region Fog関連
+
+        public void StartFog()
+        {
+            fogManager.FogOn();
+            fogManager.SetFog(ref basicEffect);
+        }
+
+        public void EndFog()
+        {
+            fogManager.FogOff();
+            fogManager.SetFog(ref basicEffect);
+        }
+
+        public FogManager FogManager
+        {
+            get { return fogManager; }
         }
 
         #endregion

@@ -46,31 +46,31 @@ namespace Team27_RougeLike.Object
             vertices[1] = new VertexPositionColorTexture(position + new Vector3(-size.X, size.Y, size.Z), color, texcoord[1]);
             vertices[2] = new VertexPositionColorTexture(position + new Vector3(size.X, -size.Y, size.Z), color, texcoord[2]);
             vertices[3] = new VertexPositionColorTexture(position + new Vector3(size.X, size.Y, size.Z), color, texcoord[3]);
-            renderer.DrawPolygon("", vertices);
+            renderer.DrawPolygon("cubeTest", vertices);
             //z-
             vertices[0] = new VertexPositionColorTexture(position + new Vector3(size.X, -size.Y, -size.Z), color, texcoord[0]);
             vertices[1] = new VertexPositionColorTexture(position + new Vector3(size.X, size.Y, -size.Z), color, texcoord[1]);
             vertices[2] = new VertexPositionColorTexture(position + new Vector3(-size.X, -size.Y, -size.Z), color, texcoord[2]);
             vertices[3] = new VertexPositionColorTexture(position + new Vector3(-size.X, size.Y, -size.Z), color, texcoord[3]);
-            renderer.DrawPolygon("", vertices);
+            renderer.DrawPolygon("cubeTest", vertices);
             //x+
             vertices[0] = new VertexPositionColorTexture(position + new Vector3(size.X, -size.Y, size.Z), color, texcoord[0]);
             vertices[1] = new VertexPositionColorTexture(position + new Vector3(size.X, size.Y, size.Z), color, texcoord[1]);
             vertices[2] = new VertexPositionColorTexture(position + new Vector3(size.X, -size.Y, -size.Z), color, texcoord[2]);
             vertices[3] = new VertexPositionColorTexture(position + new Vector3(size.X, size.Y, -size.Z), color, texcoord[3]);
-            renderer.DrawPolygon("", vertices);
+            renderer.DrawPolygon("cubeTest", vertices);
             //x-
             vertices[0] = new VertexPositionColorTexture(position + new Vector3(-size.X, -size.Y, -size.Z), color, texcoord[0]);
             vertices[1] = new VertexPositionColorTexture(position + new Vector3(-size.X, size.Y, -size.Z), color, texcoord[1]);
             vertices[2] = new VertexPositionColorTexture(position + new Vector3(-size.X, -size.Y, size.Z), color, texcoord[2]);
             vertices[3] = new VertexPositionColorTexture(position + new Vector3(-size.X, size.Y, size.Z), color, texcoord[3]);
-            renderer.DrawPolygon("", vertices);
+            renderer.DrawPolygon("cubeTest", vertices);
             //y+
             vertices[0] = new VertexPositionColorTexture(position + new Vector3(-size.X, size.Y, size.Z), color, texcoord[0]);
             vertices[1] = new VertexPositionColorTexture(position + new Vector3(-size.X, size.Y, -size.Z), color, texcoord[1]);
             vertices[2] = new VertexPositionColorTexture(position + new Vector3(size.X, size.Y, size.Z), color, texcoord[2]);
             vertices[3] = new VertexPositionColorTexture(position + new Vector3(size.X, size.Y, -size.Z), color, texcoord[3]);
-            renderer.DrawPolygon("", vertices);
+            renderer.DrawPolygon("cubeTest", vertices);
             //y-
             //vertices[0] = new VertexPositionColorTexture(position + new Vector3(-size.X, -size.Y, -size.Z), color, texcoord[0]);
             //vertices[1] = new VertexPositionColorTexture(position + new Vector3(-size.X, -size.Y, size.Z), color, texcoord[1]);

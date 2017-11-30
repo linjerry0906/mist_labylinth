@@ -66,6 +66,7 @@ namespace Team27_RougeLike
 
             // TODO: use this.Content to load your game content here
             gameDevice.Renderer.LoadTexture("test");
+            gameDevice.Renderer.LoadTexture("cubeTest");
         }
 
         /// <summary>
@@ -116,7 +117,7 @@ namespace Team27_RougeLike
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(new Color(0.3f, 0.3f, 0.3f));
 
             // TODO: Add your drawing code here
             sceneManager.Draw();
