@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Map;
 using Team27_RougeLike.Object.Actor;
@@ -24,6 +25,8 @@ namespace Team27_RougeLike.Scene
 
         private DungeonMap map;
         private Player player;          //テスト
+
+        private float angle = 0;
 
         private float fogNear;
 
@@ -42,11 +45,14 @@ namespace Team27_RougeLike.Scene
         {
             endFlag = false;
             nextScene = SceneType.LoadMap;
-            gameDevice.Renderer.StartFog();
-            fogNear = 200;
 
             if (lastScene == SceneType.Pause)
                 return;
+
+            gameDevice.Renderer.StartFog();
+            fogNear = 200;
+
+            angle = 0;
 
             map = gameManager.GetDungeonMap();
             if(map == null)                         //エラー対策　マップが正常に生成されてなかったらLoadingに戻る
@@ -63,6 +69,8 @@ namespace Team27_RougeLike.Scene
                     MapDef.TILE_SIZE,
                     map.EntryPoint.Y * MapDef.TILE_SIZE),
                 gameDevice);
+
+                gameDevice.MainProjector.Initialize(player.Position);
             }
         }
 
@@ -89,22 +97,46 @@ namespace Team27_RougeLike.Scene
 
         public void Update(GameTime gameTime)
         {
+            //Rotate Test
+            if (gameDevice.InputState.GetKeyState(Keys.Q))
+            {
+                angle += 1;
+                angle = (angle > 360) ? angle - 360 : angle;
+                gameDevice.MainProjector.Rotate(angle);
+            }
+            else if (gameDevice.InputState.GetKeyState(Keys.E))
+            {
+                angle -= 1;
+                angle = (angle < 0) ? angle + 360 : angle;
+                gameDevice.MainProjector.Rotate(angle);
+            }
+            gameDevice.MainProjector.Rotate(angle);
+
             player.Update(gameTime);
+            map.MapCollision(gameDevice.Renderer.MainProjector);
             map.FocusCenter(player.Position);
             map.Update();
             map.MapCollision(player);
 
-            if (gameDevice.InputState.GetKeyTrigger(Microsoft.Xna.Framework.Input.Keys.L))
+
+            
+
+
+            //Reload Map
+            if (gameDevice.InputState.GetKeyTrigger(Keys.L))
             {
                 endFlag = true;
                 nextScene = SceneType.LoadMap;
             }
 
-            fogNear = (fogNear > 2) ?  fogNear-0.1f : fogNear;
+
+
+            //Fog
+            fogNear = (fogNear > -50) ?  fogNear-0.1f : fogNear;
             gameDevice.Renderer.FogManager.SetNear(fogNear);
-            gameDevice.Renderer.FogManager.SetFar(fogNear + 160);
+            gameDevice.Renderer.FogManager.SetFar(fogNear + 100);
             gameDevice.Renderer.StartFog();
-            if (gameDevice.InputState.GetKeyTrigger(Microsoft.Xna.Framework.Input.Keys.F))
+            if (gameDevice.InputState.GetKeyTrigger(Keys.F))
             {
                 if (gameDevice.Renderer.FogManager.IsActive())
                 {

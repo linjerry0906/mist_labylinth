@@ -120,10 +120,10 @@ namespace Team27_RougeLike.Device
         /// </summary>
         public void RendererMainProjector()
         {
-            graphicsDevice.Viewport = mainProjector.ViewPort;
-            basicEffect.World = mainProjector.World;
-            basicEffect.View = mainProjector.LookAt;
-            basicEffect.Projection = mainProjector.Projection;
+            graphicsDevice.Viewport = mainProjector.ViewPort;       //Viewport指定
+            basicEffect.World = mainProjector.World;                //ワールド
+            basicEffect.View = mainProjector.LookAt;                //View
+            basicEffect.Projection = mainProjector.Projection;      //プロジェクション
         }
 
         /// <summary>
@@ -134,8 +134,8 @@ namespace Team27_RougeLike.Device
         /// <param name="alpha">透明度</param>
         public void DrawPolygon(string name, VertexPositionColorTexture[] vertices, float alpha = 1)
         {
-            basicEffect.TextureEnabled = true;
-            basicEffect.Alpha = alpha;
+            basicEffect.TextureEnabled = true;            //テクスチャを有効
+            basicEffect.Alpha = alpha;                    //Alpha指定
             basicEffect.Texture = textures[name];         //登録していないためにコメントアウト
             foreach (var effect in basicEffect.CurrentTechnique.Passes)
             {
@@ -201,7 +201,7 @@ namespace Team27_RougeLike.Device
         }
 
         /// <summary>
-        /// Debug用
+        /// Debug用      線を引く
         /// </summary>
         public void DrawLine(VertexPositionColor[] vertices, float alpha = 1)
         {
@@ -217,18 +217,27 @@ namespace Team27_RougeLike.Device
 
         #region Fog関連
 
+        /// <summary>
+        /// Fogを有効
+        /// </summary>
         public void StartFog()
         {
             fogManager.FogOn();
             fogManager.SetFog(ref basicEffect);
         }
 
+        /// <summary>
+        /// Fog無効
+        /// </summary>
         public void EndFog()
         {
             fogManager.FogOff();
             fogManager.SetFog(ref basicEffect);
         }
 
+        /// <summary>
+        /// Fogの詳細設定が必要な場合Getできる
+        /// </summary>
         public FogManager FogManager
         {
             get { return fogManager; }

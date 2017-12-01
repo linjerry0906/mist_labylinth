@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.11.19 ~ 2017.11.29
+// 作成日：2017.11.19 ~ 2017.12.01
 // 内容  ：マップの実体
 //--------------------------------------------------------------------------------------------------
 using System;
@@ -26,21 +26,14 @@ namespace Team27_RougeLike.Map
         private Point previousPosition;     //前フレームの描画中心座標
         private Point currentPosition;      //今のフレームの描画中心座標
         private Point entryPoint;           //入口
-        private int radius = 20;            //描画半径
+        private Point exitPoint;            //出口
+        private int radius = 15;            //描画半径
 
-        public DungeonMap(GameDevice gameDevice)
-        {
-            this.gameDevice = gameDevice;
-
-            mapChip = new int[1, 1];
-            mapBlocks = new List<Cube>();
-            mapBlocksToDraw = new List<Cube>();
-
-            currentPosition = new Point(0, 0);
-            previousPosition = currentPosition;
-            entryPoint = new Point(0, 0);
-        }
-
+        /// <summary>
+        /// マップ実体のコンストラクタ
+        /// </summary>
+        /// <param name="mapChip">マップチップ</param>
+        /// <param name="gameDevice">ゲームデバイス</param>
         public DungeonMap(int[,] mapChip, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
@@ -49,9 +42,10 @@ namespace Team27_RougeLike.Map
             mapBlocks = new List<Cube>();
             mapBlocksToDraw = new List<Cube>();
 
-            currentPosition = new Point(0, 0);
-            previousPosition = currentPosition;
-            entryPoint = new Point(0, 0);
+            currentPosition = new Point(0, 0);      //描画中心
+            previousPosition = currentPosition;     //描画中心（前フレーム）
+            entryPoint = new Point(0, 0);           //スタート位置
+            exitPoint = new Point(0, 0);            //エンド位置
         }
 
         /// <summary>
@@ -93,6 +87,7 @@ namespace Team27_RougeLike.Map
                             mapBlocks.Add(c);
                             break;
                         case (int)MapDef.BlockDef.Exit:
+                            exitPoint = new Point(x, y);
                             c = new Cube(
                                 new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
@@ -114,15 +109,37 @@ namespace Team27_RougeLike.Map
         }
 
         /// <summary>
+        /// 出口の配列座標
+        /// </summary>
+        public Point EndPoint
+        {
+            get { return exitPoint; }
+        }
+
+        /// <summary>
+        /// ワールド座標をマップチップ座標に変換
+        /// </summary>
+        /// <param name="worldPosition">ワールド座標</param>
+        /// <returns></returns>
+        public Point WorldToMap(Vector3 worldPosition)
+        {
+            int x = (int)((MapDef.TILE_SIZE / 2.0f + worldPosition.X) / MapDef.TILE_SIZE);        //マス：X
+            int z = (int)((MapDef.TILE_SIZE / 2.0f + worldPosition.Z) / MapDef.TILE_SIZE);        //マス：Y
+            ClampPoint(ref x, ref z);   //エラー対策
+
+            return new Point(x, z);
+        }
+
+        /// <summary>
         /// 描画の中心位置を設定
         /// </summary>
         /// <param name="worldPosition"></param>
         public void FocusCenter(Vector3 worldPosition)
         {
-            int x = (int)((MapDef.TILE_SIZE / 2.0f + worldPosition.X) / MapDef.TILE_SIZE);
+            int x = (int)((MapDef.TILE_SIZE / 2.0f + worldPosition.X) / MapDef.TILE_SIZE);      //マップチップに変換
             int z = (int)((MapDef.TILE_SIZE / 2.0f + worldPosition.Z) / MapDef.TILE_SIZE);
 
-            currentPosition.X = x;
+            currentPosition.X = x;      //描画中心を更新
             currentPosition.Y = z;
             ClampPoint(ref currentPosition.X, ref currentPosition.Y);          //エラーがないように配列の中に納める
         }
@@ -226,6 +243,51 @@ namespace Team27_RougeLike.Map
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// プロジェクターとマップの当たり判定
+        /// </summary>
+        /// <param name="projecter">判定するプロジェクター</param>
+        public void MapCollision(Projector projecter)
+        {
+            float floatX = ((MapDef.TILE_SIZE / 2.0f + projecter.Collision.Position.X) / MapDef.TILE_SIZE);      //そのマスの左右半分
+            float floatZ = ((MapDef.TILE_SIZE / 2.0f + projecter.Collision.Position.Z) / MapDef.TILE_SIZE);      //そのマスの上下半分
+            int x = (int)((MapDef.TILE_SIZE / 2.0f + projecter.Collision.Position.X) / MapDef.TILE_SIZE);        //マス：X
+            int z = (int)((MapDef.TILE_SIZE / 2.0f + projecter.Collision.Position.Z) / MapDef.TILE_SIZE);        //マス：Y
+            //判定半径（キャラクターのサイズにより違う）
+            int collisionRange = (int)(projecter.Collision.Collision.Radius * 2 / MapDef.TILE_SIZE) + 1;
+            Point checkDir = new Point(0, 0);           //判定基準点
+            if (floatX - x > 0.5f)                      //int型を引くと値は0～1まで　判定方向もわかる
+                checkDir.X = 0;                         //右半分と判定する場合は基準変動なし
+            else
+                checkDir.X = -1 * collisionRange;       //左半分と判定する場合は基準をずらす
+            if (floatZ - z > 0.5f)                      //X軸と同じ
+                checkDir.Y = 0;
+            else
+                checkDir.Y = -1 * collisionRange;
+
+            x += checkDir.X;            //基準をずらす
+            z += checkDir.Y;
+
+            ClampPoint(ref x, ref z);   //エラー対策
+
+            for (int mapchipZ = z; mapchipZ <= z + collisionRange; mapchipZ++)   //基準から半径の長さのマスと判定
+            {
+                if (mapchipZ < 0 || mapchipZ > mapChip.GetLength(0) - 1)         //エラー対策
+                    continue;
+                for (int mapchipX = x; mapchipX <= x + collisionRange; mapchipX++)
+                {
+                    if (mapchipX < 0 || mapchipX > mapChip.GetLength(1) - 1)     //エラー対策
+                        continue;
+                    int index = mapchipZ * mapChip.GetLength(1) + mapchipX;      //添え字を計算
+                    if (projecter.Collision.IsCollision(mapBlocks[index].Collision))       //当たっていれば
+                    {
+                        projecter.Collision.Hit(mapBlocks[index].Collision);       　      //プロジェクターの位置修正
+                    }
+                }
+            }
+            projecter.UpdateLook();        //プロジェクターのViewマトリクス更新
         }
 
         /// <summary>

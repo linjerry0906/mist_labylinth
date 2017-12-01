@@ -24,8 +24,6 @@ namespace Team27_RougeLike
         private GameManager gameManager;
         private SceneManager sceneManager;
 
-        private float angle = 0;
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -94,20 +92,6 @@ namespace Team27_RougeLike
             gameDevice.Update();
             sceneManager.Update(gameTime);
 
-            //Rotate Test
-            if (gameDevice.InputState.GetKeyState(Keys.Q))
-            {
-                angle += 1;
-                angle = (angle > 360) ? angle - 360 : angle;
-                gameDevice.MainProjector.Rotate(angle);
-            }
-            else if (gameDevice.InputState.GetKeyState(Keys.E))
-            {
-                angle -= 1;
-                angle = (angle < 0) ? angle + 360 : angle;
-                gameDevice.MainProjector.Rotate(angle);
-            }
-
             base.Update(gameTime);
         }
 
@@ -117,7 +101,7 @@ namespace Team27_RougeLike
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(new Color(0.3f, 0.3f, 0.3f));
+            GraphicsDevice.Clear(gameDevice.Renderer.FogManager.CurrentColor());
 
             // TODO: Add your drawing code here
             sceneManager.Draw();

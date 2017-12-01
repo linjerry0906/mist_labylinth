@@ -2,19 +2,6 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>testModel.fbx</Source>
-      <Name>testModel</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\testModel.xnb</Output>
-      <Time>2017-11-20T23:22:54.6844762+09:00</Time>
-      <Dependency>
-        <Key>D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\testModel_0.xml</Key>
-        <Value>2017-11-28T09:03:32.7131828+09:00</Value>
-      </Dependency>
-    </Item>
-    <Item>
       <Source>test.png</Source>
       <Name>test</Name>
       <Importer>TextureImporter</Importer>
@@ -22,13 +9,6 @@
       <Options>None</Options>
       <Output>D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\test.xnb</Output>
       <Time>2016-07-16T19:42:32+09:00</Time>
-    </Item>
-    <Item>
-      <Source>testModel.fbx</Source>
-      <Importer>FbxImporter</Importer>
-      <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\testModel_0.xml</Output>
-      <Time>2017-11-20T23:22:54.6844762+09:00</Time>
     </Item>
     <Item>
       <Source>cubeTest.jpg</Source>
