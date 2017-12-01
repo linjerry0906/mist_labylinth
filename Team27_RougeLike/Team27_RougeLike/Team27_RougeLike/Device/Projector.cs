@@ -26,6 +26,9 @@ namespace Team27_RougeLike.Device
 
         private CollisionSphere collision;      //Collision
         
+        /// <summary>
+        /// Default Settingで生成 
+        /// </summary>
         public Projector()
         {
             viewport = new Viewport(0, 0, Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT);
@@ -41,6 +44,27 @@ namespace Team27_RougeLike.Device
                 1000.0f);                        //遠い
             lookat = Matrix.CreateLookAt(collision.Position, target, Vector3.Up);
         } 
+
+        /// <summary>
+        /// Viewportと位置を指定できるコンストラクタ
+        /// </summary>
+        /// <param name="viewport">ビューポート</param>
+        /// <param name="position">位置</param>
+        public Projector(Viewport viewport, Vector3 position)
+        {
+            this.viewport = viewport;
+
+            collision = new CollisionSphere(position, 0.05f);      //Collisions
+            target = new Vector3(0, 0, 0);       //注目目標
+            baseDistance = collision.Position;   //注目目標との相対位置関係  
+            world = Matrix.CreateWorld(Vector3.Zero, Vector3.Forward, Vector3.Up);
+            projection = Matrix.CreatePerspectiveFieldOfView(
+                (float)(100 * Math.PI / 180),    //FOV
+                viewport.AspectRatio,            //Aspect
+                0.1f,                            //近い
+                1000.0f);                        //遠い
+            lookat = Matrix.CreateLookAt(collision.Position, target, Vector3.Up);
+        }
 
         /// <summary>
         /// プロジェクターの位置を初期化

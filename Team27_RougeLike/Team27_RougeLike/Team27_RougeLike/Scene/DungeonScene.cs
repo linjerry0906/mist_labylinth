@@ -39,6 +39,8 @@ namespace Team27_RougeLike.Scene
         {
             map.Draw();
             player.Draw();
+
+            map.DrawMiniMap();
         }
 
         public void Initialize(SceneType lastScene)

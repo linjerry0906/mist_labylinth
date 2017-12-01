@@ -48,6 +48,7 @@ namespace Team27_RougeLike.Object.Actor
             collision.Force(-Vector3.UnitY, 1 / 6.0f);
 
             projector.Trace(collision.Position);
+            gameDevice.Renderer.MiniMapProjector.Trace(collision.Position);
 
             motion.Update(gameTime);
         }

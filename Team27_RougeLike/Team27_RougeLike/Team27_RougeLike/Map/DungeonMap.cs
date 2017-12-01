@@ -298,7 +298,24 @@ namespace Team27_RougeLike.Map
             foreach (Cube c in mapBlocksToDraw)     //描画領域しか描画しない
             {
                 c.Draw();
+
+                gameDevice.Renderer.RenderMiniMap();
+                c.DrawMiniMap();
+                gameDevice.Renderer.RenderMainProjector();
             }
+        }
+
+        /// <summary>
+        /// 画面上にマップ表示
+        /// </summary>
+        public void DrawMiniMap()
+        {
+            gameDevice.Renderer.RenderMiniMap();    //ミニマップにレンダリング
+            foreach (Cube c in mapBlocksToDraw)     //描画領域しか描画しない
+            {
+                c.DrawMiniMap();
+            }
+            gameDevice.Renderer.RenderMainProjector();      //メインプロジェクターに戻す
         }
     }
 }
