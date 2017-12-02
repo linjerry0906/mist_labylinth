@@ -104,13 +104,11 @@ namespace Team27_RougeLike.Scene
             {
                 angle += 1;
                 angle = (angle > 360) ? angle - 360 : angle;
-                gameDevice.MainProjector.Rotate(angle);
             }
             else if (gameDevice.InputState.GetKeyState(Keys.E))
             {
                 angle -= 1;
                 angle = (angle < 0) ? angle + 360 : angle;
-                gameDevice.MainProjector.Rotate(angle);
             }
             gameDevice.MainProjector.Rotate(angle);
 
@@ -138,17 +136,6 @@ namespace Team27_RougeLike.Scene
             gameDevice.Renderer.FogManager.SetNear(fogNear);
             gameDevice.Renderer.FogManager.SetFar(fogNear + 100);
             gameDevice.Renderer.StartFog();
-            if (gameDevice.InputState.GetKeyTrigger(Keys.F))
-            {
-                if (gameDevice.Renderer.FogManager.IsActive())
-                {
-                    gameDevice.Renderer.EndFog();
-                }
-                else
-                {
-                    gameDevice.Renderer.StartFog();
-                }
-            }
         }
     }
 }
