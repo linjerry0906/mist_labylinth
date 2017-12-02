@@ -91,7 +91,7 @@ namespace Team27_RougeLike.Device
         /// エフェクトのFogを設定
         /// </summary>
         /// <param name="basicEffect">使用するエフェクト</param>
-        public void SetFog(ref BasicEffect basicEffect)
+        public void SetFog(BasicEffect basicEffect)
         {
             basicEffect.FogEnabled = isActive;      //有効か無効かを設定
             basicEffect.FogColor = fogColor;        //色設定
