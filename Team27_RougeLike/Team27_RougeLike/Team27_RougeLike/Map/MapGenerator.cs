@@ -362,13 +362,16 @@ namespace Team27_RougeLike.Map
             {
                 entryRoom = gameDevice.Random.Next(0, mainRoom.Count);
             }
-            int exitRoom = gameDevice.Random.Next(0, mainRoom.Count);       //出口の部屋（添え字）
-            //メインの部屋ではないと選択しなおし、入口の部屋とかぶると選択しなおし
-            while ((exitRoom == entryRoom) &&
-                       (mainRoom[exitRoom].Width < (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.65f) &&
-                        mainRoom[entryRoom].Length < (int)(MapDef.MAX_ROOM_SIZE * 2 * 0.65f)))
+            int exitRoom = 0;                                               //出口の部屋（添え字）
+            for (int i = 1; i < mainRoom.Count; i++)                        //一番遠い部屋で出口を指定
             {
-                exitRoom = gameDevice.Random.Next(0, mainRoom.Count);
+                if (i == entryRoom)
+                    continue;
+                if ((mainRoom[entryRoom].Position() - mainRoom[exitRoom].Position()).LengthSquared() <
+                    (mainRoom[entryRoom].Position() - mainRoom[i].Position()).LengthSquared())
+                {
+                    exitRoom = i;
+                }
             }
 
             //マップのX, Y最小値   基準座標
