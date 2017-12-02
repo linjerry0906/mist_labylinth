@@ -1,7 +1,7 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.11.16 ～ 2017.11.26
-// 作成部分：3D描画
+// 作成日：2017.11.16 ～ 2017.12.2
+// 作成部分：3D描画、プロジェクター、Fog
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -22,8 +22,11 @@ namespace Team27_RougeLike.Device
         private GraphicsDevice graphicsDevice;  // グラフィック機器
         private SpriteBatch spriteBatch;        // スプライト一括
         private BasicEffect basicEffect;        // 3D描画用
+        private FogManager fogManager;          // 霧の管理者
 
+        private Projector currentProjector;     // 現在使用のプロジェクター
         private Projector mainProjector;        // メインプロジェクター
+        private Projector miniMapProjector;     // ミニマップのプロジェクター
 
         // Dictionaryで複数の画像を管理
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
@@ -39,8 +42,14 @@ namespace Team27_RougeLike.Device
             graphicsDevice = graphics;
             spriteBatch = new SpriteBatch(graphicsDevice);
             basicEffect = new BasicEffect(graphicsDevice);
+            fogManager = new FogManager();
 
             mainProjector = new Projector();
+            miniMapProjector = new Projector(
+                new Viewport(new Rectangle(Def.WindowDef.WINDOW_WIDTH - 300, 100, 200, 200)),   //MiniMapの位置と大きさ設定
+                new Vector3(0, 50, 0.001f));
+            currentProjector = mainProjector;
+
             DefaultRenderSetting();
         }
 
@@ -50,6 +59,14 @@ namespace Team27_RougeLike.Device
         public Projector MainProjector
         {
             get { return mainProjector; }
+        }
+
+        /// <summary>
+        /// MiniMapのプロジェクター
+        /// </summary>
+        public Projector MiniMapProjector
+        {
+            get { return miniMapProjector; }
         }
 
         /// <summary>
@@ -107,7 +124,7 @@ namespace Team27_RougeLike.Device
         /// </summary>
         public void DefaultRenderSetting()
         {
-            graphicsDevice.DepthStencilState = DepthStencilState.Default;
+            graphicsDevice.DepthStencilState = DepthStencilState.Default;           //DepthStencil有効
             graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;  //カーリング
             graphicsDevice.BlendState = BlendState.AlphaBlend;                      //アルファブレンド
             basicEffect.VertexColorEnabled = true;                                  //頂点色を有効
@@ -116,12 +133,26 @@ namespace Team27_RougeLike.Device
         /// <summary>
         /// メインプロジェクターにレンダリング
         /// </summary>
-        public void RendererMainProjector()
+        public void RenderMainProjector()
         {
-            graphicsDevice.Viewport = mainProjector.ViewPort;
-            basicEffect.World = mainProjector.World;
-            basicEffect.View = mainProjector.LookAt;
-            basicEffect.Projection = mainProjector.Projection;
+            currentProjector = mainProjector;
+            graphicsDevice.Viewport = mainProjector.ViewPort;       //Viewport指定
+            basicEffect.World = mainProjector.World;                //ワールド
+            basicEffect.View = mainProjector.LookAt;                //View
+            basicEffect.Projection = mainProjector.Projection;      //プロジェクション
+        }
+
+        /// <summary>
+        /// ミニマップにレンダリング
+        /// </summary>
+        public void RenderMiniMap()
+        {
+            currentProjector = miniMapProjector;
+            graphicsDevice.DepthStencilState = DepthStencilState.None;           //DepthStencil無効
+            graphicsDevice.Viewport = miniMapProjector.ViewPort;                 //Viewport指定
+            basicEffect.World = miniMapProjector.World;                          //ワールド
+            basicEffect.View = miniMapProjector.LookAt;                          //View
+            basicEffect.Projection = miniMapProjector.Projection;                //プロジェクション
         }
 
         /// <summary>
@@ -132,8 +163,9 @@ namespace Team27_RougeLike.Device
         /// <param name="alpha">透明度</param>
         public void DrawPolygon(string name, VertexPositionColorTexture[] vertices, float alpha = 1)
         {
-            basicEffect.Alpha = alpha;
-            //basicEffect.Texture = textures[name];         //登録していないためにコメントアウト
+            basicEffect.TextureEnabled = true;            //テクスチャを有効
+            basicEffect.Alpha = alpha;                    //Alpha指定
+            basicEffect.Texture = textures[name];         //登録していないためにコメントアウト
             foreach (var effect in basicEffect.CurrentTechnique.Passes)
             {
                 effect.Apply();
@@ -153,7 +185,7 @@ namespace Team27_RougeLike.Device
         public void DrawPolygon(string name, Vector3 position, Vector2 size, Rectangle rect, Color color,float alpha = 1)
         {
             graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
-            Vector3 axis = Vector3.Cross(mainProjector.Front, mainProjector.Right);     //回転軸
+            Vector3 axis = Vector3.Cross(currentProjector.Front, currentProjector.Right);     //回転軸
             axis.Normalize();
             basicEffect.TextureEnabled = true;                                          //テクスチャ有効
             int textureHeight = textures[name].Height;                                  //テクスチャのサイズを取得
@@ -188,7 +220,7 @@ namespace Team27_RougeLike.Device
             basicEffect.Alpha = alpha;                  //アルファ値を指定
             basicEffect.Texture = textures[name];       //テクスチャを指定
             basicEffect.World = 
-                Matrix.CreateBillboard(position, mainProjector.Position, axis, mainProjector.Front); //ビルボードマトリクス 
+                Matrix.CreateBillboard(position, currentProjector.Position, axis, currentProjector.Front); //ビルボードマトリクス 
             foreach (var effect in basicEffect.CurrentTechnique.Passes)
             {
                 effect.Apply();
@@ -198,7 +230,7 @@ namespace Team27_RougeLike.Device
         }
 
         /// <summary>
-        /// Debug用
+        /// Debug用      線を引く
         /// </summary>
         public void DrawLine(VertexPositionColor[] vertices, float alpha = 1)
         {
@@ -208,6 +240,36 @@ namespace Team27_RougeLike.Device
                 effect.Apply();
             }
             graphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineList, vertices, 0, 1);
+        }
+
+        #endregion
+
+        #region Fog関連
+
+        /// <summary>
+        /// Fogを有効
+        /// </summary>
+        public void StartFog()
+        {
+            fogManager.FogOn();
+            fogManager.SetFog(ref basicEffect);
+        }
+
+        /// <summary>
+        /// Fog無効
+        /// </summary>
+        public void EndFog()
+        {
+            fogManager.FogOff();
+            fogManager.SetFog(ref basicEffect);
+        }
+
+        /// <summary>
+        /// Fogの詳細設定が必要な場合Getできる
+        /// </summary>
+        public FogManager FogManager
+        {
+            get { return fogManager; }
         }
 
         #endregion

@@ -43,7 +43,7 @@ namespace Team27_RougeLike.Scene
             endFlag = false;
 
             //ToDo：GameManagerから今の進捗状況によってマップのサイズを指定
-            mapGenerator = new MapGenerator(130, gameDevice);
+            mapGenerator = new MapGenerator(30, gameDevice);
         }
 
         public bool IsEnd()
