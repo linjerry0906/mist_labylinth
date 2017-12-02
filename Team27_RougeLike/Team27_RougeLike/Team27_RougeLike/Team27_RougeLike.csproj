@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Def\WindowDef.cs" />
+    <Compile Include="Device\EffectManager.cs" />
     <Compile Include="Device\FogManager.cs" />
     <Compile Include="Device\GameDevice.cs" />
     <Compile Include="Device\InputState.cs" />

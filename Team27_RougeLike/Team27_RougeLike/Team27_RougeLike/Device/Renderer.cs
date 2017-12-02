@@ -21,7 +21,8 @@ namespace Team27_RougeLike.Device
         private ContentManager contentManager;  // コンテンツ管理者
         private GraphicsDevice graphicsDevice;  // グラフィック機器
         private SpriteBatch spriteBatch;        // スプライト一括
-        private BasicEffect basicEffect;        // 3D描画用
+        //private BasicEffect basicEffect;        // 3D描画用
+        private EffectManager effectManager;
         private FogManager fogManager;          // 霧の管理者
 
         private Projector currentProjector;     // 現在使用のプロジェクター
@@ -41,7 +42,8 @@ namespace Team27_RougeLike.Device
             contentManager = content;
             graphicsDevice = graphics;
             spriteBatch = new SpriteBatch(graphicsDevice);
-            basicEffect = new BasicEffect(graphicsDevice);
+            effectManager = new EffectManager(graphicsDevice);
+            //basicEffect = new BasicEffect(graphicsDevice);
             fogManager = new FogManager();
 
             mainProjector = new Projector();
@@ -127,7 +129,8 @@ namespace Team27_RougeLike.Device
             graphicsDevice.DepthStencilState = DepthStencilState.Default;           //DepthStencil有効
             graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;  //カーリング
             graphicsDevice.BlendState = BlendState.AlphaBlend;                      //アルファブレンド
-            basicEffect.VertexColorEnabled = true;                                  //頂点色を有効
+            //basicEffect.VertexColorEnabled = true;                                  //頂点色を有効
+            //effectManager.CurrentEffect.VertexColorEnabled = true;
         }
 
         /// <summary>
@@ -137,9 +140,13 @@ namespace Team27_RougeLike.Device
         {
             currentProjector = mainProjector;
             graphicsDevice.Viewport = mainProjector.ViewPort;       //Viewport指定
-            basicEffect.World = mainProjector.World;                //ワールド
-            basicEffect.View = mainProjector.LookAt;                //View
-            basicEffect.Projection = mainProjector.Projection;      //プロジェクション
+            //basicEffect.World = mainProjector.World;                //ワールド
+            //basicEffect.View = mainProjector.LookAt;                //View
+            //basicEffect.Projection = mainProjector.Projection;      //プロジェクション
+            effectManager.ChangeEffect(BasicEffectType.Basic);
+            effectManager.CurrentEffect.World = currentProjector.World;                //ワールド
+            effectManager.CurrentEffect.View = currentProjector.LookAt;                //View
+            effectManager.CurrentEffect.Projection = currentProjector.Projection;      //プロジェクション
         }
 
         /// <summary>
@@ -150,9 +157,13 @@ namespace Team27_RougeLike.Device
             currentProjector = miniMapProjector;
             graphicsDevice.DepthStencilState = DepthStencilState.None;           //DepthStencil無効
             graphicsDevice.Viewport = miniMapProjector.ViewPort;                 //Viewport指定
-            basicEffect.World = miniMapProjector.World;                          //ワールド
-            basicEffect.View = miniMapProjector.LookAt;                          //View
-            basicEffect.Projection = miniMapProjector.Projection;                //プロジェクション
+            //basicEffect.World = miniMapProjector.World;                          //ワールド
+            //basicEffect.View = miniMapProjector.LookAt;                          //View
+            //basicEffect.Projection = miniMapProjector.Projection;                //プロジェクション
+            effectManager.ChangeEffect(BasicEffectType.MiniMap);
+            effectManager.CurrentEffect.World = currentProjector.World;                //ワールド
+            effectManager.CurrentEffect.View = currentProjector.LookAt;                //View
+            effectManager.CurrentEffect.Projection = currentProjector.Projection;      //プロジェクション
         }
 
         /// <summary>
@@ -163,10 +174,15 @@ namespace Team27_RougeLike.Device
         /// <param name="alpha">透明度</param>
         public void DrawPolygon(string name, VertexPositionColorTexture[] vertices, float alpha = 1)
         {
-            basicEffect.TextureEnabled = true;            //テクスチャを有効
-            basicEffect.Alpha = alpha;                    //Alpha指定
-            basicEffect.Texture = textures[name];         //登録していないためにコメントアウト
-            foreach (var effect in basicEffect.CurrentTechnique.Passes)
+            //basicEffect.TextureEnabled = true;            //テクスチャを有効
+            //basicEffect.Alpha = alpha;                    //Alpha指定
+            //basicEffect.Texture = textures[name];         //登録していないためにコメントアウト
+            effectManager.CurrentEffect.TextureEnabled = true;            //テクスチャを有効
+            effectManager.CurrentEffect.Alpha = alpha;                    //Alpha指定
+            effectManager.CurrentEffect.Texture = textures[name];         //登録していないためにコメントアウト
+
+
+            foreach (var effect in effectManager.CurrentEffect.CurrentTechnique.Passes)
             {
                 effect.Apply();
             }
@@ -187,7 +203,8 @@ namespace Team27_RougeLike.Device
             graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
             Vector3 axis = Vector3.Cross(currentProjector.Front, currentProjector.Right);     //回転軸
             axis.Normalize();
-            basicEffect.TextureEnabled = true;                                          //テクスチャ有効
+            //basicEffect.TextureEnabled = true;                                          //テクスチャ有効
+            effectManager.CurrentEffect.TextureEnabled = true;            //テクスチャを有効
             int textureHeight = textures[name].Height;                                  //テクスチャのサイズを取得
             int textureWidth = textures[name].Width;
             //四つの頂点を設定
@@ -217,16 +234,20 @@ namespace Team27_RougeLike.Device
                     (rect.X + rect.Width) * 1.0f / textureWidth,
                     rect.Y * 1.0f / textureHeight));
 
-            basicEffect.Alpha = alpha;                  //アルファ値を指定
-            basicEffect.Texture = textures[name];       //テクスチャを指定
-            basicEffect.World = 
+            //basicEffect.Alpha = alpha;                  //アルファ値を指定
+            //basicEffect.Texture = textures[name];       //テクスチャを指定
+            //basicEffect.World = 
+            effectManager.CurrentEffect.Alpha = alpha;                  //アルファ値を指定
+            effectManager.CurrentEffect.Texture = textures[name];       //テクスチャを指定
+            effectManager.CurrentEffect.World =
                 Matrix.CreateBillboard(position, currentProjector.Position, axis, currentProjector.Front); //ビルボードマトリクス 
-            foreach (var effect in basicEffect.CurrentTechnique.Passes)
+            foreach (var effect in effectManager.CurrentEffect.CurrentTechnique.Passes)
             {
                 effect.Apply();
             }
             graphicsDevice.DrawUserPrimitives<VertexPositionColorTexture>(PrimitiveType.TriangleStrip, vertices, 0, 2);
-            basicEffect.TextureEnabled = false;
+            //basicEffect.TextureEnabled = false;
+            effectManager.CurrentEffect.TextureEnabled = false;
         }
 
         /// <summary>
@@ -234,8 +255,9 @@ namespace Team27_RougeLike.Device
         /// </summary>
         public void DrawLine(VertexPositionColor[] vertices, float alpha = 1)
         {
-            basicEffect.Alpha = alpha;
-            foreach (var effect in basicEffect.CurrentTechnique.Passes)
+            //basicEffect.Alpha = alpha;
+            effectManager.CurrentEffect.Alpha = alpha;
+            foreach (var effect in effectManager.CurrentEffect.CurrentTechnique.Passes)
             {
                 effect.Apply();
             }
@@ -252,7 +274,7 @@ namespace Team27_RougeLike.Device
         public void StartFog()
         {
             fogManager.FogOn();
-            fogManager.SetFog(ref basicEffect);
+            fogManager.SetFog(effectManager.CurrentEffect);
         }
 
         /// <summary>
@@ -261,7 +283,7 @@ namespace Team27_RougeLike.Device
         public void EndFog()
         {
             fogManager.FogOff();
-            fogManager.SetFog(ref basicEffect);
+            fogManager.SetFog(effectManager.CurrentEffect);
         }
 
         /// <summary>

@@ -88,7 +88,7 @@ namespace Team27_RougeLike.Object
             vertices[2] = new VertexPositionColorTexture(new Vector3(position.X + size.X, 0, position.Z + size.X), temp, texcoord[2]);
             vertices[3] = new VertexPositionColorTexture(new Vector3(position.X + size.X, 0, position.Z -size.X), temp, texcoord[3]);
 
-            renderer.DrawPolygon("cubeTest", vertices, 0.7f);
+            renderer.DrawPolygon("cubeTest", vertices, 0.9f);
         }
 
         public BoundingBox Collision
