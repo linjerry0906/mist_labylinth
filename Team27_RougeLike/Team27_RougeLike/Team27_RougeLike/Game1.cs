@@ -68,6 +68,7 @@ namespace Team27_RougeLike
             // TODO: use this.Content to load your game content here
             gameDevice.Renderer.LoadTexture("test");
             gameDevice.Renderer.LoadTexture("cubeTest");
+            gameDevice.Renderer.LoadFont("basicFont", "./Font/");
         }
 
         /// <summary>
