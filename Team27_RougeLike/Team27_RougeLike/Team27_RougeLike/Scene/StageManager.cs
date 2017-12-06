@@ -97,7 +97,7 @@ namespace Team27_RougeLike.Scene
         {
             int min = (int)CurrentTime() / 60;
             int sec = (int)CurrentTime() - min * 60;
-            string timeString = string.Format("{0,2} : {1,2}", min, sec);
+            string timeString = string.Format("{0:00} : {1:00}", min, sec);
             renderer.Begin();
             renderer.DrawString(
                 timeString,
