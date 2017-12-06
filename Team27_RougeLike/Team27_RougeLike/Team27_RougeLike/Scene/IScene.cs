@@ -13,6 +13,7 @@ namespace Team27_RougeLike.Scene
         Town,
         LoadMap,
         Dungeon,
+        Boss,
         Pause
     }
 

@@ -27,7 +27,7 @@ namespace Team27_RougeLike.Map
         private Point currentPosition;      //今のフレームの描画中心座標
         private Point entryPoint;           //入口
         private Point exitPoint;            //出口
-        private int radius = 15;            //描画半径
+        private int radius = 16;            //描画半径
 
         /// <summary>
         /// マップ実体のコンストラクタ
@@ -298,10 +298,6 @@ namespace Team27_RougeLike.Map
             foreach (Cube c in mapBlocksToDraw)     //描画領域しか描画しない
             {
                 c.Draw();
-
-                gameDevice.Renderer.RenderMiniMap();
-                c.DrawMiniMap();
-                gameDevice.Renderer.RenderMainProjector();
             }
         }
 

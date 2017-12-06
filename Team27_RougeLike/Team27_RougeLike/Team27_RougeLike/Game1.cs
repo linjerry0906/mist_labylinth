@@ -45,11 +45,16 @@ namespace Team27_RougeLike
             // TODO: Add your initialization logic here
             gameDevice = new GameDevice(Content, GraphicsDevice);
             gameManager = new GameManager(gameDevice);
-
+            
             sceneManager = new SceneManager(gameDevice);
+            IScene dungeon = new DungeonScene(gameManager, gameDevice);
+            IScene town = new TownScene(gameManager, gameDevice);
+            sceneManager.AddScene(SceneType.Town, town);
             sceneManager.AddScene(SceneType.LoadMap, new LoadMap(gameManager, gameDevice));
-            sceneManager.AddScene(SceneType.Dungeon, new DungeonScene(gameManager, gameDevice));
-            sceneManager.Change(SceneType.LoadMap);
+            sceneManager.AddScene(SceneType.Dungeon, dungeon);
+            //Pause Test
+            sceneManager.AddScene(SceneType.Pause, new PauseScene(dungeon, dungeon, town, gameManager, gameDevice));
+            sceneManager.Change(SceneType.Town);
 
             base.Initialize();
         }
@@ -65,6 +70,7 @@ namespace Team27_RougeLike
             // TODO: use this.Content to load your game content here
             gameDevice.Renderer.LoadTexture("test");
             gameDevice.Renderer.LoadTexture("cubeTest");
+            gameDevice.Renderer.LoadFont("basicFont", "./Font/");
         }
 
         /// <summary>

@@ -19,6 +19,7 @@ namespace Team27_RougeLike.Scene
     {
         private GameDevice gameDevice;
         private GameManager gameManager;
+        private StageManager stageManager;
 
         private bool endFlag;
         private SceneType nextScene;
@@ -28,19 +29,20 @@ namespace Team27_RougeLike.Scene
 
         private float angle = 0;
 
-        private float fogNear;
-
         public DungeonScene(GameManager gameManager, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
             this.gameManager = gameManager;
+            stageManager = gameManager.StageManager;
         }
+
         public void Draw()
         {
             map.Draw();
             player.Draw();
 
             map.DrawMiniMap();
+            stageManager.DrawLimitTime();
         }
 
         public void Initialize(SceneType lastScene)
@@ -48,11 +50,8 @@ namespace Team27_RougeLike.Scene
             endFlag = false;
             nextScene = SceneType.LoadMap;
 
-            if (lastScene == SceneType.Pause)
+            if (lastScene == SceneType.Pause)       //Pauseから来た場合は初期化しない
                 return;
-
-            gameDevice.Renderer.StartFog();
-            fogNear = 200;
 
             angle = 0;
 
@@ -61,19 +60,18 @@ namespace Team27_RougeLike.Scene
             {
                 nextScene = SceneType.LoadMap;
                 endFlag = true;
+                return;
             }
-            else
-            {
-                map.Initialize();
-                player = new Player(
-                new Vector3(
-                    map.EntryPoint.X * MapDef.TILE_SIZE,
-                    MapDef.TILE_SIZE,
-                    map.EntryPoint.Y * MapDef.TILE_SIZE),
-                gameDevice);
 
-                gameDevice.MainProjector.Initialize(player.Position);
-            }
+            map.Initialize();
+            player = new Player(
+            new Vector3(
+                map.EntryPoint.X * MapDef.TILE_SIZE,
+                MapDef.TILE_SIZE,
+                map.EntryPoint.Y * MapDef.TILE_SIZE),
+            gameDevice);
+
+            gameDevice.MainProjector.Initialize(player.Position);
         }
 
         public bool IsEnd()
@@ -94,11 +92,13 @@ namespace Team27_RougeLike.Scene
             map.Clear();
             map = null;
             gameManager.ReleaseMap();
-            gameDevice.Renderer.EndFog();
         }
 
         public void Update(GameTime gameTime)
         {
+            if (endFlag)
+                return;
+
             //Rotate Test
             if (gameDevice.InputState.GetKeyState(Keys.Q))
             {
@@ -112,30 +112,42 @@ namespace Team27_RougeLike.Scene
             }
             gameDevice.MainProjector.Rotate(angle);
 
+            //Chara処理
             player.Update(gameTime);
             map.MapCollision(gameDevice.Renderer.MainProjector);
             map.FocusCenter(player.Position);
             map.Update();
             map.MapCollision(player);
 
+            stageManager.Update();              //時間やFog処理の更新
 
-            
 
-
-            //Reload Map
-            if (gameDevice.InputState.GetKeyTrigger(Keys.L))
+            //Pause機能
+            if (gameDevice.InputState.GetKeyTrigger(Keys.P))
             {
                 endFlag = true;
-                nextScene = SceneType.LoadMap;
+                nextScene = SceneType.Pause;
             }
 
+            CheckEnd();         //プレイ終了をチェック
+        }
 
+        private void CheckEnd()
+        {
+            if (stageManager.IsTime())              //時間になったら村に戻される
+            {
+                endFlag = true;
+                nextScene = SceneType.Town;
+                return;
+            }
 
-            //Fog
-            fogNear = (fogNear > -50) ?  fogNear-0.1f : fogNear;
-            gameDevice.Renderer.FogManager.SetNear(fogNear);
-            gameDevice.Renderer.FogManager.SetFar(fogNear + 100);
-            gameDevice.Renderer.StartFog();
+            if(map.WorldToMap(player.Position) == map.EndPoint)
+            {
+                endFlag = true;                     //ToDo：次の階層へ行くかどうかを聞く
+                nextScene = SceneType.LoadMap;
+                stageManager.NextFloor();
+                return;
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.11.29
+// 作成日：2017.11.29 ～ 2017.12.06
 // 内容  ：シーンの間にゲーム情報を伝えるクラス
 //--------------------------------------------------------------------------------------------------
 using System;
@@ -23,6 +23,7 @@ namespace Team27_RougeLike.Scene
         private GameDevice gameDevice;
 
         private DungeonMap mapInstance;     //マップの実体
+        private StageManager stageManager;  //ステージマネージャー
 
         /// <summary>
         /// シーンの間にゲーム情報を伝える仲介者
@@ -32,7 +33,33 @@ namespace Team27_RougeLike.Scene
         {
             this.gameDevice = gameDevice;
             mapInstance = null;
+
+            stageManager = new StageManager(gameDevice);
+            stageManager.Initialize(5 * 60, 1, 20);
         }
+
+        #region Stage関連
+
+        /// <summary>
+        /// Stageの生成情報を設定
+        /// </summary>
+        /// <param name="limitSecond">攻略の制限時間</param>
+        /// <param name="floor">階層目</param>
+        /// <param name="stageSize">ダンジョンのサイズ</param>
+        public void InitStage(int limitSecond, int floor, int stageSize)
+        {
+            stageManager.Initialize(limitSecond, floor, stageSize);
+        }
+        
+        /// <summary>
+        /// Stage管理者
+        /// </summary>
+        public StageManager StageManager
+        {
+            get { return stageManager; }
+        }
+
+        #endregion
 
         #region Map関連
         /// <summary>
