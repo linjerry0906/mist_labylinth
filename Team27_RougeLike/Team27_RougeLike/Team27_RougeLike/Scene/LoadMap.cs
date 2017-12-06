@@ -18,6 +18,7 @@ namespace Team27_RougeLike.Scene
         private GameDevice gameDevice;          //デバイス系管理者
         private Renderer renderer;
         private GameManager gameManager;        //ゲーム情報管理者
+        private StageManager stageManager;      //ステージ管理者
 
         private bool endFlag;                   //シーンの終わるフラグ
 
@@ -29,6 +30,7 @@ namespace Team27_RougeLike.Scene
             this.gameManager = gameManager;
 
             renderer = gameDevice.Renderer;
+            stageManager = gameManager.StageManager;
         }
         public void Draw()
         {
@@ -43,7 +45,7 @@ namespace Team27_RougeLike.Scene
             endFlag = false;
 
             //ToDo：GameManagerから今の進捗状況によってマップのサイズを指定
-            mapGenerator = new MapGenerator(30, gameDevice);
+            mapGenerator = new MapGenerator(stageManager.StageSize(), gameDevice);
         }
 
         public bool IsEnd()
