@@ -49,7 +49,7 @@ namespace Team27_RougeLike.Scene
             endFlag = false;
             nextScene = SceneType.LoadMap;
 
-            if (lastScene == SceneType.Pause)
+            if (lastScene == SceneType.Pause)       //Pauseから来た場合は初期化しない
                 return;
 
             angle = 0;
@@ -59,19 +59,18 @@ namespace Team27_RougeLike.Scene
             {
                 nextScene = SceneType.LoadMap;
                 endFlag = true;
+                return;
             }
-            else
-            {
-                map.Initialize();
-                player = new Player(
-                new Vector3(
-                    map.EntryPoint.X * MapDef.TILE_SIZE,
-                    MapDef.TILE_SIZE,
-                    map.EntryPoint.Y * MapDef.TILE_SIZE),
-                gameDevice);
 
-                gameDevice.MainProjector.Initialize(player.Position);
-            }
+            map.Initialize();
+            player = new Player(
+            new Vector3(
+                map.EntryPoint.X * MapDef.TILE_SIZE,
+                MapDef.TILE_SIZE,
+                map.EntryPoint.Y * MapDef.TILE_SIZE),
+            gameDevice);
+
+            gameDevice.MainProjector.Initialize(player.Position);
         }
 
         public bool IsEnd()

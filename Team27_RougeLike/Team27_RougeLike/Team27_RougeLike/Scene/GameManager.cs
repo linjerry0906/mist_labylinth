@@ -40,11 +40,20 @@ namespace Team27_RougeLike.Scene
 
         #region Stage関連
 
+        /// <summary>
+        /// Stageの生成情報を設定
+        /// </summary>
+        /// <param name="limitSecond">攻略の制限時間</param>
+        /// <param name="floor">階層目</param>
+        /// <param name="stageSize">ダンジョンのサイズ</param>
         public void InitStage(int limitSecond, int floor, int stageSize)
         {
             stageManager.Initialize(limitSecond, floor, stageSize);
         }
         
+        /// <summary>
+        /// Stage管理者
+        /// </summary>
         public StageManager StageManager
         {
             get { return stageManager; }
