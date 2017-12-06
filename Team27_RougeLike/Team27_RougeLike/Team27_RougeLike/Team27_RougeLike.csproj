@@ -85,7 +85,9 @@
     <Compile Include="Scene\GameManager.cs" />
     <Compile Include="Scene\IScene.cs" />
     <Compile Include="Scene\LoadMap.cs" />
+    <Compile Include="Scene\PauseScene.cs" />
     <Compile Include="Scene\SceneManager.cs" />
+    <Compile Include="Scene\StageManager.cs" />
     <Compile Include="Scene\Title.cs" />
     <Compile Include="Utility\Motion.cs" />
     <Compile Include="Utility\Range.cs" />

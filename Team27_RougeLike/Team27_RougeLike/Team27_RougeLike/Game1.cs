@@ -45,10 +45,13 @@ namespace Team27_RougeLike
             // TODO: Add your initialization logic here
             gameDevice = new GameDevice(Content, GraphicsDevice);
             gameManager = new GameManager(gameDevice);
-
+            
             sceneManager = new SceneManager(gameDevice);
+            IScene dungeon = new DungeonScene(gameManager, gameDevice);
             sceneManager.AddScene(SceneType.LoadMap, new LoadMap(gameManager, gameDevice));
-            sceneManager.AddScene(SceneType.Dungeon, new DungeonScene(gameManager, gameDevice));
+            sceneManager.AddScene(SceneType.Dungeon, dungeon);
+            //Pause Test
+            sceneManager.AddScene(SceneType.Pause, new PauseScene(dungeon, dungeon, dungeon, gameManager, gameDevice));
             sceneManager.Change(SceneType.LoadMap);
 
             base.Initialize();
