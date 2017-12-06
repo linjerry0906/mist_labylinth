@@ -132,7 +132,7 @@ namespace Team27_RougeLike.Scene
         public void NextFloor()
         {
             floor++;
-            stageSize += 5;
+            stageSize += 1;         //Sizeを拡大
         }
 
         /// <summary>
