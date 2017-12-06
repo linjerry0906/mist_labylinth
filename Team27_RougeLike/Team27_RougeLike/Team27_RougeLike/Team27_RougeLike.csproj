@@ -89,6 +89,7 @@
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Scene\StageManager.cs" />
     <Compile Include="Scene\Title.cs" />
+    <Compile Include="Scene\TownScene.cs" />
     <Compile Include="Utility\Motion.cs" />
     <Compile Include="Utility\Range.cs" />
     <Compile Include="Utility\Timer.cs" />

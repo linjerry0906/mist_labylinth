@@ -179,7 +179,7 @@ namespace Team27_RougeLike.Device
         /// <param name="scale">大きさ</param>
         /// <param name="alpha">透明度</param>
         /// <param name="fontName">使用するFont</param>
-        public void DrawString(string text, Vector2 position, Color color, Vector2 scale, float alpha = 1.0f, string fontName = "basicFont")
+        public void DrawString(string text, Vector2 position, Vector2 scale, Color color, float alpha = 1.0f, string fontName = "basicFont")
         {
             spriteBatch.DrawString(
                 fonts[fontName],                //使用するFont

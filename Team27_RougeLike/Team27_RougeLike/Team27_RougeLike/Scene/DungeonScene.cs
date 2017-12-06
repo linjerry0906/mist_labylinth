@@ -122,13 +122,6 @@ namespace Team27_RougeLike.Scene
             stageManager.Update();              //時間やFog処理の更新
 
 
-            //Reload Map        Debug機能
-            if (gameDevice.InputState.GetKeyTrigger(Keys.L))
-            {
-                endFlag = true;
-                nextScene = SceneType.LoadMap;
-            }
-
             //Pause機能
             if (gameDevice.InputState.GetKeyTrigger(Keys.P))
             {
@@ -144,7 +137,7 @@ namespace Team27_RougeLike.Scene
             if (stageManager.IsTime())              //時間になったら村に戻される
             {
                 endFlag = true;
-                nextScene = SceneType.LoadMap;      //ToDo：村に戻す
+                nextScene = SceneType.Town;
                 return;
             }
 
