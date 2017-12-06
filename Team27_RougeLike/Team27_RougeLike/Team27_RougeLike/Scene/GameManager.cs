@@ -35,7 +35,7 @@ namespace Team27_RougeLike.Scene
             mapInstance = null;
 
             stageManager = new StageManager(gameDevice);
-            stageManager.Initialize(1 * 60, 1, 20);
+            stageManager.Initialize(5 * 60, 1, 20);
         }
 
         #region Stage関連

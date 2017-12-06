@@ -42,6 +42,7 @@ namespace Team27_RougeLike.Scene
             player.Draw();
 
             map.DrawMiniMap();
+            stageManager.DrawLimitTime();
         }
 
         public void Initialize(SceneType lastScene)

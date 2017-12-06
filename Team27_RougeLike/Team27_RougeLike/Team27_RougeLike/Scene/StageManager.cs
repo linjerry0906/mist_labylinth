@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Utility;
 
@@ -49,7 +50,7 @@ namespace Team27_RougeLike.Scene
         /// <param name="floor">階層</param>
         public void Initialize(int limitSecond, int floor, int stageSize)
         {
-            limitTime = new Timer(limitSecond * 60);
+            limitTime = new Timer(limitSecond);
             limitTime.Initialize();
             this.floor = floor;
             this.stageSize = stageSize;
@@ -90,6 +91,21 @@ namespace Team27_RougeLike.Scene
         public float CurrentTime()
         {
             return limitTime.Now() / 60.0f;
+        }
+
+        public void DrawLimitTime()
+        {
+            int min = (int)CurrentTime() / 60;
+            int sec = (int)CurrentTime() - min * 60;
+            string timeString = string.Format("{0,2} : {1,2}", min, sec);
+            renderer.Begin();
+            renderer.DrawString(
+                timeString,
+                new Vector2(Def.WindowDef.WINDOW_WIDTH / 2, 80),
+                new Color(1, 0.2f, 0.2f),
+                new Vector2(2, 2),
+                0.8f, true, true);
+            renderer.End();
         }
 
         /// <summary>
