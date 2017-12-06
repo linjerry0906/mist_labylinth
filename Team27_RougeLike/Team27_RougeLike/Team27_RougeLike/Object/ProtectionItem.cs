@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Team27_RougeLike.Device
+namespace Team27_RougeLike.Object
 {
     class ProtectionItem : Item
     {
@@ -11,39 +11,77 @@ namespace Team27_RougeLike.Device
         //防具の種類
         public enum ProtectionType
         {
-            Head,
-            Armor,
-            Arm,
-            Shoes,
+            Head, //頭
+            Armor,　//鎧
+            Arm,　//手
+            Shoes, //靴
         }
         private ProtectionType protectionType;
-
         private EquipmentEffect effect;
 
+        private int itemPower;
+        private int itemDefense;
+        private int reinforcement;
+        private int reinforcementLimit;
+        private int upPower;
+        private int upDefense;
+        private int randomMinP;
+        private int randomMaxP;
+        private int randomMinD;
+        private int randomMaxD;
+
         //強化値ランダム
-        public ProtectionItem(string itemName, string itemExplanation,
+        public ProtectionItem(int itemID, string itemName, string itemExplanation,
             int itemPrice, int itemRare, float itemWeight, ProtectionType protectionType,
             int itemPower, int itemDefense, int reinforcement, int reinforcementLimit, int upPower, int upDefense,
             int randomMinP, int randomMaxP, int randomMinD, int randomMaxD)
-            :base(itemName, itemExplanation, itemPrice, itemRare, itemWeight, 1)
+            :base(itemID, itemName, itemExplanation, itemPrice, itemRare, itemWeight, 1)
         {
             this.protectionType = protectionType;
+
+            this.itemPower = itemPower;
+            this.itemDefense = itemDefense;
+            this.reinforcement = reinforcement;
+            this.reinforcementLimit = reinforcementLimit;
+            this.upPower = upPower;
+            this.upDefense = upDefense;
+            this.randomMinP = randomMinP;
+            this.randomMaxP = randomMaxP;
+            this.randomMinD = randomMinD;
+            this.randomMaxD = randomMaxD;
 
             effect = new EquipmentEffect(itemPower, itemDefense, reinforcementLimit,
                 upPower, upDefense, randomMinP, randomMaxP, randomMinD, randomMaxD);
         }
 
         //強化値指定
-        public ProtectionItem(string itemName, string itemExplanation,
+        public ProtectionItem(int itemID, string itemName, string itemExplanation,
             int itemPrice, int itemRare, float itemWeight, ProtectionType protectionType,
             int itemPower, int itemDefense, int reinforcement, int reinforcementLimit, int upPower, int upDefense,
             int addPower, int addDefence)
-            : base(itemName, itemExplanation, itemPrice, itemRare, itemWeight, 1)
+            : base(itemID, itemName, itemExplanation, itemPrice, itemRare, itemWeight, 1)
         {
             this.protectionType = protectionType;
 
             effect = new EquipmentEffect(itemPower, itemDefense, reinforcementLimit,
                 upPower, upDefense, addPower, addDefence);
+        }
+
+        //コピーコンストラクタ
+        public ProtectionItem(ProtectionItem other)
+            :base(other.itemID, other.itemName, other.itemExplanation,
+                 other.itemPrice, other.itemRare, other.itemWeight, other.amountLimit)
+        {
+            this.protectionType = other.protectionType;
+
+            effect = new EquipmentEffect(other.itemPower, other.itemDefense, other.reinforcementLimit,
+                other.upPower, other.upDefense, other.randomMinP, other.randomMaxP, other.randomMinD, other.randomMaxD);
+        }
+        
+        //コピー
+        public override Item Clone()
+        {
+            return new ProtectionItem(this);
         }
 
         //装備強化

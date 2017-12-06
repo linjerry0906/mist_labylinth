@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Team27_RougeLike.Device
+namespace Team27_RougeLike.Object
 {
     class EquipmentEffect
     {
@@ -24,7 +24,11 @@ namespace Team27_RougeLike.Device
             addPower = rand.Next(randomMinP, randomMaxP);
             addDefense = rand.Next(randomMinD, randomMaxD);
             
+            this.power = power;
+            this.defense = defense;
             this.reinforcementLimit = reinforcementLimit;
+            this.upPower = upPower;
+            this.upDefense = upDefense;
 
             //装備レベルのランダム
             reinforcement = rand.Next(0, 101);
@@ -56,9 +60,13 @@ namespace Team27_RougeLike.Device
         public EquipmentEffect(int power, int defense, int reinforcementLimit, int upPower, int upDefense,
             int addPower, int addDefense, int reinforcement = 0)
         {
+            this.power = power;
+            this.defense = defense;
+            this.reinforcementLimit = reinforcementLimit;
+            this.upPower = upPower;
+            this.upDefense = upDefense;
             this.addPower = addPower;
             this.addDefense = addDefense;
-            this.reinforcementLimit = reinforcementLimit;
             this.reinforcement = reinforcement;
 
             Initialize();

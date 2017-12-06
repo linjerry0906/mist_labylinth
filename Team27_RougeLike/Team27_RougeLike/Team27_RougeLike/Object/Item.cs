@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Team27_RougeLike.Device
+namespace Team27_RougeLike.Object
 {
-    class Item
+    abstract class Item
     {
-        //アイテムIDはListのKey
-        private string itemName; //アイテム名
-        private string itemExplanation; //説明文
-        private int itemPrice; //値段
-        private int itemRare; //レア度
-        private float itemWeight; //重量
-        private int amountLimit; //限界所持個数
+        protected int itemID; //アイテムID
+        protected string itemName; //アイテム名
+        protected string itemExplanation; //説明文
+        protected int itemPrice; //値段
+        protected int itemRare; //レア度
+        protected float itemWeight; //重量
+        protected int amountLimit; //限界所持個数
         
         
-        public Item(string itemName, string itemExplanation,
+        public Item(int itemID, string itemName, string itemExplanation,
             int itemPrice, int itemRare, float itemWeight, int amountLimit)
         {
+            this.itemID = itemID;
             this.itemName = itemName;
             this.itemExplanation = itemExplanation;
             this.itemPrice = itemPrice;
@@ -56,5 +57,12 @@ namespace Team27_RougeLike.Device
         {
             return amountLimit;
         }
+
+        public int GetItemID()
+        {
+            return itemID;
+        }
+
+        public abstract Item Clone();
     }
 }
