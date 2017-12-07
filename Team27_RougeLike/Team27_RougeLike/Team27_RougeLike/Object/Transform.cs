@@ -9,15 +9,13 @@ namespace Team27_RougeLike.Object
     {
         public Vector3 position;
         public float angle;
-        private int radius;
 
         //private float height;
         //private float width;
 
-        public Transform(Vector3 position,int radius)
+        public Transform(Vector3 position)
         {
             this.position = position;
-            this.radius = radius;
             //this.height = height;
             //this.width = width;
         }

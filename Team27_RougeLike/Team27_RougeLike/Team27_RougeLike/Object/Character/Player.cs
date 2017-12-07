@@ -23,7 +23,7 @@ namespace Team27_RougeLike.Object.Character
         private Motion motion;
 
         public Player(Vector3 position, GameDevice gameDevice)
-            : base(new Status(5, 100, 50, 5, 5, 5), new Transform(position,5))
+            : base(new Status(5, 100, 50, 5, 5, 5), new Transform(position))
         {
             this.gameDevice = gameDevice;
             input = gameDevice.InputState;
