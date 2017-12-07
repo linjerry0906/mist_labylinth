@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
+using Team27_RougeLike.Object.Character;
 namespace Team27_RougeLike.Object.AI
 {
     class AiManager_Fool : BaseAiManager

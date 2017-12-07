@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Map;
-using Team27_RougeLike.Object.Actor;
+using Team27_RougeLike.Object.Character;
 
 namespace Team27_RougeLike.Scene
 {

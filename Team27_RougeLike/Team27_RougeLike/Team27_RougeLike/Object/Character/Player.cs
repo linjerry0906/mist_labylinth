@@ -1,75 +1,120 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
-using Team27_RougeLike.Device;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-namespace Team27_RougeLike.Object
+using Team27_RougeLike.Device;
+using Team27_RougeLike.Utility;
 
+namespace Team27_RougeLike.Object.Character
 {
     class Player : CharacterBase
     {
-        private int luck;       //幸運値
-        private int weight;     //重さ
-        private int stamina;    //持久力
-
+        private GameDevice gameDevice;
+        private Projector projector;
         private InputState input;
 
-        public Player(Model model,GameDevice gameDevice)
-            : base(model, new Status(5, 100, 50, 5, 5, 5), new Transform(Vector3.Zero,5))
-        {
-            input = gameDevice.InputState;
-            tag = "Player";
-        }
-        public override void Initialize()
-        {
+        private CollisionSphere collision;
+        private Vector3 velocity;
+        private readonly float MAX_SPEED = 0.3f;
+        private float speed;
 
+        private Motion motion;
+
+        public Player(Vector3 position, GameDevice gameDevice)
+            : base(new Status(5, 100, 50, 5, 5, 5), new Transform(position,5))
+        {
+            this.gameDevice = gameDevice;
+            input = gameDevice.InputState;
+            projector = gameDevice.MainProjector;
+
+            tag = "Player";
+            collision = new CollisionSphere(transform.position, 2.5f);
+
+            velocity = Vector3.Zero;
+            speed = 0;
+
+            motion = new Motion();
+            for (int i = 0; i < 6; i++)
+            {
+                motion.Add(i, new Rectangle(i * 64, 0, 64, 64));
+            }
+            motion.Initialize(new Range(0, 5), new Timer(0.1f));
         }
-        public override void Update()
+
+        public void Update(GameTime gameTime)
         {
             Move();
+
+            collision.Force(velocity, speed);
+            collision.Force(-Vector3.UnitY, 1 / 6.0f);
+
+            projector.Trace(collision.Position);
+            gameDevice.Renderer.MiniMapProjector.Trace(collision.Position);
+
+            motion.Update(gameTime);
         }
 
         private void Move()
         {
-            //if (input.GetKeyState(Keys.Q))
-            //{
-            //    transform.angle--;
-            //}
-            //if (input.GetKeyState(Keys.P))
-            //{
-            //    transform.angle++;
-            //}
-            if (input.GetKeyState(Keys.A))
-            {
-                transform.position = new Vector3(transform.position.X - 1, transform.position.Y, transform.position.Z);
-            }
+            speed = (speed > 0) ? speed - 0.01f : 0;
             if (input.GetKeyState(Keys.W))
             {
-                transform.position = new Vector3(transform.position.X, transform.position.Y, transform.position.Z - 1);
+                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
+                velocity += projector.Front;
             }
             if (input.GetKeyState(Keys.S))
             {
-                transform.position = new Vector3(transform.position.X, transform.position.Y, transform.position.Z + 1);
+                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
+                velocity += projector.Back;
+            }
+            if (input.GetKeyState(Keys.A))
+            {
+                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
+                velocity += projector.Left;
             }
             if (input.GetKeyState(Keys.D))
             {
-                transform.position = new Vector3(transform.position.X + 1, transform.position.Y, transform.position.Z);
+                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
+                velocity += projector.Right;
             }
+            if (velocity.Length() > 0)
+            {
+                velocity.Normalize();
+            }
+        }
+
+        public Vector3 Position
+        {
+            get { return collision.Position; }
+        }
+
+        public void Draw()
+        {
+            gameDevice.Renderer.DrawPolygon("test", collision.Position, new Vector2(5, 5), motion.DrawingRange(), Color.White);
+        }
+
+        public override void Initialize()
+        {
+        }
+
+        public override void Update()
+        {
         }
 
         public override void Attack()
         {
-            
         }
 
         public override bool HitCheck(CharacterBase character)
         {
             throw new NotImplementedException();
+        }
+
+        public CollisionSphere Collision
+        {
+            get { return collision; }
         }
     }
 }

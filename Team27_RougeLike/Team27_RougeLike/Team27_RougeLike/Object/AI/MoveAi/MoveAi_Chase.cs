@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
+using Team27_RougeLike.Object.Character;
+using Team27_RougeLike.Utility;
 namespace Team27_RougeLike.Object.AI
 {
     class MoveAi_Chase : BaseAi
