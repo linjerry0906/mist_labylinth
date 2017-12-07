@@ -99,6 +99,7 @@
     <Compile Include="Object\Item\ItemEffect.cs" />
     <Compile Include="Object\Item\ItemEffects\Damage.cs" />
     <Compile Include="Object\Item\ItemEffects\Recovery.cs" />
+    <Compile Include="Object\Item\ItemManager.cs" />
     <Compile Include="Object\Item\ProtectionItem.cs" />
     <Compile Include="Object\Item\WeaponItem.cs" />
     <Compile Include="Object\Status.cs" />
