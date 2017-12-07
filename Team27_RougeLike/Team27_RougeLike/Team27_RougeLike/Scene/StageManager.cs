@@ -21,6 +21,7 @@ namespace Team27_RougeLike.Scene
 
         private Timer limitTime;
         private int floor;
+        private int bossFloor;
 
         private int stageSize;
 
@@ -38,6 +39,7 @@ namespace Team27_RougeLike.Scene
             limitTime = new Timer(5 * 60);
             limitTime.Initialize();
             floor = 1;
+            bossFloor = floor + 1;
             stageSize = 20;
 
             nearFog = FAREST_FOG;
@@ -48,12 +50,13 @@ namespace Team27_RougeLike.Scene
         /// </summary>
         /// <param name="limitSecond">制限時間（秒）</param>
         /// <param name="floor">階層</param>
-        public void Initialize(int limitSecond, int floor, int stageSize)
+        public void Initialize(int limitSecond, int floor, int totalFloor,int stageSize)
         {
             limitTime = new Timer(limitSecond);
             limitTime.Initialize();
             this.floor = floor;
             this.stageSize = stageSize;
+            bossFloor = floor + totalFloor - 1;
         }
 
         /// <summary>
@@ -93,6 +96,9 @@ namespace Team27_RougeLike.Scene
             return limitTime.Now() / 60.0f;
         }
 
+        /// <summary>
+        /// 残り時間を表示
+        /// </summary>
         public void DrawLimitTime()
         {
             int min = (int)CurrentTime() / 60;
@@ -124,6 +130,15 @@ namespace Team27_RougeLike.Scene
         public int CurrentFloor()
         {
             return floor;
+        }
+
+        /// <summary>
+        /// Boss部屋か？
+        /// </summary>
+        /// <returns></returns>
+        public bool IsBoss()
+        {
+            return floor == bossFloor;
         }
 
         /// <summary>

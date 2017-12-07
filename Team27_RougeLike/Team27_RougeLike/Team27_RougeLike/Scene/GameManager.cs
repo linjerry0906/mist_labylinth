@@ -35,7 +35,7 @@ namespace Team27_RougeLike.Scene
             mapInstance = null;
 
             stageManager = new StageManager(gameDevice);
-            stageManager.Initialize(5 * 60, 1, 20);
+            stageManager.Initialize(5 * 60, 1, 1, 20);
         }
 
         #region Stage関連
@@ -45,10 +45,11 @@ namespace Team27_RougeLike.Scene
         /// </summary>
         /// <param name="limitSecond">攻略の制限時間</param>
         /// <param name="floor">階層目</param>
+        /// <param name="totalFloor">総階層</param>
         /// <param name="stageSize">ダンジョンのサイズ</param>
-        public void InitStage(int limitSecond, int floor, int stageSize)
+        public void InitStage(int limitSecond, int floor, int totalFloor, int stageSize)
         {
-            stageManager.Initialize(limitSecond, floor, stageSize);
+            stageManager.Initialize(limitSecond, floor, totalFloor, stageSize);
         }
         
         /// <summary>

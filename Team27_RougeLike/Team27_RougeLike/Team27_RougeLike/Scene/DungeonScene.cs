@@ -146,6 +146,8 @@ namespace Team27_RougeLike.Scene
                 endFlag = true;                     //ToDo：次の階層へ行くかどうかを聞く
                 nextScene = SceneType.LoadMap;
                 stageManager.NextFloor();
+                if (stageManager.IsBoss())
+                    nextScene = SceneType.Boss;
                 return;
             }
         }

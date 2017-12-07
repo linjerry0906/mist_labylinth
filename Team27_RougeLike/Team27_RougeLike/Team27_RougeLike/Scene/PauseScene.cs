@@ -1,4 +1,9 @@
-﻿using System;
+﻿//--------------------------------------------------------------------------------------------------
+// 作成者：林　佳叡
+// 作成日：2017.12.06
+// 内容  ：Pauseシーン
+//--------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,6 +53,13 @@ namespace Team27_RougeLike.Scene
                     bossScene.Draw();
                     break;
             }
+
+            renderer.Begin();
+            renderer.DrawString(
+                "Pause",
+                new Vector2(Def.WindowDef.WINDOW_WIDTH / 2, Def.WindowDef.WINDOW_HEIGHT / 2),
+                new Color(0.2f, 0.2f, 0.9f), new Vector2(2, 2), 0.9f, true, true);
+            renderer.End();
         }
 
         public void Initialize(SceneType scene)

@@ -1,4 +1,9 @@
-﻿using System;
+﻿//--------------------------------------------------------------------------------------------------
+// 作成者：林　佳叡
+// 作成日：2017.12.06
+// 内容  ：村シーン
+//--------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +35,7 @@ namespace Team27_RougeLike.Scene
         public void Draw()
         {
             renderer.Begin();
-            renderer.DrawString("Town", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
+            renderer.DrawString("Town\nPress D key to Dungeon", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
             renderer.End();
         }
 
@@ -42,7 +47,7 @@ namespace Team27_RougeLike.Scene
             if (scene == SceneType.Pause)
                 return;
 
-            gameManager.InitStage(5 * 60, 1, 20);
+            gameManager.InitStage(5 * 60, 1, 5, 20);
         }
 
         public bool IsEnd()
