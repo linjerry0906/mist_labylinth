@@ -36,3 +36,25 @@ D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Tea
 D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.csprojResolveAssemblyReference.cache
 D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb
 D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.exe
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.pdb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\test.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\cubeTest.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Donut.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\castle.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\testPlayer.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Team27_RougeLike.exe
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Team27_RougeLike.pdb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.dll
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Game.dll
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.dll
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.dll
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.dll
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.xml
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Game.xml
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.xml
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.xml
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.xml
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.csprojResolveAssemblyReference.cache
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt

@@ -205,7 +205,7 @@ namespace Team27_RougeLike.Map
         /// Debug暫定　Todo：PlayerをCharacterに置き換える
         /// </summary>
         /// <param name="player"></param>
-        public void MapCollision(Player player)
+        public void MapCollision(Object.Actor.Player player)
         {
             float floatX = ((MapDef.TILE_SIZE / 2.0f + player.Position.X) / MapDef.TILE_SIZE);      //そのマスの左右半分
             float floatZ = ((MapDef.TILE_SIZE / 2.0f + player.Position.Z) / MapDef.TILE_SIZE);      //そのマスの上下半分
