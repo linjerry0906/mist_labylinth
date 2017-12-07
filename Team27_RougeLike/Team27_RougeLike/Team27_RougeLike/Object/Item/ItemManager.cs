@@ -13,7 +13,7 @@ namespace Team27_RougeLike.Object.Item
 
         public ItemManager()
         {
-            equipments = new Dictionary<int, Object.Item>();
+            equipments = new Dictionary<int, Item>();
         }
 
         public void Load(string filename, int[] IDs)
