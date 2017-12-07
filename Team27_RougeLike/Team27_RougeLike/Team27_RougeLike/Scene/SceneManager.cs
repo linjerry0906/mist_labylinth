@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Team27_RougeLike.Device;
 
-namespace Team27_RougeLike.Device
+namespace Team27_RougeLike.Scene
 {
     class SceneManager
     {
         private Dictionary<SceneType, IScene> scenes = new Dictionary<SceneType, IScene>();
         private IScene currentScene = null;
-        //private GameManger gameManager;
-        private Renderer renderer;
+        private GameDevice gameDevice;
 
         private SceneType currenetSceneName;
 
-        public SceneManager()
+        public SceneManager(GameDevice gameDevice)
         {
-            //renderer = gameManager.Renderer;
+            this.gameDevice = gameDevice;
         }
 
         public void AddScene(SceneType sceneType, IScene scene)
@@ -43,18 +44,18 @@ namespace Team27_RougeLike.Device
             currentScene.Initialize(lastScene);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             //ガード節、条件次第では終了
             if (currentScene == null)
             {
                 return;
             }
-            //ゲームマネージャーの更新後に各シーンのUpdateを実行
-            //gameManager.Update();
-            currentScene.Update();
+
+            currentScene.Update(gameTime);
 
             //シーン管理からシーン終了を問い合わせる
+            if(currentScene.IsEnd())
             {
                 Change(currentScene.Next());
             }
@@ -67,9 +68,7 @@ namespace Team27_RougeLike.Device
                 return;
             }
             //各シーンのDraw実行、前後に
-            renderer.Begin();
             currentScene.Draw();
-            renderer.End();
         }
     }
 }

@@ -1,4 +1,9 @@
-﻿using System;
+﻿//--------------------------------------------------------------------------------------------------
+// 作成者：林　佳叡
+// 作成日：2017.11.16 ～ 2017.12.2
+// 作成部分：3D描画、プロジェクター、Fog
+//--------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,12 +21,16 @@ namespace Team27_RougeLike.Device
         private ContentManager contentManager;  // コンテンツ管理者
         private GraphicsDevice graphicsDevice;  // グラフィック機器
         private SpriteBatch spriteBatch;        // スプライト一括
-        private BasicEffect basicEffect;        // 3D描画用
+        private EffectManager effectManager;    // 3D描画のEffect管理者
+        private FogManager fogManager;          // 霧の管理者
 
+        private Projector currentProjector;     // 現在使用のプロジェクター
         private Projector mainProjector;        // メインプロジェクター
+        private Projector miniMapProjector;     // ミニマップのプロジェクター
 
         // Dictionaryで複数の画像を管理
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
+        private Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
 
         /// <summary>
         /// コンストラクタ
@@ -33,9 +42,16 @@ namespace Team27_RougeLike.Device
             contentManager = content;
             graphicsDevice = graphics;
             spriteBatch = new SpriteBatch(graphicsDevice);
-            basicEffect = new BasicEffect(graphicsDevice);
+            effectManager = new EffectManager(graphicsDevice);
+            fogManager = new FogManager();
 
             mainProjector = new Projector();
+            miniMapProjector = new Projector(
+                new Viewport(new Rectangle(Def.WindowDef.WINDOW_WIDTH - 300, 100, 200, 200)),   //MiniMapの位置と大きさ設定
+                new Vector3(0, 50, 0.001f));
+            currentProjector = mainProjector;
+
+            DefaultRenderSetting();
         }
 
         /// <summary>
@@ -44,6 +60,14 @@ namespace Team27_RougeLike.Device
         public Projector MainProjector
         {
             get { return mainProjector; }
+        }
+
+        /// <summary>
+        /// MiniMapのプロジェクター
+        /// </summary>
+        public Projector MiniMapProjector
+        {
+            get { return miniMapProjector; }
         }
 
         /// <summary>
@@ -94,6 +118,82 @@ namespace Team27_RougeLike.Device
             textures.Clear();
         }
 
+        #region 文字関連
+
+        /// <summary>
+        /// 文字Fontを読み込む
+        /// </summary>
+        /// <param name="name">アセット名</param>
+        /// <param name="filepath">パス</param>
+        public void LoadFont(string name, string filepath = "./")
+        {
+            // ガード節 Dictionaryへの2重登録を回避
+            if (fonts.ContainsKey(name))
+            {
+#if DEBUG // DEBUGモードの時のみ有効
+                System.Console.WriteLine("この" + name + "はKeyで、すでに登録してます");
+#endif
+                // 処理終了
+                return;
+            }
+            // 画像の読み込みとDictionaryにアセット名と画像を追加
+            fonts.Add(name, contentManager.Load<SpriteFont>(filepath + name));
+        }
+
+        /// <summary>
+        /// 文字を描画する
+        /// </summary>
+        /// <param name="text">表示する文字</param>
+        /// <param name="position">位置</param>
+        /// <param name="color">色</param>
+        /// <param name="scale">大きさ</param>
+        /// <param name="alpha">透明度</param>
+        /// <param name="xCenter">Xを中央に置く？</param>
+        /// <param name="yCenter">Yを中央に置く？</param>
+        /// <param name="fontName">使用するFont</param>
+        public void DrawString(string text, Vector2 position, Color color, Vector2 scale, float alpha = 1.0f,
+            bool xCenter = false, bool yCenter = false, string fontName = "basicFont")
+        {
+            Vector2 size = fonts[fontName].MeasureString(text);     //textの長さを取得
+            if (xCenter)                                            //中央置きの処理
+                position.X -= ((size.X / 2) * (scale.X));
+            if (yCenter)                                            //中央置きの処理
+                position.Y -= ((size.Y / 2) * (scale.Y));
+            spriteBatch.DrawString(
+                fonts[fontName],                //使用するFont
+                text,                           //描画文字
+                position,                       //位置
+                color * alpha,                  //色
+                0,                              //回転角度
+                Vector2.Zero,                   //回転軸
+                scale,                          //大きさ
+                SpriteEffects.None, 0);         //反転、Depth
+        }
+
+        /// <summary>
+        /// 文字を描画（簡単版）
+        /// </summary>
+        /// <param name="text">描画文字</param>
+        /// <param name="position">位置</param>
+        /// <param name="color">色</param>
+        /// <param name="scale">大きさ</param>
+        /// <param name="alpha">透明度</param>
+        /// <param name="fontName">使用するFont</param>
+        public void DrawString(string text, Vector2 position, Vector2 scale, Color color, float alpha = 1.0f, string fontName = "basicFont")
+        {
+            spriteBatch.DrawString(
+                fonts[fontName],                //使用するFont
+                text,                           //描画文字
+                position,                       //位置
+                color * alpha,                  //色
+                0,                              //回転角度
+                Vector2.Zero,                   //回転軸
+                scale,                          //大きさ
+                SpriteEffects.None, 0);         //反転、Depth
+        }
+
+        #endregion
+
         #region 3D用
 
         /// <summary>
@@ -101,21 +201,36 @@ namespace Team27_RougeLike.Device
         /// </summary>
         public void DefaultRenderSetting()
         {
-            graphicsDevice.DepthStencilState = DepthStencilState.Default;
-            graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
-            graphicsDevice.BlendState = BlendState.AlphaBlend;
-            basicEffect.VertexColorEnabled = true;
+            graphicsDevice.DepthStencilState = DepthStencilState.Default;           //DepthStencil有効
+            graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;  //カーリング
+            graphicsDevice.BlendState = BlendState.AlphaBlend;                      //アルファブレンド
         }
 
         /// <summary>
         /// メインプロジェクターにレンダリング
         /// </summary>
-        public void RendererMainProjector()
+        public void RenderMainProjector()
         {
-            graphicsDevice.Viewport = mainProjector.ViewPort;
-            basicEffect.World = mainProjector.World;
-            basicEffect.View = mainProjector.LookAt;
-            basicEffect.Projection = mainProjector.Projection;
+            currentProjector = mainProjector;
+            graphicsDevice.Viewport = mainProjector.ViewPort;       //Viewport指定
+            effectManager.ChangeEffect(BasicEffectType.Basic);
+            effectManager.CurrentEffect.World = currentProjector.World;                //ワールド
+            effectManager.CurrentEffect.View = currentProjector.LookAt;                //View
+            effectManager.CurrentEffect.Projection = currentProjector.Projection;      //プロジェクション
+        }
+
+        /// <summary>
+        /// ミニマップにレンダリング
+        /// </summary>
+        public void RenderMiniMap()
+        {
+            currentProjector = miniMapProjector;
+            graphicsDevice.DepthStencilState = DepthStencilState.None;           //DepthStencil無効
+            graphicsDevice.Viewport = miniMapProjector.ViewPort;                 //Viewport指定
+            effectManager.ChangeEffect(BasicEffectType.MiniMap);
+            effectManager.CurrentEffect.World = currentProjector.World;                //ワールド
+            effectManager.CurrentEffect.View = currentProjector.LookAt;                //View
+            effectManager.CurrentEffect.Projection = currentProjector.Projection;      //プロジェクション
         }
 
         /// <summary>
@@ -126,13 +241,115 @@ namespace Team27_RougeLike.Device
         /// <param name="alpha">透明度</param>
         public void DrawPolygon(string name, VertexPositionColorTexture[] vertices, float alpha = 1)
         {
-            basicEffect.Alpha = alpha;
-            //basicEffect.Texture = textures[name];         //登録していないためにコメントアウト
-            foreach (var effect in basicEffect.CurrentTechnique.Passes)
+            effectManager.CurrentEffect.TextureEnabled = true;            //テクスチャを有効
+            effectManager.CurrentEffect.Alpha = alpha;                    //Alpha指定
+            effectManager.CurrentEffect.Texture = textures[name];         //テクスチャを指定
+
+            foreach (var effect in effectManager.CurrentEffect.CurrentTechnique.Passes)
             {
                 effect.Apply();
             }
             graphicsDevice.DrawUserPrimitives<VertexPositionColorTexture>(PrimitiveType.TriangleStrip, vertices, 0, 2);
+        }
+
+        /// <summary>
+        /// スクリーンに向いてポリゴンを描画
+        /// </summary>
+        /// <param name="name">アセット名</param>
+        /// <param name="position">位置</param>
+        /// <param name="size">ポリゴンのサイズ</param>
+        /// <param name="rect">アセットのUV</param>
+        /// <param name="color">ポリゴンの色</param>
+        /// <param name="alpha">アルファ値</param>
+        public void DrawPolygon(string name, Vector3 position, Vector2 size, Rectangle rect, Color color,float alpha = 1)
+        {
+            graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
+            Vector3 axis = Vector3.Cross(currentProjector.Front, currentProjector.Right);     //回転軸
+            axis.Normalize();
+            effectManager.CurrentEffect.TextureEnabled = true;                          //テクスチャを有効
+            int textureHeight = textures[name].Height;                                  //テクスチャのサイズを取得
+            int textureWidth = textures[name].Width;
+            //四つの頂点を設定
+            VertexPositionColorTexture[] vertices = new VertexPositionColorTexture[4];
+            vertices[0] = new VertexPositionColorTexture(
+                Vector3.Left * size.X / 2 + Vector3.Up * size.Y / 2,
+                color,
+                new Vector2(
+                    rect.X * 1.0f / textureWidth,
+                    (rect.Y + rect.Height) * 1.0f / textureHeight));
+            vertices[1] = new VertexPositionColorTexture(
+                Vector3.Left * size.X / 2 + Vector3.Down * size.Y / 2,
+                color,
+                new Vector2(
+                    rect.X * 1.0f / textureWidth,
+                    rect.Y * 1.0f / textureHeight));
+            vertices[2] = new VertexPositionColorTexture(
+                Vector3.Right * size.X / 2 + Vector3.Up * size.Y / 2,
+                color,
+                new Vector2(
+                    (rect.X + rect.Width) * 1.0f / textureWidth,
+                    (rect.Y + rect.Height) * 1.0f / textureHeight));
+            vertices[3] = new VertexPositionColorTexture(
+                Vector3.Right * size.X / 2 + Vector3.Down * size.Y / 2,
+                color,
+                new Vector2(
+                    (rect.X + rect.Width) * 1.0f / textureWidth,
+                    rect.Y * 1.0f / textureHeight));
+
+            effectManager.CurrentEffect.Alpha = alpha;                  //アルファ値を指定
+            effectManager.CurrentEffect.Texture = textures[name];       //テクスチャを指定
+            effectManager.CurrentEffect.World =
+                Matrix.CreateBillboard(position, currentProjector.Position, axis, currentProjector.Front); //ビルボードマトリクス 
+            foreach (var effect in effectManager.CurrentEffect.CurrentTechnique.Passes)
+            {
+                effect.Apply();
+            }
+            graphicsDevice.DrawUserPrimitives<VertexPositionColorTexture>(PrimitiveType.TriangleStrip, vertices, 0, 2);
+            effectManager.CurrentEffect.TextureEnabled = false;
+        }
+
+        /// <summary>
+        /// Debug用      線を引く
+        /// </summary>
+        public void DrawLine(VertexPositionColor[] vertices, float alpha = 1)
+        {
+            //basicEffect.Alpha = alpha;
+            effectManager.CurrentEffect.Alpha = alpha;
+            foreach (var effect in effectManager.CurrentEffect.CurrentTechnique.Passes)
+            {
+                effect.Apply();
+            }
+            graphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineList, vertices, 0, 1);
+        }
+
+        #endregion
+
+        #region Fog関連
+
+        /// <summary>
+        /// Fogを有効
+        /// </summary>
+        public void StartFog()
+        {
+            fogManager.FogOn();
+            fogManager.SetFog(effectManager.CurrentEffect);
+        }
+
+        /// <summary>
+        /// Fog無効
+        /// </summary>
+        public void EndFog()
+        {
+            fogManager.FogOff();
+            fogManager.SetFog(effectManager.CurrentEffect);
+        }
+
+        /// <summary>
+        /// Fogの詳細設定が必要な場合Getできる
+        /// </summary>
+        public FogManager FogManager
+        {
+            get { return fogManager; }
         }
 
         #endregion
@@ -172,6 +389,11 @@ namespace Team27_RougeLike.Device
                 "プログラムを確認してください");
 
             spriteBatch.Draw(textures[name], position, Color.White * alpha);
+        }
+
+        public void DrawTexture(RenderTarget2D texture, Vector2 position, float alpha = 1.0f)
+        {
+            spriteBatch.Draw(texture, position, Color.White * alpha);
         }
 
         /// <summary>

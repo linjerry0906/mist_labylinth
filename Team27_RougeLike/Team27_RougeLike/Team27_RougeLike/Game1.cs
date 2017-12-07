@@ -9,9 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Team27_RougeLike.Device;
-using Team27_RougeLike.Def;
-using Team27_RougeLike.Object;
-using Team27_RougeLike.Map;
+using Team27_RougeLike.Scene;
 
 namespace Team27_RougeLike
 {
@@ -23,8 +21,8 @@ namespace Team27_RougeLike
         private GraphicsDeviceManager graphics;
         private GameDevice gameDevice;
 
-        private Cube cube;
-        private MapGenerator mapGenerator;
+        private GameManager gameManager;
+        private SceneManager sceneManager;
 
         public Game1()
         {
@@ -46,8 +44,17 @@ namespace Team27_RougeLike
         {
             // TODO: Add your initialization logic here
             gameDevice = new GameDevice(Content, GraphicsDevice);
-            cube = new Cube(Vector3.Zero, new Vector3(1, 1, 1), gameDevice);
-            mapGenerator = new MapGenerator(gameDevice);
+            gameManager = new GameManager(gameDevice);
+            
+            sceneManager = new SceneManager(gameDevice);
+            IScene dungeon = new DungeonScene(gameManager, gameDevice);
+            IScene town = new TownScene(gameManager, gameDevice);
+            sceneManager.AddScene(SceneType.Town, town);
+            sceneManager.AddScene(SceneType.LoadMap, new LoadMap(gameManager, gameDevice));
+            sceneManager.AddScene(SceneType.Dungeon, dungeon);
+            //Pause Test
+            sceneManager.AddScene(SceneType.Pause, new PauseScene(dungeon, dungeon, town, gameManager, gameDevice));
+            sceneManager.Change(SceneType.Town);
 
             base.Initialize();
         }
@@ -61,6 +68,9 @@ namespace Team27_RougeLike
             // Create a new SpriteBatch, which can be used to draw textures.
 
             // TODO: use this.Content to load your game content here
+            gameDevice.Renderer.LoadTexture("test");
+            gameDevice.Renderer.LoadTexture("cubeTest");
+            gameDevice.Renderer.LoadFont("basicFont", "./Font/");
         }
 
         /// <summary>
@@ -86,7 +96,7 @@ namespace Team27_RougeLike
                 this.Exit();
             // TODO: Add your update logic here
             gameDevice.Update();
-            mapGenerator.Update();
+            sceneManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -97,11 +107,10 @@ namespace Team27_RougeLike
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(gameDevice.Renderer.FogManager.CurrentColor());
 
             // TODO: Add your drawing code here
-            cube.Draw();
-            mapGenerator.Draw();
+            sceneManager.Draw();
 
             base.Draw(gameTime);
         }

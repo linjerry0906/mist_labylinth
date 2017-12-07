@@ -1,6 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>test.png</Source>
+      <Name>test</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\test.xnb</Output>
+      <Time>2017-12-07T13:26:39.6505868+09:00</Time>
+    </Item>
+    <Item>
+      <Source>cubeTest.jpg</Source>
+      <Name>cubeTest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\cubeTest.xnb</Output>
+      <Time>2017-12-07T13:26:39.647587+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Font\basicFont.spritefont</Source>
+      <Name>Font\basicFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
+      <Time>2017-12-07T13:26:39.6445668+09:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{2E0FBB49-9D3A-4D29-B7F5-8325684AF7CD}</ContentProjectGUID>
@@ -8,15 +35,39 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\</RootDirectory>
-      <LoggerRootDirectory>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\</RootDirectory>
+      <LoggerRootDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\</LoggerRootDirectory>
+      <IntermediateDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
-        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2017-04-24T11:12:23.6482345+09:00</Value>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2017-11-16T16:49:35.7510569+09:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
