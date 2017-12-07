@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using Team27_RougeLike.Device;
 
-namespace Team27_RougeLike.Object.Item
+namespace Team27_RougeLike.Object
 {
     class ItemManager
     {
