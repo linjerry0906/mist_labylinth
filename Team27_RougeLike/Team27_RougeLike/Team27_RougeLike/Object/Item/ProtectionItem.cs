@@ -11,9 +11,9 @@ namespace Team27_RougeLike.Object
         //防具の種類
         public enum ProtectionType
         {
-            Head, //頭
+            Helm, //頭
             Armor,　//鎧
-            Arm,　//手
+            Glove,　//手
             Shoes, //靴
         }
         private ProtectionType protectionType;
