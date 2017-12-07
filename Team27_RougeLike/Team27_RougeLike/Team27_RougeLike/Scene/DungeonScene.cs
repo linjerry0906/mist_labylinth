@@ -39,7 +39,7 @@ namespace Team27_RougeLike.Scene
         public void Draw()
         {
             map.Draw();
-            player.Draw();
+            player.Draw(gameDevice.Renderer);
 
             map.DrawMiniMap();
             stageManager.DrawLimitTime();
