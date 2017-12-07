@@ -48,12 +48,14 @@ namespace Team27_RougeLike
             
             sceneManager = new SceneManager(gameDevice);
             IScene dungeon = new DungeonScene(gameManager, gameDevice);
+            IScene boss = new BossScene(gameManager, gameDevice);
             IScene town = new TownScene(gameManager, gameDevice);
             sceneManager.AddScene(SceneType.Town, town);
             sceneManager.AddScene(SceneType.LoadMap, new LoadMap(gameManager, gameDevice));
             sceneManager.AddScene(SceneType.Dungeon, dungeon);
+            sceneManager.AddScene(SceneType.Boss, boss);
             //Pause Test
-            sceneManager.AddScene(SceneType.Pause, new PauseScene(dungeon, dungeon, town, gameManager, gameDevice));
+            sceneManager.AddScene(SceneType.Pause, new PauseScene(dungeon, boss, town, gameManager, gameDevice));
             sceneManager.Change(SceneType.Town);
 
             base.Initialize();
