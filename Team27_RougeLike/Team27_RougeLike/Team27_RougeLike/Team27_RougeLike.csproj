@@ -71,7 +71,7 @@
     <Compile Include="Map\MapDef.cs" />
     <Compile Include="Map\MapGenerator.cs" />
     <Compile Include="Map\MapRoom.cs" />
-    <Compile Include="Object\Actor\Player.cs" />
+    <Compile Include="Object\Character\Player.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Fool.cs" />
     <Compile Include="Object\AI\AiManager\BaseAiManager.cs" />
     <Compile Include="Object\AI\AttackAi\AttackAi_Attack.cs" />
@@ -86,11 +86,10 @@
     <Compile Include="Object\AI\MoveAi\MoveAi_Wait.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Normal.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Stun.cs" />
-    <Compile Include="Object\Angle.cs" />
+    <Compile Include="Utility\Angle.cs" />
     <Compile Include="Object\Character\CharacterBase.cs" />
     <Compile Include="Object\Character\CharacterManager.cs" />
     <Compile Include="Object\Character\EnemyBase.cs" />
-    <Compile Include="Object\Character\Player.cs" />
     <Compile Include="Object\Character\TestSimpleMeleeEnemy.cs" />
     <Compile Include="Object\CollisionSphere.cs" />
     <Compile Include="Object\Cube.cs" />

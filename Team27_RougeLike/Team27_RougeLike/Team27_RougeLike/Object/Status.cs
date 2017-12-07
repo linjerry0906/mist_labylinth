@@ -8,13 +8,14 @@ namespace Team27_RougeLike.Object
 {
     class Status
     {
-        protected int level;            //現在レベル
-        protected int health;           //体力現在値
-        protected int maxhealth;        //体力最大値
-        protected int basepower;        //装備無　攻撃力
-        protected int basearmor;        //装備無　防御力
-        protected int attackspd;        //攻撃速度
-        protected float velocity;       //移動速度 
+        protected int level;                     //現在レベル
+        protected int health;                    //体力現在値
+        protected int maxhealth;                 //体力最大値
+        protected int basepower;                 //装備無　攻撃力
+        protected int basearmor;                 //装備無　防御力
+        protected int attackspd;                 //攻撃速度
+        protected float velocity;                //移動速度 
+        private readonly float MAX_SPEED = 0.3f; //限界移動速度
         public Status(int level, int maxhealth, int power, int armor, int attackspd, float velocity)
         {
             this.level = level;

@@ -7,29 +7,32 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Device;
-using Team27_RougeLike.Object.AI;
+using Team27_RougeLike.Object.Character;
 namespace Team27_RougeLike.Object.Character
 {
     class CharacterManager
     {
         private GameDevice gamedevice;
-        private ContentManager content;
         private List<CharacterBase> characters = new List<CharacterBase>();
+
+        /// <summary>
+        /// 3DモデルをDrawする場合に必要 どちらにするかあいまいな為放置
+        /// </summary>
+        private ContentManager content;
+
         private Player player;
 
         private const int drawLength = 100;
 
-        public CharacterManager(GameDevice gamedevice, ContentManager content)
+        public CharacterManager(GameDevice gamedevice/*, ContentManager content*/)
         {
             this.gamedevice = gamedevice;
-            this.content = content;
+            // this.content = content;
         }
 
         public void Initialize()
         {
-            player = new Player(content.Load<Model>("Donut"), gamedevice);
-            AddCharacter(player);
-            AddCharacter(new TestSimpleMeleeEnemy(content.Load<Model>("testPlayer"), new Vector3(10, 0, 5)));
+            //AddCharacter(new TestSimpleMeleeEnemy(content.Load<Model>("testPlayer"), new Vector3(10, 0, 5)));
         }
 
         public void Update()
@@ -50,7 +53,7 @@ namespace Team27_RougeLike.Object.Character
                 }
 
             }
-                        
+
             characters.RemoveAll((CharacterBase c) => c.IsDead());
         }
 
@@ -62,9 +65,10 @@ namespace Team27_RougeLike.Object.Character
             {
                 if (c is Player)
                 {
-                    c.Draw(gamedevice);
+                    //c.Draw(gamedevice);           元々の3D表示用
+                    ((Player)c).Draw();             //2D表示用　取り急ぎ
                 }
-                if (c is CharacterBase && NearPlayer(c))
+                if (c is CharacterBase && NearPlayer(c) && !(c is Player))
                 {
                     c.Draw(gamedevice);
                 }
@@ -76,6 +80,16 @@ namespace Team27_RougeLike.Object.Character
             characters.Add(character);
         }
 
+        /// <summary>
+        /// リンさんの2D表示用のものです。 
+        /// </summary>
+        /// <param name="position"></param>
+        public void AddPlayer(Vector3 position)
+        {
+            player = new Player(position, gamedevice);
+            characters.Add(player);
+        }
+
 
         /// <summary>
         /// プレイヤーが近くにいるかどうか
@@ -84,10 +98,15 @@ namespace Team27_RougeLike.Object.Character
         /// <returns></returns>
         public bool NearPlayer(CharacterBase character)
         {
-            //if (player == null) return false;
+            //if (player == null) return false;         エラーチェック　デバッグのため未実装
             //if (player.IsDead()) return false;
 
             return Math.Abs(character.transform.position.X - player.transform.position.X) < drawLength && Math.Abs(character.transform.position.Y - player.transform.position.Y) < drawLength;
+        }
+
+        public Player GetPlayer()
+        {
+            return player;
         }
     }
 }

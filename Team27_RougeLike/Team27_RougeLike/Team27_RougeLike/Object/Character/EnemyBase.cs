@@ -6,6 +6,7 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Object.AI;
+using Team27_RougeLike.Object.Character;
 namespace Team27_RougeLike.Object
 {
     abstract class EnemyBase : CharacterBase

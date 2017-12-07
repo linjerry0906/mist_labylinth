@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Object;
 using Team27_RougeLike.Device;
-using Team27_RougeLike.Object.Actor;
+using Team27_RougeLike.Object.Character;
 
 namespace Team27_RougeLike.Map
 {
@@ -205,7 +205,7 @@ namespace Team27_RougeLike.Map
         /// Debug暫定　Todo：PlayerをCharacterに置き換える
         /// </summary>
         /// <param name="player"></param>
-        public void MapCollision(Object.Actor.Player player)
+        public void MapCollision(Player player)
         {
             float floatX = ((MapDef.TILE_SIZE / 2.0f + player.Position.X) / MapDef.TILE_SIZE);      //そのマスの左右半分
             float floatZ = ((MapDef.TILE_SIZE / 2.0f + player.Position.Z) / MapDef.TILE_SIZE);      //そのマスの上下半分

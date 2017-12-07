@@ -19,6 +19,12 @@ namespace Team27_RougeLike.Object
         protected string tag;
         public string Tag { get{ return tag; }}
 
+        /// <summary>
+        /// 3Dモデルの場合
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="status"></param>
+        /// <param name="transform"></param>
         public CharacterBase(Model model, Status status, Transform transform)
         {
             this.model = model;
@@ -26,20 +32,27 @@ namespace Team27_RougeLike.Object
             this.transform = transform;
         }
 
+        /// <summary>
+        /// 2Dモデルの場合
+        /// </summary>
+        /// <param name="status"></param>
+        /// <param name="transform"></param>
+        public CharacterBase(Status status, Transform transform)
+        {
+            this.status = status;
+            this.transform = transform;
+        }
+
         public abstract void Initialize();
 
         public abstract void Update();
+
         public abstract void Attack();
 
         public void Draw(GameDevice gamedevice)
         {
             Matrix world = Matrix.CreateTranslation(transform.position);
             model.Draw(world, gamedevice.MainProjector.LookAt, gamedevice.MainProjector.Projection);
-        }
-
-        public bool CollisionCheck(CharacterBase other)
-        {
-            return true;
         }
 
         public bool IsDead()
