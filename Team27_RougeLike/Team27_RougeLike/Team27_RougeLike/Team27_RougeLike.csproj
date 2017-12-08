@@ -96,7 +96,7 @@
     <Compile Include="Object\Item\ConsumptionItem.cs" />
     <Compile Include="Object\Item\EquipmentEffect.cs" />
     <Compile Include="Object\Item\Item.cs" />
-    <Compile Include="Object\Item\ItemEffect.cs" />
+    <Compile Include="Object\Item\ItemEffects\ItemEffect.cs" />
     <Compile Include="Object\Item\ItemEffects\Damage.cs" />
     <Compile Include="Object\Item\ItemEffects\Recovery.cs" />
     <Compile Include="Object\Item\ItemManager.cs" />

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Team27_RougeLike.Object.Item.ItemEffects;
 
-namespace Team27_RougeLike.Object
+namespace Team27_RougeLike.Object.Item
 {
     class ConsumptionItem : Item
     {
