@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using Team27_RougeLike.Device;
 
-namespace Team27_RougeLike.Object
+namespace Team27_RougeLike.Object.Item
 {
     class ItemManager
     {
@@ -16,7 +15,7 @@ namespace Team27_RougeLike.Object
             equipments = new Dictionary<int, Item>();
         }
 
-        public void Load(string filename, int[] IDs)
+        public void Load(string filename, int[] equipmentIDs)
         {
 
             //.csv付け忘れ対策
@@ -36,7 +35,7 @@ namespace Team27_RougeLike.Object
 
                 int id = int.Parse(items[0]);
 
-                if (!IDs.Contains(id)) continue;
+                if (!equipmentIDs.Contains(id)) continue;
 
                 string itemName = items[1];
                 string itemExplanation = items[2];
@@ -111,10 +110,8 @@ namespace Team27_RougeLike.Object
                         power, defence, reinforcement, reinforcementLimit,
                         upPower, upDefence, randMinP, randMaxP, randMinD, randMaxD);
                 }
-
+                dateSr.Close();
             }
-
-            
         }
     }
 }
