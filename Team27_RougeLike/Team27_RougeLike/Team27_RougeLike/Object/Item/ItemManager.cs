@@ -110,8 +110,8 @@ namespace Team27_RougeLike.Object.Item
                         power, defence, reinforcement, reinforcementLimit,
                         upPower, upDefence, randMinP, randMaxP, randMinD, randMaxD);
                 }
-                dateSr.Close();
             }
+            dateSr.Close();
         }
     }
 }
