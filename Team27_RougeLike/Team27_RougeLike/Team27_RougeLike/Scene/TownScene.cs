@@ -10,6 +10,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
+using Team27_RougeLike.Scene.Town;
 
 namespace Team27_RougeLike.Scene
 {
@@ -19,6 +20,8 @@ namespace Team27_RougeLike.Scene
         private InputState input;
         private Renderer renderer;
         private GameManager gameManager;
+
+        private Store stores;
 
         private bool endFlag;
         private bool isChanged;
@@ -46,6 +49,7 @@ namespace Team27_RougeLike.Scene
             }
 
             renderer.DrawString("Town\nPress D key to Dungeon", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
+            stores.DrawEquip();
 
             if (!isChanged)
             {
@@ -62,6 +66,8 @@ namespace Team27_RougeLike.Scene
             if (scene == SceneType.Pause)
                 return;
 
+            stores = new Store(gameManager, gameDevice);
+            stores.Initialize();
             gameManager.InitStage(5 * 60, 1, 5, 20);
         }
 
@@ -82,6 +88,13 @@ namespace Team27_RougeLike.Scene
 
         public void Update(GameTime gameTime)
         {
+
+            CheckIsEnd();
+        }
+
+
+        private void CheckIsEnd()
+        {
             if (input.GetKeyTrigger(Keys.D))
             {
                 nextScene = SceneType.LoadMap;
@@ -95,7 +108,6 @@ namespace Team27_RougeLike.Scene
                 endFlag = true;
                 return;
             }
-
         }
     }
 }

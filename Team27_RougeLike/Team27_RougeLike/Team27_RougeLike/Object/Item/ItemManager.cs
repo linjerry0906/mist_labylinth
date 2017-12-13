@@ -29,7 +29,7 @@ namespace Team27_RougeLike.Object.Item
 
             //装備読み込み
             FileStream datefs = new FileStream(equipmentFilename, FileMode.Open);
-            StreamReader equipmentDate = new StreamReader(datefs);
+            StreamReader equipmentDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
 
             //装備生成
             while (!equipmentDate.EndOfStream)

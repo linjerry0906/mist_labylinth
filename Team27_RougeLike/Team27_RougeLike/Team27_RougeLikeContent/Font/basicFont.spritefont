@@ -11,7 +11,7 @@ with.
     <!--
     Modify this string to change the font that will be imported.
     -->
-    <FontName>Segoe UI Mono</FontName>
+    <FontName>MS UI Gothic</FontName>
 
     <!--
     Size is a float value, measured in points. Modify this value to change
@@ -55,6 +55,174 @@ with.
         <Start>&#32;</Start>
         <End>&#126;</End>
       </CharacterRegion>
+      <!-- ひらがな -->
+      <CharacterRegion>
+        <Start>&#x3041;</Start>
+        <End>&#x309F;</End>
+      </CharacterRegion>
+
+      <!-- カタカナ -->
+      <CharacterRegion>
+        <Start>&#x30A1;</Start>
+        <End>&#x30FF;</End>
+      </CharacterRegion>
+
+      <!-- 全角記号 -->
+      <CharacterRegion>
+        <Start>&#x3000;</Start>
+        <End>&#x303F;</End>
+      </CharacterRegion>
+
+
+
+      <!-- 漢字 -->
+      <!-- あ -->
+      <!-- い -->
+
+      <!-- う -->
+      <!-- え -->
+      <!-- えら -->
+      <CharacterRegion>
+        <Start>選</Start>
+        <End>選</End>
+      </CharacterRegion>
+      
+      <!-- お -->
+      <!-- か -->
+      <!-- き -->
+      <!-- ぎ -->
+
+      <!-- く -->
+      <!-- くん -->
+
+      <!-- け -->
+      
+      <CharacterRegion>
+        <Start>剣</Start>
+        <End>剣</End>
+      </CharacterRegion>
+      
+      <!-- げつ -->
+
+      <!-- こ -->
+      <!-- ご -->
+
+      <!-- さ -->
+      <!-- ざ -->
+
+      <!-- し -->
+      <!--じょう -->
+      <!-- しん -->
+
+      <!-- す -->
+
+      <!-- せ -->
+      <!-- せい -->
+
+      <!-- そ -->
+
+      <!-- た -->
+
+      
+      <CharacterRegion>
+        <Start>盾</Start>
+        <End>盾</End>
+      </CharacterRegion>
+
+      <!-- たん -->
+      <CharacterRegion>
+        <Start>短</Start>
+        <End>短</End>
+      </CharacterRegion>
+      <!-- だい -->
+
+
+      <!-- ち -->
+      <!-- ちょう -->
+
+      <!-- つ -->
+      <!-- て -->
+      <CharacterRegion>
+        <Start>手</Start>
+        <End>手</End>
+      </CharacterRegion>
+
+      <!-- と -->
+      <!-- とう -->
+
+      <!-- ど -->
+
+      <!-- な -->
+
+      <CharacterRegion>
+        <Start>名</Start>
+        <End>名</End>
+      </CharacterRegion>
+      
+      <!-- なん -->
+
+
+      <!-- に -->
+      <!-- にち -->
+
+      <!-- ぬ -->
+      <!-- ね -->
+      <!-- の -->
+
+      <!-- は -->
+      <!-- ひ -->
+      <!-- ひょう -->
+
+      <!-- ふ -->
+      <!-- へ -->
+
+      <!-- ほ -->
+      <!-- ほん -->
+
+
+      <!-- ま -->
+      <!-- まえ -->
+      <CharacterRegion>
+        <Start>前</Start>
+        <End>前</End>
+      </CharacterRegion>
+      
+      <!-- まぼ -->
+      <CharacterRegion>
+        <Start>幻</Start>
+        <End>幻</End>
+      </CharacterRegion>
+      
+      <!-- み -->
+      <!-- む -->
+      <!-- め -->
+
+      <!-- も -->
+      <!-- もの -->
+      <CharacterRegion>
+        <Start>者</Start>
+        <End>者</End>
+      </CharacterRegion>
+      <!-- もん -->
+
+      <!-- や -->
+      <!-- ゆ -->
+      <CharacterRegion>
+        <Start>弓</Start>
+        <End>弓</End>
+      </CharacterRegion>
+      <!-- よ -->
+
+      <!-- ら -->
+      <!-- り -->
+      <!-- る -->
+      <!-- れ -->
+      <!-- ろ -->
+
+      <!-- わ -->
+      <!-- を -->
+      <!-- ん -->
+
     </CharacterRegions>
   </Asset>
 </XnaContent>
