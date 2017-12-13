@@ -72,6 +72,7 @@
     <Compile Include="Map\MapDef.cs" />
     <Compile Include="Map\MapGenerator.cs" />
     <Compile Include="Map\MapRoom.cs" />
+    <Compile Include="Map\StageInfoLoader.cs" />
     <Compile Include="Object\Character\Player.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Fool.cs" />
     <Compile Include="Object\AI\AiManager\BaseAiManager.cs" />
