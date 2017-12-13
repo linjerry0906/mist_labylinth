@@ -61,3 +61,24 @@ C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Te
 D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\test.xnb
 D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\cubeTest.xnb
 D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\basicFont.xnb
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\test.xnb
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\cubeTest.xnb
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Team27_RougeLike.exe
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Team27_RougeLike.pdb
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.dll
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Game.dll
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.dll
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.dll
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.dll
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.xml
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Game.xml
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.xml
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.xml
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.xml
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.csprojResolveAssemblyReference.cache
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.exe
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.pdb
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\ItemCSV\ConsuptionItems.csv
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\ItemCSV\EquipmentItems.csv
