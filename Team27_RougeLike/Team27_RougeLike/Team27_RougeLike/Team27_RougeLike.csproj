@@ -58,14 +58,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Def\WindowDef.cs" />
+    <Compile Include="Device\BGMLoader.cs" />
     <Compile Include="Device\EffectManager.cs" />
     <Compile Include="Device\FogManager.cs" />
     <Compile Include="Device\GameDevice.cs" />
     <Compile Include="Device\InputState.cs" />
+    <Compile Include="Device\Loader.cs" />
     <Compile Include="Device\Projector.cs" />
     <Compile Include="Device\Renderer.cs" />
     <Compile Include="Device\SaveData.cs" />
+    <Compile Include="Device\SELoader.cs" />
     <Compile Include="Device\Sound.cs" />
+    <Compile Include="Device\TextureLoader.cs" />
     <Compile Include="Effects\BlurEffect.cs" />
     <Compile Include="Object\Box\HitBoxBase.cs" />
     <Compile Include="Map\DungeonMap.cs" />
@@ -90,6 +94,7 @@
     <Compile Include="Object\AI\StateAi\StateAi_Normal.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Stun.cs" />
     <Compile Include="Object\Item\ItemEffects\noEffect.cs" />
+    <Compile Include="Scene\Load.cs" />
     <Compile Include="Scene\LoadTown.cs" />
     <Compile Include="Scene\Town\Store.cs" />
     <Compile Include="Scene\Town\TownInfoLoader.cs" />
