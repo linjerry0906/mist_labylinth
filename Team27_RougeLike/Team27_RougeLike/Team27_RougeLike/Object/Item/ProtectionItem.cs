@@ -51,7 +51,7 @@ namespace Team27_RougeLike.Object.Item
             this.randomMaxD = randomMaxD;
 
             effect = new EquipmentEffect(itemPower, itemDefense, reinforcementLimit,
-                upPower, upDefense, randomMinP, randomMaxP, randomMinD, randomMaxD);
+                upPower, upDefense, 0, 0);
         }
 
         //強化値指定

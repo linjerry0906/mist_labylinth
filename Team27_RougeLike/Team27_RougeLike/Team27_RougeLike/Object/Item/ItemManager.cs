@@ -25,6 +25,8 @@ namespace Team27_RougeLike.Object.Item
 
         public void Load(int[] equipmentIDs, int[] consuptionIDs)
         {
+            Clear();
+
             //装備読み込み
             FileStream datefs = new FileStream(equipmentFilename, FileMode.Open);
             StreamReader equipmentDate = new StreamReader(datefs);
@@ -166,9 +168,10 @@ namespace Team27_RougeLike.Object.Item
             consuptionDate.Close();
         }
 
-        public void LoadPlayerItem(string[] saveItems)
+        public List<Item> LoadPlayerItem(string[] saveItems)
             //saveItems{ id, addPower, addDefence, reinforcment }
         {
+            List<Item> itemList = new List<Item>();
             //string配列読み込み
             int saveID = int.Parse(saveItems[0]);
             int addPower = int.Parse(saveItems[1]);
@@ -204,62 +207,80 @@ namespace Team27_RougeLike.Object.Item
 
                 if (type == "Sword")
                 {
-                    equipments[id] = new WeaponItem(id, itemName, itemExplanation,
+                    itemList.Add(new WeaponItem(id, itemName, itemExplanation,
                         itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Sword,
                         power, defence, reinforcement, reinforcementLimit,
-                        upPower, upDefence, addPower, addDefence);
+                        upPower, upDefence, addPower, addDefence));
                 }
                 else if (type == "Bow")
                 {
-                    equipments[id] = new WeaponItem(id, itemName, itemExplanation,
+                    itemList.Add(new WeaponItem(id, itemName, itemExplanation,
                         itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Bow,
                         power, defence, reinforcement, reinforcementLimit,
-                        upPower, upDefence, addPower, addDefence);
+                        upPower, upDefence, addPower, addDefence));
                 }
                 else if (type == "Dagger")
                 {
-                    equipments[id] = new WeaponItem(id, itemName, itemExplanation,
+                    itemList.Add(new WeaponItem(id, itemName, itemExplanation,
                         itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Dagger,
                         power, defence, reinforcement, reinforcementLimit,
-                        upPower, upDefence, addPower, addDefence);
+                        upPower, upDefence, addPower, addDefence));
                 }
                 else if (type == "Shield")
                 {
-                    equipments[id] = new WeaponItem(id, itemName, itemExplanation,
+                    itemList.Add(new WeaponItem(id, itemName, itemExplanation,
                         itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Shield,
                         power, defence, reinforcement, reinforcementLimit,
-                        upPower, upDefence, addPower, addDefence);
+                        upPower, upDefence, addPower, addDefence));
                 }
                 else if (type == "Helm")
                 {
-                    equipments[id] = new ProtectionItem(id, itemName, itemExplanation,
+                    itemList.Add(new ProtectionItem(id, itemName, itemExplanation,
                         itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Helm,
                         power, defence, reinforcement, reinforcementLimit,
-                        upPower, upDefence, addPower, addDefence);
+                        upPower, upDefence, addPower, addDefence));
                 }
                 else if (type == "Armor")
                 {
-                    equipments[id] = new ProtectionItem(id, itemName, itemExplanation,
+                    itemList.Add(new ProtectionItem(id, itemName, itemExplanation,
                         itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Armor,
                         power, defence, reinforcement, reinforcementLimit,
-                        upPower, upDefence, addPower, addDefence);
+                        upPower, upDefence, addPower, addDefence));
                 }
                 else if (type == "Glove")
                 {
-                    equipments[id] = new ProtectionItem(id, itemName, itemExplanation,
+                    itemList.Add(new ProtectionItem(id, itemName, itemExplanation,
                         itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Glove,
                         power, defence, reinforcement, reinforcementLimit,
-                        upPower, upDefence, addPower, addDefence);
+                        upPower, upDefence, addPower, addDefence));
                 }
                 else if (type == "Shoes")
                 {
-                    equipments[id] = new ProtectionItem(id, itemName, itemExplanation,
+                    itemList.Add(new ProtectionItem(id, itemName, itemExplanation,
                         itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Shoes,
                         power, defence, reinforcement, reinforcementLimit,
-                        upPower, upDefence, addPower, addDefence);
+                        upPower, upDefence, addPower, addDefence));
                 }
             }
             equipmentDate.Close();
+
+            return itemList;
+        }
+
+        public void Clear()
+        {
+            equipments.Clear();
+            consumptions.Clear();
+        }
+
+        public Item GetEquipmentItem(int id)
+        {
+            return equipments[id].Clone();
+        }
+
+        public Item GetConsuptionItem(int id)
+        {
+            return consumptions[id].Clone();
         }
     }
 }
