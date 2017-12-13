@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Utility;
+using Team27_RougeLike.Object.Character;
 namespace Team27_RougeLike.Object
 {
     abstract class CharacterBase
@@ -17,6 +18,8 @@ namespace Team27_RougeLike.Object
         public Status status;        //様々なパラメータ
         protected CollisionSphere collision;
         protected Motion motion;
+        protected CharacterManager characterManager;
+
         protected string textureName;//テクスチャ名
         protected string tag;        //敵味方　タグ分け
 
@@ -25,12 +28,12 @@ namespace Team27_RougeLike.Object
 
         public string Tag { get{ return tag; }}
 
-        public CharacterBase(Status status, CollisionSphere collision,string textureName)
+        public CharacterBase(Status status, CollisionSphere collision,string textureName,CharacterManager characterManager)
         {
             this.status = status;
             this.collision = collision;
             this.textureName = textureName;
-
+            this.characterManager = characterManager;
             velocity = Vector3.Zero;
             speed = 0;
         }
@@ -48,7 +51,10 @@ namespace Team27_RougeLike.Object
         {
             renderer.DrawPolygon(textureName, collision.Position, new Vector2(5, 5), motion.DrawingRange(), Color.White);
         }
-
+        public void Damage(int num)
+        {
+            status.Health = status.Health - num;
+        }
         public bool IsDead()
         {
             return status.Health <= 0;

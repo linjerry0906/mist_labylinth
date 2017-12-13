@@ -67,6 +67,7 @@
     <Compile Include="Device\SaveData.cs" />
     <Compile Include="Device\Sound.cs" />
     <Compile Include="Effects\BlurEffect.cs" />
+    <Compile Include="Object\Box\DamageBox.cs" />
     <Compile Include="Object\Box\HitBoxBase.cs" />
     <Compile Include="Map\DungeonMap.cs" />
     <Compile Include="Map\Edge.cs" />
@@ -87,8 +88,8 @@
     <Compile Include="Object\AI\MoveAi\MoveAi_Step.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_TargetMove.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_Wait.cs" />
-    <Compile Include="Object\AI\StateAi\StateAi_Normal.cs" />
-    <Compile Include="Object\AI\StateAi\StateAi_Stun.cs" />
+    <Compile Include="Object\AI\MoveAi\StateAi\StateAi_Normal.cs" />
+    <Compile Include="Object\AI\MoveAi\StateAi\StateAi_Stun.cs" />
     <Compile Include="Object\Item\ItemEffects\noEffect.cs" />
     <Compile Include="Scene\LoadTown.cs" />
     <Compile Include="Scene\Town\Store.cs" />

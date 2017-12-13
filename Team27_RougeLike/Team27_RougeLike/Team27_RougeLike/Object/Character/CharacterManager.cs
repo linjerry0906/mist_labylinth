@@ -25,12 +25,17 @@ namespace Team27_RougeLike.Object.Character
             this.gamedevice = gamedevice;
         }
 
-        public void Initialize(Vector3 playerPosition)
+        public void Initialize(Vector3 position)
         {
-            hitBoxs.Clear();
-            characters.Clear();
-            AddPlayer(playerPosition);
-            AddCharacter(new TestSimpleMeleeEnemy(player.Collision.Position));
+            //デバッグ用、呼び出すときはプレイヤーを生成してから！
+            AddPlayer(position);
+            AddCharacter(new TestSimpleMeleeEnemy(player.Collision.Position,this));
+            AddCharacter(new TestSimpleMeleeEnemy(new Vector3
+                (
+                player.Collision.Position.X + 4,
+                player.Collision.Position.Y,
+                player.Collision.Position.Z + 4
+                ), this));
         }
 
         public void Update(GameTime gameTime)
@@ -41,12 +46,12 @@ namespace Team27_RougeLike.Object.Character
 
                 if (c is EnemyBase && c.HitCheck(player))
                 {
-                    ((EnemyBase)c).HitUpdate(player,gameTime);
+                    ((EnemyBase)c).HitUpdate(player, gameTime);
                 }
             }
-            foreach(var h in hitBoxs)
+            foreach (var h in hitBoxs)
             {
-                foreach(var c in characters)
+                foreach (var c in characters)
                 {
                     if (h.HitCheck(c))
                     {
@@ -65,7 +70,7 @@ namespace Team27_RougeLike.Object.Character
             {
                 if (c is Player)
                 {
-                    c.Draw(gamedevice.Renderer); 
+                    c.Draw(gamedevice.Renderer);
                 }
                 if (c is CharacterBase && NearPlayer(c) && !(c is Player))
                 {
@@ -81,7 +86,7 @@ namespace Team27_RougeLike.Object.Character
 
         public void AddPlayer(Vector3 position)
         {
-            player = new Player(position, gamedevice);
+            player = new Player(position, gamedevice,this);
             characters.Add(player);
         }
 
@@ -106,6 +111,11 @@ namespace Team27_RougeLike.Object.Character
         public Player GetPlayer()
         {
             return player;
+        }
+
+        public List<CharacterBase> Characters()
+        {
+            return characters;
         }
     }
 }

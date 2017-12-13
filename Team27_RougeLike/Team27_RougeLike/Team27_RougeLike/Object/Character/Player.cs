@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Utility;
-
+using Team27_RougeLike.Object.Character;
+using Team27_RougeLike.Object.Box;
 namespace Team27_RougeLike.Object.Character
 {
     class Player : CharacterBase
@@ -15,8 +17,8 @@ namespace Team27_RougeLike.Object.Character
         private Projector projector;
         private InputState input;
 
-        public Player(Vector3 position, GameDevice gameDevice)
-            : base(new Status(5, 100, 50, 5, 5, 5), new CollisionSphere(position,2.5f),"test")
+        public Player(Vector3 position, GameDevice gameDevice,CharacterManager characterManager)
+            : base(new Status(5, 100, 50, 5, 5, 5), new CollisionSphere(position,2.5f),"test",characterManager)
         {
             this.gameDevice = gameDevice;
             input = gameDevice.InputState;
@@ -40,6 +42,12 @@ namespace Team27_RougeLike.Object.Character
 
             projector.Trace(collision.Position);
             gameDevice.Renderer.MiniMapProjector.Trace(collision.Position);
+
+            //デバッグ
+            if (gameDevice.InputState.LeftButtonEnter(ButtonState.Pressed))
+            {
+                characterManager.AddHitBox(new DamageBox(new BoundingSphere(Position, 10), 1, tag));
+            }
 
             motion.Update(gameTime);
         }
