@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Map;
+using Team27_RougeLike.Object.Item;
 
 namespace Team27_RougeLike.Scene
 {
@@ -18,7 +19,7 @@ namespace Team27_RougeLike.Scene
         //Player情報  --->Save情報
         //Save機能
         //攻略進捗    --->Save情報
-        //Item関連の読み込み ---> excelか他のファイルからデータを読み込む
+        private ItemManager itemManager;
 
         private GameDevice gameDevice;
 
@@ -36,7 +37,18 @@ namespace Team27_RougeLike.Scene
 
             stageManager = new StageManager(gameDevice);
             stageManager.Initialize(5 * 60, 1, 1, 20);
+
+            itemManager = new ItemManager();
         }
+
+        #region Item関連
+
+        public ItemManager ItemManager
+        {
+            get { return itemManager; }
+        }
+
+        #endregion
 
         #region Stage関連
 
