@@ -20,6 +20,9 @@ namespace Team27_RougeLike.Object
         protected string textureName;//テクスチャ名
         protected string tag;        //敵味方　タグ分け
 
+        protected Vector3 velocity;
+        protected float speed;
+
         public string Tag { get{ return tag; }}
 
         public CharacterBase(Status status, CollisionSphere collision,string textureName)
@@ -27,11 +30,17 @@ namespace Team27_RougeLike.Object
             this.status = status;
             this.collision = collision;
             this.textureName = textureName;
+
+            velocity = Vector3.Zero;
+            speed = 0;
         }
 
         public abstract void Initialize();
 
-        public abstract void Update(GameTime gameTime);
+        public virtual void Update(GameTime gameTime)
+        {
+            collision.Force(-Vector3.UnitY, 1 / 6.0f);
+        }
 
         public abstract void Attack();
 

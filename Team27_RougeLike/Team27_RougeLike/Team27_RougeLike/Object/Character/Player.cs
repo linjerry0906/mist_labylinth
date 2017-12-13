@@ -15,9 +15,6 @@ namespace Team27_RougeLike.Object.Character
         private Projector projector;
         private InputState input;
 
-        private Vector3 velocity;
-        private float speed;
-
         public Player(Vector3 position, GameDevice gameDevice)
             : base(new Status(5, 100, 50, 5, 5, 5), new CollisionSphere(position,2.5f),"test")
         {
@@ -26,9 +23,6 @@ namespace Team27_RougeLike.Object.Character
             projector = gameDevice.MainProjector;
 
             tag = "Player";
-            
-            velocity = Vector3.Zero;
-            speed = 0;
 
             motion = new Motion();
             for (int i = 0; i < 6; i++)
@@ -43,7 +37,6 @@ namespace Team27_RougeLike.Object.Character
             Move();
 
             collision.Force(velocity, speed);
-            collision.Force(-Vector3.UnitY, 1 / 6.0f);
 
             projector.Trace(collision.Position);
             gameDevice.Renderer.MiniMapProjector.Trace(collision.Position);

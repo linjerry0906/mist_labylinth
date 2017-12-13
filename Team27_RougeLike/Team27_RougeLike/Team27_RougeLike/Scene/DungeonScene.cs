@@ -21,14 +21,13 @@ namespace Team27_RougeLike.Scene
         private Renderer renderer;              //レンダラー
         private GameManager gameManager;        //シーンの間に情報を渡す機能のクラス
         private StageManager stageManager;      //ステージ管理者
-
+        private CharacterManager characterManager;
         private bool endFlag;                   //終了フラグ
         private bool isChanged;                 //シーンが完全に切り替えたフラグ
         private SceneType nextScene;            //次のシーン
 
         private DungeonMap map;                 //マップ
-        private Player player;              //テスト
-
+        
         private float angle = 0;
 
         public DungeonScene(GameManager gameManager, GameDevice gameDevice)
@@ -37,13 +36,13 @@ namespace Team27_RougeLike.Scene
             this.gameManager = gameManager;
             renderer = gameDevice.Renderer;
             stageManager = gameManager.StageManager;
+            characterManager = new CharacterManager(gameDevice);
         }
 
         public void Draw()
         {
             map.Draw();                 //Mapの描画
-            player.Draw(renderer);
-
+            characterManager.Draw();
             map.DrawMiniMap();          //MiniMapの描画
 
             DrawUI();                   //UIを描画
@@ -87,14 +86,12 @@ namespace Team27_RougeLike.Scene
             }
 
             map.Initialize();                       //マップを初期化
-            player = new Player(
-            new Vector3(
+            characterManager.Initialize(new Vector3(
                 map.EntryPoint.X * MapDef.TILE_SIZE,
                 MapDef.TILE_SIZE,
-                map.EntryPoint.Y * MapDef.TILE_SIZE),
-            gameDevice);
+                map.EntryPoint.Y * MapDef.TILE_SIZE));
 
-            gameDevice.MainProjector.Initialize(player.Position);       //カメラを初期化
+            gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
         }
 
         public bool IsEnd()
@@ -137,11 +134,11 @@ namespace Team27_RougeLike.Scene
             gameDevice.MainProjector.Rotate(angle);
 
             //Chara処理
-            player.Update(gameTime);
+            characterManager.Update(gameTime);
             map.MapCollision(gameDevice.Renderer.MainProjector);
-            map.FocusCenter(player.Position);
+            map.FocusCenter(characterManager.GetPlayer().Position);
             map.Update();
-            map.MapCollision(player);
+            map.MapCollision(characterManager.GetPlayer());
 
             stageManager.Update();              //時間やFog処理の更新
 
@@ -167,7 +164,7 @@ namespace Team27_RougeLike.Scene
                 return;
             }
 
-            if(map.WorldToMap(player.Position) == map.EndPoint)         //階段にたどり着いた場合
+            if(map.WorldToMap(characterManager.GetPlayer().Position) == map.EndPoint)         //階段にたどり着いた場合
             {
                 endFlag = true;                     //ToDo：次の階層へ行くかどうかを聞く
                 nextScene = SceneType.LoadMap;
