@@ -28,7 +28,7 @@ namespace Team27_RougeLike.Object
         }
         public Status() { }
 
-        public int Attackspd { get { return attackspd; } }  
+        public int Attackspd { get { return attackspd; } }
         public float Movespeed { get { return velocity; } }
         public int BasePower { get { return basepower; } }
         public int BaseArmor { get { return basearmor; } }
@@ -38,10 +38,7 @@ namespace Team27_RougeLike.Object
             get
             { return health; }
             set
-            {
-                if (health + value > maxhealth) { health = maxhealth; }
-                else { health = health + value; }
-            }
+            { health = value; }
         }
         public void LevelUp()
         {

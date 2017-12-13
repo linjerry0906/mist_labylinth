@@ -21,7 +21,7 @@ namespace Team27_RougeLike.Object.AI
 
         public override void Update(Player player)
         {
-            //索敵範囲内
+            #region 索敵範囲
             if (actor.SearchCheck(player))
             {
                 //攻撃可能状態なら必ず向かってくる
@@ -30,17 +30,20 @@ namespace Team27_RougeLike.Object.AI
                     moveAi = new MoveAi_Chase(actor,player);
                 }
             }
-            //索敵範囲外
             else
             {
 
             }
-            //索敵範囲内、攻撃範囲外
+            #endregion
+
+            #region 索敵範囲内攻撃範囲外
             if (actor.SearchCheck(player) && !actor.AttackCheck(player))
             {
 
             }
-            //攻撃範囲内
+            #endregion
+
+            #region 攻撃範囲
             if (actor.AttackCheck(player))
             {
                 if (attackAi is AttackAi_Wait)
@@ -58,14 +61,14 @@ namespace Team27_RougeLike.Object.AI
                     moveAi = new MoveAi_Escape(actor,player);
                 }
             }
-            //攻撃範囲外
             else
             {
-                if(moveAi is MoveAi_Escape)
+                if(moveAi is MoveAi_Escape && actor.WaitPointCheck(player))
                 {
                     moveAi = new MoveAi_Wait(actor);
                 }
             }
+            #endregion
 
             base.Update(player);
         }
