@@ -17,12 +17,12 @@ namespace Team27_RougeLike.Object
         protected int hitRange;         //敵のUpdate範囲
         protected int Feeling;          //気分値
 
-
+       
         protected BaseAiManager aiManager;
         public BaseAiManager AiManager { get { return aiManager; } }
 
-        public EnemyBase(Model model, Status status, Transform transform,BaseAiManager AiType)
-            : base(model, status, transform)
+        public EnemyBase(Status status, CollisionSphere collision,BaseAiManager AiType,string textureName)
+            : base(status, collision,textureName)
         {
             aiManager = AiType;
             tag = "Enemy";
@@ -30,14 +30,14 @@ namespace Team27_RougeLike.Object
 
         public abstract override void Initialize();
         public abstract override void Attack();
-        public abstract override void Update();
-        public abstract void HitUpdate(Player player);
-        public int Distance(Player player) { return (int)Vector2.Distance(new Vector2(player.transform.position.X, player.transform.position.Z), new Vector2(transform.position.X, transform.position.Z)); }
+        public abstract override void Update(GameTime gameTime);
+        public abstract void HitUpdate(Player player,GameTime gameTime);
+        public int Distance(Player player) { return (int)Vector2.Distance(new Vector2(player.Collision.Position.X, player.Collision.Position.Z), new Vector2(collision.Position.X, collision.Position.Z)); }
         public bool SearchCheck(Player player) { return Distance(player) < searchRange; }
         public bool AttackCheck(Player player) { return Distance(player) < attackRange; }
         public override bool HitCheck(CharacterBase character)
         {
-            return Vector2.Distance(new Vector2(character.transform.position.X, character.transform.position.Z), new Vector2(transform.position.X, transform.position.Z)) < hitRange/* character.transform.Width + transform.Width*/;
+            return Vector2.Distance(new Vector2(character.Collision.Position.X, character.Collision.Position.Z), new Vector2(collision.Position.X, collision.Position.Z)) < hitRange;
         }
     }
 }
