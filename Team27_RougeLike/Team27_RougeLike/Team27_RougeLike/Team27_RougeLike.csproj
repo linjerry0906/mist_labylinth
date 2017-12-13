@@ -87,6 +87,7 @@
     <Compile Include="Object\AI\MoveAi\MoveAi_Wait.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Normal.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Stun.cs" />
+    <Compile Include="Object\Item\ItemEffects\noEffect.cs" />
     <Compile Include="Utility\Angle.cs" />
     <Compile Include="Object\Character\CharacterBase.cs" />
     <Compile Include="Object\Character\CharacterManager.cs" />

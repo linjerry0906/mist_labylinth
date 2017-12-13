@@ -50,8 +50,16 @@
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ItemCSV\" />
+    <None Include="ItemCSV\ConsuptionItems.csv">
+      <Name>ConsuptionItems</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ItemCSV\EquipmentItems.csv">
+      <Name>EquipmentItems</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Effect\blur.fx">
