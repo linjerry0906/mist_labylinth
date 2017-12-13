@@ -19,6 +19,7 @@ namespace Team27_RougeLike.Scene
         private Renderer renderer;
         private GameManager gameManager;        //ゲーム情報管理者
         private StageManager stageManager;      //ステージ管理者
+        private StageInfoLoader stageInfoLoader;        //Stage情報をロードするクラス
 
         private bool endFlag;                   //シーンの終わるフラグ
 
@@ -46,6 +47,8 @@ namespace Team27_RougeLike.Scene
 
             //ToDo：GameManagerから今の進捗状況によってマップのサイズを指定
             mapGenerator = new MapGenerator(stageManager.StageSize(), gameDevice);
+            stageInfoLoader = new StageInfoLoader();
+            stageInfoLoader.Initialize();
         }
 
         public bool IsEnd()
@@ -68,12 +71,16 @@ namespace Team27_RougeLike.Scene
             if (!mapGenerator.IsEnd())      //生成が終わってなかったら生成し続ける
             {
                 mapGenerator.Update();
+                return;
             }
-            else
+            if (!stageInfoLoader.IsItemLoad())
             {
-                gameManager.GenerateMapInstance(mapGenerator.MapChip);      //実体を生成し、シーンを終わらせる
-                endFlag = true;
+                stageInfoLoader.LoadFloorItem(gameManager.ItemManager, stageManager.CurrentFloor());
             }
+
+
+            gameManager.GenerateMapInstance(mapGenerator.MapChip);      //実体を生成し、シーンを終わらせる
+            endFlag = true;
         }
     }
 }

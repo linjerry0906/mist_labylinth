@@ -2,3 +2,5 @@ Content\test.xnb
 Content\cubeTest.xnb
 Content\Font\basicFont.xnb
 Content\Effect\blur.xnb
+Content\ItemCSV\ConsuptionItems.csv
+Content\ItemCSV\EquipmentItems.csv
