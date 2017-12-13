@@ -8,45 +8,61 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
+using Team27_RougeLike.Effects;
 
 namespace Team27_RougeLike.Device
 {
     public enum BasicEffectType
     {
-        Basic,
-        MiniMap,
+        Basic,          //XNA　DefaultのEffect
+        MiniMap,        //MiniMap描画用のEffect
     }
 
     class EffectManager
     {
-        private GraphicsDevice graphicsDevice;  // グラフィック機器
+        private GraphicsDevice graphicsDevice;  //グラフィック機器
 
-        private BasicEffect currentEffect;
-        private BasicEffect basicEffect;
-        private BasicEffect miniMapEffect;
+        private BasicEffect currentEffect;      //現在使用中のEffect
+        private BasicEffect basicEffect;        //XNA　DefaultのEffect
+        private BasicEffect miniMapEffect;      //MiniMap描画用のEffect
 
-        public EffectManager(GraphicsDevice graphicsDevice)
+        private BlurEffect blurEffect;          //BlurEffect
+
+        /// <summary>
+        /// Effectを管理するクラス
+        /// </summary>
+        /// <param name="graphicsDevice">グラフィック機器</param>
+        /// <param name="contents">コンテントマネージャー</param>
+        public EffectManager(GraphicsDevice graphicsDevice, ContentManager contents)
         {
             this.graphicsDevice = graphicsDevice;
             basicEffect = new BasicEffect(graphicsDevice);
             miniMapEffect = new BasicEffect(graphicsDevice);
 
-            basicEffect.VertexColorEnabled = true;
-            miniMapEffect.VertexColorEnabled = true;
+            basicEffect.VertexColorEnabled = true;          //頂点色を有効
+            miniMapEffect.VertexColorEnabled = true;        //頂点色を有効
 
             currentEffect = basicEffect;
+
+            blurEffect = new BlurEffect(                    //BlurEffectをShaderから読み取って生成する
+                graphicsDevice,
+                contents.Load<Effect>("./Effect/blur"));
+            blurEffect.Initialize();                        //初期化
         }
 
+        /// <summary>
+        /// 現在使用中のEffectを取得
+        /// </summary>
         public BasicEffect CurrentEffect
         {
             get { return currentEffect; }
         }
 
-        public BasicEffect GetCurrentEffect()
-        {
-            return currentEffect;
-        }
-
+        /// <summary>
+        /// Effectを交換
+        /// </summary>
+        /// <param name="type">交換するEffect</param>
         public void ChangeEffect(BasicEffectType type)
         {
             switch (type)
@@ -58,6 +74,15 @@ namespace Team27_RougeLike.Device
                     currentEffect = miniMapEffect;
                     break;
             }
+        }
+
+        /// <summary>
+        /// BlurEffectを取得
+        /// </summary>
+        /// <returns></returns>
+        public BlurEffect GetBlurEffect()
+        {
+            return blurEffect;
         }
     }
 }

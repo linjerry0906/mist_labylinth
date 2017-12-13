@@ -21,6 +21,7 @@ namespace Team27_RougeLike.Scene
         private GameManager gameManager;
 
         private bool endFlag;
+        private bool isChanged;
 
         private SceneType nextScene;
 
@@ -34,15 +35,29 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
-            renderer.Begin();
+            DrawUI();
+        }
+
+        private void DrawUI()
+        {
+            if (!isChanged)
+            {
+                renderer.Begin();
+            }
+
             renderer.DrawString("Town\nPress D key to Dungeon", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
-            renderer.End();
+
+            if (!isChanged)
+            {
+                renderer.End();
+            }
         }
 
         public void Initialize(SceneType scene)
         {
             nextScene = SceneType.LoadMap;
             endFlag = false;
+            isChanged = false;
 
             if (scene == SceneType.Pause)
                 return;
@@ -62,6 +77,7 @@ namespace Team27_RougeLike.Scene
 
         public void Shutdown()
         {
+            isChanged = true;
         }
 
         public void Update(GameTime gameTime)

@@ -1,6 +1,4 @@
 Content\test.xnb
 Content\cubeTest.xnb
 Content\Font\basicFont.xnb
-Content\Donut.xnb
-Content\castle.xnb
-Content\testPlayer.xnb
+Content\Effect\blur.xnb

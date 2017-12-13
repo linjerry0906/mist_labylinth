@@ -28,6 +28,15 @@
       <Output>D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
       <Time>2017-12-06T13:18:25.721512+09:00</Time>
     </Item>
+    <Item>
+      <Source>Effect\blur.fx</Source>
+      <Name>Effect\blur</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\blur.xnb</Output>
+      <Time>2017-12-13T09:52:21.8060238+09:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{2E0FBB49-9D3A-4D29-B7F5-8325684AF7CD}</ContentProjectGUID>

@@ -104,14 +104,12 @@ namespace Team27_RougeLike.Scene
             int min = (int)CurrentTime() / 60;
             int sec = (int)CurrentTime() - min * 60;
             string timeString = string.Format("{0:00} : {1:00}", min, sec);
-            renderer.Begin();
             renderer.DrawString(
                 timeString,
                 new Vector2(Def.WindowDef.WINDOW_WIDTH / 2, 80),
                 new Color(1, 0.2f, 0.2f),
                 new Vector2(2, 2),
                 0.8f, true, true);
-            renderer.End();
         }
 
         /// <summary>

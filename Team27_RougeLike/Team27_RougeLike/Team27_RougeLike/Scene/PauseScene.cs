@@ -10,6 +10,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
+using Team27_RougeLike.Effects;
 
 namespace Team27_RougeLike.Scene
 {
@@ -19,6 +20,9 @@ namespace Team27_RougeLike.Scene
         private InputState input;
         private Renderer renderer;              //描画　ToDo：Blur
         private GameManager gameManager;        //Player現在の情報を取得用
+
+        private BlurEffect blurEffect;
+        private float blurRate;
 
         private IScene dungeonScene;            //ダンジョンシーン
         private IScene bossScene;               //ボスシーン
@@ -33,6 +37,7 @@ namespace Team27_RougeLike.Scene
             renderer = gameDevice.Renderer;
             input = gameDevice.InputState;
             this.gameManager = gameManager;
+            blurEffect = renderer.EffectManager.GetBlurEffect();
 
             this.dungeonScene = dungeon;
             this.bossScene = boss;
@@ -41,6 +46,8 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
+            blurEffect.WriteRenderTarget(renderer.FogManager.CurrentColor());
+            renderer.Begin();
             switch (nextScene)               //背景は前のシーンを描画
             {
                 case SceneType.Dungeon:
@@ -53,6 +60,9 @@ namespace Team27_RougeLike.Scene
                     bossScene.Draw();
                     break;
             }
+            renderer.End();
+            blurEffect.ReleaseRenderTarget();
+            blurEffect.Draw(renderer);
 
             renderer.Begin();
             renderer.DrawString(
@@ -66,11 +76,13 @@ namespace Team27_RougeLike.Scene
         {
             endFlag = false;
             nextScene = scene;
+
+            blurRate = 0.0f;
         }
 
         public bool IsEnd()
         {
-            return endFlag;
+            return endFlag && blurRate <= 0;
         }
 
         public SceneType Next()
@@ -86,6 +98,21 @@ namespace Team27_RougeLike.Scene
         {
             if (input.GetKeyTrigger(Keys.P))
                 endFlag = true;
+
+            UpdateBlurRate();
+            blurEffect.Update(blurRate);
+        }
+
+        private void UpdateBlurRate()
+        {
+            if (endFlag)
+            {
+                blurRate -= 0.03f;
+                return;
+            }
+
+            if (blurRate < 0.8f)
+                blurRate += 0.03f;
         }
     }
 }

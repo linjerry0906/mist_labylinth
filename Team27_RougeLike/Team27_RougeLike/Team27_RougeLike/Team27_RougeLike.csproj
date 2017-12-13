@@ -66,6 +66,7 @@
     <Compile Include="Device\Renderer.cs" />
     <Compile Include="Device\SaveData.cs" />
     <Compile Include="Device\Sound.cs" />
+    <Compile Include="Effects\BlurEffect.cs" />
     <Compile Include="Map\DungeonMap.cs" />
     <Compile Include="Map\Edge.cs" />
     <Compile Include="Map\MapDef.cs" />

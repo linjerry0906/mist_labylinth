@@ -17,15 +17,17 @@ namespace Team27_RougeLike.Scene
 {
     class DungeonScene : IScene
     {
-        private GameDevice gameDevice;
-        private GameManager gameManager;
-        private StageManager stageManager;
+        private GameDevice gameDevice;          //Device系をまとめたクラス
+        private Renderer renderer;              //レンダラー
+        private GameManager gameManager;        //シーンの間に情報を渡す機能のクラス
+        private StageManager stageManager;      //ステージ管理者
 
-        private bool endFlag;
-        private SceneType nextScene;
+        private bool endFlag;                   //終了フラグ
+        private bool isChanged;                 //シーンが完全に切り替えたフラグ
+        private SceneType nextScene;            //次のシーン
 
-        private DungeonMap map;
-        private Player player;          //テスト
+        private DungeonMap map;                 //マップ
+        private Player player;              //テスト
 
         private float angle = 0;
 
@@ -33,29 +35,50 @@ namespace Team27_RougeLike.Scene
         {
             this.gameDevice = gameDevice;
             this.gameManager = gameManager;
+            renderer = gameDevice.Renderer;
             stageManager = gameManager.StageManager;
         }
 
         public void Draw()
         {
-            map.Draw();
+            map.Draw();                 //Mapの描画
             player.Draw();
 
-            map.DrawMiniMap();
-            stageManager.DrawLimitTime();
+            map.DrawMiniMap();          //MiniMapの描画
+
+            DrawUI();                   //UIを描画
+        }
+
+        /// <summary>
+        /// UIの描画
+        /// </summary>
+        private void DrawUI()
+        {
+            if (!isChanged)                     //シーンが切り替えたら別のシーンに任せる
+            {
+                renderer.Begin();
+            }
+
+            stageManager.DrawLimitTime();       //残り時間を表示
+
+            if (!isChanged)                     //シーンが切り替えたら別のシーンに任せる
+            {
+                renderer.End();
+            }
         }
 
         public void Initialize(SceneType lastScene)
         {
-            endFlag = false;
+            endFlag = false;                        //終了フラグ初期化
+            isChanged = false;                      //シーンの切り替えフラグ初期化
             nextScene = SceneType.LoadMap;
 
-            if (lastScene == SceneType.Pause)       //Pauseから来た場合は初期化しない
+            if (lastScene == SceneType.Pause)       //Pauseから来た場合は以下のもの初期化しない
                 return;
 
             angle = 0;
 
-            map = gameManager.GetDungeonMap();
+            map = gameManager.GetDungeonMap();      //生成したマップを取得
             if(map == null)                         //エラー対策　マップが正常に生成されてなかったらLoadingに戻る
             {
                 nextScene = SceneType.LoadMap;
@@ -63,7 +86,7 @@ namespace Team27_RougeLike.Scene
                 return;
             }
 
-            map.Initialize();
+            map.Initialize();                       //マップを初期化
             player = new Player(
             new Vector3(
                 map.EntryPoint.X * MapDef.TILE_SIZE,
@@ -71,7 +94,7 @@ namespace Team27_RougeLike.Scene
                 map.EntryPoint.Y * MapDef.TILE_SIZE),
             gameDevice);
 
-            gameDevice.MainProjector.Initialize(player.Position);
+            gameDevice.MainProjector.Initialize(player.Position);       //カメラを初期化
         }
 
         public bool IsEnd()
@@ -86,10 +109,11 @@ namespace Team27_RougeLike.Scene
 
         public void Shutdown()
         {
-            if (nextScene == SceneType.Pause)       //次のシーンがPauseだったらShutdownしない
+            isChanged = true;                       //完全に切り替えたらTrue
+            if (nextScene == SceneType.Pause)       //次のシーンがPauseだったら以下のものShutdownしない
                 return;
 
-            map.Clear();
+            map.Clear();                            //マップ解放
             map = null;
             gameManager.ReleaseMap();
         }
@@ -122,26 +146,28 @@ namespace Team27_RougeLike.Scene
             stageManager.Update();              //時間やFog処理の更新
 
 
-            //Pause機能
-            if (gameDevice.InputState.GetKeyTrigger(Keys.P))
+            CheckEnd();         //プレイ終了をチェック
+        }
+
+        /// <summary>
+        /// シーンを変えるかのチェック
+        /// </summary>
+        private void CheckEnd()
+        {
+            if (gameDevice.InputState.GetKeyTrigger(Keys.P))            //Pause機能
             {
                 endFlag = true;
                 nextScene = SceneType.Pause;
             }
 
-            CheckEnd();         //プレイ終了をチェック
-        }
-
-        private void CheckEnd()
-        {
-            if (stageManager.IsTime())              //時間になったら村に戻される
+            if (stageManager.IsTime())                                  //時間になったら村に戻される
             {
                 endFlag = true;
                 nextScene = SceneType.Town;
                 return;
             }
 
-            if(map.WorldToMap(player.Position) == map.EndPoint)
+            if(map.WorldToMap(player.Position) == map.EndPoint)         //階段にたどり着いた場合
             {
                 endFlag = true;                     //ToDo：次の階層へ行くかどうかを聞く
                 nextScene = SceneType.LoadMap;

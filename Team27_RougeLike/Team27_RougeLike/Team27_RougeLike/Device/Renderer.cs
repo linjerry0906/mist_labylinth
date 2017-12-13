@@ -42,7 +42,7 @@ namespace Team27_RougeLike.Device
             contentManager = content;
             graphicsDevice = graphics;
             spriteBatch = new SpriteBatch(graphicsDevice);
-            effectManager = new EffectManager(graphicsDevice);
+            effectManager = new EffectManager(graphicsDevice, content);
             fogManager = new FogManager();
 
             mainProjector = new Projector();
@@ -68,6 +68,11 @@ namespace Team27_RougeLike.Device
         public Projector MiniMapProjector
         {
             get { return miniMapProjector; }
+        }
+
+        public EffectManager EffectManager
+        {
+            get { return effectManager; }
         }
 
         /// <summary>
@@ -354,6 +359,8 @@ namespace Team27_RougeLike.Device
 
         #endregion
 
+
+
         #region 2D用
 
         /// <summary>
@@ -362,6 +369,11 @@ namespace Team27_RougeLike.Device
         public void Begin()
         {
             spriteBatch.Begin();
+        }
+
+        public void Begin(Effect effect)
+        {
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, DepthStencilState.Default, RasterizerState.CullCounterClockwise, effect);
         }
 
         /// <summary>
@@ -390,6 +402,7 @@ namespace Team27_RougeLike.Device
 
             spriteBatch.Draw(textures[name], position, Color.White * alpha);
         }
+
 
         public void DrawTexture(RenderTarget2D texture, Vector2 position, float alpha = 1.0f)
         {

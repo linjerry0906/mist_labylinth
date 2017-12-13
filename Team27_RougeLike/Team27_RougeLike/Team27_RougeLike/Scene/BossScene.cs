@@ -21,6 +21,7 @@ namespace Team27_RougeLike.Scene
         private InputState input;
 
         private bool endFlag;
+        private bool isChanged;
         private SceneType nextScene;
 
         public BossScene(GameManager gameManager, GameDevice gameDevice)
@@ -34,16 +35,28 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
-            renderer.Begin();
+            DrawUI();
+        }
+
+        public void DrawUI()
+        {
+            if (!isChanged)
+            {
+                renderer.Begin();
+            }
 
             renderer.DrawString("Boss Scene\n P Key:Pause\n T Key: Back to Town", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
 
-            renderer.End();
+            if (!isChanged)
+            {
+                renderer.End();
+            }
         }
 
         public void Initialize(SceneType scene)
         {
             endFlag = false;
+            isChanged = false;
             nextScene = SceneType.Town;
 
             if (scene == SceneType.Pause)
@@ -62,6 +75,7 @@ namespace Team27_RougeLike.Scene
 
         public void Shutdown()
         {
+            isChanged = true;
         }
 
         public void Update(GameTime gameTime)
