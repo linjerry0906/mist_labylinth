@@ -19,8 +19,8 @@ namespace Team27_RougeLike.Object.Item
             equipments = new Dictionary<int, Item>();
             consumptions = new Dictionary<int, Item>();
 
-            equipmentFilename = "./ItemCSV/EquipmentItems.csv";
-            consuptionFilename = "./ItemCSV/ConsuptionItems.csv";
+            equipmentFilename = @"Content/" + "ItemCSV/EquipmentItems.csv";
+            consuptionFilename = @"Content/" + "ItemCSV/ConsuptionItems.csv";
         }
 
         public void Load(int[] equipmentIDs, int[] consuptionIDs)
@@ -126,7 +126,7 @@ namespace Team27_RougeLike.Object.Item
 
             while (!consuptionDate.EndOfStream)
             {
-                string line = equipmentDate.ReadLine();
+                string line = consuptionDate.ReadLine();
                 string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 if (items.Length != 9) continue;
 
@@ -281,6 +281,23 @@ namespace Team27_RougeLike.Object.Item
         public Item GetConsuptionItem(int id)
         {
             return consumptions[id].Clone();
+        }
+
+        public void Debug()
+        {
+            foreach (var page in equipments)
+            {
+                Console.WriteLine(page.Key);
+                Console.WriteLine(page.Value.GetType().ToString());
+                Console.WriteLine(page.Value.GetItemRare());
+            }
+
+            foreach (var page in consumptions)
+            {
+                Console.WriteLine(page.Key);
+                Console.WriteLine(page.Value.GetType().ToString());
+                Console.WriteLine(page.Value.GetItemRare());
+            }
         }
     }
 }

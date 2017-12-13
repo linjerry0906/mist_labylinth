@@ -22,7 +22,7 @@ namespace Team27_RougeLike.Map
 
         public void LoadFloorItem(ItemManager itemManager, int floor)
         {
-            FileStream fs = new FileStream("./StageCSV/StageItem.csv", FileMode.Open);
+            FileStream fs = new FileStream(@"Content/" + "StageCSV/StageItem.csv", FileMode.Open);
             StreamReader sr = new StreamReader(fs);
             List<int> equipList = new List<int>();
             List<int> consuptionList = new List<int>();
