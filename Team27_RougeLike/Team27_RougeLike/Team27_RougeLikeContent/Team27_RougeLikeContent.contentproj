@@ -64,6 +64,10 @@
       <Name>StageItem</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="StoreItemCSV\StoreItem.csv">
+      <Name>StoreItem</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Effect\blur.fx">

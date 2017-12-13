@@ -57,7 +57,7 @@ namespace Team27_RougeLike.Scene
         {
             endFlag = false;
             isChanged = false;
-            nextScene = SceneType.Town;
+            nextScene = SceneType.LoadTown;
 
             if (scene == SceneType.Pause)
                 return;

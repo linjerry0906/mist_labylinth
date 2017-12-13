@@ -90,6 +90,9 @@
     <Compile Include="Object\AI\StateAi\StateAi_Normal.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Stun.cs" />
     <Compile Include="Object\Item\ItemEffects\noEffect.cs" />
+    <Compile Include="Scene\LoadTown.cs" />
+    <Compile Include="Scene\Town\Store.cs" />
+    <Compile Include="Scene\Town\TownInfoLoader.cs" />
     <Compile Include="Utility\Angle.cs" />
     <Compile Include="Object\Character\CharacterBase.cs" />
     <Compile Include="Object\Character\CharacterManager.cs" />

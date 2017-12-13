@@ -10,6 +10,7 @@ namespace Team27_RougeLike.Scene
     {
         Title,
         Load,
+        LoadTown,
         Town,
         LoadMap,
         Dungeon,
