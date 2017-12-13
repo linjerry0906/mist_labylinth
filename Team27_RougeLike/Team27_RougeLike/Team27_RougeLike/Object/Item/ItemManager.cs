@@ -20,7 +20,7 @@ namespace Team27_RougeLike.Object.Item
             consumptions = new Dictionary<int, Item>();
 
             equipmentFilename = @"Content/" + "ItemCSV/EquipmentItems.csv";
-            consuptionFilename = @"Content/" + "ItemCSV/ConsuptionItems.csv";
+            consuptionFilename = @"Content/" + "ItemCSV/ConsumptionItems.csv";
         }
 
         public void Load(int[] equipmentIDs, int[] consuptionIDs)
@@ -119,7 +119,6 @@ namespace Team27_RougeLike.Object.Item
             equipmentDate.Close();
 
 
-
             //消費アイテム読み込み
             datefs = new FileStream(consuptionFilename, FileMode.Open);
             StreamReader consuptionDate = new StreamReader(datefs);
@@ -168,7 +167,8 @@ namespace Team27_RougeLike.Object.Item
             consuptionDate.Close();
         }
 
-        public List<Item> LoadPlayerItem(string[] saveItems)
+        //セーブデータから装備を再現
+        public List<Item> LoadSaveItem(string[] saveItems)
             //saveItems{ id, addPower, addDefence, reinforcment }
         {
             List<Item> itemList = new List<Item>();
@@ -267,20 +267,47 @@ namespace Team27_RougeLike.Object.Item
             return itemList;
         }
 
+        //Dictionary初期化
         public void Clear()
         {
             equipments.Clear();
             consumptions.Clear();
         }
 
+        //指定された装備アイテムを送る
         public Item GetEquipmentItem(int id)
         {
             return equipments[id].Clone();
         }
 
+        //指定された消費アイテムを送る
         public Item GetConsuptionItem(int id)
         {
             return consumptions[id].Clone();
+        }
+
+        //Store用 装備アイテムListを送る
+        public List<Item> GetEquipmentList()
+        {
+            List<Item> equipmentList = new List<Item>();
+            foreach(var page in equipments)
+            {
+                equipmentList.Add(page.Value);
+            }
+
+            return equipmentList;
+        }
+
+        //Store用　消費アイテムListを送る
+        public List<Item> GetConsumptionList()
+        {
+            List<Item> consumptionList = new List<Item>();
+            foreach (var page in consumptions)
+            {
+                consumptionList.Add(page.Value);
+            }
+
+            return consumptionList;
         }
 
         public void Debug()

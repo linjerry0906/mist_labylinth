@@ -52,8 +52,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="ItemCSV\ConsuptionItems.csv">
-      <Name>ConsuptionItems</Name>
+    <None Include="ItemCSV\ConsumptionItems.csv">
+      <Name>ConsumptionItems</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ItemCSV\EquipmentItems.csv">
