@@ -27,6 +27,8 @@ namespace Team27_RougeLike.Object.Character
 
         public void Initialize(Vector3 position)
         {
+            characters.Clear();
+            hitBoxs.Clear();
             //デバッグ用、呼び出すときはプレイヤーを生成してから！
             AddPlayer(position);
             AddCharacter(new TestSimpleMeleeEnemy(player.Collision.Position,this));
