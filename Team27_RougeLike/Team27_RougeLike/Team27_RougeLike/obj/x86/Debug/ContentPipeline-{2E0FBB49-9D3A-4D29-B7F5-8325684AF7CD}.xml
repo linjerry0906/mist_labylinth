@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\test.xnb</Output>
-      <Time>2017-12-07T16:08:16.8774529+09:00</Time>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\test.xnb</Output>
+      <Time>2017-12-07T13:40:48.5483784+09:00</Time>
     </Item>
     <Item>
       <Source>cubeTest.jpg</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\cubeTest.xnb</Output>
-      <Time>2017-12-11T00:08:21.2128127+09:00</Time>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\cubeTest.xnb</Output>
+      <Time>2017-12-07T13:40:48.5433635+09:00</Time>
     </Item>
     <Item>
       <Source>Font\basicFont.spritefont</Source>
@@ -25,8 +25,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2017-12-11T00:08:21.1927677+09:00</Time>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
+      <Time>2017-12-07T13:40:48.5403567+09:00</Time>
     </Item>
     <Item>
       <Source>Effect\blur.fx</Source>
@@ -34,8 +34,8 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\blur.xnb</Output>
-      <Time>2017-12-13T10:31:41.4134537+09:00</Time>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\blur.xnb</Output>
+      <Time>2017-12-13T10:43:18.9854217+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -44,10 +44,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\</RootDirectory>
-      <LoggerRootDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -76,7 +76,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2017-11-16T16:49:35.7510569+09:00</Value>
+        <Value>2017-11-17T20:01:38.0605973+09:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

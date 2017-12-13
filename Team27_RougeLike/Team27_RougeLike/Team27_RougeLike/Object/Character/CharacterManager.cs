@@ -8,13 +8,14 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Object.Character;
+using Team27_RougeLike.Object.Box;
 namespace Team27_RougeLike.Object.Character
 {
     class CharacterManager
     {
         private GameDevice gamedevice;
         private List<CharacterBase> characters = new List<CharacterBase>();
-
+        private List<HitBoxBase> hitBoxs = new List<HitBoxBase>();
         private Player player;
 
         private const int drawLength = 100;
@@ -41,7 +42,19 @@ namespace Team27_RougeLike.Object.Character
                     ((EnemyBase)c).HitUpdate(player,gameTime);
                 }
             }
+            foreach(var h in hitBoxs)
+            {
+                foreach(var c in characters)
+                {
+                    if (h.HitCheck(c))
+                    {
+                        h.Effect(c);
+                    }
+                }
+                h.Update();
+            }
             characters.RemoveAll((CharacterBase c) => c.IsDead());
+            hitBoxs.RemoveAll((HitBoxBase h) => h.IsEnd());
         }
 
         public void Draw()
@@ -68,6 +81,11 @@ namespace Team27_RougeLike.Object.Character
         {
             player = new Player(position, gamedevice);
             characters.Add(player);
+        }
+
+        public void AddHitBox(HitBoxBase hitBox)
+        {
+            hitBoxs.Add(hitBox);
         }
 
         /// <summary>

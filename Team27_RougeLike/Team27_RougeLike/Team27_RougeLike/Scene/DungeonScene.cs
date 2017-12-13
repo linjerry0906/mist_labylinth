@@ -42,7 +42,7 @@ namespace Team27_RougeLike.Scene
         public void Draw()
         {
             map.Draw();                 //Mapの描画
-            player.Draw();
+            player.Draw(renderer);
 
             map.DrawMiniMap();          //MiniMapの描画
 
