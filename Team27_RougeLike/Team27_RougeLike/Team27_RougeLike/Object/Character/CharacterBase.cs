@@ -8,58 +8,46 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Device;
+using Team27_RougeLike.Utility;
 namespace Team27_RougeLike.Object
 {
     abstract class CharacterBase
     {
-        public Transform transform;  //位置情報、サイズ
+        public float angle;          //向き
         public Status status;        //様々なパラメータ
-        protected Model model;
+        protected CollisionSphere collision;
+        protected Motion motion;
+        protected string textureName;//テクスチャ名
+        protected string tag;        //敵味方　タグ分け
 
-        protected string tag;
         public string Tag { get{ return tag; }}
 
-        /// <summary>
-        /// 3Dモデルの場合
-        /// </summary>
-        /// <param name="model"></param>
-        /// <param name="status"></param>
-        /// <param name="transform"></param>
-        public CharacterBase(Model model, Status status, Transform transform)
-        {
-            this.model = model;
-            this.status = status;
-            this.transform = transform;
-        }
-
-        /// <summary>
-        /// 2Dモデルの場合
-        /// </summary>
-        /// <param name="status"></param>
-        /// <param name="transform"></param>
-        public CharacterBase(Status status, Transform transform)
+        public CharacterBase(Status status, CollisionSphere collision,string textureName)
         {
             this.status = status;
-            this.transform = transform;
+            this.collision = collision;
+            this.textureName = textureName;
         }
 
         public abstract void Initialize();
 
-        public abstract void Update();
+        public abstract void Update(GameTime gameTime);
 
         public abstract void Attack();
 
-        public void Draw(GameDevice gamedevice)
+        public void Draw(Renderer renderer)
         {
-            Matrix world = Matrix.CreateTranslation(transform.position);
-            model.Draw(world, gamedevice.MainProjector.LookAt, gamedevice.MainProjector.Projection);
+            renderer.DrawPolygon(textureName, collision.Position, new Vector2(5, 5), motion.DrawingRange(), Color.White);
         }
 
         public bool IsDead()
         {
             return status.Health <= 0;
         }
-
+        public CollisionSphere Collision
+        {
+            get { return collision; }
+        }
         public abstract bool HitCheck(CharacterBase character);
     }
 }

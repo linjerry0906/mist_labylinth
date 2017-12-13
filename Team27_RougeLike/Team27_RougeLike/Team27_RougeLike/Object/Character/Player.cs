@@ -15,23 +15,18 @@ namespace Team27_RougeLike.Object.Character
         private Projector projector;
         private InputState input;
 
-        private CollisionSphere collision;
         private Vector3 velocity;
-        private readonly float MAX_SPEED = 0.3f;
         private float speed;
 
-        private Motion motion;
-
         public Player(Vector3 position, GameDevice gameDevice)
-            : base(new Status(5, 100, 50, 5, 5, 5), new Transform(position))
+            : base(new Status(5, 100, 50, 5, 5, 5), new CollisionSphere(position,2.5f),"test")
         {
             this.gameDevice = gameDevice;
             input = gameDevice.InputState;
             projector = gameDevice.MainProjector;
 
             tag = "Player";
-            collision = new CollisionSphere(transform.position, 2.5f);
-
+            
             velocity = Vector3.Zero;
             speed = 0;
 
@@ -43,7 +38,7 @@ namespace Team27_RougeLike.Object.Character
             motion.Initialize(new Range(0, 5), new Timer(0.1f));
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             Move();
 
@@ -61,22 +56,22 @@ namespace Team27_RougeLike.Object.Character
             speed = (speed > 0) ? speed - 0.01f : 0;
             if (input.GetKeyState(Keys.W))
             {
-                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
+                speed = (speed < status.MAX_SPEED) ? speed + 0.05f : status.MAX_SPEED;
                 velocity += projector.Front;
             }
             if (input.GetKeyState(Keys.S))
             {
-                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
+                speed = (speed < status.MAX_SPEED) ? speed + 0.05f : status.MAX_SPEED;
                 velocity += projector.Back;
             }
             if (input.GetKeyState(Keys.A))
             {
-                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
+                speed = (speed < status.MAX_SPEED) ? speed + 0.05f : status.MAX_SPEED;
                 velocity += projector.Left;
             }
             if (input.GetKeyState(Keys.D))
             {
-                speed = (speed < MAX_SPEED) ? speed + 0.05f : MAX_SPEED;
+                speed = (speed < status.MAX_SPEED) ? speed + 0.05f : status.MAX_SPEED;
                 velocity += projector.Right;
             }
             if (velocity.Length() > 0)
@@ -90,16 +85,7 @@ namespace Team27_RougeLike.Object.Character
             get { return collision.Position; }
         }
 
-        public void Draw()
-        {
-            gameDevice.Renderer.DrawPolygon("test", collision.Position, new Vector2(5, 5), motion.DrawingRange(), Color.White);
-        }
-
         public override void Initialize()
-        {
-        }
-
-        public override void Update()
         {
         }
 
@@ -110,11 +96,6 @@ namespace Team27_RougeLike.Object.Character
         public override bool HitCheck(CharacterBase character)
         {
             throw new NotImplementedException();
-        }
-
-        public CollisionSphere Collision
-        {
-            get { return collision; }
         }
     }
 }
