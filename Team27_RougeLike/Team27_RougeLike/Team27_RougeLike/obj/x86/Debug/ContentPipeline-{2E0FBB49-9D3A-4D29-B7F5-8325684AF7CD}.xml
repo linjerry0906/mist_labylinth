@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\test.xnb</Output>
-      <Time>2017-12-14T13:43:27.8777369+09:00</Time>
+      <Output>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\test.xnb</Output>
+      <Time>2017-12-14T14:23:29.5908219+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\cubeTest.jpg</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\cubeTest.xnb</Output>
-      <Time>2017-12-14T13:43:27.8747291+09:00</Time>
+      <Output>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\cubeTest.xnb</Output>
+      <Time>2017-12-14T14:23:29.5898204+09:00</Time>
     </Item>
     <Item>
       <Source>Font\basicFont.spritefont</Source>
@@ -25,8 +25,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2017-12-14T13:43:27.8717198+09:00</Time>
+      <Output>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
+      <Time>2017-12-14T14:23:29.520994+09:00</Time>
     </Item>
     <Item>
       <Source>Effect\blur.fx</Source>
@@ -34,8 +34,8 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\blur.xnb</Output>
-      <Time>2017-12-13T13:33:22.5224952+09:00</Time>
+      <Output>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\blur.xnb</Output>
+      <Time>2017-12-13T10:52:10.0172807+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -44,10 +44,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\</RootDirectory>
-      <LoggerRootDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\</RootDirectory>
+      <LoggerRootDirectory>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\</LoggerRootDirectory>
+      <IntermediateDirectory>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -75,8 +75,8 @@
         <Value>2011-09-01T16:22:30+09:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2017-11-16T16:49:35.7510569+09:00</Value>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2017-04-24T11:12:23.6482345+09:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

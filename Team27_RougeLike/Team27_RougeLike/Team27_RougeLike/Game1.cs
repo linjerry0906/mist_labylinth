@@ -72,9 +72,14 @@ namespace Team27_RougeLike
             // Create a new SpriteBatch, which can be used to draw textures.
 
             // TODO: use this.Content to load your game content here
-            //gameDevice.Renderer.LoadTexture("test");
-            //gameDevice.Renderer.LoadTexture("cubeTest");
             gameDevice.Renderer.LoadFont("basicFont", "./Font/");
+
+            //1ƒsƒNƒZƒ‹‰æ‘œ‚Ì¶¬
+            Texture2D fade = new Texture2D(GraphicsDevice, 1, 1);
+            Color[] date = new Color[1 * 1];
+            date[0] = new Color(0, 0, 0);
+            fade.SetData(date);
+            gameDevice.Renderer.LoadTexture("fade", fade);
         }
 
         /// <summary>

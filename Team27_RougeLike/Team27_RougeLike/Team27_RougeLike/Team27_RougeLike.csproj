@@ -102,6 +102,7 @@
     <Compile Include="Scene\LoadTown.cs" />
     <Compile Include="Scene\Town\Store.cs" />
     <Compile Include="Scene\Town\TownInfoLoader.cs" />
+    <Compile Include="UI\Window.cs" />
     <Compile Include="Utility\Angle.cs" />
     <Compile Include="Object\Character\CharacterBase.cs" />
     <Compile Include="Object\Character\CharacterManager.cs" />
@@ -149,9 +150,7 @@
       <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--
