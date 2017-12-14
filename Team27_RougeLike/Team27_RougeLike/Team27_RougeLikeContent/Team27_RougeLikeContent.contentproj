@@ -60,6 +60,11 @@
       <Name>EquipmentItems</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Model\ItemModel.fbx">
+      <Name>ItemModel</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
     <None Include="StageCSV\StageItem.csv">
       <Name>StageItem</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
