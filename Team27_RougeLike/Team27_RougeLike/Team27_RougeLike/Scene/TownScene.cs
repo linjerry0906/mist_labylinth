@@ -21,8 +21,6 @@ namespace Team27_RougeLike.Scene
         private Renderer renderer;
         private GameManager gameManager;
 
-        private Store stores;
-
         private bool endFlag;
         private bool isChanged;
 
@@ -49,7 +47,7 @@ namespace Team27_RougeLike.Scene
             }
 
             renderer.DrawString("Town\nPress D key to Dungeon", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
-            stores.DrawEquip();
+            renderer.DrawString("Press S key to ItemShop", new Vector2(0, 100), new Vector2(1, 1), new Color(1, 1, 1));
 
             if (!isChanged)
             {
@@ -63,11 +61,10 @@ namespace Team27_RougeLike.Scene
             endFlag = false;
             isChanged = false;
 
-            if (scene == SceneType.Pause)
+            if (scene == SceneType.Pause ||
+                scene == SceneType.ItemShop)
                 return;
 
-            stores = new Store(gameManager, gameDevice);
-            stores.Initialize();
             gameManager.InitStage(5 * 60, 1, 5, 20);
         }
 
@@ -105,6 +102,13 @@ namespace Team27_RougeLike.Scene
             if (input.GetKeyTrigger(Keys.P))
             {
                 nextScene = SceneType.Pause;
+                endFlag = true;
+                return;
+            }
+
+            if (input.GetKeyTrigger(Keys.S))
+            {
+                nextScene = SceneType.ItemShop;
                 endFlag = true;
                 return;
             }

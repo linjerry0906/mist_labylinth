@@ -12,6 +12,7 @@ namespace Team27_RougeLike.Scene
         Load,
         LoadTown,
         Town,
+        ItemShop,
         LoadMap,
         Dungeon,
         Boss,
