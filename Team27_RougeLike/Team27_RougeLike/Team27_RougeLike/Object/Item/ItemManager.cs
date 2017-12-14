@@ -291,7 +291,7 @@ namespace Team27_RougeLike.Object.Item
         {
             int id = new Random().Next(0, equipments.Count);
 
-            return equipments.Values.ToList<Item>()[id];
+            return equipments.Values.ToList<Item>()[id].Clone();
         }
 
         //Dictionary内からランダムに消費アイテムを送る
@@ -299,7 +299,7 @@ namespace Team27_RougeLike.Object.Item
         {
             int id = new Random().Next(0, consumptions.Count);
 
-            return consumptions.Values.ToList<Item>()[id];
+            return consumptions.Values.ToList<Item>()[id].Clone();
         }
 
         //Store用 装備アイテムListを送る

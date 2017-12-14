@@ -71,6 +71,7 @@
     <Compile Include="Device\Sound.cs" />
     <Compile Include="Device\TextureLoader.cs" />
     <Compile Include="Effects\BlurEffect.cs" />
+    <Compile Include="Map\MapItemManager.cs" />
     <Compile Include="Object\Box\DamageBox.cs" />
     <Compile Include="Object\Box\HitBoxBase.cs" />
     <Compile Include="Map\DungeonMap.cs" />
