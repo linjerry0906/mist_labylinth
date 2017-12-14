@@ -37,10 +37,11 @@ namespace Team27_RougeLike.Object.Character
         }
         public override void Update(GameTime gameTime)
         {
+            aiManager.Update();
         }
         public override void HitUpdate(Player player,GameTime gameTime)
         {
-            aiManager.Update(player);
+           ((IEnemyAI)aiManager).HitUpdate(player);
         }
     }
 }

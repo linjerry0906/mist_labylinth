@@ -7,9 +7,9 @@ namespace Team27_RougeLike.Object.AI
 {
     abstract class BaseAi
     {
-        protected EnemyBase actor;
+        protected CharacterBase actor;
 
-        public BaseAi(EnemyBase actor)
+        public BaseAi(CharacterBase actor)
         {
             this.actor = actor;
         }

@@ -13,7 +13,7 @@ namespace Team27_RougeLike.Object.AI
         private int coolTime;
 
         private int currenttime  = 0;
-        public AttackAi_CoolDown(EnemyBase actor,int coolTime)
+        public AttackAi_CoolDown(CharacterBase actor,int coolTime)
             :base (actor)
         {
             this.coolTime = coolTime;
@@ -26,7 +26,7 @@ namespace Team27_RougeLike.Object.AI
 
         public override void Exit()
         {
-            actor.AiManager.SetAttackAi(new AttackAi_Wait(actor));
+            actor.AiManager().SetAttackAi(new AttackAi_Wait(actor));
         }
 
         public override void Update()

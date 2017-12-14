@@ -1,5 +1,5 @@
 ﻿/////////////////////////////////////////////////////
-//・攻撃ＡＩ　攻撃タイミング
+//・攻撃ＡＩ　攻撃タイミング　一瞬判定を出す
 /////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Team27_RougeLike.Object.AI
         private int coolTime;
 
         private int currenttime = 0;
-        public AttackAi_Attack(EnemyBase actor,int attackTime,int coolTime)
+        public AttackAi_Attack(CharacterBase actor,int attackTime,int coolTime)
             :base (actor)
         {
             this.attackTime = attackTime;
@@ -24,11 +24,12 @@ namespace Team27_RougeLike.Object.AI
 
         public override void Enter()
         {
+            actor.Attack();
         }
 
         public override void Exit()
         {
-            actor.AiManager.SetAttackAi(new AttackAi_CoolDown(actor,coolTime));
+            actor.AiManager().SetAttackAi(new AttackAi_CoolDown(actor,coolTime));
         }
 
         public override void Update()

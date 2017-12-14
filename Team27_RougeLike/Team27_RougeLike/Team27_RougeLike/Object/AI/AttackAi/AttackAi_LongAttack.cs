@@ -1,5 +1,5 @@
 ﻿/////////////////////////////////////////////////////
-//・攻撃ＡＩ　タメ、予備動作中
+//・攻撃ＡＩ　攻撃タイミング　判定を出し続ける
 /////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
@@ -8,18 +8,15 @@ using System.Text;
 
 namespace Team27_RougeLike.Object.AI
 {
-    class AttackAi_Charge : BaseAi
+    class AttackAi_LongAttack : BaseAi
     {
-        private int chargeTime;
         private int attackTime;
         private int coolTime;
 
         private int currenttime = 0;
-
-        public AttackAi_Charge(CharacterBase actor,int chargeTime,int attackTime,int coolTime)
+        public AttackAi_LongAttack(CharacterBase actor,int attackTime,int coolTime)
             :base (actor)
         {
-            this.chargeTime = chargeTime;
             this.attackTime = attackTime;
             this.coolTime = coolTime;
             Enter();
@@ -27,21 +24,23 @@ namespace Team27_RougeLike.Object.AI
 
         public override void Enter()
         {
-
+            actor.Attack();
         }
 
         public override void Exit()
         {
-            actor.AiManager().SetAttackAi(new AttackAi_Attack(actor,attackTime,coolTime));
+            actor.AiManager().SetAttackAi(new AttackAi_CoolDown(actor,coolTime));
         }
 
         public override void Update()
         {
+            actor.Attack();
             currenttime++;
-            if (currenttime > chargeTime)
+            if (currenttime > attackTime)
             {
                 Exit();
             }
         }
+        
     }
 }

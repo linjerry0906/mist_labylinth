@@ -1,5 +1,5 @@
 ﻿/////////////////////////////////////////////////////
-//・状態ＡＩ　通常状態
+//・状態ＡＩ　通常状態　なにもしない
 /////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Team27_RougeLike.Object.AI
 {
     class StateAi_Normal : BaseAi
     {
-        public StateAi_Normal(EnemyBase actor)
+        public StateAi_Normal(CharacterBase actor)
             : base(actor)
         {
             Enter();
