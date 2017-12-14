@@ -19,17 +19,18 @@ namespace Team27_RougeLike.Scene
 
         private string[,] TextureList()
         {
-            string path = "./Texture";
+            string path = "./Texture/";
             string[,] list = new string[,]
             {
-
+                {"test" ,path},
+                {"cubeTest" ,path},
             };
             return list;
         }
 
         private string[,] BGMList()
         {
-            string path = "./BGM";
+            string path = "./BGM/";
             string[,] list = new string[,]
             {
 
@@ -38,7 +39,7 @@ namespace Team27_RougeLike.Scene
         }
         private string[,] SEMList()
         {
-            string path = "./SE";
+            string path = "./SE/";
             string[,] list = new string[,]
             {
 
@@ -77,6 +78,11 @@ namespace Team27_RougeLike.Scene
 
         public void Update(GameTime gameTime)
         {
+            textureLoader.Update();
+            bgmLoader.Update();
+            seLoader.Update();
+
+
             //読み込み処理が終わっていたらシーンを終了
             if (textureLoader.IsEnd() &&
                 bgmLoader.IsEnd() &&
@@ -90,8 +96,8 @@ namespace Team27_RougeLike.Scene
         public void Draw()
         {
             renderer.Begin();
-
-            //renderer.DrawTexture("load", Vector2.Zero);
+            
+            renderer.DrawString("ロード中", Vector2.Zero, Color.Black, new Vector2(1, 1));
 
             //読み込んでいる数を取得
             int currentCount = textureLoader.CurrentCount() +
@@ -100,9 +106,8 @@ namespace Team27_RougeLike.Scene
 
             if (totalResouceNum != 0)
             {
-                //renderer.DrawNumber("number",
-                //    new Vector2(0, 100),
-                //    (int)(currentCount / (float)totalResouceNum * 100));
+                renderer.DrawString(((int)(currentCount / (float)totalResouceNum * 100)).ToString(),
+                    new Vector2(0, 100), Color.Black, new Vector2(1, 1));
             }
 
             renderer.End();
@@ -116,7 +121,7 @@ namespace Team27_RougeLike.Scene
 
         public SceneType Next()
         {
-            return SceneType.Title;
+            return SceneType.LoadTown;
         }
 
         public bool IsEnd()

@@ -138,6 +138,13 @@ with.
 
 
       <!-- ち -->
+      
+      <!--ちゅう-->
+      <CharacterRegion>
+        <Start>中</Start>
+        <End>中</End>
+      </CharacterRegion>
+      
       <!-- ちょう -->
 
       <!-- つ -->

@@ -64,8 +64,6 @@ D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Tea
 D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.exe
 D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.pdb
-D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\test.xnb
-D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\cubeTest.xnb
 D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb
 D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\blur.xnb
 D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\ItemCSV\ConsumptionItems.csv
@@ -88,3 +86,5 @@ D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeL
 D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.exe
 D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Team27_RougeLike.pdb
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\test.xnb
+D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\cubeTest.xnb

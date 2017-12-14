@@ -50,13 +50,14 @@ namespace Team27_RougeLike
             IScene dungeon = new DungeonScene(gameManager, gameDevice);
             IScene boss = new BossScene(gameManager, gameDevice);
             IScene town = new TownScene(gameManager, gameDevice);
+            sceneManager.AddScene(SceneType.Load, new Load(gameDevice));
             sceneManager.AddScene(SceneType.LoadTown, new LoadTown(gameManager, gameDevice));
             sceneManager.AddScene(SceneType.Town, town);
             sceneManager.AddScene(SceneType.LoadMap, new LoadMap(gameManager, gameDevice));
             sceneManager.AddScene(SceneType.Dungeon, dungeon);
             sceneManager.AddScene(SceneType.Boss, boss);
             sceneManager.AddScene(SceneType.Pause, new PauseScene(dungeon, boss, town, gameManager, gameDevice));
-            sceneManager.Change(SceneType.LoadTown);
+            sceneManager.Change(SceneType.Load);
 
             base.Initialize();
         }
@@ -70,8 +71,8 @@ namespace Team27_RougeLike
             // Create a new SpriteBatch, which can be used to draw textures.
 
             // TODO: use this.Content to load your game content here
-            gameDevice.Renderer.LoadTexture("test");
-            gameDevice.Renderer.LoadTexture("cubeTest");
+            //gameDevice.Renderer.LoadTexture("test");
+            //gameDevice.Renderer.LoadTexture("cubeTest");
             gameDevice.Renderer.LoadFont("basicFont", "./Font/");
         }
 
