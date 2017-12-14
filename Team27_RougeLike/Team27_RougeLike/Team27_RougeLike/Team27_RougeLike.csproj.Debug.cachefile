@@ -1,7 +1,7 @@
-Content\Font\basicFont.xnb
-Content\Effect\blur.xnb
 Content\Texture\test.xnb
 Content\Texture\cubeTest.xnb
+Content\Font\basicFont.xnb
+Content\Effect\blur.xnb
 Content\ItemCSV\ConsumptionItems.csv
 Content\ItemCSV\EquipmentItems.csv
 Content\StageCSV\StageItem.csv

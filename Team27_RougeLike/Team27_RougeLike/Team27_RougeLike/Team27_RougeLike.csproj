@@ -94,6 +94,7 @@
     <Compile Include="Object\AI\MoveAi\MoveAi_Wait.cs" />
     <Compile Include="Object\AI\MoveAi\StateAi\StateAi_Normal.cs" />
     <Compile Include="Object\AI\MoveAi\StateAi\StateAi_Stun.cs" />
+    <Compile Include="Object\Item\Inventory.cs" />
     <Compile Include="Object\Item\Item3D.cs" />
     <Compile Include="Object\Item\ItemEffects\noEffect.cs" />
     <Compile Include="Scene\Load.cs" />
