@@ -286,6 +286,22 @@ namespace Team27_RougeLike.Object.Item
             return consumptions[id].Clone();
         }
 
+        //Dictionary内からランダムに装備アイテムを送る
+        public Item GetEquipmentItem()
+        {
+            int id = new Random().Next(0, equipments.Count);
+
+            return equipments.Values.ToList<Item>()[id];
+        }
+
+        //Dictionary内からランダムに消費アイテムを送る
+        public Item GetConsuptionitem()
+        {
+            int id = new Random().Next(0, consumptions.Count);
+
+            return consumptions.Values.ToList<Item>()[id];
+        }
+
         //Store用 装備アイテムListを送る
         public List<Item> GetEquipmentList()
         {
