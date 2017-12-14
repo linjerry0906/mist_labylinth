@@ -17,6 +17,7 @@ namespace Team27_RougeLike.Scene
     {
         //ToDo：
         //Player情報  --->Save情報
+        private Inventory playerItem;
         //Save機能
         //攻略進捗    --->Save情報
         private ItemManager itemManager;
@@ -39,6 +40,7 @@ namespace Team27_RougeLike.Scene
             stageManager.Initialize(5 * 60, 1, 1, 20);
 
             itemManager = new ItemManager();
+            playerItem = new Inventory();
         }
 
         #region Item関連
@@ -46,6 +48,11 @@ namespace Team27_RougeLike.Scene
         public ItemManager ItemManager
         {
             get { return itemManager; }
+        }
+
+        public Inventory PlayerItem
+        {
+            get { return playerItem; }
         }
 
         #endregion
