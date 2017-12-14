@@ -28,6 +28,9 @@ namespace Team27_RougeLike.Object
         }
         public Status() { }
 
+        /// <summary>
+        /// このステータスはレベル比例にしたいのでgetOnly
+        /// </summary>
         public int Attackspd { get { return attackspd; } }
         public float Movespeed { get { return velocity; } }
         public int BasePower { get { return basepower; } }

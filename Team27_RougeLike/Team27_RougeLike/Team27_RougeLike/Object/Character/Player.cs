@@ -93,6 +93,7 @@ namespace Team27_RougeLike.Object.Character
 
         public override void Attack()
         {
+            Debug.WriteLine("attack");
             characterManager.AddHitBox(new DamageBox(new BoundingSphere(Position, 10), 1, tag));
         }
 

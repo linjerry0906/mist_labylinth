@@ -120,7 +120,7 @@ namespace Team27_RougeLike.Object.Character
             return player;
         }
 
-        public List<CharacterBase> Characters()
+        public List<CharacterBase> GetCharacters()
         {
             return characters;
         }
