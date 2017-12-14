@@ -41,7 +41,6 @@ namespace Team27_RougeLike.Device
             // 現在のキーを最新のキーに
             currentMouse = mouseState;
             mousePosition = new Vector2(currentMouse.X, currentMouse.Y);
-            Debug.WriteLine(GetMousePosition());
         }
 
         /// <summary>
