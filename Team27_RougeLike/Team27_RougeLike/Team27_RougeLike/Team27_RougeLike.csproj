@@ -67,6 +67,7 @@
     <Compile Include="Device\Projector.cs" />
     <Compile Include="Device\Renderer.cs" />
     <Compile Include="Device\SaveData.cs" />
+    <Compile Include="Device\SaveLoad.cs" />
     <Compile Include="Device\SELoader.cs" />
     <Compile Include="Device\Sound.cs" />
     <Compile Include="Device\TextureLoader.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Object\AI\MoveAi\MoveAi_Wait.cs" />
     <Compile Include="Object\AI\MoveAi\StateAi\StateAi_Normal.cs" />
     <Compile Include="Object\AI\MoveAi\StateAi\StateAi_Stun.cs" />
+    <Compile Include="Object\Item\Inventory.cs" />
     <Compile Include="Object\Item\ItemEffects\noEffect.cs" />
     <Compile Include="Scene\Load.cs" />
     <Compile Include="Scene\LoadTown.cs" />
