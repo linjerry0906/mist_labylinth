@@ -31,6 +31,7 @@ namespace Team27_RougeLike.Device
         // Dictionaryで複数の画像を管理
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         private Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
+        private Dictionary<string, Model> models = new Dictionary<string, Model>();
 
         /// <summary>
         /// コンストラクタ
@@ -200,6 +201,37 @@ namespace Team27_RougeLike.Device
         #endregion
 
         #region 3D用
+
+        public void LoadModel(string name, string filepath = "./")
+        {
+            // ガード節 Dictionaryへの2重登録を回避
+            if (models.ContainsKey(name))
+            {
+#if DEBUG // DEBUGモードの時のみ有効
+                System.Console.WriteLine("この" + name + "はKeyで、すでに登録してます");
+#endif
+                // 処理終了
+                return;
+            }
+            // 画像の読み込みとDictionaryにアセット名と画像を追加
+            models.Add(name, contentManager.Load<Model>(filepath + name));
+        }
+
+        public void DrawModel(string name, Vector3 position)
+        {
+            Model drawModel = models[name];
+            foreach (ModelMesh m in drawModel.Meshes)
+            {
+                foreach(BasicEffect e in m.Effects)
+                {
+                    e.LightingEnabled = true;
+                    e.View = currentProjector.LookAt;
+                    e.Projection = currentProjector.Projection;
+                    e.World = Matrix.CreateTranslation(position);
+                }
+                m.Draw();
+            }
+        }
 
         /// <summary>
         /// DepthStencil, Cull, AlphaBlend, Color

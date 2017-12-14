@@ -73,6 +73,7 @@ namespace Team27_RougeLike
 
             // TODO: use this.Content to load your game content here
             gameDevice.Renderer.LoadFont("basicFont", "./Font/");
+            gameDevice.Renderer.LoadModel("ItemModel", "./Model/");
 
             //1ƒsƒNƒZƒ‹‰æ‘œ‚Ì¶¬
             Texture2D fade = new Texture2D(GraphicsDevice, 1, 1);

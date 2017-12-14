@@ -12,8 +12,8 @@ namespace Team27_RougeLike.Object.Item
         private Vector3 size = new Vector3(1, 0.5f, 1);
 
         private GameDevice gameDevice;
+        private Renderer renderer;
         private Item item;
-        private Cube cube;
         private CollisionSphere collision;
 
         public Item3D(GameDevice gameDevice, Item item, Vector3 position)
@@ -21,10 +21,8 @@ namespace Team27_RougeLike.Object.Item
             this.gameDevice = gameDevice;
             this.item = item;
 
-            cube = new Cube(position, size, gameDevice);
+            renderer = gameDevice.Renderer;
             collision = new CollisionSphere(position, 0.5f);
-
-            cube.SetColor(Color.Yellow);
         }
 
         public CollisionSphere Collisiton
@@ -39,7 +37,7 @@ namespace Team27_RougeLike.Object.Item
 
         public void Draw()
         {
-            cube.Draw();
+            renderer.DrawModel("ItemModel", collision.Position);
         }
     }
 }
