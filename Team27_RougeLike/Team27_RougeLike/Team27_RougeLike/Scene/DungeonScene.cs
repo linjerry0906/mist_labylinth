@@ -27,6 +27,7 @@ namespace Team27_RougeLike.Scene
         private SceneType nextScene;            //次のシーン
 
         private DungeonMap map;                 //マップ
+        private MapItemManager mapItemManager;
         
         private float angle = 0;
 
@@ -42,6 +43,7 @@ namespace Team27_RougeLike.Scene
         public void Draw()
         {
             map.Draw();                 //Mapの描画
+            mapItemManager.Draw();
             characterManager.Draw();
             map.DrawMiniMap();          //MiniMapの描画
 
@@ -86,6 +88,16 @@ namespace Team27_RougeLike.Scene
             }
 
             map.Initialize();                       //マップを初期化
+
+            mapItemManager = new MapItemManager(gameManager.ItemManager, gameDevice);
+            mapItemManager.Initialize();
+            int itemAmount = stageManager.CurrentFloor() / 10 + stageManager.CurrentFloor() % 5;
+            for (int i = 0; i < itemAmount; i++)
+            {
+                mapItemManager.AddItem(map.RandomSpace());
+                mapItemManager.AddEquip(map.RandomSpace());
+            }
+
             characterManager.Initialize(new Vector3(
                 map.EntryPoint.X * MapDef.TILE_SIZE,
                 MapDef.TILE_SIZE,
@@ -113,6 +125,9 @@ namespace Team27_RougeLike.Scene
             map.Clear();                            //マップ解放
             map = null;
             gameManager.ReleaseMap();
+
+            mapItemManager.Initialize();
+            mapItemManager = null;
         }
 
         public void Update(GameTime gameTime)

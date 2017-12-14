@@ -20,6 +20,7 @@ namespace Team27_RougeLike.Map
         private GameDevice gameDevice;      //Debug可視化用
 
         private List<Cube> mapBlocks;       //モデルに変更可
+        private List<Point> space;          //スペースのあるマス
         private int[,] mapChip;             //マップチップ
 
         private List<Cube> mapBlocksToDraw; //描画するマップ
@@ -39,6 +40,7 @@ namespace Team27_RougeLike.Map
             this.gameDevice = gameDevice;
 
             this.mapChip = mapChip;
+            space = new List<Point>();
             mapBlocks = new List<Cube>();
             mapBlocksToDraw = new List<Cube>();
 
@@ -76,6 +78,7 @@ namespace Team27_RougeLike.Map
                                 gameDevice);
                             c.SetColor(new Color(60, 60, 60));
                             mapBlocks.Add(c);
+                            space.Add(new Point(x, y));
                             break;
                         case (int)MapDef.BlockDef.Entry:
                             entryPoint = new Point(x, y);
@@ -312,6 +315,23 @@ namespace Team27_RougeLike.Map
                 c.DrawMiniMap();
             }
             gameDevice.Renderer.RenderMainProjector();      //メインプロジェクターに戻す
+        }
+
+        /// <summary>
+        /// 空地の座標を返す
+        /// </summary>
+        /// <returns></returns>
+        public Vector3 RandomSpace()
+        {
+            int index = gameDevice.Random.Next(0, space.Count);
+            Point spaceCell = space[index];
+            space.RemoveAt(index);
+
+            Vector3 position = new Vector3(
+                spaceCell.X * MapDef.TILE_SIZE, 
+                MapDef.TILE_SIZE / 2.0f, 
+                spaceCell.Y * MapDef.TILE_SIZE);
+            return position;
         }
     }
 }

@@ -76,6 +76,7 @@ namespace Team27_RougeLike.Scene
             if (!stageInfoLoader.IsItemLoad())
             {
                 stageInfoLoader.LoadFloorItem(gameManager.ItemManager, stageManager.CurrentFloor());
+                return;
             }
 
 
