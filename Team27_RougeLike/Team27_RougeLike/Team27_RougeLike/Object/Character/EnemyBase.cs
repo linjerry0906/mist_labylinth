@@ -17,15 +17,11 @@ namespace Team27_RougeLike.Object
         protected int hitRange;         //敵のUpdate範囲
         protected int Feeling;          //気分値
 
-
-        protected BaseAiManager aiManager;
-        public BaseAiManager AiManager { get { return aiManager; } }
-
         public EnemyBase(Status status, CollisionSphere collision, BaseAiManager AiType, string textureName,CharacterManager characterManager)
             : base(status, collision, textureName,characterManager)
         {
-            aiManager = AiType;
             tag = "Enemy";
+            aiManager = AiType;
         }
 
         public abstract override void Initialize();
@@ -36,7 +32,7 @@ namespace Team27_RougeLike.Object
         public bool SearchCheck(Player player) { return Distance(player) < searchRange; }
         public bool AttackCheck(Player player) { return Distance(player) < attackRange; }
         public bool WaitPointCheck(Player player) { return Distance(player) < waitRange; }
-        public override bool HitCheck(CharacterBase character)
+        public bool HitCheck(CharacterBase character)
         {
             return Vector2.Distance(new Vector2(character.Collision.Position.X, character.Collision.Position.Z), new Vector2(collision.Position.X, collision.Position.Z)) < hitRange;
         }

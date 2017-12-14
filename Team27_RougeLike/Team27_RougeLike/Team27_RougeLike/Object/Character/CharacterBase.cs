@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Utility;
 using Team27_RougeLike.Object.Character;
+using Team27_RougeLike.Object.AI;
 namespace Team27_RougeLike.Object
 {
     abstract class CharacterBase
@@ -17,8 +18,9 @@ namespace Team27_RougeLike.Object
         public float angle;          //向き
         public Status status;        //様々なパラメータ
         protected CollisionSphere collision;
-        protected Motion motion;
         protected CharacterManager characterManager;
+        protected BaseAiManager aiManager;
+        protected Motion motion;
 
         protected string textureName;//テクスチャ名
         protected string tag;        //敵味方　タグ分け
@@ -63,6 +65,9 @@ namespace Team27_RougeLike.Object
         {
             get { return collision; }
         }
-        public abstract bool HitCheck(CharacterBase character);
+        public BaseAiManager AiManager()
+        {
+            return aiManager;
+        }
     }
 }

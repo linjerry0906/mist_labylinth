@@ -12,7 +12,7 @@ namespace Team27_RougeLike.Object.AI
     {
         Vector3 targetPosition;
         float rad;        
-        public MoveAi_TargetMove(EnemyBase actor ,Vector3 targetPosition)
+        public MoveAi_TargetMove(CharacterBase actor ,Vector3 targetPosition)
             :base(actor)
         {
             Enter();

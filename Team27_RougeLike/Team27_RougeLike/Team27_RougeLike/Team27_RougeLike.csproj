@@ -67,6 +67,9 @@
     <Compile Include="Device\SaveData.cs" />
     <Compile Include="Device\Sound.cs" />
     <Compile Include="Effects\BlurEffect.cs" />
+    <Compile Include="Object\AI\AiManager\AiManager_Player.cs" />
+    <Compile Include="Object\AI\AiManager\IEnemyAi.cs" />
+    <Compile Include="Object\AI\AttackAi\AttackAi_LongAttack.cs" />
     <Compile Include="Object\Box\DamageBox.cs" />
     <Compile Include="Object\Box\HitBoxBase.cs" />
     <Compile Include="Map\DungeonMap.cs" />
@@ -88,8 +91,8 @@
     <Compile Include="Object\AI\MoveAi\MoveAi_Step.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_TargetMove.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_Wait.cs" />
-    <Compile Include="Object\AI\MoveAi\StateAi\StateAi_Normal.cs" />
-    <Compile Include="Object\AI\MoveAi\StateAi\StateAi_Stun.cs" />
+    <Compile Include="Object\AI\StateAi\StateAi_Normal.cs" />
+    <Compile Include="Object\AI\StateAi\StateAi_Stun.cs" />
     <Compile Include="Object\Item\ItemEffects\noEffect.cs" />
     <Compile Include="Utility\Angle.cs" />
     <Compile Include="Object\Character\CharacterBase.cs" />
@@ -108,7 +111,6 @@
     <Compile Include="Object\Item\ProtectionItem.cs" />
     <Compile Include="Object\Item\WeaponItem.cs" />
     <Compile Include="Object\Status.cs" />
-    <Compile Include="Object\Transform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />

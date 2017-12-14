@@ -31,7 +31,7 @@ namespace Team27_RougeLike.Object.Character
             hitBoxs.Clear();
             //デバッグ用、呼び出すときはプレイヤーを生成してから！
             AddPlayer(position);
-            AddCharacter(new TestSimpleMeleeEnemy(player.Collision.Position,this));
+            AddCharacter(new TestSimpleMeleeEnemy(player.Collision.Position, this));
             AddCharacter(new TestSimpleMeleeEnemy(new Vector3
                 (
                 player.Collision.Position.X + 4,
@@ -46,15 +46,20 @@ namespace Team27_RougeLike.Object.Character
             {
                 c.Update(gameTime);
 
-                if (c is EnemyBase && c.HitCheck(player))
+                if (c is EnemyBase)
                 {
-                    ((EnemyBase)c).HitUpdate(player, gameTime);
+                    //敵の距離によってアップデートを分けた
+                    if (((EnemyBase)c).HitCheck(player))
+                    {
+                        ((EnemyBase)c).HitUpdate(player, gameTime);
+                    }
                 }
             }
             foreach (var h in hitBoxs)
             {
                 foreach (var c in characters)
                 {
+                    //ヒットボックスのコリジョン内
                     if (h.HitCheck(c))
                     {
                         h.Effect(c);
@@ -88,7 +93,7 @@ namespace Team27_RougeLike.Object.Character
 
         public void AddPlayer(Vector3 position)
         {
-            player = new Player(position, gamedevice,this);
+            player = new Player(position, gamedevice, this);
             characters.Add(player);
         }
 

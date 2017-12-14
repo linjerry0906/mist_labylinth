@@ -1,5 +1,5 @@
 ﻿/////////////////////////////////////////////////////
-//・攻撃ＡＩ　攻撃可能、待機状態
+//・攻撃ＡＩ　攻撃可能、待機状態　何もしない
 /////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Team27_RougeLike.Object.AI
 {
     class AttackAi_Wait : BaseAi
     {
-        public AttackAi_Wait(EnemyBase actor)
+        public AttackAi_Wait(CharacterBase actor)
             :base(actor)
         {
             Enter();

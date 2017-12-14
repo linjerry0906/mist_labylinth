@@ -1,5 +1,5 @@
 ﻿/////////////////////////////////////////////////////
-//・移動ＡＩ　待機状態
+//・移動ＡＩ　待機状態　何もしない
 /////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Team27_RougeLike.Object.AI
 {
     class MoveAi_Wait : BaseAi
     {
-        public MoveAi_Wait(EnemyBase actor)
+        public MoveAi_Wait(CharacterBase actor)
             :base(actor)
         {
             Enter();

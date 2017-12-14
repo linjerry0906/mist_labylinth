@@ -11,7 +11,7 @@ namespace Team27_RougeLike.Object.AI
         protected BaseAi moveAi;
         protected BaseAi attackAi;
         protected BaseAi stateAi;
-        protected EnemyBase actor;
+        protected CharacterBase actor;
 
         public BaseAiManager()
         {
@@ -20,17 +20,13 @@ namespace Team27_RougeLike.Object.AI
             this.stateAi = new StateAi_Normal(actor);
         }
 
-        public virtual void Initialize(EnemyBase actor)
+        public virtual void Initialize(CharacterBase actor)
         {
             this.actor = actor;
         }
-
-        public virtual void Update(Player player)
+        public virtual void Update()
         {
             stateAi.Update();
-            //状態異常チェック
-            if (stateAi is StateAi_Stun) return;
-            
             moveAi.Update();
             attackAi.Update();
         }

@@ -14,7 +14,7 @@ namespace Team27_RougeLike.Object.AI
     class MoveAi_Chase : BaseAi
     {
         private Player player;
-        public MoveAi_Chase(EnemyBase actor, Player player)
+        public MoveAi_Chase(CharacterBase actor, Player player)
             : base(actor)
         {
             Enter();

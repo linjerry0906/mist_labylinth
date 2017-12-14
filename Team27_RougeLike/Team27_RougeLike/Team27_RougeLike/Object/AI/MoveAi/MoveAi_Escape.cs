@@ -14,7 +14,7 @@ namespace Team27_RougeLike.Object.AI
     class MoveAi_Escape : BaseAi
     {
         private Player player;
-        public MoveAi_Escape(EnemyBase actor, Player player)
+        public MoveAi_Escape(CharacterBase actor, Player player)
             : base(actor)
         {
             Enter();

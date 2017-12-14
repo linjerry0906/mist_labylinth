@@ -10,7 +10,7 @@ namespace Team27_RougeLike.Object.AI
 {
     class MoveAi_Step : BaseAi
     {
-        public MoveAi_Step(EnemyBase actor)
+        public MoveAi_Step(CharacterBase actor)
             :base(actor)
         {
             Enter();

@@ -11,7 +11,7 @@ namespace Team27_RougeLike.Object.AI
     class StateAi_Stun : BaseAi
     {
 
-        public StateAi_Stun(EnemyBase actor)
+        public StateAi_Stun(CharacterBase actor)
             :base(actor)
         {
             Exit();
