@@ -53,6 +53,7 @@ namespace Team27_RougeLike
             sceneManager.AddScene(SceneType.Load, new Load(gameDevice));
             sceneManager.AddScene(SceneType.LoadTown, new LoadTown(gameManager, gameDevice));
             sceneManager.AddScene(SceneType.Town, town);
+            sceneManager.AddScene(SceneType.ItemShop, new ItemShop(town, gameManager, gameDevice));
             sceneManager.AddScene(SceneType.LoadMap, new LoadMap(gameManager, gameDevice));
             sceneManager.AddScene(SceneType.Dungeon, dungeon);
             sceneManager.AddScene(SceneType.Boss, boss);
