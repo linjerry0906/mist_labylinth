@@ -99,11 +99,17 @@ namespace Team27_RougeLike.Device
             basicEffect.FogEnd = far;               //遠い距離を設定
         }
 
+        /// <summary>
+        /// モデルEffect用　Fogの開始点
+        /// </summary>
         public float Near
         {
             get { return near; }
         }
 
+        /// <summary>
+        /// モデルEffect用　Fogの終了点
+        /// </summary>
         public float Far
         {
             get { return far; }

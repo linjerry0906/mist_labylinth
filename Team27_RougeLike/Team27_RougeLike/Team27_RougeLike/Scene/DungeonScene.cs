@@ -27,7 +27,7 @@ namespace Team27_RougeLike.Scene
         private SceneType nextScene;            //次のシーン
 
         private DungeonMap map;                 //マップ
-        private MapItemManager mapItemManager;
+        private MapItemManager mapItemManager;  //マップ内に落ちているアイテムの管理者
         
         private float angle = 0;
 
@@ -158,7 +158,7 @@ namespace Team27_RougeLike.Scene
             stageManager.Update();              //時間やFog処理の更新
 
 
-            CheckEnd();         //プレイ終了をチェック
+            CheckEnd();                         //プレイ終了をチェック
         }
 
         /// <summary>
