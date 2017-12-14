@@ -37,7 +37,7 @@ namespace Team27_RougeLike.Object.Item
 
         public void Draw()
         {
-            renderer.DrawModel("ItemModel", collision.Position);
+            renderer.DrawModel("ItemModel", collision.Position, new Vector3(2, 2, 2), new Color(1.0f, 1.0f, 0.0f));
         }
     }
 }

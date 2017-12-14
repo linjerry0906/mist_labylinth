@@ -98,5 +98,15 @@ namespace Team27_RougeLike.Device
             basicEffect.FogStart = near;            //近い距離を設定
             basicEffect.FogEnd = far;               //遠い距離を設定
         }
+
+        public float Near
+        {
+            get { return near; }
+        }
+
+        public float Far
+        {
+            get { return far; }
+        }
     }
 }
