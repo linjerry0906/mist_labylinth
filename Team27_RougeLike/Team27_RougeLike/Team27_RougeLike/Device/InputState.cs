@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -15,7 +15,7 @@ namespace Team27_RougeLike.Device
         private KeyboardState previousKey;  // 1フレーム前のキー
         private MouseState currentMouse;    //現在のマウス
         private MouseState previousMouse;   //1フレーム前のマウス
-
+        private Vector2 mousePosition;      //マウスの位置
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -40,6 +40,8 @@ namespace Team27_RougeLike.Device
             previousMouse = currentMouse;
             // 現在のキーを最新のキーに
             currentMouse = mouseState;
+            mousePosition = new Vector2(currentMouse.X, currentMouse.Y);
+            Debug.WriteLine(GetMousePosition());
         }
 
         /// <summary>
@@ -131,6 +133,11 @@ namespace Team27_RougeLike.Device
             // キーボード状態の更新
             UpdateKey(keyState);
             UpdateMouse(mouseState);
+        }
+
+        public Vector2 GetMousePosition()
+        {
+            return mousePosition;
         }
     }
 }

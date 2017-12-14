@@ -89,6 +89,7 @@ namespace Team27_RougeLike.Object.Character
 
         public override void Initialize()
         {
+            
         }
 
         public override void Attack()
