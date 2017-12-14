@@ -96,8 +96,6 @@
     <Compile Include="Object\AI\MoveAi\MoveAi_Step.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_TargetMove.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_Wait.cs" />
-    <Compile Include="Object\AI\MoveAi\StateAi\StateAi_Normal.cs" />
-    <Compile Include="Object\AI\MoveAi\StateAi\StateAi_Stun.cs" />
     <Compile Include="Object\Item\Inventory.cs" />
     <Compile Include="Object\Item\Item3D.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Normal.cs" />
@@ -155,7 +153,9 @@
       <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Object\AI\MoveAi\StateAi\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--
