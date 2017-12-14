@@ -78,34 +78,64 @@ namespace Team27_RougeLike.UI
             renderer.End();
         }
 
-        public Vector2 GetOffsetPosition()
-        {
-            return offsetPosition;
-        }
-
+        //大きさ
         public Vector2 GetWindowSize()
         {
             return windowSize;
         }
 
-        public Vector2 GetCenter()
+        //左上
+        public Vector2 GetOffsetPosition()
         {
-            return offsetPosition + windowSize / 2;
+            return offsetPosition;
         }
 
+        //中央上
         public Vector2 GetCenterTop()
         {
             return offsetPosition + new Vector2(windowSize.X / 2, 0);
         }
 
+        //右上
         public Vector2 GetRightTop()
         {
             return offsetPosition + new Vector2(windowSize.X, 0);
         }
 
+        //左中央
+        public Vector2 GetLeftCenter()
+        {
+            return offsetPosition + new Vector2(0, windowSize.Y / 2);
+        }
+
+        //中央
+        public Vector2 GetCenter()
+        {
+            return offsetPosition + windowSize / 2;
+        }
+
+        //右中央
         public Vector2 GetRightCenter()
         {
             return offsetPosition + new Vector2(windowSize.X, windowSize.Y / 2);
+        }
+
+        //左下
+        public Vector2 GetLeftUnder()
+        {
+            return offsetPosition + new Vector2(0, windowSize.Y);
+        }
+
+        //中央下
+        public Vector2 GetCenterUnder()
+        {
+            return offsetPosition + new Vector2(windowSize.X / 2, windowSize.Y);
+        }
+
+        //右下
+        public Vector2 GetRightUnder()
+        {
+            return offsetPosition + windowSize;
         }
     }
 }
