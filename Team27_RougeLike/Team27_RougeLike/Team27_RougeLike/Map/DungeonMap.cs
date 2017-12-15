@@ -205,7 +205,16 @@ namespace Team27_RougeLike.Map
         }
 
         /// <summary>
-        /// Debug暫定　Todo：PlayerをCharacterに置き換える
+        /// 多数のキャラクターとあたり判定
+        /// </summary>
+        /// <param name="characters"></param>
+        public void MapCollision(List<CharacterBase> characters)
+        {
+            characters.ForEach(c => MapCollision(c));
+        }
+
+        /// <summary>
+        /// キャラクターとマップのあたり判定
         /// </summary>
         /// <param name="chara">チェックするキャラクター</param>
         public void MapCollision(CharacterBase chara)

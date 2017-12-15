@@ -130,7 +130,7 @@ namespace Team27_RougeLike.Scene
             map = null;
             gameManager.ReleaseMap();
 
-            mapItemManager.Initialize();
+            mapItemManager.Initialize();            //Item解放
             mapItemManager = null;
         }
 
@@ -139,7 +139,32 @@ namespace Team27_RougeLike.Scene
             if (endFlag)
                 return;
 
-            //Rotate Test
+            RotateCamera();
+
+            //Chara処理
+            characterManager.Update(gameTime);
+
+            //マップ処理
+            map.MapCollision(gameDevice.Renderer.MainProjector);
+            map.FocusCenter(characterManager.GetPlayer().Position);
+            map.Update();
+            map.MapCollision(characterManager.GetPlayer());
+            map.MapCollision(characterManager.GetCharacters());
+
+            //アイテム処理
+            mapItemManager.ItemCollision(characterManager.GetPlayer());
+
+            stageManager.Update();              //時間やFog処理の更新
+
+
+            CheckEnd();                         //プレイ終了をチェック
+        }
+
+        /// <summary>
+        /// カメラの回転
+        /// </summary>
+        private void RotateCamera()
+        {
             if (gameDevice.InputState.GetKeyState(Keys.Q))
             {
                 angle += 1;
@@ -151,20 +176,6 @@ namespace Team27_RougeLike.Scene
                 angle = (angle < 0) ? angle + 360 : angle;
             }
             gameDevice.MainProjector.Rotate(angle);
-
-            //Chara処理
-            characterManager.Update(gameTime);
-            map.MapCollision(gameDevice.Renderer.MainProjector);
-            map.FocusCenter(characterManager.GetPlayer().Position);
-            map.Update();
-            map.MapCollision(characterManager.GetPlayer());
-
-            mapItemManager.ItemCollision(characterManager.GetPlayer());
-
-            stageManager.Update();              //時間やFog処理の更新
-
-
-            CheckEnd();                         //プレイ終了をチェック
         }
 
         /// <summary>
