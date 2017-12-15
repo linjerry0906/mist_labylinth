@@ -64,6 +64,16 @@ namespace Team27_RougeLike.UI
             }
         }
 
+        public bool CurrentState()
+        {
+            return alphaSwitch;
+        }
+
+        public float CurrentAlpha()
+        {
+            return alpha;
+        }
+
         public bool IsEnd()
         {
             return alpha <= 0;
@@ -71,11 +81,7 @@ namespace Team27_RougeLike.UI
 
         public void Draw()
         {
-            renderer.Begin();
-
-            renderer.DrawTexture("black", offsetPosition, windowSize, alpha);
-
-            renderer.End();
+            renderer.DrawTexture("fade", offsetPosition, windowSize, alpha);
         }
 
         //大きさ

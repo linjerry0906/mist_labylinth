@@ -79,6 +79,16 @@ namespace Team27_RougeLike.Device
         {
             return currentMouse.LeftButton == button && previousMouse.LeftButton != button;   
         }
+
+        /// <summary>
+        /// マウスの左ボタンがクリックされたFrameか
+        /// </summary>
+        /// <returns></returns>
+        public bool IsLeftClick()
+        {
+            return currentMouse.LeftButton == ButtonState.Pressed && previousMouse.LeftButton == ButtonState.Released;
+        }
+
         /// <summary>
         /// 右マウスが押されているか
         /// </summary>

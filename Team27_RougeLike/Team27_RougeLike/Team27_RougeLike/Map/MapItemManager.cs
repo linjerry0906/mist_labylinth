@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework;
 using Team27_RougeLike.Object.Item;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Object;
+using Team27_RougeLike.UI;
 
 namespace Team27_RougeLike.Map
 {
@@ -44,7 +45,8 @@ namespace Team27_RougeLike.Map
         public void AddItem(Vector3 position)
         {
             Item itemInfo = itemManager.GetConsuptionitem();
-            Item3D addItem = new Item3D(gameDevice, itemInfo, position);
+            float size = 2;
+            Item3D addItem = new Item3D(gameDevice, itemInfo, position + new Vector3(0, size, 0));
             items.Add(addItem);
         }
 
@@ -55,7 +57,8 @@ namespace Team27_RougeLike.Map
         public void AddEquip(Vector3 position)
         {
             Item itemInfo = itemManager.GetEquipmentItem();
-            Item3D addItem = new Item3D(gameDevice, itemInfo, position);
+            float size = 2;
+            Item3D addItem = new Item3D(gameDevice, itemInfo, position + new Vector3(0, size, 0));
             items.Add(addItem);
         }
 
@@ -67,13 +70,18 @@ namespace Team27_RougeLike.Map
             items.ForEach(i => i.Draw());
         }
 
-        public void ItemCollision(CharacterBase chara)          //Todo：UI Panel追加し、表示処理
+        /// <summary>
+        /// Playerとアイテムのあたり判定
+        /// </summary>
+        /// <param name="chara">Player</param>
+        /// <param name="ui">UI表示用（）Debug</param>
+        public void ItemCollision(CharacterBase chara, DungeonPopUI ui)
         {
             items.ForEach(i => 
             {
-                if (i.Collisiton.IsCollision(chara.Collision.Collision))
+                if (chara.Collision.IsCollision(i.Collisiton))
                 {
-                    //UI表示処理
+                    ui.SetItemInfo(i.GetItem());                    //当たっていればUIに通知  ToDo：オブザーバーパターン
                     return;
                 }
             });

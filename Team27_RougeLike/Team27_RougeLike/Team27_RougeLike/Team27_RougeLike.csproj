@@ -106,6 +106,7 @@
     <Compile Include="Scene\LoadTown.cs" />
     <Compile Include="Scene\Town\Store.cs" />
     <Compile Include="Scene\Town\TownInfoLoader.cs" />
+    <Compile Include="UI\DungeonPopUI.cs" />
     <Compile Include="UI\Window.cs" />
     <Compile Include="Utility\Angle.cs" />
     <Compile Include="Object\Character\CharacterBase.cs" />

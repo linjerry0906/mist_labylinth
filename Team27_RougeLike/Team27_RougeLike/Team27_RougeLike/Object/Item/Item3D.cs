@@ -9,12 +9,12 @@ namespace Team27_RougeLike.Object.Item
 {
     class Item3D
     {
-        private Vector3 size = new Vector3(1, 0.5f, 1);
+        private Vector3 size = new Vector3(2.0f, 2.0f, 2.0f);
 
         private GameDevice gameDevice;
         private Renderer renderer;
         private Item item;
-        private CollisionSphere collision;
+        private Vector3 position;
 
         public Item3D(GameDevice gameDevice, Item item, Vector3 position)
         {
@@ -22,12 +22,12 @@ namespace Team27_RougeLike.Object.Item
             this.item = item;
 
             renderer = gameDevice.Renderer;
-            collision = new CollisionSphere(position, 0.5f);
+            this.position = position;
         }
 
-        public CollisionSphere Collisiton
+        public BoundingBox Collisiton
         {
-            get { return collision; }
+            get { return new BoundingBox(position - size, position + size); }
         }
 
         public Item GetItem()
@@ -37,7 +37,7 @@ namespace Team27_RougeLike.Object.Item
 
         public void Draw()
         {
-            renderer.DrawModel("ItemModel", collision.Position, new Vector3(2, 2, 2), new Color(1.0f, 1.0f, 0.0f));
+            renderer.DrawModel("ItemModel", position, size, new Color(1.0f, 1.0f, 0.0f));
         }
     }
 }
