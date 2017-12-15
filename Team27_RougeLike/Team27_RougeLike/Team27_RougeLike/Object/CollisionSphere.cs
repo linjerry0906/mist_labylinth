@@ -24,6 +24,8 @@ namespace Team27_RougeLike.Object
 
         private Vector3 position;   //位置
         private float radius;       //半径
+        private static readonly float GRAVITY = 9.8f;
+        private float gSpeed;
 
         /// <summary>
         /// 球状のCollision
@@ -34,6 +36,8 @@ namespace Team27_RougeLike.Object
         {
             this.position = position;
             this.radius = radius;
+
+            gSpeed = 0;
         }
 
         /// <summary>
@@ -80,6 +84,7 @@ namespace Team27_RougeLike.Object
                     break;
                 case Direction.Yplus:
                     position.Y = other.Max.Y + radius;
+                    gSpeed = 0;
                     break;
                 case Direction.Zminus:
                     while (IsCollision(other))
@@ -130,9 +135,15 @@ namespace Team27_RougeLike.Object
         /// </summary>
         /// <param name="velocity">方向</param>
         /// <param name="speed">スピード</param>
-        public void Force(Vector3 velocity, float speed)
+        /// <param name="gravity">重力適用するか</param>>
+        public void Force(Vector3 velocity, float speed, bool gravity = true)
         {
             position += velocity * speed;
+
+            if (!gravity)
+                return;
+            gSpeed += GRAVITY / 60.0f;
+            position.Y -= gSpeed;
         }
 
         /// <summary>

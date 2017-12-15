@@ -104,7 +104,7 @@ namespace Team27_RougeLike.Device
         private void Move(Vector3 velocity, float speed)
         {
             velocity.Normalize();
-            collision.Force(velocity, speed);        //移動
+            collision.Force(velocity, speed, false);        //移動
             target += (velocity * speed);
             lookat = Matrix.CreateLookAt(collision.Position, target, Vector3.Up);     //マトリクス更新
         }
@@ -127,7 +127,7 @@ namespace Team27_RougeLike.Device
                 (Matrix.CreateTranslation(baseDistance) *                             //目標との相対位置へ移動
                 Matrix.CreateRotationY(angle * (float)Math.PI / 180) *                //回転角度を指定角度へ
                 Matrix.CreateTranslation(target)).Translation;                      　//目標まで平行移動
-            collision.Force(position - collision.Position, 0.1f);                     //Collision移動
+            collision.Force(position - collision.Position, 0.1f, false);                     //Collision移動
             lookat = Matrix.CreateLookAt(collision.Position, target, Vector3.Up);     //マトリクス更新
         }
 
