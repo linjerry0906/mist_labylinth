@@ -94,7 +94,11 @@ namespace Team27_RougeLike.Scene
             int itemAmount = stageManager.CurrentFloor() / 10 + stageManager.CurrentFloor() % 5;
             for (int i = 0; i < itemAmount; i++)
             {
-                mapItemManager.AddItem(map.RandomSpace());
+                if (gameDevice.Random.Next(0, 101) < 70)
+                {
+                    mapItemManager.AddItem(map.RandomSpace());
+                    continue;
+                }
                 mapItemManager.AddEquip(map.RandomSpace());
             }
 
@@ -154,6 +158,8 @@ namespace Team27_RougeLike.Scene
             map.FocusCenter(characterManager.GetPlayer().Position);
             map.Update();
             map.MapCollision(characterManager.GetPlayer());
+
+            mapItemManager.ItemCollision(characterManager.GetPlayer());
 
             stageManager.Update();              //時間やFog処理の更新
 
