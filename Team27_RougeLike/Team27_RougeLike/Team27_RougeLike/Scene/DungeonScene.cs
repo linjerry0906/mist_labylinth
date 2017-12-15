@@ -24,7 +24,6 @@ namespace Team27_RougeLike.Scene
         private StageManager stageManager;      //ステージ管理者
         private CharacterManager characterManager;
         private bool endFlag;                   //終了フラグ
-        private bool isChanged;                 //シーンが完全に切り替えたフラグ
         private SceneType nextScene;            //次のシーン
 
         private DungeonMap map;                 //マップ
@@ -58,24 +57,17 @@ namespace Team27_RougeLike.Scene
         /// </summary>
         private void DrawUI()
         {
-            if (!isChanged)                     //シーンが切り替えたら別のシーンに任せる
-            {
-                renderer.Begin();
-            }
+            renderer.Begin();
 
             stageManager.DrawLimitTime();       //残り時間を表示
             popUI.Draw();                       //Popメッセージの描画
 
-            if (!isChanged)                     //シーンが切り替えたら別のシーンに任せる
-            {
-                renderer.End();
-            }
+            renderer.End();
         }
 
         public void Initialize(SceneType lastScene)
         {
             endFlag = false;                        //終了フラグ初期化
-            isChanged = false;                      //シーンの切り替えフラグ初期化
             nextScene = SceneType.LoadMap;
 
             if (lastScene == SceneType.Pause)       //Pauseから来た場合は以下のもの初期化しない
@@ -134,7 +126,6 @@ namespace Team27_RougeLike.Scene
 
         public void Shutdown()
         {
-            isChanged = true;                       //完全に切り替えたらTrue
             if (nextScene == SceneType.Pause)       //次のシーンがPauseだったら以下のものShutdownしない
                 return;
 
@@ -174,6 +165,16 @@ namespace Team27_RougeLike.Scene
             
 
             stageManager.Update();              //時間やFog処理の更新
+
+            //Camera Shake仮実装 ToDo:Class化
+            if (gameDevice.InputState.IsLeftClick())
+            {
+                Vector3 offset = new Vector3(
+                    gameDevice.Random.Next(-10, 10) / 50.0f,
+                    gameDevice.Random.Next(-10, 10) / 50.0f,
+                    gameDevice.Random.Next(-10, 10) / 50.0f);
+                gameDevice.MainProjector.Collision.Position += offset;
+            }
 
 
             CheckEnd();                         //プレイ終了をチェック

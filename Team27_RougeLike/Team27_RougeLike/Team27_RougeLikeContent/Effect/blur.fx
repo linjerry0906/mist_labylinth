@@ -28,10 +28,6 @@ struct VertexShaderOutput
 {
 	float4 Position : POSITION0;
 	float2 TexUV0 : TEXCOORD0;
-	float2 TexUV1 : TEXCOORD1;
-	float2 TexUV2 : TEXCOORD2;
-	float2 TexUV3 : TEXCOORD3;
-	float2 TexUV4 : TEXCOORD4;
 
 	// TODO: add vertex shader outputs such as colors and texture
 	// coordinates here. These values will automatically be interpolated
@@ -44,28 +40,26 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 
 	output.Position = mul(input.Position, Projection);
 
-	output.TexUV0 = input.TexUV + float2(BlurRate, 0);
-	output.TexUV1 = input.TexUV + float2(-BlurRate, 0);
-	output.TexUV2 = input.TexUV + float2(0, BlurRate);
-	output.TexUV3 = input.TexUV + float2(0, -BlurRate);
-	output.TexUV4 = input.TexUV + float2(0, 0);
+	output.TexUV0 = input.TexUV;
 
 	return output;
 }
 
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
-	float4 Color = tex2D(MainSampler, input.TexUV0 + float2(offsetX, offsetY)) / 5.0f;
+	float4 Color = 0;
 
-	Color += tex2D(MainSampler, input.TexUV1 + float2(offsetX, offsetY)) / 5.0f;
+	Color += tex2D(MainSampler, input.TexUV0 + float2(offsetX, offsetY) + float2(-BlurRate, -BlurRate));
+	Color += tex2D(MainSampler, input.TexUV0 + float2(offsetX, offsetY) + float2(0, -BlurRate));
+	Color += tex2D(MainSampler, input.TexUV0 + float2(offsetX, offsetY) + float2(BlurRate, -BlurRate));
+	Color += tex2D(MainSampler, input.TexUV0 + float2(offsetX, offsetY) + float2(-BlurRate, 0));
+	Color += tex2D(MainSampler, input.TexUV0 + float2(offsetX, offsetY) + float2(0, 0));
+	Color += tex2D(MainSampler, input.TexUV0 + float2(offsetX, offsetY) + float2(BlurRate, 0));
+	Color += tex2D(MainSampler, input.TexUV0 + float2(offsetX, offsetY) + float2(-BlurRate, BlurRate));
+	Color += tex2D(MainSampler, input.TexUV0 + float2(offsetX, offsetY) + float2(0, BlurRate));
+	Color += tex2D(MainSampler, input.TexUV0 + float2(offsetX, offsetY) + float2(BlurRate, BlurRate));
 
-	Color += tex2D(MainSampler, input.TexUV2 + float2(offsetX, offsetY)) / 5.0f;
-
-	Color += tex2D(MainSampler, input.TexUV3 + float2(offsetX, offsetY)) / 5.0f;
-
-	Color += tex2D(MainSampler, input.TexUV4) / 5.0f;
-
-	return Color;
+	return Color / 9;
 }
 
 technique Technique1

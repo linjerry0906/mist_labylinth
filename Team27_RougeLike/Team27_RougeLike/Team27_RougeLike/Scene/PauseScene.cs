@@ -47,7 +47,6 @@ namespace Team27_RougeLike.Scene
         public void Draw()
         {
             blurEffect.WriteRenderTarget(renderer.FogManager.CurrentColor());
-            renderer.Begin();
             switch (nextScene)               //背景は前のシーンを描画
             {
                 case SceneType.Dungeon:
@@ -60,7 +59,6 @@ namespace Team27_RougeLike.Scene
                     bossScene.Draw();
                     break;
             }
-            renderer.End();
             blurEffect.ReleaseRenderTarget();
             blurEffect.Draw(renderer);
 
@@ -107,12 +105,12 @@ namespace Team27_RougeLike.Scene
         {
             if (endFlag)
             {
-                blurRate -= 0.03f;
+                blurRate -= 0.05f;
                 return;
             }
 
-            if (blurRate < 0.8f)
-                blurRate += 0.03f;
+            if (blurRate < 0.6f)
+                blurRate += 0.05f;
         }
     }
 }
