@@ -207,15 +207,15 @@ namespace Team27_RougeLike.Map
         /// <summary>
         /// Debug暫定　Todo：PlayerをCharacterに置き換える
         /// </summary>
-        /// <param name="player"></param>
-        public void MapCollision(Player player)
+        /// <param name="chara">チェックするキャラクター</param>
+        public void MapCollision(CharacterBase chara)
         {
-            float floatX = ((MapDef.TILE_SIZE / 2.0f + player.Position.X) / MapDef.TILE_SIZE);      //そのマスの左右半分
-            float floatZ = ((MapDef.TILE_SIZE / 2.0f + player.Position.Z) / MapDef.TILE_SIZE);      //そのマスの上下半分
-            int x = (int)((MapDef.TILE_SIZE / 2.0f + player.Position.X) / MapDef.TILE_SIZE);        //マス：X
-            int z = (int)((MapDef.TILE_SIZE / 2.0f + player.Position.Z) / MapDef.TILE_SIZE);        //マス：Y
+            float floatX = ((MapDef.TILE_SIZE / 2.0f + chara.Collision.Position.X) / MapDef.TILE_SIZE);      //そのマスの左右半分
+            float floatZ = ((MapDef.TILE_SIZE / 2.0f + chara.Collision.Position.Z) / MapDef.TILE_SIZE);      //そのマスの上下半分
+            int x = (int)((MapDef.TILE_SIZE / 2.0f + chara.Collision.Position.X) / MapDef.TILE_SIZE);        //マス：X
+            int z = (int)((MapDef.TILE_SIZE / 2.0f + chara.Collision.Position.Z) / MapDef.TILE_SIZE);        //マス：Y
             //判定半径（キャラクターのサイズにより違う）
-            int collisionRange = (int)(player.Collision.Radius * 2 / MapDef.TILE_SIZE) + 1;
+            int collisionRange = (int)(chara.Collision.Radius * 2 / MapDef.TILE_SIZE) + 1;
             Point checkDir = new Point(0, 0);           //判定基準点
             if (floatX - x > 0.5f)      //int型を引くと値は0～1まで　判定方向もわかる
                 checkDir.X = 0;         //右半分と判定する場合は基準変動なし
@@ -240,9 +240,9 @@ namespace Team27_RougeLike.Map
                     if (mapchipX < 0 || mapchipX > mapChip.GetLength(1) - 1)     //エラー対策
                         continue;
                     int index = mapchipZ * mapChip.GetLength(1) + mapchipX;      //添え字を計算
-                    if (player.Collision.IsCollision(mapBlocks[index].Collision))       //当たっていれば
+                    if (chara.Collision.IsCollision(mapBlocks[index].Collision))       //当たっていれば
                     {
-                        player.Collision.Hit(mapBlocks[index].Collision);       　//キャラクターの位置修正
+                        chara.Collision.Hit(mapBlocks[index].Collision);       　//キャラクターの位置修正
                     }
                 }
             }
