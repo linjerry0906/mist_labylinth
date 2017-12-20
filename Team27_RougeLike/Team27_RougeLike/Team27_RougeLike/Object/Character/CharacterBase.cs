@@ -1,10 +1,8 @@
-﻿//////////////////////////
-///・作成者　飯泉 
-//////////////////////////
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Device;
@@ -26,25 +24,37 @@ namespace Team27_RougeLike.Object
         protected string tag;        //敵味方　タグ分け
 
         protected Vector3 velocity;
-        protected float speed;
 
-        public string Tag { get{ return tag; }}
+        public string Tag { get { return tag; } }
 
-        public CharacterBase(Status status, CollisionSphere collision,string textureName,CharacterManager characterManager)
+        public CharacterBase(Status status, CollisionSphere collision, string textureName, CharacterManager characterManager)
         {
             this.status = status;
             this.collision = collision;
             this.textureName = textureName;
             this.characterManager = characterManager;
             velocity = Vector3.Zero;
-            speed = 0;
         }
 
         public abstract void Initialize();
 
         public virtual void Update(GameTime gameTime)
         {
-            collision.Force(-Vector3.UnitY, 1 / 6.0f);
+            collision.Force(-Vector3.UnitY, 1 / 6.0f);   //Y軸減衰
+
+            if (Math.Abs(velocity.X) < 0.01f)
+            {
+                velocity.X = 0;
+            }
+            if (Math.Abs(velocity.Z) < 0.01f)
+            {
+                velocity.Z = 0;
+            }
+            var v = velocity;
+            v.Y = 0;
+            velocity -= v * 0.1f;
+
+            collision.Force(velocity, status.Movespeed, true);//移動
         }
 
         public abstract void Attack();
@@ -69,5 +79,11 @@ namespace Team27_RougeLike.Object
         {
             return aiManager;
         }
+        public Vector3 Velocity
+        {
+            get { return velocity; }
+            set { velocity = value; }
+        }
+
     }
 }

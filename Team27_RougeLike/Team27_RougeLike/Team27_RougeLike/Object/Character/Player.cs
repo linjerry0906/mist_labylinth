@@ -20,7 +20,7 @@ namespace Team27_RougeLike.Object.Character
         private InputState input;
 
         public Player(Vector3 position, GameDevice gameDevice, CharacterManager characterManager)
-            : base(new Status(5, 100, 50, 5, 5, 5), new CollisionSphere(position, 2.5f), "test", characterManager)
+            : base(new Status(5, 100, 50, 5, 5, 0.3f), new CollisionSphere(position, 2.5f), "test", characterManager)
         {
             tag = "Player";
 
@@ -40,46 +40,15 @@ namespace Team27_RougeLike.Object.Character
 
         public override void Update(GameTime gameTime)
         {
-            collision.Force(velocity, speed);
-
+            base.Update(gameTime);
             projector.Trace(collision.Position);
             gameDevice.Renderer.MiniMapProjector.Trace(collision.Position);
-
             motion.Update(gameTime);
             aiManager.Update();
         }
 
         public void Move()
         {
-            speed = (speed > 0) ? speed - 0.01f : 0;
-            if (input.GetKeyState(Keys.W))
-            {
-                speed = (speed < status.MAX_SPEED) ? speed + 0.05f : status.MAX_SPEED;
-                velocity += projector.Front;
-            }
-            if (input.GetKeyState(Keys.S))
-            {
-                speed = (speed < status.MAX_SPEED) ? speed + 0.05f : status.MAX_SPEED;
-                velocity += projector.Back;
-            }
-            if (input.GetKeyState(Keys.A))
-            {
-                speed = (speed < status.MAX_SPEED) ? speed + 0.05f : status.MAX_SPEED;
-                velocity += projector.Left;
-            }
-            if (input.GetKeyState(Keys.D))
-            {
-                speed = (speed < status.MAX_SPEED) ? speed + 0.05f : status.MAX_SPEED;
-                velocity += projector.Right;
-            }
-            if (velocity.Length() > 0)
-            {
-                velocity.Normalize();
-            }
-            if (gameDevice.InputState.GetKeyState(Keys.LeftShift))
-            {
-                velocity = velocity * 1.5f;
-            }
         }
 
         public Vector3 Position
@@ -94,10 +63,13 @@ namespace Team27_RougeLike.Object.Character
 
         public override void Attack()
         {
-            Debug.WriteLine("attack");
-            characterManager.AddHitBox(new DamageBox(new BoundingSphere(Position, 10), 1, tag));
+            characterManager.AddHitBox(new DamageBox(new BoundingSphere(Position, 10), 1, tag,status.BasePower));
         }
 
+        public Projector Projecter
+        {
+            get { return projector; }
+        }
         public void Stop()
         {
             velocity = Vector3.Zero;

@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\test.xnb</Output>
-      <Time>2017-12-14T15:39:57.3945676+09:00</Time>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\test.xnb</Output>
+      <Time>2017-12-14T15:57:16.4441367+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\cubeTest.jpg</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\cubeTest.xnb</Output>
-      <Time>2017-12-14T15:39:57.3935517+09:00</Time>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\cubeTest.xnb</Output>
+      <Time>2017-12-14T15:57:16.4431336+09:00</Time>
     </Item>
     <Item>
       <Source>Font\basicFont.spritefont</Source>
@@ -25,8 +25,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2017-12-14T15:39:57.3865449+09:00</Time>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
+      <Time>2017-12-14T15:57:16.4280936+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -34,11 +34,11 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Model\ItemModel.xnb</Output>
-      <Time>2017-12-14T21:20:07.5088557+09:00</Time>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Model\ItemModel.xnb</Output>
+      <Time>2017-12-14T15:57:16.43411+09:00</Time>
       <Dependency>
-        <Key>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\ItemModel_0.xml</Key>
-        <Value>2017-12-14T23:33:51.9079231+09:00</Value>
+        <Key>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\ItemModel_0.xml</Key>
+        <Value>2017-12-20T09:10:35.4730046+09:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -47,15 +47,15 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\blur.xnb</Output>
-      <Time>2017-12-16T00:52:36.8717901+09:00</Time>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\blur.xnb</Output>
+      <Time>2017-12-20T09:04:47.1469559+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\ItemModel_0.xml</Output>
-      <Time>2017-12-14T21:20:07.5088557+09:00</Time>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\ItemModel_0.xml</Output>
+      <Time>2017-12-14T15:57:16.43411+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -64,10 +64,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\</RootDirectory>
-      <LoggerRootDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -96,7 +96,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2017-11-16T16:49:35.7510569+09:00</Value>
+        <Value>2017-11-17T20:01:38.0605973+09:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
