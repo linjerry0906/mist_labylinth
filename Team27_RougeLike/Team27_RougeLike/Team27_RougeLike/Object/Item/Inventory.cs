@@ -68,6 +68,50 @@ namespace Team27_RougeLike.Object.Item
         }
 
         /// <summary>
+        /// 左手に装備する
+        /// </summary>
+        /// <param name="bagIndex"></param>
+        public void EquipLeftHand(int bagIndex)
+        {
+            Item item = bag[bagIndex];
+            if (!(item is WeaponItem))
+            {
+                return;
+            }
+
+            if (leftHand != null)                 //装備している状態
+            {
+                bag.Add(leftHand);                //バッグに戻す
+            }
+            leftHand = (WeaponItem)item;          //装備する
+            bag.Remove(bag[bagIndex]);
+        }
+
+        /// <summary>
+        /// 右手に装備する
+        /// </summary>
+        /// <param name="bagIndex"></param>
+        public void EquipRightHand(int bagIndex)
+        {
+            Item item = bag[bagIndex];
+            if (!(item is WeaponItem))
+            {
+                return;
+            }
+
+            WeaponItem.WeaponType type = ((WeaponItem)item).GetWeaponType();
+            if (type == WeaponItem.WeaponType.Bow)  //右手は弓を装備できない
+                return;
+
+            if (rightHand != null)                 //装備している状態
+            {
+                bag.Add(rightHand);                //バッグに戻す
+            }
+            leftHand = (WeaponItem)item;           //装備する
+            bag.Remove(bag[bagIndex]);
+        }
+
+        /// <summary>
         /// バッグ内のアイテム
         /// </summary>
         /// <returns></returns>
@@ -107,6 +151,33 @@ namespace Team27_RougeLike.Object.Item
             power += rightHand.GetPower();
             defence += rightHand.GetDefense();
             weight += rightHand.GetItemWeight();
+        }
+
+        /// <summary>
+        /// 装備している防具
+        /// </summary>
+        /// <returns></returns>
+        public ProtectionItem[] CurrentArmor()
+        {
+            return armor;
+        }
+
+        /// <summary>
+        /// 左手に装備している武器
+        /// </summary>
+        /// <returns></returns>
+        public WeaponItem LeftHand()
+        {
+            return leftHand;
+        }
+
+        /// <summary>
+        /// 右手に装備している武器
+        /// </summary>
+        /// <returns></returns>
+        public WeaponItem RightHand()
+        {
+            return rightHand;
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Map;
+using Team27_RougeLike.Object;
 using Team27_RougeLike.Object.Item;
 
 namespace Team27_RougeLike.Scene
@@ -17,6 +18,7 @@ namespace Team27_RougeLike.Scene
     {
         //ToDo：
         //Player情報  --->Save情報
+        private PlayerStatus playerStatus;
         private Inventory playerItem;
         //Save機能
         //攻略進捗    --->Save情報
@@ -40,7 +42,13 @@ namespace Team27_RougeLike.Scene
             stageManager.Initialize(5 * 60, 1, 1, 20);
 
             itemManager = new ItemManager();
-            playerItem = new Inventory();
+
+            PlayerStatusLoader psLoader = new PlayerStatusLoader();
+            int[] status = psLoader.LoadStatus();
+            Status defaultStatus = new Status(1, status[0], status[1], status[2], status[3], 1);
+            playerStatus = new PlayerStatus(defaultStatus);
+
+            
         }
 
         #region Item関連
@@ -48,11 +56,6 @@ namespace Team27_RougeLike.Scene
         public ItemManager ItemManager
         {
             get { return itemManager; }
-        }
-
-        public Inventory PlayerItem
-        {
-            get { return playerItem; }
         }
 
         #endregion
