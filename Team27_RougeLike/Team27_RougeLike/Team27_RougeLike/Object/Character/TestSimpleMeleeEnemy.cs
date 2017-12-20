@@ -12,7 +12,7 @@ namespace Team27_RougeLike.Object.Character
     class TestSimpleMeleeEnemy : EnemyBase
     {
         public TestSimpleMeleeEnemy(Vector3 position,CharacterManager characterManager)
-            : base(new Status(5, 100, 50, 5, 5, 0.3f), new CollisionSphere(position,5.0f), new AiManager_Fool(),"test",characterManager)
+            : base(new Status(5, 100, 50, 5, 5, 0.3f), new CollisionSphere(position,5.0f), new AiManager_Fool(),"bat",characterManager)
         {
             hitRange = 100;
             searchRange = 50;
@@ -20,11 +20,11 @@ namespace Team27_RougeLike.Object.Character
             aiManager.Initialize(this);
 
             motion = new Motion();
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 3; i++)
             {
                 motion.Add(i, new Rectangle(i * 64, 0, 64, 64));
             }
-            motion.Initialize(new Range(0, 5), new Timer(0.1f));
+            motion.Initialize(new Range(0, 2), new Timer(0.02f));
         }
 
         public override void Initialize()
@@ -42,6 +42,7 @@ namespace Team27_RougeLike.Object.Character
         }
         public override void HitUpdate(Player player,GameTime gameTime)
         {
+            motion.Update(gameTime);
            ((IEnemyAI)aiManager).HitUpdate(player);
         }
     }
