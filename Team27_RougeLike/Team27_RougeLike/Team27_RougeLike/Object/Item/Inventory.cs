@@ -14,12 +14,22 @@ namespace Team27_RougeLike.Object.Item
     {
         private static readonly int MaxItemCount = 25;      //Bagのサイズ
         private List<Item> bag;                             //Bagの内容
-        private List<Item> equipments;                      //装備している物
+
+        private ProtectionItem[] armor;
+        private WeaponItem rightHand;
+        private WeaponItem leftHand;
+
 
         public Inventory()
         {
             bag = new List<Item>();
-            equipments = new List<Item>();
+            armor = new ProtectionItem[4];
+            for (int i = 0; i < armor.Length; i++)
+            {
+                armor[i] = null;
+            }
+            rightHand = null;
+            leftHand = null;
         }
 
         /// <summary>
@@ -42,7 +52,7 @@ namespace Team27_RougeLike.Object.Item
         /// <param name="bagIndex">バッグ内のIndex</param>
         public void Equip(int bagIndex)
         {
-            equipments.Add(bag[bagIndex]);
+            //equipments.Add(bag[bagIndex]);
             bag.Remove(bag[bagIndex]);
         }
 
@@ -55,13 +65,6 @@ namespace Team27_RougeLike.Object.Item
             return bag;
         }
 
-        /// <summary>
-        /// 装備しているアイテム
-        /// </summary>
-        /// <returns></returns>
-        public List<Item> Equipments()
-        {
-            return equipments;
-        }
+        
     }
 }
