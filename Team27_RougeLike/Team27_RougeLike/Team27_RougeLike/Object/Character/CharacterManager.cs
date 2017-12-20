@@ -42,16 +42,24 @@ namespace Team27_RougeLike.Object.Character
 
         public void Update(GameTime gameTime)
         {
-            foreach (var c in characters)
+            foreach (var c1 in characters)
             {
-                c.Update(gameTime);
+                c1.Update(gameTime);
 
-                if (c is EnemyBase)
+                if (c1 is EnemyBase)
                 {
                     //敵の距離によってアップデートを分けた
-                    if (((EnemyBase)c).HitCheck(player))
+                    if (((EnemyBase)c1).HitCheck(player))
                     {
-                        ((EnemyBase)c).HitUpdate(player, gameTime);
+                        ((EnemyBase)c1).HitUpdate(player, gameTime);
+                    }
+                }
+
+                foreach (var c2 in characters)
+                {
+                    if (c2.Collision.IsCollision(c1.Collision.Collision))
+                    {
+                        //キャラクター同士の移動制限処理
                     }
                 }
             }

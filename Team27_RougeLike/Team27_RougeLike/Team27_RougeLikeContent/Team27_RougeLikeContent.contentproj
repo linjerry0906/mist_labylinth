@@ -50,7 +50,9 @@
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="EnemyCSV\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="ItemCSV\ConsumptionItems.csv">
       <Name>ConsumptionItems</Name>
