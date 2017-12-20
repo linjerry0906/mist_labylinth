@@ -5,5 +5,6 @@ Content\Model\ItemModel.xnb
 Content\Effect\blur.xnb
 Content\ItemCSV\ConsumptionItems.csv
 Content\ItemCSV\EquipmentItems.csv
+Content\PlayerCSV\PlayerStatus.csv
 Content\StageCSV\StageItem.csv
 Content\StoreItemCSV\StoreItem.csv
