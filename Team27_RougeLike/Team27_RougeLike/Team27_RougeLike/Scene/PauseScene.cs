@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Effects;
+using Team27_RougeLike.UI;
 
 namespace Team27_RougeLike.Scene
 {
@@ -30,6 +31,8 @@ namespace Team27_RougeLike.Scene
 
         private SceneType nextScene;            //次のシーン
         private bool endFlag;                   //終了フラグ
+
+        private PauseUI ui;
 
         public PauseScene(IScene dungeon, IScene boss, IScene town, GameManager gameManager, GameDevice gameDevice)
         {
@@ -62,11 +65,11 @@ namespace Team27_RougeLike.Scene
             blurEffect.ReleaseRenderTarget();
             blurEffect.Draw(renderer);
 
+
             renderer.Begin();
-            renderer.DrawString(
-                "Pause",
-                new Vector2(Def.WindowDef.WINDOW_WIDTH / 2, Def.WindowDef.WINDOW_HEIGHT / 2),
-                new Color(0.2f, 0.2f, 0.9f), new Vector2(2, 2), 0.9f, true, true);
+
+            ui.Draw();
+
             renderer.End();
         }
 
@@ -76,6 +79,8 @@ namespace Team27_RougeLike.Scene
             nextScene = scene;
 
             blurRate = 0.0f;
+
+            ui = new PauseUI(gameManager, gameDevice);
         }
 
         public bool IsEnd()
@@ -90,27 +95,40 @@ namespace Team27_RougeLike.Scene
 
         public void Shutdown()
         {
+            ui = null;
         }
 
         public void Update(GameTime gameTime)
         {
             if (input.GetKeyTrigger(Keys.P))
-                endFlag = true;
+                ui.SwitchOff();
+
+            ui.Update();
 
             UpdateBlurRate();
-            blurEffect.Update(blurRate);
+
+            CheckSceneEnd();
         }
 
         private void UpdateBlurRate()
         {
-            if (endFlag)
+            if (ui.IsEnd())
             {
                 blurRate -= 0.05f;
+                blurEffect.Update(blurRate);
                 return;
             }
 
             if (blurRate < 0.6f)
                 blurRate += 0.05f;
+
+            blurEffect.Update(blurRate);
+        }
+
+        private void CheckSceneEnd()
+        {
+            if (blurRate <= 0.0f)
+                endFlag = true;
         }
     }
 }

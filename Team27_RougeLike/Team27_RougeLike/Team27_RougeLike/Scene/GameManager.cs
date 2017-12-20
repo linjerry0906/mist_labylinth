@@ -47,9 +47,22 @@ namespace Team27_RougeLike.Scene
             int[] status = psLoader.LoadStatus();
             Status defaultStatus = new Status(1, status[0], status[1], status[2], status[3], 1);
             playerStatus = new PlayerStatus(defaultStatus);
+            playerStatus.Initialize();
 
             playerItem = playerStatus.GetInventory();                     //道具欄を取得
         }
+
+        #region Player関連
+
+        /// <summary>
+        /// Playerの現在情報を取得
+        /// </summary>
+        public PlayerStatus PlayerInfo
+        {
+            get { return playerStatus; }
+        }
+
+        #endregion
 
         #region Item関連
 

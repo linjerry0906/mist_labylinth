@@ -139,18 +139,26 @@ namespace Team27_RougeLike.Object.Item
 
             foreach (ProtectionItem p in armor)
             {
+                if (p == null)
+                    continue;
                 power += p.GetPower();
                 defence += p.GetDefense();
                 weight += p.GetItemWeight();
             }
 
-            power += leftHand.GetPower();
-            defence += leftHand.GetDefense();
-            weight += leftHand.GetItemWeight();
+            if (leftHand != null)
+            {
+                power += leftHand.GetPower();
+                defence += leftHand.GetDefense();
+                weight += leftHand.GetItemWeight();
+            }
 
-            power += rightHand.GetPower();
-            defence += rightHand.GetDefense();
-            weight += rightHand.GetItemWeight();
+            if (rightHand != null)
+            {
+                power += rightHand.GetPower();
+                defence += rightHand.GetDefense();
+                weight += rightHand.GetItemWeight();
+            }
         }
 
         /// <summary>

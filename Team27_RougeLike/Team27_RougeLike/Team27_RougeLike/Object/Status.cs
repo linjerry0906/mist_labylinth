@@ -41,6 +41,10 @@ namespace Team27_RougeLike.Object
             get { return health; }
             set { health = value; }
         }
+        public int MaxHealth
+        {
+            get { return maxhealth; }
+        }
         public void LevelUp()
         {
             level++;
