@@ -7,6 +7,6 @@ namespace Team27_RougeLike.Object.AI
 { 
     interface IEnemyAI
     {
-        void HitUpdate(Player player);
+        void NearUpdate(Player player);
     }
 }

@@ -1,0 +1,4 @@
+ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd
+1,test,10,5,1,0.3,Fool,3,1
+2,test,20,3,2,0.1,Fool,10,1
+3,test,10,3,2,0.4,Fool,1,1

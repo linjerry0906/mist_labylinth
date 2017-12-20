@@ -20,7 +20,7 @@ namespace Team27_RougeLike.Object.AI
             base.Initialize(actor);
         }
 
-        public void HitUpdate(Player player)
+        public void NearUpdate(Player player)
         {
             //敵専用ＡＩなので事前に変換しておく
             EnemyBase enemyActor = (EnemyBase)actor;    
@@ -35,7 +35,7 @@ namespace Team27_RougeLike.Object.AI
             }
             else
             {
-
+                moveAi = new MoveAi_Wait(actor);
             }
             #endregion
 

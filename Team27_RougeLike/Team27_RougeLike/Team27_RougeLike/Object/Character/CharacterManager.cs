@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Object.Box;
+using Team27_RougeLike.Object.AI;
 namespace Team27_RougeLike.Object.Character
 {
     class CharacterManager
@@ -18,11 +20,17 @@ namespace Team27_RougeLike.Object.Character
         private List<HitBoxBase> hitBoxs = new List<HitBoxBase>();
         private Player player;
 
-        private const int drawLength = 100;
+        private Dictionary<int, EnemyBase> enemys = new Dictionary<int, EnemyBase>();
+
+        private string enemyFilename;
+        private const int drawLength = 120;
+
 
         public CharacterManager(GameDevice gamedevice)
         {
             this.gamedevice = gamedevice;
+            enemyFilename = @"Content/" + "EnemysCSV/Enemy.csv";
+            Load();
         }
 
         public void Initialize(Vector3 position)
@@ -31,13 +39,19 @@ namespace Team27_RougeLike.Object.Character
             hitBoxs.Clear();
             //デバッグ用、呼び出すときはプレイヤーを生成してから！
             AddPlayer(position);
-            AddCharacter(new TestSimpleMeleeEnemy(player.Collision.Position, this));
-            AddCharacter(new TestSimpleMeleeEnemy(new Vector3
-                (
-                player.Collision.Position.X + 4,
+            AddCharacter(enemys[1].Clone(player.Collision.Position));
+            AddCharacter(enemys[2].Clone(new Vector3
+                (player.Collision.Position.X + 4,
                 player.Collision.Position.Y,
-                player.Collision.Position.Z + 4
-                ), this));
+                player.Collision.Position.Z + 8
+                )));
+            AddCharacter(enemys[2].Clone(player.Collision.Position));
+            AddCharacter(enemys[3].Clone(new Vector3
+                         (
+                         player.Collision.Position.X + 4,
+                         player.Collision.Position.Y,
+                         player.Collision.Position.Z + 4
+                         )));
         }
 
         public void Update(GameTime gameTime)
@@ -49,17 +63,9 @@ namespace Team27_RougeLike.Object.Character
                 if (c1 is EnemyBase)
                 {
                     //敵の距離によってアップデートを分けた
-                    if (((EnemyBase)c1).HitCheck(player))
+                    if (NearPlayer(c1))
                     {
-                        ((EnemyBase)c1).HitUpdate(player, gameTime);
-                    }
-                }
-
-                foreach (var c2 in characters)
-                {
-                    if (c2.Collision.IsCollision(c1.Collision.Collision))
-                    {
-                        //キャラクター同士の移動制限処理
+                        ((EnemyBase)c1).NearUpdate(player, gameTime);
                     }
                 }
             }
@@ -115,7 +121,7 @@ namespace Team27_RougeLike.Object.Character
         /// </summary>
         /// <param name="character"></param>
         /// <returns></returns>
-        public bool NearPlayer(CharacterBase character)
+        private bool NearPlayer(CharacterBase character)
         {
             //if (player == null) return false;         エラーチェック　デバッグのため未実装
             //if (player.IsDead()) return false;
@@ -131,6 +137,45 @@ namespace Team27_RougeLike.Object.Character
         public List<CharacterBase> GetCharacters()
         {
             return characters;
+        }
+
+        private void Load()
+        {
+            FileStream datefs = new FileStream(enemyFilename, FileMode.Open);
+            StreamReader enemDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
+
+            //ごみ捨て
+
+            var Dust = enemDate.ReadLine();
+
+            while (!enemDate.EndOfStream)
+            {
+                var line = enemDate.ReadLine();
+                string[] data = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var id = int.Parse(data[0]);
+                var name = data[1];
+                var health = int.Parse(data[2]);
+                var attack = int.Parse(data[3]);
+                var diffence = int.Parse(data[4]);
+                var speed = float.Parse(data[5]);
+                var aiType = data[6];
+                var size = int.Parse(data[7]);
+                var attackspd = int.Parse(data[8]);
+                enemys.Add
+                    (
+                    id,
+                    new EnemyBase
+                        (
+                        new Status(1, health, attack, diffence, attackspd, speed),
+                        new CollisionSphere(Vector3.Zero, size),
+                        aiType,
+                        name,
+                        this
+                        )
+                    );
+            }
+
+            enemDate.Close();
         }
     }
 }

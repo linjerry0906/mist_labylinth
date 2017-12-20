@@ -14,7 +14,6 @@ namespace Team27_RougeLike.Object.Character
         public TestSimpleMeleeEnemy(Vector3 position,CharacterManager characterManager)
             : base(new Status(5, 100, 50, 5, 5, 0.3f), new CollisionSphere(position,5.0f), new AiManager_Fool(),"test",characterManager)
         {
-            hitRange = 100;
             searchRange = 50;
             attackRange = 10;
             aiManager.Initialize(this);
@@ -32,17 +31,15 @@ namespace Team27_RougeLike.Object.Character
         }
         public override void Attack()
         {
-            var targetPosition = new Vector2(angle);
-            
         }
         public override void Update(GameTime gameTime)
         {
             aiManager.Update();
             base.Update(gameTime);
         }
-        public override void HitUpdate(Player player,GameTime gameTime)
+        public override void NearUpdate(Player player,GameTime gameTime)
         {
-           ((IEnemyAI)aiManager).HitUpdate(player);
+           ((IEnemyAI)aiManager).NearUpdate(player);
         }
     }
 }
