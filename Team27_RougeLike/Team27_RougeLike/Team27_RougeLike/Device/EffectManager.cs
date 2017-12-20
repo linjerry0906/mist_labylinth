@@ -28,6 +28,7 @@ namespace Team27_RougeLike.Device
         private BasicEffect miniMapEffect;      //MiniMap描画用のEffect
 
         private BlurEffect blurEffect;          //BlurEffect
+        private PolygonEffect polygonEffect;    //透明のポリゴン用のEffect
 
         /// <summary>
         /// Effectを管理するクラス
@@ -49,6 +50,9 @@ namespace Team27_RougeLike.Device
                 graphicsDevice,
                 contents.Load<Effect>("./Effect/blur"));
             blurEffect.Initialize();                        //初期化
+
+            polygonEffect = new PolygonEffect(
+                contents.Load<Effect>("./Effect/polygon"));
         }
 
         /// <summary>
@@ -83,6 +87,15 @@ namespace Team27_RougeLike.Device
         public BlurEffect GetBlurEffect()
         {
             return blurEffect;
+        }
+
+        /// <summary>
+        /// PolygonEffectを取得
+        /// </summary>
+        /// <returns></returns>
+        public PolygonEffect GetPolygonEffect()
+        {
+            return polygonEffect;
         }
     }
 }
