@@ -30,9 +30,7 @@ namespace Team27_RougeLike.Object.AI
         }
 
         public override void Update()
-        {
-            if (PlessMoveKey())
-            {
+        {   
                 Vector3 velocity = Vector3.Zero;
                 if (inputState.GetKeyState(Keys.W))
                 {
@@ -51,18 +49,17 @@ namespace Team27_RougeLike.Object.AI
                     velocity += projector.Right;
                 }
 
-                velocity.Normalize();
+                if (velocity.LengthSquared() != 0)
+                {
+                    velocity.Normalize();
+                }
 
                 if (inputState.GetKeyState(Keys.LeftShift))
                 {
-                    actor.Velocity = actor.Velocity * 1.5f;
+                    velocity = velocity * 1.5f;
                 }
                 actor.Velocity = velocity;
-            }
-        }
-        public bool PlessMoveKey()
-        {
-            return (inputState.GetKeyState(Keys.A) || inputState.GetKeyState(Keys.W) || inputState.GetKeyState(Keys.S) || inputState.GetKeyState(Keys.D));
+            
         }
     }
 }
