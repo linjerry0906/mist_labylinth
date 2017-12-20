@@ -48,7 +48,7 @@ namespace Team27_RougeLike.Scene
             Status defaultStatus = new Status(1, status[0], status[1], status[2], status[3], 1);
             playerStatus = new PlayerStatus(defaultStatus);
 
-            
+            playerItem = playerStatus.GetInventory();
         }
 
         #region Item関連
@@ -56,6 +56,11 @@ namespace Team27_RougeLike.Scene
         public ItemManager ItemManager
         {
             get { return itemManager; }
+        }
+
+        public Inventory PlayerItem
+        {
+            get { return playerItem; }
         }
 
         #endregion
