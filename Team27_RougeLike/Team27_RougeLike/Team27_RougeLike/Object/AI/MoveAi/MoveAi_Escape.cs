@@ -14,6 +14,7 @@ namespace Team27_RougeLike.Object.AI
     class MoveAi_Escape : BaseAi
     {
         private Player player;
+        private Vector3 velocity;
         public MoveAi_Escape(CharacterBase actor, Player player)
             : base(actor)
         {
@@ -30,17 +31,9 @@ namespace Team27_RougeLike.Object.AI
 
         public override void Update()
         {
-            actor.angle = Angle.CheckAngle(player.Collision.Position, actor.Collision.Position);
-            var dx = Math.Cos(actor.angle * Math.PI / 180) * actor.status.Movespeed;
-            var dz = Math.Sin(actor.angle * Math.PI / 180) * actor.status.Movespeed;
-            
-            actor.Collision.Position = new Vector3
-                (
-                actor.Collision.Position.X - (float)dx,
-                actor.Collision.Position.Y,
-                actor.Collision.Position.Z - (float)dz
-                );
-
+            velocity = player.Collision.Position - actor.Collision.Position;
+            velocity.Normalize();
+            actor.Velocity = -velocity;
         }
     }
 }

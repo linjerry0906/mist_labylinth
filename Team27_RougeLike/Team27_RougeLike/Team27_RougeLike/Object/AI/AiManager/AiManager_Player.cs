@@ -27,9 +27,20 @@ namespace Team27_RougeLike.Object.AI
             //プレイヤー専用ＡＩなので事前に変換しておく
             Player playerActor = (Player)actor;
             base.Update();
-            if(attackAi is AttackAi_Wait)
+
+
+            if (PlessMoveKey() && !(moveAi is MoveAi_PlayerMove))
             {
-                playerActor.Move();
+                moveAi = new MoveAi_PlayerMove(actor, inputState, playerActor.Projecter);
+            }
+
+            if (!PlessMoveKey() && !(moveAi is MoveAi_Wait))
+            {
+                moveAi = new MoveAi_Wait(actor);
+            }
+
+            if (attackAi is AttackAi_Wait)
+            {
             }
             else
             {
@@ -39,6 +50,11 @@ namespace Team27_RougeLike.Object.AI
             {
                 SetAttackAi(new AttackAi_Charge(actor, 15, 1, 50));
             }
+        }
+
+        public bool PlessMoveKey()
+        {
+            return (inputState.GetKeyState(Keys.A) || inputState.GetKeyState(Keys.W) || inputState.GetKeyState(Keys.S) || inputState.GetKeyState(Keys.D));
         }
     }
 }

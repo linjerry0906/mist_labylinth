@@ -11,19 +11,19 @@ namespace Team27_RougeLike.Object
         private int level;                     //現在レベル
         private int health;                    //体力現在値
         private int maxhealth;                 //体力最大値
-        private int basepower;                 //装備無　攻撃力
-        private int basearmor;                 //装備無　防御力
+        private int basePower;                 //装備無　攻撃力
+        private int baseDiffence;              //装備無　防御力
         private int attackspd;                 //攻撃速度
-        private float velocity;                //移動速度 
-        private float maxSpeed = 0.3f;         //限界移動速度
-        public Status(int level, int maxhealth, int power, int armor, int attackspd, float velocity)
+        private float speed;                   //移動速度 
+        private float maxSpeed = 0.6f;         //限界移動速度
+        public Status(int level, int maxhealth, int basePower, int baseDiffence, int attackspd, float speed)
         {
             this.level = level;
             this.maxhealth = maxhealth;
             this.health = this.maxhealth;
-            this.basepower = power;
-            this.basearmor = armor;
-            this.velocity = velocity;
+            this.basePower = basePower;
+            this.baseDiffence = baseDiffence;
+            this.speed = speed;
             this.attackspd = attackspd;
         }
         public Status() { }
@@ -32,16 +32,14 @@ namespace Team27_RougeLike.Object
         /// このステータスはレベル比例にしたいのでgetOnly
         /// </summary>
         public int Attackspd { get { return attackspd; } }
-        public float Movespeed { get { return velocity; } }
-        public int BasePower { get { return basepower; } }
-        public int BaseArmor { get { return basearmor; } }
+        public float Movespeed { get { return speed; } }
+        public int BasePower { get { return basePower; } }
+        public int BaseArmor { get { return baseDiffence; } }
         public int Level { get { return level; } }
         public int Health
         {
-            get
-            { return health; }
-            set
-            { health = value; }
+            get { return health; }
+            set { health = value; }
         }
         public void LevelUp()
         {
@@ -52,5 +50,6 @@ namespace Team27_RougeLike.Object
             level = 1;
         }
         public float MAX_SPEED { get { return maxSpeed; } }
+        public float Speed {get { return speed; } set{ if (value > MAX_SPEED) { speed = MAX_SPEED; } else { speed = value; } } }
     }
 }

@@ -26,7 +26,10 @@ namespace Team27_RougeLike.Object
 
         public abstract override void Initialize();
         public abstract override void Attack();
-        public abstract override void Update(GameTime gameTime);
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+        }
         public abstract void HitUpdate(Player player, GameTime gameTime);
         public int Distance(Player player) { return (int)Vector2.Distance(new Vector2(player.Collision.Position.X, player.Collision.Position.Z), new Vector2(collision.Position.X, collision.Position.Z)); }
         public bool SearchCheck(Player player) { return Distance(player) < searchRange; }
