@@ -12,7 +12,7 @@ namespace Team27_RougeLike.Object.Item
 {
     class Inventory
     {
-        private readonly int MaxItemCount = 2;       //Bagのサイズ
+        private readonly int MaxItemCount = 25;       //Bagのサイズ
         private List<Item> bag;                             //Bagの内容
 
         private ProtectionItem[] armor;
