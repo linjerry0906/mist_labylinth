@@ -18,11 +18,11 @@ namespace Team27_RougeLike.Scene
     {
         //ToDo：
         //Player情報  --->Save情報
-        private PlayerStatus playerStatus;
-        private Inventory playerItem;
+        private PlayerStatus playerStatus;  //Playerのステータス
+        private Inventory playerItem;       //Playerが持つアイテム
         //Save機能
         //攻略進捗    --->Save情報
-        private ItemManager itemManager;
+        private ItemManager itemManager;    //Item Dictionary
 
         private GameDevice gameDevice;
 
@@ -53,11 +53,17 @@ namespace Team27_RougeLike.Scene
 
         #region Item関連
 
+        /// <summary>
+        /// ItemDictionary
+        /// </summary>
         public ItemManager ItemManager
         {
             get { return itemManager; }
         }
 
+        /// <summary>
+        /// Playerの道具欄
+        /// </summary>
         public Inventory PlayerItem
         {
             get { return playerItem; }

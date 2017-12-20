@@ -31,7 +31,7 @@ namespace Team27_RougeLike.Scene
         
         private float angle = 0;                //カメラ回転角度
 
-        private DungeonPopUI popUI;             //Popメッセージ
+        private DungeonUI ui;             //Popメッセージ
 
         public DungeonScene(GameManager gameManager, GameDevice gameDevice)
         {
@@ -60,7 +60,7 @@ namespace Team27_RougeLike.Scene
             renderer.Begin();
 
             stageManager.DrawLimitTime();       //残り時間を表示
-            popUI.Draw();                       //Popメッセージの描画
+            ui.Draw();                          //UIの描画
 
             renderer.End();
         }
@@ -86,17 +86,17 @@ namespace Team27_RougeLike.Scene
             #endregion
 
             #region Item初期化
-            mapItemManager = new MapItemManager(gameManager.ItemManager, gameDevice);
+            mapItemManager = new MapItemManager(gameManager, gameDevice);
             mapItemManager.Initialize();
             int itemAmount = stageManager.CurrentFloor() / 10 + stageManager.CurrentFloor() % 5;    //初期落ちているアイテムの数
             itemAmount = gameDevice.Random.Next(0, itemAmount);
             for (int i = 0; i < itemAmount; i++)
             {
-                //if (gameDevice.Random.Next(0, 101) < 70)            //70%が使用アイテム
-                //{
-                //    mapItemManager.AddItem(map.RandomSpace());
-                //    continue;
-                //}
+                if (gameDevice.Random.Next(0, 101) < 70)            //70%が使用アイテム
+                {
+                    mapItemManager.AddItem(map.RandomSpace());
+                    continue;
+                }
                 mapItemManager.AddEquip(map.RandomSpace());         //30％が装備
             }
             #endregion
@@ -111,7 +111,7 @@ namespace Team27_RougeLike.Scene
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
             #endregion
 
-            popUI = new DungeonPopUI(gameManager, gameDevice);
+            ui = new DungeonUI(gameManager, gameDevice);
         }
 
         public bool IsEnd()
@@ -136,7 +136,7 @@ namespace Team27_RougeLike.Scene
             mapItemManager.Initialize();            //Item解放
             mapItemManager = null;
 
-            popUI = null;
+            ui = null;
         }
 
         public void Update(GameTime gameTime)
@@ -144,8 +144,8 @@ namespace Team27_RougeLike.Scene
             if (endFlag)
                 return;
 
-            popUI.Update();
-            if (popUI.IsPop())                   //メッセージ表示中は以下Updateしない
+            ui.Update();
+            if (ui.IsPop())                   //メッセージ表示中は以下Updateしない
                 return;
 
             RotateCamera();
@@ -161,7 +161,7 @@ namespace Team27_RougeLike.Scene
             map.MapCollision(characterManager.GetCharacters());
 
             //アイテム処理
-            mapItemManager.ItemCollision(characterManager.GetPlayer(), popUI);
+            mapItemManager.ItemCollision(characterManager.GetPlayer(), ui);
             
 
             stageManager.Update();              //時間やFog処理の更新

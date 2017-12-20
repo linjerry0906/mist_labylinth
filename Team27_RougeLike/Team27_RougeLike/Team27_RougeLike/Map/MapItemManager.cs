@@ -8,10 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Object.Item;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Object;
 using Team27_RougeLike.UI;
+using Team27_RougeLike.Scene;
 
 namespace Team27_RougeLike.Map
 {
@@ -20,11 +22,12 @@ namespace Team27_RougeLike.Map
         private List<Item3D> items;         //落ちているアイテム
         private GameDevice gameDevice;
         private ItemManager itemManager;    //アイテムデータベース
+        private Inventory playerItem;
 
-
-        public MapItemManager(ItemManager itemManager, GameDevice gameDevice)
+        public MapItemManager(GameManager gameManager, GameDevice gameDevice)
         {
-            this.itemManager = itemManager;
+            itemManager = gameManager.ItemManager;
+            playerItem = gameManager.PlayerItem;
             this.gameDevice = gameDevice;
 
             items = new List<Item3D>();
@@ -75,16 +78,45 @@ namespace Team27_RougeLike.Map
         /// </summary>
         /// <param name="chara">Player</param>
         /// <param name="ui">UI表示用（）Debug</param>
-        public void ItemCollision(CharacterBase chara, DungeonPopUI ui)
+        public void ItemCollision(CharacterBase chara, DungeonUI ui)
         {
+            int index = 0;
+            DungeonHintUI hint = ui.HintUI;
+            hint.Switch(false);                     //UIを非表示
+
             items.ForEach(i => 
             {
                 if (chara.Collision.IsCollision(i.Collisiton))
                 {
-                    ui.SetItemInfo(i.GetItem());                    //当たっていればUIに通知  ToDo：オブザーバーパターン
+                    
+                    hint.Switch(true);              //当たっていれば表示
+                    hint.SetMessage("Press Space to get item");     //表示するメッセージ
+                    bool result = false;
+                    if (hint.IsPush(Keys.Space))    //拾ったらもらう処理
+                    {
+                        result = GetItem(index);
+                    }
+                    if (result)                     //道具欄に追加成功したらメッセージをOFF
+                        hint.Switch(false);
+
                     return;
                 }
+                index++;
             });
+        }
+
+        /// <summary>
+        /// Itemをもらう処理
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        private bool GetItem(int index)
+        {
+            if (!playerItem.AddItem(items[index].GetItem()))
+                return false;
+
+            items.RemoveAt(index);
+            return true;
         }
     }
 }
