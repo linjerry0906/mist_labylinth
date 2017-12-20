@@ -113,6 +113,7 @@
     <Compile Include="UI\DungeonHintUI.cs" />
     <Compile Include="UI\DungeonPopUI.cs" />
     <Compile Include="UI\DungeonUI.cs" />
+    <Compile Include="UI\PauseUI.cs" />
     <Compile Include="UI\Window.cs" />
     <Compile Include="Utility\Angle.cs" />
     <Compile Include="Object\Character\CharacterBase.cs" />
