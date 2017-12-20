@@ -13,6 +13,7 @@ namespace Team27_RougeLike.Object.AI
     {
         private InputState inputState;
         private Projector projector;
+        private Vector3 velocity;
         public MoveAi_PlayerMove(CharacterBase actor, InputState input, Projector projector)
             : base(actor)
         {
@@ -30,36 +31,34 @@ namespace Team27_RougeLike.Object.AI
         }
 
         public override void Update()
-        {   
-                Vector3 velocity = Vector3.Zero;
-                if (inputState.GetKeyState(Keys.W))
-                {
-                    velocity += projector.Front;
-                }
-                if (inputState.GetKeyState(Keys.S))
-                {
-                    velocity += projector.Back;
-                }
-                if (inputState.GetKeyState(Keys.A))
-                {
-                    velocity += projector.Left;
-                }
-                if (inputState.GetKeyState(Keys.D))
-                {
-                    velocity += projector.Right;
-                }
+        {
+            if (inputState.GetKeyState(Keys.W))
+            {
+                velocity += projector.Front;
+            }
+            if (inputState.GetKeyState(Keys.S))
+            {
+                velocity += projector.Back;
+            }
+            if (inputState.GetKeyState(Keys.A))
+            {
+                velocity += projector.Left;
+            }
+            if (inputState.GetKeyState(Keys.D))
+            {
+                velocity += projector.Right;
+            }
 
-                if (velocity.LengthSquared() != 0)
-                {
-                    velocity.Normalize();
-                }
+            if (velocity.LengthSquared() != 0)
+            {
+                velocity.Normalize();
+            }
 
-                if (inputState.GetKeyState(Keys.LeftShift))
-                {
-                    velocity = velocity * 1.5f;
-                }
-                actor.Velocity = velocity;
-            
+            if (inputState.GetKeyState(Keys.LeftShift))
+            {
+                velocity = velocity * 1.5f;
+            }
+            actor.Velocity = velocity;
         }
     }
 }

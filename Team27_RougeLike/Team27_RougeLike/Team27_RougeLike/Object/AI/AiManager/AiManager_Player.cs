@@ -28,7 +28,6 @@ namespace Team27_RougeLike.Object.AI
             Player playerActor = (Player)actor;
             base.Update();
 
-
             if (PlessMoveKey() && !(moveAi is MoveAi_PlayerMove))
             {
                 moveAi = new MoveAi_PlayerMove(actor, inputState, playerActor.Projecter);

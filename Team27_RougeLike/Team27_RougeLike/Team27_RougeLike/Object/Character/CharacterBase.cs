@@ -40,8 +40,6 @@ namespace Team27_RougeLike.Object
 
         public virtual void Update(GameTime gameTime)
         {
-            //collision.Force(-Vector3.UnitY, 1 / 6.0f);   //Y軸減衰
-
             if (Math.Abs(velocity.X) < 0.01f)
             {
                 velocity.X = 0;
