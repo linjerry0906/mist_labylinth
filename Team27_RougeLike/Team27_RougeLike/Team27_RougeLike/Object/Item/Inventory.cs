@@ -14,12 +14,22 @@ namespace Team27_RougeLike.Object.Item
     {
         private static readonly int MaxItemCount = 25;      //Bagのサイズ
         private List<Item> bag;                             //Bagの内容
-        private List<Item> equipments;                      //装備している物
+
+        private ProtectionItem[] armor;
+        private WeaponItem rightHand;
+        private WeaponItem leftHand;
+
 
         public Inventory()
         {
             bag = new List<Item>();
-            equipments = new List<Item>();
+            armor = new ProtectionItem[4];
+            for (int i = 0; i < armor.Length; i++)
+            {
+                armor[i] = null;
+            }
+            rightHand = null;
+            leftHand = null;
         }
 
         /// <summary>
@@ -40,9 +50,20 @@ namespace Team27_RougeLike.Object.Item
         /// バッグ内のアイテムを装備する
         /// </summary>
         /// <param name="bagIndex">バッグ内のIndex</param>
-        public void Equip(int bagIndex)
+        public void EquipArmor(int bagIndex)
         {
-            equipments.Add(bag[bagIndex]);
+            Item item = bag[bagIndex];
+            if (!(item is ProtectionItem))
+            {
+                return;
+            }
+
+            ProtectionItem.ProtectionType type = ((ProtectionItem)item).GetProtectionType();
+            if (armor[(int)type] != null)                 //装備している状態
+            {
+                bag.Add(armor[(int)type]);                //バッグに戻す
+            }
+            armor[(int)type] = (ProtectionItem)item;      //装備する
             bag.Remove(bag[bagIndex]);
         }
 
@@ -56,12 +77,36 @@ namespace Team27_RougeLike.Object.Item
         }
 
         /// <summary>
-        /// 装備しているアイテム
+        /// ステータスを加算して返す
         /// </summary>
-        /// <returns></returns>
-        public List<Item> Equipments()
+        /// <param name="power">攻撃力</param>
+        /// <param name="defence">防御力</param>
+        /// <param name="weight">重量</param>
+        public void GetStatus(ref int power, ref int defence, ref float weight)
         {
-            return equipments;
+            power = 0;
+            defence = 0;
+            weight = 0;
+
+            foreach (Item i in bag)
+            {
+                weight += i.GetItemWeight();
+            }
+
+            foreach (ProtectionItem p in armor)
+            {
+                power += p.GetPower();
+                defence += p.GetDefense();
+                weight += p.GetItemWeight();
+            }
+
+            power += leftHand.GetPower();
+            defence += leftHand.GetDefense();
+            weight += leftHand.GetItemWeight();
+
+            power += rightHand.GetPower();
+            defence += rightHand.GetDefense();
+            weight += rightHand.GetItemWeight();
         }
     }
 }
