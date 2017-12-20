@@ -307,7 +307,7 @@ namespace Team27_RougeLike.Device
         /// <param name="alpha">アルファ値</param>
         public void DrawPolygon(string name, Vector3 position, Vector2 size, Rectangle rect, Color color,float alpha = 1)
         {
-            graphicsDevice.DepthStencilState = DepthStencilState.None;
+            graphicsDevice.DepthStencilState = DepthStencilState.Default;
             graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
             Vector3 axis = Vector3.Cross(currentProjector.Front, currentProjector.Right);     //回転軸
             axis.Normalize();

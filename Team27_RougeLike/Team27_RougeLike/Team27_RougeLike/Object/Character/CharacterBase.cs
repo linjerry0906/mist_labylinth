@@ -40,7 +40,7 @@ namespace Team27_RougeLike.Object
 
         public virtual void Update(GameTime gameTime)
         {
-            collision.Force(-Vector3.UnitY, 1 / 6.0f);   //Y軸減衰
+            //collision.Force(-Vector3.UnitY, 1 / 6.0f);   //Y軸減衰
 
             if (Math.Abs(velocity.X) < 0.01f)
             {
@@ -54,14 +54,14 @@ namespace Team27_RougeLike.Object
             v.Y = 0;
             velocity -= v * 0.1f;
 
-            collision.Force(velocity, status.Movespeed, true);//移動
+            collision.Force(velocity, status.Movespeed);//移動
         }
 
         public abstract void Attack();
 
         public void Draw(Renderer renderer)
         {
-            renderer.DrawPolygon(textureName, collision.Position, new Vector2(5, 5), motion.DrawingRange(), Color.White);
+            renderer.DrawPolygon(textureName, collision.Position, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
         }
         public void Damage(int num)
         {

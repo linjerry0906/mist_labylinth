@@ -12,7 +12,7 @@ namespace Team27_RougeLike.Object.Character
     class TestSimpleMeleeEnemy : EnemyBase
     {
         public TestSimpleMeleeEnemy(Vector3 position,CharacterManager characterManager)
-            : base(new Status(5, 100, 50, 5, 5, 0.3f), new CollisionSphere(position,5), new AiManager_Fool(),"test",characterManager)
+            : base(new Status(5, 100, 50, 5, 5, 0.3f), new CollisionSphere(position,5.0f), new AiManager_Fool(),"test",characterManager)
         {
             hitRange = 100;
             searchRange = 50;

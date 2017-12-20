@@ -20,7 +20,7 @@ namespace Team27_RougeLike.Object.Character
         private InputState input;
 
         public Player(Vector3 position, GameDevice gameDevice, CharacterManager characterManager)
-            : base(new Status(5, 100, 50, 5, 5, 0.3f), new CollisionSphere(position, 2.5f), "test", characterManager)
+            : base(new Status(5, 100, 50, 5, 5, 0.3f), new CollisionSphere(position, 5.0f), "test", characterManager)
         {
             tag = "Player";
 
