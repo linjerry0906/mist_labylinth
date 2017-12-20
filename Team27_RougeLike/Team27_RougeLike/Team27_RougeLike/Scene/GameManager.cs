@@ -43,12 +43,12 @@ namespace Team27_RougeLike.Scene
 
             itemManager = new ItemManager();
 
-            PlayerStatusLoader psLoader = new PlayerStatusLoader();
+            PlayerStatusLoader psLoader = new PlayerStatusLoader();       //Todo:Saveから読み取る（PassiveSkillがあるため）
             int[] status = psLoader.LoadStatus();
             Status defaultStatus = new Status(1, status[0], status[1], status[2], status[3], 1);
             playerStatus = new PlayerStatus(defaultStatus);
 
-            playerItem = playerStatus.GetInventory();
+            playerItem = playerStatus.GetInventory();                     //道具欄を取得
         }
 
         #region Item関連
