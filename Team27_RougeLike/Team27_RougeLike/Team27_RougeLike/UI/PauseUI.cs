@@ -22,6 +22,7 @@ namespace Team27_RougeLike.UI
 
         private Window backLayer;               //背景レイヤー
         private ParameterUI parameterUI;        //パラメータ表示UI
+        private ItemUI itemUI;
 
         public PauseUI(GameManager gameManager, GameDevice gameDevice)
         {
@@ -40,6 +41,10 @@ namespace Team27_RougeLike.UI
             parameterUI = new ParameterUI(
                 backLayer.GetRightTop() + new Vector2(-350, 50),        //背景レイヤーから相対位置を取る
                 gameManager, gameDevice);
+
+            itemUI = new ItemUI(
+                backLayer.GetOffsetPosition() + new Vector2(20, 50),
+                gameManager, gameDevice);
         }
 
         /// <summary>
@@ -48,6 +53,7 @@ namespace Team27_RougeLike.UI
         public void Update()
         {
             backLayer.Update();
+            itemUI.Update();
         }
 
         /// <summary>
@@ -74,6 +80,7 @@ namespace Team27_RougeLike.UI
         {
             backLayer.Draw();
             parameterUI.Draw(backLayer.CurrentAlpha());
+            itemUI.Draw(backLayer.CurrentAlpha());
         }
     }
 }

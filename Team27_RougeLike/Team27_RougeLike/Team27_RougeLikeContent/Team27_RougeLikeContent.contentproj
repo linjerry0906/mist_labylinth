@@ -76,6 +76,11 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
+    <Compile Include="Model\B_01.fbx">
+      <Name>B_01</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
     <None Include="PlayerCSV\PlayerStatus.csv">
       <Name>PlayerStatus</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

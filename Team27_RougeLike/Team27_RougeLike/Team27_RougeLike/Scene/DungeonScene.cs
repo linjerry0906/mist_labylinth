@@ -39,7 +39,6 @@ namespace Team27_RougeLike.Scene
             this.gameManager = gameManager;
             renderer = gameDevice.Renderer;
             stageManager = gameManager.StageManager;
-            characterManager = new CharacterManager(gameDevice);
         }
 
         public void Draw()
@@ -101,6 +100,7 @@ namespace Team27_RougeLike.Scene
             }
             #endregion
 
+            characterManager = new CharacterManager(gameDevice);
             characterManager.Initialize(new Vector3(
                 map.EntryPoint.X * MapDef.TILE_SIZE,
                 MapDef.TILE_SIZE,

@@ -217,6 +217,11 @@ namespace Team27_RougeLike.Device
             models.Add(name, contentManager.Load<Model>(filepath + name));
         }
 
+        public Model GetModel(string name)
+        {
+            return models[name];
+        }
+
         public void DrawModel(string name, Vector3 position, Vector3 size, Color color)
         {
             Model drawModel = models[name];
