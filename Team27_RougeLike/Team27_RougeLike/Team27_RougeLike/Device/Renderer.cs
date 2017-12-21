@@ -311,7 +311,7 @@ namespace Team27_RougeLike.Device
             graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
             Vector3 axis = Vector3.Cross(currentProjector.Front, currentProjector.Right);     //回転軸
             axis.Normalize();
-            effectManager.CurrentEffect.TextureEnabled = true;                          //テクスチャを有効
+            //effectManager.CurrentEffect.TextureEnabled = true;                          //テクスチャを有効
             int textureHeight = textures[name].Height;                                  //テクスチャのサイズを取得
             int textureWidth = textures[name].Width;
             //四つの頂点を設定
@@ -341,11 +341,13 @@ namespace Team27_RougeLike.Device
                     (rect.X + rect.Width) * 1.0f / textureWidth,
                     rect.Y * 1.0f / textureHeight));
 
-            effectManager.CurrentEffect.Alpha = alpha;                  //アルファ値を指定
-            effectManager.CurrentEffect.Texture = textures[name];       //テクスチャを指定
-            effectManager.CurrentEffect.World =
-                Matrix.CreateBillboard(position, currentProjector.Position, axis, currentProjector.Front); //ビルボードマトリクス 
-            foreach (var effect in effectManager.CurrentEffect.CurrentTechnique.Passes)
+            effectManager.GetPolygonEffect().Alpha.SetValue(alpha);                  //アルファ値を指定
+            effectManager.GetPolygonEffect().Texture.SetValue(textures[name]);       //テクスチャを指定
+            effectManager.GetPolygonEffect().World.SetValue(
+                Matrix.CreateBillboard(position, currentProjector.Position, axis, currentProjector.Front)); //ビルボードマトリクス 
+            effectManager.GetPolygonEffect().View.SetValue(currentProjector.LookAt);
+            effectManager.GetPolygonEffect().Projection.SetValue(currentProjector.Projection);
+            foreach (var effect in effectManager.GetPolygonEffect().GetEffect().CurrentTechnique.Passes)
             {
                 effect.Apply();
             }

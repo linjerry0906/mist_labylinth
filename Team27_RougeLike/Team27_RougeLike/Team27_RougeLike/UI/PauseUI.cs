@@ -1,9 +1,15 @@
-﻿using System;
+﻿//--------------------------------------------------------------------------------------------------
+// 作成者：林　佳叡
+// 作成日：2017.12.20
+// 内容　：PauseにあるUIをまとめたクラス
+//--------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Scene;
+using Microsoft.Xna.Framework;
 
 namespace Team27_RougeLike.UI
 {
@@ -14,7 +20,8 @@ namespace Team27_RougeLike.UI
         private InputState input;
         private Renderer renderer;
 
-        private Window backLayer;
+        private Window backLayer;               //背景レイヤー
+        private ParameterUI parameterUI;        //パラメータ表示UI
 
         public PauseUI(GameManager gameManager, GameDevice gameDevice)
         {
@@ -23,15 +30,50 @@ namespace Team27_RougeLike.UI
             input = gameDevice.InputState;
             renderer = gameDevice.Renderer;
 
+            backLayer = new Window(
+                gameDevice,
+                new Vector2(10, 10),
+                new Vector2(Def.WindowDef.WINDOW_WIDTH - 20, Def.WindowDef.WINDOW_HEIGHT - 20));
+            backLayer.Initialize();         //初期化
+            backLayer.Switch();             //開く
 
+            parameterUI = new ParameterUI(
+                backLayer.GetRightTop() + new Vector2(-350, 50),        //背景レイヤーから相対位置を取る
+                gameManager, gameDevice);
         }
 
+        /// <summary>
+        /// UIの更新処理
+        /// </summary>
         public void Update()
         {
+            backLayer.Update();
         }
 
+        /// <summary>
+        /// 終わっているか
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEnd()
+        {
+            return backLayer.IsEnd();
+        }
+
+        /// <summary>
+        /// UIを閉じる
+        /// </summary>
+        public void SwitchOff()
+        {
+            backLayer.Switch();
+        }
+
+        /// <summary>
+        /// 描画する
+        /// </summary>
         public void Draw()
         {
+            backLayer.Draw();
+            parameterUI.Draw(backLayer.CurrentAlpha());
         }
     }
 }

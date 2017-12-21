@@ -27,9 +27,24 @@ namespace Team27_RougeLike.Object
             status = new Status(baseStatus.Level, baseStatus.Health, baseStatus.BasePower, baseStatus.BaseArmor, baseStatus.Attackspd, baseStatus.Movespeed);
         }
 
-        public void AddStatus()
+        public void CaculateStatus()
         {
             inventory.GetStatus(ref addPower, ref addDefence, ref weight);
+        }
+
+        public int GetLevel()
+        {
+            return status.Level;
+        }
+
+        public int GetMaxHP()
+        {
+            return status.MaxHealth;
+        }
+
+        public int GetHP()
+        {
+            return status.Health;
         }
 
         public int GetPower()
@@ -50,6 +65,11 @@ namespace Team27_RougeLike.Object
         public float GetVelocty()
         {
             return status.Movespeed - weight / 100 / status.BasePower;
+        }
+
+        public float GetWeight()
+        {
+            return weight;
         }
 
         public Inventory GetInventory()

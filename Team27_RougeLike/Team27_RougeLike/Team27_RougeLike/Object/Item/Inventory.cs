@@ -12,7 +12,7 @@ namespace Team27_RougeLike.Object.Item
 {
     class Inventory
     {
-        private static readonly int MaxItemCount = 25;      //Bagのサイズ
+        private readonly int MaxItemCount = 25;       //Bagのサイズ
         private List<Item> bag;                             //Bagの内容
 
         private ProtectionItem[] armor;
@@ -39,8 +39,11 @@ namespace Team27_RougeLike.Object.Item
         /// <returns>フールの場合はFalseを返す</returns>
         public bool AddItem(Item item)
         {
-            if (bag.Count > MaxItemCount)
+            int count = bag.Count;
+            if (count >= MaxItemCount)
+            {
                 return false;
+            }
 
             bag.Add(item);
             return true;
@@ -139,18 +142,26 @@ namespace Team27_RougeLike.Object.Item
 
             foreach (ProtectionItem p in armor)
             {
+                if (p == null)
+                    continue;
                 power += p.GetPower();
                 defence += p.GetDefense();
                 weight += p.GetItemWeight();
             }
 
-            power += leftHand.GetPower();
-            defence += leftHand.GetDefense();
-            weight += leftHand.GetItemWeight();
+            if (leftHand != null)
+            {
+                power += leftHand.GetPower();
+                defence += leftHand.GetDefense();
+                weight += leftHand.GetItemWeight();
+            }
 
-            power += rightHand.GetPower();
-            defence += rightHand.GetDefense();
-            weight += rightHand.GetItemWeight();
+            if (rightHand != null)
+            {
+                power += rightHand.GetPower();
+                defence += rightHand.GetDefense();
+                weight += rightHand.GetItemWeight();
+            }
         }
 
         /// <summary>

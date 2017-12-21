@@ -71,6 +71,7 @@
     <Compile Include="Device\Sound.cs" />
     <Compile Include="Device\TextureLoader.cs" />
     <Compile Include="Effects\BlurEffect.cs" />
+    <Compile Include="Effects\PolygonEffect.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Player.cs" />
     <Compile Include="Object\AI\AiManager\IEnemyAi.cs" />
     <Compile Include="Object\AI\AttackAi\AttackAi_LongAttack.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="UI\DungeonHintUI.cs" />
     <Compile Include="UI\DungeonPopUI.cs" />
     <Compile Include="UI\DungeonUI.cs" />
+    <Compile Include="UI\ParameterUI.cs" />
     <Compile Include="UI\PauseUI.cs" />
     <Compile Include="UI\Window.cs" />
     <Compile Include="Utility\Angle.cs" />

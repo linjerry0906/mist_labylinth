@@ -48,6 +48,7 @@
       <Name>basicFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +92,16 @@
   <ItemGroup>
     <Compile Include="Effect\blur.fx">
       <Name>blur</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EnemyCSV\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Effect\polygon.fx">
+      <Name>polygon</Name>
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
     </Compile>
