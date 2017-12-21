@@ -43,6 +43,7 @@ namespace Team27_RougeLike
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            IsMouseVisible = true;
             gameDevice = new GameDevice(Content, GraphicsDevice);
             gameManager = new GameManager(gameDevice);
             

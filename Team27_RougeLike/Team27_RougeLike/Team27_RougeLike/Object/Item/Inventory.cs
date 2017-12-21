@@ -179,5 +179,16 @@ namespace Team27_RougeLike.Object.Item
         {
             return rightHand;
         }
+
+        /// <summary>
+        /// アイテム数量と最大値を取得
+        /// </summary>
+        /// <param name="current">現在量</param>
+        /// <param name="maxium">最大量</param>
+        public void ItemCount(ref int current, ref int maxium)
+        {
+            current = bag.Count;
+            maxium = MaxItemCount;
+        }
     }
 }

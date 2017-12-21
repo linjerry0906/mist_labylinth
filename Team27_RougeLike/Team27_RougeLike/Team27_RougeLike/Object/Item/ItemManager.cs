@@ -121,7 +121,7 @@ namespace Team27_RougeLike.Object.Item
 
             //消費アイテム読み込み
             datefs = new FileStream(consuptionFilename, FileMode.Open);
-            StreamReader consuptionDate = new StreamReader(datefs);
+            StreamReader consuptionDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
 
             while (!consuptionDate.EndOfStream)
             {
