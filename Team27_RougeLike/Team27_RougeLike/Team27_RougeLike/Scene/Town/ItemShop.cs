@@ -12,11 +12,20 @@ using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Effects;
 using Team27_RougeLike.Scene.Town;
+using Team27_RougeLike.Object.Item;
+using Team27_RougeLike.UI;
 
 namespace Team27_RougeLike.Scene
 {
     class ItemShop : IScene
     {
+        public enum ShopMode
+        {
+            buy,
+            sell,
+            select,
+        }
+
         private GameDevice gameDevice;          //ゲームデバイス
         private InputState input;
         private Renderer renderer;
@@ -30,6 +39,17 @@ namespace Team27_RougeLike.Scene
         private bool endFlag;                   //終了フラグ
 
         private Store stores;
+        private ItemManager itemManager;
+        private Inventory inventory;
+        private Window leftWindow;
+        private Window rightWindow;
+        private Window messegeWindow;
+
+        private ShopMode mode;                  //売るか、買うか、どうするか
+        private bool isPop;
+        private bool isMessegePop;
+
+        private Rectangle backRect;
 
         public ItemShop(IScene town, GameManager gameManager, GameDevice gameDevice)
         {
@@ -38,8 +58,97 @@ namespace Team27_RougeLike.Scene
             input = gameDevice.InputState;
             this.gameManager = gameManager;
             blurEffect = renderer.EffectManager.GetBlurEffect();
+            itemManager = gameManager.ItemManager;
+            inventory = gameManager.PlayerItem;
 
             townScene = town;
+
+            backRect = new Rectangle(0, 720 - 64, 320, 64);
+        }
+
+        public void Initialize(SceneType scene)
+        {
+            endFlag = false;
+
+            blurRate = 0.0f;
+
+            stores = new Store(gameManager, gameDevice);
+            stores.Initialize();
+
+            Vector2 size = new Vector2(1080 / 2 - 128, 720 - 128);
+            leftWindow = new Window(gameDevice, new Vector2(64, 64), size);
+            leftWindow.Initialize();
+            rightWindow = new Window(gameDevice, new Vector2(1080 / 2 + 64, 64), size);
+            rightWindow.Initialize();
+            messegeWindow = new Window(gameDevice, new Vector2(1080 / 2 - 160, 720 / 2 - 80), new Vector2(320, 160));
+            messegeWindow.Initialize();
+
+            mode = ShopMode.select;
+            isPop = false;
+            isMessegePop = false;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            stores.Update();
+
+            leftWindow.Update();
+            rightWindow.Update();
+            messegeWindow.Update();
+
+            Point mousePos = new Point(
+                (int)input.GetMousePosition().X,
+                (int)input.GetMousePosition().Y);
+
+            if (mode == ShopMode.select)
+            {
+                if (backRect.Contains(mousePos) && input.IsLeftClick())
+                {
+                    endFlag = true;
+                }
+
+                if (!isMessegePop)
+                {
+                    messegeWindow.Switch();
+                    isMessegePop = true;
+                }
+                if (input.GetKeyState(Keys.D1))
+                {
+                    mode = ShopMode.buy;
+                    messegeWindow.Switch();
+                    isMessegePop = false;
+                    stores.Initialize();
+                }
+                else if (input.GetKeyState(Keys.D2))
+                {
+                    mode = ShopMode.sell;
+                    messegeWindow.Switch();
+                    isMessegePop = false;
+                    stores.Initialize();
+                }
+            }
+            else
+            {
+                if (!isPop)
+                {
+                    leftWindow.Switch();
+                    rightWindow.Switch();
+                    isPop = true;
+                }
+                if (input.GetKeyState(Keys.D0) || backRect.Contains(mousePos) && input.IsLeftClick())
+                {
+                    mode = ShopMode.select;
+                    leftWindow.Switch();
+                    rightWindow.Switch();
+                    isPop = false;
+                }
+            }
+
+            if (input.GetKeyTrigger(Keys.B))
+                endFlag = true;
+
+            UpdateBlurRate();
+            blurEffect.Update(blurRate);
         }
 
         public void Draw()
@@ -51,20 +160,36 @@ namespace Team27_RougeLike.Scene
 
 
             renderer.Begin();
+
+            renderer.DrawString("戻る", new Vector2(0, 720 - 64), new Vector2(1, 1), Color.White);
+
+            leftWindow.Draw();
+            rightWindow.Draw();
+            messegeWindow.Draw();
+
             renderer.DrawString("B key back to Town", Vector2.Zero, new Vector2(1, 1), Color.Black);
-            stores.DrawEquip();
+
+            if (mode == ShopMode.select)
+            {
+                renderer.DrawString("1で買う、2で売却", messegeWindow.GetLeftCenter(), new Vector2(1, 1), Color.White);
+            }
+            else
+            {
+                renderer.DrawString("0でselectに戻る", new Vector2(0, 32), new Vector2(1, 1), Color.Black);
+                if (mode == ShopMode.buy)
+                {
+                    renderer.DrawString("売り物", new Vector2(64, 64), new Vector2(1, 1), Color.White);
+                    renderer.DrawString("買う物リスト", new Vector2(1080 / 2 + 64, 64), new Vector2(1, 1), Color.White);
+                    stores.DrawEquip();
+                }
+                else if (mode == ShopMode.sell)
+                {
+
+                }
+            }
             renderer.End();
         }
 
-        public void Initialize(SceneType scene)
-        {
-            endFlag = false;
-
-            blurRate = 0.0f;
-
-            stores = new Store(gameManager, gameDevice);
-            stores.Initialize();
-        }
 
         public bool IsEnd()
         {
@@ -79,16 +204,6 @@ namespace Team27_RougeLike.Scene
         public void Shutdown()
         {
         }
-
-        public void Update(GameTime gameTime)
-        {
-            if (input.GetKeyTrigger(Keys.B))
-                endFlag = true;
-
-            UpdateBlurRate();
-            blurEffect.Update(blurRate);
-        }
-
         private void UpdateBlurRate()
         {
             if (endFlag)

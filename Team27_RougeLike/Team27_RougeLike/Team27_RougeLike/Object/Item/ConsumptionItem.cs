@@ -46,5 +46,20 @@ namespace Team27_RougeLike.Object.Item
             return itemEffect;
         }
 
+        public string GetTypeText()
+        {
+            if (effectType == ItemEffectType.recovery)
+            {
+                return "回復系";
+            }
+            else if (effectType == ItemEffectType.damage)
+            {
+                return "ダメージ";
+            }
+            else
+            {
+                return "なし";
+            }
+        }
     }
 }
