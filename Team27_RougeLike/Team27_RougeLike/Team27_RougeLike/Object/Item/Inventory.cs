@@ -49,6 +49,11 @@ namespace Team27_RougeLike.Object.Item
             return true;
         }
 
+        public void RemoveItem(Item item)
+        {
+            bag.Remove(item);
+        }
+
         /// <summary>
         /// バッグ内のアイテムを装備する
         /// </summary>

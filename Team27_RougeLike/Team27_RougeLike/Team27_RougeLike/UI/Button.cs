@@ -35,5 +35,14 @@ namespace Team27_RougeLike.UI
         {
             return rect.Contains(mousePos);
         }
+
+        /// <summary>
+        /// ボタンの中心位置
+        /// </summary>
+        /// <returns></returns>
+        public Point ButtonCenter()
+        {
+            return rect.Center;
+        }
     }
 }

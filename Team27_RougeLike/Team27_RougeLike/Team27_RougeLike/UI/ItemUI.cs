@@ -31,6 +31,9 @@ namespace Team27_RougeLike.UI
         private readonly int WIDTH = 200;       //ボタンの長さ
         private readonly int HEIGHT = 22;       //ボタンの高さ
 
+        private Button equipButton;             //装備ボタン
+        private Button removeButton;            //捨てるボタン
+
         public ItemUI(Vector2 position, GameManager gameManager, GameDevice gameDevice)
         {
             this.position = position;
@@ -47,6 +50,9 @@ namespace Team27_RougeLike.UI
                     new Button(position + new Vector2(0, i * HEIGHT), WIDTH, HEIGHT));
             }
 
+            equipButton = new Button(position + new Vector2(450, 580), 100, 30);
+            removeButton = new Button(position + new Vector2(450, 620), 100, 30);
+
             currentItem = null;
             currentInfo = new ItemInfoUI(position + new Vector2(0, 575), gameDevice);
         }
@@ -56,6 +62,16 @@ namespace Team27_RougeLike.UI
         /// </summary>
         public void Update()
         {
+            ClickList();
+
+            CheckInfoButton();
+        }
+
+        /// <summary>
+        /// Listにクリックされたかをチェック
+        /// </summary>
+        private void ClickList()
+        {
             if (!input.IsLeftClick())       //clickしていなかったら判定
                 return;
 
@@ -63,16 +79,73 @@ namespace Team27_RougeLike.UI
             int index = 0;
             foreach(Button b in buttons)
             {
-                if (b.IsClick(mousePos))
+                if (b.IsClick(mousePos))    //クリックされたかを確認
                 {
                     break;
                 }
                 index++;
             }
-            if (index == buttons.Count)
+            if (index == buttons.Count)     //最後までなかったら
                 return;
 
             currentItem = itemList[index];
+        }
+
+        /// <summary>
+        /// Infoのボタンが押されたかをチェック
+        /// </summary>
+        private void CheckInfoButton()
+        {
+            if (!input.IsLeftClick())       //clickしていなかったら判定
+                return;
+
+            if (currentItem == null)
+                return;
+
+            Point mousePos = new Point((int)input.GetMousePosition().X, (int)input.GetMousePosition().Y);
+
+            if (equipButton.IsClick(mousePos))
+            {
+                if (currentItem is ConsumptionItem)
+                {
+                    Use();
+                    return;
+                }
+
+                Equip();
+                return;
+            }
+
+            if (removeButton.IsClick(mousePos))
+            {
+                Remove();
+            }
+        }
+
+        private void Use()
+        {
+            currentItem = null;
+        }
+
+        private void Equip()
+        {
+            int index = itemList.FindIndex(i => i == currentItem);
+            if(currentItem is ProtectionItem)
+            {
+                playerItem.EquipArmor(index);
+            }
+            else
+            {
+                playerItem.EquipLeftHand(index);
+            }
+            currentItem = null;
+        }
+
+        private void Remove()
+        {
+            playerItem.RemoveItem(currentItem);
+            buttons.RemoveAt(buttons.Count - 1);
+            currentItem = null;
         }
 
         /// <summary>
@@ -91,9 +164,38 @@ namespace Team27_RougeLike.UI
                     alpha, false, false);
             }
 
-            //選択していないなら表示しない部分
+            DrawInfo(alpha);
+        }
+
+        /// <summary>
+        /// 選択していないなら表示しない部分
+        /// </summary>
+        /// <param name="alpha"></param>
+        private void DrawInfo(float alpha)
+        {
             if (currentItem == null)
                 return;
+
+            string buttonString = "使用";
+
+            if (currentItem is WeaponItem || currentItem is ProtectionItem)
+            {
+                buttonString = "装備";
+            }
+
+            renderer.DrawString(
+                    buttonString,
+                    new Vector2(equipButton.ButtonCenter().X, equipButton.ButtonCenter().Y),
+                    Color.White,
+                    new Vector2(1.0f, 1.0f),
+                    alpha, true, true);
+
+            renderer.DrawString(
+                    "捨てる",
+                    new Vector2(removeButton.ButtonCenter().X, removeButton.ButtonCenter().Y),
+                    Color.White,
+                    new Vector2(1.0f, 1.0f),
+                    alpha, true, true);
 
             currentInfo.Draw(currentItem, alpha);
         }

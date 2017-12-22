@@ -287,7 +287,11 @@ with.
       <!-- しん -->
 
       <!-- す -->
-
+      <CharacterRegion>
+        <Start>捨</Start>
+        <End>捨</End>
+      </CharacterRegion>
+      
       <!-- せ -->
       <!-- せつ -->
       <CharacterRegion>

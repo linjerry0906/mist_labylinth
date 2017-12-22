@@ -54,6 +54,8 @@ namespace Team27_RougeLike.UI
         {
             backLayer.Update();
             itemUI.Update();
+
+            parameterUI.RefreshInfo();
         }
 
         /// <summary>
