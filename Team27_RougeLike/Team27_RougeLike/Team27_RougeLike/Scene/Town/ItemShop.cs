@@ -38,7 +38,7 @@ namespace Team27_RougeLike.Scene
 
         private bool endFlag;                   //終了フラグ
 
-        private Store stores;
+        private Buy stores;
         private ItemManager itemManager;
         private Inventory inventory;
         private Window leftWindow;
@@ -72,7 +72,7 @@ namespace Team27_RougeLike.Scene
 
             blurRate = 0.0f;
 
-            stores = new Store(gameManager, gameDevice);
+            stores = new Buy(gameManager, gameDevice);
             stores.Initialize();
 
             Vector2 size = new Vector2(1080 / 2 - 128, 720 - 128);

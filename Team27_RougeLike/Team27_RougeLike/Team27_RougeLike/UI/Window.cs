@@ -12,7 +12,8 @@ namespace Team27_RougeLike.UI
         private Vector2 offsetPosition;
         private Vector2 windowSize;
         private float alpha;
-        private bool alphaSwitch;
+        private float alphaLimit;
+        private bool alphaSwitch; //trueだったら表示される
 
         private Renderer renderer;
 
@@ -24,12 +25,15 @@ namespace Team27_RougeLike.UI
             windowSize = size;
 
             alphaSwitch = false;
+
+            alphaLimit = 0.5f;
         }
 
         public void Initialize()
         {
             alphaSwitch = false;
 
+            alphaLimit = 0.5f;
             alpha = 0;
         }
 
@@ -38,16 +42,16 @@ namespace Team27_RougeLike.UI
             //フェード処理
             if (alphaSwitch)
             {
-                if (alpha <= 0.5f)
+                if (alpha <= alphaLimit)
                 {
-                    alpha += 0.025f;
+                    alpha += alphaLimit / 20;
                 }
             }
             else
             {
                 if (alpha >= 0)
                 {
-                    alpha -= 0.025f;
+                    alpha -= alphaLimit / 20;
                 }
             }
         }
@@ -62,6 +66,12 @@ namespace Team27_RougeLike.UI
             {
                 alphaSwitch = true;
             }
+        }
+
+        //alpha値の限界を設定
+        public void SetAlphaLimit(float num)
+        {
+            alphaLimit = num;
         }
 
         public bool CurrentState()
