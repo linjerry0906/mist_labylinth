@@ -436,6 +436,10 @@ with.
         <End>買</End>
       </CharacterRegion>
       <!-- ひ -->
+      <CharacterRegion>
+        <Start>左</Start>
+        <End>左</End>
+      </CharacterRegion>
       <!-- び -->
       <CharacterRegion>
         <Start>備</Start>
@@ -470,6 +474,10 @@ with.
       </CharacterRegion>
       
       <!-- み -->
+      <CharacterRegion>
+        <Start>右</Start>
+        <End>右</End>
+      </CharacterRegion>
       <!-- む -->
       <!-- め -->
       <!-- めい -->

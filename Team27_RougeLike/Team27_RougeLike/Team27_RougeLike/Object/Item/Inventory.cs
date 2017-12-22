@@ -13,11 +13,11 @@ namespace Team27_RougeLike.Object.Item
     class Inventory
     {
         private readonly int MaxItemCount = 25;       //Bagのサイズ
-        private List<Item> bag;                             //Bagの内容
+        private List<Item> bag;                       //Bagの内容
 
-        private ProtectionItem[] armor;
-        private WeaponItem rightHand;
-        private WeaponItem leftHand;
+        private ProtectionItem[] armor;               //装備
+        private WeaponItem rightHand;               　//右手
+        private WeaponItem leftHand;                　//左手
 
 
         public Inventory()
@@ -40,7 +40,7 @@ namespace Team27_RougeLike.Object.Item
         public bool AddItem(Item item)
         {
             int count = bag.Count;
-            if (count >= MaxItemCount)
+            if (count >= MaxItemCount)      //最大限に超えたら追加しない
             {
                 return false;
             }
@@ -49,6 +49,10 @@ namespace Team27_RougeLike.Object.Item
             return true;
         }
 
+        /// <summary>
+        /// 特定のアイテムを削除
+        /// </summary>
+        /// <param name="bagIndex">バッグ内のIndex</param>
         public void RemoveItem(int bagIndex)
         {
             bag.RemoveAt(bagIndex);
@@ -78,19 +82,27 @@ namespace Team27_RougeLike.Object.Item
         /// <summary>
         /// 左手に装備する
         /// </summary>
-        /// <param name="bagIndex"></param>
+        /// <param name="bagIndex">バッグ内のIndex</param>
         public void EquipLeftHand(int bagIndex)
         {
             Item item = bag[bagIndex];
-            if (!(item is WeaponItem))
-            {
+            if (!(item is WeaponItem))          　//エラー対策
                 return;
-            }
 
             if (leftHand != null)                 //装備している状態
             {
                 bag.Add(leftHand);                //バッグに戻す
             }
+
+            WeaponItem.WeaponType type = ((WeaponItem)item).GetWeaponType();
+            if (type == WeaponItem.WeaponType.Bow)     //弓は両手
+            {
+                if (rightHand != null)                 //装備している状態
+                {
+                    bag.Add(rightHand);                //バッグに戻す
+                }
+            }
+
             leftHand = (WeaponItem)item;          //装備する
             bag.RemoveAt(bagIndex);
         }
@@ -98,24 +110,29 @@ namespace Team27_RougeLike.Object.Item
         /// <summary>
         /// 右手に装備する
         /// </summary>
-        /// <param name="bagIndex"></param>
+        /// <param name="bagIndex">バッグ内のIndex</param>
         public void EquipRightHand(int bagIndex)
         {
             Item item = bag[bagIndex];
-            if (!(item is WeaponItem))
-            {
+            if (!(item is WeaponItem))             //エラー対策
                 return;
-            }
 
             WeaponItem.WeaponType type = ((WeaponItem)item).GetWeaponType();
-            if (type == WeaponItem.WeaponType.Bow)  //右手は弓を装備できない
+            if (type == WeaponItem.WeaponType.Bow) //右手は弓を装備できない
                 return;
 
             if (rightHand != null)                 //装備している状態
             {
                 bag.Add(rightHand);                //バッグに戻す
             }
-            leftHand = (WeaponItem)item;           //装備する
+
+            if (leftHand.GetWeaponType() == WeaponItem.WeaponType.Bow)
+            {
+                bag.Add(leftHand);                  //バッグに戻す
+                leftHand = null;
+            }
+
+            rightHand = (WeaponItem)item;          //装備する
             bag.Remove(bag[bagIndex]);
         }
 
@@ -140,12 +157,12 @@ namespace Team27_RougeLike.Object.Item
             defence = 0;
             weight = 0;
 
-            foreach (Item i in bag)
+            foreach (Item i in bag)               //ItemListの重量計算
             {
                 weight += i.GetItemWeight();
             }
 
-            foreach (ProtectionItem p in armor)
+            foreach (ProtectionItem p in armor)   //防具の計算
             {
                 if (p == null)
                     continue;
@@ -154,14 +171,14 @@ namespace Team27_RougeLike.Object.Item
                 weight += p.GetItemWeight();
             }
 
-            if (leftHand != null)
+            if (leftHand != null)                 //左手のものを計算
             {
                 power += leftHand.GetPower();
                 defence += leftHand.GetDefense();
                 weight += leftHand.GetItemWeight();
             }
 
-            if (rightHand != null)
+            if (rightHand != null)              　//右手のものを計算
             {
                 power += rightHand.GetPower();
                 defence += rightHand.GetDefense();

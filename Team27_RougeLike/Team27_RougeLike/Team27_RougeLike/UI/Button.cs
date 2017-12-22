@@ -44,5 +44,10 @@ namespace Team27_RougeLike.UI
         {
             return rect.Center;
         }
+
+        public Point Position()
+        {
+            return rect.Location;
+        }
     }
 }

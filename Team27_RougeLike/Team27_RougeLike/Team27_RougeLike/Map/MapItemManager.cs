@@ -118,8 +118,8 @@ namespace Team27_RougeLike.Map
                 return false;
 
             Item item = items[index].GetItem();
-            Color color = Color.Lerp(Color.White, Color.Gold, item.GetItemRare() / 100.0f);
-            ui.LogUI.AddLog(item.GetItemName() + " を取得した", color);
+            Color color = Color.Lerp(Color.White, Color.Gold, item.GetItemRare() / 100.0f);       //色調整
+            ui.LogUI.AddLog(item.GetItemName() + " を取得した", color);                           //Logに追加
             items.RemoveAt(index);
             return true;
         }

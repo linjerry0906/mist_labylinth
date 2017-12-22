@@ -21,7 +21,7 @@ namespace Team27_RougeLike.UI
 
         public DungeonUI(GameManager gameManager, GameDevice gameDevice)
         {
-            popUI = new DungeonPopUI(gameManager, gameDevice);
+            popUI = new DungeonPopUI(gameDevice);
             hintUI = new DungeonHintUI(gameDevice);
             logUI = new DungeonLog(
                 new Vector2(30, Def.WindowDef.WINDOW_HEIGHT - 250),
