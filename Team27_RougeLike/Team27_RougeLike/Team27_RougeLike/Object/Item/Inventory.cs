@@ -72,7 +72,7 @@ namespace Team27_RougeLike.Object.Item
                 bag.Add(armor[(int)type]);                //バッグに戻す
             }
             armor[(int)type] = (ProtectionItem)item;      //装備する
-            bag.Remove(bag[bagIndex]);
+            bag.RemoveAt(bagIndex);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Team27_RougeLike.Object.Item
                 bag.Add(leftHand);                //バッグに戻す
             }
             leftHand = (WeaponItem)item;          //装備する
-            bag.Remove(bag[bagIndex]);
+            bag.RemoveAt(bagIndex);
         }
 
         /// <summary>
