@@ -29,7 +29,7 @@ namespace Team27_RougeLike.UI
         private ItemInfoUI currentInfo;
 
         private readonly int WIDTH = 200;
-        private readonly int HEIGHT = 20;
+        private readonly int HEIGHT = 22;
 
         public ItemUI(Vector2 position, GameManager gameManager, GameDevice gameDevice)
         {
@@ -48,7 +48,7 @@ namespace Team27_RougeLike.UI
             }
 
             currentItem = null;
-            currentInfo = new ItemInfoUI(position + new Vector2(0, 540), gameDevice);
+            currentInfo = new ItemInfoUI(position + new Vector2(0, 575), gameDevice);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Team27_RougeLike.UI
         }
 
         /// <summary>
-        /// Listを表示
+        /// Item関連の描画
         /// </summary>
         /// <param name="alpha">透明値</param>
         public void Draw(float alpha)
@@ -87,10 +87,11 @@ namespace Team27_RougeLike.UI
                     itemList[i].GetItemName(),
                     position + new Vector2(0, i * HEIGHT),
                     Color.White,
-                    new Vector2(1.2f, 1.2f),
-                    alpha, false, true);
+                    new Vector2(1.1f, 1.1f),
+                    alpha, false, false);
             }
 
+            //選択していないなら表示しない部分
             if (currentItem == null)
                 return;
 

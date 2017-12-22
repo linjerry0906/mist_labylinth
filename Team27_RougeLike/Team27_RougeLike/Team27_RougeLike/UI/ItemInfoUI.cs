@@ -1,4 +1,9 @@
-﻿using System;
+﻿//--------------------------------------------------------------------------------------------------
+// 作成者：林　佳叡
+// 作成日：2017.12.21
+// 内容  ：Itemの詳細を表示するUI
+//--------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +17,10 @@ namespace Team27_RougeLike.UI
     {
         private Renderer renderer;
         private Vector2 position;
-        private readonly int LINE_HEIGHT = 30;
-        private readonly int COLUME_WIDTH = 100;
+        private readonly int LINE_HEIGHT = 24;      //行の間隔
+        private readonly int COLUME_WIDTH = 100;    //項目の間隔
 
-        private string[] info;
+        private string[] info;                      //詳細文字
 
         public ItemInfoUI(Vector2 position, GameDevice gameDevice)
         {
@@ -24,15 +29,22 @@ namespace Team27_RougeLike.UI
             this.position = position;
         }
 
+        /// <summary>
+        /// 詳細を描画
+        /// </summary>
+        /// <param name="item">描画アイテム</param>
+        /// <param name="alpha">透明度</param>
         public void Draw(Item item, float alpha)
         {
-            SetInfo(item);
+            SetInfo(item);      //文字設定
 
-            Color nameColor = Color.Lerp(Color.White, Color.Gold, item.GetItemRare() / 100.0f);
+            Color nameColor = Color.Lerp(Color.White, Color.Gold, item.GetItemRare() / 100.0f);     //レア度で名前の色を決める
+            //名前
             renderer.DrawString(
                 info[0], position, nameColor, new Vector2(1.2f, 1.2f),
                 alpha, false, true);
 
+            //共通情報
             for (int i = 1; i <= 4; i++)
             {
                 renderer.DrawString(
@@ -41,25 +53,32 @@ namespace Team27_RougeLike.UI
                     alpha, false, true);
             }
 
+            //説明文
             renderer.DrawString(
                 info[5], position + new Vector2(0, LINE_HEIGHT * 2), 
                 Color.White, new Vector2(1.0f, 1.0f),
                 alpha, false, true);
 
+            //使用アイテムはここまで
             if (info.Length < 7)
                 return;
 
+            //攻撃
             renderer.DrawString(
                 info[6], position + new Vector2(0, LINE_HEIGHT * 3),
                 Color.White, new Vector2(1.0f, 1.0f),
                 alpha, false, true);
-
+            //防御
             renderer.DrawString(
                 info[7], position + new Vector2(COLUME_WIDTH * 2, LINE_HEIGHT * 3),
                 Color.White, new Vector2(1.0f, 1.0f),
                 alpha, false, true);
         }
 
+        /// <summary>
+        /// 文字設定
+        /// </summary>
+        /// <param name="item">詳細を表示したいアイテム</param>
         private void SetInfo(Item item)
         {
             if (item is WeaponItem)
