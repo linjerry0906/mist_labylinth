@@ -19,17 +19,17 @@ namespace Team27_RougeLike.UI
         private Renderer renderer;
         private InputState input;
 
-        private Vector2 position;
-        private Inventory playerItem;
-        private List<Item> itemList;
+        private Vector2 position;               //表示位置
+        private Inventory playerItem;           //Playerのアイテム
+        private List<Item> itemList;            //アイテムリスト
 
-        private List<Button> buttons;
-        private Item currentItem;
+        private List<Button> buttons;           //ボタン
+        private Item currentItem;               //選択されているアイテム
 
-        private ItemInfoUI currentInfo;
+        private ItemInfoUI currentInfo;         //選択されているアイテムの表示
 
-        private readonly int WIDTH = 200;
-        private readonly int HEIGHT = 22;
+        private readonly int WIDTH = 200;       //ボタンの長さ
+        private readonly int HEIGHT = 22;       //ボタンの高さ
 
         public ItemUI(Vector2 position, GameManager gameManager, GameDevice gameDevice)
         {

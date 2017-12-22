@@ -14,8 +14,8 @@ namespace Team27_RougeLike.UI
 {
     class Button
     {
-        private Vector2 position;
-        private Rectangle rect;
+        private Vector2 position;       //位置
+        private Rectangle rect;         //判定場所
 
         public Button(Vector2 position, int width, int height)
         {
@@ -26,6 +26,11 @@ namespace Team27_RougeLike.UI
                 width, height);
         }
 
+        /// <summary>
+        /// クリックされたフレームはTrue
+        /// </summary>
+        /// <param name="mousePos">マウスの位置</param>
+        /// <returns></returns>
         public bool IsClick(Point mousePos)
         {
             return rect.Contains(mousePos);
