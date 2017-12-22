@@ -255,6 +255,10 @@ with.
         <Start>守</Start>
         <End>守</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>取</Start>
+        <End>取</End>
+      </CharacterRegion>
       <!--　じゅう -->
       
       <CharacterRegion>
@@ -398,6 +402,10 @@ with.
       <CharacterRegion>
         <Start>特</Start>
         <End>特</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>得</Start>
+        <End>得</End>
       </CharacterRegion>
       
       <!-- な -->

@@ -113,10 +113,12 @@
     <Compile Include="Scene\Town\TownInfoLoader.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\DungeonHintUI.cs" />
+    <Compile Include="UI\DungeonLog.cs" />
     <Compile Include="UI\DungeonPopUI.cs" />
     <Compile Include="UI\DungeonUI.cs" />
     <Compile Include="UI\ItemInfoUI.cs" />
     <Compile Include="UI\ItemUI.cs" />
+    <Compile Include="UI\LogText.cs" />
     <Compile Include="UI\ParameterUI.cs" />
     <Compile Include="UI\PauseUI.cs" />
     <Compile Include="UI\Window.cs" />

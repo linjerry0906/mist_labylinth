@@ -99,7 +99,7 @@ namespace Team27_RougeLike.UI
 
             InitButton();
 
-            if (index == buttons.Count)     //最後までなかったら
+            if (index == buttons.Count || index >= itemList.Count)     //最後までなかったら
             {
                 return;
             }
@@ -195,7 +195,7 @@ namespace Team27_RougeLike.UI
         {
             for (int i = 0; i < itemList.Count; i++)
             {
-                renderer.DrawTexture("fade", position + new Vector2(0, i * HEIGHT), new Vector2(WIDTH, HEIGHT - 2), 0.3f);
+                renderer.DrawTexture("fade", position + new Vector2(0, i * HEIGHT), new Vector2(WIDTH, HEIGHT - 2), alpha);
                 renderer.DrawString(
                     itemList[i].GetItemName(),
                     position + new Vector2(0, i * HEIGHT),

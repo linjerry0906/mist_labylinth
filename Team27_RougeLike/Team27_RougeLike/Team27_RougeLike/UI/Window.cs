@@ -84,6 +84,16 @@ namespace Team27_RougeLike.UI
             return alpha;
         }
 
+        public void SetAlpha(float alpha)
+        {
+            this.alpha = alpha;
+        }
+
+        public void Switch(bool alphaSwitch)
+        {
+            this.alphaSwitch = alphaSwitch;
+        }
+
         public bool IsEnd()
         {
             return alpha <= 0;

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Team27_RougeLike.Scene;
 using Team27_RougeLike.Device;
 
@@ -16,11 +17,15 @@ namespace Team27_RougeLike.UI
     {
         private DungeonPopUI popUI;         //PopメッセージUI
         private DungeonHintUI hintUI;       //ヒントUI
+        private DungeonLog logUI;           //LogUI
 
         public DungeonUI(GameManager gameManager, GameDevice gameDevice)
         {
             popUI = new DungeonPopUI(gameManager, gameDevice);
             hintUI = new DungeonHintUI(gameDevice);
+            logUI = new DungeonLog(
+                new Vector2(30, Def.WindowDef.WINDOW_HEIGHT - 250),
+                new Vector2(280, 150), gameDevice);
         }
 
         /// <summary>
@@ -30,6 +35,7 @@ namespace Team27_RougeLike.UI
         {
             popUI.Draw();
             hintUI.Draw();
+            logUI.Draw();
         }
 
         /// <summary>
@@ -39,6 +45,7 @@ namespace Team27_RougeLike.UI
         {
             popUI.Update();
             hintUI.Update();
+            logUI.Update();
         }
 
         /// <summary>
@@ -56,6 +63,11 @@ namespace Team27_RougeLike.UI
         public DungeonHintUI HintUI
         {
             get { return hintUI; }
+        }
+
+        public DungeonLog LogUI
+        {
+            get { return logUI; }
         }
     }
 }

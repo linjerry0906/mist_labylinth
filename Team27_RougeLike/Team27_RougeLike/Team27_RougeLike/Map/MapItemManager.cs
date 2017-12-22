@@ -94,10 +94,12 @@ namespace Team27_RougeLike.Map
                     bool result = false;
                     if (hint.IsPush(Keys.Space))    //拾ったらもらう処理
                     {
-                        result = GetItem(index);
+                        result = GetItem(index, ui);
                     }
                     if (result)                     //道具欄に追加成功したらメッセージをOFF
+                    {
                         hint.Switch(false);
+                    }
 
                     return;
                 }
@@ -110,11 +112,14 @@ namespace Team27_RougeLike.Map
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        private bool GetItem(int index)
+        private bool GetItem(int index, DungeonUI ui)
         {
             if (!playerItem.AddItem(items[index].GetItem()))
                 return false;
 
+            Item item = items[index].GetItem();
+            Color color = Color.Lerp(Color.White, Color.Gold, item.GetItemRare() / 100.0f);
+            ui.LogUI.AddLog(item.GetItemName() + " を取得した", color);
             items.RemoveAt(index);
             return true;
         }
