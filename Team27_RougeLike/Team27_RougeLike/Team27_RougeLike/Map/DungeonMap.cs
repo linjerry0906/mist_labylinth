@@ -332,6 +332,9 @@ namespace Team27_RougeLike.Map
         /// <returns></returns>
         public Vector3 RandomSpace()
         {
+            if (space.Count <= 0)
+                return Vector3.Zero;    //Error対策
+
             int index = gameDevice.Random.Next(0, space.Count);
             Point spaceCell = space[index];
             space.RemoveAt(index);

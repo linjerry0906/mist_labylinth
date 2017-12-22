@@ -91,12 +91,16 @@ namespace Team27_RougeLike.Scene
             itemAmount = gameDevice.Random.Next(0, itemAmount);
             for (int i = 0; i < itemAmount; i++)
             {
+                Vector3 randomSpace = map.RandomSpace();
+                if (randomSpace == Vector3.Zero)                    //Error対策
+                    break;
+
                 if (gameDevice.Random.Next(0, 101) < 70)            //70%が使用アイテム
                 {
-                    mapItemManager.AddItem(map.RandomSpace());
+                    mapItemManager.AddItem(randomSpace);
                     continue;
                 }
-                mapItemManager.AddEquip(map.RandomSpace());         //30％が装備
+                mapItemManager.AddEquip(randomSpace);               //30％が装備
             }
             #endregion
 
