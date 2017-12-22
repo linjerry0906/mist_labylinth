@@ -25,6 +25,7 @@ namespace Team27_RougeLike.UI
 
         private List<Button> buttons;           //ボタン
         private Item currentItem;               //選択されているアイテム
+        private int itemIndex;                  //特定するための添え字
 
         private ItemInfoUI currentInfo;         //選択されているアイテムの表示
 
@@ -54,6 +55,7 @@ namespace Team27_RougeLike.UI
             removeButton = new Button(position + new Vector2(450, 620), 100, 30);
 
             currentItem = null;
+            itemIndex = -1;
             currentInfo = new ItemInfoUI(position + new Vector2(0, 575), gameDevice);
         }
 
@@ -85,10 +87,14 @@ namespace Team27_RougeLike.UI
                 }
                 index++;
             }
-            if (index == buttons.Count)     //最後までなかったら
-                return;
 
-            currentItem = itemList[index];
+            if (index == buttons.Count)     //最後までなかったら
+            {
+                return;
+            }
+
+            itemIndex = index;
+            currentItem = itemList[itemIndex];
         }
 
         /// <summary>
@@ -125,27 +131,29 @@ namespace Team27_RougeLike.UI
         private void Use()
         {
             currentItem = null;
+            itemIndex = -1;
         }
 
         private void Equip()
         {
-            int index = itemList.FindIndex(i => i == currentItem);
             if(currentItem is ProtectionItem)
             {
-                playerItem.EquipArmor(index);
+                playerItem.EquipArmor(itemIndex);
             }
             else
             {
-                playerItem.EquipLeftHand(index);
+                playerItem.EquipLeftHand(itemIndex);
             }
             currentItem = null;
+            itemIndex = -1;
         }
 
         private void Remove()
         {
-            playerItem.RemoveItem(currentItem);
+            playerItem.RemoveItem(itemIndex);
             buttons.RemoveAt(buttons.Count - 1);
             currentItem = null;
+            itemIndex = -1;
         }
 
         /// <summary>

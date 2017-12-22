@@ -49,9 +49,9 @@ namespace Team27_RougeLike.Object.Item
             return true;
         }
 
-        public void RemoveItem(Item item)
+        public void RemoveItem(int bagIndex)
         {
-            bag.Remove(item);
+            bag.RemoveAt(bagIndex);
         }
 
         /// <summary>
