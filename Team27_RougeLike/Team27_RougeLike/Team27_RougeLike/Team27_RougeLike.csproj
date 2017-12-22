@@ -103,14 +103,13 @@
     <Compile Include="Object\Item\Item3D.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Normal.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Stun.cs" />
-    <Compile Include="Object\Item\ItemButton.cs" />
     <Compile Include="Object\Item\ItemEffects\noEffect.cs" />
     <Compile Include="Object\PlayerStatus.cs" />
     <Compile Include="Object\PlayerStatusLoader.cs" />
     <Compile Include="Scene\Town\ItemShop.cs" />
     <Compile Include="Scene\Load.cs" />
     <Compile Include="Scene\LoadTown.cs" />
-    <Compile Include="Scene\Town\Store.cs" />
+    <Compile Include="Scene\Town\Buy.cs" />
     <Compile Include="Scene\Town\TownInfoLoader.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\DungeonHintUI.cs" />
