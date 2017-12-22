@@ -509,7 +509,10 @@ with.
         <End>弓</End>
       </CharacterRegion>
       <!-- よ -->
-
+      <CharacterRegion>
+        <Start>用</Start>
+        <End>用</End>
+      </CharacterRegion>
       <!-- ら -->
       <!-- り -->
       <!-- りょう -->
