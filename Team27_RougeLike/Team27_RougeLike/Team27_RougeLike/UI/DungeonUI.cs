@@ -65,6 +65,9 @@ namespace Team27_RougeLike.UI
             get { return hintUI; }
         }
 
+        /// <summary>
+        /// Log情報を表示するUI
+        /// </summary>
         public DungeonLog LogUI
         {
             get { return logUI; }

@@ -13,9 +13,9 @@ namespace Team27_RougeLike.UI
 {
     class LogText
     {
-        private string logText;
-        private Color color;
-        private float alpha;
+        private string logText;     //Log情報
+        private Color color;        //色
+        private float alpha;        //透明度
 
         public LogText(string logText, Color color, float alpha = 1.0f)
         {
@@ -24,17 +24,26 @@ namespace Team27_RougeLike.UI
             this.alpha = alpha;
         }
 
+        /// <summary>
+        /// 透明度
+        /// </summary>
         public float Alpha
         {
             get { return alpha; }
             set { alpha = value; }
         }
 
+        /// <summary>
+        /// Log情報
+        /// </summary>
         public string Log
         {
             get { return logText; }
         }
 
+        /// <summary>
+        /// 色
+        /// </summary>
         public Color Color
         {
             get { return color; }

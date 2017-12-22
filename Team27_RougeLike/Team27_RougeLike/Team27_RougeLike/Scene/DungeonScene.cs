@@ -191,12 +191,12 @@ namespace Team27_RougeLike.Scene
         {
             if (gameDevice.InputState.GetKeyState(Keys.Q))
             {
-                angle += 1;
+                angle += 1.5f;
                 angle = (angle > 360) ? angle - 360 : angle;
             }
             else if (gameDevice.InputState.GetKeyState(Keys.E))
             {
-                angle -= 1;
+                angle -= 1.5f;
                 angle = (angle < 0) ? angle + 360 : angle;
             }
             gameDevice.MainProjector.Rotate(angle);
@@ -207,22 +207,32 @@ namespace Team27_RougeLike.Scene
         /// </summary>
         private void CheckEnd()
         {
-            if (gameDevice.InputState.GetKeyTrigger(Keys.P))            //Pause機能
+            //Pause機能
+            if (gameDevice.InputState.GetKeyTrigger(Keys.P))
             {
                 endFlag = true;
                 nextScene = SceneType.Pause;
             }
 
-            if (stageManager.IsTime())                                  //時間になったら村に戻される
+            //時間になったら村に戻される
+            if (stageManager.IsTime())
             {
                 endFlag = true;
                 nextScene = SceneType.Town;
                 return;
             }
 
-            if(map.WorldToMap(characterManager.GetPlayer().Position) == map.EndPoint)         //階段にたどり着いた場合
+            //階段にたどり着いた場合
+            if (map.WorldToMap(characterManager.GetPlayer().Position) == map.EndPoint)
             {
-                endFlag = true;                     //ToDo：次の階層へ行くかどうかを聞く
+                //ヒント文字を出す
+                ui.HintUI.Switch(true);
+                ui.HintUI.SetMessage("Press Space to go next");
+                if (!ui.HintUI.IsPush(Keys.Space))
+                    return;
+
+                //次へ行く処理
+                endFlag = true;
                 nextScene = SceneType.LoadMap;
                 stageManager.NextFloor();
                 if (stageManager.IsBoss())
