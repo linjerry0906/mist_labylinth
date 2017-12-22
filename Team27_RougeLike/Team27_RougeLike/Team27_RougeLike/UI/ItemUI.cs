@@ -26,6 +26,8 @@ namespace Team27_RougeLike.UI
         private List<Button> buttons;
         private Item currentItem;
 
+        private ItemInfoUI currentInfo;
+
         private readonly int WIDTH = 200;
         private readonly int HEIGHT = 20;
 
@@ -39,18 +41,22 @@ namespace Team27_RougeLike.UI
             buttons = new List<Button>();
             itemList = playerItem.BagList();
 
-            for(int i = 0; i < itemList.Count + 1; i++)
+            for(int i = 0; i < itemList.Count; i++)
             {
                 buttons.Add(
                     new Button(position + new Vector2(0, i * HEIGHT), WIDTH, HEIGHT));
             }
 
             currentItem = null;
+            currentInfo = new ItemInfoUI(position + new Vector2(0, 540), gameDevice);
         }
 
+        /// <summary>
+        /// ボタンの更新
+        /// </summary>
         public void Update()
         {
-            if (!input.IsLeftClick())
+            if (!input.IsLeftClick())       //clickしていなかったら判定
                 return;
 
             Point mousePos = new Point((int)input.GetMousePosition().X, (int)input.GetMousePosition().Y);
@@ -69,6 +75,10 @@ namespace Team27_RougeLike.UI
             currentItem = itemList[index];
         }
 
+        /// <summary>
+        /// Listを表示
+        /// </summary>
+        /// <param name="alpha">透明値</param>
         public void Draw(float alpha)
         {
             for (int i = 0; i < itemList.Count; i++)
@@ -80,6 +90,11 @@ namespace Team27_RougeLike.UI
                     new Vector2(1.2f, 1.2f),
                     alpha, false, true);
             }
+
+            if (currentItem == null)
+                return;
+
+            currentInfo.Draw(currentItem, alpha);
         }
     }
 }
