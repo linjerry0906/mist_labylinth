@@ -45,9 +45,22 @@ namespace Team27_RougeLike.UI
             return rect.Center;
         }
 
+        /// <summary>
+        /// 位置
+        /// </summary>
+        /// <returns></returns>
         public Point Position()
         {
             return rect.Location;
+        }
+
+        /// <summary>
+        /// 大きさ
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 Size()
+        {
+            return new Vector2(rect.Width, rect.Height);
         }
     }
 }

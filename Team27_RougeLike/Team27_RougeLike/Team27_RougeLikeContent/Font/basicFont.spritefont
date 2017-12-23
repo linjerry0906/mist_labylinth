@@ -118,6 +118,11 @@ with.
         <Start>買</Start>
         <End>買</End>
       </CharacterRegion>
+
+      <CharacterRegion>
+        <Start>兜</Start>
+        <End>兜</End>
+      </CharacterRegion>
       
       <!-- かい -->
       <CharacterRegion>
@@ -178,6 +183,10 @@ with.
       </CharacterRegion>
 
       <!-- く -->
+      <CharacterRegion>
+        <Start>靴</Start>
+        <End>靴</End>
+      </CharacterRegion>
       <!-- くん -->
 
       <!-- け -->
@@ -207,6 +216,10 @@ with.
       <!-- げつ -->
 
       <!-- こ -->
+      <CharacterRegion>
+        <Start>籠</Start>
+        <End>籠</End>
+      </CharacterRegion>
       <!-- こう -->
       <CharacterRegion>
         <Start>攻</Start>
@@ -528,6 +541,10 @@ with.
       <CharacterRegion>
         <Start>用</Start>
         <End>用</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>鎧</Start>
+        <End>鎧</End>
       </CharacterRegion>
       <!-- ら -->
       <!-- り -->

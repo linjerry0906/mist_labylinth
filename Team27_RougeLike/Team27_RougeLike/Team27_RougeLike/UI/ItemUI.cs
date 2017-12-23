@@ -31,6 +31,8 @@ namespace Team27_RougeLike.UI
         private DungeonPopUI popUI;             //PopUi
         private Button[] popButtons;            //PopUiのボタン
 
+        private EquipUI equipUI;
+
         private readonly int WIDTH = 150;       //ボタンの長さ
         private readonly int HEIGHT = 22;       //ボタンの高さ
 
@@ -50,14 +52,20 @@ namespace Team27_RougeLike.UI
 
             InitButton();
 
-            equipButton = new Button(position + new Vector2(450, 580), 100, 30);
-            removeButton = new Button(position + new Vector2(450, 620), 100, 30);
+            equipButton = new Button(position + new Vector2(450, 590), 100, 30);
+            removeButton = new Button(position + new Vector2(450, 630), 100, 30);
             #endregion
 
             #region ItemInfo
             currentItem = null;
             itemIndex = -1;
             currentInfo = new ItemInfoUI(position + new Vector2(0, 575), gameDevice);
+            #endregion
+
+            #region EquipUI
+            equipUI = new EquipUI(
+                position + new Vector2(660, 480),
+                gameManager, gameDevice);
             #endregion
 
             #region PopUI
@@ -80,6 +88,11 @@ namespace Team27_RougeLike.UI
                 buttons.Add(
                     new Button(position + new Vector2(0, i * HEIGHT), WIDTH, HEIGHT));
             }
+        }
+
+        public void SwitchOff()
+        {
+            popUI.PopOff();
         }
 
         /// <summary>
@@ -257,7 +270,9 @@ namespace Team27_RougeLike.UI
 
             DrawInfo(alpha);
 
-            DrawPopUI(alpha);
+            equipUI.Draw(alpha);
+
+            DrawPopUI();
         }
 
         /// <summary>
@@ -268,7 +283,9 @@ namespace Team27_RougeLike.UI
         {
             for (int i = 0; i < itemList.Count; i++)
             {
-                renderer.DrawTexture("fade", position + new Vector2(0, i * HEIGHT), new Vector2(WIDTH, HEIGHT - 2), alpha);
+                float drawAlpha = alpha;
+                if (i == itemIndex) drawAlpha *= 1.7f;       //選択されたアイテムをハイライト
+                renderer.DrawTexture("fade", position + new Vector2(0, i * HEIGHT), new Vector2(WIDTH, HEIGHT - 2), drawAlpha);
                 renderer.DrawString(
                     itemList[i].GetItemName(),
                     position + new Vector2(0, i * HEIGHT),
@@ -294,6 +311,10 @@ namespace Team27_RougeLike.UI
                 buttonString = "装備";
             }
 
+            renderer.DrawTexture(
+                "fade",
+                new Vector2(equipButton.Position().X, equipButton.Position().Y),
+                equipButton.Size(), alpha);
             renderer.DrawString(
                     buttonString,
                     new Vector2(equipButton.ButtonCenter().X, equipButton.ButtonCenter().Y),
@@ -301,6 +322,10 @@ namespace Team27_RougeLike.UI
                     new Vector2(1.0f, 1.0f),
                     alpha, true, true);
 
+            renderer.DrawTexture(
+                "fade",
+                new Vector2(removeButton.Position().X, removeButton.Position().Y),
+                removeButton.Size(), alpha);
             renderer.DrawString(
                     "捨てる",
                     new Vector2(removeButton.ButtonCenter().X, removeButton.ButtonCenter().Y),
@@ -315,32 +340,32 @@ namespace Team27_RougeLike.UI
         /// PopUiを描画
         /// </summary>
         /// <param name="alpha">透明度</param>
-        private void DrawPopUI(float alpha)
+        private void DrawPopUI()
         {
             if (!popUI.IsPop())
                 return;
 
             popUI.Draw();
 
-            renderer.DrawTexture("fade", 
-                new Vector2(popButtons[0].Position().X, popButtons[0].Position().Y), 
-                new Vector2(100, 30), alpha);
+            renderer.DrawTexture("fade",
+                new Vector2(popButtons[0].Position().X, popButtons[0].Position().Y),
+                new Vector2(100, 30), popUI.Alpha);
             renderer.DrawString(
                     "左手",
                     new Vector2(popButtons[0].ButtonCenter().X, popButtons[0].ButtonCenter().Y),
                     Color.White,
                     new Vector2(1.0f, 1.0f),
-                    alpha, true, true);
+                    popUI.Alpha, true, true);
 
             renderer.DrawTexture("fade",
                 new Vector2(popButtons[1].Position().X, popButtons[1].Position().Y),
-                new Vector2(100, 30), alpha);
+                new Vector2(100, 30), popUI.Alpha);
             renderer.DrawString(
                     "右手",
                     new Vector2(popButtons[1].ButtonCenter().X, popButtons[1].ButtonCenter().Y),
                     Color.White,
                     new Vector2(1.0f, 1.0f),
-                    alpha, true, true);
+                    popUI.Alpha, true, true);
         }
     }
 }

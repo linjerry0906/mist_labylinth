@@ -83,57 +83,75 @@ namespace Team27_RougeLike.Object.Item
         /// 左手に装備する
         /// </summary>
         /// <param name="bagIndex">バッグ内のIndex</param>
-        public void EquipLeftHand(int bagIndex)
+        public bool EquipLeftHand(int bagIndex)
         {
             Item item = bag[bagIndex];
             if (!(item is WeaponItem))          　//エラー対策
-                return;
+                return false;
 
-            if (leftHand != null)                 //装備している状態
-            {
-                bag.Add(leftHand);                //バッグに戻す
-            }
 
             WeaponItem.WeaponType type = ((WeaponItem)item).GetWeaponType();
             if (type == WeaponItem.WeaponType.Bow)     //弓は両手
             {
+                if (rightHand != null && leftHand != null &&
+                    bag.Count + 2 > MaxItemCount)      //両手いっぱいで、弓を装備する場合はカバンの容量をチェック
+                {
+                    return false;
+                }
+
+                if (leftHand != null)                 //装備している状態
+                {
+                    bag.Add(leftHand);                //バッグに戻す
+                }
+
                 if (rightHand != null)                 //装備している状態
                 {
                     bag.Add(rightHand);                //バッグに戻す
+                    rightHand = null;
+                }
+            }
+            else
+            {
+                if (leftHand != null)                 //装備している状態
+                {
+                    bag.Add(leftHand);                //バッグに戻す
                 }
             }
 
             leftHand = (WeaponItem)item;          //装備する
             bag.RemoveAt(bagIndex);
+            return true;
         }
 
         /// <summary>
         /// 右手に装備する
         /// </summary>
         /// <param name="bagIndex">バッグ内のIndex</param>
-        public void EquipRightHand(int bagIndex)
+        public bool EquipRightHand(int bagIndex)
         {
             Item item = bag[bagIndex];
             if (!(item is WeaponItem))             //エラー対策
-                return;
+                return false;
 
             WeaponItem.WeaponType type = ((WeaponItem)item).GetWeaponType();
             if (type == WeaponItem.WeaponType.Bow) //右手は弓を装備できない
-                return;
+                return false;
+
+
+            if (leftHand != null && leftHand.GetWeaponType() == WeaponItem.WeaponType.Bow)      //弓は同時装備できない
+            {
+                bag.Add(leftHand);                 //バッグに戻す
+                leftHand = null;
+            }
 
             if (rightHand != null)                 //装備している状態
             {
                 bag.Add(rightHand);                //バッグに戻す
             }
 
-            if (leftHand.GetWeaponType() == WeaponItem.WeaponType.Bow)
-            {
-                bag.Add(leftHand);                  //バッグに戻す
-                leftHand = null;
-            }
-
             rightHand = (WeaponItem)item;          //装備する
-            bag.Remove(bag[bagIndex]);
+            bag.RemoveAt(bagIndex);
+            return true;
         }
 
         /// <summary>

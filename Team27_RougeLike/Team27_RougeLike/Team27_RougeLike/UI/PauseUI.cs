@@ -39,7 +39,7 @@ namespace Team27_RougeLike.UI
             backLayer.Switch();             //開く
 
             parameterUI = new ParameterUI(
-                backLayer.GetRightTop() + new Vector2(-350, 20),        //背景レイヤーから相対位置を取る
+                backLayer.GetRightTop() + new Vector2(-350, 30),        //背景レイヤーから相対位置を取る
                 gameManager, gameDevice);
 
             itemUI = new ItemUI(
@@ -73,6 +73,7 @@ namespace Team27_RougeLike.UI
         public void SwitchOff()
         {
             backLayer.Switch();
+            itemUI.SwitchOff();
         }
 
         /// <summary>

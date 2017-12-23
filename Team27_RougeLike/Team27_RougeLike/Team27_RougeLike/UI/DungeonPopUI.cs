@@ -125,5 +125,13 @@ namespace Team27_RougeLike.UI
                 window.CurrentAlpha() + 0.3f, 
                 true, true);
         }
+
+        /// <summary>
+        /// 現在のAlpha値
+        /// </summary>
+        public float Alpha
+        {
+            get { return window.CurrentAlpha(); }
+        }
     }
 }
