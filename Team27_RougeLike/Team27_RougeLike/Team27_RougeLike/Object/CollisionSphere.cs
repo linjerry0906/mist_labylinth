@@ -147,6 +147,14 @@ namespace Team27_RougeLike.Object
         }
 
         /// <summary>
+        /// 地面についた
+        /// </summary>
+        public void Ground()
+        {
+            gSpeed = 0;
+        }
+
+        /// <summary>
         /// Collisionの中心座標
         /// </summary>
         public Vector3 Position

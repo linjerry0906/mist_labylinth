@@ -28,6 +28,8 @@ namespace Team27_RougeLike.Scene
         private CharacterManager characterManager;
         private float angle;
 
+        Model model;
+
         public BossScene(GameManager gameManager, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
@@ -39,7 +41,8 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
-            renderer.DrawModel("B_01", Vector3.Zero, new Vector3(20, 20, 20), Color.White);
+            renderer.DrawModel("B_01", Vector3.Zero, new Vector3(50, 50, 50), Color.White);
+
             characterManager.Draw();
 
             DrawUI();
@@ -50,9 +53,11 @@ namespace Team27_RougeLike.Scene
             renderer.Begin();
 
             renderer.DrawString("Boss Scene\n P Key:Pause\n T Key: Back to Town", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
-            renderer.DrawString("ぼす は ただいま　がいしゅつちゅう　ですよ-----", 
+            renderer.DrawString("ぼす は ただいま　がいしゅつちゅう　ですよ-----",
                 new Vector2(Def.WindowDef.WINDOW_WIDTH / 2, Def.WindowDef.WINDOW_HEIGHT / 2),
                 new Color(1.0f, 0.0f, 0.0f), new Vector2(1.2f, 1.2f), 1.0f, true, true);
+
+            renderer.DrawString("", new Vector2(0, 300), new Vector2(2.0f, 2.0f), Color.White);
 
             renderer.End();
         }
@@ -72,6 +77,9 @@ namespace Team27_RougeLike.Scene
             angle = 0;
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
             #endregion
+
+            model = renderer.GetModel("B_01");
+
         }
 
         public bool IsEnd()
@@ -93,14 +101,23 @@ namespace Team27_RougeLike.Scene
             RotateCamera();
 
             //Chara処理
-            //characterManager.Update(gameTime);
+            characterManager.Update(gameTime);
 
-            //characterManager.GetCharacters().ForEach(c =>
-            //{
-            //    Vector3 min = new Vector3(-10, 150, -10);
-            //    Vector3 max = new Vector3(10, 500, 10);
-            //    c.Collision.Position = Vector3.Clamp(c.Collision.Position, min, max);
-            //});
+            Plane p = new Plane(Vector3.Up, 0);
+            characterManager.GetCharacters().ForEach(c =>
+            {
+                Ray r = new Ray(c.Collision.Position, Vector3.Down);
+
+                if (r.Intersects(p).HasValue)
+                {
+                    float length = r.Intersects(p).Value;
+                    if (length <= c.Collision.Radius)
+                    {
+                        c.Collision.Force(Vector3.Up, c.Collision.Radius - length, false);
+                        c.Collision.Ground();
+                    }
+                }
+            });
 
             //Debug 村シーンへ
             if (input.GetKeyTrigger(Keys.T))
