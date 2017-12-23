@@ -57,7 +57,7 @@ namespace Team27_RougeLike.UI
             {
                 Vector2 drawPos = position + new Vector2(0, i * (cellSize.Y + 5));      //描画位置
                 Vector2 center = drawPos + cellSize / 2;                                //中心部
-                renderer.DrawTexture("fade", drawPos, cellSize, alpha);                 //背景
+                renderer.DrawTexture("fade", drawPos, cellSize, alpha * 0.5f);                 //背景
                 renderer.DrawString(
                     parts[i],       //説明欄
                     center,
@@ -67,7 +67,7 @@ namespace Team27_RougeLike.UI
 
                 Vector2 equipPos = drawPos + new Vector2(cellSize.X + 2, 0);            //描画位置       
                 Vector2 equipCenter = equipPos + equipCellSize / 2;                     //中心部
-                renderer.DrawTexture("fade", equipPos, equipCellSize, alpha);           //背景
+                renderer.DrawTexture("fade", equipPos, equipCellSize, alpha * 0.5f);           //背景
                 renderer.DrawString(
                     equips[i],      //装備欄
                     equipCenter,

@@ -64,7 +64,7 @@ namespace Team27_RougeLike.UI
 
             #region EquipUI
             equipUI = new EquipUI(
-                position + new Vector2(660, 480),
+                position + new Vector2(660, 485),
                 gameManager, gameDevice);
             #endregion
 
@@ -284,12 +284,22 @@ namespace Team27_RougeLike.UI
             for (int i = 0; i < itemList.Count; i++)
             {
                 float drawAlpha = alpha;
-                if (i == itemIndex) drawAlpha *= 1.7f;       //選択されたアイテムをハイライト
+                Color color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+                if (i == itemIndex)
+                {
+                    drawAlpha *= 2.0f;       //選択されたアイテムをハイライト
+                    color = Color.Yellow;
+                }
+                else
+                {
+                    drawAlpha *= 0.4f;       //選択されてないアイテムは対比するためFadeのAlphaを下げる
+                }
+
                 renderer.DrawTexture("fade", position + new Vector2(0, i * HEIGHT), new Vector2(WIDTH, HEIGHT - 2), drawAlpha);
                 renderer.DrawString(
                     itemList[i].GetItemName(),
                     position + new Vector2(0, i * HEIGHT),
-                    Color.White,
+                    color,
                     new Vector2(1.1f, 1.1f),
                     alpha, false, false);
             }
@@ -314,7 +324,7 @@ namespace Team27_RougeLike.UI
             renderer.DrawTexture(
                 "fade",
                 new Vector2(equipButton.Position().X, equipButton.Position().Y),
-                equipButton.Size(), alpha);
+                equipButton.Size(), alpha * 0.5f);
             renderer.DrawString(
                     buttonString,
                     new Vector2(equipButton.ButtonCenter().X, equipButton.ButtonCenter().Y),
@@ -325,7 +335,7 @@ namespace Team27_RougeLike.UI
             renderer.DrawTexture(
                 "fade",
                 new Vector2(removeButton.Position().X, removeButton.Position().Y),
-                removeButton.Size(), alpha);
+                removeButton.Size(), alpha * 0.5f);
             renderer.DrawString(
                     "捨てる",
                     new Vector2(removeButton.ButtonCenter().X, removeButton.ButtonCenter().Y),
@@ -349,23 +359,23 @@ namespace Team27_RougeLike.UI
 
             renderer.DrawTexture("fade",
                 new Vector2(popButtons[0].Position().X, popButtons[0].Position().Y),
-                new Vector2(100, 30), popUI.Alpha);
+                new Vector2(100, 30), popUI.Alpha * 2);
             renderer.DrawString(
                     "左手",
                     new Vector2(popButtons[0].ButtonCenter().X, popButtons[0].ButtonCenter().Y),
                     Color.White,
                     new Vector2(1.0f, 1.0f),
-                    popUI.Alpha, true, true);
+                    popUI.Alpha * 2, true, true);
 
             renderer.DrawTexture("fade",
                 new Vector2(popButtons[1].Position().X, popButtons[1].Position().Y),
-                new Vector2(100, 30), popUI.Alpha);
+                new Vector2(100, 30), popUI.Alpha * 2);
             renderer.DrawString(
                     "右手",
                     new Vector2(popButtons[1].ButtonCenter().X, popButtons[1].ButtonCenter().Y),
                     Color.White,
                     new Vector2(1.0f, 1.0f),
-                    popUI.Alpha, true, true);
+                    popUI.Alpha * 2, true, true);
         }
     }
 }

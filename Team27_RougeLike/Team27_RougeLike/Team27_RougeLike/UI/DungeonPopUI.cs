@@ -52,6 +52,7 @@ namespace Team27_RougeLike.UI
                 Def.WindowDef.WINDOW_HEIGHT / 2 - size.Y / 2);
             window = new Window(gameDevice, pos, size);             //背景レイアウト
             window.Initialize();
+            window.SetAlphaLimit(0.4f);
         }
 
         public Vector2 Center
@@ -122,7 +123,7 @@ namespace Team27_RougeLike.UI
                 window.GetCenter() - new Vector2(0, 20), 
                 Color.White, 
                 new Vector2(1.0f, 1.0f), 
-                window.CurrentAlpha() + 0.3f, 
+                window.CurrentAlpha(), 
                 true, true);
         }
 

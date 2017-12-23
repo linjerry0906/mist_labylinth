@@ -83,6 +83,13 @@ namespace Team27_RougeLike
             date[0] = new Color(0, 0, 0);
             fade.SetData(date);
             gameDevice.Renderer.LoadTexture("fade", fade);
+
+            //白：1ピクセル
+            Texture2D white = new Texture2D(GraphicsDevice, 1, 1);
+            Color[] data = new Color[1 * 1];
+            data[0] = new Color(1.0f, 1.0f, 1.0f);
+            white.SetData(data);
+            gameDevice.Renderer.LoadTexture("white", white);
         }
 
         /// <summary>

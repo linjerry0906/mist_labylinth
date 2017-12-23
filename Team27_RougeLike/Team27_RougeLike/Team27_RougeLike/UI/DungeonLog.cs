@@ -39,9 +39,11 @@ namespace Team27_RougeLike.UI
             if (!window.CurrentState())                 //Window開いていなかったら更新する必要がない
                 return;
 
-            foreach (LogText text in logs)              //Logの透明どを下げる
+            Vector2 position = window.GetOffsetPosition();
+            for(int i = 0; i < logs.Count; i++)
             {
-                text.Alpha -= 0.005f;
+                logs[i].Alpha -= 0.005f;                //Logの透明どを下げる
+                logs[i].Update(position + new Vector2(2, i * HEIGHT));
             }
 
             logs.RemoveAll(text => text.Alpha <= 0);    //完全透明になったらLog情報を削除
@@ -60,9 +62,10 @@ namespace Team27_RougeLike.UI
         /// <param name="color">色</param>
         public void AddLog(string log, Color color)
         {
-            logs.Add(new LogText(log, color));      //Log追加
-            window.Switch(true);                    //Windowを開く
-            window.SetAlpha(0.5f);                  //透明度設定
+            Vector2 position = window.GetOffsetPosition() + new Vector2(2, logs.Count * HEIGHT);
+            logs.Add(new LogText(log, color, position));      //Log追加
+            window.Switch(true);                              //Windowを開く
+            window.SetAlpha(0.5f);                            //透明度設定
         }
 
         /// <summary>
@@ -71,9 +74,10 @@ namespace Team27_RougeLike.UI
         /// <param name="log">Log情報</param>
         public void AddLog(string log)
         {
-            logs.Add(new LogText(log, Color.White));      //Log追加
-            window.Switch(true);                          //Windowを開く
-            window.SetAlpha(0.5f);                        //透明度設定
+            Vector2 position = window.GetOffsetPosition() + new Vector2(2, logs.Count * HEIGHT);
+            logs.Add(new LogText(log, Color.White, position));      //Log追加
+            window.Switch(true);                                    //Windowを開く
+            window.SetAlpha(0.5f);                                  //透明度設定
         }
 
         /// <summary>
@@ -82,13 +86,12 @@ namespace Team27_RougeLike.UI
         public void Draw()
         {
             window.Draw();          //背景描画
-            Vector2 position = window.GetOffsetPosition();
             //Log情報を表示
             for (int i = 0; i < logs.Count; i++)
             {
                 renderer.DrawString(
                     logs[i].Log,
-                    position + new Vector2(2, i * HEIGHT),
+                    logs[i].Position,
                     new Vector2(1.0f, 1.0f),
                     logs[i].Color,
                     logs[i].Alpha);

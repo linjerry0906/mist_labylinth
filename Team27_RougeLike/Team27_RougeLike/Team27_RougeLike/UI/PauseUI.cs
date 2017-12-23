@@ -22,7 +22,8 @@ namespace Team27_RougeLike.UI
 
         private Window backLayer;               //背景レイヤー
         private ParameterUI parameterUI;        //パラメータ表示UI
-        private ItemUI itemUI;
+        private ItemUI itemUI;                  //ItemUI
+        private readonly float LIMIT_ALPHA = 0.1f;      //背景Alphaの最大値 
 
         public PauseUI(GameManager gameManager, GameDevice gameDevice)
         {
@@ -36,6 +37,7 @@ namespace Team27_RougeLike.UI
                 new Vector2(10, 10),
                 new Vector2(Def.WindowDef.WINDOW_WIDTH - 20, Def.WindowDef.WINDOW_HEIGHT - 20));
             backLayer.Initialize();         //初期化
+            backLayer.SetAlphaLimit(LIMIT_ALPHA);
             backLayer.Switch();             //開く
 
             parameterUI = new ParameterUI(
@@ -81,9 +83,10 @@ namespace Team27_RougeLike.UI
         /// </summary>
         public void Draw()
         {
-            backLayer.Draw();
-            parameterUI.Draw(backLayer.CurrentAlpha());
-            itemUI.Draw(backLayer.CurrentAlpha());
+            float constractAlpha = 1.0f / LIMIT_ALPHA;
+            backLayer.Draw("white");
+            parameterUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
+            itemUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
         }
     }
 }
