@@ -119,6 +119,11 @@ namespace Team27_RougeLike.Map
 
             Item item = items[index].GetItem();
             Color color = Color.Lerp(Color.White, Color.Gold, item.GetItemRare() / 100.0f);       //色調整
+            string name = item.GetItemName();
+            if (item is WeaponItem)
+                name += " + " + ((WeaponItem)item).GetReinforcement();
+            if (item is ProtectionItem)
+                name += " + " + ((ProtectionItem)item).GetReinforcement();
             ui.LogUI.AddLog(item.GetItemName() + " を取得した", color);                           //Logに追加
             items.RemoveAt(index);
             return true;

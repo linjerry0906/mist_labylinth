@@ -59,7 +59,7 @@ namespace Team27_RougeLike.UI
             #region ItemInfo
             currentItem = null;
             itemIndex = -1;
-            currentInfo = new ItemInfoUI(position + new Vector2(0, 575), gameDevice);
+            currentInfo = new ItemInfoUI(position + new Vector2(0, 575), gameManager, gameDevice);
             #endregion
 
             #region EquipUI
@@ -296,8 +296,14 @@ namespace Team27_RougeLike.UI
                 }
 
                 renderer.DrawTexture("fade", position + new Vector2(0, i * HEIGHT), new Vector2(WIDTH, HEIGHT - 2), drawAlpha);
+                string name = itemList[i].GetItemName();
+                if (itemList[i] is WeaponItem)
+                    name += " + " + ((WeaponItem)itemList[i]).GetReinforcement();
+                if (itemList[i] is ProtectionItem)
+                    name += " + " + ((ProtectionItem)itemList[i]).GetReinforcement();
+
                 renderer.DrawString(
-                    itemList[i].GetItemName(),
+                    name,
                     position + new Vector2(0, i * HEIGHT),
                     color,
                     new Vector2(1.1f, 1.1f),

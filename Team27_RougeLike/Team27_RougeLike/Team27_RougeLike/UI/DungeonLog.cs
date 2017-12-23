@@ -63,6 +63,11 @@ namespace Team27_RougeLike.UI
         public void AddLog(string log, Color color)
         {
             Vector2 position = window.GetOffsetPosition() + new Vector2(2, logs.Count * HEIGHT);
+            if(logs.Count > 0)
+            {
+                LogText last = logs[logs.Count - 1];
+                position = last.Position + new Vector2(0, HEIGHT);
+            }
             logs.Add(new LogText(log, color, position));      //Log追加
             window.Switch(true);                              //Windowを開く
             window.SetAlpha(0.5f);                            //透明度設定
@@ -75,6 +80,11 @@ namespace Team27_RougeLike.UI
         public void AddLog(string log)
         {
             Vector2 position = window.GetOffsetPosition() + new Vector2(2, logs.Count * HEIGHT);
+            if (logs.Count > 0)
+            {
+                LogText last = logs[logs.Count - 1];
+                position = last.Position + new Vector2(0, HEIGHT);
+            }
             logs.Add(new LogText(log, Color.White, position));      //Log追加
             window.Switch(true);                                    //Windowを開く
             window.SetAlpha(0.5f);                                  //透明度設定
