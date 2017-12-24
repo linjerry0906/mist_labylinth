@@ -10,8 +10,18 @@ using Team27_RougeLike.UI;
 
 namespace Team27_RougeLike.Scene.Town
 {
-    class Buy
+    class Store
     {
+        private enum ModeType
+        {
+            Buy,
+            Sell,
+            No,
+        }
+
+        private ModeType modeType;
+        private string text = "バグ";
+
         private GameManager gameManager;
         private GameDevice gameDevice;
         private Renderer renderer;
@@ -21,6 +31,7 @@ namespace Team27_RougeLike.Scene.Town
 
         private List<Item> consumptions;
         private List<Item> equipments;
+        private List<Item> playerItems;
 
         private List<Item> leftItems;
         private List<Item> rightItems;
@@ -41,10 +52,12 @@ namespace Team27_RougeLike.Scene.Town
         
         private Vector2 buttonPosition;
         private Window buttonWindow;
-        private Button buyButton;
+        private Button button;
 
-        public Buy(GameManager gameManager, GameDevice gameDevice)
+        public Store(GameManager gameManager, GameDevice gameDevice)
         {
+            modeType = ModeType.No;
+
             this.gameDevice = gameDevice;
             this.gameManager = gameManager;
             input = gameDevice.InputState;
@@ -60,11 +73,14 @@ namespace Team27_RougeLike.Scene.Town
 
             buttonPosition = new Vector2(1080 - 64, 720 - 64);
             buttonWindow = new Window(gameDevice, buttonPosition, new Vector2(64, 32));
-            buyButton = new Button(buttonPosition, 64, 32);
+            button = new Button(buttonPosition, 64, 32);
         }
 
         public void Initialize()
         {
+            modeType = ModeType.No;
+
+            playerItems = new List<Item>();
             consumptions = new List<Item>();
             equipments = new List<Item>();
 
@@ -75,38 +91,48 @@ namespace Team27_RougeLike.Scene.Town
             rightButtons = new List<Button>();
             rightWindows = new List<Window>();
 
-            consumptions = itemManager.GetConsumptionList();
-            equipments = itemManager.GetEquipmentList();
-
             isInventoryFullMessege = false;
             isRightListFull = false;
             messegeWindow.Initialize();
             messegeWindow.SetAlphaLimit(0.8f);
 
-            for (int i = 0; i < equipments.Count; i++)
-            {
-                leftItems.Add(equipments[i]);
-                Vector2 position = new Vector2(64, 96 + 32 * (i + 1));
-                leftButtons.Add(new Button(position, buttonWidht, buttonHeight));
-                leftWindows.Add(new Window(gameDevice, position, new Vector2(buttonWidht, buttonHeight)));
-                leftWindows[i].Initialize();
-                leftWindows[i].Switch();
-            }
-            for (int i = 0; i < consumptions.Count; i++)
-            {
-                leftItems.Add(consumptions[i]);
-                Vector2 position = new Vector2(64, 96 + 32 * (i + equipments.Count + 1));
-                leftButtons.Add(new Button(position, buttonWidht, buttonHeight));
-                leftWindows.Add(new Window(gameDevice, position, new Vector2(buttonWidht, buttonHeight)));
-                leftWindows[equipments.Count + i].Initialize();
-                leftWindows[equipments.Count + i].Switch();
-            }
-
-
             totalPrice = 0;
 
             buttonWindow.Initialize();
             buttonWindow.Switch();
+        }
+
+        public void Buy()
+        {
+            modeType = ModeType.Buy;
+
+            text = "買う";
+
+            equipments = itemManager.GetEquipmentList();
+            consumptions = itemManager.GetConsumptionList();
+
+            foreach (Item item in equipments)
+            {
+                AddLeftList(item);
+            }
+            foreach (Item item in consumptions)
+            {
+                AddLeftList(item);
+            }
+        }
+
+        public void Sell()
+        {
+            modeType = ModeType.Sell;
+
+            text = "売る";
+
+            playerItems = playerInventory.BagList();
+
+            foreach(Item item in playerItems)
+            {
+                AddLeftList(item);
+            }
         }
 
         public void Update()
@@ -129,12 +155,25 @@ namespace Team27_RougeLike.Scene.Town
                 }
             }
 
-            playerInventory.ItemCount(ref currentNum, ref maxNum);
-
             Point mousePos = new Point((int)input.GetMousePosition().X, (int)input.GetMousePosition().Y);
 
+            if (modeType == ModeType.Buy)
+            {
+                BuyUpdate(mousePos);
+            }
+            else if (modeType == ModeType.Sell)
+            {
+                SellUpdate(mousePos);
+            }
+        }
+
+        public void BuyUpdate(Point mousePos)
+        {
+
+            playerInventory.ItemCount(ref currentNum, ref maxNum);
+
             //アイテムを買う処理(お金が足りるか、バックにはいるかチェック)
-            if (buyButton.IsClick(mousePos))
+            if (button.IsClick(mousePos))
             {
                 if (maxNum >= currentNum + rightItems.Count)
                 {
@@ -170,11 +209,11 @@ namespace Team27_RougeLike.Scene.Town
                 //売り物リストから買う物リストに追加する処理(買い物リストが空いているかチェック)
                 if (leftButtons[i].IsClick(mousePos))
                 {
-                    if (rightButtons.Count >= 15)
+                    if (rightButtons.Count >= 20)
                     {
                         isRightListFull = true;
                     }
-                    else if(input.IsLeftClick())
+                    else if (input.IsLeftClick())
                     {
                         AddRightList(leftItems[i]);
                     }
@@ -200,11 +239,87 @@ namespace Team27_RougeLike.Scene.Town
             }
         }
 
+        public void SellUpdate(Point mousePos)
+        {
+            //アイテムを売る処理
+            if (button.IsClick(mousePos))
+            {
+                if (input.IsLeftClick())
+                {
+                    //プレイヤーにお金が入る処理
+
+                    totalPrice = 0;
+                    rightItems = new List<Item>();
+                    rightButtons = new List<Button>();
+                    rightWindows = new List<Window>();
+                }
+            }
+
+            for (int i = 0; i < leftButtons.Count; i++)
+            {
+                leftWindows[i].Update();
+
+                //持ち物を売る物リストに移動
+                if (leftButtons[i].IsClick(mousePos))
+                {
+                    if (input.IsLeftClick())
+                    {
+                        AddRightList(leftItems[i]);
+                        RemoveLeftList(i);
+                    }
+                }
+            }
+
+            for (int i = 0; i < rightButtons.Count; i++)
+            {
+                rightWindows[i].Update();
+
+                //売る物リストから持ち物リストへ移動
+                if (rightButtons[i].IsClick(mousePos))
+                {
+                    if (input.IsLeftClick())
+                    {
+                        AddLeftList(rightItems[i]);
+                        RemoveRightList(i);
+                    }
+                }
+            }
+        }
+
+        //左のリストにアイテムを追加する。
+        public void AddLeftList(Item item)
+        {
+            leftItems.Add(item);
+            Vector2 position = new Vector2(64, 96 + 24 * (leftButtons.Count + 1));
+            leftButtons.Add(new Button(position, buttonWidht, buttonHeight));
+            leftWindows.Add(new Window(gameDevice, position, new Vector2(buttonWidht, buttonHeight)));
+            leftWindows[leftWindows.Count - 1].Initialize();
+            leftWindows[leftWindows.Count - 1].Switch();
+        }
+
+        //左のリストから指定されたアイテムを消す。
+        public void RemoveLeftList(int key)
+        {
+            leftItems.Remove(leftItems[key]);
+            leftButtons.Remove(leftButtons[key]);
+            leftWindows.Remove(leftWindows[key]);
+
+            //上に詰める処理
+            List<Item> copyLeftItems = leftItems;
+            leftItems = new List<Item>();
+            leftButtons = new List<Button>();
+            leftWindows = new List<Window>();
+            foreach (Item item in copyLeftItems)
+            {
+                AddLeftList(item);
+            }
+        }
+
         //右のリストにアイテムを追加する。
         public void AddRightList(Item item)
         {
             rightItems.Add(item);
-            Vector2 position = new Vector2(1080 / 2 + 64, 96 + 32 * (rightButtons.Count + 1));
+            Vector2 position = new Vector2(1080 / 2 + 64, 96 + 24 * (rightButtons.Count + 1));
             rightButtons.Add(new Button(position, buttonWidht, buttonHeight));
             rightWindows.Add(new Window(gameDevice, position, new Vector2(buttonWidht, buttonHeight)));
             rightWindows[rightWindows.Count - 1].Initialize();
@@ -215,7 +330,6 @@ namespace Team27_RougeLike.Scene.Town
         //右リストから指定されたアイテムを消す。
         public void RemoveRightList(int key)
         {
-            totalPrice -= rightItems[key].GetItemPrice();
             rightItems.Remove(rightItems[key]);
             rightButtons.Remove(rightButtons[key]);
             rightWindows.Remove(rightWindows[key]);
@@ -235,10 +349,22 @@ namespace Team27_RougeLike.Scene.Town
         public void DrawEquip()
         {
             buttonWindow.Draw();
-            renderer.DrawString("買う", buttonPosition, new Vector2(1, 1), Color.White);
+            renderer.DrawString(text, buttonPosition, new Vector2(1, 1), Color.White);
+
+            if (modeType == ModeType.Buy)
+            {
+                renderer.DrawString("バッグ(" + currentNum + "/" + maxNum + ")", new Vector2(1080 - 320, 64), new Vector2(1, 1), Color.White);
+            }
 
             renderer.DrawString("アイテム名", new Vector2(64, 64 + 32), new Vector2(1, 1), Color.White);
-            renderer.DrawString("値段", new Vector2(224, 64 + 32), new Vector2(1, 1), Color.White);
+            if (modeType == ModeType.Buy)
+            {
+                renderer.DrawString("値段", new Vector2(224, 64 + 32), new Vector2(1, 1), Color.White);
+            }
+            else if (modeType == ModeType.Sell)
+            {
+                renderer.DrawString("買取額", new Vector2(224, 64 + 32), new Vector2(1, 1), Color.White);
+            }
             renderer.DrawString("タイプ", new Vector2(320, 64 + 32), new Vector2(1, 1), Color.White);
 
             //左側のリストのアイテムの描画
@@ -247,7 +373,14 @@ namespace Team27_RougeLike.Scene.Town
                 leftWindows[i].Draw();
 
                 renderer.DrawString(leftItems[i].GetItemName(), leftWindows[i].GetOffsetPosition(), new Vector2(1, 1), Color.White);
-                renderer.DrawString(leftItems[i].GetItemPrice().ToString(), leftWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
+                if (modeType == ModeType.Buy)
+                {
+                    renderer.DrawString(leftItems[i].GetItemPrice().ToString(), leftWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
+                }
+                else if (modeType == ModeType.Sell)
+                {
+                    renderer.DrawString((leftItems[i].GetItemPrice() / 2).ToString(), leftWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
+                }
                 string type;
                 if (leftItems[i] is WeaponItem)
                 {
@@ -270,7 +403,14 @@ namespace Team27_RougeLike.Scene.Town
                 rightWindows[i].Draw();
 
                 renderer.DrawString(rightItems[i].GetItemName(), rightWindows[i].GetOffsetPosition(), new Vector2(1, 1), Color.White);
-                renderer.DrawString(rightItems[i].GetItemPrice().ToString(), rightWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
+                if (modeType == ModeType.Buy)
+                {
+                    renderer.DrawString(rightItems[i].GetItemPrice().ToString(), rightWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
+                }
+                else if (modeType == ModeType.Sell)
+                {
+                    renderer.DrawString((rightItems[i].GetItemPrice() / 2).ToString(), rightWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
+                }
                 string type;
                 if (rightItems[i] is WeaponItem)
                 {
@@ -298,8 +438,6 @@ namespace Team27_RougeLike.Scene.Town
             }
 
             renderer.DrawString("合計金額 : " + totalPrice, new Vector2(1080 - 320, 720 - 128 + 32), new Vector2(1, 1), Color.White);
-
-            renderer.DrawString("バッグ(" + currentNum + "/" + maxNum + ")", new Vector2(1080 - 320, 64), new Vector2(1, 1), Color.White);
         }
     }
 }
