@@ -109,7 +109,7 @@
     <Compile Include="Scene\Town\ItemShop.cs" />
     <Compile Include="Scene\Load.cs" />
     <Compile Include="Scene\LoadTown.cs" />
-    <Compile Include="Scene\Town\Buy.cs" />
+    <Compile Include="Scene\Town\Store.cs" />
     <Compile Include="Scene\Town\TownInfoLoader.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\DungeonHintUI.cs" />

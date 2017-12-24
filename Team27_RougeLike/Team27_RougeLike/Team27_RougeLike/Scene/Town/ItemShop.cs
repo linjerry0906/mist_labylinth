@@ -38,7 +38,7 @@ namespace Team27_RougeLike.Scene
 
         private bool endFlag;                   //終了フラグ
 
-        private Buy stores;
+        private Store store;
         private ItemManager itemManager;
         private Inventory inventory;
         private Window leftWindow;
@@ -72,8 +72,8 @@ namespace Team27_RougeLike.Scene
 
             blurRate = 0.0f;
 
-            stores = new Buy(gameManager, gameDevice);
-            stores.Initialize();
+            store = new Store(gameManager, gameDevice);
+            store.Initialize();
 
             Vector2 size = new Vector2(1080 / 2 - 128, 720 - 128);
             leftWindow = new Window(gameDevice, new Vector2(64, 64), size);
@@ -90,7 +90,7 @@ namespace Team27_RougeLike.Scene
 
         public void Update(GameTime gameTime)
         {
-            stores.Update();
+            store.Update();
 
             leftWindow.Update();
             rightWindow.Update();
@@ -115,16 +115,18 @@ namespace Team27_RougeLike.Scene
                 if (input.GetKeyState(Keys.D1))
                 {
                     mode = ShopMode.buy;
+                    store.Initialize();
+                    store.Buy();
                     messegeWindow.Switch();
                     isMessegePop = false;
-                    stores.Initialize();
                 }
                 else if (input.GetKeyState(Keys.D2))
                 {
                     mode = ShopMode.sell;
+                    store.Initialize();
+                    store.Sell();
                     messegeWindow.Switch();
                     isMessegePop = false;
-                    stores.Initialize();
                 }
             }
             else
@@ -178,13 +180,15 @@ namespace Team27_RougeLike.Scene
                 renderer.DrawString("0でselectに戻る", new Vector2(0, 32), new Vector2(1, 1), Color.Black);
                 if (mode == ShopMode.buy)
                 {
-                    renderer.DrawString("売り物", new Vector2(64, 64), new Vector2(1, 1), Color.White);
+                    renderer.DrawString("売り物リスト", new Vector2(64, 64), new Vector2(1, 1), Color.White);
                     renderer.DrawString("買う物リスト", new Vector2(1080 / 2 + 64, 64), new Vector2(1, 1), Color.White);
-                    stores.DrawEquip();
+                    store.DrawEquip();
                 }
                 else if (mode == ShopMode.sell)
                 {
-
+                    renderer.DrawString("持ち物リスト", new Vector2(64, 64), new Vector2(1, 1), Color.White);
+                    renderer.DrawString("売る物のリスト", new Vector2(1080 / 2 + 64, 64), new Vector2(1, 1), Color.White);
+                    store.DrawEquip();
                 }
             }
             renderer.End();
