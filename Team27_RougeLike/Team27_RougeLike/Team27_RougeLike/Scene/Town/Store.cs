@@ -247,6 +247,7 @@ namespace Team27_RougeLike.Scene.Town
                 if (input.IsLeftClick())
                 {
                     //プレイヤーにお金が入る処理
+                    playerInventory.SetBag(leftItems);
 
                     totalPrice = 0;
                     rightItems = new List<Item>();
@@ -398,7 +399,7 @@ namespace Team27_RougeLike.Scene.Town
             }
 
             //右側のリストのアイテムの描画
-            for (int i = 0; i < rightButtons.Count; i++)
+            for (int i = 0; i < rightItems.Count; i++)
             {
                 rightWindows[i].Draw();
 
