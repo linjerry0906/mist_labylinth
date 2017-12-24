@@ -241,5 +241,14 @@ namespace Team27_RougeLike.Object.Item
             current = bag.Count;
             maxium = MaxItemCount;
         }
+
+        /// <summary>
+        /// アイテムのリストをbagに適用
+        /// </summary>
+        /// <param name="itemList">別のアイテムリスト</param>
+        public void SetBag(List<Item> itemList)
+        {
+            bag = itemList;
+        }
     }
 }
