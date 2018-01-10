@@ -22,6 +22,7 @@ namespace Team27_RougeLike.Object.Item
         private WeaponItem rightHand;               　//右手
         private WeaponItem leftHand;                　//左手
 
+        private int money;                            //所持金
 
         public Inventory(GameDevice gameDevice)
         {
@@ -305,5 +306,33 @@ namespace Team27_RougeLike.Object.Item
         {
             bag = itemList;
         }
+
+        /// <summary>
+        /// 所持金を増やす
+        /// </summary>
+        /// <param name="add">増やす量</param>
+        public void AddMoney(int add)
+        {
+            money += add;
+        }
+
+        /// <summary>
+        /// 今所持しているお金
+        /// </summary>
+        /// <returns></returns>
+        public int CurrentMoney()
+        {
+            return money;
+        }
+
+        /// <summary>
+        /// 所持金を使う
+        /// </summary>
+        /// <param name="add">使う量</param>
+        public void SpendMoney(int amount)
+        {
+            money -= amount;
+        }
+
     }
 }
