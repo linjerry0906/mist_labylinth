@@ -85,6 +85,10 @@
       <Name>PlayerStatus</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="StageCSV\StageInfo.csv">
+      <Name>StageInfo</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="StageCSV\StageItem.csv">
       <Name>StageItem</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

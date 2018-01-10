@@ -50,11 +50,12 @@ namespace Team27_RougeLike.Scene
 
         public void Initialize(SceneType scene)
         {
-            nextScene = SceneType.LoadMap;
+            nextScene = SceneType.DungeonSelect;
             endFlag = false;
 
             if (scene == SceneType.Pause ||
-                scene == SceneType.ItemShop)
+                scene == SceneType.ItemShop ||
+                scene == SceneType.DungeonSelect)
                 return;
 
             gameManager.InitStage(5 * 60, 1, 5, 20);
@@ -85,7 +86,7 @@ namespace Team27_RougeLike.Scene
         {
             if (input.GetKeyTrigger(Keys.D))
             {
-                nextScene = SceneType.LoadMap;
+                nextScene = SceneType.DungeonSelect;
                 endFlag = true;
                 return;
             }

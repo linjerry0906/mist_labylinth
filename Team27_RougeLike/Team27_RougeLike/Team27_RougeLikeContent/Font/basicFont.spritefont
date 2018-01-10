@@ -206,6 +206,10 @@ with.
         <Start>剣</Start>
         <End>剣</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>険</Start>
+        <End>険</End>
+      </CharacterRegion>
       
       <!-- げき -->
       <CharacterRegion>
@@ -470,6 +474,11 @@ with.
       <!-- へ -->
 
       <!-- ほ -->
+      <!-- ぼ -->
+      <CharacterRegion>
+        <Start>冒</Start>
+        <End>冒</End>
+      </CharacterRegion>
       <!-- ほん -->
 
 
