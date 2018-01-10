@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Object.Box;
+using Team27_RougeLike.Object.ParticleSystem;
+
 namespace Team27_RougeLike.Object.Character
 {
     class CharacterManager
@@ -30,14 +32,14 @@ namespace Team27_RougeLike.Object.Character
             characters.Clear();
             hitBoxs.Clear();
             //デバッグ用、呼び出すときはプレイヤーを生成してから！
-            AddPlayer(position);
-            AddCharacter(new TestSimpleMeleeEnemy(player.Collision.Position, this));
-            AddCharacter(new TestSimpleMeleeEnemy(new Vector3
-                (
-                player.Collision.Position.X + 4,
-                player.Collision.Position.Y,
-                player.Collision.Position.Z + 4
-                ), this));
+            //AddPlayer(position);
+            //AddCharacter(new TestSimpleMeleeEnemy(player.Collision.Position, this));
+            //AddCharacter(new TestSimpleMeleeEnemy(new Vector3
+            //    (
+            //    player.Collision.Position.X + 4,
+            //    player.Collision.Position.Y,
+            //    player.Collision.Position.Z + 4
+            //    ), this));
         }
 
         public void Update(GameTime gameTime)
@@ -73,7 +75,7 @@ namespace Team27_RougeLike.Object.Character
                         h.Effect(c);
                     }
                 }
-                h.Update();
+                h.Update(gameTime);
             }
             characters.RemoveAll((CharacterBase c) => c.IsDead());
             hitBoxs.RemoveAll((HitBoxBase h) => h.IsEnd());
@@ -99,9 +101,9 @@ namespace Team27_RougeLike.Object.Character
             characters.Add(character);
         }
 
-        public void AddPlayer(Vector3 position)
+        public void AddPlayer(Vector3 position,ParticleManager pManager)
         {
-            player = new Player(position, gamedevice, this);
+            player = new Player(position, gamedevice, this,pManager);
             characters.Add(player);
         }
 

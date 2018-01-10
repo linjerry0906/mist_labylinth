@@ -55,8 +55,13 @@ namespace Team27_RougeLike.Utility
                 timer.Initialize();
                 MotionUpdate();
             }
-
         }
+
+        public bool IsEnd()
+        {
+            return motionNumber == range.End();
+        }
+
         public Rectangle DrawingRange()
         {
             return rectangles[motionNumber];
