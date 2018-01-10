@@ -14,6 +14,7 @@ namespace Team27_RougeLike.Object.Item
     {
         private readonly int MaxItemCount = 25;       //Bagのサイズ
         private List<Item> bag;                       //Bagの内容
+        private List<Item> tempBag;                   //一時的なバッグ
 
         private ProtectionItem[] armor;               //装備
         private WeaponItem rightHand;               　//右手
@@ -45,6 +46,19 @@ namespace Team27_RougeLike.Object.Item
                 return false;
             }
 
+            bag.Add(item);
+            return true;
+        }
+
+        public bool AddTempItem(Item item)
+        {
+            int count = bag.Count;
+            if (count >= MaxItemCount)      //最大限に超えたら追加しない
+            {
+                return false;
+            }
+
+            tempBag.Add(item);
             bag.Add(item);
             return true;
         }

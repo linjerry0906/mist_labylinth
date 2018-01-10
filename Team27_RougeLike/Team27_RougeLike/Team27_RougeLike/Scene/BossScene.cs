@@ -28,7 +28,6 @@ namespace Team27_RougeLike.Scene
         private CharacterManager characterManager;
         private float angle;
 
-        Model model;
 
         public BossScene(GameManager gameManager, GameDevice gameDevice)
         {
@@ -41,7 +40,8 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
-            renderer.DrawModel("B_01", Vector3.Zero, new Vector3(50, 50, 50), Color.White);
+            renderer.DefaultRenderSetting();
+            renderer.DrawModel("B_01", Vector3.Zero, new Vector3(70, 70, 70), Color.White);
 
             characterManager.Draw();
 
@@ -78,8 +78,6 @@ namespace Team27_RougeLike.Scene
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
             #endregion
 
-            model = renderer.GetModel("B_01");
-
         }
 
         public bool IsEnd()
@@ -103,7 +101,7 @@ namespace Team27_RougeLike.Scene
             //Chara処理
             characterManager.Update(gameTime);
 
-            Plane p = new Plane(Vector3.Up, 0);
+            Plane p = new Plane(Vector3.Up, -5);
             characterManager.GetCharacters().ForEach(c =>
             {
                 Ray r = new Ray(c.Collision.Position, Vector3.Down);
@@ -118,6 +116,16 @@ namespace Team27_RougeLike.Scene
                     }
                 }
             });
+
+            characterManager.GetCharacters().ForEach(c =>
+            {
+                c.Collision.Position = Vector3.Clamp(
+                    c.Collision.Position,
+                    new Vector3(-30, 0, -30),
+                    new Vector3(30, 90, 30));
+            });
+
+
 
             //Debug 村シーンへ
             if (input.GetKeyTrigger(Keys.T))
