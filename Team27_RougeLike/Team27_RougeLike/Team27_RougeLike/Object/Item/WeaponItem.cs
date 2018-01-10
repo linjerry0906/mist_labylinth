@@ -120,11 +120,11 @@ namespace Team27_RougeLike.Object.Item
         //セーブ用
         public int GetAddPower()
         {
-            return effect.GetPower();
+            return effect.GetAddPower();
         }
         public int GetAddDefence()
         {
-            return effect.GetDefense();
+            return effect.GetAddDefense();
         }
         public int GetReinforcement()
         {
