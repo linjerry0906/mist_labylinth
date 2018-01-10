@@ -7,11 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Team27_RougeLike.Device;
 
 namespace Team27_RougeLike.Object.Item
 {
     class Inventory
     {
+        private GameDevice gameDevice;
         private readonly int MaxItemCount = 25;       //Bagのサイズ
         private List<Item> bag;                       //Bagの内容
         private List<Item> tempBag;                   //一時的なバッグ
@@ -21,9 +23,11 @@ namespace Team27_RougeLike.Object.Item
         private WeaponItem leftHand;                　//左手
 
 
-        public Inventory()
+        public Inventory(GameDevice gameDevice)
         {
+            this.gameDevice = gameDevice;
             bag = new List<Item>();
+            tempBag = new List<Item>();
             armor = new ProtectionItem[4];
             for (int i = 0; i < armor.Length; i++)
             {
@@ -50,14 +54,20 @@ namespace Team27_RougeLike.Object.Item
             return true;
         }
 
+        /// <summary>
+        /// アイテムを一時的なバッグに追加
+        /// </summary>
+        /// <param name="item">追加するアイテム</param>
+        /// <returns>フールの場合はFalseを返す</returns>
         public bool AddTempItem(Item item)
         {
             int count = bag.Count;
-            if (count >= MaxItemCount)      //最大限に超えたら追加しない
+            if (count >= MaxItemCount)                      //最大限に超えたら追加しない
             {
                 return false;
             }
 
+            item.ResetID(gameDevice.Random.Next(0, 100));   //ID変更
             tempBag.Add(item);
             bag.Add(item);
             return true;
@@ -70,6 +80,37 @@ namespace Team27_RougeLike.Object.Item
         public void RemoveItem(int bagIndex)
         {
             bag.RemoveAt(bagIndex);
+        }
+
+        /// <summary>
+        /// 持ち帰れないアイテムを削除
+        /// </summary>
+        public void RemoveTempItem()
+        {
+            foreach (Item temp in tempBag)
+            {
+                bag.RemoveAll(i =>i.GetUniqueID() == temp.GetUniqueID());
+            }
+
+            tempBag.Clear();
+        }
+
+        /// <summary>
+        /// すべて削除
+        /// </summary>
+        public void RemoveAll()
+        {
+            bag.Clear();
+            tempBag.Clear();
+            bag = new List<Item>();
+            tempBag = new List<Item>();
+            armor = new ProtectionItem[4];
+            for (int i = 0; i < armor.Length; i++)
+            {
+                armor[i] = null;
+            }
+            rightHand = null;
+            leftHand = null;
         }
 
         /// <summary>

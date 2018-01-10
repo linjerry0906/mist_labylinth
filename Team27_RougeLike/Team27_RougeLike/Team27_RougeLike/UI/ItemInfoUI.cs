@@ -45,6 +45,7 @@ namespace Team27_RougeLike.UI
             SetInfo(item);      //文字設定
 
             Color nameColor = Color.Lerp(Color.White, Color.Gold, item.GetItemRare() / 100.0f);     //レア度で名前の色を決める
+
             //名前
             renderer.DrawString(
                 info[0], position, nameColor, new Vector2(1.2f, 1.2f),

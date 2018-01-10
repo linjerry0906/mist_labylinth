@@ -114,7 +114,7 @@ namespace Team27_RougeLike.Map
         /// <returns></returns>
         private bool GetItem(int index, DungeonUI ui)
         {
-            if (!playerItem.AddItem(items[index].GetItem()))
+            if (!playerItem.AddTempItem(items[index].GetItem()))
                 return false;
 
             Item item = items[index].GetItem();

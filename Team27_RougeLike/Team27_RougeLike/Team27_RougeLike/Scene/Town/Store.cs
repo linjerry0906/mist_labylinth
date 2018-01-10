@@ -349,9 +349,6 @@ namespace Team27_RougeLike.Scene.Town
 
         public void DrawEquip()
         {
-            renderer.DrawString(leftItems[0].GetUniqueID(), Vector2.Zero, new Vector2(1, 1), Color.Red);
-            renderer.DrawString(leftItems[1].GetUniqueID(), new Vector2(0, 30), new Vector2(1, 1), Color.Red);
-
             buttonWindow.Draw();
             renderer.DrawString(text, buttonPosition, new Vector2(1, 1), Color.White);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Team27_RougeLike.Object.Item;
+using Team27_RougeLike.Device;
 
 namespace Team27_RougeLike.Object
 {
@@ -16,10 +17,10 @@ namespace Team27_RougeLike.Object
         private int addDefence;
         private float weight;
 
-        public PlayerStatus(Status status)
+        public PlayerStatus(Status status, GameDevice gameDevice)
         {
             this.baseStatus = status;
-            inventory = new Inventory();
+            inventory = new Inventory(gameDevice);
         }
 
         public void Initialize()

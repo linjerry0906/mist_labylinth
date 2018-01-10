@@ -214,9 +214,13 @@ namespace Team27_RougeLike.Scene
                 nextScene = SceneType.Pause;
             }
 
+            //死んだ時
+            //gameManager.PlayerItem.RemoveAll();
+
             //時間になったら村に戻される
             if (stageManager.IsTime())
             {
+                gameManager.PlayerItem.RemoveTempItem();
                 endFlag = true;
                 nextScene = SceneType.Town;
                 return;
