@@ -13,6 +13,7 @@ using Team27_RougeLike.Device;
 using Team27_RougeLike.Map;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.UI;
+using Team27_RougeLike.Object.ParticleSystem;
 
 namespace Team27_RougeLike.Scene
 {
@@ -28,10 +29,12 @@ namespace Team27_RougeLike.Scene
 
         private DungeonMap map;                 //マップ
         private MapItemManager mapItemManager;  //マップ内に落ちているアイテムの管理者
-        
+
         private float angle = 0;                //カメラ回転角度
 
         private DungeonUI ui;             //Popメッセージ
+
+        private ParticleManager pManager;
 
         public DungeonScene(GameManager gameManager, GameDevice gameDevice)
         {
@@ -39,6 +42,9 @@ namespace Team27_RougeLike.Scene
             this.gameManager = gameManager;
             renderer = gameDevice.Renderer;
             stageManager = gameManager.StageManager;
+
+            characterManager = new CharacterManager(gameDevice);
+            pManager = new ParticleManager(gameDevice);
         }
 
         public void Draw()
@@ -46,8 +52,8 @@ namespace Team27_RougeLike.Scene
             map.Draw();                 //Mapの描画
             mapItemManager.Draw();      //アイテムの描画
             characterManager.Draw();
+            pManager.Draw();
             map.DrawMiniMap();          //MiniMapの描画
-
             DrawUI();                   //UIを描画
         }
 
@@ -69,13 +75,13 @@ namespace Team27_RougeLike.Scene
         {
             endFlag = false;                        //終了フラグ初期化
             nextScene = SceneType.LoadMap;
-
+            pManager.Initialize();
             if (lastScene == SceneType.Pause)       //Pauseから来た場合は以下のもの初期化しない
                 return;
 
             #region Map初期化
             map = gameManager.GetDungeonMap();      //生成したマップを取得
-            if(map == null)                         //エラー対策　マップが正常に生成されてなかったらLoadingに戻る
+            if (map == null)                         //エラー対策　マップが正常に生成されてなかったらLoadingに戻る
             {
                 nextScene = SceneType.LoadMap;
                 endFlag = true;
@@ -105,12 +111,12 @@ namespace Team27_RougeLike.Scene
             }
             #endregion
 
-            characterManager = new CharacterManager(gameDevice);
-            characterManager.Initialize(new Vector3(
-                map.EntryPoint.X * MapDef.TILE_SIZE,
+            Vector3 position = new Vector3(
+           map.EntryPoint.X * MapDef.TILE_SIZE,
                 MapDef.TILE_SIZE,
-                map.EntryPoint.Y * MapDef.TILE_SIZE));
-
+                map.EntryPoint.Y * MapDef.TILE_SIZE);
+            characterManager.Initialize(position);
+            characterManager.AddPlayer(position, pManager);
             #region カメラ初期化
             angle = 0;
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
@@ -158,6 +164,8 @@ namespace Team27_RougeLike.Scene
             //Chara処理
             characterManager.Update(gameTime);
 
+            pManager.Update(gameTime);
+
             //マップ処理
             map.MapCollision(gameDevice.Renderer.MainProjector);
             map.FocusCenter(characterManager.GetPlayer().Position);
@@ -167,7 +175,7 @@ namespace Team27_RougeLike.Scene
 
             //アイテム処理
             mapItemManager.ItemCollision(characterManager.GetPlayer(), ui);
-            
+
 
             stageManager.Update();              //時間やFog処理の更新
 
@@ -180,8 +188,6 @@ namespace Team27_RougeLike.Scene
                     gameDevice.Random.Next(-10, 10) / 50.0f);
                 gameDevice.MainProjector.Collision.Position += offset;
             }
-
-
             CheckEnd();                         //プレイ終了をチェック
         }
 

@@ -77,6 +77,10 @@ namespace Team27_RougeLike.Object
         {
             return aiManager;
         }
+        public bool Dodge  ()
+        {
+            return aiManager.GetStateAi() is StateAi_Dodge;
+        }
         public Vector3 Velocity
         {
             get { return velocity; }

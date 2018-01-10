@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
+using Team27_RougeLike.Device;
+using Team27_RougeLike.Object.ParticleSystem;
+
 namespace Team27_RougeLike.Object.Box
 {
     class DamageBox : HitBoxBase
     {
         private int attack;
+        
         public DamageBox(BoundingSphere collision,int time,int attack)
             :base(collision,time)
         {
@@ -28,6 +32,11 @@ namespace Team27_RougeLike.Object.Box
         public override void Effect(CharacterBase character)
         {
             character.Damage(attack);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
         }
     }
 }

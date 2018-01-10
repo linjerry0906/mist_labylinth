@@ -33,7 +33,10 @@ namespace Team27_RougeLike.Object
                 status[3] = int.Parse(split[4]);
             }
 
+            fs.Close();
+            sr.Close();
             return status;
+
         }
     }
 }

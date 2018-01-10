@@ -54,11 +54,44 @@ namespace Team27_RougeLike.Object.AI
                 velocity.Normalize();
             }
 
-            if (inputState.GetKeyState(Keys.LeftShift))
+            if (inputState.GetKeyState(Keys.LeftShift) && !actor.Dodge())
             {
                 velocity = velocity * 1.5f;
             }
-            actor.Velocity = velocity;
+
+            if (!actor.Dodge())
+            {
+                var old = velocity;
+                
+                //goto使ってるので変なのを入れないように
+                if (inputState.DualkeyDown(Keys.W))
+                {
+                    velocity += projector.Front * 5.5f;
+                    goto END;
+                }
+                if (inputState.DualkeyDown(Keys.D))
+                {
+                    velocity += projector.Right * 5.5f;
+                    goto END;
+                }
+                if (inputState.DualkeyDown(Keys.A))
+                {
+                    velocity += projector.Left * 5.5f;
+                    goto END;
+                }
+                if (inputState.DualkeyDown(Keys.S))
+                {
+                    velocity += projector.Back * 5.5f;
+                }
+
+                END:
+
+                if (velocity != old)
+                {
+                    actor.AiManager().SetStateAi(new StateAi_Dodge(actor));
+                }
+                actor.Velocity = velocity;
+            }
         }
     }
 }

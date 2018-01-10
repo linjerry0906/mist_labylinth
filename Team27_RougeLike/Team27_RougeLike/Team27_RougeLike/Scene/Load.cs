@@ -25,13 +25,14 @@ namespace Team27_RougeLike.Scene
                 {"test" ,path},
                 {"cubeTest" ,path},
                 {"bat" ,path},
+                {"slash" ,path},
             };
             return list;
         }
 
         private string[,] BGMList()
         {
-            string path = "./BGM/";
+            string path = "./Sound/";
             string[,] list = new string[,]
             {
 
@@ -40,10 +41,11 @@ namespace Team27_RougeLike.Scene
         }
         private string[,] SEMList()
         {
-            string path = "./SE/";
+            string path = "./Sound/";
             string[,] list = new string[,]
             {
-
+                {"slash",path },
+                {"sowrd",path },
             };
             return list;
         }

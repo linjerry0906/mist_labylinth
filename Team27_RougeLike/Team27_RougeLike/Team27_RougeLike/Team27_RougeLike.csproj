@@ -79,6 +79,7 @@
     <Compile Include="Object\AI\AttackAi\AttackAi_LongAttack.cs" />
     <Compile Include="Map\MapItemManager.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_PlayerMove.cs" />
+    <Compile Include="Object\AI\StateAi\StateAi_Dodge.cs" />
     <Compile Include="Object\Box\DamageBox.cs" />
     <Compile Include="Object\Box\HitBoxBase.cs" />
     <Compile Include="Map\DungeonMap.cs" />
@@ -107,6 +108,9 @@
     <Compile Include="Object\AI\StateAi\StateAi_Normal.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Stun.cs" />
     <Compile Include="Object\Item\ItemEffects\noEffect.cs" />
+    <Compile Include="Object\ParticleSystem\Particle.cs" />
+    <Compile Include="Object\ParticleSystem\ParticleManager.cs" />
+    <Compile Include="Object\ParticleSystem\Slash.cs" />
     <Compile Include="Object\PlayerStatus.cs" />
     <Compile Include="Object\PlayerStatusLoader.cs" />
     <Compile Include="Scene\DungeonProcess.cs" />

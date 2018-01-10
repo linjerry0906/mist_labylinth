@@ -11,6 +11,8 @@ using Team27_RougeLike.Device;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Object.Box;
 using Team27_RougeLike.Object.AI;
+using Team27_RougeLike.Object.ParticleSystem;
+
 namespace Team27_RougeLike.Object.Character
 {
     class CharacterManager
@@ -23,6 +25,8 @@ namespace Team27_RougeLike.Object.Character
         private Dictionary<int, EnemyBase> enemys = new Dictionary<int, EnemyBase>();
 
         private string enemyFilename;
+        private string playerFilename;
+
         private const int drawLength = 120;
 
 
@@ -30,6 +34,7 @@ namespace Team27_RougeLike.Object.Character
         {
             this.gamedevice = gamedevice;
             enemyFilename = @"Content/" + "EnemysCSV/Enemy.csv";
+            playerFilename = @"Content/" + "PlayerCSV/PlayerStatus.csv";
             Load();
         }
 
@@ -37,21 +42,6 @@ namespace Team27_RougeLike.Object.Character
         {
             characters.Clear();
             hitBoxs.Clear();
-            //デバッグ用、呼び出すときはプレイヤーを生成してから！
-            AddPlayer(position);
-            AddCharacter(enemys[1].Clone(player.Collision.Position));
-            AddCharacter(enemys[2].Clone(new Vector3
-                (player.Collision.Position.X + 4,
-                player.Collision.Position.Y,
-                player.Collision.Position.Z + 8
-                )));
-            AddCharacter(enemys[2].Clone(player.Collision.Position));
-            AddCharacter(enemys[3].Clone(new Vector3
-                         (
-                         player.Collision.Position.X + 4,
-                         player.Collision.Position.Y,
-                         player.Collision.Position.Z + 4
-                         )));
         }
 
         public void Update(GameTime gameTime)
@@ -79,7 +69,7 @@ namespace Team27_RougeLike.Object.Character
                         h.Effect(c);
                     }
                 }
-                h.Update();
+                h.Update(gameTime);
             }
             characters.RemoveAll((CharacterBase c) => c.IsDead());
             hitBoxs.RemoveAll((HitBoxBase h) => h.IsEnd());
@@ -105,10 +95,14 @@ namespace Team27_RougeLike.Object.Character
             characters.Add(character);
         }
 
-        public void AddPlayer(Vector3 position)
+        public void AddPlayer(Vector3 position,ParticleManager pManager)
         {
-            player = new Player(position, gamedevice, this);
+            PlayerStatusLoader loader = new PlayerStatusLoader();
+            var i = loader.LoadStatus();
+            player = new Player(position, new Status(1, i[0],i[1], i[2],i[3], 0.3f), gamedevice, this,pManager);
+
             characters.Add(player);
+            
         }
 
         public void AddHitBox(HitBoxBase hitBox)
@@ -137,6 +131,11 @@ namespace Team27_RougeLike.Object.Character
         public List<CharacterBase> GetCharacters()
         {
             return characters;
+        }
+
+        public Dictionary<int, EnemyBase> Enemys()
+        {
+            return enemys;
         }
 
         private void Load()
