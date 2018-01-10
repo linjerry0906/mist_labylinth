@@ -19,8 +19,8 @@ namespace Team27_RougeLike.Object.Character
         private Projector projector;
         private InputState input;
 
-        public Player(Vector3 position, GameDevice gameDevice, CharacterManager characterManager)
-            : base(new Status(5, 100, 3, 5, 5, 0.3f), new CollisionSphere(position, 5.0f), "test", characterManager)
+        public Player(Vector3 position, Status status, GameDevice gameDevice, CharacterManager characterManager)
+            : base(status, new CollisionSphere(position, 5.0f), "test", characterManager)
         {
             tag = "Player";
 
@@ -45,10 +45,6 @@ namespace Team27_RougeLike.Object.Character
             gameDevice.Renderer.MiniMapProjector.Trace(collision.Position);
             motion.Update(gameTime);
             aiManager.Update();
-        }
-
-        public void Move()
-        {
         }
 
         public Vector3 Position

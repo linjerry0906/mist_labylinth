@@ -10,6 +10,7 @@ namespace Team27_RougeLike.Object.AI
 {
     class StateAi_Dodge : BaseAi
     {
+        private int time = 30;
         public StateAi_Dodge(CharacterBase actor)
             : base(actor)
         {
@@ -26,6 +27,11 @@ namespace Team27_RougeLike.Object.AI
 
         public override void Update()
         {
+            time--;
+            if(time <= 0)
+            {
+                actor.AiManager().SetStateAi(new StateAi_Normal(actor));
+            }
         }
     }
 }

@@ -27,7 +27,6 @@ namespace Team27_RougeLike.Object.Box
 
         public override void Effect(CharacterBase character)
         {
-            if (character.Dodge()) return;
             character.Damage(attack);
         }
     }

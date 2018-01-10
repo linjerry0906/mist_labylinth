@@ -23,6 +23,8 @@ namespace Team27_RougeLike.Object.Character
         private Dictionary<int, EnemyBase> enemys = new Dictionary<int, EnemyBase>();
 
         private string enemyFilename;
+        private string playerFilename;
+
         private const int drawLength = 120;
 
 
@@ -30,6 +32,7 @@ namespace Team27_RougeLike.Object.Character
         {
             this.gamedevice = gamedevice;
             enemyFilename = @"Content/" + "EnemysCSV/Enemy.csv";
+            playerFilename = @"Content/" + "PlayerCSV/PlayerStatus.csv";
             Load();
         }
 
@@ -107,8 +110,11 @@ namespace Team27_RougeLike.Object.Character
 
         public void AddPlayer(Vector3 position)
         {
-            player = new Player(position, gamedevice, this);
+            PlayerStatusLoader loader = new PlayerStatusLoader();
+            var i = loader.LoadStatus();
+            player = new Player(position, new Status(1, i[0],i[1], i[2],i[3], 0.3f), gamedevice, this);
             characters.Add(player);
+            
         }
 
         public void AddHitBox(HitBoxBase hitBox)
