@@ -91,6 +91,16 @@ namespace Team27_RougeLike.Object.Item
             foreach (Item temp in tempBag)
             {
                 bag.RemoveAll(i =>i.GetUniqueID() == temp.GetUniqueID());
+                for (int i = 0; i < armor.Length; i++)
+                {
+                    if (armor[i] != null && armor[i].GetUniqueID() == temp.GetUniqueID())
+                        armor[i] = null;
+                }
+
+                if (leftHand != null && leftHand.GetUniqueID() == temp.GetUniqueID())
+                    leftHand = null;
+                if (rightHand != null && rightHand.GetUniqueID() == temp.GetUniqueID())
+                    rightHand = null;
             }
 
             tempBag.Clear();
