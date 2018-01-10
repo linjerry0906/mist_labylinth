@@ -37,16 +37,16 @@ namespace Team27_RougeLike.Object.Character
         {
             characters.Clear();
             hitBoxs.Clear();
-            //デバッグ用、呼び出すときはプレイヤーを生成してから！
             AddPlayer(position);
-            AddCharacter(enemys[1].Clone(player.Collision.Position));
-            AddCharacter(enemys[2].Clone(new Vector3
+            //デバッグ用、敵を呼び出すときはプレイヤーを生成してから！
+            AddCharacter(Enemys()[1].Clone(player.Collision.Position));
+            AddCharacter(Enemys()[2].Clone(new Vector3
                 (player.Collision.Position.X + 4,
                 player.Collision.Position.Y,
                 player.Collision.Position.Z + 8
                 )));
-            AddCharacter(enemys[2].Clone(player.Collision.Position));
-            AddCharacter(enemys[3].Clone(new Vector3
+            AddCharacter(Enemys()[3].Clone(player.Collision.Position));
+            AddCharacter(Enemys()[2].Clone(new Vector3
                          (
                          player.Collision.Position.X + 4,
                          player.Collision.Position.Y,
@@ -137,6 +137,11 @@ namespace Team27_RougeLike.Object.Character
         public List<CharacterBase> GetCharacters()
         {
             return characters;
+        }
+
+        public Dictionary<int, EnemyBase> Enemys()
+        {
+            return enemys;
         }
 
         private void Load()

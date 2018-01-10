@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Object.AI;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Utility;
+using Team27_RougeLike.Object.Box;
 namespace Team27_RougeLike.Object
 {
     class EnemyBase : CharacterBase
@@ -62,7 +63,7 @@ namespace Team27_RougeLike.Object
         }
         public override void Attack()
         {
-
+            characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position, 10), 1, tag, status.BasePower));
         }
         public override void Update(GameTime gameTime)
         {

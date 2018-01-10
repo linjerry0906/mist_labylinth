@@ -46,7 +46,7 @@ namespace Team27_RougeLike.Object.AI
                 if (attackAi is AttackAi_Wait)
                 {
                     //時間は仮実装
-                    attackAi = new AttackAi_Charge(actor, 20, 10, 30);
+                    attackAi = new AttackAi_Charge(actor, 60, 1, 30);
                 }
 
                 if (moveAi is MoveAi_Chase)

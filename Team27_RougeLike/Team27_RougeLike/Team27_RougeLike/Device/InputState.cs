@@ -16,11 +16,19 @@ namespace Team27_RougeLike.Device
         private MouseState currentMouse;    //現在のマウス
         private MouseState previousMouse;   //1フレーム前のマウス
         private Vector2 mousePosition;      //マウスの位置
+
+        private int[] currentKeyTime = new int[(int)Keys.Z];         //そのキーの連打判定時間
+        private const int time = 7;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public InputState()
         {
+            for (int i = 0; i < (int)Keys.Z; i++)
+            {
+                currentKeyTime[i] = 0;
+            }
         }
 
         /// <summary>
@@ -67,7 +75,7 @@ namespace Team27_RougeLike.Device
         /// <returns></returns>
         public bool LeftButtonDown(ButtonState button)
         {
-            return currentMouse.LeftButton == button;            
+            return currentMouse.LeftButton == button;
         }
 
         /// <summary>
@@ -77,7 +85,7 @@ namespace Team27_RougeLike.Device
         /// <returns></returns>
         public bool LeftButtonEnter(ButtonState button)
         {
-            return currentMouse.LeftButton == button && previousMouse.LeftButton != button;   
+            return currentMouse.LeftButton == button && previousMouse.LeftButton != button;
         }
 
         /// <summary>
@@ -142,11 +150,42 @@ namespace Team27_RougeLike.Device
             // キーボード状態の更新
             UpdateKey(keyState);
             UpdateMouse(mouseState);
+            UpdateDualKeyCheck();
+            
         }
 
         public Vector2 GetMousePosition()
         {
             return mousePosition;
+        }
+
+        private void UpdateDualKeyCheck()
+        {
+
+            for (int i = 0; i < (int)Keys.Z; i++)
+            {
+                if (IsKeyDown((Keys)i))
+                {
+                    currentKeyTime[i] = time;
+                }
+
+                if (!(currentKeyTime[i] < 0))
+                {
+                    currentKeyTime[i]--;
+                }
+            }
+        }
+        public bool DualkeyDown(Keys key)
+        {
+            if((!currentKey.IsKeyDown(key) && !(currentKeyTime[(int)key] < 0)) == true)
+            {
+                currentKeyTime[(int)key] = 0;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

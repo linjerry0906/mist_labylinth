@@ -34,5 +34,6 @@ namespace Team27_RougeLike.Object.AI
         public void SetMoveAi(BaseAi moveAi) { this.moveAi = moveAi; }
         public void SetAttackAi(BaseAi attackAi) { this.attackAi = attackAi; }
         public void SetStateAi(BaseAi stateAi) { this.stateAi = stateAi; }
+        public BaseAi GetStateAi() { return stateAi; }
     }
 }

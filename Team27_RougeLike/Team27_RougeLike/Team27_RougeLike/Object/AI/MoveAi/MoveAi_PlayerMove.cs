@@ -54,6 +54,24 @@ namespace Team27_RougeLike.Object.AI
                 velocity.Normalize();
             }
 
+            if (inputState.DualkeyDown(Keys.D))
+            {
+                velocity += projector.Right * 7;
+            }
+            if (inputState.DualkeyDown(Keys.W))
+            {
+                velocity += projector.Front * 7;
+            }
+            if (inputState.DualkeyDown(Keys.A))
+            {
+                velocity += projector.Left * 7;
+            }
+            if (inputState.DualkeyDown(Keys.S))
+            {
+                velocity += projector.Back * 7;
+            }
+
+
             if (inputState.GetKeyState(Keys.LeftShift))
             {
                 velocity = velocity * 1.5f;
