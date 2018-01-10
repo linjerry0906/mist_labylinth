@@ -117,6 +117,7 @@ namespace Team27_RougeLike.Object.Item
                 }
             }
             equipmentDate.Close();
+            datefs.Close();
 
 
             //消費アイテム読み込み
@@ -165,6 +166,7 @@ namespace Team27_RougeLike.Object.Item
                 }
             }
             consuptionDate.Close();
+            datefs.Close();
         }
 
         //セーブデータから装備を再現
@@ -263,6 +265,7 @@ namespace Team27_RougeLike.Object.Item
                 }
             }
             equipmentDate.Close();
+            datefs.Close();
 
             return itemList;
         }

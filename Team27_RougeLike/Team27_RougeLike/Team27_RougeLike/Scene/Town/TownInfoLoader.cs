@@ -57,6 +57,7 @@ namespace Team27_RougeLike.Scene.Town
                 }
             }
             sr.Close();                                 //読み終わったらファイルをClose
+            fs.Close();
 
             itemManager.Load(equipList.ToArray(), consuptionList.ToArray());        //Listを渡してDictionaryを作ってくれる
             isItemLoad = true;                                                      //読み終わった
