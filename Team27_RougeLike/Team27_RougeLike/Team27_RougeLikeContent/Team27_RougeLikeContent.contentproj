@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EnemyCSV\" />
+    <Folder Include="SaveCSV\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Effect\polygon.fx">
