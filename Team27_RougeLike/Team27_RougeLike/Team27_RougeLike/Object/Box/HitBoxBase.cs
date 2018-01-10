@@ -54,7 +54,7 @@ namespace Team27_RougeLike.Object.Box
             this.mask = tags;
         }
 
-        public void Update()
+        public virtual void Update(GameTime gameTime)
         {
             time--;
         }
@@ -103,6 +103,6 @@ namespace Team27_RougeLike.Object.Box
         }
 
         public abstract void Effect(CharacterBase character);
-
+        public Vector3 Position() { return collision.Center; }
     }
 }

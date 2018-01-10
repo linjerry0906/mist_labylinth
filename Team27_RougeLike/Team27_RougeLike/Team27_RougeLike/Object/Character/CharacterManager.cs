@@ -11,6 +11,8 @@ using Team27_RougeLike.Device;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Object.Box;
 using Team27_RougeLike.Object.AI;
+using Team27_RougeLike.Object.ParticleSystem;
+
 namespace Team27_RougeLike.Object.Character
 {
     class CharacterManager
@@ -40,21 +42,6 @@ namespace Team27_RougeLike.Object.Character
         {
             characters.Clear();
             hitBoxs.Clear();
-            AddPlayer(position);
-            //デバッグ用、敵を呼び出すときはプレイヤーを生成してから！
-            AddCharacter(Enemys()[1].Clone(player.Collision.Position));
-            AddCharacter(Enemys()[2].Clone(new Vector3
-                (player.Collision.Position.X + 4,
-                player.Collision.Position.Y,
-                player.Collision.Position.Z + 8
-                )));
-            AddCharacter(Enemys()[3].Clone(player.Collision.Position));
-            AddCharacter(Enemys()[2].Clone(new Vector3
-                         (
-                         player.Collision.Position.X + 4,
-                         player.Collision.Position.Y,
-                         player.Collision.Position.Z + 4
-                         )));
         }
 
         public void Update(GameTime gameTime)
@@ -82,7 +69,7 @@ namespace Team27_RougeLike.Object.Character
                         h.Effect(c);
                     }
                 }
-                h.Update();
+                h.Update(gameTime);
             }
             characters.RemoveAll((CharacterBase c) => c.IsDead());
             hitBoxs.RemoveAll((HitBoxBase h) => h.IsEnd());
@@ -108,11 +95,12 @@ namespace Team27_RougeLike.Object.Character
             characters.Add(character);
         }
 
-        public void AddPlayer(Vector3 position)
+        public void AddPlayer(Vector3 position,ParticleManager pManager)
         {
             PlayerStatusLoader loader = new PlayerStatusLoader();
             var i = loader.LoadStatus();
-            player = new Player(position, new Status(1, i[0],i[1], i[2],i[3], 0.3f), gamedevice, this);
+            player = new Player(position, new Status(1, i[0],i[1], i[2],i[3], 0.3f), gamedevice, this,pManager);
+
             characters.Add(player);
             
         }

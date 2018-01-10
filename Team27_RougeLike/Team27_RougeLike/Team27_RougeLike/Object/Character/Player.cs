@@ -10,6 +10,7 @@ using Team27_RougeLike.Utility;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Object.Box;
 using Team27_RougeLike.Object.AI;
+using Team27_RougeLike.Object.ParticleSystem;
 
 namespace Team27_RougeLike.Object.Character
 {
@@ -18,8 +19,9 @@ namespace Team27_RougeLike.Object.Character
         private GameDevice gameDevice;
         private Projector projector;
         private InputState input;
+        private ParticleManager pManager;
 
-        public Player(Vector3 position, Status status, GameDevice gameDevice, CharacterManager characterManager)
+        public Player(Vector3 position, Status status, GameDevice gameDevice, CharacterManager characterManager, ParticleManager pManager)
             : base(status, new CollisionSphere(position, 5.0f), "test", characterManager)
         {
             tag = "Player";
@@ -29,7 +31,7 @@ namespace Team27_RougeLike.Object.Character
             projector = gameDevice.MainProjector;
             aiManager = new AiManager_Player(gameDevice.InputState);
             aiManager.Initialize(this);
-
+            this.pManager = pManager;
             motion = new Motion();
             for (int i = 0; i < 6; i++)
             {
@@ -54,12 +56,13 @@ namespace Team27_RougeLike.Object.Character
 
         public override void Initialize()
         {
-            
         }
 
         public override void Attack()
         {
-            characterManager.AddHitBox(new DamageBox(new BoundingSphere(Position, 10), 1, tag,status.BasePower));
+            DamageBox DBox= new DamageBox(new BoundingSphere(Position, 10), 1, tag, status.BasePower);
+            characterManager.AddHitBox(DBox);
+            pManager.AddParticle(new Slash(gameDevice,this,DBox.Position()));
         }
 
         public Projector Projecter
