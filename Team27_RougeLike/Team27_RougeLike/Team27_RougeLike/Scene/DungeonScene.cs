@@ -239,7 +239,7 @@ namespace Team27_RougeLike.Scene
                 endFlag = true;
                 nextScene = SceneType.LoadMap;
                 stageManager.NextFloor();
-                //if (stageManager.IsBoss())
+                if (stageManager.IsBoss())
                     nextScene = SceneType.Boss;
                 return;
             }

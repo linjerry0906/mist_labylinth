@@ -89,8 +89,12 @@
       <Name>StageInfo</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="StageCSV\StageItem.csv">
-      <Name>StageItem</Name>
+    <None Include="StageCSV\StageItem_1.csv">
+      <Name>StageItem_1</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="StageCSV\StageItem_2.csv">
+      <Name>StageItem_2</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="StoreItemCSV\StoreItem.csv">

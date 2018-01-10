@@ -18,6 +18,8 @@ namespace Team27_RougeLike.Scene.Town
         public int baseSize;
         public int bossRange;
         public float limitTime;
+
+        public int fileNum;
     }
 
     class StageInfoLoader
@@ -62,6 +64,7 @@ namespace Team27_RougeLike.Scene.Town
                 info.baseSize = int.Parse(data[3]);
                 info.bossRange = int.Parse(data[4]);
                 info.limitTime = float.Parse(data[5]);
+                info.fileNum = int.Parse(data[6]);
 
                 stageInfo.Add(info);
             }

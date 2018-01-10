@@ -134,6 +134,11 @@ with.
         <Start>塊</Start>
         <End>塊</End>
       </CharacterRegion>
+
+      <CharacterRegion>
+        <Start>階</Start>
+        <End>階</End>
+      </CharacterRegion>
       
       <!-- かん -->
       <CharacterRegion>
@@ -260,6 +265,10 @@ with.
         <Start>使</Start>
         <End>使</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>下</Start>
+        <End>下</End>
+      </CharacterRegion>
       
       <!-- じ -->
       <CharacterRegion>
@@ -369,7 +378,11 @@ with.
       </CharacterRegion>
 
       <!-- ち -->
-      
+      <CharacterRegion>
+        <Start>地</Start>
+        <End>地</End>
+      </CharacterRegion>
+
       <!--ちゅう-->
       <CharacterRegion>
         <Start>中</Start>
@@ -501,6 +514,10 @@ with.
         <End>右</End>
       </CharacterRegion>
       <!-- む -->
+      <CharacterRegion>
+        <Start>村</Start>
+        <End>村</End>
+      </CharacterRegion>
       <!-- め -->
       <!-- めい -->
       <CharacterRegion>

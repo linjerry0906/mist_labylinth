@@ -17,15 +17,28 @@ namespace Team27_RougeLike.UI
 
     class DungeonSelectUI
     {
+        public enum DungeonSelectButtonEnum
+        {
+            村 = 0,
+            ダンジョン,
+            NULL,
+        }
+
         private GameDevice gameDevice;
         private GameManager gameManager;
         private InputState input;
         private Renderer renderer;
 
         private Window backLayer;                       //背景レイヤー
-        private List<Button> dungeons;
-        private Button[] buttons;
-        private List<StageInfo> stageInfo;
+
+        private List<Button> dungeons;                  //ダンジョンのボタン
+        private int dungeonIndex;                       //選択したダンジョン
+        private List<Button> floors;                    //選択したダンジョンのフロア
+        private int floorIndex;                         //選択したフロア
+
+        private Button[] buttons;                       //クリックできるボタン
+        private DungeonSelectButtonEnum choose;         //クリックしたボタン
+        private List<StageInfo> stageInfo;              //Stage情報
 
         private readonly float LIMIT_ALPHA = 0.5f;      //背景Alphaの最大値 
 
@@ -43,6 +56,12 @@ namespace Team27_RougeLike.UI
             backLayer.Initialize();         //初期化
             backLayer.SetAlphaLimit(LIMIT_ALPHA);
             backLayer.Switch();             //開く
+
+            buttons = new Button[(int)DungeonSelectButtonEnum.NULL];
+            buttons[(int)DungeonSelectButtonEnum.村] = new Button(backLayer.GetCenterUnder() + new Vector2(-180, -35), 120, 30);
+            buttons[(int)DungeonSelectButtonEnum.ダンジョン] = new Button(backLayer.GetCenterUnder() + new Vector2(30, -35), 120, 30);
+
+            choose = DungeonSelectButtonEnum.NULL;
         }
 
         /// <summary>
@@ -52,10 +71,65 @@ namespace Team27_RougeLike.UI
         {
             backLayer.Update();
 
-            if (!input.IsLeftClick())
+            if (!input.IsLeftClick() || !backLayer.CurrentState())
                 return;
 
             Vector2 mosPos = input.GetMousePosition();
+            CheckDungeonButton(mosPos);
+            CheckFloorButton(mosPos);
+            CheckButtons(mosPos);
+        }
+
+        /// <summary>
+        /// ダンジョン名がクリックされているかをチェック
+        /// </summary>
+        /// <param name="mosPos">マウスの位置</param>
+        private void CheckDungeonButton(Vector2 mosPos)
+        {
+            int index = 0;
+            foreach (Button b in dungeons)
+            {
+                if (b.IsClick(new Point((int)mosPos.X, (int)mosPos.Y)))
+                {
+                    dungeonIndex = index;
+                    InitFloor();
+                    return;
+                }
+                index++;
+            }
+        }
+
+        private void CheckFloorButton(Vector2 mosPos)
+        {
+            int index = 0;
+            foreach (Button b in floors)
+            {
+                if (b.IsClick(new Point((int)mosPos.X, (int)mosPos.Y)))
+                {
+                    floorIndex = index;
+                    return;
+                }
+                index++;
+            }
+        }
+
+        /// <summary>
+        /// ボタンが押されていたかをチェック
+        /// </summary>
+        /// <param name="mosPos">マウスの位置</param>
+        private void CheckButtons(Vector2 mosPos)
+        {
+            DungeonSelectButtonEnum index = 0;
+            foreach (Button b in buttons)
+            {
+                if (b.IsClick(new Point((int)mosPos.X, (int)mosPos.Y)))
+                {
+                    SwitchOff();
+                    choose = index;
+                    return;
+                }
+                index++;
+            }
         }
 
         /// <summary>
@@ -83,35 +157,160 @@ namespace Team27_RougeLike.UI
             float constractAlpha = 1.0f / LIMIT_ALPHA;
             backLayer.Draw();
 
-            renderer.DrawString(
-                "どのダンジョンへ冒険するか",
-                backLayer.GetOffsetPosition() + new Vector2(5, 5),
-                new Vector2(1.1f, 1.1f), Color.White, backLayer.CurrentAlpha() * constractAlpha);
-
-
             DrawDungeons(constractAlpha);
+            DrawFloors(constractAlpha);
+            DrawButtons(constractAlpha);
         }
 
+        /// <summary>
+        /// ダンジョンの種類を表示
+        /// </summary>
+        /// <param name="constractAlpha">透明度</param>
         private void DrawDungeons(float constractAlpha)
         {
-            renderer.DrawTexture("fade",
-                backLayer.GetOffsetPosition() + new Vector2(5, 5),
-                new Vector2(280, 390),
+            renderer.DrawString(
+                "どのダンジョンへ冒険するか",
+                backLayer.GetOffsetPosition() + new Vector2(10, 10),
+                new Vector2(1.1f, 1.1f), Color.White, backLayer.CurrentAlpha() * constractAlpha);
+
+            renderer.DrawTexture("fade",                                //背景
+                backLayer.GetOffsetPosition() + new Vector2(10, 10),
+                new Vector2(280, 330),
                 backLayer.CurrentAlpha() * 0.5f);
 
-            for (int i = 0; i < stageInfo.Count; i++)
+            for (int i = 0; i < stageInfo.Count; i++)                           //各ダンジョン
             {
+                Vector2 buttonPos = new Vector2(dungeons[i].Position().X, dungeons[i].Position().Y);
+                Color color = (i == dungeonIndex) ? Color.Gold : Color.White;    //選択の色
+
+                renderer.DrawTexture(
+                    "fade",
+                    buttonPos,
+                    dungeons[i].Size(),
+                    backLayer.CurrentAlpha() * constractAlpha);
+
                 renderer.DrawString(
                     stageInfo[i].name,
-                    backLayer.GetOffsetPosition() + new Vector2(5, 25 * i + 30),
-                    new Vector2(1.1f, 1.1f), Color.White, backLayer.CurrentAlpha() * constractAlpha);
+                    backLayer.GetOffsetPosition() + new Vector2(10, 25 * i + 35),
+                    new Vector2(1.1f, 1.1f), color, backLayer.CurrentAlpha() * constractAlpha);
             }
-
         }
 
+        /// <summary>
+        /// Buttonを描画
+        /// </summary>
+        /// <param name="constractAlpha">透明度</param>
+        private void DrawButtons(float constractAlpha)
+        {
+            for (int i = 0; i < buttons.Length; i++)                             //各Button
+            {
+                Vector2 buttonPos = new Vector2(buttons[i].Position().X, buttons[i].Position().Y);
+
+                renderer.DrawTexture(
+                    "fade",
+                    buttonPos,
+                    buttons[i].Size(),
+                    backLayer.CurrentAlpha() * constractAlpha);
+
+                renderer.DrawString(
+                    ((DungeonSelectButtonEnum)i).ToString() + " へ",
+                    new Vector2(buttons[i].ButtonCenter().X, buttons[i].ButtonCenter().Y),
+                    Color.White, new Vector2(1.1f, 1.1f), backLayer.CurrentAlpha() * constractAlpha,
+                    true, true);
+            }
+        }
+
+        private void DrawFloors(float constractAlpha)
+        {
+            renderer.DrawTexture("fade",                                //背景
+                backLayer.GetRightTop() + new Vector2(-290, 10),
+                new Vector2(280, 330),
+                backLayer.CurrentAlpha() * 0.5f);
+
+            StageInfo info = stageInfo[dungeonIndex];
+            int chooseFloor = info.totalFloor / info.bossRange;
+
+            for (int i = 0; i < floors.Count; i++)                           //各ダンジョン
+            {
+                Vector2 buttonPos = new Vector2(floors[i].Position().X, floors[i].Position().Y);
+                Color color = (i == floorIndex) ? Color.Gold : Color.White;    //選択の色
+
+                renderer.DrawTexture(
+                    "fade",
+                    buttonPos,
+                    floors[i].Size(),
+                    backLayer.CurrentAlpha() * constractAlpha);
+
+                renderer.DrawString(
+                    "地下 " + (1 + info.bossRange * i) + " 階",
+                    backLayer.GetRightTop() + new Vector2(-290, 25 * i + 35),
+                    new Vector2(1.1f, 1.1f), color, backLayer.CurrentAlpha() * constractAlpha);
+            }
+        }
+
+        /// <summary>
+        /// Stage情報を追加
+        /// </summary>
+        /// <param name="info">Stage情報</param>
         public void SetStageInfo(List<StageInfo> info)
         {
             this.stageInfo = info;
+
+            dungeons = new List<Button>();
+            for (int i = 0; i < info.Count; i++)        //Buttonを初期化
+            {
+                Vector2 position = backLayer.GetOffsetPosition() + new Vector2(10, 25 * i + 35);
+                Button button = new Button(position + new Vector2(0, 2), 280, 21);
+                dungeons.Add(button);
+            }
+
+            dungeonIndex = 0;                           //指定のダンジョン
+            InitFloor();
+        }
+
+        /// <summary>
+        /// FloorUIを更新
+        /// </summary>
+        public void InitFloor()
+        {
+            floorIndex = 0;
+            floors = new List<Button>();
+            StageInfo info = stageInfo[dungeonIndex];
+            int chooseFloor = info.totalFloor / info.bossRange;
+
+            for (int i = 0; i < chooseFloor; i++)       //Buttonを作る
+            {
+                Vector2 position = backLayer.GetRightTop() + new Vector2(-290, 25 * i + 35);
+                Button button = new Button(position + new Vector2(0, 2), 280, 21);
+                floors.Add(button);
+            }
+        }
+
+        /// <summary>
+        /// 選択したボタン
+        /// </summary>
+        /// <returns></returns>
+        public DungeonSelectButtonEnum Next()
+        {
+            return choose;
+        }
+
+        /// <summary>
+        /// Stageを初期化する
+        /// </summary>
+        public void InitStage()
+        {
+            StageInfo nextStage = stageInfo[dungeonIndex];                                        //指定のダンジョン
+            int chooseFloor = (nextStage.totalFloor / nextStage.bossRange) * floorIndex + 1;      //指定のフロアを計算
+
+            //Stage情報を入力
+            gameManager.StageItemNum = nextStage.fileNum;
+            gameManager.InitStage(
+                (int)nextStage.limitTime,
+                chooseFloor,
+                nextStage.totalFloor,
+                nextStage.bossRange,
+                nextStage.baseSize + chooseFloor - 1);
         }
     }
 }

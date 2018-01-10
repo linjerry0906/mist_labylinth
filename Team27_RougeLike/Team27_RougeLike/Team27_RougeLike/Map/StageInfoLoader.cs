@@ -33,9 +33,10 @@ namespace Team27_RougeLike.Map
         /// </summary>
         /// <param name="itemManager">アイテム管理者</param>
         /// <param name="floor">階層</param>
-        public void LoadFloorItem(ItemManager itemManager, int floor)
+        public void LoadFloorItem(ItemManager itemManager, int fileNum,int floor)
         {
-            FileStream fs = new FileStream(@"Content/" + "StageCSV/StageItem.csv", FileMode.Open);      //設定ファイルを開く
+            string fileName = "StageItem_" + fileNum + ".csv";
+            FileStream fs = new FileStream(@"Content/" + "StageCSV/" + fileName, FileMode.Open);      //設定ファイルを開く
             StreamReader sr = new StreamReader(fs);
             List<int> equipList = new List<int>();              //落ちる可能性のある装備リスト
             List<int> consuptionList = new List<int>();         //落ちる可能性のある使用アイテムリスト

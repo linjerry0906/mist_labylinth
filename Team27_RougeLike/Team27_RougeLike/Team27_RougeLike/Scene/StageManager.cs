@@ -21,7 +21,7 @@ namespace Team27_RougeLike.Scene
 
         private Timer limitTime;
         private int floor;
-        private int bossFloor;
+        private int bossRange;
 
         private int stageSize;
 
@@ -39,7 +39,7 @@ namespace Team27_RougeLike.Scene
             limitTime = new Timer(5 * 60);
             limitTime.Initialize();
             floor = 1;
-            bossFloor = floor + 1;
+            bossRange = 5;
             stageSize = 20;
 
             nearFog = FAREST_FOG;
@@ -48,15 +48,18 @@ namespace Team27_RougeLike.Scene
         /// <summary>
         /// 初期化
         /// </summary>
-        /// <param name="limitSecond">制限時間（秒）</param>
-        /// <param name="floor">階層</param>
-        public void Initialize(int limitSecond, int floor, int totalFloor,int stageSize)
+        /// <param name="limitSecond">攻略の制限時間</param>
+        /// <param name="floor">階層目</param>
+        /// <param name="totalFloor">総階層</param>
+        /// <param name="bossRange">Boss出る階層</param>
+        /// <param name="stageSize">ダンジョンのサイズ</param>
+        public void Initialize(int limitSecond, int floor, int totalFloor, int bossRange, int stageSize)
         {
             limitTime = new Timer(limitSecond);
             limitTime.Initialize();
             this.floor = floor;
             this.stageSize = stageSize;
-            bossFloor = floor + totalFloor - 1;
+            this.bossRange = bossRange;
         }
 
         /// <summary>
@@ -136,7 +139,7 @@ namespace Team27_RougeLike.Scene
         /// <returns></returns>
         public bool IsBoss()
         {
-            return floor == bossFloor;
+            return floor % bossRange == 0;
         }
 
         /// <summary>

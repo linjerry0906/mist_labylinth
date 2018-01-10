@@ -57,8 +57,6 @@ namespace Team27_RougeLike.Scene
                 scene == SceneType.ItemShop ||
                 scene == SceneType.DungeonSelect)
                 return;
-
-            gameManager.InitStage(5 * 60, 1, 5, 20);
         }
 
         public bool IsEnd()

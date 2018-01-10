@@ -347,6 +347,9 @@ namespace Team27_RougeLike.Object.Item
         //Dictionary内からランダムに装備アイテムを送る
         public Item GetEquipmentItem()
         {
+            if (equipments.Count <= 0)
+                return null;
+
             int id = new Random().Next(0, equipments.Count);
 
             return equipments.Values.ToList<Item>()[id].Clone();
@@ -355,6 +358,8 @@ namespace Team27_RougeLike.Object.Item
         //Dictionary内からランダムに消費アイテムを送る
         public Item GetConsuptionitem()
         {
+            if (equipments.Count <= 0)
+                return null;
             int id = new Random().Next(0, consumptions.Count);
 
             return consumptions.Values.ToList<Item>()[id].Clone();

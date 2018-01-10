@@ -98,16 +98,6 @@ namespace Team27_RougeLike.Scene
             if (endFlag)
                 return;
 
-            if (input.GetKeyTrigger(Keys.P))
-                ui.SwitchOff();
-
-            if (input.GetKeyTrigger(Keys.D))
-            {
-                ui.SwitchOff();
-                nextScene = SceneType.LoadMap;
-                gameManager.InitStage(1 * 60, 1, 5, 40);
-            }
-
             ui.Update();
 
             UpdateBlurRate();
@@ -134,6 +124,15 @@ namespace Team27_RougeLike.Scene
         {
             if (blurRate <= 0.0f)
                 endFlag = true;
+
+            if (ui.IsEnd())
+            {
+                if (ui.Next() == DungeonSelectUI.DungeonSelectButtonEnum.ダンジョン)
+                {
+                    nextScene = SceneType.LoadMap;
+                    ui.InitStage();
+                }
+            }
         }
     }
 }
