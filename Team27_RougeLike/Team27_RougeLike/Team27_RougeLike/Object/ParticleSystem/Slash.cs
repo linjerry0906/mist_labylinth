@@ -23,12 +23,12 @@ namespace Team27_RougeLike.Object.ParticleSystem
             this.position1 = position1;
             name = "slash";
             alpha = 1.0f;
-            size = new Vector2(20, 20);
+            size = new Vector2(10, 10);
 
             motion = new Motion();
-            for (int i = 0; i < 4; i++)
-                motion.Add(i, new Rectangle(64 * i, 0, 64, 64));
-            motion.Initialize(new Range(0, 3), new Timer(0.04f));
+            for (int i = 0; i < 7; i++)
+                motion.Add(i, new Rectangle(256 * i, 0, 256, 256));
+            motion.Initialize(new Range(0, 6), new Timer(0.02f));
         }
 
         public override void Initialize()
