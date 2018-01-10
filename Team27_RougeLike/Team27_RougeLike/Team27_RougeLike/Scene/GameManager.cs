@@ -28,6 +28,7 @@ namespace Team27_RougeLike.Scene
 
         private DungeonMap mapInstance;     //マップの実体
         private StageManager stageManager;  //ステージマネージャー
+        private int stageItemFile;          //ステージのファイル番号
 
         /// <summary>
         /// シーンの間にゲーム情報を伝える仲介者
@@ -39,7 +40,7 @@ namespace Team27_RougeLike.Scene
             mapInstance = null;
 
             stageManager = new StageManager(gameDevice);
-            stageManager.Initialize(5 * 60, 1, 1, 20);
+            stageManager.Initialize(5 * 60, 1, 5, 5, 20);
 
             itemManager = new ItemManager();
 
@@ -82,6 +83,12 @@ namespace Team27_RougeLike.Scene
             get { return playerItem; }
         }
 
+        public int StageItemNum
+        {
+            get { return stageItemFile; }
+            set { stageItemFile = value; }
+        }
+
         #endregion
 
         #region Stage関連
@@ -92,10 +99,11 @@ namespace Team27_RougeLike.Scene
         /// <param name="limitSecond">攻略の制限時間</param>
         /// <param name="floor">階層目</param>
         /// <param name="totalFloor">総階層</param>
+        /// <param name="bossRange">Boss出る階層</param>
         /// <param name="stageSize">ダンジョンのサイズ</param>
-        public void InitStage(int limitSecond, int floor, int totalFloor, int stageSize)
+        public void InitStage(int limitSecond, int floor, int totalFloor, int bossRange,int stageSize)
         {
-            stageManager.Initialize(limitSecond, floor, totalFloor, stageSize);
+            stageManager.Initialize(limitSecond, floor, totalFloor, bossRange,stageSize);
         }
         
         /// <summary>

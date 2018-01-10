@@ -48,6 +48,9 @@ namespace Team27_RougeLike.Map
         public void AddItem(Vector3 position)
         {
             Item itemInfo = itemManager.GetConsuptionitem();
+            if (itemInfo == null)
+                return;
+
             float size = 2;
             Item3D addItem = new Item3D(gameDevice, itemInfo, position + new Vector3(0, size, 0));
             items.Add(addItem);
@@ -60,6 +63,9 @@ namespace Team27_RougeLike.Map
         public void AddEquip(Vector3 position)
         {
             Item itemInfo = itemManager.GetEquipmentItem();
+            if (itemInfo == null)
+                return;
+
             float size = 2;
             Item3D addItem = new Item3D(gameDevice, itemInfo, position + new Vector3(0, size, 0));
             items.Add(addItem);
