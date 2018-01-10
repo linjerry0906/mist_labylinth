@@ -334,5 +334,17 @@ namespace Team27_RougeLike.Object.Item
             money -= amount;
         }
 
+        /// <summary>
+        /// ファイルからアイテムを復元
+        /// </summary>
+        /// <param name="saveData"></param>
+        public void LoadFromFile(SaveData saveData)
+        {
+            armor = saveData.GetArmor();
+            leftHand = saveData.GetLeftHand();
+            rightHand = saveData.GetRightHand();
+            money = saveData.GetMoney();
+            bag = saveData.GetBagList();
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace Team27_RougeLike.Scene.Town
 {
     public struct StageInfo
     {
+        public int dungeonNo;
         public string name;
         public int totalFloor;
         public int baseSize;
@@ -59,6 +60,7 @@ namespace Team27_RougeLike.Scene.Town
                     break;
 
                 StageInfo info = new StageInfo();
+                info.dungeonNo = int.Parse(data[0]);
                 info.name = data[1];
                 info.totalFloor = int.Parse(data[2]);
                 info.baseSize = int.Parse(data[3]);

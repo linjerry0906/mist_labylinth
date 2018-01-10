@@ -59,6 +59,7 @@ namespace Team27_RougeLike.Scene
             renderer.Begin();
 
             stageManager.DrawLimitTime();       //残り時間を表示
+            stageManager.DrawDungeonInfo();
             ui.Draw();                          //UIの描画
 
             renderer.End();
@@ -216,6 +217,7 @@ namespace Team27_RougeLike.Scene
 
             //死んだ時
             //gameManager.PlayerItem.RemoveAll();
+            //gameManager.Save();
 
             //時間になったら村に戻される
             if (stageManager.IsTime())
@@ -223,6 +225,7 @@ namespace Team27_RougeLike.Scene
                 gameManager.PlayerItem.RemoveTempItem();
                 endFlag = true;
                 nextScene = SceneType.Town;
+                gameManager.Save();
                 return;
             }
 
@@ -238,6 +241,7 @@ namespace Team27_RougeLike.Scene
                 //次へ行く処理
                 endFlag = true;
                 nextScene = SceneType.LoadMap;
+                gameManager.UpdateDungeonProcess();     //攻略状況更新
                 stageManager.NextFloor();
                 if (stageManager.IsBoss())
                     nextScene = SceneType.Boss;

@@ -92,6 +92,8 @@ namespace Team27_RougeLike.Scene
 
         public void Shutdown()
         {
+            if (nextScene == SceneType.Pause)
+                return;
         }
 
         public void Update(GameTime gameTime)
@@ -131,6 +133,9 @@ namespace Team27_RougeLike.Scene
             if (input.GetKeyTrigger(Keys.T))
             {
                 endFlag = true;
+
+                gameManager.UpdateDungeonProcess();     //攻略状況更新
+                gameManager.Save();
                 return;
             }
 

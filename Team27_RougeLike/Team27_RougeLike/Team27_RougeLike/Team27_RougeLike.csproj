@@ -109,6 +109,7 @@
     <Compile Include="Object\Item\ItemEffects\noEffect.cs" />
     <Compile Include="Object\PlayerStatus.cs" />
     <Compile Include="Object\PlayerStatusLoader.cs" />
+    <Compile Include="Scene\DungeonProcess.cs" />
     <Compile Include="Scene\Town\DungeonSelect.cs" />
     <Compile Include="Scene\Town\ItemShop.cs" />
     <Compile Include="Scene\Load.cs" />

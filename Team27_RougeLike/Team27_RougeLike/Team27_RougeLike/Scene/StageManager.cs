@@ -19,6 +19,8 @@ namespace Team27_RougeLike.Scene
         private Renderer renderer;
         private FogManager fogManager;
 
+        private string dungeonName;
+        private int dungeonNum;
         private Timer limitTime;
         private int floor;
         private int bossRange;
@@ -48,13 +50,18 @@ namespace Team27_RougeLike.Scene
         /// <summary>
         /// 初期化
         /// </summary>
+        /// <param name="dungeonNum">ダンジョンの番号</param>
+        /// <param name="dungeonName">ダンジョン名</param>
         /// <param name="limitSecond">攻略の制限時間</param>
         /// <param name="floor">階層目</param>
         /// <param name="totalFloor">総階層</param>
         /// <param name="bossRange">Boss出る階層</param>
         /// <param name="stageSize">ダンジョンのサイズ</param>
-        public void Initialize(int limitSecond, int floor, int totalFloor, int bossRange, int stageSize)
+        public void Initialize(int dungeonNum, string dungeonName, 
+            int limitSecond, int floor, int totalFloor, int bossRange, int stageSize)
         {
+            this.dungeonName = dungeonName;
+            this.dungeonNum = dungeonNum;
             limitTime = new Timer(limitSecond);
             limitTime.Initialize();
             this.floor = floor;
@@ -115,6 +122,23 @@ namespace Team27_RougeLike.Scene
                 0.8f, true, true);
         }
 
+        public void DrawDungeonInfo()
+        {
+            renderer.DrawString(
+                dungeonName,
+                new Vector2(40, 60),
+                Color.WhiteSmoke,
+                new Vector2(1.4f, 1.4f),
+                0.8f, false, true);
+
+            renderer.DrawString(
+                "地下" + floor + "階",
+                new Vector2(40, 100),
+                Color.WhiteSmoke,
+                new Vector2(1.2f, 1.2f),
+                0.8f, false, true);
+        }
+
         /// <summary>
         /// ステージの時間切れか
         /// </summary>
@@ -131,6 +155,24 @@ namespace Team27_RougeLike.Scene
         public int CurrentFloor()
         {
             return floor;
+        }
+
+        /// <summary>
+        /// ダンジョンの番号
+        /// </summary>
+        /// <returns></returns>
+        public int CurrentDungeonNum()
+        {
+            return dungeonNum;
+        }
+
+        /// <summary>
+        /// ダンジョンの名前
+        /// </summary>
+        /// <returns></returns>
+        public string DungeonName()
+        {
+            return dungeonName;
         }
 
         /// <summary>

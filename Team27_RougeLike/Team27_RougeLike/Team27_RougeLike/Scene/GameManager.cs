@@ -16,12 +16,10 @@ namespace Team27_RougeLike.Scene
 {
     class GameManager
     {
-        //ToDo：
-        //Player情報  --->Save情報
         private PlayerStatus playerStatus;  //Playerのステータス
         private Inventory playerItem;       //Playerが持つアイテム
-        //Save機能
-        //攻略進捗    --->Save情報
+
+        private DungeonProcess dungeonProcess; //進捗状況
         private ItemManager itemManager;    //Item Dictionary
 
         private GameDevice gameDevice;
@@ -40,9 +38,8 @@ namespace Team27_RougeLike.Scene
             mapInstance = null;
 
             stageManager = new StageManager(gameDevice);
-            stageManager.Initialize(5 * 60, 1, 5, 5, 20);
-
             itemManager = new ItemManager();
+            dungeonProcess = new DungeonProcess();
 
             PlayerStatusLoader psLoader = new PlayerStatusLoader();       //Todo:Saveから読み取る（PassiveSkillがあるため）
             int[] status = psLoader.LoadStatus();
@@ -51,7 +48,45 @@ namespace Team27_RougeLike.Scene
             playerStatus.Initialize();
 
             playerItem = playerStatus.GetInventory();                     //道具欄を取得
+
+            Load();
         }
+
+        #region Save関連
+
+        /// <summary>
+        /// 再開で前のセーブを読み取る処理
+        /// </summary>
+        private void Load()
+        {
+            SaveData saveData = new SaveData(this);
+
+            if (!saveData.Load())                //失敗の場合
+            {
+                InitNewData();
+                return;
+            }
+
+            playerItem.LoadFromFile(saveData);   //Playerアイテム復元
+        }
+
+        /// <summary>
+        /// 新しいセーブデータを作る
+        /// </summary>
+        private void InitNewData()
+        {
+        }
+
+        /// <summary>
+        /// セーブ
+        /// </summary>
+        public void Save()
+        {
+            SaveData saveData = new SaveData(this);
+            //saveData.Save();
+        }
+
+        #endregion
 
         #region Player関連
 
@@ -101,9 +136,10 @@ namespace Team27_RougeLike.Scene
         /// <param name="totalFloor">総階層</param>
         /// <param name="bossRange">Boss出る階層</param>
         /// <param name="stageSize">ダンジョンのサイズ</param>
-        public void InitStage(int limitSecond, int floor, int totalFloor, int bossRange,int stageSize)
+        public void InitStage(int dungeonNum, string dungeonName,
+            int limitSecond, int floor, int totalFloor, int bossRange,int stageSize)
         {
-            stageManager.Initialize(limitSecond, floor, totalFloor, bossRange,stageSize);
+            stageManager.Initialize(dungeonNum ,dungeonName, limitSecond, floor, totalFloor, bossRange,stageSize);
         }
         
         /// <summary>
@@ -112,6 +148,14 @@ namespace Team27_RougeLike.Scene
         public StageManager StageManager
         {
             get { return stageManager; }
+        }
+
+        /// <summary>
+        /// 進捗状況更新
+        /// </summary>
+        public void UpdateDungeonProcess()
+        {
+            dungeonProcess.UpdateProcess(stageManager.CurrentDungeonNum(), stageManager.CurrentFloor());
         }
 
         #endregion

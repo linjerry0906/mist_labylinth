@@ -306,6 +306,8 @@ namespace Team27_RougeLike.UI
             //Stage情報を入力
             gameManager.StageItemNum = nextStage.fileNum;
             gameManager.InitStage(
+                nextStage.dungeonNo,
+                nextStage.name,
                 (int)nextStage.limitTime,
                 chooseFloor,
                 nextStage.totalFloor,
