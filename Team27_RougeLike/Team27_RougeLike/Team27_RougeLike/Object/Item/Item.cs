@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 
 namespace Team27_RougeLike.Object.Item
 {
-    abstract class Item
+    abstract class Item 
     {
+        protected static long commonID = DateTime.Now.Ticks;
+        protected string uniqueID; //ユニークID
         protected int itemID; //アイテムID
         protected string itemName; //アイテム名
         protected string itemExplanation; //説明文
@@ -26,6 +29,8 @@ namespace Team27_RougeLike.Object.Item
             this.itemRare = itemRare;
             this.itemWeight = itemWeight;
             this.amountLimit = amountLimit;
+            commonID++;
+            uniqueID = commonID.ToString();
         }
 
         public string GetItemName()
@@ -61,6 +66,17 @@ namespace Team27_RougeLike.Object.Item
         public int GetItemID()
         {
             return itemID;
+        }
+
+        public string GetUniqueID()
+        {
+            return uniqueID;
+        }
+
+        public void ResetID(int num)
+        {
+            commonID = DateTime.Now.Ticks + num;
+            uniqueID = commonID.ToString();
         }
 
         public abstract Item Clone();
