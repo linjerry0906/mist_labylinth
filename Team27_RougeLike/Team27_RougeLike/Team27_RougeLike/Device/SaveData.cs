@@ -13,13 +13,14 @@ namespace Team27_RougeLike.Device
     {
         private GameManager gameManager;
         private ItemManager itemManager;
-        private int clearFloor;
-        private int money;
         private Inventory playerInventory;
-        private List<Item> bag;
-        private ProtectionItem[] armor;
-        private WeaponItem leftHand;
-        private WeaponItem rightHand;
+
+        private int clearFloor;             //クリアしたフロア
+        private int money;                  //所持金
+        private List<Item> bag;             //バッグの中身
+        private ProtectionItem[] armor;     //装備中の防具
+        private WeaponItem leftHand;        //左手装備
+        private WeaponItem rightHand;       //右手装備
 
         private string saveFileName;
 
@@ -30,8 +31,7 @@ namespace Team27_RougeLike.Device
             playerInventory = gameManager.PlayerItem;
 
             clearFloor = 1;
-            money = 0;
-
+            money = playerInventory.CurrentMoney();
             bag = playerInventory.BagList();
             armor = playerInventory.CurrentArmor();
             leftHand = playerInventory.LeftHand();
