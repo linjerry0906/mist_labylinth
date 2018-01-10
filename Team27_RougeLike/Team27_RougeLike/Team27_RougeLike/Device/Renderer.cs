@@ -245,6 +245,29 @@ namespace Team27_RougeLike.Device
             }
         }
 
+        public void DrawModel(string name, string textureName,Vector3 position, Vector3 size, Color color)
+        {
+            Model drawModel = models[name];
+            foreach (ModelMesh m in drawModel.Meshes)
+            {
+                foreach (BasicEffect e in m.Effects)
+                {
+                    e.TextureEnabled = true;
+                    e.Texture = textures[textureName];
+                    e.DiffuseColor = color.ToVector3();
+                    e.FogEnabled = fogManager.IsActive();
+                    e.FogStart = fogManager.Near;
+                    e.FogEnd = fogManager.Far;
+                    e.FogColor = fogManager.CurrentColor().ToVector3();
+                    e.View = currentProjector.LookAt;
+                    e.Projection = currentProjector.Projection;
+                    e.World = Matrix.CreateScale(size) *
+                        Matrix.CreateTranslation(position);
+                }
+                m.Draw();
+            }
+        }
+
         /// <summary>
         /// DepthStencil, Cull, AlphaBlend, Color
         /// </summary>

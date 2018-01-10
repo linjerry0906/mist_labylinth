@@ -81,6 +81,11 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
+    <Compile Include="Model\map_block.fbx">
+      <Name>map_block</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
     <None Include="PlayerCSV\PlayerStatus.csv">
       <Name>PlayerStatus</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
