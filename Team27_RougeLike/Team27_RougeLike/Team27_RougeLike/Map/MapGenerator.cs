@@ -185,6 +185,14 @@ namespace Team27_RougeLike.Map
                 }
             }
 
+            if (mainRoom.Count < 4)             //量が少なすぎるとやり直し
+            {
+                currentState = GenerateState.GenerateRoom;
+                rooms.Clear();
+                mainRoom.Clear();
+                return;
+            }
+
             currentState = GenerateState.LinkRoom;      //次の段階へ移行
         }
 
