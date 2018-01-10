@@ -158,6 +158,11 @@ namespace Team27_RougeLike.Scene
             dungeonProcess.UpdateProcess(stageManager.CurrentDungeonNum(), stageManager.CurrentFloor());
         }
 
+        public DungeonProcess DungeonProcess
+        {
+            get { return dungeonProcess; }
+        }
+
         #endregion
 
         #region Map関連

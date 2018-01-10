@@ -358,7 +358,7 @@ namespace Team27_RougeLike.Object.Item
         //Dictionary内からランダムに消費アイテムを送る
         public Item GetConsuptionitem()
         {
-            if (equipments.Count <= 0)
+            if (consumptions.Count <= 0)
                 return null;
             int id = new Random().Next(0, consumptions.Count);
 

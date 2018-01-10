@@ -39,9 +39,19 @@ namespace Team27_RougeLike.Scene
         /// 攻略状況を取得
         /// </summary>
         /// <returns></returns>
-        Dictionary<int, int> GetProcess()
+        public Dictionary<int, int> GetProcess()
         {
             return dungeonProcess;
+        }
+
+        /// <summary>
+        /// 攻略したことあるか
+        /// </summary>
+        /// <param name="dungeonNum"></param>
+        /// <returns></returns>
+        public bool HasKey(int dungeonNum)
+        {
+            return dungeonProcess.ContainsKey(dungeonNum);
         }
     }
 }

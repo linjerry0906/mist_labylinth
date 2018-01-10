@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Object.Character;
+using Team27_RougeLike.Object.ParticleSystem;
 
 namespace Team27_RougeLike.Scene
 {
@@ -26,6 +27,7 @@ namespace Team27_RougeLike.Scene
         private SceneType nextScene;
 
         private CharacterManager characterManager;
+        private ParticleManager pManager;
         private float angle;
 
 
@@ -44,6 +46,7 @@ namespace Team27_RougeLike.Scene
             renderer.DrawModel("B_01", Vector3.Zero, new Vector3(70, 70, 70), Color.White);
 
             characterManager.Draw();
+            pManager.Draw();
 
             DrawUI();
         }
@@ -70,14 +73,17 @@ namespace Team27_RougeLike.Scene
             if (scene == SceneType.Pause)
                 return;
 
+            pManager = new ParticleManager(gameDevice);
+            pManager.Initialize();
+
             characterManager = new CharacterManager(gameDevice);
             characterManager.Initialize(new Vector3(0, 30, 0));
+            characterManager.AddPlayer(new Vector3(0, 30, 0), pManager);
 
             #region カメラ初期化
             angle = 0;
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
             #endregion
-
         }
 
         public bool IsEnd()
@@ -94,6 +100,10 @@ namespace Team27_RougeLike.Scene
         {
             if (nextScene == SceneType.Pause)
                 return;
+
+            pManager.Clear();
+            pManager = null;
+            characterManager = null;
         }
 
         public void Update(GameTime gameTime)
@@ -127,7 +137,7 @@ namespace Team27_RougeLike.Scene
                     new Vector3(30, 90, 30));
             });
 
-
+            pManager.Update(gameTime);
 
             //Debug 村シーンへ
             if (input.GetKeyTrigger(Keys.T))

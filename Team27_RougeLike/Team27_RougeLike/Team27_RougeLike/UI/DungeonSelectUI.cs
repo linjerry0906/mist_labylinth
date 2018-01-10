@@ -275,11 +275,21 @@ namespace Team27_RougeLike.UI
         {
             floorIndex = 0;
             floors = new List<Button>();
+            DungeonProcess process = gameManager.DungeonProcess;
             StageInfo info = stageInfo[dungeonIndex];
+            int limit = 1;
+            if (process.HasKey(info.dungeonNo))
+            {
+                limit = process.GetProcess()[info.dungeonNo];
+            }
+
             int chooseFloor = info.totalFloor / info.bossRange;
 
             for (int i = 0; i < chooseFloor; i++)       //Buttonを作る
             {
+                if ((1 + info.bossRange * i) > limit + 1)   //到達した階層以外は選択できない
+                    break;
+
                 Vector2 position = backLayer.GetRightTop() + new Vector2(-290, 25 * i + 35);
                 Button button = new Button(position + new Vector2(0, 2), 280, 21);
                 floors.Add(button);

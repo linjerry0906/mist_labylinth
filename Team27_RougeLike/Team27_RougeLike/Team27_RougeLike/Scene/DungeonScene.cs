@@ -112,7 +112,7 @@ namespace Team27_RougeLike.Scene
             #endregion
 
             Vector3 position = new Vector3(
-           map.EntryPoint.X * MapDef.TILE_SIZE,
+                map.EntryPoint.X * MapDef.TILE_SIZE,
                 MapDef.TILE_SIZE,
                 map.EntryPoint.Y * MapDef.TILE_SIZE);
             characterManager.Initialize(position);
