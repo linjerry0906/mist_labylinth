@@ -41,7 +41,7 @@ namespace Team27_RougeLike.Object.Box
         {
             if (!hit)
             {
-                character.Damage(attack);
+                character.Damage(attack,angle);
                 hit = true;
             }
         }

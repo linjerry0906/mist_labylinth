@@ -60,9 +60,10 @@ namespace Team27_RougeLike.Object
         {
             renderer.DrawPolygon(textureName, collision.Position, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
         }
-        public void Damage(int num)
+        public void Damage(int num ,Vector3 nockback)
         {
             status.Health = status.Health - num;
+            velocity += nockback;
         }
         public bool IsDead()
         {

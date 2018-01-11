@@ -63,17 +63,17 @@ namespace Team27_RougeLike.Object
         }
         public override void Attack()
         {
+            var angle = Angle.CheckAngleVector(characterManager.GetPlayer().Position, collision.Position);
             switch (aiManager.ToString())
             {
-                case"Team27_RougeLike.Object.AI.AiManager_Fool":
-                    //characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + ang, 10), 1, tag, status.BasePower));
+                case "Team27_RougeLike.Object.AI.AiManager_Fool":
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower,angle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    var angle = Angle.CheckAngleVector(characterManager.GetPlayer().Position, collision.Position);
                     characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + angle, 2), 100, tag, status.BasePower, angle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                   // characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + ang, 10), 1, tag, status.BasePower));
+                   characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower,angle));
                     break;
                 default:
                     break;
