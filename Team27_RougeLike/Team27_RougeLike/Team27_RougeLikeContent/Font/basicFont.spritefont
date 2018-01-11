@@ -77,6 +77,10 @@ with.
 
       <!-- 漢字 -->
       <!-- あ -->
+      <CharacterRegion>
+        <Start>足</Start>
+        <End>足</End>
+      </CharacterRegion>
       <!-- い -->
 
       <!-- う -->
@@ -189,10 +193,15 @@ with.
 
       <!-- く -->
       <CharacterRegion>
+        <Start>来</Start>
+        <End>来</End>
+      </CharacterRegion>
+      
+      <!-- くつ -->
+      <CharacterRegion>
         <Start>靴</Start>
         <End>靴</End>
       </CharacterRegion>
-      <!-- くん -->
 
       <!-- け -->
 

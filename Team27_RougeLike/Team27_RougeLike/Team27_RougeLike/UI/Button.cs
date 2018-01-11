@@ -45,6 +45,11 @@ namespace Team27_RougeLike.UI
             return rect.Center;
         }
 
+        public Vector2 ButtonCenterVector()
+        {
+            return new Vector2(rect.Center.X, rect.Center.Y);
+        }
+
         /// <summary>
         /// 位置
         /// </summary>

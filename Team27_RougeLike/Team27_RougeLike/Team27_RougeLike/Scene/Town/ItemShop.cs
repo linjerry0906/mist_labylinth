@@ -44,6 +44,10 @@ namespace Team27_RougeLike.Scene
         private Window leftWindow;
         private Window rightWindow;
         private Window messegeWindow;
+        private Button buyButton;
+        private Button sellButton;
+        private Window buyWindow;
+        private Window sellWindow;
 
         private ShopMode mode;                  //売るか、買うか、どうするか
         private bool isPop;
@@ -83,6 +87,13 @@ namespace Team27_RougeLike.Scene
             messegeWindow = new Window(gameDevice, new Vector2(1080 / 2 - 160, 720 / 2 - 80), new Vector2(320, 160));
             messegeWindow.Initialize();
 
+            buyButton = new Button(new Vector2(1080 / 2 - 160, 720 / 2 + 80 + 32), 64, 32);
+            sellButton = new Button(new Vector2(1080 / 2 + 160 - 64, 720 / 2 + 80 + 32), 64, 32);
+            buyWindow = new Window(gameDevice, new Vector2(1080 / 2 - 160, 720 / 2 + 80 + 32), new Vector2(64, 32));
+            buyWindow.Initialize();
+            sellWindow = new Window(gameDevice, new Vector2(1080 / 2 + 160 - 64, 720 / 2 +80 + 32), new Vector2(64, 32));
+            sellWindow.Initialize();
+
             mode = ShopMode.select;
             isPop = false;
             isMessegePop = false;
@@ -95,6 +106,8 @@ namespace Team27_RougeLike.Scene
             leftWindow.Update();
             rightWindow.Update();
             messegeWindow.Update();
+            buyWindow.Update();
+            sellWindow.Update();
 
             Point mousePos = new Point(
                 (int)input.GetMousePosition().X,
@@ -110,22 +123,28 @@ namespace Team27_RougeLike.Scene
                 if (!isMessegePop)
                 {
                     messegeWindow.Switch();
+                    buyWindow.Switch();
+                    sellWindow.Switch();
                     isMessegePop = true;
                 }
-                if (input.GetKeyState(Keys.D1))
+                if (buyButton.IsClick(mousePos) && input.IsLeftClick())
                 {
                     mode = ShopMode.buy;
                     store.Initialize();
                     store.Buy();
                     messegeWindow.Switch();
+                    buyWindow.Switch();
+                    sellWindow.Switch();
                     isMessegePop = false;
                 }
-                else if (input.GetKeyState(Keys.D2))
+                else if (sellButton.IsClick(mousePos) && input.IsLeftClick())
                 {
                     mode = ShopMode.sell;
                     store.Initialize();
                     store.Sell();
                     messegeWindow.Switch();
+                    buyWindow.Switch();
+                    sellWindow.Switch();
                     isMessegePop = false;
                 }
             }
@@ -168,12 +187,16 @@ namespace Team27_RougeLike.Scene
             leftWindow.Draw();
             rightWindow.Draw();
             messegeWindow.Draw();
+            buyWindow.Draw();
+            sellWindow.Draw();
 
             renderer.DrawString("B key back to Town", Vector2.Zero, new Vector2(1, 1), Color.Black);
 
             if (mode == ShopMode.select)
             {
-                renderer.DrawString("1で買う、2で売却", messegeWindow.GetLeftCenter(), new Vector2(1, 1), Color.White);
+                renderer.DrawString("いらっしゃい!　何しに来たんだい?", messegeWindow.GetCenter(), Color.White, new Vector2(1, 1), 1.0f, true, true);
+                renderer.DrawString("買う", buyButton.ButtonCenterVector() , Color.White, new Vector2(1, 1),1.0f, true, true);
+                renderer.DrawString("売る", sellButton.ButtonCenterVector(), Color.White, new Vector2(1, 1), 1.0f, true, true);
             }
             else
             {

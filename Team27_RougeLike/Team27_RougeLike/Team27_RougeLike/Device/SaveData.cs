@@ -16,7 +16,7 @@ namespace Team27_RougeLike.Device
         private ItemManager itemManager;
         private Inventory playerInventory;
 
-        private int clearFloor;             //クリアしたフロア
+        private Dictionary<int, int> clearDungen;             //クリアしたフロア
         private int money;                  //所持金
         private List<Item> bag;             //バッグの中身
         private ProtectionItem[] armor;     //装備中の防具
@@ -33,7 +33,7 @@ namespace Team27_RougeLike.Device
             itemManager = gameManager.ItemManager;
             playerInventory = gameManager.PlayerItem;
 
-            clearFloor = 1;
+            clearDungen = gameManager.DungeonProcess.GetProcess();
             money = playerInventory.CurrentMoney();
             bag = playerInventory.BagList();
             armor = playerInventory.CurrentArmor();
@@ -47,7 +47,7 @@ namespace Team27_RougeLike.Device
 
         public void Set()
         {
-            clearFloor = 1;
+            clearDungen = gameManager.DungeonProcess.GetProcess();
             money = playerInventory.CurrentMoney();
             bag = playerInventory.BagList();
             armor = playerInventory.CurrentArmor();
@@ -97,7 +97,10 @@ namespace Team27_RougeLike.Device
 
             StreamWriter sw = new StreamWriter(saveFileName);
 
-            sw.WriteLine("floor," + clearFloor);
+            foreach (var clearFloor in clearDungen)
+            {
+                sw.WriteLine("floor," + clearFloor.Key + "," + clearFloor.Value);
+            }
             sw.WriteLine("money," + money);
             sw.WriteLine("leftHand," + ItemSaveString(leftHand));
             sw.WriteLine("rightHand," + ItemSaveString(rightHand));
@@ -125,7 +128,9 @@ namespace Team27_RougeLike.Device
             try
             {
                 isLoad = true;
+
                 List<string[]> itemDates = new List<string[]>();
+                clearDungen = new Dictionary<int, int>();
                 armor = new ProtectionItem[4];
                 bag = new List<Item>();
 
@@ -136,7 +141,7 @@ namespace Team27_RougeLike.Device
 
                     if (strings[0] == "floor")
                     {
-                        clearFloor = int.Parse(strings[1]);
+                        clearDungen[int.Parse(strings[1])] = int.Parse(strings[2]);
                     }
                     else if (strings[0] == "money")
                     {
@@ -261,9 +266,9 @@ namespace Team27_RougeLike.Device
             }
         }
 
-        public int GetFloor()
+        public Dictionary<int,int> GetClearDungen()
         {
-            return clearFloor;
+            return clearDungen;
         }
 
         public int GetMoney()
