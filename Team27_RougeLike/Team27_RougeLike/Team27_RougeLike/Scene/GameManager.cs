@@ -75,6 +75,8 @@ namespace Team27_RougeLike.Scene
         /// </summary>
         private void InitNewData()
         {
+            SaveData saveData = new SaveData(this);
+            saveData.Save();
         }
 
         /// <summary>
@@ -83,7 +85,7 @@ namespace Team27_RougeLike.Scene
         public void Save()
         {
             SaveData saveData = new SaveData(this);
-            //saveData.Save();
+            saveData.Save();
         }
 
         #endregion

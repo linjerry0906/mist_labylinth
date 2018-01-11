@@ -1,4 +1,3 @@
 D:\作品\1年後期チーム27班 Brunch\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\obj\x86\Debug\Team27_RougeLikeContent.contentprojResolveAssemblyReference.cache
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\obj\x86\Debug\Team27_RougeLikeContent.contentprojResolveAssemblyReference.cache
 D:\授業\ゲーム制作\2017_後期1年生チーム制作2_27班\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\obj\x86\Debug\Team27_RougeLikeContent.contentprojResolveAssemblyReference.cache
-D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\obj\x86\Debug\Team27_RougeLikeContent.contentprojResolveAssemblyReference.cache

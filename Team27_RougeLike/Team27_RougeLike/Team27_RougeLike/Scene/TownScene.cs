@@ -44,7 +44,7 @@ namespace Team27_RougeLike.Scene
 
             renderer.DrawString("Town\nPress D key to Dungeon", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
             renderer.DrawString("Press S key to ItemShop", new Vector2(0, 100), new Vector2(1, 1), new Color(1, 1, 1));
-
+            
             renderer.End();
         }
 
@@ -53,6 +53,7 @@ namespace Team27_RougeLike.Scene
             nextScene = SceneType.DungeonSelect;
             endFlag = false;
 
+            gameManager.Save();
             if (scene == SceneType.Pause ||
                 scene == SceneType.ItemShop ||
                 scene == SceneType.DungeonSelect)
