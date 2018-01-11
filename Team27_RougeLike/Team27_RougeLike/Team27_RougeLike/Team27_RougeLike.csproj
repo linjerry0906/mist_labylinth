@@ -103,6 +103,7 @@
     <Compile Include="Object\AI\MoveAi\MoveAi_Step.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_TargetMove.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_Wait.cs" />
+    <Compile Include="Object\Character\Spawner.cs" />
     <Compile Include="Object\IBoss.cs" />
     <Compile Include="Object\Item\Inventory.cs" />
     <Compile Include="Object\Item\Item3D.cs" />

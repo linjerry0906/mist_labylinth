@@ -79,7 +79,7 @@ namespace Team27_RougeLike.Scene
             if (lastScene == SceneType.Pause)       //Pauseから来た場合は以下のもの初期化しない
                 return;
 
-            gameDevice.MainProjector.SetRelativePosition(new Vector3(0, 2, 10));
+            gameDevice.MainProjector.SetRelativePosition(new Vector3(0, 6, 12f));
 
             #region Map初期化
             map = gameManager.GetDungeonMap();      //生成したマップを取得
@@ -117,11 +117,14 @@ namespace Team27_RougeLike.Scene
                 map.EntryPoint.X * MapDef.TILE_SIZE,
                 MapDef.TILE_SIZE,
                 map.EntryPoint.Y * MapDef.TILE_SIZE);
-            characterManager.Initialize(position);
+            characterManager.Initialize();
             characterManager.AddPlayer(position, pManager);
-            characterManager.AddCharacter(characterManager.Enemys()[1].Clone(characterManager.GetPlayer().Position));
-            characterManager.AddCharacter(characterManager.Enemys()[2].Clone(characterManager.GetPlayer().Position));
-            characterManager.AddCharacter(characterManager.Enemys()[3].Clone(characterManager.GetPlayer().Position));
+            var d = new int[2];
+            d[0] = 3;
+            d[1] = 2;
+            //配列を渡せばその中からランダムで、ＩＤ単体を渡せばそれのみをスポーンさせます
+            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, d, 10,3, characterManager));
+            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, 1, 10, 3, characterManager));
             #region カメラ初期化
             angle = 0;
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化

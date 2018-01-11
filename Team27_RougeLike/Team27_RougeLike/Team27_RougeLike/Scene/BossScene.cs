@@ -106,7 +106,7 @@ namespace Team27_RougeLike.Scene
             pManager.Initialize();
 
             characterManager = new CharacterManager(gameDevice);
-            characterManager.Initialize(position);
+            characterManager.Initialize();
             characterManager.AddPlayer(position, pManager);
 
             #region カメラ初期化
