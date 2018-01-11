@@ -77,6 +77,10 @@ with.
 
       <!-- 漢字 -->
       <!-- あ -->
+      <CharacterRegion>
+        <Start>足</Start>
+        <End>足</End>
+      </CharacterRegion>
       <!-- い -->
 
       <!-- う -->
