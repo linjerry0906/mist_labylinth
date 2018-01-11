@@ -49,7 +49,12 @@ namespace Team27_RougeLike.Scene
         public void Draw()
         {
             blurEffect.WriteRenderTarget(renderer.FogManager.CurrentColor());
-            townScene.Draw();
+            townScene.Draw();           //前のシーンを描画
+
+            renderer.Begin();
+            ui.DrawBackGround();        //ダンジョンイメージ
+            renderer.End();
+
             blurEffect.ReleaseRenderTarget();
             blurEffect.Draw(renderer);
 
@@ -105,6 +110,9 @@ namespace Team27_RougeLike.Scene
             CheckSceneEnd();
         }
 
+        /// <summary>
+        /// ぼかし更新
+        /// </summary>
         private void UpdateBlurRate()
         {
             if (ui.IsEnd())

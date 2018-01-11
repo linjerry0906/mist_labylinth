@@ -57,6 +57,8 @@ namespace Team27_RougeLike.Scene
                 scene == SceneType.ItemShop ||
                 scene == SceneType.DungeonSelect)
                 return;
+
+            gameManager.PlayerItem.RemoveTemp();       //一時的なアイテムを削除
         }
 
         public bool IsEnd()

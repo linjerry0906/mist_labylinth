@@ -74,6 +74,11 @@ namespace Team27_RougeLike.Object.Item
             return true;
         }
 
+        public void RemoveTemp()
+        {
+            tempBag.Clear();
+        }
+
         /// <summary>
         /// 特定のアイテムを削除
         /// </summary>
