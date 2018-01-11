@@ -174,6 +174,10 @@ namespace Team27_RougeLike.Object.Item
             //saveItems{ 種類, id, addPower, addDefence, reinforcment }
         {
             //string配列読み込み
+            if (saveItems == null)
+            {
+                return null;
+            }
             string kind = saveItems[0];
             int saveID = int.Parse(saveItems[1]);
 

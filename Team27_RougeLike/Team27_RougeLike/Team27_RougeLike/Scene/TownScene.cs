@@ -20,6 +20,7 @@ namespace Team27_RougeLike.Scene
         private InputState input;
         private Renderer renderer;
         private GameManager gameManager;
+        private SaveData saveDate;
 
         private bool endFlag;
 
@@ -31,6 +32,7 @@ namespace Team27_RougeLike.Scene
             input = gameDevice.InputState;
             renderer = gameDevice.Renderer;
             this.gameManager = gameManager;
+            saveDate = new SaveData(gameManager);
         }
 
         public void Draw()
@@ -44,6 +46,10 @@ namespace Team27_RougeLike.Scene
 
             renderer.DrawString("Town\nPress D key to Dungeon", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
             renderer.DrawString("Press S key to ItemShop", new Vector2(0, 100), new Vector2(1, 1), new Color(1, 1, 1));
+            renderer.DrawString("Press R key to Save", new Vector2(0, 150), new Vector2(1, 1), Color.Black);
+            renderer.DrawString("Press L key to Load", new Vector2(0, 180), new Vector2(1, 1), Color.Black);
+
+            saveDate.Draw(renderer);
 
             renderer.End();
         }
@@ -103,6 +109,16 @@ namespace Team27_RougeLike.Scene
                 nextScene = SceneType.ItemShop;
                 endFlag = true;
                 return;
+            }
+
+            if (input.GetKeyTrigger(Keys.R))
+            {
+                saveDate.Save();
+            }
+
+            if (input.GetKeyTrigger(Keys.L))
+            {
+                saveDate.Load();
             }
         }
     }

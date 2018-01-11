@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using Microsoft.Xna.Framework;
 using Team27_RougeLike.Scene;
 using Team27_RougeLike.Object;
 using Team27_RougeLike.Object.Item;
@@ -23,6 +24,8 @@ namespace Team27_RougeLike.Device
         private WeaponItem rightHand;       //右手装備
 
         private string saveFileName;
+        private bool isSave;
+        private bool isLoad;
 
         public SaveData(GameManager gameManager)
         {
@@ -37,9 +40,22 @@ namespace Team27_RougeLike.Device
             leftHand = playerInventory.LeftHand();
             rightHand = playerInventory.RightHand();
 
-            saveFileName = @"Content/" + "SaveCSV/SaveDate.csv";
+            saveFileName = @"Content/SaveCSV/SaveDate.csv";
+            isSave = false;
+            isLoad = false;
         }
 
+        public void Set()
+        {
+            clearFloor = 1;
+            money = playerInventory.CurrentMoney();
+            bag = playerInventory.BagList();
+            armor = playerInventory.CurrentArmor();
+            leftHand = playerInventory.LeftHand();
+            rightHand = playerInventory.RightHand();
+        }
+
+        //Itemをテキスト出力するためのメソッド
         public string ItemSaveString(Item item)
         {
             if (item is WeaponItem)
@@ -58,17 +74,31 @@ namespace Team27_RougeLike.Device
                     ((ProtectionItem)item).GetAddDefence() + "," +
                     ((ProtectionItem)item).GetReinforcement();
             }
-            else
+            else if (item is ConsumptionItem)
             {
                 return "Consumption" + "," +
-                    item.GetItemID().ToString();
+                    item.GetItemID();
+            }
+            else
+            {
+                return "no";
             }
         }
 
         //セーブデータを書き込む
         public void Save()
         {
+            Set();
+
+            isSave = true;
+
+            //フォルダが存在していなかったらフォルダを生成
+            DirectoryInfo di = Directory.CreateDirectory(@"Content/SaveCSV");
+
+            
+            //FileStream datefs = new FileStream(saveFileName, FileMode.Open);
             StreamWriter sw = new StreamWriter(saveFileName);
+
             sw.WriteLine("floor," + clearFloor);
             sw.WriteLine("money," + money);
             sw.WriteLine("leftHand," + ItemSaveString(leftHand));
@@ -83,6 +113,7 @@ namespace Team27_RougeLike.Device
             }
 
             sw.Close();
+            isSave = false;
         }
 
         //セーブデータを読み込む
@@ -90,6 +121,8 @@ namespace Team27_RougeLike.Device
         {
             try
             {
+                isLoad = true;
+                List<string[]> itemDates = new List<string[]>();
                 armor = new ProtectionItem[4];
                 bag = new List<Item>();
 
@@ -109,59 +142,108 @@ namespace Team27_RougeLike.Device
                     }
                     else if (strings[0] == "leftHand")
                     {
-                        string[] itemDates = new string[]
+                        if (strings[1] != "no")
                         {
+                            string[] itemDate = new string[]
+                            {
                             strings[1],
                             strings[2],
                             strings[3],
                             strings[4],
                             strings[5],
-                        };
-                        leftHand = (WeaponItem)itemManager.LoadSaveItem(itemDates);
+                            };
+                            itemDates.Add(itemDate);
+                        }
+                        else
+                        {
+                            itemDates.Add(null);
+                        }
                     }
                     else if (strings[0] == "rightHand")
                     {
-                        string[] itemDates = new string[]
+                        if (strings[1] != "no")
                         {
+                            string[] itemDate = new string[]
+                            {
                             strings[1],
                             strings[2],
                             strings[3],
                             strings[4],
                             strings[5],
-                        };
-                        rightHand = (WeaponItem)itemManager.LoadSaveItem(itemDates);
+                            };
+                            itemDates.Add(itemDate);
+                        }
+                        else
+                        {
+                            itemDates.Add(null);
+                        }
                     }
                     else if (strings[0] == "armor")
                     {
-                        string[] itemDates = new string[]
+                        if (strings[1] != "no")
                         {
+                            string[] itemDate = new string[]
+                            {
                             strings[1],
                             strings[2],
                             strings[3],
                             strings[4],
                             strings[5],
-                        };
-                        armor[armor.Length - 1] = (ProtectionItem)itemManager.LoadSaveItem(itemDates);
+                            };
+                            itemDates.Add(itemDate);
+                        }
+                        else
+                        {
+                            itemDates.Add(null);
+                        }
                     }
                     else if (strings[0] == "bag")
                     {
-                        string[] itemDates = new string[]
+                        if (strings[1] != "no")
                         {
+                            string[] itemDate = new string[]
+                            {
                             strings[1],
                             strings[2],
                             strings[3],
                             strings[4],
                             strings[5],
-                        };
-                        bag.Add(itemManager.LoadSaveItem(itemDates));
+                            };
+                            itemDates.Add(itemDate);
+                        }
                     }
-
                 }
+                sr.Close();
+
+                leftHand = (WeaponItem)itemManager.LoadSaveItem(itemDates[0]);
+                rightHand = (WeaponItem)itemManager.LoadSaveItem(itemDates[1]);
+                for(int i = 0; i < 4; i++)
+                {
+                    armor[i] = (ProtectionItem)itemManager.LoadSaveItem(itemDates[2 + i]);
+                }
+                for(int i = 6; i < itemDates.Count; i++)
+                {
+                    bag.Add(itemManager.LoadSaveItem(itemDates[i]));
+                }
+
+                isLoad = false;
                 return true;
             }
             catch
             {
                 return false;
+            }
+        }
+
+        public void Draw(Renderer renderer)
+        {
+            if (isSave)
+            {
+                renderer.DrawString("セーブ中", Vector2.Zero, new Vector2(1, 1), Color.Red);
+            }
+            if (isLoad)
+            {
+                renderer.DrawString("ロード中", Vector2.Zero, new Vector2(1, 1), Color.Red);
             }
         }
 
