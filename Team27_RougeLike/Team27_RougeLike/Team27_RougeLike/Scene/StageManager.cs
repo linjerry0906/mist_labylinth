@@ -19,13 +19,14 @@ namespace Team27_RougeLike.Scene
         private Renderer renderer;
         private FogManager fogManager;
 
-        private string dungeonName;
-        private int dungeonNum;
-        private Timer limitTime;
-        private int floor;
-        private int bossRange;
+        private string dungeonName;     //ダンジョンの名
+        private int dungeonNum;         //ダンジョンの番号
+        private Timer limitTime;        //制限時間
+        private int floor;              //今の階層
+        private int bossRange;          //何階ごとにボス
 
-        private int stageSize;
+        private int stageSize;          //今のサイズ
+        private int expandRate;         //拡大の比率
 
         private static readonly float FAREST_FOG = 100;
         private static readonly float NEAREST_FOG = -50;
@@ -57,8 +58,9 @@ namespace Team27_RougeLike.Scene
         /// <param name="totalFloor">総階層</param>
         /// <param name="bossRange">Boss出る階層</param>
         /// <param name="stageSize">ダンジョンのサイズ</param>
+        /// <param name="expandRate">拡大の比率</param>
         public void Initialize(int dungeonNum, string dungeonName, 
-            int limitSecond, int floor, int totalFloor, int bossRange, int stageSize)
+            int limitSecond, int floor, int totalFloor, int bossRange, int stageSize, int expandRate)
         {
             this.dungeonName = dungeonName;
             this.dungeonNum = dungeonNum;
@@ -67,6 +69,7 @@ namespace Team27_RougeLike.Scene
             this.floor = floor;
             this.stageSize = stageSize;
             this.bossRange = bossRange;
+            this.expandRate = expandRate;
         }
 
         /// <summary>
@@ -122,6 +125,9 @@ namespace Team27_RougeLike.Scene
                 0.8f, true, true);
         }
 
+        /// <summary>
+        /// ダンジョンの進行状況を描画
+        /// </summary>
         public void DrawDungeonInfo()
         {
             renderer.DrawString(
@@ -190,7 +196,7 @@ namespace Team27_RougeLike.Scene
         public void NextFloor()
         {
             floor++;
-            stageSize += 1;         //Sizeを拡大
+            stageSize += expandRate;         //Sizeを拡大
         }
 
         /// <summary>

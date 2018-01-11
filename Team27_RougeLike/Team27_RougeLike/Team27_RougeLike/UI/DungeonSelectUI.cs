@@ -168,7 +168,7 @@ namespace Team27_RougeLike.UI
         public void DrawBackGround()
         {
             float constractAlpha = 1.0f / LIMIT_ALPHA;
-            renderer.DrawTexture("dungeon_image" + (dungeonIndex + 1), Vector2.Zero, backLayer.CurrentAlpha() * constractAlpha);
+            renderer.DrawTexture(stageInfo[dungeonIndex].imageName, Vector2.Zero, backLayer.CurrentAlpha() * constractAlpha);
             renderer.DrawTexture(
                 "white", 
                 Vector2.Zero, 
@@ -291,15 +291,15 @@ namespace Team27_RougeLike.UI
             floors = new List<Button>();
             DungeonProcess process = gameManager.DungeonProcess;
             StageInfo info = stageInfo[dungeonIndex];
-            int limit = 1;
-            if (process.HasKey(info.dungeonNo))
+            int limit = 1;                                  //制限階層
+            if (process.HasKey(info.dungeonNo))             //攻略したことがあれば進捗で更新
             {
                 limit = process.GetProcess()[info.dungeonNo];
             }
 
             int chooseFloor = info.totalFloor / info.bossRange;
 
-            for (int i = 0; i < chooseFloor; i++)       //Buttonを作る
+            for (int i = 0; i < chooseFloor; i++)           //Buttonを作る
             {
                 if ((1 + info.bossRange * i) > limit + 1)   //到達した階層以外は選択できない
                     break;
@@ -336,7 +336,8 @@ namespace Team27_RougeLike.UI
                 chooseFloor,
                 nextStage.totalFloor,
                 nextStage.bossRange,
-                nextStage.baseSize + chooseFloor - 1);
+                nextStage.baseSize + (chooseFloor - 1) * nextStage.expandRate,
+                nextStage.expandRate);
         }
     }
 }

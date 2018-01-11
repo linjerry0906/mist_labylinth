@@ -133,10 +133,14 @@ namespace Team27_RougeLike.Scene
         /// <param name="totalFloor">総階層</param>
         /// <param name="bossRange">Boss出る階層</param>
         /// <param name="stageSize">ダンジョンのサイズ</param>
+        /// <param name="expandRate">拡大の比率</param>
         public void InitStage(int dungeonNum, string dungeonName,
-            int limitSecond, int floor, int totalFloor, int bossRange,int stageSize)
+            int limitSecond, int floor, int totalFloor, int bossRange,int stageSize, int expandRate)
         {
-            stageManager.Initialize(dungeonNum ,dungeonName, limitSecond, floor, totalFloor, bossRange,stageSize);
+            stageManager.Initialize(
+                dungeonNum ,dungeonName, limitSecond, 
+                floor, totalFloor, bossRange, 
+                stageSize, expandRate);
         }
         
         /// <summary>
@@ -155,11 +159,17 @@ namespace Team27_RougeLike.Scene
             dungeonProcess.UpdateProcess(stageManager.CurrentDungeonNum(), stageManager.CurrentFloor());
         }
 
+        /// <summary>
+        /// 攻略進捗
+        /// </summary>
         public DungeonProcess DungeonProcess
         {
             get { return dungeonProcess; }
         }
 
+        /// <summary>
+        /// ステージ使用するアイテム情報のファイル番号
+        /// </summary>
         public int StageNum
         {
             get { return stageNumFile; }

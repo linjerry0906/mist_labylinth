@@ -13,14 +13,16 @@ namespace Team27_RougeLike.Scene.Town
 {
     public struct StageInfo
     {
-        public int dungeonNo;
-        public string name;
-        public int totalFloor;
-        public int baseSize;
-        public int bossRange;
-        public float limitTime;
+        public int dungeonNo;           //ダンジョンの番号
+        public string name;             //ダンジョン名
+        public int totalFloor;          //総階層
+        public int baseSize;            //基本サイズ
+        public int bossRange;           //何階ごとにボス
+        public float limitTime;         //制限時間
 
-        public int fileNum;
+        public int fileNum;             //Item詳細の番号
+        public string imageName;        //イメージのAsset名
+        public int expandRate;       　 //拡大する比率
     }
 
     class StageInfoLoader
@@ -67,6 +69,8 @@ namespace Team27_RougeLike.Scene.Town
                 info.bossRange = int.Parse(data[4]);
                 info.limitTime = float.Parse(data[5]);
                 info.fileNum = int.Parse(data[6]);
+                info.imageName = data[7];
+                info.expandRate = int.Parse(data[8]);
 
                 stageInfo.Add(info);
             }

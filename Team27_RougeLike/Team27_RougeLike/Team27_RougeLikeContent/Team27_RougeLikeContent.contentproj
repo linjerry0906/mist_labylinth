@@ -102,6 +102,10 @@
       <Name>StageItem_2</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="StageCSV\StageItem_3.csv">
+      <Name>StageItem_3</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="StageCSV\Stage_boss.csv">
       <Name>Stage_boss</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -156,11 +160,6 @@
     </Compile>
     <Compile Include="Texture\dungeon_image2.png">
       <Name>dungeon_image2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Texture\dungeon_image3.png">
-      <Name>dungeon_image3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
