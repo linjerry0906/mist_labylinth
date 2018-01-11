@@ -12,7 +12,7 @@ namespace Team27_RougeLike.Object.Box
         /// 注　このマスクに入れるものは、触らせたくないもの
         /// </summary>
         private List<string> mask;          //マスク
-        private BoundingSphere collision;   //当たり判定
+        public BoundingSphere collision;   //当たり判定
 
         private int time;                   //持続時間
         
@@ -54,7 +54,7 @@ namespace Team27_RougeLike.Object.Box
             this.mask = tags;
         }
 
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update()
         {
             time--;
         }

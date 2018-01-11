@@ -13,7 +13,6 @@ namespace Team27_RougeLike.Object
 {
     abstract class CharacterBase
     {
-        public float angle;          //向き
         public Status status;        //様々なパラメータ
         protected CollisionSphere collision;
         protected CharacterManager characterManager;
@@ -61,9 +60,10 @@ namespace Team27_RougeLike.Object
         {
             renderer.DrawPolygon(textureName, collision.Position, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
         }
-        public void Damage(int num)
+        public void Damage(int num ,Vector3 nockback)
         {
             status.Health = status.Health - num;
+            velocity += nockback;
         }
         public bool IsDead()
         {

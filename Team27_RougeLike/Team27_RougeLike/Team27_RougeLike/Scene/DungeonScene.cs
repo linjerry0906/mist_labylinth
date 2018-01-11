@@ -119,6 +119,9 @@ namespace Team27_RougeLike.Scene
                 map.EntryPoint.Y * MapDef.TILE_SIZE);
             characterManager.Initialize(position);
             characterManager.AddPlayer(position, pManager);
+            characterManager.AddCharacter(characterManager.Enemys()[1].Clone(characterManager.GetPlayer().Position));
+            characterManager.AddCharacter(characterManager.Enemys()[2].Clone(characterManager.GetPlayer().Position));
+            characterManager.AddCharacter(characterManager.Enemys()[3].Clone(characterManager.GetPlayer().Position));
             #region カメラ初期化
             angle = 0;
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化

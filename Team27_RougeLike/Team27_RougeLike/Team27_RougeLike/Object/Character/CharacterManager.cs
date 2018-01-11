@@ -25,8 +25,6 @@ namespace Team27_RougeLike.Object.Character
         private Dictionary<int, EnemyBase> enemys = new Dictionary<int, EnemyBase>();
 
         private string enemyFilename;
-        private string playerFilename;
-
         private const int drawLength = 120;
 
 
@@ -34,7 +32,6 @@ namespace Team27_RougeLike.Object.Character
         {
             this.gamedevice = gamedevice;
             enemyFilename = @"Content/" + "EnemysCSV/Enemy.csv";
-            playerFilename = @"Content/" + "PlayerCSV/PlayerStatus.csv";
             Load();
         }
 
@@ -69,7 +66,7 @@ namespace Team27_RougeLike.Object.Character
                         h.Effect(c);
                     }
                 }
-                h.Update(gameTime);
+                h.Update();
             }
             characters.RemoveAll((CharacterBase c) => c.IsDead());
             hitBoxs.RemoveAll((HitBoxBase h) => h.IsEnd());
