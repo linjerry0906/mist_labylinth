@@ -63,9 +63,6 @@ namespace Team27_RougeLike.Scene
             renderer.Begin();
 
             renderer.DrawString("Boss Scene\n P Key:Pause\n T Key: Back to Town", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
-            renderer.DrawString("ぼす は ただいま　がいしゅつちゅう　ですよ-----",
-                new Vector2(Def.WindowDef.WINDOW_WIDTH / 2, Def.WindowDef.WINDOW_HEIGHT / 2),
-                new Color(1.0f, 0.0f, 0.0f), new Vector2(1.2f, 1.2f), 1.0f, true, true);
 
             ui.Draw();
 
@@ -102,12 +99,18 @@ namespace Team27_RougeLike.Scene
                MapDef.TILE_SIZE,
                map.EntryPoint.Y * MapDef.TILE_SIZE);
 
+            Vector3 bossPosition = new Vector3(
+               map.EndPoint.X * MapDef.TILE_SIZE,
+               MapDef.TILE_SIZE,
+               map.EndPoint.Y * MapDef.TILE_SIZE);
+
             pManager = new ParticleManager(gameDevice);
             pManager.Initialize();
 
             characterManager = new CharacterManager(gameDevice);
             characterManager.Initialize(position);
             characterManager.AddPlayer(position, pManager);
+            characterManager.AddCharacter(characterManager.Enemys()[4].Clone(bossPosition));
 
             #region カメラ初期化
             angle = 0;

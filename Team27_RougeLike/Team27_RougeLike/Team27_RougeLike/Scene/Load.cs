@@ -28,6 +28,7 @@ namespace Team27_RougeLike.Scene
                 {"slash" ,path},
                 {"dungeon_image1" ,path},
                 {"dungeon_image2" ,path},
+                {"dungeon_image3" ,path},
             };
             return list;
         }
