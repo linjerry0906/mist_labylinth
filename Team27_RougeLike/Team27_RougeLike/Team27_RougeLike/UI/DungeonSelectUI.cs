@@ -328,7 +328,7 @@ namespace Team27_RougeLike.UI
             int chooseFloor = (nextStage.totalFloor / nextStage.bossRange) * floorIndex + 1;      //指定のフロアを計算
 
             //Stage情報を入力
-            gameManager.StageItemNum = nextStage.fileNum;
+            gameManager.StageNum = nextStage.fileNum;
             gameManager.InitStage(
                 nextStage.dungeonNo,
                 nextStage.name,

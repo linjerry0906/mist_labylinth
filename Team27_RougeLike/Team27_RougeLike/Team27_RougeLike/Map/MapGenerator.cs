@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Team27_RougeLike.Device;
 
@@ -396,6 +397,37 @@ namespace Team27_RougeLike.Map
 
             mapChip[entryPoint.Y, entryPoint.X] = (int)MapDef.BlockDef.Entry;
             mapChip[exitPoint.Y, exitPoint.X] = (int)MapDef.BlockDef.Exit;
+
+            currentState = GenerateState.End;
+        }
+
+        public void LoadFormFile()
+        {
+            FileStream fs = new FileStream(@"Content/" + "StageCSV/" + "Stage_boss.csv", FileMode.Open);      //設定ファイルを開く
+            StreamReader sr = new StreamReader(fs);
+
+            int lines = 0;
+            List<int> blocks = new List<int>();
+
+            while (!sr.EndOfStream)                     //最後まで読み込む
+            {
+                string line = sr.ReadLine();            //一行つず読み込む
+                string[] data = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                for (int i = 0; i < data.Length; i++)
+                {
+                    blocks.Add(int.Parse(data[i]));
+                }
+                lines++;
+            }
+            sr.Close();                                 //読み終わったらファイルをClose
+            fs.Close();
+
+            mapChip = new int[lines, blocks.Count / lines];
+            for (int i = 0; i < mapChip.Length; i++)
+            {
+                mapChip[i / lines, i % lines] = blocks[i];
+            }
 
             currentState = GenerateState.End;
         }
