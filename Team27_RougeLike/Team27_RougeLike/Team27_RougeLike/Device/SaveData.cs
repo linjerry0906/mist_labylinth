@@ -94,9 +94,7 @@ namespace Team27_RougeLike.Device
 
             //フォルダが存在していなかったらフォルダを生成
             DirectoryInfo di = Directory.CreateDirectory(@"Content/SaveCSV");
-
             
-            //FileStream datefs = new FileStream(saveFileName, FileMode.Open);
             StreamWriter sw = new StreamWriter(saveFileName);
 
             sw.WriteLine("floor," + clearFloor);
@@ -215,15 +213,16 @@ namespace Team27_RougeLike.Device
                 }
                 sr.Close();
 
-                leftHand = (WeaponItem)itemManager.LoadSaveItem(itemDates[0]);
-                rightHand = (WeaponItem)itemManager.LoadSaveItem(itemDates[1]);
-                for(int i = 0; i < 4; i++)
+                List<Item> items = itemManager.LoadSaveItem(itemDates);
+                leftHand = (WeaponItem)items[0];
+                rightHand = (WeaponItem)items[1];
+                armor[0] = (ProtectionItem)items[2];
+                armor[1] = (ProtectionItem)items[3];
+                armor[2] = (ProtectionItem)items[4];
+                armor[3] = (ProtectionItem)items[5];
+                for (int i = 6; i < items.Count; i++)
                 {
-                    armor[i] = (ProtectionItem)itemManager.LoadSaveItem(itemDates[2 + i]);
-                }
-                for(int i = 6; i < itemDates.Count; i++)
-                {
-                    bag.Add(itemManager.LoadSaveItem(itemDates[i]));
+                    bag[i - 6] = items[i];
                 }
 
                 isLoad = false;
