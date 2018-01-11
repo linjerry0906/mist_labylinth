@@ -60,7 +60,8 @@ namespace Team27_RougeLike.Object.Character
 
         public override void Attack()
         {
-            DamageBox DBox= new DamageBox(new BoundingSphere(Position, 10), 1, tag, status.BasePower);
+            Debug.WriteLine(status.Health);
+            HitBoxBase DBox= new MoveDamageBox(new BoundingSphere(Position + projector.Front*10, 10), 100,tag,status.BasePower,projector.Front);
             characterManager.AddHitBox(DBox);
             pManager.AddParticle(new Slash(gameDevice,this,DBox.Position()));
         }

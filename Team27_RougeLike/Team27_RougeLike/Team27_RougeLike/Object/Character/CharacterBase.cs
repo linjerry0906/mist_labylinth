@@ -13,7 +13,6 @@ namespace Team27_RougeLike.Object
 {
     abstract class CharacterBase
     {
-        public float angle;          //向き
         public Status status;        //様々なパラメータ
         protected CollisionSphere collision;
         protected CharacterManager characterManager;

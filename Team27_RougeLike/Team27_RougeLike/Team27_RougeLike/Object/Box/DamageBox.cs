@@ -34,9 +34,9 @@ namespace Team27_RougeLike.Object.Box
             character.Damage(attack);
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
-            base.Update(gameTime);
+            base.Update();
         }
     }
 }
