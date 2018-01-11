@@ -88,6 +88,11 @@ with.
         <Start>売</Start>
         <End>売</End>
       </CharacterRegion>
+
+      <CharacterRegion>
+        <Start>海</Start>
+        <End>海</End>
+      </CharacterRegion>
       
       <!-- え -->
       <!-- えら -->
@@ -161,6 +166,11 @@ with.
         <End>起</End>
       </CharacterRegion>
 
+      <CharacterRegion>
+        <Start>樹</Start>
+        <End>樹</End>
+      </CharacterRegion>
+
       <!-- きゃく -->
       <CharacterRegion>
         <Start>却</Start>
@@ -224,7 +234,13 @@ with.
         <Start>険</Start>
         <End>険</End>
       </CharacterRegion>
-      
+
+      <!-- げ -->
+      <CharacterRegion>
+        <Start>限</Start>
+        <End>限</End>
+      </CharacterRegion>
+
       <!-- げき -->
       <CharacterRegion>
         <Start>撃</Start>
@@ -237,6 +253,10 @@ with.
       <CharacterRegion>
         <Start>籠</Start>
         <End>籠</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>氷</Start>
+        <End>氷</End>
       </CharacterRegion>
       <!-- こう -->
       <CharacterRegion>
@@ -527,6 +547,10 @@ with.
         <Start>村</Start>
         <End>村</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>無</Start>
+        <End>無</End>
+      </CharacterRegion>
       <!-- め -->
       <!-- めい -->
       <CharacterRegion>
@@ -597,7 +621,10 @@ with.
       <!-- る -->
       <!-- れ -->
       <!-- ろ -->
-
+      <CharacterRegion>
+        <Start>廊</Start>
+        <End>廊</End>
+      </CharacterRegion>
       <!-- わ -->
       <!-- を -->
       <!-- ん -->
