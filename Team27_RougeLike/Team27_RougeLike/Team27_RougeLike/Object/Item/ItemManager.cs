@@ -170,159 +170,170 @@ namespace Team27_RougeLike.Object.Item
         }
 
         //セーブデータからアイテム再現
-        public Item LoadSaveItem(string[] saveItems)
-            //saveItems{ 種類, id, addPower, addDefence, reinforcment }
+        public List<Item> LoadSaveItem(List<string[]> saveItems)
+            //saveItem{ 種類, id, addPower, addDefence, reinforcment }
         {
-            //string配列読み込み
-            string kind = saveItems[0];
-            int saveID = int.Parse(saveItems[1]);
+            List<Item> save = new List<Item>();
 
-            if (kind == "Weapon" || kind == "Protection")
+            for (int i = 0; i < saveItems.Count; i++)
             {
-                int addPower = int.Parse(saveItems[2]);
-                int addDefence = int.Parse(saveItems[3]);
-                int reinforcement = int.Parse(saveItems[4]);
-
-                //装備読み込み
-                FileStream datefs = new FileStream(equipmentFilename, FileMode.Open);
-                StreamReader equipmentDate = new StreamReader(datefs);
-
-                //装備生成
-                while (!equipmentDate.EndOfStream)
+                //string配列読み込み
+                string[] saveItem = saveItems[i];
+                if (saveItem == null)
                 {
-                    string line = equipmentDate.ReadLine();
-                    string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    if (items.Length != 17) continue;
-
-                    int id = int.Parse(items[0]);
-
-                    if (saveID != id) continue;
-
-                    string itemName = items[1];
-                    string itemExplanation = items[2];
-                    int itemPrice = int.Parse(items[3]);
-                    int itemRare = int.Parse(items[4]);
-                    float itemWeight = float.Parse(items[5]);
-                    string type = items[6];
-                    int power = int.Parse(items[7]);
-                    int defence = int.Parse(items[8]);
-                    int reinforcementLimit = int.Parse(items[10]);
-                    int upPower = int.Parse(items[11]);
-                    int upDefence = int.Parse(items[12]);
-
-                    if (type == "Sword")
-                    {
-                        return (new WeaponItem(id, itemName, itemExplanation,
-                            itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Sword,
-                            power, defence, reinforcement, reinforcementLimit,
-                            upPower, upDefence, addPower, addDefence));
-                    }
-                    else if (type == "Bow")
-                    {
-                        return (new WeaponItem(id, itemName, itemExplanation,
-                            itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Bow,
-                            power, defence, reinforcement, reinforcementLimit,
-                            upPower, upDefence, addPower, addDefence));
-                    }
-                    else if (type == "Dagger")
-                    {
-                        return (new WeaponItem(id, itemName, itemExplanation,
-                            itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Dagger,
-                            power, defence, reinforcement, reinforcementLimit,
-                            upPower, upDefence, addPower, addDefence));
-                    }
-                    else if (type == "Shield")
-                    {
-                        return (new WeaponItem(id, itemName, itemExplanation,
-                            itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Shield,
-                            power, defence, reinforcement, reinforcementLimit,
-                            upPower, upDefence, addPower, addDefence));
-                    }
-                    else if (type == "Helm")
-                    {
-                        return (new ProtectionItem(id, itemName, itemExplanation,
-                            itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Helm,
-                            power, defence, reinforcement, reinforcementLimit,
-                            upPower, upDefence, addPower, addDefence));
-                    }
-                    else if (type == "Armor")
-                    {
-                        return (new ProtectionItem(id, itemName, itemExplanation,
-                            itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Armor,
-                            power, defence, reinforcement, reinforcementLimit,
-                            upPower, upDefence, addPower, addDefence));
-                    }
-                    else if (type == "Glove")
-                    {
-                        return (new ProtectionItem(id, itemName, itemExplanation,
-                            itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Glove,
-                            power, defence, reinforcement, reinforcementLimit,
-                            upPower, upDefence, addPower, addDefence));
-                    }
-                    else if (type == "Shoes")
-                    {
-                        return (new ProtectionItem(id, itemName, itemExplanation,
-                            itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Shoes,
-                            power, defence, reinforcement, reinforcementLimit,
-                            upPower, upDefence, addPower, addDefence));
-                    }
+                    save.Add(null);
+                    continue;
                 }
-                equipmentDate.Close();
-                datefs.Close();
-            }
-            else if (kind == "Consumption")
-            {
+                string kind = saveItem[0];
+                int saveID = int.Parse(saveItem[1]);
 
-                //消費アイテム読み込み
-                FileStream datefs = new FileStream(consuptionFilename, FileMode.Open);
-                StreamReader consuptionDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
-
-                while (!consuptionDate.EndOfStream)
+                if (kind == "Weapon" || kind == "Protection")
                 {
-                    string line = consuptionDate.ReadLine();
-                    string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    if (items.Length != 9) continue;
+                    int addPower = int.Parse(saveItem[2]);
+                    int addDefence = int.Parse(saveItem[3]);
+                    int reinforcement = int.Parse(saveItem[4]);
 
-                    int id = int.Parse(items[0]);
+                    //装備読み込み
+                    FileStream datefs = new FileStream(equipmentFilename, FileMode.Open);
+                    StreamReader equipmentDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
 
-                    if (saveID != id) continue;
-
-                    string itemName = items[1];
-                    string itemExplanation = items[2];
-                    int itemPrice = int.Parse(items[3]);
-                    int itemRare = int.Parse(items[4]);
-                    float itemWeight = float.Parse(items[5]);
-                    int amountLimit = int.Parse(items[6]);
-                    string type = items[7];
-                    int amount = int.Parse(items[8]);
-
-                    if (type == "recovary")
+                    //装備生成
+                    while (!equipmentDate.EndOfStream)
                     {
-                        consumptions[id] = new ConsumptionItem(id, itemName, itemExplanation,
-                            itemPrice, itemRare, itemWeight, amount,
-                            ConsumptionItem.ItemEffectType.recovery,
-                            new Recovery(amount));
+                        string line = equipmentDate.ReadLine();
+                        string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (items.Length != 17) continue;
+
+                        int id = int.Parse(items[0]);
+
+                        if (saveID != id) continue;
+
+                        string itemName = items[1];
+                        string itemExplanation = items[2];
+                        int itemPrice = int.Parse(items[3]);
+                        int itemRare = int.Parse(items[4]);
+                        float itemWeight = float.Parse(items[5]);
+                        string type = items[6];
+                        int power = int.Parse(items[7]);
+                        int defence = int.Parse(items[8]);
+                        int reinforcementLimit = int.Parse(items[10]);
+                        int upPower = int.Parse(items[11]);
+                        int upDefence = int.Parse(items[12]);
+
+                        if (type == "Sword")
+                        {
+                            save.Add(new WeaponItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Sword,
+                                power, defence, reinforcement, reinforcementLimit,
+                                upPower, upDefence, addPower, addDefence));
+                        }
+                        else if (type == "Bow")
+                        {
+                            save.Add(new WeaponItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Bow,
+                                power, defence, reinforcement, reinforcementLimit,
+                                upPower, upDefence, addPower, addDefence));
+                        }
+                        else if (type == "Dagger")
+                        {
+                            save.Add(new WeaponItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Dagger,
+                                power, defence, reinforcement, reinforcementLimit,
+                                upPower, upDefence, addPower, addDefence));
+                        }
+                        else if (type == "Shield")
+                        {
+                            save.Add(new WeaponItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Shield,
+                                power, defence, reinforcement, reinforcementLimit,
+                                upPower, upDefence, addPower, addDefence));
+                        }
+                        else if (type == "Helm")
+                        {
+                            save.Add(new ProtectionItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Helm,
+                                power, defence, reinforcement, reinforcementLimit,
+                                upPower, upDefence, addPower, addDefence));
+                        }
+                        else if (type == "Armor")
+                        {
+                            save.Add(new ProtectionItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Armor,
+                                power, defence, reinforcement, reinforcementLimit,
+                                upPower, upDefence, addPower, addDefence));
+                        }
+                        else if (type == "Glove")
+                        {
+                            save.Add(new ProtectionItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Glove,
+                                power, defence, reinforcement, reinforcementLimit,
+                                upPower, upDefence, addPower, addDefence));
+                        }
+                        else if (type == "Shoes")
+                        {
+                            save.Add(new ProtectionItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Shoes,
+                                power, defence, reinforcement, reinforcementLimit,
+                                upPower, upDefence, addPower, addDefence));
+                        }
                     }
-                    else if (type == "damage")
-                    {
-                        consumptions[id] = new ConsumptionItem(id, itemName, itemExplanation,
-                            itemPrice, itemRare, itemWeight, amount,
-                            ConsumptionItem.ItemEffectType.damage,
-                            new Damage(amount));
-                    }
-                    else if (type == "noEffect")
-                    {
-                        consumptions[id] = new ConsumptionItem(id, itemName, itemExplanation,
-                            itemPrice, itemRare, itemWeight, amount,
-                            ConsumptionItem.ItemEffectType.noEffect,
-                            new NoEffect());
-                    }
+                    equipmentDate.Close();
+                    datefs.Close();
                 }
-                consuptionDate.Close();
-                datefs.Close();
+                else if (kind == "Consumption")
+                {
+
+                    //消費アイテム読み込み
+                    FileStream datefs = new FileStream(consuptionFilename, FileMode.Open);
+                    StreamReader consuptionDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
+
+                    while (!consuptionDate.EndOfStream)
+                    {
+                        string line = consuptionDate.ReadLine();
+                        string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (items.Length != 9) continue;
+
+                        int id = int.Parse(items[0]);
+
+                        if (saveID != id) continue;
+
+                        string itemName = items[1];
+                        string itemExplanation = items[2];
+                        int itemPrice = int.Parse(items[3]);
+                        int itemRare = int.Parse(items[4]);
+                        float itemWeight = float.Parse(items[5]);
+                        int amountLimit = int.Parse(items[6]);
+                        string type = items[7];
+                        int amount = int.Parse(items[8]);
+
+                        if (type == "recovary")
+                        {
+                            save.Add(new ConsumptionItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, amount,
+                                ConsumptionItem.ItemEffectType.recovery,
+                                new Recovery(amount)));
+                        }
+                        else if (type == "damage")
+                        {
+                            save.Add(new ConsumptionItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, amount,
+                                ConsumptionItem.ItemEffectType.damage,
+                                new Damage(amount)));
+                        }
+                        else if (type == "noEffect")
+                        {
+                            save.Add(new ConsumptionItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, amount,
+                                ConsumptionItem.ItemEffectType.noEffect,
+                                new NoEffect()));
+                        }
+                    }
+                    consuptionDate.Close();
+                    datefs.Close();
+                }
             }
 
-            return null; //ここまで来たらバグ
+            return save;
         }
 
         //Dictionary初期化

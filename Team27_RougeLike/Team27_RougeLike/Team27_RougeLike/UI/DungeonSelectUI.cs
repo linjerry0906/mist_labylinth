@@ -163,6 +163,20 @@ namespace Team27_RougeLike.UI
         }
 
         /// <summary>
+        /// ダンジョンイメージを背景に描画
+        /// </summary>
+        public void DrawBackGround()
+        {
+            float constractAlpha = 1.0f / LIMIT_ALPHA;
+            renderer.DrawTexture("dungeon_image" + (dungeonIndex + 1), Vector2.Zero, backLayer.CurrentAlpha() * constractAlpha);
+            renderer.DrawTexture(
+                "white", 
+                Vector2.Zero, 
+                new Vector2(Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT), 
+                backLayer.CurrentAlpha() * 0.5f);
+        }
+
+        /// <summary>
         /// ダンジョンの種類を表示
         /// </summary>
         /// <param name="constractAlpha">透明度</param>

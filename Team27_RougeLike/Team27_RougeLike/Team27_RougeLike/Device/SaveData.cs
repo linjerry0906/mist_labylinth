@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using Microsoft.Xna.Framework;
 using Team27_RougeLike.Scene;
 using Team27_RougeLike.Object;
 using Team27_RougeLike.Object.Item;
@@ -15,7 +16,7 @@ namespace Team27_RougeLike.Device
         private ItemManager itemManager;
         private Inventory playerInventory;
 
-        private int clearFloor;             //クリアしたフロア
+        private Dictionary<int, int> clearDungen;             //クリアしたフロア
         private int money;                  //所持金
         private List<Item> bag;             //バッグの中身
         private ProtectionItem[] armor;     //装備中の防具
@@ -23,6 +24,8 @@ namespace Team27_RougeLike.Device
         private WeaponItem rightHand;       //右手装備
 
         private string saveFileName;
+        private bool isSave;
+        private bool isLoad;
 
         public SaveData(GameManager gameManager)
         {
@@ -30,16 +33,29 @@ namespace Team27_RougeLike.Device
             itemManager = gameManager.ItemManager;
             playerInventory = gameManager.PlayerItem;
 
-            clearFloor = 1;
+            clearDungen = gameManager.DungeonProcess.GetProcess();
             money = playerInventory.CurrentMoney();
             bag = playerInventory.BagList();
             armor = playerInventory.CurrentArmor();
             leftHand = playerInventory.LeftHand();
             rightHand = playerInventory.RightHand();
 
-            saveFileName = @"Content/" + "SaveCSV/SaveDate.csv";
+            saveFileName = @"Content/SaveCSV/SaveDate.csv";
+            isSave = false;
+            isLoad = false;
         }
 
+        public void Set()
+        {
+            clearDungen = gameManager.DungeonProcess.GetProcess();
+            money = playerInventory.CurrentMoney();
+            bag = playerInventory.BagList();
+            armor = playerInventory.CurrentArmor();
+            leftHand = playerInventory.LeftHand();
+            rightHand = playerInventory.RightHand();
+        }
+
+        //Itemをテキスト出力するためのメソッド
         public string ItemSaveString(Item item)
         {
             if (item is WeaponItem)
@@ -58,50 +74,74 @@ namespace Team27_RougeLike.Device
                     ((ProtectionItem)item).GetAddDefence() + "," +
                     ((ProtectionItem)item).GetReinforcement();
             }
-            else
+            else if (item is ConsumptionItem)
             {
                 return "Consumption" + "," +
-                    item.GetItemID().ToString();
+                    item.GetItemID();
+            }
+            else
+            {
+                return "no";
             }
         }
 
         //セーブデータを書き込む
         public void Save()
         {
+            Set();
+
+            isSave = true;
+
+            //フォルダが存在していなかったらフォルダを生成
+            DirectoryInfo di = Directory.CreateDirectory(@"Content/SaveCSV");
+
             StreamWriter sw = new StreamWriter(saveFileName);
-            sw.WriteLine("floor," + clearFloor);
+
+            foreach (var clearFloor in clearDungen)
+            {
+                sw.WriteLine("floor," + clearFloor.Key + "," + clearFloor.Value);
+            }
             sw.WriteLine("money," + money);
             sw.WriteLine("leftHand," + ItemSaveString(leftHand));
             sw.WriteLine("rightHand," + ItemSaveString(rightHand));
-            foreach(Item item in armor)
+            foreach (Item item in armor)
             {
                 sw.WriteLine("armor," + ItemSaveString(item));
             }
-            foreach(Item item in bag)
+            foreach (Item item in bag)
             {
                 sw.WriteLine("bag," + ItemSaveString(item));
             }
 
             sw.Close();
+            isSave = false;
         }
 
         //セーブデータを読み込む
         public bool Load()
         {
+            if (!File.Exists(saveFileName))
+            {
+                return false;
+            }
+            StreamReader sr = new StreamReader(saveFileName);
             try
             {
+                isLoad = true;
+
+                List<string[]> itemDates = new List<string[]>();
+                clearDungen = new Dictionary<int, int>();
                 armor = new ProtectionItem[4];
                 bag = new List<Item>();
 
-                StreamReader sr = new StreamReader(saveFileName);
-                while(!sr.EndOfStream)
+                while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
                     string[] strings = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     if (strings[0] == "floor")
                     {
-                        clearFloor = int.Parse(strings[1]);
+                        clearDungen[int.Parse(strings[1])] = int.Parse(strings[2]);
                     }
                     else if (strings[0] == "money")
                     {
@@ -109,65 +149,126 @@ namespace Team27_RougeLike.Device
                     }
                     else if (strings[0] == "leftHand")
                     {
-                        string[] itemDates = new string[]
+                        if (strings[1] != "no")
                         {
+                            string[] itemDate = new string[]
+                            {
                             strings[1],
                             strings[2],
                             strings[3],
                             strings[4],
                             strings[5],
-                        };
-                        leftHand = (WeaponItem)itemManager.LoadSaveItem(itemDates);
+                            };
+                            itemDates.Add(itemDate);
+                        }
+                        else
+                        {
+                            itemDates.Add(null);
+                        }
                     }
                     else if (strings[0] == "rightHand")
                     {
-                        string[] itemDates = new string[]
+                        if (strings[1] != "no")
                         {
+                            string[] itemDate = new string[]
+                            {
                             strings[1],
                             strings[2],
                             strings[3],
                             strings[4],
                             strings[5],
-                        };
-                        rightHand = (WeaponItem)itemManager.LoadSaveItem(itemDates);
+                            };
+                            itemDates.Add(itemDate);
+                        }
+                        else
+                        {
+                            itemDates.Add(null);
+                        }
                     }
                     else if (strings[0] == "armor")
                     {
-                        string[] itemDates = new string[]
+                        if (strings[1] != "no")
                         {
+                            string[] itemDate = new string[]
+                            {
                             strings[1],
                             strings[2],
                             strings[3],
                             strings[4],
                             strings[5],
-                        };
-                        armor[armor.Length - 1] = (ProtectionItem)itemManager.LoadSaveItem(itemDates);
+                            };
+                            itemDates.Add(itemDate);
+                        }
+                        else
+                        {
+                            itemDates.Add(null);
+                        }
                     }
                     else if (strings[0] == "bag")
                     {
-                        string[] itemDates = new string[]
+                        if (strings[1] == "Consumption")
                         {
+                            string[] itemDate = new string[]
+                            {
+                            strings[1],
+                            strings[2],
+                            };
+                            itemDates.Add(itemDate);
+                        }
+                        else
+                        {
+                            string[] itemDate = new string[]
+                            {
                             strings[1],
                             strings[2],
                             strings[3],
                             strings[4],
                             strings[5],
-                        };
-                        bag.Add(itemManager.LoadSaveItem(itemDates));
+                            };
+                            itemDates.Add(itemDate);
+                        }
                     }
-
                 }
+                sr.Close();
+
+                List<Item> items = itemManager.LoadSaveItem(itemDates);
+                leftHand = (WeaponItem)items[0];
+                rightHand = (WeaponItem)items[1];
+                armor[0] = (ProtectionItem)items[2];
+                armor[1] = (ProtectionItem)items[3];
+                armor[2] = (ProtectionItem)items[4];
+                armor[3] = (ProtectionItem)items[5];
+                for (int i = 6; i < items.Count; i++)
+                {
+                    bag.Add(items[i]);
+                }
+
+                isLoad = false;
                 return true;
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e);
+                sr.Close();
                 return false;
             }
         }
 
-        public int GetFloor()
+        public void Draw(Renderer renderer)
         {
-            return clearFloor;
+            if (isSave)
+            {
+                renderer.DrawString("セーブ中", Vector2.Zero, new Vector2(1, 1), Color.Red);
+            }
+            if (isLoad)
+            {
+                renderer.DrawString("ロード中", Vector2.Zero, new Vector2(1, 1), Color.Red);
+            }
+        }
+
+        public Dictionary<int,int> GetClearDungen()
+        {
+            return clearDungen;
         }
 
         public int GetMoney()

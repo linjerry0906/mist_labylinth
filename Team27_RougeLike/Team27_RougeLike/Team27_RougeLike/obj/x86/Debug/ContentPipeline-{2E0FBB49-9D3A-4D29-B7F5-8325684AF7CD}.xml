@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Texture\test.png</Source>
+      <Name>Texture\test</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\test.xnb</Output>
+      <Time>2017-12-20T13:30:34.7026651+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\cubeTest.jpg</Source>
+      <Name>Texture\cubeTest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\cubeTest.xnb</Output>
+      <Time>2017-12-20T13:30:34.6976552+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\bat.png</Source>
+      <Name>Texture\bat</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\bat.xnb</Output>
+      <Time>2017-12-22T22:34:22.6427147+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\slash.png</Source>
+      <Name>Texture\slash</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\slash.xnb</Output>
+      <Time>2018-01-11T13:29:14.1008545+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\dungeon_image1.png</Source>
+      <Name>Texture\dungeon_image1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image1.xnb</Output>
+      <Time>2018-01-11T13:29:14.0928336+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\dungeon_image2.png</Source>
+      <Name>Texture\dungeon_image2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image2.xnb</Output>
+      <Time>2018-01-11T13:29:14.099852+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Font\basicFont.spritefont</Source>
+      <Name>Font\basicFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
+      <Time>2018-01-11T13:29:14.0767924+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Model\ItemModel.fbx</Source>
+      <Name>Model\ItemModel</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Model\ItemModel.xnb</Output>
+      <Time>2017-12-20T21:22:29.7771497+09:00</Time>
+      <Dependency>
+        <Key>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\ItemModel_0.xml</Key>
+        <Value>2018-01-11T14:24:54.5959355+09:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Model\B_01.fbx</Source>
+      <Name>Model\B_01</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Model\B_01.xnb</Output>
+      <Time>2018-01-10T20:07:17.9118872+09:00</Time>
+      <Dependency>
+        <Key>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\B_01_0.xml</Key>
+        <Value>2018-01-11T14:24:54.6761539+09:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Model\map_block.fbx</Source>
+      <Name>Model\map_block</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Model\map_block.xnb</Output>
+      <Time>2018-01-11T13:29:14.0777934+09:00</Time>
+      <Dependency>
+        <Key>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\map_block_0.xml</Key>
+        <Value>2018-01-11T14:24:54.7062335+09:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Effect\blur.fx</Source>
+      <Name>Effect\blur</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\blur.xnb</Output>
+      <Time>2017-12-23T16:10:58.135274+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Effect\polygon.fx</Source>
+      <Name>Effect\polygon</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\polygon.xnb</Output>
+      <Time>2018-01-10T16:01:55.7034452+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\slash.wav</Source>
+      <Name>Sound\slash</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\slash.xnb</Output>
+      <Time>2018-01-11T13:29:14.0797994+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\sowrd.wav</Source>
+      <Name>Sound\sowrd</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\sowrd.xnb</Output>
+      <Time>2018-01-11T13:29:14.0818048+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Model\ItemModel.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\ItemModel_0.xml</Output>
+      <Time>2017-12-20T21:22:29.7771497+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Model\B_01.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\B_01_0.xml</Output>
+      <Time>2018-01-10T20:07:17.9118872+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Model\map_block.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\map_block_0.xml</Output>
+      <Time>2018-01-11T13:29:14.0777934+09:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{2E0FBB49-9D3A-4D29-B7F5-8325684AF7CD}</ContentProjectGUID>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLikeContent\</RootDirectory>
+      <LoggerRootDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\</LoggerRootDirectory>
+      <IntermediateDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>D:\作品\1年後期チーム27班 2017.11\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2011-09-01T16:22:30+09:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2017-11-16T16:49:35.7510569+09:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
