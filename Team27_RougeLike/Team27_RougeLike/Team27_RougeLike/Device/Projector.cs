@@ -82,6 +82,16 @@ namespace Team27_RougeLike.Device
         }
 
         /// <summary>
+        /// 相対位置を変更
+        /// </summary>
+        /// <param name="position">相対位置</param>
+        public void SetRelativePosition(Vector3 position)
+        {
+            collision = new CollisionSphere(position, 0.05f);      //Collisions
+            baseDistance = collision.Position;   //注目目標との相対位置関係  
+        }
+
+        /// <summary>
         /// 追尾するターゲット
         /// </summary>
         /// <param name="target">注目する場所</param>

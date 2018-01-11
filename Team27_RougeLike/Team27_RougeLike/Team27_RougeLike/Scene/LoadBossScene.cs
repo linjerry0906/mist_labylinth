@@ -1,7 +1,7 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.11.29
-// 内容  ：ダンジョンをロードするシーン
+// 作成日：2018.1.11
+// 内容  ：ボスシーンをロードするシーン
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using Team27_RougeLike.Map;
 
 namespace Team27_RougeLike.Scene
 {
-    class LoadMap : IScene
+    class LoadBossScene : IScene
     {
         private GameDevice gameDevice;          //デバイス系管理者
         private Renderer renderer;
@@ -25,7 +25,7 @@ namespace Team27_RougeLike.Scene
 
         private MapGenerator mapGenerator;      //マップ生成者
 
-        public LoadMap(GameManager gameManager, GameDevice gameDevice)
+        public LoadBossScene(GameManager gameManager, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
             this.gameManager = gameManager;
@@ -45,7 +45,6 @@ namespace Team27_RougeLike.Scene
         {
             endFlag = false;
 
-            //ToDo：GameManagerから今の進捗状況によってマップのサイズを指定
             mapGenerator = new MapGenerator(stageManager.StageSize(), gameDevice);
             stageInfoLoader = new StageInfoLoader();
             stageInfoLoader.Initialize();
@@ -58,7 +57,7 @@ namespace Team27_RougeLike.Scene
 
         public SceneType Next()
         {
-            return SceneType.Dungeon;
+            return SceneType.Boss;
         }
 
         public void Shutdown()
@@ -70,7 +69,7 @@ namespace Team27_RougeLike.Scene
         {
             if (!mapGenerator.IsEnd())      //生成が終わってなかったら生成し続ける
             {
-                mapGenerator.Update();
+                mapGenerator.LoadFormFile();
                 return;
             }
             if (!stageInfoLoader.IsItemLoad())

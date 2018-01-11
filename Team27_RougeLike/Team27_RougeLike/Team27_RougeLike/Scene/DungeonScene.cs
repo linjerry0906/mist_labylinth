@@ -79,6 +79,8 @@ namespace Team27_RougeLike.Scene
             if (lastScene == SceneType.Pause)       //Pauseから来た場合は以下のもの初期化しない
                 return;
 
+            gameDevice.MainProjector.SetRelativePosition(new Vector3(0, 2, 10));
+
             #region Map初期化
             map = gameManager.GetDungeonMap();      //生成したマップを取得
             if (map == null)                         //エラー対策　マップが正常に生成されてなかったらLoadingに戻る
@@ -253,7 +255,7 @@ namespace Team27_RougeLike.Scene
                 gameManager.UpdateDungeonProcess();     //攻略状況更新
                 stageManager.NextFloor();
                 if (stageManager.IsBoss())
-                    nextScene = SceneType.Boss;
+                    nextScene = SceneType.LoadBoss;
                 return;
             }
         }

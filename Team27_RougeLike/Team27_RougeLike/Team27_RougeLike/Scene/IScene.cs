@@ -16,6 +16,7 @@ namespace Team27_RougeLike.Scene
         DungeonSelect,
         LoadMap,
         Dungeon,
+        LoadBoss,
         Boss,
         Pause
     }

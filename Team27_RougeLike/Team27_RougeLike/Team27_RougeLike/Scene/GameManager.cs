@@ -26,7 +26,7 @@ namespace Team27_RougeLike.Scene
 
         private DungeonMap mapInstance;     //マップの実体
         private StageManager stageManager;  //ステージマネージャー
-        private int stageItemFile;          //ステージのファイル番号
+        private int stageNumFile;          //ステージのファイル番号
 
         /// <summary>
         /// シーンの間にゲーム情報を伝える仲介者
@@ -120,11 +120,6 @@ namespace Team27_RougeLike.Scene
             get { return playerItem; }
         }
 
-        public int StageItemNum
-        {
-            get { return stageItemFile; }
-            set { stageItemFile = value; }
-        }
 
         #endregion
 
@@ -165,6 +160,11 @@ namespace Team27_RougeLike.Scene
             get { return dungeonProcess; }
         }
 
+        public int StageNum
+        {
+            get { return stageNumFile; }
+            set { stageNumFile = value; }
+        }
         #endregion
 
         #region Map関連

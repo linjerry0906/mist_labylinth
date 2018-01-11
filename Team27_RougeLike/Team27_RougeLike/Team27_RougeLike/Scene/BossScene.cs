@@ -13,6 +13,8 @@ using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Object.ParticleSystem;
+using Team27_RougeLike.Map;
+using Team27_RougeLike.UI;
 
 namespace Team27_RougeLike.Scene
 {
@@ -26,9 +28,14 @@ namespace Team27_RougeLike.Scene
         private bool endFlag;
         private SceneType nextScene;
 
+        private DungeonMap map;                 //マップ
+        private MapItemManager mapItemManager;  //マップ内に落ちているアイテムの管理者
+
         private CharacterManager characterManager;
         private ParticleManager pManager;
         private float angle;
+
+        private DungeonUI ui;             //Popメッセージ
 
 
         public BossScene(GameManager gameManager, GameDevice gameDevice)
@@ -42,8 +49,8 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
-            renderer.DefaultRenderSetting();
-            renderer.DrawModel("B_01", Vector3.Zero, new Vector3(70, 70, 70), Color.White);
+            map.Draw();
+            mapItemManager.Draw();      //アイテムの描画
 
             characterManager.Draw();
             pManager.Draw();
@@ -60,7 +67,7 @@ namespace Team27_RougeLike.Scene
                 new Vector2(Def.WindowDef.WINDOW_WIDTH / 2, Def.WindowDef.WINDOW_HEIGHT / 2),
                 new Color(1.0f, 0.0f, 0.0f), new Vector2(1.2f, 1.2f), 1.0f, true, true);
 
-            renderer.DrawString("", new Vector2(0, 300), new Vector2(2.0f, 2.0f), Color.White);
+            ui.Draw();
 
             renderer.End();
         }
@@ -73,17 +80,41 @@ namespace Team27_RougeLike.Scene
             if (scene == SceneType.Pause)
                 return;
 
+            #region Map初期化
+            map = gameManager.GetDungeonMap();      //生成したマップを取得
+            if (map == null)                         //エラー対策　マップが正常に生成されてなかったらLoadingに戻る
+            {
+                nextScene = SceneType.LoadMap;
+                endFlag = true;
+                return;
+            }
+
+            map.Initialize();                       //マップを初期化
+            #endregion
+
+            #region MapItemの初期化処理
+            mapItemManager = new MapItemManager(gameManager, gameDevice);
+            mapItemManager.Initialize();
+            #endregion
+
+            Vector3 position = new Vector3(
+               map.EntryPoint.X * MapDef.TILE_SIZE,
+               MapDef.TILE_SIZE,
+               map.EntryPoint.Y * MapDef.TILE_SIZE);
+
             pManager = new ParticleManager(gameDevice);
             pManager.Initialize();
 
             characterManager = new CharacterManager(gameDevice);
-            characterManager.Initialize(new Vector3(0, 30, 0));
-            characterManager.AddPlayer(new Vector3(0, 30, 0), pManager);
+            characterManager.Initialize(position);
+            characterManager.AddPlayer(position, pManager);
 
             #region カメラ初期化
             angle = 0;
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
             #endregion
+
+            ui = new DungeonUI(gameManager, gameDevice);
         }
 
         public bool IsEnd()
@@ -101,43 +132,42 @@ namespace Team27_RougeLike.Scene
             if (nextScene == SceneType.Pause)
                 return;
 
+            map.Clear();                            //マップ解放
+            map = null;
+            gameManager.ReleaseMap();
+
+            mapItemManager.Initialize();            //Item解放
+            mapItemManager = null;
+
             pManager.Clear();
             pManager = null;
             characterManager = null;
+
+            ui = null;
         }
 
         public void Update(GameTime gameTime)
         {
+            ui.Update();
+            if (ui.IsPop())                   //メッセージ表示中は以下Updateしない
+                return;
+
             RotateCamera();
 
             //Chara処理
             characterManager.Update(gameTime);
 
-            Plane p = new Plane(Vector3.Up, -5);
-            characterManager.GetCharacters().ForEach(c =>
-            {
-                Ray r = new Ray(c.Collision.Position, Vector3.Down);
-
-                if (r.Intersects(p).HasValue)
-                {
-                    float length = r.Intersects(p).Value;
-                    if (length <= c.Collision.Radius)
-                    {
-                        c.Collision.Force(Vector3.Up, c.Collision.Radius - length, false);
-                        c.Collision.Ground();
-                    }
-                }
-            });
-
-            characterManager.GetCharacters().ForEach(c =>
-            {
-                c.Collision.Position = Vector3.Clamp(
-                    c.Collision.Position,
-                    new Vector3(-30, 0, -30),
-                    new Vector3(30, 90, 30));
-            });
-
             pManager.Update(gameTime);
+
+            //マップ処理
+            map.MapCollision(gameDevice.Renderer.MainProjector);
+            map.FocusCenter(characterManager.GetPlayer().Position);
+            map.Update();
+            map.MapCollision(characterManager.GetPlayer());
+            map.MapCollision(characterManager.GetCharacters());
+
+            //アイテム処理
+            mapItemManager.ItemCollision(characterManager.GetPlayer(), ui);
 
             //Debug 村シーンへ
             if (input.GetKeyTrigger(Keys.T))
