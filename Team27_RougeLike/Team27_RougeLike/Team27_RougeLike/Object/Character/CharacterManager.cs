@@ -19,6 +19,7 @@ namespace Team27_RougeLike.Object.Character
     {
         private GameDevice gamedevice;
         private List<CharacterBase> characters = new List<CharacterBase>();
+        private List<Spawner> spawners = new List<Spawner>();
         private List<HitBoxBase> hitBoxs = new List<HitBoxBase>();
         private Player player;
 
@@ -35,14 +36,19 @@ namespace Team27_RougeLike.Object.Character
             Load();
         }
 
-        public void Initialize(Vector3 position)
+        public void Initialize()
         {
             characters.Clear();
+            spawners.Clear();
             hitBoxs.Clear();
         }
 
         public void Update(GameTime gameTime)
         {
+            foreach(var spawner in spawners)
+            {
+                spawner.Update();
+            }
             foreach (var c1 in characters)
             {
                 c1.Update(gameTime);
@@ -50,7 +56,7 @@ namespace Team27_RougeLike.Object.Character
                 if (c1 is EnemyBase)
                 {
                     //敵の距離によってアップデートを分けた
-                    if (NearPlayer(c1))
+                    if (NearPlayer(c1.Collision.Position))
                     {
                         ((EnemyBase)c1).NearUpdate(player, gameTime);
                     }
@@ -80,16 +86,22 @@ namespace Team27_RougeLike.Object.Character
                 {
                     c.Draw(gamedevice.Renderer);
                 }
-                if (c is CharacterBase && NearPlayer(c) && !(c is Player))
+                if (c is CharacterBase && NearPlayer(c.Collision.Position) && !(c is Player))
                 {
                     c.Draw(gamedevice.Renderer);
                 }
             }
         }
 
-        public void AddCharacter(CharacterBase character)
+        public void AddSpawner(Spawner spawner)
+        {
+            spawners.Add(spawner);
+        }
+
+        public CharacterBase AddCharacter(CharacterBase character)
         {
             characters.Add(character);
+            return character;
         }
 
         public void AddPlayer(Vector3 position,ParticleManager pManager)
@@ -97,9 +109,7 @@ namespace Team27_RougeLike.Object.Character
             PlayerStatusLoader loader = new PlayerStatusLoader();
             var i = loader.LoadStatus();
             player = new Player(position, new Status(1, i[0],i[1], i[2],i[3], 0.3f), gamedevice, this,pManager);
-
             characters.Add(player);
-            
         }
 
         public void AddHitBox(HitBoxBase hitBox)
@@ -112,12 +122,12 @@ namespace Team27_RougeLike.Object.Character
         /// </summary>
         /// <param name="character"></param>
         /// <returns></returns>
-        private bool NearPlayer(CharacterBase character)
+        private bool NearPlayer(Vector3 position)
         {
-            //if (player == null) return false;         エラーチェック　デバッグのため未実装
+            //if (player == null) return false;
             //if (player.IsDead()) return false;
 
-            return Math.Abs(character.Collision.Position.X - player.Collision.Position.X) < drawLength && Math.Abs(character.Collision.Position.Y - player.Collision.Position.Y) < drawLength;
+            return Math.Abs(position.X - player.Collision.Position.X) < drawLength && Math.Abs(position.Y - player.Collision.Position.Y) < drawLength;
         }
 
         public Player GetPlayer()
@@ -133,6 +143,22 @@ namespace Team27_RougeLike.Object.Character
         public Dictionary<int, EnemyBase> Enemys()
         {
             return enemys;
+        }
+
+        public bool DiedCharacters()
+        {
+            return LiveCharacterCnt() == 0;
+        }
+
+        public int LiveCharacterCnt()
+        {
+            int cnt = 0;
+            foreach (var c in characters)
+            {
+                if (c == player) continue;
+                cnt++;
+            }
+            return cnt;
         }
 
         private void Load()
