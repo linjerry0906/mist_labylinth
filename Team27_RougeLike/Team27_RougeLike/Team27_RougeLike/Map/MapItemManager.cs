@@ -42,6 +42,28 @@ namespace Team27_RougeLike.Map
         }
 
         /// <summary>
+        /// 確率でアイテムを追加
+        /// </summary>
+        /// <param name="position">場所</param>
+        /// <param name="general">全体の確率（0.0～1.0）</param>
+        /// <param name="equip">装備品の確率（0.0～1.0）</param>
+        public void AddItemByPossibility(Vector3 position, float general, float equip)
+        {
+            float possiblility = gameDevice.Random.Next(0, 1001) / 1000.0f;
+            if (possiblility > general)     //全体の確率より大きい場合は追加しない
+                return;
+
+            possiblility = gameDevice.Random.Next(0, 1001) / 1000.0f;
+            if (possiblility < equip)
+            {
+                AddEquip(position);
+                return;
+            }
+
+            AddItem(position);
+        }
+
+        /// <summary>
         /// 落ちているアイテムを追加
         /// </summary>
         /// <param name="position">位置</param>
@@ -51,8 +73,8 @@ namespace Team27_RougeLike.Map
             if (itemInfo == null)
                 return;
 
-            float size = 2;
-            Item3D addItem = new Item3D(gameDevice, itemInfo, position + new Vector3(0, size, 0));
+            position.Y = MapDef.TILE_SIZE / 2 + Item3D.GetHeight();
+            Item3D addItem = new Item3D(gameDevice, itemInfo, position);
             items.Add(addItem);
         }
 
@@ -66,8 +88,8 @@ namespace Team27_RougeLike.Map
             if (itemInfo == null)
                 return;
 
-            float size = 2;
-            Item3D addItem = new Item3D(gameDevice, itemInfo, position + new Vector3(0, size, 0));
+            position.Y = MapDef.TILE_SIZE / 2 + Item3D.GetHeight();
+            Item3D addItem = new Item3D(gameDevice, itemInfo, position);
             items.Add(addItem);
         }
 

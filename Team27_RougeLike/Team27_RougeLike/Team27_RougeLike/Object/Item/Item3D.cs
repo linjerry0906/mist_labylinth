@@ -9,7 +9,7 @@ namespace Team27_RougeLike.Object.Item
 {
     class Item3D
     {
-        private Vector3 size = new Vector3(2.0f, 2.0f, 2.0f);
+        private static Vector3 size = new Vector3(2.0f, 2.0f, 2.0f);
 
         private GameDevice gameDevice;
         private Renderer renderer;
@@ -33,6 +33,11 @@ namespace Team27_RougeLike.Object.Item
         public Item GetItem()
         {
             return item;
+        }
+
+        public static float GetHeight()
+        {
+            return size.Y;
         }
 
         public void Draw()

@@ -96,20 +96,14 @@ namespace Team27_RougeLike.Scene
             #region Item初期化
             mapItemManager = new MapItemManager(gameManager, gameDevice);
             mapItemManager.Initialize();
-            int itemAmount = stageManager.CurrentFloor() / 10 + stageManager.CurrentFloor() % 5;    //初期落ちているアイテムの数
-            itemAmount = gameDevice.Random.Next(0, itemAmount);
+            int itemAmount = stageManager.CurrentFloor() / 10 + stageManager.StageSize() / 5;    //初期落ちているアイテムの数
             for (int i = 0; i < itemAmount; i++)
             {
                 Vector3 randomSpace = map.RandomSpace();
                 if (randomSpace == Vector3.Zero)                    //Error対策
                     break;
 
-                if (gameDevice.Random.Next(0, 101) < 70)            //70%が使用アイテム
-                {
-                    mapItemManager.AddItem(randomSpace);
-                    continue;
-                }
-                mapItemManager.AddEquip(randomSpace);               //30％が装備
+                mapItemManager.AddItemByPossibility(randomSpace, 0.9f, 0.3f);
             }
             #endregion
 
@@ -120,7 +114,7 @@ namespace Team27_RougeLike.Scene
                 map.EntryPoint.X * MapDef.TILE_SIZE,
                 MapDef.TILE_SIZE,
                 map.EntryPoint.Y * MapDef.TILE_SIZE);
-            characterManager.Initialize(ui);
+            characterManager.Initialize(ui, mapItemManager);
             characterManager.AddPlayer(position, pManager,gameManager);
             var d = new int[2];
             d[0] = 3;

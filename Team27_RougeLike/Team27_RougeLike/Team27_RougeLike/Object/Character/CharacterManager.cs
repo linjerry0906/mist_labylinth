@@ -12,6 +12,7 @@ using Team27_RougeLike.Object.Box;
 using Team27_RougeLike.Object.ParticleSystem;
 using Team27_RougeLike.Scene;
 using Team27_RougeLike.UI;
+using Team27_RougeLike.Map;
 namespace Team27_RougeLike.Object.Character
 {
     class CharacterManager
@@ -28,6 +29,7 @@ namespace Team27_RougeLike.Object.Character
         private string enemyFilename;
         private const int drawLength = 120;
 
+        private MapItemManager mapItemManager;      //ステージのアイテムマネージャー
 
         public CharacterManager(GameDevice gamedevice)
         {
@@ -37,12 +39,13 @@ namespace Team27_RougeLike.Object.Character
             Load();
         }
 
-        public void Initialize(DungeonUI ui)
+        public void Initialize(DungeonUI ui, MapItemManager mapItemManager)
         {
             characters.Clear();
             spawners.Clear();
             hitBoxs.Clear();
             this.ui = ui;
+            this.mapItemManager = mapItemManager;
         }
 
         public void Update(GameTime gameTime)
@@ -95,6 +98,8 @@ namespace Team27_RougeLike.Object.Character
                 if (c.IsDead())
                 {
                     ui.LogUI.AddLog(c.Tag + " is Dead");
+
+                    mapItemManager.AddItemByPossibility(c.Collision.Position, 0.65f, 0.4f);     //落ちる確率65％　装備品の確率40%
                 }
             }
 

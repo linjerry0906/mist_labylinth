@@ -111,7 +111,7 @@ namespace Team27_RougeLike.Scene
 
             ui = new DungeonUI(gameManager, gameDevice);
 
-            characterManager.Initialize(ui);
+            characterManager.Initialize(ui, mapItemManager);
             characterManager.AddPlayer(position, pManager,gameManager);
             characterManager.AddCharacter(characterManager.Enemys()[4].Clone(bossPosition));
 
