@@ -108,8 +108,11 @@ namespace Team27_RougeLike.Scene
             pManager.Initialize();
 
             characterManager = new CharacterManager(gameDevice);
-            characterManager.Initialize();
-            characterManager.AddPlayer(position, pManager);
+
+            ui = new DungeonUI(gameManager, gameDevice);
+
+            characterManager.Initialize(ui);
+            characterManager.AddPlayer(position, pManager,gameManager);
             characterManager.AddCharacter(characterManager.Enemys()[4].Clone(bossPosition));
 
             #region カメラ初期化
@@ -117,7 +120,6 @@ namespace Team27_RougeLike.Scene
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
             #endregion
 
-            ui = new DungeonUI(gameManager, gameDevice);
         }
 
         public bool IsEnd()

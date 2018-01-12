@@ -8,16 +8,16 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Device;
-using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Object.Box;
-using Team27_RougeLike.Object.AI;
 using Team27_RougeLike.Object.ParticleSystem;
-
+using Team27_RougeLike.Scene;
+using Team27_RougeLike.UI;
 namespace Team27_RougeLike.Object.Character
 {
     class CharacterManager
     {
         private GameDevice gamedevice;
+        private DungeonUI ui;
         private List<CharacterBase> characters = new List<CharacterBase>();
         private List<Spawner> spawners = new List<Spawner>();
         private List<HitBoxBase> hitBoxs = new List<HitBoxBase>();
@@ -32,20 +32,22 @@ namespace Team27_RougeLike.Object.Character
         public CharacterManager(GameDevice gamedevice)
         {
             this.gamedevice = gamedevice;
+
             enemyFilename = @"Content/" + "EnemysCSV/Enemy.csv";
             Load();
         }
 
-        public void Initialize()
+        public void Initialize(DungeonUI ui)
         {
             characters.Clear();
             spawners.Clear();
             hitBoxs.Clear();
+            this.ui = ui;
         }
 
         public void Update(GameTime gameTime)
         {
-            foreach(var spawner in spawners)
+            foreach (var spawner in spawners)
             {
                 spawner.Update();
             }
@@ -69,11 +71,34 @@ namespace Team27_RougeLike.Object.Character
                     //ヒットボックスのコリジョン内
                     if (h.HitCheck(c))
                     {
-                        h.Effect(c);
+                        if (!h.EffectedCharacters().Contains(c))
+                        {
+                            //ここでcの判定確定
+                            h.Effect(c);
+
+                            //それが攻撃だった場合の判定
+                            if (h is iDamageBox)
+                            {
+                                ui.LogUI.AddLog(c.Tag + "に" + ((iDamageBox)h).Damage() + "の damageChance");
+                            }
+                        }
                     }
+
                 }
                 h.Update();
             }
+
+
+            foreach (var c in characters)
+            {
+                //ここがキャラクターの死亡時です
+                if (c.IsDead())
+                {
+                    ui.LogUI.AddLog(c.Tag + " is Dead");
+                }
+            }
+
+
             characters.RemoveAll((CharacterBase c) => c.IsDead());
             hitBoxs.RemoveAll((HitBoxBase h) => h.IsEnd());
         }
@@ -104,11 +129,17 @@ namespace Team27_RougeLike.Object.Character
             return character;
         }
 
-        public void AddPlayer(Vector3 position,ParticleManager pManager)
+        public void AddPlayer(Vector3 position, ParticleManager pManager, GameManager gamemanager)
         {
-            PlayerStatusLoader loader = new PlayerStatusLoader();
-            var i = loader.LoadStatus();
-            player = new Player(position, new Status(1, i[0],i[1], i[2],i[3], 0.3f), gamedevice, this,pManager);
+            player = new Player
+                (
+                position,
+                gamemanager.PlayerInfo,
+                gamedevice,
+                this,
+                pManager,
+                gamemanager
+                );
             characters.Add(player);
         }
 

@@ -6,10 +6,9 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 namespace Team27_RougeLike.Object.Box
 {
-    class MoveDamageBox : HitBoxBase
+    class MoveDamageBox : HitBoxBase, iDamageBox
     {
         private int attack;
-        private bool hit = false;
         private Vector3 angle;
 
         public MoveDamageBox(BoundingSphere collision, int time, int attack, Vector3 angle)
@@ -39,11 +38,13 @@ namespace Team27_RougeLike.Object.Box
 
         public override void Effect(CharacterBase character)
         {
-            if (!hit)
-            {
-                character.Damage(attack,angle);
-                hit = true;
-            }
+            effectedCharacters.Add(character);
+            character.Damage(attack, angle);
         }
+        public int Damage()
+        {
+            return attack;
+        }
+
     }
 }

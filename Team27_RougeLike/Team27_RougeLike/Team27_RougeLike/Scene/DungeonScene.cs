@@ -113,24 +113,26 @@ namespace Team27_RougeLike.Scene
             }
             #endregion
 
+            ///飯泉より　キャラクターマネージャのinitの前にずらしました
+            ui = new DungeonUI(gameManager, gameDevice);
+
             Vector3 position = new Vector3(
                 map.EntryPoint.X * MapDef.TILE_SIZE,
                 MapDef.TILE_SIZE,
                 map.EntryPoint.Y * MapDef.TILE_SIZE);
-            characterManager.Initialize();
-            characterManager.AddPlayer(position, pManager);
+            characterManager.Initialize(ui);
+            characterManager.AddPlayer(position, pManager,gameManager);
             var d = new int[2];
             d[0] = 3;
             d[1] = 2;
             //配列を渡せばその中からランダムで、ＩＤ単体を渡せばそれのみをスポーンさせます
-            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, d, 10,3, characterManager));
-            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, 1, 10, 3, characterManager));
+            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, d, 10,1, characterManager));
+            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, 1, 10, 1, characterManager));
             #region カメラ初期化
             angle = 0;
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
             #endregion
 
-            ui = new DungeonUI(gameManager, gameDevice);
         }
 
         public bool IsEnd()

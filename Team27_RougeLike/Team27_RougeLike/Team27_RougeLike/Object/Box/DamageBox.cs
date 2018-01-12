@@ -9,24 +9,24 @@ using Team27_RougeLike.Object.ParticleSystem;
 
 namespace Team27_RougeLike.Object.Box
 {
-    class DamageBox : HitBoxBase
+    class DamageBox : HitBoxBase, iDamageBox
     {
         private int attack;
         private Vector3 angle;
-        public DamageBox(BoundingSphere collision,int time,int attack,Vector3 angle)
-            :base(collision,time)
+        public DamageBox(BoundingSphere collision, int time, int attack, Vector3 angle)
+            : base(collision, time)
         {
             this.attack = attack;
             this.angle = angle;
         }
-        public DamageBox(BoundingSphere collision,int time,string tag,int attack,Vector3 angle)
-            :base(collision,time,tag)
+        public DamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle)
+            : base(collision, time, tag)
         {
             this.attack = attack;
             this.angle = angle;
         }
-        public DamageBox(BoundingSphere collision,int time,List<string> tags,int attack,Vector3 angle)
-            :base(collision,time,tags)
+        public DamageBox(BoundingSphere collision, int time, List<string> tags, int attack, Vector3 angle)
+            : base(collision, time, tags)
         {
             this.attack = attack;
             this.angle = angle;
@@ -34,12 +34,17 @@ namespace Team27_RougeLike.Object.Box
 
         public override void Effect(CharacterBase character)
         {
-            character.Damage(attack,angle);
+            effectedCharacters.Add(character);
+            character.Damage(attack, angle);
         }
 
         public override void Update()
         {
             base.Update();
+        }
+        public int Damage()
+        {
+            return attack;
         }
     }
 }

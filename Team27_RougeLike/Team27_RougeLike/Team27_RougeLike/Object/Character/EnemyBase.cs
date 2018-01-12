@@ -14,6 +14,7 @@ namespace Team27_RougeLike.Object
     class EnemyBase : CharacterBase
     {
         protected EnemyRange range;
+        protected Status status;
         protected string aiName;
 
         /// <summary>
@@ -25,8 +26,9 @@ namespace Team27_RougeLike.Object
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
         public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager)
-            : base(status, collision, textureName, characterManager)
+            : base(collision, textureName, characterManager)
         {
+            this.status = status;
             this.aiName = aiName;
         }
 
@@ -40,9 +42,10 @@ namespace Team27_RougeLike.Object
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
         public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager)
-         : base(status, collision, textureName, characterManager)
+         : base(collision, textureName, characterManager)
         {
             tag = "Enemy";
+            this.status = status;
             aiManager = manager;
             motion = new Motion();
             for (int i = 0; i < 6; i++)
@@ -83,7 +86,7 @@ namespace Team27_RougeLike.Object
         {
             aiManager.Update();
             motion.Update(gameTime);
-            base.Update(gameTime);
+            Move();
         }
         public virtual void NearUpdate(Player player, GameTime gameTime)
         {
@@ -132,6 +135,37 @@ namespace Team27_RougeLike.Object
                     range = new EnemyRange(50, 20, 15);
                     break;
             }
+        }
+        public override void Damage(int num, Vector3 nockback)
+        {
+            var damage = num - status.BasePower;
+            if (damage > 0)
+            {
+            status.Health -= damage;
+            }
+            velocity += nockback;
+        }
+
+        public override bool IsDead()
+        {
+            return status.Health <= 0;
+        }
+
+        public override void Move()
+        {
+            if (Math.Abs(velocity.X) < 0.01f)
+            {
+                velocity.X = 0;
+            }
+            if (Math.Abs(velocity.Z) < 0.01f)
+            {
+                velocity.Z = 0;
+            }
+            var v = velocity;
+            v.Y = 0;
+            velocity -= v * 0.1f;
+
+            collision.Force(velocity, status.Movespeed);//移動
         }
     }
 }

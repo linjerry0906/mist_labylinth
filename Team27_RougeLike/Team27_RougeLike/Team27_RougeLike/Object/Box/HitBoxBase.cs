@@ -11,10 +11,12 @@ namespace Team27_RougeLike.Object.Box
         /// <summary>
         /// 注　このマスクに入れるものは、触らせたくないもの
         /// </summary>
-        private List<string> mask;          //マスク
-        public BoundingSphere collision;   //当たり判定
+        public BoundingSphere collision;        //当たり判定
 
-        private int time;                   //持続時間
+        protected List<CharacterBase> effectedCharacters = new List<CharacterBase>(); //既に当たっているキャラクタ
+
+        private List<string> mask;              //マスク
+        private int time;                       //持続時間
         
         /// <summary>
         /// 当たり判定:マスク無し
@@ -104,5 +106,10 @@ namespace Team27_RougeLike.Object.Box
 
         public abstract void Effect(CharacterBase character);
         public Vector3 Position() { return collision.Center; }
+
+        public List<CharacterBase> EffectedCharacters()
+        {
+            return effectedCharacters;
+        }
     }
 }

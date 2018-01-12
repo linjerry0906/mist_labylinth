@@ -13,7 +13,6 @@ namespace Team27_RougeLike.Object
 {
     abstract class CharacterBase
     {
-        public Status status;        //様々なパラメータ
         protected CollisionSphere collision;
         protected CharacterManager characterManager;
         protected BaseAiManager aiManager;
@@ -26,9 +25,8 @@ namespace Team27_RougeLike.Object
 
         public string Tag { get { return tag; } }
 
-        public CharacterBase(Status status, CollisionSphere collision, string textureName, CharacterManager characterManager)
+        public CharacterBase(CollisionSphere collision, string textureName, CharacterManager characterManager)
         {
-            this.status = status;
             this.collision = collision;
             this.textureName = textureName;
             this.characterManager = characterManager;
@@ -37,22 +35,7 @@ namespace Team27_RougeLike.Object
 
         public abstract void Initialize();
 
-        public virtual void Update(GameTime gameTime)
-        {
-            if (Math.Abs(velocity.X) < 0.01f)
-            {
-                velocity.X = 0;
-            }
-            if (Math.Abs(velocity.Z) < 0.01f)
-            {
-                velocity.Z = 0;
-            }
-            var v = velocity;
-            v.Y = 0;
-            velocity -= v * 0.1f;
-
-            collision.Force(velocity, status.Movespeed);//移動
-        }
+        public abstract void Update(GameTime gameTime);
 
         public abstract void Attack();
 
@@ -60,15 +43,9 @@ namespace Team27_RougeLike.Object
         {
             renderer.DrawPolygon(textureName, collision.Position, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
         }
-        public void Damage(int num ,Vector3 nockback)
-        {
-            status.Health = status.Health - num;
-            velocity += nockback;
-        }
-        public bool IsDead()
-        {
-            return status.Health <= 0;
-        }
+        public abstract void Damage(int num, Vector3 nockback);
+        public abstract bool IsDead();
+        public abstract void Move();
         public CollisionSphere Collision
         {
             get { return collision; }

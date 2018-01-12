@@ -26,6 +26,16 @@ namespace Team27_RougeLike.Object
             this.speed = speed;
             this.attackspd = attackspd;
         }
+        public Status(int level, int maxhealth,int health, int basePower, int baseDiffence, int attackspd, float speed)
+        {
+            this.level = level;
+            this.maxhealth = maxhealth;
+            this.health = health;
+            this.basePower = basePower;
+            this.baseDiffence = baseDiffence;
+            this.speed = speed;
+            this.attackspd = attackspd;
+        }
         public Status() { }
 
         /// <summary>
