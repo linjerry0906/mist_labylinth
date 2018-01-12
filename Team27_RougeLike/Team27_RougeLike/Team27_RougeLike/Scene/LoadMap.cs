@@ -68,14 +68,19 @@ namespace Team27_RougeLike.Scene
 
         public void Update(GameTime gameTime)
         {
-            if (!mapGenerator.IsEnd())      //生成が終わってなかったら生成し続ける
+            if (!mapGenerator.IsEnd())               //生成が終わってなかったら生成し続ける
             {
                 mapGenerator.Update();
                 return;
             }
-            if (!stageInfoLoader.IsItemLoad())
+            if (!stageInfoLoader.IsItemLoad())       //Item読み込む
             {
                 stageInfoLoader.LoadFloorItem(gameManager.ItemManager, gameManager.StageNum, stageManager.CurrentFloor());
+                return;
+            }
+            if (!stageInfoLoader.IsEnemyLoad())      //敵の配置を読み込む
+            {
+                stageInfoLoader.LoadFloorEnemy();
                 return;
             }
 

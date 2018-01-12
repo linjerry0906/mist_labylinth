@@ -15,6 +15,7 @@ namespace Team27_RougeLike.Map
     class StageInfoLoader
     {
         private bool isItemLoad;            //Item読み込んだフラグ
+        private bool isMonsterLoad;         //敵の配置とスポナーを読み込んだフラグ
 
         public StageInfoLoader()
         {
@@ -26,6 +27,7 @@ namespace Team27_RougeLike.Map
         public void Initialize()
         {
             isItemLoad = false;
+            isMonsterLoad = false;
         }
 
         /// <summary>
@@ -77,12 +79,29 @@ namespace Team27_RougeLike.Map
         }
 
         /// <summary>
+        /// 敵の配置を読み込む処理
+        /// </summary>
+        public void LoadFloorEnemy()
+        {
+            isMonsterLoad = true;
+        }
+
+        /// <summary>
         /// Itemが読み込んだか
         /// </summary>
         /// <returns></returns>
         public bool IsItemLoad()
         {
             return isItemLoad;
+        }
+
+        /// <summary>
+        /// 敵のは配置は読み込んだか
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEnemyLoad()
+        {
+            return isMonsterLoad;
         }
     }
 }

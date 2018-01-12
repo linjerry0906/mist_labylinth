@@ -98,7 +98,7 @@ namespace Team27_RougeLike.Scene
             mapItemManager.Initialize();
             int itemAmount = stageManager.CurrentFloor() / 10 + stageManager.CurrentFloor() % 5;    //初期落ちているアイテムの数
             itemAmount = gameDevice.Random.Next(0, itemAmount);
-            for (int i = 0; i < itemAmount + 40; i++)
+            for (int i = 0; i < itemAmount; i++)
             {
                 Vector3 randomSpace = map.RandomSpace();
                 if (randomSpace == Vector3.Zero)                    //Error対策
