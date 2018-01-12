@@ -43,7 +43,7 @@ namespace Team27_RougeLike.Scene
             itemManager = new ItemManager();
             dungeonProcess = new DungeonProcess();
 
-            PlayerStatusLoader psLoader = new PlayerStatusLoader();       //Todo:Saveから読み取る（PassiveSkillがあるため）
+            PlayerStatusLoader psLoader = new PlayerStatusLoader();
             int[] status = psLoader.LoadStatus();
             Status defaultStatus = new Status(1, status[0], status[1], status[2], status[3], 1);
             playerStatus = new PlayerStatus(defaultStatus, gameDevice);

@@ -33,7 +33,7 @@ namespace Team27_RougeLike.UI
 
         private EquipUI equipUI;
 
-        private readonly int WIDTH = 150;       //ボタンの長さ
+        private readonly int WIDTH = 170;       //ボタンの長さ
         private readonly int HEIGHT = 22;       //ボタンの高さ
 
         private Button equipButton;             //装備ボタン
@@ -189,6 +189,9 @@ namespace Team27_RougeLike.UI
             {
                 if (currentItem is ConsumptionItem)     //使用アイテム
                 {
+                    if (((ConsumptionItem)currentItem).GetTypeText() == "なし")
+                        return;
+
                     Use();
                     return;
                 }
@@ -320,24 +323,6 @@ namespace Team27_RougeLike.UI
             if (currentItem == null)
                 return;
 
-            string buttonString = "使用";
-
-            if (currentItem is WeaponItem || currentItem is ProtectionItem)
-            {
-                buttonString = "装備";
-            }
-
-            renderer.DrawTexture(
-                "fade",
-                new Vector2(equipButton.Position().X, equipButton.Position().Y),
-                equipButton.Size(), alpha * 0.5f);
-            renderer.DrawString(
-                    buttonString,
-                    new Vector2(equipButton.ButtonCenter().X, equipButton.ButtonCenter().Y),
-                    Color.White,
-                    new Vector2(1.0f, 1.0f),
-                    alpha, true, true);
-
             renderer.DrawTexture(
                 "fade",
                 new Vector2(removeButton.Position().X, removeButton.Position().Y),
@@ -350,6 +335,28 @@ namespace Team27_RougeLike.UI
                     alpha, true, true);
 
             currentInfo.Draw(currentItem, alpha);
+
+            string buttonString = "使用";
+            if (currentItem is WeaponItem || currentItem is ProtectionItem)
+            {
+                buttonString = "装備";
+            }
+            else
+            {
+                if (((ConsumptionItem)currentItem).GetTypeText() == "なし")       //使用できない
+                    return;
+            }
+
+            renderer.DrawTexture(
+                "fade",
+                new Vector2(equipButton.Position().X, equipButton.Position().Y),
+                equipButton.Size(), alpha * 0.5f);
+            renderer.DrawString(
+                    buttonString,
+                    new Vector2(equipButton.ButtonCenter().X, equipButton.ButtonCenter().Y),
+                    Color.White,
+                    new Vector2(1.0f, 1.0f),
+                    alpha, true, true);
         }
 
         /// <summary>
