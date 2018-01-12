@@ -19,7 +19,8 @@ namespace Team27_RougeLike.UI
         private Window window;              //背景レイアウト
         private List<LogText> logs;         //LogList
 
-        private readonly int HEIGHT = 22;   //Logの間隔
+        private readonly static int HEIGHT = 22;         //Logの間隔
+        private readonly static int TEXT_LIMIT = 5;      //メッセージ最大の数
 
         public DungeonLog(Vector2 position, Vector2 size, GameDevice gameDevice)
         {
@@ -62,12 +63,19 @@ namespace Team27_RougeLike.UI
         /// <param name="color">色</param>
         public void AddLog(string log, Color color)
         {
+            if (logs.Count + 1 > TEXT_LIMIT)
+            {
+                logs.RemoveRange(0, logs.Count - TEXT_LIMIT + 1);
+            }
+
             Vector2 position = window.GetOffsetPosition() + new Vector2(2, logs.Count * HEIGHT);
-            if(logs.Count > 0)
+
+            if(logs.Count > 0)                                //場所を調整
             {
                 LogText last = logs[logs.Count - 1];
                 position = last.Position + new Vector2(0, HEIGHT);
             }
+
             logs.Add(new LogText(log, color, position));      //Log追加
             window.Switch(true);                              //Windowを開く
             window.SetAlpha(0.5f);                            //透明度設定
@@ -79,6 +87,11 @@ namespace Team27_RougeLike.UI
         /// <param name="log">Log情報</param>
         public void AddLog(string log)
         {
+            if (logs.Count + 1 > TEXT_LIMIT)
+            {
+                logs.RemoveRange(0, logs.Count - TEXT_LIMIT + 1);
+            }
+
             Vector2 position = window.GetOffsetPosition() + new Vector2(2, logs.Count * HEIGHT);
             if (logs.Count > 0)
             {
