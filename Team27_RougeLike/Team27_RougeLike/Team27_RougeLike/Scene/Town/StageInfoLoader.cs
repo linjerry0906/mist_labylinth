@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using Microsoft.Xna.Framework;
 
 namespace Team27_RougeLike.Scene.Town
 {
@@ -26,6 +27,7 @@ namespace Team27_RougeLike.Scene.Town
 
         public string wallTexture;      //壁テクスチャ
         public string groundTexture;    //地面テクスチャ
+        public Vector3 fogColor;          //霧の色
     }
 
     class StageInfoLoader
@@ -76,6 +78,7 @@ namespace Team27_RougeLike.Scene.Town
                 info.expandRate = int.Parse(data[8]);
                 info.groundTexture = data[9];
                 info.wallTexture = data[10];
+                info.fogColor = new Vector3(float.Parse(data[11]), float.Parse(data[12]), float.Parse(data[13]));
 
                 stageInfo.Add(info);
             }

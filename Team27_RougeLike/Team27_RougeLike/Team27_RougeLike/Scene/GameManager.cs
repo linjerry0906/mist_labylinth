@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Map;
 using Team27_RougeLike.Object;
@@ -137,12 +138,13 @@ namespace Team27_RougeLike.Scene
         /// <param name="stageSize">ダンジョンのサイズ</param>
         /// <param name="expandRate">拡大の比率</param>
         public void InitStage(int dungeonNum, string dungeonName,
-            int limitSecond, int floor, int totalFloor, int bossRange,int stageSize, int expandRate)
+            int limitSecond, int floor, int totalFloor, int bossRange,int stageSize, int expandRate, 
+            Vector3 fogColor)
         {
             stageManager.Initialize(
                 dungeonNum ,dungeonName, limitSecond, 
                 floor, totalFloor, bossRange, 
-                stageSize, expandRate);
+                stageSize, expandRate, fogColor);
         }
 
         /// <summary>

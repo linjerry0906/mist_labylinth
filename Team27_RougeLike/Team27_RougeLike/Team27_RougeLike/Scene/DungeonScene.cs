@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Map;
+using Team27_RougeLike.Object;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.UI;
 using Team27_RougeLike.Object.ParticleSystem;
@@ -29,6 +30,7 @@ namespace Team27_RougeLike.Scene
 
         private DungeonMap map;                 //マップ
         private MapItemManager mapItemManager;  //マップ内に落ちているアイテムの管理者
+        private FogBackground background;       //背景の霧
 
         private float angle = 0;                //カメラ回転角度
 
@@ -49,6 +51,8 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
+            background.Draw(renderer.FogManager.CurrentColor());
+
             map.Draw();                 //Mapの描画
             mapItemManager.Draw();      //アイテムの描画
             characterManager.Draw();
@@ -127,6 +131,8 @@ namespace Team27_RougeLike.Scene
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
             #endregion
 
+
+            background = new FogBackground(gameDevice);
         }
 
         public bool IsEnd()
@@ -163,6 +169,7 @@ namespace Team27_RougeLike.Scene
             if (ui.IsPop())                   //メッセージ表示中は以下Updateしない
                 return;
 
+            background.Update();
             RotateCamera();
 
             //Chara処理

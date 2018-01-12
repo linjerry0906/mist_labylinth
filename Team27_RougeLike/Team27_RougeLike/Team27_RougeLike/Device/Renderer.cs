@@ -558,6 +558,34 @@ namespace Team27_RougeLike.Device
         }
 
         /// <summary>
+        /// （拡大縮小対応版）画像の描画
+        /// </summary>
+        /// <param name="name">アセット名</param>
+        /// <param name="position">位置</param>
+        /// <param name="scale">拡大縮小値</param>
+        /// <param name="alpha">透明値</param>
+        public void DrawTexture(string name, Vector2 position,
+                                Vector2 scale, Color color,float alpha = 1.0f)
+        {
+            Debug.Assert(textures.ContainsKey(name),
+                "アセット名を間違えていませんか？\n" +
+                "大文字小文字が間違ってませんか？\n" +
+                "LoadTextureで読み込んでますか？\n" +
+                "プログラムを確認してください\n");
+            spriteBatch.Draw(
+                textures[name],         // 画像
+                position,               // 位置
+                null,                   // 切り取り範囲
+                color * alpha,          // 透過
+                0.0f,                   // 回転
+                Vector2.Zero,           // 回転軸の位置
+                scale,                  // 拡大縮小
+                SpriteEffects.None,     // 表示反転効果
+                0.0f                    // スプライト表示深度
+                );
+        }
+
+        /// <summary>
         /// 数字の描画（整数のみ版）
         /// </summary>
         /// <param name="name"></param>

@@ -26,6 +26,7 @@ namespace Team27_RougeLike.Scene
                 {"cubeTest" ,path},
                 {"bat" ,path},
                 {"slash" ,path},
+                {"fog" ,path},
                 {"dungeon_image1" ,path},
                 {"dungeon_image2" ,path},
                 {"dungeon_image_thomb" ,path},

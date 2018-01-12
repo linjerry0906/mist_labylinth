@@ -59,8 +59,10 @@ namespace Team27_RougeLike.Scene
         /// <param name="bossRange">Boss出る階層</param>
         /// <param name="stageSize">ダンジョンのサイズ</param>
         /// <param name="expandRate">拡大の比率</param>
+        /// <param name="fogColor">霧の色</param>
         public void Initialize(int dungeonNum, string dungeonName, 
-            int limitSecond, int floor, int totalFloor, int bossRange, int stageSize, int expandRate)
+            int limitSecond, int floor, int totalFloor, int bossRange, int stageSize, int expandRate,
+            Vector3 fogColor)
         {
             this.dungeonName = dungeonName;
             this.dungeonNum = dungeonNum;
@@ -70,6 +72,7 @@ namespace Team27_RougeLike.Scene
             this.stageSize = stageSize;
             this.bossRange = bossRange;
             this.expandRate = expandRate;
+            fogManager.SetColor(fogColor);
         }
 
         /// <summary>
