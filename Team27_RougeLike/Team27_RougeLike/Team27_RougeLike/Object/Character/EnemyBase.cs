@@ -138,7 +138,7 @@ namespace Team27_RougeLike.Object
         }
         public override void Damage(int num, Vector3 nockback)
         {
-            var damage = num - status.BasePower;
+            var damage = num - status.BaseArmor;
             if (damage > 0)
             {
             status.Health -= damage;
