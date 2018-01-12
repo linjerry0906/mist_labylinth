@@ -28,6 +28,10 @@ namespace Team27_RougeLike.Device
         private Projector mainProjector;        // メインプロジェクター
         private Projector miniMapProjector;     // ミニマップのプロジェクター
 
+        private static Vector3 dirLight0 = new Vector3(0.6f, -0.5f, 0.3f);      //DirectionLight0 (highLight用)
+        private static Vector3 dirLight1 = new Vector3(-0.3f, -0.3f, -0.5f);    //DirectionLight1
+        private static Vector3 dif1 = new Vector3(0.4f, 0.4f, 0.55f);           //DiffuseColor1
+
         // Dictionaryで複数の画像を管理
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         private Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
@@ -202,6 +206,11 @@ namespace Team27_RougeLike.Device
 
         #region 3D用
 
+        /// <summary>
+        /// モデルを読み込む
+        /// </summary>
+        /// <param name="name">アセット名</param>
+        /// <param name="filepath">ファイルパス</param>
         public void LoadModel(string name, string filepath = "./")
         {
             // ガード節 Dictionaryへの2重登録を回避
@@ -215,11 +224,6 @@ namespace Team27_RougeLike.Device
             }
             // 画像の読み込みとDictionaryにアセット名と画像を追加
             models.Add(name, contentManager.Load<Model>(filepath + name));
-        }
-
-        public Model GetModel(string name)
-        {
-            return models[name];
         }
 
         public void DrawModel(string name, Vector3 position, Vector3 size, Color color)
@@ -245,20 +249,40 @@ namespace Team27_RougeLike.Device
             }
         }
 
-        public void DrawModel(string name, string textureName,Vector3 position, Vector3 size, Color color)
+        /// <summary>
+        /// モデルを描画
+        /// </summary>
+        /// <param name="name">モデル名</param>
+        /// <param name="textureName">テクスチャー名</param>
+        /// <param name="position">位置</param>
+        /// <param name="size">大きさ</param>
+        /// <param name="color">色</param>
+        /// <param name="alpha">透明度</param>
+        public void DrawModel(string name, string textureName,Vector3 position, Vector3 size, Color color, float alpha = 1.0f)
         {
             Model drawModel = models[name];
             foreach (ModelMesh m in drawModel.Meshes)
             {
                 foreach (BasicEffect e in m.Effects)
                 {
+                    //二つの直行光で立体感を調整
+                    e.LightingEnabled = true;
+                    e.DirectionalLight0.Enabled = true;
+                    e.DirectionalLight0.Direction = dirLight0; 
+                    e.DirectionalLight1.Enabled = true;
+                    e.DirectionalLight1.Direction = dirLight1;
+                    e.DirectionalLight1.DiffuseColor = dif1;
+                    e.DiffuseColor = color.ToVector3();
+                    //Texture設定
                     e.TextureEnabled = true;
                     e.Texture = textures[textureName];
-                    e.DiffuseColor = color.ToVector3();
+                    e.Alpha = alpha;
+                    //Fog設定
                     e.FogEnabled = fogManager.IsActive();
                     e.FogStart = fogManager.Near;
                     e.FogEnd = fogManager.Far;
                     e.FogColor = fogManager.CurrentColor().ToVector3();
+                    //3D空間設定
                     e.View = currentProjector.LookAt;
                     e.Projection = currentProjector.Projection;
                     e.World = Matrix.CreateScale(size) *

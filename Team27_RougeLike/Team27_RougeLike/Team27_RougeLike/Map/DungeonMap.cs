@@ -53,8 +53,10 @@ namespace Team27_RougeLike.Map
         /// <summary>
         /// マップのオブジェクトを生成
         /// </summary>
-        public void Initialize()
+        public void Initialize(BlockStyle blockStyle)
         {
+            Dictionary<MapDef.BlockDef, string> blockDef = blockStyle.GetDefination();
+
             for (int y = 0; y < mapChip.GetLength(0); y++)          //マップのY軸
             {
                 for (int x = 0; x < mapChip.GetLength(1); x++)      //マップのX軸
@@ -68,7 +70,8 @@ namespace Team27_RougeLike.Map
                                 new Vector3(x * MapDef.TILE_SIZE, MapDef.TILE_SIZE, y * MapDef.TILE_SIZE),
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE * 2, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
-                            c.SetColor(new Color(100, 120, 60));
+                            //c.SetColor(new Color(100, 120, 60));
+                            c.SetTexture(blockDef[MapDef.BlockDef.Wall]);
                             mapBlocks.Add(c);
                             break;
                         case (int)MapDef.BlockDef.Space:
@@ -76,7 +79,8 @@ namespace Team27_RougeLike.Map
                                 new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
-                            c.SetColor(new Color(100, 100, 100));
+                            //c.SetColor(new Color(100, 100, 100));
+                            c.SetTexture(blockDef[MapDef.BlockDef.Space]);
                             mapBlocks.Add(c);
                             space.Add(new Point(x, y));
                             break;
@@ -87,6 +91,7 @@ namespace Team27_RougeLike.Map
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
                             //c.SetColor(new Color(0, 60, 60));
+                            c.SetTexture(blockDef[MapDef.BlockDef.Space]);
                             mapBlocks.Add(c);
                             break;
                         case (int)MapDef.BlockDef.Exit:
@@ -95,7 +100,8 @@ namespace Team27_RougeLike.Map
                                 new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
-                            c.SetColor(new Color(60, 0, 0));
+                            c.SetColor(new Color(200, 200, 200));
+                            c.SetTexture(blockDef[MapDef.BlockDef.Space]);
                             mapBlocks.Add(c);
                             break;
                     }

@@ -37,13 +37,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Texture\cubeTest.jpg">
-      <Name>cubeTest</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Font\basicFont.spritefont">
       <Name>basicFont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -100,9 +93,11 @@
     </None>
     <None Include="StageCSV\StageItem_2.csv">
       <Name>StageItem_2</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="StageCSV\StageItem_3.csv">
       <Name>StageItem_3</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="StageCSV\StageItem_4.csv">
       <Name>StageItem_4</Name>
@@ -183,6 +178,28 @@
     </Compile>
     <Compile Include="Texture\dungeon_image_tree.png">
       <Name>dungeon_image_tree</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Texture\cubeTest.png">
+      <Name>cubeTest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Texture\ground_ice.png">
+      <Name>ground_ice</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Texture\wall_default.png">
+      <Name>wall_default</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Texture\wall_ice.png">
+      <Name>wall_ice</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

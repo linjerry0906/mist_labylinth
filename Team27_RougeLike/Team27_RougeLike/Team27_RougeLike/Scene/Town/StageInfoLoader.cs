@@ -23,6 +23,9 @@ namespace Team27_RougeLike.Scene.Town
         public int fileNum;             //Item詳細の番号
         public string imageName;        //イメージのAsset名
         public int expandRate;       　 //拡大する比率
+
+        public string wallTexture;      //壁テクスチャ
+        public string groundTexture;    //地面テクスチャ
     }
 
     class StageInfoLoader
@@ -71,6 +74,8 @@ namespace Team27_RougeLike.Scene.Town
                 info.fileNum = int.Parse(data[6]);
                 info.imageName = data[7];
                 info.expandRate = int.Parse(data[8]);
+                info.groundTexture = data[9];
+                info.wallTexture = data[10];
 
                 stageInfo.Add(info);
             }

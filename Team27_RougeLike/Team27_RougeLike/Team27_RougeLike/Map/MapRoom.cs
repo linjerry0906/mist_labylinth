@@ -85,7 +85,7 @@ namespace Team27_RougeLike.Map
         /// </summary>
         public void Draw()
         {
-            cube.Draw();
+            //cube.Draw();
         }
 
         /// <summary>

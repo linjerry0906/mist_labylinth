@@ -90,7 +90,7 @@ namespace Team27_RougeLike.Scene
                 return;
             }
 
-            map.Initialize();                       //マップを初期化
+            map.Initialize(gameManager.BlockStyle);                       //マップを初期化
             #endregion
 
             #region Item初期化

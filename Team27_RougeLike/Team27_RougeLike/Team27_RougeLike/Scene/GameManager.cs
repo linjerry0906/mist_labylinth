@@ -24,9 +24,10 @@ namespace Team27_RougeLike.Scene
 
         private GameDevice gameDevice;
 
+        private BlockStyle blockStyle;      //Blockの種類
         private DungeonMap mapInstance;     //マップの実体
         private StageManager stageManager;  //ステージマネージャー
-        private int stageNumFile;          //ステージのファイル番号
+        private int stageNumFile;           //ステージのファイル番号
 
         /// <summary>
         /// シーンの間にゲーム情報を伝える仲介者
@@ -38,6 +39,7 @@ namespace Team27_RougeLike.Scene
             mapInstance = null;
 
             stageManager = new StageManager(gameDevice);
+            blockStyle = new BlockStyle();
             itemManager = new ItemManager();
             dungeonProcess = new DungeonProcess();
 
@@ -141,6 +143,23 @@ namespace Team27_RougeLike.Scene
                 dungeonNum ,dungeonName, limitSecond, 
                 floor, totalFloor, bossRange, 
                 stageSize, expandRate);
+        }
+
+        /// <summary>
+        /// Block定義をクリア
+        /// </summary>
+        public void ClearBlockStyle()
+        {
+            blockStyle.Clear();
+        }
+
+
+        /// <summary>
+        /// Blockのテクスチャーを定義するクラス
+        /// </summary>
+        public BlockStyle BlockStyle
+        {
+            get { return blockStyle; }
         }
         
         /// <summary>

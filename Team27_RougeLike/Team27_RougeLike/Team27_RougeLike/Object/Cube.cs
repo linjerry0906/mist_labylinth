@@ -15,11 +15,11 @@ namespace Team27_RougeLike.Object
     class Cube
     {
         private Renderer renderer;
-        private Vector3 position;
-        private Vector3 size;
+        private string textureName = "cubeTest";        //アセット名
+        private Vector3 position;                       //位置
+        private Vector3 size;                           //大きさ
 
-        private Vector2[] texcoord;
-        private Color color;            //Debug 色付け用
+        private Color color;                            //色付け用
 
         public Cube(Vector3 position, Vector3 halfSize, GameDevice gameDevice)
         {
@@ -27,39 +27,48 @@ namespace Team27_RougeLike.Object
             this.position = position;
             this.size = halfSize;
 
-            texcoord = new Vector2[4];
-            texcoord[0] = new Vector2(0, 0);
-            texcoord[1] = new Vector2(0, 1);
-            texcoord[2] = new Vector2(1, 0);
-            texcoord[3] = new Vector2(1, 1);
-
             color = Color.White;
         }
 
+        /// <summary>
+        /// 3D描画
+        /// </summary>
         public void Draw()
         {
             renderer.DefaultRenderSetting();
             renderer.RenderMainProjector();
-            renderer.DrawModel("map_block", "cubeTest", position, size  * 2, color);
+            renderer.DrawModel("map_block", textureName, position, size  * 2, color);
         }
 
+        /// <summary>
+        /// MiniMapに描画
+        /// </summary>
         public void DrawMiniMap()
         {
-            Color temp = new Color(color.R + 70, color.G + 70, color.B + 70, color.A);
-            VertexPositionColorTexture[] vertices = new VertexPositionColorTexture[4];
-            vertices[0] = new VertexPositionColorTexture(new Vector3(position.X + -size.X, 0, position.Z + size.X), temp, texcoord[0]);
-            vertices[1] = new VertexPositionColorTexture(new Vector3(position.X + -size.X, 0, position.Z -size.X), temp, texcoord[1]);
-            vertices[2] = new VertexPositionColorTexture(new Vector3(position.X + size.X, 0, position.Z + size.X), temp, texcoord[2]);
-            vertices[3] = new VertexPositionColorTexture(new Vector3(position.X + size.X, 0, position.Z -size.X), temp, texcoord[3]);
-
-            renderer.DrawPolygon("cubeTest", vertices, 0.9f);
+            renderer.DrawModel("map_block", textureName, position, size * 2, color, 0.7f);
         }
 
+        /// <summary>
+        /// テクスチャーを設定
+        /// </summary>
+        /// <param name="textureName">アセット名</param>
+        public void SetTexture(string textureName)
+        {
+            this.textureName = textureName;
+        }
+
+        /// <summary>
+        /// あたり判定
+        /// </summary>
         public BoundingBox Collision
         {
             get{ return new BoundingBox(position - size, position + size); }
         }
 
+        /// <summary>
+        /// 色設定
+        /// </summary>
+        /// <param name="color">色</param>
         public void SetColor(Color color)
         {
             this.color = color;

@@ -58,11 +58,13 @@ namespace Team27_RougeLike.Device
             target = new Vector3(0, 0, 0);       //注目目標
             baseDistance = collision.Position;   //注目目標との相対位置関係  
             world = Matrix.CreateWorld(Vector3.Zero, Vector3.Forward, Vector3.Up);
-            projection = Matrix.CreatePerspectiveFieldOfView(
-                (float)(100 * Math.PI / 180),    //FOV
-                viewport.AspectRatio,            //Aspect
-                0.1f,                            //近い
-                1000.0f);                        //遠い
+            //projection = Matrix.CreatePerspectiveFieldOfView(
+            //    (float)(100 * Math.PI / 180),    //FOV
+            //    viewport.AspectRatio,            //Aspect
+            //    0.1f,                            //近い
+            //    1000.0f);                        //遠い
+            projection = Matrix.CreateOrthographic(viewport.Width, viewport.Height, 0.1f, 1000.0f);     //Orthographicに変更
+            projection *= Matrix.CreateScale(1.5f);     //拡大
             lookat = Matrix.CreateLookAt(collision.Position, target, Vector3.Up);
         }
 

@@ -31,6 +31,9 @@ namespace Team27_RougeLike.Scene
                 {"dungeon_image_thomb" ,path},
                 {"dungeon_image_ice" ,path},
                 {"dungeon_image_tree" ,path},
+                {"ground_ice" ,path},
+                {"wall_default" ,path},
+                {"wall_ice" ,path},
             };
             return list;
         }

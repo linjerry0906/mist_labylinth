@@ -338,6 +338,13 @@ namespace Team27_RougeLike.UI
                 nextStage.bossRange,
                 nextStage.baseSize + (chooseFloor - 1) * nextStage.expandRate,
                 nextStage.expandRate);
+
+            //BlockStyle設定
+            gameManager.ClearBlockStyle();
+            gameManager.BlockStyle.Add(Map.MapDef.BlockDef.Entry, nextStage.groundTexture);
+            gameManager.BlockStyle.Add(Map.MapDef.BlockDef.Exit, nextStage.groundTexture);
+            gameManager.BlockStyle.Add(Map.MapDef.BlockDef.Space, nextStage.groundTexture);
+            gameManager.BlockStyle.Add(Map.MapDef.BlockDef.Wall, nextStage.wallTexture);
         }
     }
 }
