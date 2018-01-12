@@ -14,9 +14,12 @@ namespace Team27_RougeLike.Object.Item
     class Inventory
     {
         private GameDevice gameDevice;
-        private readonly int MaxItemCount = 25;       //Bagのサイズ
-        private List<Item> bag;                       //Bagの内容
-        private List<Item> tempBag;                   //一時的なバッグ
+        private static readonly int MAX_ITEM_COUNT_BAG = 25;       //Bagのサイズ
+        private List<Item> bag;                                    //Bagの内容
+        private List<Item> tempBag;                                //一時的なバッグ
+
+        private readonly int MAX_ITEM_COUNT_DEPOSITORY;            //倉庫の大きさ
+        private List<Item> depository;                             //倉庫
 
         private ProtectionItem[] armor;               //装備
         private WeaponItem rightHand;               　//右手
@@ -29,6 +32,7 @@ namespace Team27_RougeLike.Object.Item
             this.gameDevice = gameDevice;
             bag = new List<Item>();
             tempBag = new List<Item>();
+            depository = new List<Item>();
             armor = new ProtectionItem[4];
             for (int i = 0; i < armor.Length; i++)
             {
@@ -46,12 +50,46 @@ namespace Team27_RougeLike.Object.Item
         public bool AddItem(Item item)
         {
             int count = bag.Count;
-            if (count >= MaxItemCount)      //最大限に超えたら追加しない
+            if (count >= MAX_ITEM_COUNT_BAG)      //最大限に超えたら追加しない
             {
                 return false;
             }
 
             bag.Add(item);
+            return true;
+        }
+
+        /// <summary>
+        /// カバンから指定のIndexのアイテムを倉庫に入れる
+        /// </summary>
+        /// <param name="bagIndex">カバン内の添え字</param>
+        /// <returns></returns>
+        public bool DepositItem(int bagIndex)
+        {
+            if (depository.Count >= MAX_ITEM_COUNT_DEPOSITORY)
+            {
+                return false;
+            }
+
+            depository.Add(bag[bagIndex]);
+            bag.RemoveAt(bagIndex);
+            return true;
+        }
+
+        /// <summary>
+        /// 倉庫から指定のIndexのアイテムを倉庫に入れる
+        /// </summary>
+        /// <param name="depositIndex">倉庫内の添え字</param>
+        /// <returns></returns>
+        public bool MoveDepositItemToBag(int depositIndex)
+        {
+            if (bag.Count >= MAX_ITEM_COUNT_BAG)
+            {
+                return false;
+            }
+
+            bag.Add(depository[depositIndex]);
+            depository.RemoveAt(depositIndex);
             return true;
         }
 
@@ -63,7 +101,7 @@ namespace Team27_RougeLike.Object.Item
         public bool AddTempItem(Item item)
         {
             int count = bag.Count;
-            if (count >= MaxItemCount)                      //最大限に超えたら追加しない
+            if (count >= MAX_ITEM_COUNT_BAG)                      //最大限に超えたら追加しない
             {
                 return false;
             }
@@ -165,7 +203,7 @@ namespace Team27_RougeLike.Object.Item
             if (type == WeaponItem.WeaponType.Bow)     //弓は両手
             {
                 if (rightHand != null && leftHand != null &&
-                    bag.Count + 2 > MaxItemCount)      //両手いっぱいで、弓を装備する場合はカバンの容量をチェック
+                    bag.Count + 2 > MAX_ITEM_COUNT_BAG)      //両手いっぱいで、弓を装備する場合はカバンの容量をチェック
                 {
                     return false;
                 }
@@ -232,6 +270,15 @@ namespace Team27_RougeLike.Object.Item
         public List<Item> BagList()
         {
             return bag;
+        }
+
+        /// <summary>
+        /// 倉庫にあるもの
+        /// </summary>
+        /// <returns></returns>
+        public List<Item> Depository()
+        {
+            return depository;
         }
 
         /// <summary>
@@ -303,14 +350,25 @@ namespace Team27_RougeLike.Object.Item
         }
 
         /// <summary>
-        /// アイテム数量と最大値を取得
+        /// カバンにアイテム数量と最大値を取得
         /// </summary>
         /// <param name="current">現在量</param>
         /// <param name="maxium">最大量</param>
-        public void ItemCount(ref int current, ref int maxium)
+        public void BagItemCount(ref int current, ref int maxium)
         {
             current = bag.Count;
-            maxium = MaxItemCount;
+            maxium = MAX_ITEM_COUNT_BAG;
+        }
+
+        /// <summary>
+        /// 倉庫にアイテム数量と最大値を取得
+        /// </summary>
+        /// <param name="current">現在量</param>
+        /// <param name="maxium">最大量</param>
+        public void DepositoryItemCount(ref int current, ref int maxium)
+        {
+            current = depository.Count;
+            maxium = MAX_ITEM_COUNT_DEPOSITORY;
         }
 
         /// <summary>

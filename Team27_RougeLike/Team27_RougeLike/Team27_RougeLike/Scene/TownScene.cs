@@ -60,6 +60,7 @@ namespace Team27_RougeLike.Scene
                 return;
 
             gameManager.PlayerItem.RemoveTemp();       //一時的なアイテムを削除
+            gameManager.PlayerInfo.Initialize();       //レベルなどの初期化処理
         }
 
         public bool IsEnd()

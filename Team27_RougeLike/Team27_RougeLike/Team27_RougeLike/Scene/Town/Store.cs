@@ -173,7 +173,7 @@ namespace Team27_RougeLike.Scene.Town
         public void BuyUpdate(Point mousePos)
         {
 
-            playerInventory.ItemCount(ref currentNum, ref maxNum);
+            playerInventory.BagItemCount(ref currentNum, ref maxNum);
 
             //アイテムを買う処理(お金が足りるか、バックにはいるかチェック)
             if (button.IsClick(mousePos))
