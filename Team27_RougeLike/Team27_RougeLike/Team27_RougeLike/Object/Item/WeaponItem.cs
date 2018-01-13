@@ -34,7 +34,7 @@ namespace Team27_RougeLike.Object.Item
             int itemPrice, int itemRare, float itemWeight, WeaponType weaponType,
             int itemPower, int itemDefense, int reinforcement, int reinforcementLimit,
             int upPower, int upDefense, int randomMinP, int randomMaxP, int randomMinD, int randomMaxD)
-            :base(itemID, itemName, itemExplanation, itemPrice, itemRare, itemWeight, 1)
+            : base(itemID, itemName, itemExplanation, itemPrice, itemRare, itemWeight, 1)
         {
             this.weaponType = weaponType;
 
@@ -68,7 +68,7 @@ namespace Team27_RougeLike.Object.Item
 
         //コピーコンストラクタ
         public WeaponItem(WeaponItem other)
-            :base(other.itemID, other.itemName, other.itemExplanation,
+            : base(other.itemID, other.itemName, other.itemExplanation,
                  other.itemPrice, other.itemRare, other.itemWeight, other.amountLimit)
         {
             this.weaponType = other.weaponType;
@@ -82,6 +82,8 @@ namespace Team27_RougeLike.Object.Item
         {
             return new WeaponItem(this);
         }
+
+
 
         //装備強化
         public void LevelUp()
@@ -129,6 +131,16 @@ namespace Team27_RougeLike.Object.Item
         public int GetReinforcement()
         {
             return effect.GetReinforcement();
+        }
+
+        public override Item UniqueClone()
+        {
+            WeaponItem newItem = new WeaponItem(itemID, itemName, itemExplanation,
+            itemPrice, itemRare, itemWeight, weaponType,
+            itemPower, itemDefense, reinforcement, reinforcementLimit, upPower, upDefense,
+            effect.GetAddPower(), effect.GetAddDefense());
+
+            return newItem;
         }
     }
 }

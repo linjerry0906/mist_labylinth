@@ -59,7 +59,9 @@ namespace Team27_RougeLike.Object.Item
                 return false;
             }
 
-            bag.Add(item);
+            Item newItem = item.UniqueClone();
+            newItem.ResetID(gameDevice.Random.Next(-50, 50));
+            bag.Add(newItem);
             return true;
         }
 
@@ -117,6 +119,16 @@ namespace Team27_RougeLike.Object.Item
             }
 
             tempBag.Clear();
+        }
+
+        /// <summary>
+        /// 手持ちのアイテムの添え字を探すメソッド
+        /// </summary>
+        /// <param name="item">カバン内のアイテム</param>
+        /// <returns></returns>
+        public int BagItemIndex(Item item)
+        {
+            return bag.FindIndex(i => i.Equals(item));
         }
 
         /// <summary>
@@ -321,15 +333,6 @@ namespace Team27_RougeLike.Object.Item
             maxium = MAX_ITEM_COUNT_BAG;
         }
 
-        /// <summary>
-        /// アイテムのリストをbagに適用
-        /// </summary>
-        /// <param name="itemList">別のアイテムリスト</param>
-        public void SetBag(List<Item> itemList)
-        {
-            bag = itemList;
-        }
-
         #endregion
 
         #region　倉庫関連
@@ -394,6 +397,11 @@ namespace Team27_RougeLike.Object.Item
             maxium = MAX_ITEM_COUNT_DEPOSITORY;
         }
 
+        /// <summary>
+        /// カバン内のアイテムを倉庫に入れる
+        /// </summary>
+        /// <param name="bagIndex">カバン内のIndex</param>
+        /// <returns></returns>
         public bool DepositItem(int bagIndex)
         {
             if (!(bag[bagIndex] is ConsumptionItem))

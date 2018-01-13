@@ -61,5 +61,10 @@ namespace Team27_RougeLike.Object.Item
                 return "なし";
             }
         }
+
+        public override Item UniqueClone()
+        {
+            return Clone();
+        }
     }
 }

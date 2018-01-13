@@ -80,5 +80,7 @@ namespace Team27_RougeLike.Object.Item
         }
 
         public abstract Item Clone();
+
+        public abstract Item UniqueClone();
     }
 }

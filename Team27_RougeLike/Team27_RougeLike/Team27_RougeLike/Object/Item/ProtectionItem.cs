@@ -131,5 +131,15 @@ namespace Team27_RougeLike.Object.Item
         {
             return effect.GetReinforcement();
         }
+
+        public override Item UniqueClone()
+        {
+            ProtectionItem newItem = new ProtectionItem(itemID, itemName, itemExplanation,
+            itemPrice, itemRare, itemWeight, protectionType,
+            itemPower, itemDefense, reinforcement, reinforcementLimit, upPower, upDefense,
+            effect.GetAddPower(), effect.GetAddDefense());
+
+            return newItem;
+        }
     }
 }
