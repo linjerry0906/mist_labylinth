@@ -32,6 +32,7 @@ namespace Team27_RougeLike.Object
 
         public void Initialize()
         {
+            exp = 0;
             status = new Status(baseStatus.Level, baseStatus.Health, baseStatus.BasePower, baseStatus.BaseArmor, baseStatus.Attackspd, baseStatus.Movespeed);
         }
 
@@ -57,11 +58,13 @@ namespace Team27_RougeLike.Object
 
         public int GetPower()
         {
+            CaculateStatus();
             return status.BasePower + addPower;
         }
 
         public int GetDefence()
         {
+            CaculateStatus();
             return status.BaseArmor + addDefence;
         }
 
@@ -77,11 +80,13 @@ namespace Team27_RougeLike.Object
 
         public float GetVelocty()
         {
+            CaculateStatus();
             return status.Movespeed - weight / 100 / status.BasePower;
         }
 
         public float GetWeight()
         {
+            CaculateStatus();
             return weight;
         }
 
