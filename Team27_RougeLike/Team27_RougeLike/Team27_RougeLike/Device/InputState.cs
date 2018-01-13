@@ -161,7 +161,6 @@ namespace Team27_RougeLike.Device
 
         private void UpdateDualKeyCheck()
         {
-
             for (int i = 0; i < (int)Keys.Z; i++)
             {
                 if (IsKeyDown((Keys)i))
@@ -177,7 +176,7 @@ namespace Team27_RougeLike.Device
         }
         public bool DualkeyDown(Keys key)
         {
-            if((!currentKey.IsKeyDown(key) && !(currentKeyTime[(int)key] < 0)) == true)
+            if((!currentKey.IsKeyDown(key) && (currentKeyTime[(int)key] > 0)))
             {
                 currentKeyTime[(int)key] = 0;
                 return true;

@@ -53,7 +53,7 @@ namespace Team27_RougeLike.Object.AI
             {
                 velocity.Normalize();
             }
-
+            
             if (inputState.GetKeyState(Keys.LeftShift) && !actor.Dodge())
             {
                 velocity = velocity * 1.5f;

@@ -12,9 +12,11 @@ namespace Team27_RougeLike.Object.AI
     class AiManager_Player : BaseAiManager
     {
         private InputState inputState;
-        public AiManager_Player(InputState inputState)
+        private PlayerStatus status;
+        public AiManager_Player(InputState inputState, PlayerStatus status)
         {
             this.inputState = inputState;
+            this.status = status;
         }
 
         public override void Initialize(CharacterBase actor)
@@ -47,8 +49,9 @@ namespace Team27_RougeLike.Object.AI
             }
             if (inputState.LeftButtonEnter(ButtonState.Pressed) && attackAi is AttackAi_Wait)
             {
-                SetAttackAi(new AttackAi_Charge(actor, ((Player)actor).GetPlayerStatus().GetAttackSpeed()*10, 1, ((Player)actor).GetPlayerStatus().GetAttackSpeed()*10));
+                SetAttackAi(new AttackAi_Charge(actor, status.GetAttackSpeed() * 10, 1, status.GetAttackSpeed() * 10));
             }
+
         }
 
         public bool PlessMoveKey()
