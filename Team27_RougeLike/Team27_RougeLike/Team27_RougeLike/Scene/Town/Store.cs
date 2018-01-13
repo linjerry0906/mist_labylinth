@@ -251,6 +251,10 @@ namespace Team27_RougeLike.Scene.Town
                 if (input.IsLeftClick())
                 {
                     playerInventory.AddMoney(totalPrice);
+                    foreach(Item item in rightItems)
+                    {
+                        playerInventory.RemoveItem(playerInventory.BagItemIndex(item));
+                    }
                     totalPrice = 0;
                     rightItems = new List<Item>();
                     rightButtons = new List<Button>();
@@ -268,7 +272,6 @@ namespace Team27_RougeLike.Scene.Town
                     if (input.IsLeftClick())
                     {
                         AddRightList(leftItems[i]);
-                        playerInventory.RemoveItem(i);
                         RemoveLeftList(i);
                     }
                 }
@@ -284,7 +287,6 @@ namespace Team27_RougeLike.Scene.Town
                     if (input.IsLeftClick())
                     {
                         AddLeftList(rightItems[i]);
-                        playerInventory.AddItem(rightItems[i]);
                         RemoveRightList(i);
                     }
                 }
