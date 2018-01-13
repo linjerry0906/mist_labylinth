@@ -124,11 +124,11 @@ namespace Team27_RougeLike.Scene
             d[0] = 3;
             d[1] = 2;
             //配列を渡せばその中からランダムで、ＩＤ単体を渡せばそれのみをスポーンさせます
-            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, d, 10,1, characterManager));
-            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, 1, 10, 1, characterManager));
+            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().GetPosition, d, 10,1, characterManager));
+            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().GetPosition, 1, 10, 1, characterManager));
             #region カメラ初期化
             angle = 0;
-            gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
+            gameDevice.MainProjector.Initialize(characterManager.GetPlayer().GetPosition);       //カメラを初期化
             #endregion
 
 
@@ -179,7 +179,7 @@ namespace Team27_RougeLike.Scene
 
             //マップ処理
             map.MapCollision(gameDevice.Renderer.MainProjector);
-            map.FocusCenter(characterManager.GetPlayer().Position);
+            map.FocusCenter(characterManager.GetPlayer().GetPosition);
             map.Update();
             map.MapCollision(characterManager.GetPlayer());
             map.MapCollision(characterManager.GetCharacters());
@@ -247,7 +247,7 @@ namespace Team27_RougeLike.Scene
             }
 
             //階段にたどり着いた場合
-            if (map.WorldToMap(characterManager.GetPlayer().Position) == map.EndPoint)
+            if (map.WorldToMap(characterManager.GetPlayer().GetPosition) == map.EndPoint)
             {
                 //ヒント文字を出す
                 ui.HintUI.Switch(true);

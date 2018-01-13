@@ -98,8 +98,13 @@ namespace Team27_RougeLike.Object.Character
                 if (c.IsDead())
                 {
                     ui.LogUI.AddLog(c.Tag + " is Dead");
+                    if (c is EnemyBase)
+                    {
+                        mapItemManager.AddItemByPossibility(c.Collision.Position, 0.65f, 0.4f);     //落ちる確率65％　装備品の確率40%
+                        player.GetPlayerStatus().AddExp(((EnemyBase)c).GetExp());
+                        ui.LogUI.AddLog(((EnemyBase)c).GetExp() + "exp ");
+                    }
 
-                    mapItemManager.AddItemByPossibility(c.Collision.Position, 0.65f, 0.4f);     //落ちる確率65％　装備品の確率40%
                 }
             }
 
@@ -143,7 +148,8 @@ namespace Team27_RougeLike.Object.Character
                 gamedevice,
                 this,
                 pManager,
-                gamemanager
+                gamemanager,
+                ui
                 );
             characters.Add(player);
         }
@@ -219,6 +225,7 @@ namespace Team27_RougeLike.Object.Character
                 var aiType = data[6];
                 var size = int.Parse(data[7]);
                 var attackspd = int.Parse(data[8]);
+                var exp = int.Parse(data[9]);
                 enemys.Add
                     (
                     id,
@@ -228,7 +235,8 @@ namespace Team27_RougeLike.Object.Character
                         new CollisionSphere(Vector3.Zero, size),
                         aiType,
                         name,
-                        this
+                        this,
+                        exp
                         )
                     );
             }
