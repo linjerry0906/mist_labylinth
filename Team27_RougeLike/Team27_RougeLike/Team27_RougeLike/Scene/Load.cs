@@ -35,6 +35,10 @@ namespace Team27_RougeLike.Scene
                 {"ground_ice" ,path},
                 {"wall_default" ,path},
                 {"wall_ice" ,path},
+                {"magic_center" ,path},
+                {"magic_in" ,path},
+                {"magic_middle" ,path},
+                {"magic_out" ,path},
             };
             return list;
         }

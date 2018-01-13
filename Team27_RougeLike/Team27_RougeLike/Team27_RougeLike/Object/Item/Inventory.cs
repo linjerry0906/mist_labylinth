@@ -375,7 +375,7 @@ namespace Team27_RougeLike.Object.Item
             return true;
         }
 
-        
+
         /// <summary>
         /// 倉庫にある装備
         /// </summary>
@@ -385,7 +385,7 @@ namespace Team27_RougeLike.Object.Item
             return equipDepository;
         }
 
-        
+
         /// <summary>
         /// 倉庫に装備数量と最大値を取得
         /// </summary>
@@ -410,10 +410,12 @@ namespace Team27_RougeLike.Object.Item
             if (!itemDepository.ContainsKey(bag[bagIndex].GetItemID()))
             {
                 itemDepository.Add(bag[bagIndex].GetItemID(), 1);
+                bag.RemoveAt(bagIndex);
                 return true;
             }
 
             itemDepository[bag[bagIndex].GetItemID()] += 1;
+            bag.RemoveAt(bagIndex);
             return true;
         }
 
@@ -425,6 +427,15 @@ namespace Team27_RougeLike.Object.Item
         public int DepositEquipIndex(Item item)
         {
             return equipDepository.IndexOf(item);
+        }
+
+        /// <summary>
+        /// 倉庫のアイテムリスト
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, int> DepositoryItem()
+        {
+            return itemDepository;
         }
 
         #endregion

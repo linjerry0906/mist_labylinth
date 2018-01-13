@@ -80,6 +80,7 @@ namespace Team27_RougeLike
             gameDevice.Renderer.LoadModel("ItemModel", "./Model/");
             gameDevice.Renderer.LoadModel("map_block", "./Model/");
             gameDevice.Renderer.LoadModel("B_01", "./Model/");
+            gameDevice.Renderer.LoadModel("magic_circle", "./Model/");
 
             //1ƒsƒNƒZƒ‹‰æ‘œ‚Ì¶¬
             Texture2D fade = new Texture2D(GraphicsDevice, 1, 1);
