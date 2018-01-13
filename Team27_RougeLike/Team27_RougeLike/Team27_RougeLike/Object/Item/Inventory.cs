@@ -417,6 +417,16 @@ namespace Team27_RougeLike.Object.Item
             return true;
         }
 
+        /// <summary>
+        /// 倉庫にある装備の添え字
+        /// </summary>
+        /// <param name="item">倉庫にあるアイテム</param>
+        /// <returns></returns>
+        public int DepositEquipIndex(Item item)
+        {
+            return equipDepository.IndexOf(item);
+        }
+
         #endregion
 
         #region 金関連
