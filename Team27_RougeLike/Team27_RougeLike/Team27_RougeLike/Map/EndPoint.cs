@@ -25,5 +25,9 @@ namespace Team27_RougeLike.Map
             middleAngle = 0;
             outAngle = 0;
         }
+
+        public void Update()
+        {
+        }
     }
 }
