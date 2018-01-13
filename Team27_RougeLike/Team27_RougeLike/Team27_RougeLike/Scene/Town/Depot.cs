@@ -82,7 +82,7 @@ namespace Team27_RougeLike.Scene
 
             mode = DepotModeType.select;
             inventory = gameManager.PlayerItem;
-            itemManager = gameManager.ItemManager;
+            itemManager = new ItemManager();
         }
 
         public void Initialize(SceneType scene)
@@ -94,7 +94,7 @@ namespace Team27_RougeLike.Scene
             mode = DepotModeType.select;
             playerItems = inventory.BagList();
             equipments = inventory.EquipDepository();
-            consumptions = new Dictionary<int, int>();
+            consumptions = inventory.DepositoryItem();
 
             itemManager.LoadAll();
 
@@ -364,20 +364,11 @@ namespace Team27_RougeLike.Scene
                 //バッグ側
                 for (int i = 0; i < leftButtons.Count; i++)
                 {
-                    inventory.DepositItem(inventory.BagItemIndex(leftItems[i]));
                     if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isDepotMax)
                     {
-                        foreach(int id in consumptions.Keys)
-                        {
-                            if (id == leftItems[i].GetItemID())
-                            {
-                                consumptions[leftItems[i].GetItemID()]++;
-                                RemoveLeftList(i);
-                                return;
-                            }
-                        }
-                        consumptions[leftItems[i].GetItemID()] = 1;
-                        AddRightList(leftItems[i]);
+                        inventory.DepositItem(inventory.BagItemIndex(leftItems[i]));
+                        if (consumptions[leftItems[i].GetItemID()] - 1 <= 0)
+                            AddRightList(leftItems[i]);
                         RemoveLeftList(i);
                     }
                 }
@@ -387,8 +378,8 @@ namespace Team27_RougeLike.Scene
                 {
                     if (rightButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isBagMax)
                     {
+                        inventory.AddItem(itemManager.GetConsuptionItem(consumptions[rightItems[i].GetItemID()]));
                         AddLeftList(rightItems[i]);
-                        inventory.AddItem(rightItems[i]);
                         if (consumptions[rightItems[i].GetItemID()] - 1 <= 0)
                         {
                             consumptions.Remove(rightItems[i].GetItemID());
@@ -396,7 +387,7 @@ namespace Team27_RougeLike.Scene
                         }
                         else
                         {
-                            consumptions[rightItems[i].GetItemID()]--;
+                            consumptions[rightItems[i].GetItemID()] -= 1;
                         }
                     }
                 }
