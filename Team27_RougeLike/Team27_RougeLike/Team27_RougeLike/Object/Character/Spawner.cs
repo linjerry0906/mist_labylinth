@@ -16,8 +16,7 @@ namespace Team27_RougeLike.Object.Character
         private CharacterManager characterManager;
         private List<CharacterBase> liveCharacters;
         private Vector3 position;
-        private int seed = Environment.TickCount;
-        private Random rand = new Random();
+        private static Random rand = new Random();
 
         /// <summary>
         /// 最大スポーン数
@@ -68,6 +67,14 @@ namespace Team27_RougeLike.Object.Character
             this.maxNum = maxNum;
             this.characterManager = characterManager;
             liveCharacters = new List<CharacterBase>();
+        }
+
+        /// <summary>
+        /// リンより追加　最初の時間をずらす、最初の間隔を短縮するためのメソッド
+        /// </summary>
+        public void InitCurrentTime()
+        {
+            currentTime = rand.Next(0, spawnrate);
         }
 
         public void Update()

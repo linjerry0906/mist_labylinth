@@ -41,6 +41,10 @@ namespace Team27_RougeLike.UI
         private List<StageInfo> stageInfo;              //Stage情報
 
         private readonly float LIMIT_ALPHA = 0.5f;      //背景Alphaの最大値 
+        private readonly Vector2 DUNGEON_OFFSET = 
+            new Vector2(Def.WindowDef.WINDOW_WIDTH / 2 - 360, Def.WindowDef.WINDOW_HEIGHT / 2 - 180);
+        private readonly Vector2 FLOOR_OFFSET =
+           new Vector2(Def.WindowDef.WINDOW_WIDTH / 2 + 80, Def.WindowDef.WINDOW_HEIGHT / 2 - 180);
 
         public DungeonSelectUI(GameManager gameManager, GameDevice gameDevice)
         {
@@ -58,8 +62,8 @@ namespace Team27_RougeLike.UI
             backLayer.Switch();             //開く
 
             buttons = new Button[(int)DungeonSelectButtonEnum.NULL];
-            buttons[(int)DungeonSelectButtonEnum.村] = new Button(backLayer.GetCenterUnder() + new Vector2(-180, -35), 120, 30);
-            buttons[(int)DungeonSelectButtonEnum.ダンジョン] = new Button(backLayer.GetCenterUnder() + new Vector2(30, -35), 120, 30);
+            buttons[(int)DungeonSelectButtonEnum.村] = new Button(backLayer.GetCenterUnder() + new Vector2(-200, -35), 140, 30);
+            buttons[(int)DungeonSelectButtonEnum.ダンジョン] = new Button(backLayer.GetCenterUnder() + new Vector2(60, -35), 140, 30);
 
             choose = DungeonSelectButtonEnum.NULL;
         }
@@ -184,15 +188,15 @@ namespace Team27_RougeLike.UI
         {
             renderer.DrawString(
                 "どのダンジョンへ冒険するか",
-                backLayer.GetOffsetPosition() + new Vector2(10, 10),
+                DUNGEON_OFFSET + new Vector2(10, 5),
                 new Vector2(1.1f, 1.1f), Color.White, backLayer.CurrentAlpha() * constractAlpha);
 
-            renderer.DrawTexture("fade",                                //背景
-                backLayer.GetOffsetPosition() + new Vector2(10, 10),
+            renderer.DrawTexture("fade",                                         //背景
+                DUNGEON_OFFSET,
                 new Vector2(280, 330),
                 backLayer.CurrentAlpha() * 0.5f);
 
-            for (int i = 0; i < stageInfo.Count; i++)                           //各ダンジョン
+            for (int i = 0; i < stageInfo.Count; i++)                            //各ダンジョン
             {
                 Vector2 buttonPos = new Vector2(dungeons[i].Position().X, dungeons[i].Position().Y);
                 Color color = (i == dungeonIndex) ? Color.Gold : Color.White;    //選択の色
@@ -201,11 +205,11 @@ namespace Team27_RougeLike.UI
                     "fade",
                     buttonPos,
                     dungeons[i].Size(),
-                    backLayer.CurrentAlpha() * constractAlpha);
+                    backLayer.CurrentAlpha());
 
                 renderer.DrawString(
                     stageInfo[i].name,
-                    backLayer.GetOffsetPosition() + new Vector2(10, 25 * i + 35),
+                    DUNGEON_OFFSET + new Vector2(10, 25 * i + 35),
                     new Vector2(1.1f, 1.1f), color, backLayer.CurrentAlpha() * constractAlpha);
             }
         }
@@ -224,7 +228,7 @@ namespace Team27_RougeLike.UI
                     "fade",
                     buttonPos,
                     buttons[i].Size(),
-                    backLayer.CurrentAlpha() * constractAlpha);
+                    backLayer.CurrentAlpha());
 
                 renderer.DrawString(
                     ((DungeonSelectButtonEnum)i).ToString() + " へ",
@@ -236,15 +240,15 @@ namespace Team27_RougeLike.UI
 
         private void DrawFloors(float constractAlpha)
         {
-            renderer.DrawTexture("fade",                                //背景
-                backLayer.GetRightTop() + new Vector2(-290, 10),
+            renderer.DrawTexture("fade",                                       //背景
+                FLOOR_OFFSET,
                 new Vector2(280, 330),
                 backLayer.CurrentAlpha() * 0.5f);
 
             StageInfo info = stageInfo[dungeonIndex];
             int chooseFloor = info.totalFloor / info.bossRange;
 
-            for (int i = 0; i < floors.Count; i++)                           //各ダンジョン
+            for (int i = 0; i < floors.Count; i++)                             //各ダンジョン
             {
                 Vector2 buttonPos = new Vector2(floors[i].Position().X, floors[i].Position().Y);
                 Color color = (i == floorIndex) ? Color.Gold : Color.White;    //選択の色
@@ -253,11 +257,11 @@ namespace Team27_RougeLike.UI
                     "fade",
                     buttonPos,
                     floors[i].Size(),
-                    backLayer.CurrentAlpha() * constractAlpha);
+                    backLayer.CurrentAlpha());
 
                 renderer.DrawString(
                     "地下 " + (1 + info.bossRange * i) + " 階",
-                    backLayer.GetRightTop() + new Vector2(-290, 25 * i + 35),
+                    FLOOR_OFFSET + new Vector2(10, 25 * i + 35),
                     new Vector2(1.1f, 1.1f), color, backLayer.CurrentAlpha() * constractAlpha);
             }
         }
@@ -273,7 +277,7 @@ namespace Team27_RougeLike.UI
             dungeons = new List<Button>();
             for (int i = 0; i < info.Count; i++)        //Buttonを初期化
             {
-                Vector2 position = backLayer.GetOffsetPosition() + new Vector2(10, 25 * i + 35);
+                Vector2 position = DUNGEON_OFFSET + new Vector2(0, 25 * i + 35);
                 Button button = new Button(position + new Vector2(0, 2), 280, 21);
                 dungeons.Add(button);
             }
@@ -304,7 +308,7 @@ namespace Team27_RougeLike.UI
                 if ((1 + info.bossRange * i) > limit + 1)   //到達した階層以外は選択できない
                     break;
 
-                Vector2 position = backLayer.GetRightTop() + new Vector2(-290, 25 * i + 35);
+                Vector2 position = FLOOR_OFFSET + new Vector2(0, 25 * i + 35);
                 Button button = new Button(position + new Vector2(0, 2), 280, 21);
                 floors.Add(button);
             }
@@ -324,8 +328,8 @@ namespace Team27_RougeLike.UI
         /// </summary>
         public void InitStage()
         {
-            StageInfo nextStage = stageInfo[dungeonIndex];                                        //指定のダンジョン
-            int chooseFloor = (nextStage.totalFloor / nextStage.bossRange) * floorIndex + 1;      //指定のフロアを計算
+            StageInfo nextStage = stageInfo[dungeonIndex];               //指定のダンジョン
+            int chooseFloor = nextStage.bossRange * floorIndex + 1;      //指定のフロアを計算
 
             //Stage情報を入力
             gameManager.StageNum = nextStage.fileNum;

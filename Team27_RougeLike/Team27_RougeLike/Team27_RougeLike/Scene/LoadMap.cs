@@ -75,12 +75,18 @@ namespace Team27_RougeLike.Scene
             }
             if (!stageInfoLoader.IsItemLoad())       //Item読み込む
             {
-                stageInfoLoader.LoadFloorItem(gameManager.ItemManager, gameManager.StageNum, stageManager.CurrentFloor());
+                stageInfoLoader.LoadFloorItem(
+                    gameManager.ItemManager, 
+                    gameManager.StageNum, 
+                    stageManager.CurrentFloor());
                 return;
             }
             if (!stageInfoLoader.IsEnemyLoad())      //敵の配置を読み込む
             {
-                stageInfoLoader.LoadFloorEnemy();
+                stageInfoLoader.LoadFloorEnemy(
+                    gameManager.EnemySetting,
+                    gameManager.StageNum,
+                    stageManager.CurrentFloor());
                 return;
             }
 

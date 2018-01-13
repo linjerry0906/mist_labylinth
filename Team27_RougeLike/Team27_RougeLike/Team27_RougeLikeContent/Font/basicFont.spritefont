@@ -88,6 +88,10 @@ with.
         <Start>売</Start>
         <End>売</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>受</Start>
+        <End>受</End>
+      </CharacterRegion>
 
       <CharacterRegion>
         <Start>海</Start>
@@ -95,6 +99,10 @@ with.
       </CharacterRegion>
       
       <!-- え -->
+      <CharacterRegion>
+        <Start>演</Start>
+        <End>演</End>
+      </CharacterRegion>
       <!-- えら -->
       <CharacterRegion>
         <Start>選</Start>
@@ -298,6 +306,10 @@ with.
         <Start>下</Start>
         <End>下</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>習</Start>
+        <End>習</End>
+      </CharacterRegion>
       
       <!-- じ -->
       <CharacterRegion>
@@ -342,6 +354,10 @@ with.
       <CharacterRegion>
         <Start>上</Start>
         <End>上</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>場</Start>
+        <End>場</End>
       </CharacterRegion>
       <!-- しん -->
 

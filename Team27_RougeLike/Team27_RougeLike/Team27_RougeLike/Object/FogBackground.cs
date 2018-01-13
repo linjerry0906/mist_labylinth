@@ -30,7 +30,7 @@ namespace Team27_RougeLike.Object
         /// </summary>
         public void Update()
         {
-            position.X -= 0.5f;                   //ずらす
+            position.X -= 0.7f;                   //ずらす
             if (position.X < -offset)              //大きさを超えたら元に戻す
                 position.X = 0;
         }
@@ -41,8 +41,8 @@ namespace Team27_RougeLike.Object
         public void Draw(Color color)
         {
             renderer.Begin();
-            renderer.DrawTexture("fog", position, new Vector2(4, 4), color, 0.5f);
-            renderer.DrawTexture("fog", position + new Vector2(offset, 0), new Vector2(4, 4), color, 0.5f);
+            renderer.DrawTexture("fog", position, new Vector2(4, 4), color, 0.1f);
+            renderer.DrawTexture("fog", position + new Vector2(offset, 0), new Vector2(4, 4), color, 0.1f);
             renderer.End();
         }
     }

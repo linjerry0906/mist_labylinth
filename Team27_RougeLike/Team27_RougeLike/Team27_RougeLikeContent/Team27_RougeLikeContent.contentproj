@@ -83,6 +83,26 @@
       <Name>PlayerStatus</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="StageCSV\StageEnemy_1.csv">
+      <Name>StageEnemy_1</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="StageCSV\StageEnemy_2.csv">
+      <Name>StageEnemy_2</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="StageCSV\StageEnemy_3.csv">
+      <Name>StageEnemy_3</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="StageCSV\StageEnemy_4.csv">
+      <Name>StageEnemy_4</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="StageCSV\StageEnemy_5.csv">
+      <Name>StageEnemy_5</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="StageCSV\StageInfo.csv">
       <Name>StageInfo</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

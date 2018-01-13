@@ -148,6 +148,8 @@ namespace Team27_RougeLike.Scene
             pManager = null;
             characterManager = null;
 
+            gameManager.EnemySetting.Clear();
+
             ui = null;
         }
 

@@ -119,13 +119,22 @@ namespace Team27_RougeLike.Scene
                 MapDef.TILE_SIZE,
                 map.EntryPoint.Y * MapDef.TILE_SIZE);
             characterManager.Initialize(ui, mapItemManager);
-            characterManager.AddPlayer(position, pManager,gameManager);
-            var d = new int[2];
-            d[0] = 3;
-            d[1] = 2;
-            //配列を渡せばその中からランダムで、ＩＤ単体を渡せばそれのみをスポーンさせます
-            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, d, 10,1, characterManager));
-            characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, 1, 10, 1, characterManager));
+            characterManager.AddPlayer(position, pManager, gameManager);
+            //var d = new int[2];
+            //d[0] = 3;
+            //d[1] = 2;
+            ////配列を渡せばその中からランダムで、ＩＤ単体を渡せばそれのみをスポーンさせます
+            //characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, d, 10,1, characterManager));
+            //characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, 1, 10, 1, characterManager));
+
+            int spawnerAmount =
+                stageManager.StageSize() / 5 +              //サイズ補正
+                stageManager.CurrentFloor() / 10 +          //Floor補正
+                stageManager.CurrentDungeonNum() / 2;   　  //ダンジョンの難易度補正
+
+            GenerateSpawner(spawnerAmount);
+
+
             #region カメラ初期化
             angle = 0;
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
@@ -133,6 +142,38 @@ namespace Team27_RougeLike.Scene
 
 
             background = new FogBackground(gameDevice);
+        }
+
+        /// <summary>
+        /// Spawnerを初期化
+        /// </summary>
+        /// <param name="amount">量</param>
+        private void GenerateSpawner(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Vector3 randomSpace = map.RandomSpace();
+                if (randomSpace == Vector3.Zero)                    //Error対策
+                    break;
+
+                EnemySetting setting = gameManager.EnemySetting.RandomSpawnerSetting();
+                if (setting.ids.Length > 1)                         //配列の場合
+                {
+                    Spawner spawner = new Spawner(
+                            setting.rate, randomSpace, setting.ids,
+                            setting.max, setting.amountPerSpawn, characterManager);
+                    spawner.InitCurrentTime();
+                    characterManager.AddSpawner(spawner);
+                }
+                else
+                {
+                    Spawner spawner = new Spawner(
+                            setting.rate, randomSpace, setting.ids[0],
+                            setting.max, setting.amountPerSpawn, characterManager);
+                    spawner.InitCurrentTime();
+                    characterManager.AddSpawner(spawner);
+                }
+            }
         }
 
         public bool IsEnd()
@@ -156,6 +197,8 @@ namespace Team27_RougeLike.Scene
 
             mapItemManager.Initialize();            //Item解放
             mapItemManager = null;
+
+            gameManager.EnemySetting.Clear();       //SpawnSettingを削除
 
             ui = null;
         }

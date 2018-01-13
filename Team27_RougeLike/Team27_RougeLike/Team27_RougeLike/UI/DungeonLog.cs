@@ -19,7 +19,7 @@ namespace Team27_RougeLike.UI
         private Window window;              //背景レイアウト
         private List<LogText> logs;         //LogList
 
-        private readonly static int HEIGHT = 22;         //Logの間隔
+        private readonly static int HEIGHT = 21;         //Logの間隔
         private readonly static int TEXT_LIMIT = 5;      //メッセージ最大の数
 
         public DungeonLog(Vector2 position, Vector2 size, GameDevice gameDevice)

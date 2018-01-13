@@ -17,18 +17,19 @@ namespace Team27_RougeLike.Scene
 {
     class GameManager
     {
-        private PlayerStatus playerStatus;  //Playerのステータス
-        private Inventory playerItem;       //Playerが持つアイテム
+        private PlayerStatus playerStatus;                   //Playerのステータス
+        private Inventory playerItem;                        //Playerが持つアイテム
 
-        private DungeonProcess dungeonProcess; //進捗状況
-        private ItemManager itemManager;    //Item Dictionary
+        private DungeonProcess dungeonProcess;               //進捗状況
+        private ItemManager itemManager;                     //Item Dictionary
 
         private GameDevice gameDevice;
 
-        private BlockStyle blockStyle;      //Blockの種類
-        private DungeonMap mapInstance;     //マップの実体
-        private StageManager stageManager;  //ステージマネージャー
-        private int stageNumFile;           //ステージのファイル番号
+        private BlockStyle blockStyle;                       //Blockの種類
+        private DungeonMap mapInstance;                      //マップの実体
+        private StageManager stageManager;                   //ステージマネージャー
+        private EnemySettingManager enemySettingManager;     //Enemy配置管理者
+        private int stageNumFile;                            //ステージのファイル番号
 
         /// <summary>
         /// シーンの間にゲーム情報を伝える仲介者
@@ -40,10 +41,12 @@ namespace Team27_RougeLike.Scene
             mapInstance = null;
 
             stageManager = new StageManager(gameDevice);
+            enemySettingManager = new EnemySettingManager(gameDevice);
             blockStyle = new BlockStyle();
             itemManager = new ItemManager();
             dungeonProcess = new DungeonProcess();
 
+            #region Player初期化
             PlayerStatusLoader psLoader = new PlayerStatusLoader();
             int[] status = psLoader.LoadStatus();
             Status defaultStatus = new Status(1, status[0], status[1], status[2], status[3], 1);
@@ -51,6 +54,7 @@ namespace Team27_RougeLike.Scene
             playerStatus.Initialize();
 
             playerItem = playerStatus.GetInventory();                     //道具欄を取得
+            #endregion
 
             Load();
         }
@@ -138,12 +142,12 @@ namespace Team27_RougeLike.Scene
         /// <param name="stageSize">ダンジョンのサイズ</param>
         /// <param name="expandRate">拡大の比率</param>
         public void InitStage(int dungeonNum, string dungeonName,
-            int limitSecond, int floor, int totalFloor, int bossRange,int stageSize, int expandRate, 
+            int limitSecond, int floor, int totalFloor, int bossRange, int stageSize, int expandRate,
             Vector3 fogColor)
         {
             stageManager.Initialize(
-                dungeonNum ,dungeonName, limitSecond, 
-                floor, totalFloor, bossRange, 
+                dungeonNum, dungeonName, limitSecond,
+                floor, totalFloor, bossRange,
                 stageSize, expandRate, fogColor);
         }
 
@@ -163,7 +167,7 @@ namespace Team27_RougeLike.Scene
         {
             get { return blockStyle; }
         }
-        
+
         /// <summary>
         /// Stage管理者
         /// </summary>
@@ -196,6 +200,15 @@ namespace Team27_RougeLike.Scene
             get { return stageNumFile; }
             set { stageNumFile = value; }
         }
+
+        /// <summary>
+        /// Enemy配置
+        /// </summary>
+        public EnemySettingManager EnemySetting
+        {
+            get { return enemySettingManager; }
+        }
+
         #endregion
 
         #region Map関連
@@ -205,7 +218,7 @@ namespace Team27_RougeLike.Scene
         /// <param name="mapChip">マップチップ</param>
         public void GenerateMapInstance(int[,] mapChip)
         {
-            mapInstance = new DungeonMap(mapChip ,gameDevice);
+            mapInstance = new DungeonMap(mapChip, gameDevice);
         }
 
         /// <summary>

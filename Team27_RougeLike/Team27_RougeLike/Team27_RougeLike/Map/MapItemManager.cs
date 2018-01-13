@@ -143,7 +143,10 @@ namespace Team27_RougeLike.Map
         private bool GetItem(int index, DungeonUI ui)
         {
             if (!playerItem.AddTempItem(items[index].GetItem()))
+            {
+                ui.LogUI.AddLog("カバンのアイテムがいっぱい", Color.Red);                       //Logに追加
                 return false;
+            }
 
             Item item = items[index].GetItem();
             Color color = Color.Lerp(Color.White, Color.Gold, item.GetItemRare() / 100.0f);       //色調整

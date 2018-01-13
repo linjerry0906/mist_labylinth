@@ -28,9 +28,9 @@ namespace Team27_RougeLike.Scene
         private int stageSize;          //今のサイズ
         private int expandRate;         //拡大の比率
 
-        private static readonly float FAREST_FOG = 100;
-        private static readonly float NEAREST_FOG = -50;
-        private static readonly float FOG_RANGE = 70;
+        private static readonly float FAREST_FOG = 200;
+        private static readonly float NEAREST_FOG = -70;
+        private static readonly float FOG_RANGE = 200;
         private float nearFog;
 
         public StageManager(GameDevice gameDevice)
@@ -84,8 +84,8 @@ namespace Team27_RougeLike.Scene
 
             //Fog
             nearFog = limitTime.Rate() * (FAREST_FOG - NEAREST_FOG);
-            fogManager.SetNear(nearFog);
-            fogManager.SetFar(nearFog + FOG_RANGE);
+            fogManager.SetNear(nearFog - FOG_RANGE);
+            fogManager.SetFar(nearFog);
             renderer.StartFog();
         }
 

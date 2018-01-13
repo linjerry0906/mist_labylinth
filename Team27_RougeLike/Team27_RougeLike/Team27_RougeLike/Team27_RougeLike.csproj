@@ -73,6 +73,7 @@
     <Compile Include="Effects\BlurEffect.cs" />
     <Compile Include="Effects\PolygonEffect.cs" />
     <Compile Include="Map\BlockStyle.cs" />
+    <Compile Include="Map\EnemySettingManager.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Melee.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Player.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Ranged.cs" />
