@@ -90,7 +90,7 @@ namespace Team27_RougeLike.Scene
 
             mode = DepotModeType.select;
             playerItems = inventory.BagList();
-            depository = inventory.Depository();
+            depository = inventory.EquipDepository();
             equipments = new List<Item>();
             consumptions = new Dictionary<Item, int>();
 
