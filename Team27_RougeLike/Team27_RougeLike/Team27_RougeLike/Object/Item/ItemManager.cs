@@ -23,6 +23,26 @@ namespace Team27_RougeLike.Object.Item
             consuptionFilename = @"Content/" + "ItemCSV/ConsumptionItems.csv";
         }
 
+        public void LoadAll()
+        {
+            int equipmentNum = 8;
+            int consumptionNum = 14;
+
+            int[] equipmentIDs = new int[equipmentNum];
+            for(int i = 1; i <= equipmentNum; i++)
+            {
+                equipmentIDs[i - 1] = i;
+            }
+
+            int[] consumptionIDs = new int[consumptionNum];
+            for(int i = 1; i <= consumptionNum; i++)
+            {
+                consumptionIDs[i - 1] = i;
+            }
+
+            Load(equipmentIDs, consumptionIDs);
+        }
+
         public void Load(int[] equipmentIDs, int[] consuptionIDs)
         {
             Clear();
