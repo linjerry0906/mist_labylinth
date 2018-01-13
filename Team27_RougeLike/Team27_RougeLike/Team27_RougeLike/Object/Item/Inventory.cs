@@ -18,8 +18,9 @@ namespace Team27_RougeLike.Object.Item
         private List<Item> bag;                                    //Bagの内容
         private List<Item> tempBag;                                //一時的なバッグ
 
-        private readonly int MAX_ITEM_COUNT_DEPOSITORY;            //倉庫の大きさ
-        private List<Item> depository;                             //倉庫
+        private readonly int MAX_ITEM_COUNT_DEPOSITORY = 50;       //倉庫の大きさ
+        private List<Item> equipDepository;                        //装備の倉庫
+        private Dictionary<int, int> itemDepository;               //アイテムの倉庫
 
         private ProtectionItem[] armor;               //装備
         private WeaponItem rightHand;               　//右手
@@ -32,7 +33,8 @@ namespace Team27_RougeLike.Object.Item
             this.gameDevice = gameDevice;
             bag = new List<Item>();
             tempBag = new List<Item>();
-            depository = new List<Item>();
+            equipDepository = new List<Item>();
+            itemDepository = new Dictionary<int, int>();
             armor = new ProtectionItem[4];
             for (int i = 0; i < armor.Length; i++)
             {
@@ -41,6 +43,8 @@ namespace Team27_RougeLike.Object.Item
             rightHand = null;
             leftHand = null;
         }
+
+        #region カバン関連
 
         /// <summary>
         /// アイテムをバッグに追加
@@ -56,40 +60,6 @@ namespace Team27_RougeLike.Object.Item
             }
 
             bag.Add(item);
-            return true;
-        }
-
-        /// <summary>
-        /// カバンから指定のIndexのアイテムを倉庫に入れる
-        /// </summary>
-        /// <param name="bagIndex">カバン内の添え字</param>
-        /// <returns></returns>
-        public bool DepositItem(int bagIndex)
-        {
-            if (depository.Count >= MAX_ITEM_COUNT_DEPOSITORY)
-            {
-                return false;
-            }
-
-            depository.Add(bag[bagIndex]);
-            bag.RemoveAt(bagIndex);
-            return true;
-        }
-
-        /// <summary>
-        /// 倉庫から指定のIndexのアイテムを倉庫に入れる
-        /// </summary>
-        /// <param name="depositIndex">倉庫内の添え字</param>
-        /// <returns></returns>
-        public bool MoveDepositItemToBag(int depositIndex)
-        {
-            if (bag.Count >= MAX_ITEM_COUNT_BAG)
-            {
-                return false;
-            }
-
-            bag.Add(depository[depositIndex]);
-            depository.RemoveAt(depositIndex);
             return true;
         }
 
@@ -133,7 +103,7 @@ namespace Team27_RougeLike.Object.Item
         {
             foreach (Item temp in tempBag)
             {
-                bag.RemoveAll(i =>i.GetUniqueID() == temp.GetUniqueID());
+                bag.RemoveAll(i => i.GetUniqueID() == temp.GetUniqueID());
                 for (int i = 0; i < armor.Length; i++)
                 {
                     if (armor[i] != null && armor[i].GetUniqueID() == temp.GetUniqueID())
@@ -273,15 +243,6 @@ namespace Team27_RougeLike.Object.Item
         }
 
         /// <summary>
-        /// 倉庫にあるもの
-        /// </summary>
-        /// <returns></returns>
-        public List<Item> Depository()
-        {
-            return depository;
-        }
-
-        /// <summary>
         /// ステータスを加算して返す
         /// </summary>
         /// <param name="power">攻撃力</param>
@@ -361,17 +322,6 @@ namespace Team27_RougeLike.Object.Item
         }
 
         /// <summary>
-        /// 倉庫にアイテム数量と最大値を取得
-        /// </summary>
-        /// <param name="current">現在量</param>
-        /// <param name="maxium">最大量</param>
-        public void DepositoryItemCount(ref int current, ref int maxium)
-        {
-            current = depository.Count;
-            maxium = MAX_ITEM_COUNT_DEPOSITORY;
-        }
-
-        /// <summary>
         /// アイテムのリストをbagに適用
         /// </summary>
         /// <param name="itemList">別のアイテムリスト</param>
@@ -379,6 +329,89 @@ namespace Team27_RougeLike.Object.Item
         {
             bag = itemList;
         }
+
+        #endregion
+
+        #region　倉庫関連
+
+
+        /// <summary>
+        /// カバンから指定のIndexの装備を倉庫に入れる
+        /// </summary>
+        /// <param name="bagIndex">カバン内の添え字</param>
+        /// <returns></returns>
+        public bool DepositEquip(int bagIndex)
+        {
+            if (equipDepository.Count >= MAX_ITEM_COUNT_DEPOSITORY)
+            {
+                return false;
+            }
+
+            if (bag[bagIndex] is ConsumptionItem)
+                return false;
+
+            equipDepository.Add(bag[bagIndex]);
+            bag.RemoveAt(bagIndex);
+            return true;
+        }
+
+        /// <summary>
+        /// 倉庫から指定のIndexのアイテムを倉庫に入れる
+        /// </summary>
+        /// <param name="equipDepositIndex">倉庫内の添え字</param>
+        /// <returns></returns>
+        public bool MoveDepositEquipToBag(int equipDepositIndex)
+        {
+            if (bag.Count >= MAX_ITEM_COUNT_BAG)
+            {
+                return false;
+            }
+
+            bag.Add(equipDepository[equipDepositIndex]);
+            equipDepository.RemoveAt(equipDepositIndex);
+            return true;
+        }
+
+        
+        /// <summary>
+        /// 倉庫にある装備
+        /// </summary>
+        /// <returns></returns>
+        public List<Item> EquipDepository()
+        {
+            return equipDepository;
+        }
+
+        
+        /// <summary>
+        /// 倉庫に装備数量と最大値を取得
+        /// </summary>
+        /// <param name="current">現在量</param>
+        /// <param name="maxium">最大量</param>
+        public void DepositoryEquipCount(ref int current, ref int maxium)
+        {
+            current = equipDepository.Count;
+            maxium = MAX_ITEM_COUNT_DEPOSITORY;
+        }
+
+        public bool DepositItem(int bagIndex)
+        {
+            if (!(bag[bagIndex] is ConsumptionItem))
+                return false;
+
+            if (!itemDepository.ContainsKey(bag[bagIndex].GetItemID()))
+            {
+                itemDepository.Add(bag[bagIndex].GetItemID(), 1);
+                return true;
+            }
+
+            itemDepository[bag[bagIndex].GetItemID()] += 1;
+            return true;
+        }
+
+        #endregion
+
+        #region 金関連
 
         /// <summary>
         /// 所持金を増やす
@@ -406,6 +439,8 @@ namespace Team27_RougeLike.Object.Item
         {
             money -= amount;
         }
+
+        #endregion
 
         /// <summary>
         /// ファイルからアイテムを復元
