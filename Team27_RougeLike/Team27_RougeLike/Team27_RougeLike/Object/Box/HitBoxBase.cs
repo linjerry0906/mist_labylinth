@@ -17,7 +17,12 @@ namespace Team27_RougeLike.Object.Box
 
         private List<string> mask;              //マスク
         private int time;                       //持続時間
-        
+
+
+        public HitBoxBase()
+        {
+        }
+
         /// <summary>
         /// 当たり判定:マスク無し
         /// </summary>

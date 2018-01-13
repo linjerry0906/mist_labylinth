@@ -169,7 +169,7 @@ namespace Team27_RougeLike.Object.Character
             //if (player == null) return false;
             //if (player.IsDead()) return false;
 
-            return Math.Abs(position.X - player.Collision.Position.X) < drawLength && Math.Abs(position.Y - player.Collision.Position.Y) < drawLength;
+            return Math.Abs(position.X - player.Collision.Position.X) < drawLength && Math.Abs(position.Z - player.Collision.Position.Z) < drawLength;
         }
 
         public Player GetPlayer()

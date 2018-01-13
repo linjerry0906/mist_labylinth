@@ -7,12 +7,13 @@ using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Utility;
-using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Object.Box;
 using Team27_RougeLike.Object.AI;
 using Team27_RougeLike.Object.ParticleSystem;
 using Team27_RougeLike.Scene;
 using Team27_RougeLike.UI;
+using Team27_RougeLike.Object.Item;
+
 namespace Team27_RougeLike.Object.Character
 {
     class Player : CharacterBase
@@ -24,7 +25,7 @@ namespace Team27_RougeLike.Object.Character
         private GameManager gameManager;
         private PlayerStatus status;
         private DungeonUI ui;
-        public Player(Vector3 position, PlayerStatus status, GameDevice gameDevice, CharacterManager characterManager, ParticleManager pManager, GameManager gameManager,DungeonUI ui)
+        public Player(Vector3 position, PlayerStatus status, GameDevice gameDevice, CharacterManager characterManager, ParticleManager pManager, GameManager gameManager, DungeonUI ui)
             : base(new CollisionSphere(position, 5.0f), "test", characterManager)
         {
             tag = "Player";
@@ -36,7 +37,7 @@ namespace Team27_RougeLike.Object.Character
             this.pManager = pManager;
             this.status = status;
             this.ui = ui;
-            aiManager = new AiManager_Player(gameDevice.InputState);
+            aiManager = new AiManager_Player(gameDevice.InputState, status);
             aiManager.Initialize(this);
             motion = new Motion();
             for (int i = 0; i < 6; i++)
@@ -64,7 +65,31 @@ namespace Team27_RougeLike.Object.Character
         }
         public override void Attack()
         {
-            HitBoxBase DBox = new MoveDamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 100, tag, status.GetPower(), projector.Front);
+            HitBoxBase DBox;
+            //switch (status.GetInventory().LeftHand().GetWeaponType())
+            //{
+            //    case WeaponItem.WeaponType.Bow:
+            //        DBox = new MoveDamageBox(new BoundingSphere(GetPosition + projector.Front *3, 0.5f), 100, tag, status.GetPower(), projector.Front);
+            //        ui.LogUI.AddLog("弓による攻撃");
+            //        break;
+            //    case WeaponItem.WeaponType.Sword:
+            //        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 2, 1), 100, tag, status.GetPower(), projector.Front);
+            //        ui.LogUI.AddLog("剣での攻撃");
+            //        break;
+            //    case WeaponItem.WeaponType.Shield:
+            //        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 2), 100, tag, status.GetPower(), projector.Front);
+            //        ui.LogUI.AddLog("剣での攻撃");
+            //        break;
+            //    case WeaponItem.WeaponType.Dagger:
+            //        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 3), 100, tag, status.GetPower(), projector.Front);
+            //        ui.LogUI.AddLog("短剣での攻撃");
+            //        break;
+            //    default:
+            //        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 100, tag, status.GetPower(), projector.Front);
+            //        break;
+            //}
+            DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 100, tag, status.GetPower(), projector.Front);
+
             characterManager.AddHitBox(DBox);
             pManager.AddParticle(new Slash(gameDevice, this, DBox.Position()));
         }
@@ -79,9 +104,9 @@ namespace Team27_RougeLike.Object.Character
         public override void Damage(int num, Vector3 nockback)
         {
             var damage = num - gameManager.PlayerInfo.GetDefence();
-            if(damage > 0)
+            if (damage > 0)
             {
-            status.Damage(damage);
+                status.Damage(damage);
             }
             velocity += nockback;
         }
@@ -107,7 +132,7 @@ namespace Team27_RougeLike.Object.Character
             var v = velocity;
             v.Y = 0;
             velocity -= v * 0.1f;
-            collision.Force(velocity, status.GetVelocty());//移動
+            collision.Force(velocity, status.GetVelocty() / 2); //ベースを1とするととても速いので半減
         }
     }
 }
