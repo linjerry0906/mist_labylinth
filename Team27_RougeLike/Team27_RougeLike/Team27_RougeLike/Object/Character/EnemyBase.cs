@@ -15,6 +15,7 @@ namespace Team27_RougeLike.Object
     {
         protected EnemyRange range;
         protected Status status;
+        protected int exp;
         protected string aiName;
 
         /// <summary>
@@ -25,11 +26,12 @@ namespace Team27_RougeLike.Object
         /// <param name="aiName"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager)
+        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp)
             : base(collision, textureName, characterManager)
         {
             this.status = status;
             this.aiName = aiName;
+            this.exp = exp;
         }
 
 
@@ -41,11 +43,12 @@ namespace Team27_RougeLike.Object
         /// <param name="manager"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager)
+        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager, int exp)
          : base(collision, textureName, characterManager)
         {
             tag = "Enemy";
             this.status = status;
+            this.exp = exp;
             aiManager = manager;
             motion = new Motion();
             for (int i = 0; i < 6; i++)
@@ -66,17 +69,17 @@ namespace Team27_RougeLike.Object
         }
         public override void Attack()
         {
-            var angle = Angle.CheckAngleVector(characterManager.GetPlayer().Position, collision.Position);
+            var angle = Angle.CheckAngleVector(characterManager.GetPlayer().GetPosition, collision.Position);
             switch (aiManager.ToString())
             {
                 case "Team27_RougeLike.Object.AI.AiManager_Fool":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower,angle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower, angle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
                     characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + angle, 2), 100, tag, status.BasePower, angle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                   characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower,angle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower, angle));
                     break;
                 default:
                     break;
@@ -104,7 +107,8 @@ namespace Team27_RougeLike.Object
                 new CollisionSphere(position, collision.Radius),
                 SwitchAi(),
                 textureName,
-                characterManager
+                characterManager,
+                exp
                 );
         }
         private BaseAiManager SwitchAi()
@@ -141,16 +145,14 @@ namespace Team27_RougeLike.Object
             var damage = num - status.BaseArmor;
             if (damage > 0)
             {
-            status.Health -= damage;
+                status.Health -= damage;
             }
             velocity += nockback;
         }
-
         public override bool IsDead()
         {
             return status.Health <= 0;
         }
-
         public override void Move()
         {
             if (Math.Abs(velocity.X) < 0.01f)
@@ -166,6 +168,14 @@ namespace Team27_RougeLike.Object
             velocity -= v * 0.1f;
 
             collision.Force(velocity, status.Movespeed);//移動
+        }
+        public Status GetStatus()
+        {
+            return status;
+        }
+        public int GetExp()
+        {
+            return exp;
         }
     }
 }

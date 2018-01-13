@@ -214,6 +214,15 @@
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\map_block_0.xml</Output>
       <Time>2018-01-11T13:01:08.7302432+09:00</Time>
     </Item>
+    <Item>
+      <Source>Texture\fog.png</Source>
+      <Name>Texture\fog</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\fog.xnb</Output>
+      <Time>2018-01-13T14:16:09.2668934+09:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{2E0FBB49-9D3A-4D29-B7F5-8325684AF7CD}</ContentProjectGUID>

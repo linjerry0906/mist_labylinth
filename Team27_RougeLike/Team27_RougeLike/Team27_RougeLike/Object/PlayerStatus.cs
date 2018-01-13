@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using Team27_RougeLike.Object.Item;
 using Team27_RougeLike.Device;
-
+using Team27_RougeLike.UI;
 namespace Team27_RougeLike.Object
 {
     class PlayerStatus
@@ -12,7 +13,10 @@ namespace Team27_RougeLike.Object
         private Status status;
         private Status baseStatus;
         private Inventory inventory;
-
+        private ExpLoader loader;
+        private Dictionary<int, int> expData;
+        private GameDevice gamedevice;
+        private int exp;
         private int addPower;
         private int addDefence;
         private float weight;
@@ -20,6 +24,9 @@ namespace Team27_RougeLike.Object
         public PlayerStatus(Status status, GameDevice gameDevice)
         {
             this.baseStatus = status;
+            this.gamedevice = gameDevice;
+            loader = new ExpLoader();
+            expData = loader.LoadExp();
             inventory = new Inventory(gameDevice);
         }
 
@@ -76,6 +83,19 @@ namespace Team27_RougeLike.Object
         public float GetWeight()
         {
             return weight;
+        }
+
+        public void AddExp(int exp)
+        {
+            this.exp += exp;
+            if(expData[GetLevel()] < this.exp)
+            {
+                this.exp -= expData[GetLevel()];
+                status.LevelUp();
+                //ui.LogUI.AddLog("LevelUp");
+                //ui.LogUI.AddLog("Player Level is "+ status.Level);
+
+            }
         }
 
         public Inventory GetInventory()

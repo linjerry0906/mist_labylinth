@@ -117,7 +117,7 @@ namespace Team27_RougeLike.Scene
 
             #region カメラ初期化
             angle = 0;
-            gameDevice.MainProjector.Initialize(characterManager.GetPlayer().Position);       //カメラを初期化
+            gameDevice.MainProjector.Initialize(characterManager.GetPlayer().GetPosition);       //カメラを初期化
             #endregion
 
         }
@@ -168,7 +168,7 @@ namespace Team27_RougeLike.Scene
 
             //マップ処理
             map.MapCollision(gameDevice.Renderer.MainProjector);
-            map.FocusCenter(characterManager.GetPlayer().Position);
+            map.FocusCenter(characterManager.GetPlayer().GetPosition);
             map.Update();
             map.MapCollision(characterManager.GetPlayer());
             map.MapCollision(characterManager.GetCharacters());
