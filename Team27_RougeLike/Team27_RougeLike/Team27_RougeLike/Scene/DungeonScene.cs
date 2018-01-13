@@ -51,12 +51,11 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
-            background.Draw(renderer.FogManager.CurrentColor());
-
             map.Draw();                 //Mapの描画
             mapItemManager.Draw();      //アイテムの描画
             characterManager.Draw();
             pManager.Draw();
+            background.Draw(renderer.FogManager.CurrentColor());
             map.DrawMiniMap();          //MiniMapの描画
             DrawUI();                   //UIを描画
         }
@@ -275,7 +274,6 @@ namespace Team27_RougeLike.Scene
 
             //死んだ時
             //gameManager.PlayerItem.RemoveAll();
-            //gameManager.Save();
 
             //時間になったら村に戻される
             if (stageManager.IsTime())

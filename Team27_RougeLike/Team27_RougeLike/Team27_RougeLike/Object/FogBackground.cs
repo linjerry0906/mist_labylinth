@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using Team27_RougeLike.Device;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Team27_RougeLike.Object
 {
@@ -16,6 +17,7 @@ namespace Team27_RougeLike.Object
     {
         private Renderer renderer;
         private float offset = Def.WindowDef.WINDOW_WIDTH;
+        private float angle;
 
         private Vector2 position;
 
@@ -30,7 +32,8 @@ namespace Team27_RougeLike.Object
         /// </summary>
         public void Update()
         {
-            position.X -= 0.7f;                   //ずらす
+            position.X -= 1.0f;                   //ずらす
+
             if (position.X < -offset)              //大きさを超えたら元に戻す
                 position.X = 0;
         }
@@ -41,8 +44,10 @@ namespace Team27_RougeLike.Object
         public void Draw(Color color)
         {
             renderer.Begin();
-            renderer.DrawTexture("fog", position, new Vector2(4, 4), color, 0.1f);
-            renderer.DrawTexture("fog", position + new Vector2(offset, 0), new Vector2(4, 4), color, 0.1f);
+            renderer.ChangeBlendState(BlendState.Additive);
+            renderer.DrawTexture("fog", position, new Vector2(4, 4), color, 0.2f);
+            renderer.DrawTexture("fog", position + new Vector2(offset, 0), new Vector2(4, 4), color, 0.2f);
+            renderer.ChangeBlendState(BlendState.AlphaBlend);
             renderer.End();
         }
     }

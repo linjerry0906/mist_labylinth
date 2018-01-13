@@ -29,8 +29,9 @@ namespace Team27_RougeLike.Device
         private Projector miniMapProjector;     // ミニマップのプロジェクター
 
         private static Vector3 dirLight0 = new Vector3(0.6f, -0.5f, 0.3f);      //DirectionLight0 (highLight用)
+        private static Vector3 dif0 = new Vector3(0.95f, 0.9f, 0.9f);            //DiffuseColor1
         private static Vector3 dirLight1 = new Vector3(-0.3f, -0.3f, -0.5f);    //DirectionLight1
-        private static Vector3 dif1 = new Vector3(0.4f, 0.4f, 0.55f);           //DiffuseColor1
+        private static Vector3 dif1 = new Vector3(0.4f, 0.4f, 0.45f);            //DiffuseColor1
 
         // Dictionaryで複数の画像を管理
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
@@ -53,7 +54,7 @@ namespace Team27_RougeLike.Device
             mainProjector = new Projector();
             miniMapProjector = new Projector(
                 new Viewport(new Rectangle(Def.WindowDef.WINDOW_WIDTH - 300, 100, 200, 200)),   //MiniMapの位置と大きさ設定
-                new Vector3(0, 50, 0.001f));
+                new Vector3(0, 100, 0.001f));
             currentProjector = mainProjector;
 
             DefaultRenderSetting();
@@ -268,7 +269,8 @@ namespace Team27_RougeLike.Device
                     //二つの直行光で立体感を調整
                     e.LightingEnabled = true;
                     e.DirectionalLight0.Enabled = true;
-                    e.DirectionalLight0.Direction = dirLight0; 
+                    e.DirectionalLight0.Direction = dirLight0;
+                    e.DirectionalLight0.DiffuseColor = dif0;
                     e.DirectionalLight1.Enabled = true;
                     e.DirectionalLight1.Direction = dirLight1;
                     e.DirectionalLight1.DiffuseColor = dif1;
@@ -300,6 +302,15 @@ namespace Team27_RougeLike.Device
             graphicsDevice.DepthStencilState = DepthStencilState.Default;           //DepthStencil有効
             graphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;  //カーリング
             graphicsDevice.BlendState = BlendState.AlphaBlend;                      //アルファブレンド
+        }
+
+        /// <summary>
+        /// BlendStateを変える
+        /// </summary>
+        /// <param name="state">BlendState</param>
+        public void ChangeBlendState(BlendState state)
+        {
+            graphicsDevice.BlendState = state;
         }
 
         /// <summary>
