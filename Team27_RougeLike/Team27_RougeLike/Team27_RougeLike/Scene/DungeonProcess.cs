@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Team27_RougeLike.Device;
 
 namespace Team27_RougeLike.Scene
 {
@@ -52,6 +53,15 @@ namespace Team27_RougeLike.Scene
         public bool HasKey(int dungeonNum)
         {
             return dungeonProcess.ContainsKey(dungeonNum);
+        }
+
+        /// <summary>
+        /// セーブから読み込む
+        /// </summary>
+        /// <param name="save">セーブデータ</param>
+        public void LoadSaveData(SaveData save)
+        {
+            dungeonProcess = save.GetClearDungen();
         }
     }
 }

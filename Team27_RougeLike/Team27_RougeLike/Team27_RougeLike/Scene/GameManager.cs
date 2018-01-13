@@ -74,7 +74,8 @@ namespace Team27_RougeLike.Scene
                 return;
             }
 
-            playerItem.LoadFromFile(saveData);   //Playerアイテム復元
+            playerItem.LoadFromFile(saveData);       //Playerアイテム復元
+            dungeonProcess.LoadSaveData(saveData);   //攻略情報復元
         }
 
         /// <summary>
