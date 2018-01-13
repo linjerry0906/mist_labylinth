@@ -375,6 +375,17 @@ namespace Team27_RougeLike.Object.Item
             return true;
         }
 
+        public bool MoveDepositItemToBag(ItemManager itemManager, int id)
+        {
+            if (!itemDepository.ContainsKey(id) ||
+                itemDepository[id] <= 0)
+                return false;
+
+            Item item = itemManager.GetConsuptionItem(id);
+            itemDepository[id]--;
+            bag.Add(item);
+            return true;
+        }
 
         /// <summary>
         /// 倉庫にある装備
