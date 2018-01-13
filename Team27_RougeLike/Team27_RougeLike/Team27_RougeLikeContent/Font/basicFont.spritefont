@@ -251,6 +251,11 @@ with.
 
       <!-- こ -->
       <CharacterRegion>
+        <Start>庫</Start>
+        <End>庫</End>
+      </CharacterRegion>
+      
+      <CharacterRegion>
         <Start>籠</Start>
         <End>籠</End>
       </CharacterRegion>
@@ -334,6 +339,11 @@ with.
       </CharacterRegion>
       
       <CharacterRegion>
+        <Start>消</Start>
+        <End>消</End>
+      </CharacterRegion>
+      
+      <CharacterRegion>
         <Start>小</Start>
         <End>小</End>
       </CharacterRegion>
@@ -349,6 +359,12 @@ with.
       <CharacterRegion>
         <Start>捨</Start>
         <End>捨</End>
+      </CharacterRegion>
+
+      <!-- すう -->
+      <CharacterRegion>
+        <Start>数</Start>
+        <End>数</End>
       </CharacterRegion>
       
       <!-- せ -->
@@ -374,6 +390,11 @@ with.
       <CharacterRegion>
         <Start>装</Start>
         <End>装</End>
+      </CharacterRegion>
+      
+      <CharacterRegion>
+        <Start>倉</Start>
+        <End>倉</End>
       </CharacterRegion>
 
       <!-- た -->
@@ -496,9 +517,20 @@ with.
       </CharacterRegion>
       <!-- ひ -->
       <CharacterRegion>
+        <Start>費</Start>
+        <End>費</End>
+      </CharacterRegion>
+      <CharacterRegion>
         <Start>左</Start>
         <End>左</End>
       </CharacterRegion>
+      
+      <!-- ひん -->
+      <CharacterRegion>
+        <Start>品</Start>
+        <End>品</End>
+      </CharacterRegion>
+      
       <!-- び -->
       <CharacterRegion>
         <Start>備</Start>

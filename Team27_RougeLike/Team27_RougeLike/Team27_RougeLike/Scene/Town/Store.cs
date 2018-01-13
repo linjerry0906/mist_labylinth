@@ -250,8 +250,6 @@ namespace Team27_RougeLike.Scene.Town
             {
                 if (input.IsLeftClick())
                 {
-                    //プレイヤーにお金が入る処理
-                    playerInventory.SetBag(leftItems);
                     playerInventory.AddMoney(totalPrice);
                     totalPrice = 0;
                     rightItems = new List<Item>();
@@ -270,6 +268,7 @@ namespace Team27_RougeLike.Scene.Town
                     if (input.IsLeftClick())
                     {
                         AddRightList(leftItems[i]);
+                        playerInventory.RemoveItem(i);
                         RemoveLeftList(i);
                     }
                 }
@@ -285,6 +284,7 @@ namespace Team27_RougeLike.Scene.Town
                     if (input.IsLeftClick())
                     {
                         AddLeftList(rightItems[i]);
+                        playerInventory.AddItem(rightItems[i]);
                         RemoveRightList(i);
                     }
                 }
@@ -292,7 +292,7 @@ namespace Team27_RougeLike.Scene.Town
         }
 
         //左のリストにアイテムを追加する。
-        public void AddLeftList(Item item)
+        private void AddLeftList(Item item)
         {
             leftItems.Add(item);
             Vector2 position = new Vector2(64, 96 + 24 * (leftButtons.Count + 1));
@@ -303,7 +303,7 @@ namespace Team27_RougeLike.Scene.Town
         }
 
         //左のリストから指定されたアイテムを消す。
-        public void RemoveLeftList(int key)
+        private void RemoveLeftList(int key)
         {
             leftItems.Remove(leftItems[key]);
             leftButtons.Remove(leftButtons[key]);
@@ -321,7 +321,7 @@ namespace Team27_RougeLike.Scene.Town
         }
 
         //右のリストにアイテムを追加する。
-        public void AddRightList(Item item)
+        private void AddRightList(Item item)
         {
             rightItems.Add(item);
             Vector2 position = new Vector2(1080 / 2 + 64, 96 + 24 * (rightButtons.Count + 1));
@@ -333,7 +333,7 @@ namespace Team27_RougeLike.Scene.Town
         }
 
         //右リストから指定されたアイテムを消す。
-        public void RemoveRightList(int key)
+        private void RemoveRightList(int key)
         {
             rightItems.Remove(rightItems[key]);
             rightButtons.Remove(rightButtons[key]);
