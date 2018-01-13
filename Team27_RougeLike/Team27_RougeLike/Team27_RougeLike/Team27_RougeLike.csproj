@@ -121,6 +121,7 @@
     <Compile Include="Object\PlayerStatusLoader.cs" />
     <Compile Include="Scene\DungeonProcess.cs" />
     <Compile Include="Scene\LoadBossScene.cs" />
+    <Compile Include="Scene\Town\Depot.cs" />
     <Compile Include="Scene\Town\DungeonSelect.cs" />
     <Compile Include="Scene\Town\ItemShop.cs" />
     <Compile Include="Scene\Load.cs" />
