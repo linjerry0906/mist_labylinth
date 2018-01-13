@@ -28,6 +28,7 @@ namespace Team27_RougeLike.Map
         private Point currentPosition;      //今のフレームの描画中心座標
         private Point entryPoint;           //入口
         private Point exitPoint;            //出口
+        private List<Point> bossPoint;
         private int radius = 16;            //描画半径
 
         private bool drawExit;              //出口の印を描画するか
@@ -46,6 +47,7 @@ namespace Team27_RougeLike.Map
             space = new List<Point>();
             mapBlocks = new List<Cube>();
             mapBlocksToDraw = new List<Cube>();
+            bossPoint = new List<Point>();
 
             currentPosition = new Point(0, 0);      //描画中心
             previousPosition = currentPosition;     //描画中心（前フレーム）
@@ -96,6 +98,16 @@ namespace Team27_RougeLike.Map
                             break;
                         case (int)MapDef.BlockDef.Exit:
                             exitPoint = new Point(x, y);
+                            c = new Cube(
+                                new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
+                                new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
+                                gameDevice);
+                            c.SetTexture(blockDef[MapDef.BlockDef.Space]);
+                            mapBlocks.Add(c);
+                            break;
+                        case (int)MapDef.BlockDef.Boss:
+                            Point bossP = new Point(x, y);
+                            bossPoint.Add(bossP);
                             c = new Cube(
                                 new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
@@ -216,6 +228,8 @@ namespace Team27_RougeLike.Map
             exitEffect = null;
             mapBlocks.Clear();
             mapBlocksToDraw.Clear();
+            bossPoint.Clear();
+            space.Clear();
         }
 
         /// <summary>
@@ -371,6 +385,21 @@ namespace Team27_RougeLike.Map
                 spaceCell.X * MapDef.TILE_SIZE,
                 MapDef.TILE_SIZE / 2.0f,
                 spaceCell.Y * MapDef.TILE_SIZE);
+            return position;
+        }
+
+        /// <summary>
+        /// Bossの設置位置
+        /// </summary>
+        /// <param name="bossIndex"></param>
+        /// <returns></returns>
+        public Vector3 BossPoint(int bossIndex)
+        {
+            Point p = bossPoint[bossIndex];
+            Vector3 position = new Vector3(
+                p.X * MapDef.TILE_SIZE,
+                MapDef.TILE_SIZE / 2.0f,
+                p.Y * MapDef.TILE_SIZE);
             return position;
         }
     }

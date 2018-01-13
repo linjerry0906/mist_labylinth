@@ -63,5 +63,13 @@ namespace Team27_RougeLike.Map
 
             return settings[index];
         }
+
+        /// <summary>
+        /// Bossの設定を取得
+        /// </summary>
+        public EnemySetting BossSetting
+        {
+            get { return settings[0]; }
+        }
     }
 }

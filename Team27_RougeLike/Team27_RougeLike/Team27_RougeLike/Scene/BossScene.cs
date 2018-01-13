@@ -100,11 +100,6 @@ namespace Team27_RougeLike.Scene
                MapDef.TILE_SIZE,
                map.EntryPoint.Y * MapDef.TILE_SIZE);
 
-            Vector3 bossPosition = new Vector3(
-               map.EndPoint.X * MapDef.TILE_SIZE,
-               MapDef.TILE_SIZE,
-               map.EndPoint.Y * MapDef.TILE_SIZE);
-
             pManager = new ParticleManager(gameDevice);
             pManager.Initialize();
 
@@ -114,13 +109,33 @@ namespace Team27_RougeLike.Scene
 
             characterManager.Initialize(ui, mapItemManager);
             characterManager.AddPlayer(position, pManager,gameManager);
-            characterManager.AddCharacter(characterManager.Enemys()[4].Clone(bossPosition));
+            //characterManager.AddCharacter(characterManager.Enemys()[4].Clone(bossPosition));
+
+            GeneratBoss();
 
             #region カメラ初期化
             angle = 0;
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().GetPosition);       //カメラを初期化
             #endregion
 
+        }
+
+        /// <summary>
+        /// 配置よりボスを生成
+        /// </summary>
+        private void GeneratBoss()
+        {
+            EnemySetting setting = gameManager.EnemySetting.BossSetting;
+
+            for (int i = 0; i < setting.ids.Length; i++)
+            {
+                int id = setting.ids[i];
+                if (id < 0)
+                    continue;
+
+                Vector3 bossPosition = map.BossPoint(i);
+                characterManager.AddCharacter(characterManager.Enemys()[id].Clone(bossPosition));
+            }
         }
 
         public bool IsEnd()
@@ -176,7 +191,10 @@ namespace Team27_RougeLike.Scene
 
             //アイテム処理
             mapItemManager.ItemCollision(characterManager.GetPlayer(), ui);
+        }
 
+        private void CheckEnd()
+        {
             //Debug 村シーンへ
             if (input.GetKeyTrigger(Keys.T))
             {
