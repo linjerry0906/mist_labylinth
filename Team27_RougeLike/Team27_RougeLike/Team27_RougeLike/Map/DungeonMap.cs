@@ -30,6 +30,9 @@ namespace Team27_RougeLike.Map
         private Point exitPoint;            //出口
         private int radius = 16;            //描画半径
 
+        private bool drawExit;              //出口の印を描画するか
+        private EndPoint exitEffect;        //出口の印
+
         /// <summary>
         /// マップ実体のコンストラクタ
         /// </summary>
@@ -70,7 +73,6 @@ namespace Team27_RougeLike.Map
                                 new Vector3(x * MapDef.TILE_SIZE, MapDef.TILE_SIZE, y * MapDef.TILE_SIZE),
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE * 2, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
-                            //c.SetColor(new Color(100, 120, 60));
                             c.SetTexture(blockDef[MapDef.BlockDef.Wall]);
                             mapBlocks.Add(c);
                             break;
@@ -79,7 +81,6 @@ namespace Team27_RougeLike.Map
                                 new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
-                            //c.SetColor(new Color(100, 100, 100));
                             c.SetTexture(blockDef[MapDef.BlockDef.Space]);
                             mapBlocks.Add(c);
                             space.Add(new Point(x, y));
@@ -90,7 +91,6 @@ namespace Team27_RougeLike.Map
                                 new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
-                            //c.SetColor(new Color(0, 60, 60));
                             c.SetTexture(blockDef[MapDef.BlockDef.Space]);
                             mapBlocks.Add(c);
                             break;
@@ -100,13 +100,19 @@ namespace Team27_RougeLike.Map
                                 new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
-                            c.SetColor(new Color(160, 160, 160));
                             c.SetTexture(blockDef[MapDef.BlockDef.Space]);
                             mapBlocks.Add(c);
                             break;
                     }
                 }
             }
+
+            Vector3 endPos = new Vector3(
+                    exitPoint.X * MapDef.TILE_SIZE,
+                    MapDef.TILE_SIZE / 2 + 0.01f,
+                    exitPoint.Y * MapDef.TILE_SIZE);
+            exitEffect = new EndPoint(endPos, gameDevice);
+            drawExit = true;
         }
 
         /// <summary>
@@ -158,6 +164,7 @@ namespace Team27_RougeLike.Map
         /// </summary>
         public void Update()
         {
+            exitEffect.Update();
             if (previousPosition == currentPosition)    //描画領域変わってなかったら更新する必要がない
                 return;
 
@@ -206,6 +213,7 @@ namespace Team27_RougeLike.Map
         public void Clear()
         {
             mapChip = null;
+            exitEffect = null;
             mapBlocks.Clear();
             mapBlocksToDraw.Clear();
         }
@@ -250,7 +258,7 @@ namespace Team27_RougeLike.Map
             {
                 if (mapchipZ < 0 || mapchipZ > mapChip.GetLength(0) - 1)         //エラー対策
                     continue;
-                for (int mapchipX = x; mapchipX <= x +  collisionRange; mapchipX++)
+                for (int mapchipX = x; mapchipX <= x + collisionRange; mapchipX++)
                 {
                     if (mapchipX < 0 || mapchipX > mapChip.GetLength(1) - 1)     //エラー対策
                         continue;
@@ -317,6 +325,9 @@ namespace Team27_RougeLike.Map
             {
                 c.Draw();
             }
+
+            if(drawExit)
+                exitEffect.Draw();
         }
 
         /// <summary>
@@ -329,7 +340,18 @@ namespace Team27_RougeLike.Map
             {
                 c.DrawMiniMap();
             }
+            if(drawExit)
+                exitEffect.Draw();
             gameDevice.Renderer.RenderMainProjector();      //メインプロジェクターに戻す
+        }
+
+        /// <summary>
+        /// 終点描画するかを設定
+        /// </summary>
+        /// <param name="toDraw">trueは描画</param>
+        public void SwitchDrawExit(bool toDraw)
+        {
+            drawExit = toDraw;
         }
 
         /// <summary>
@@ -346,8 +368,8 @@ namespace Team27_RougeLike.Map
             space.RemoveAt(index);
 
             Vector3 position = new Vector3(
-                spaceCell.X * MapDef.TILE_SIZE, 
-                MapDef.TILE_SIZE / 2.0f, 
+                spaceCell.X * MapDef.TILE_SIZE,
+                MapDef.TILE_SIZE / 2.0f,
                 spaceCell.Y * MapDef.TILE_SIZE);
             return position;
         }

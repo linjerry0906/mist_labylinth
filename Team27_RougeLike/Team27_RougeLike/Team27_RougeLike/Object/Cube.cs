@@ -45,7 +45,7 @@ namespace Team27_RougeLike.Object
         /// </summary>
         public void DrawMiniMap()
         {
-            renderer.DrawModel("map_block", textureName, position, size * 2, color, 0.7f);
+            renderer.DrawModel("magic_circle", textureName, position, size * 2, color, 0.7f);
         }
 
         /// <summary>

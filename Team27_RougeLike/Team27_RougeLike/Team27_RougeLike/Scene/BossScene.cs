@@ -87,6 +87,7 @@ namespace Team27_RougeLike.Scene
             }
 
             map.Initialize(gameManager.BlockStyle);                       //マップを初期化
+            map.SwitchDrawExit(false);
             #endregion
 
             #region MapItemの初期化処理
