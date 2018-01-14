@@ -143,7 +143,7 @@ namespace Team27_RougeLike.Scene.Town
             buttonWindow.Update();
             messegeWindow.Update();
 
-            if (isRightListFull || isInventoryFullMessege)
+            if (isRightListFull || isInventoryFullMessege  || isNoMoney)
             {
                 if (!messegeWindow.CurrentState())
                 {
@@ -175,6 +175,10 @@ namespace Team27_RougeLike.Scene.Town
 
             playerInventory.BagItemCount(ref currentNum, ref maxNum);
 
+            isRightListFull = false;
+            isNoMoney = false;
+            isInventoryFullMessege = false;
+
             //アイテムを買う処理(お金が足りるか、バックにはいるかチェック)
             if (button.IsClick(mousePos))
             {
@@ -195,15 +199,15 @@ namespace Team27_RougeLike.Scene.Town
                             rightWindows = new List<Window>();
                         }
                     }
+                    else
+                    {
+                        isNoMoney = true;
+                    }
                 }
                 else
                 {
                     isInventoryFullMessege = true;
                 }
-            }
-            else
-            {
-                isInventoryFullMessege = false;
             }
 
             for (int i = 0; i < leftButtons.Count; i++)
@@ -221,10 +225,6 @@ namespace Team27_RougeLike.Scene.Town
                     {
                         AddRightList(leftItems[i]);
                     }
-                }
-                else
-                {
-                    isRightListFull = false;
                 }
             }
 
@@ -360,8 +360,8 @@ namespace Team27_RougeLike.Scene.Town
 
             if (modeType == ModeType.Buy)
             {
-                renderer.DrawString("バッグ(" + currentNum + "/" + maxNum + ")", new Vector2(1080 - 320, 64), new Vector2(1, 1), Color.White);
-                renderer.DrawString("所持金" + playerInventory.CurrentMoney(), new Vector2(1080 - 200, 64), new Vector2(1, 1), Color.White);
+                renderer.DrawString("バッグ(" + currentNum + "/" + maxNum + ")", new Vector2(1080 - 240, 64), new Vector2(1, 1), Color.White);
+                renderer.DrawString("所持金 : " + playerInventory.CurrentMoney(), new Vector2(1080 / 2 + 120, 720 - 128 + 32), new Vector2(1, 1), Color.White);
             }
 
             renderer.DrawString("アイテム名", new Vector2(64, 64 + 32), new Vector2(1, 1), Color.White);
@@ -449,7 +449,7 @@ namespace Team27_RougeLike.Scene.Town
                 renderer.DrawString("所持金が足りません。", new Vector2(320, 720 / 2), new Vector2(2, 2), Color.Red);
             }
 
-            renderer.DrawString("合計金額 : " + totalPrice, new Vector2(1080 - 320, 720 - 128 + 32), new Vector2(1, 1), Color.White);
+            renderer.DrawString("合計金額 : " + totalPrice, new Vector2(1080 - 240, 720 - 128 + 32), new Vector2(1, 1), Color.White);
         }
     }
 }
