@@ -452,6 +452,25 @@ namespace Team27_RougeLike.Object.Item
             return itemDepository;
         }
 
+        /// <summary>
+        /// 倉庫アイテムを削除処理
+        /// </summary>
+        /// <param name="itemID">アイテムのID</param>
+        /// <param name="amount">削除する量</param>
+        public void RemoveDepositoryItem(int itemID, int amount)
+        {
+            if (!itemDepository.ContainsKey(itemID))
+                return;
+
+            if (itemDepository[itemID] < amount)
+                return;
+
+            itemDepository[itemID] -= amount;
+
+            if (itemDepository[itemID] <= 0)
+                itemDepository.Remove(itemID);
+        }
+
         #endregion
 
         #region 金関連
