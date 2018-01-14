@@ -27,7 +27,7 @@ namespace Team27_RougeLike.Scene
                 {"bat" ,path},
                 {"slash" ,path},
                 {"fog" ,path},
-                {"dungeon_image1" ,path},
+                {"dungeon_image_tutorial" ,path},
                 {"dungeon_image2" ,path},
                 {"dungeon_image_thomb" ,path},
                 {"dungeon_image_ice" ,path},

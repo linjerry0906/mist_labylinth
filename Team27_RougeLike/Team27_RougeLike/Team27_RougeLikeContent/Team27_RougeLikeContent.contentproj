@@ -183,11 +183,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Texture\dungeon_image1.png">
-      <Name>dungeon_image1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Texture\dungeon_image2.png">
       <Name>dungeon_image2</Name>
       <Importer>TextureImporter</Importer>
@@ -258,6 +253,13 @@
     </Compile>
     <Compile Include="Texture\magic_out.png">
       <Name>magic_out</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Texture\dungeon_image_tutorial.png">
+      <Name>dungeon_image_tutorial</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
