@@ -383,6 +383,9 @@ namespace Team27_RougeLike.Object.Item
 
             Item item = itemManager.GetConsuptionItem(id);
             itemDepository[id]--;
+            if (itemDepository[id] <= 0)
+                itemDepository.Remove(id);
+
             bag.Add(item);
             return true;
         }
