@@ -130,6 +130,7 @@
     <Compile Include="Scene\Town\StageInfoLoader.cs" />
     <Compile Include="Scene\Town\Store.cs" />
     <Compile Include="Scene\Town\TownInfoLoader.cs" />
+    <Compile Include="Scene\Town\UpgradeStore.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\DungeonHintUI.cs" />
     <Compile Include="UI\DungeonLog.cs" />
