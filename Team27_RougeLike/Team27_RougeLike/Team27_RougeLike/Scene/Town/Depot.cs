@@ -379,16 +379,16 @@ namespace Team27_RougeLike.Scene
                     if (rightButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isBagMax)
                     {
                         //inventory.AddItem(itemManager.GetConsuptionItem(consumptions[rightItems[i].GetItemID()]));
-                        inventory.MoveDepositItemToBag(itemManager, consumptions[rightItems[i].GetItemID()]);
-                        AddLeftList(rightItems[i]);
-                        if (consumptions[rightItems[i].GetItemID()] - 1 <= 0)
+                        inventory.MoveDepositItemToBag(itemManager, rightItems[i].GetItemID());
+                        AddLeftList(playerItems[playerItems.Count - 1]);
+                        if (consumptions[rightItems[i].GetItemID()] <= 0)
                         {
-                            consumptions.Remove(rightItems[i].GetItemID());
+                            //consumptions.Remove(rightItems[i].GetItemID());
                             RemoveRightList(i);
                         }
                         else
                         {
-                            consumptions[rightItems[i].GetItemID()] -= 1;
+                            //consumptions[rightItems[i].GetItemID()] -= 1;
                         }
                     }
                 }
