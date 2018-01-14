@@ -78,10 +78,10 @@ namespace Team27_RougeLike.Scene
         {
             endFlag = false;                        //終了フラグ初期化
             nextScene = SceneType.LoadMap;
-            pManager.Initialize();
             if (lastScene == SceneType.Pause)       //Pauseから来た場合は以下のもの初期化しない
                 return;
 
+            pManager.Initialize();
             gameDevice.MainProjector.SetRelativePosition(new Vector3(0, 6, 12f));
 
             #region Map初期化
@@ -226,7 +226,6 @@ namespace Team27_RougeLike.Scene
 
             //アイテム処理
             mapItemManager.ItemCollision(characterManager.GetPlayer(), ui);
-
 
             stageManager.Update();              //時間やFog処理の更新
 

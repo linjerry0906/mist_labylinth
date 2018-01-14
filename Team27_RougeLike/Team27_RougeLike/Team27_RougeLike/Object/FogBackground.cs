@@ -17,14 +17,15 @@ namespace Team27_RougeLike.Object
     {
         private Renderer renderer;
         private float offset = Def.WindowDef.WINDOW_WIDTH;
-        private float angle;
 
         private Vector2 position;
+        private Vector2 position2;
 
         public FogBackground(GameDevice gameDevice)
         {
             renderer = gameDevice.Renderer;
             position = Vector2.Zero;
+            position2 = Vector2.Zero;
         }
 
         /// <summary>
@@ -32,10 +33,14 @@ namespace Team27_RougeLike.Object
         /// </summary>
         public void Update()
         {
-            position.X -= 1.0f;                   //ずらす
+            position.X -= 0.5f;                   //ずらす
+            position2.X += 1.2f;
 
             if (position.X < -offset)              //大きさを超えたら元に戻す
                 position.X = 0;
+
+            if (position2.X > offset)              //大きさを超えたら元に戻す
+                position2.X = 0;
         }
 
         /// <summary>
@@ -47,6 +52,8 @@ namespace Team27_RougeLike.Object
             renderer.ChangeBlendState(BlendState.Additive);
             renderer.DrawTexture("fog", position, new Vector2(4, 4), color, 0.2f);
             renderer.DrawTexture("fog", position + new Vector2(offset, 0), new Vector2(4, 4), color, 0.2f);
+            renderer.DrawTexture("fog", position2, new Vector2(4, 4), color, 0.15f);
+            renderer.DrawTexture("fog", position2 + new Vector2(-offset, 0), new Vector2(4, 4), color, 0.15f);
             renderer.ChangeBlendState(BlendState.AlphaBlend);
             renderer.End();
         }

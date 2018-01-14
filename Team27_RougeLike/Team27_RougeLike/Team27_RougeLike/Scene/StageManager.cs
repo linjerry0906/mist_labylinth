@@ -28,10 +28,10 @@ namespace Team27_RougeLike.Scene
         private int stageSize;          //今のサイズ
         private int expandRate;         //拡大の比率
 
-        private static readonly float FAREST_FOG = 200;
-        private static readonly float NEAREST_FOG = -70;
+        private static readonly float FAREST_FOG = 600;
+        private static readonly float NEAREST_FOG = 400;
         private static readonly float FOG_RANGE = 200;
-        private float nearFog;
+        private float farFog;
 
         public StageManager(GameDevice gameDevice)
         {
@@ -45,7 +45,7 @@ namespace Team27_RougeLike.Scene
             bossRange = 5;
             stageSize = 20;
 
-            nearFog = FAREST_FOG;
+            farFog = FAREST_FOG;
         }
 
         /// <summary>
@@ -83,9 +83,9 @@ namespace Team27_RougeLike.Scene
             limitTime.Update();
 
             //Fog
-            nearFog = limitTime.Rate() * (FAREST_FOG - NEAREST_FOG);
-            fogManager.SetNear(nearFog - FOG_RANGE);
-            fogManager.SetFar(nearFog);
+            farFog = (limitTime.Rate() + 0.2f) * (FAREST_FOG - NEAREST_FOG);
+            fogManager.SetNear(farFog - FOG_RANGE);
+            fogManager.SetFar(farFog);
             renderer.StartFog();
         }
 
@@ -94,12 +94,12 @@ namespace Team27_RougeLike.Scene
         /// </summary>
         public void RemoveFog()
         {
-            if (nearFog >= FAREST_FOG)
+            if (farFog >= FAREST_FOG)
                 return;
 
-            nearFog += 1;
-            fogManager.SetNear(nearFog);
-            fogManager.SetFar(nearFog + FOG_RANGE);
+            farFog += 1;
+            fogManager.SetNear(farFog);
+            fogManager.SetFar(farFog + FOG_RANGE);
             renderer.StartFog();
         }
 
