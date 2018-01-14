@@ -280,7 +280,7 @@ namespace Team27_RougeLike.Scene.Town
             {
                 if (id == item.GetItemID())
                 {
-                    //Inventoryのbagから指定されたアイテムを削除するメソッド
+                    inventory.RemoveItem(inventory.BagItemIndex(item));
                     playerItems.Remove(item);
                     num--;
                     if (num <= 0)
@@ -297,12 +297,12 @@ namespace Team27_RougeLike.Scene.Town
                     {
                         if (depotConsumptions[id] - 1 <= 0)
                         {
-                            //InventoryのitemDepositoryから指定されたアイテムを削除するメソッド
+                            inventory.RemoveDepositoryItem(id, 1);
                             depotConsumptions.Remove(id);
                         }
                         else
                         {
-                            //InventoryのitemDepositoryから指定されたアイテムを削除するメソッド
+                            inventory.RemoveDepositoryItem(id, 1);
                             depotConsumptions[id]--;
                         }
                         num--;
