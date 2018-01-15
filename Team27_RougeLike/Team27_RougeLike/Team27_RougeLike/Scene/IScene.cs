@@ -27,7 +27,7 @@ namespace Team27_RougeLike.Scene
         void Initialize(SceneType scene);
         void Update(GameTime gameTime);
         void Draw();
-        void Shutdown();
+        void ShutDown();
         bool IsEnd();
         SceneType Next();
     }

@@ -62,7 +62,7 @@ namespace Team27_RougeLike.Scene
             return SceneType.Dungeon;
         }
 
-        public void Shutdown()
+        public void ShutDown()
         {
             mapGenerator = null;            //マップ生成者のメモリーを解放
         }

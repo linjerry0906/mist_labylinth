@@ -73,7 +73,7 @@ namespace Team27_RougeLike.Scene
             return nextScene;
         }
 
-        public void Shutdown()
+        public void ShutDown()
         {
         }
 

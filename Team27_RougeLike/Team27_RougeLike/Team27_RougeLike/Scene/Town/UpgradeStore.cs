@@ -369,7 +369,7 @@ namespace Team27_RougeLike.Scene.Town
 
         }
 
-        public void Shutdown()
+        public void ShutDown()
         {
 
         }

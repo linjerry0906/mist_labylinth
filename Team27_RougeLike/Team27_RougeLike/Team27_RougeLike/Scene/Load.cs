@@ -114,7 +114,7 @@ namespace Team27_RougeLike.Scene
         public void Draw()
         {
             renderer.Begin();
-            
+            renderer.DrawTexture("fade", Vector2.Zero, new Vector2(Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT));
             renderer.DrawString("ロード中", Vector2.Zero, Color.Black, new Vector2(1, 1));
 
             //読み込んでいる数を取得
@@ -132,7 +132,7 @@ namespace Team27_RougeLike.Scene
 
         }
 
-        public void Shutdown()
+        public void ShutDown()
         {
 
         }

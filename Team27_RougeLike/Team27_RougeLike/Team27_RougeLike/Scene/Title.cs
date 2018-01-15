@@ -43,7 +43,7 @@ namespace Team27_RougeLike.Scene
             return SceneType.Town;
         }
 
-        public void Shutdown()
+        public void ShutDown()
         {
         }
 

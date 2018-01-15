@@ -30,7 +30,7 @@ namespace Team27_RougeLike.Scene
             //現在のシーンを終了
             if (currentScene != null)
             {
-                currentScene.Shutdown();
+                currentScene.ShutDown();
             }
             //現在のシーンをlastSceneに記録
             SceneType lastScene = currenetSceneName;

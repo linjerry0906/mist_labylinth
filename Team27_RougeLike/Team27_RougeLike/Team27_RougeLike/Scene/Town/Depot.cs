@@ -506,7 +506,7 @@ namespace Team27_RougeLike.Scene
             renderer.End();
         }
 
-        public void Shutdown()
+        public void ShutDown()
         {
             if (backWindow.CurrentState()) backWindow.Switch();
             if (messegeWindow.CurrentState()) messegeWindow.Switch();

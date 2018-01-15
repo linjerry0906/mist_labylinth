@@ -148,7 +148,7 @@ namespace Team27_RougeLike.Scene
             return nextScene;
         }
 
-        public void Shutdown()
+        public void ShutDown()
         {
             if (nextScene == SceneType.Pause)
                 return;

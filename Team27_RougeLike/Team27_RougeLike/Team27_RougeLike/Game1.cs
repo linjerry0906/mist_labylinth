@@ -53,13 +53,13 @@ namespace Team27_RougeLike
             IScene town = new TownScene(gameManager, gameDevice);
             sceneManager.AddScene(SceneType.Load, new Load(gameDevice));
             sceneManager.AddScene(SceneType.LoadTown, new LoadTown(gameManager, gameDevice));
-            sceneManager.AddScene(SceneType.Town, town);
+            sceneManager.AddScene(SceneType.Town, new SceneFader(town, gameDevice));
             sceneManager.AddScene(SceneType.ItemShop, new ItemShop(town, gameManager, gameDevice));
             sceneManager.AddScene(SceneType.Depot, new Depot(town, gameManager, gameDevice));
-            sceneManager.AddScene(SceneType.DungeonSelect, new DungeonSelect(town, gameManager, gameDevice));
+            sceneManager.AddScene(SceneType.DungeonSelect, new SceneFader(new DungeonSelect(town, gameManager, gameDevice), gameDevice));
             sceneManager.AddScene(SceneType.LoadMap, new LoadMap(gameManager, gameDevice));
-            sceneManager.AddScene(SceneType.Dungeon, dungeon);
-            sceneManager.AddScene(SceneType.LoadBoss, new LoadBossScene(gameManager, gameDevice));
+            sceneManager.AddScene(SceneType.Dungeon, new SceneFader(dungeon, gameDevice));
+            sceneManager.AddScene(SceneType.LoadBoss, new SceneFader(new LoadBossScene(gameManager, gameDevice), gameDevice));
             sceneManager.AddScene(SceneType.Boss, boss);
             sceneManager.AddScene(SceneType.Pause, new PauseScene(dungeon, boss, town, gameManager, gameDevice));
             sceneManager.Change(SceneType.Load);
