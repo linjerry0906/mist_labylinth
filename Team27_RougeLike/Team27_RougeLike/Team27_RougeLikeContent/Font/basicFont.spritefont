@@ -493,6 +493,10 @@ with.
         <Start>銅</Start>
         <End>銅</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>洞</Start>
+        <End>洞</End>
+      </CharacterRegion>
       
       <!-- とく -->
       <CharacterRegion>
@@ -502,6 +506,10 @@ with.
       <CharacterRegion>
         <Start>得</Start>
         <End>得</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>窟</Start>
+        <End>窟</End>
       </CharacterRegion>
       
       <!-- な -->
