@@ -9,7 +9,7 @@ using Team27_RougeLike.Effects;
 using Team27_RougeLike.Object.Item;
 using Team27_RougeLike.UI;
 
-namespace Team27_RougeLike.Scene.Town
+namespace Team27_RougeLike.Scene
 {
     class UpgradeStore:IScene
     {
@@ -28,16 +28,16 @@ namespace Team27_RougeLike.Scene.Town
         private Inventory inventory;
         private ItemManager itemManager;
 
-        private List<Item> playerItems;
-        private Dictionary<int, int> depotConsumptions;
-        private Item upgradeItem;
-        private Dictionary<int, int> materialItems;
-        private Dictionary<int, int> consumptions;
+        private List<Item> playerItems; //バッグ
+        private Dictionary<int, int> depotConsumptions; //倉庫のアイテム
+        private Item upgradeItem; //強化するアイテム
+        private Dictionary<int, int> materialItems; //必要な素材
+        private Dictionary<int, int> consumptions; //消費アイテム
 
         private Button backButton;
         private Window backWindow;
-        private Button UpgradeButton;
-        private Window UpgradeWindow;
+        private Button upgradeButton;
+        private Window upgradeWindow;
 
         private Window leftWindow;
         private Window rightWindow;
@@ -48,7 +48,7 @@ namespace Team27_RougeLike.Scene.Town
         private List<Window> leftWindows;
 
         private bool isSelect; //アイテムを選んだかどうか
-        private bool isNotEnough; //素材が足りてるかどうか
+        private bool isEnough; //素材が足りてるかどうか
         private bool isNotEnoughMessage; //素材が足りてないメッセージ;
         private bool isBiggest; //レベルがマックスかどうか
 
@@ -115,8 +115,8 @@ namespace Team27_RougeLike.Scene.Town
 
             backButton = new Button(new Vector2(0, 720 - 64), 64, 32);
             backWindow = new Window(gameDevice, new Vector2(0, 720 - 64), new Vector2(64, 32));
-            UpgradeButton = new Button(new Vector2(1080 - 64, 720 - 64), 64, 32);
-            UpgradeWindow = new Window(gameDevice, new Vector2(1080 - 64, 720 - 64), new Vector2(64, 32));
+            upgradeButton = new Button(new Vector2(1080 - 64, 720 - 64), 64, 32);
+            upgradeWindow = new Window(gameDevice, new Vector2(1080 - 64, 720 - 64), new Vector2(64, 32));
 
             leftItems = new List<Item>();
             leftButtons = new List<Button>();
@@ -131,7 +131,7 @@ namespace Team27_RougeLike.Scene.Town
             }
 
             isSelect = false;
-            isNotEnough = false;
+            isEnough = false;
             isBiggest = false;
             isNotEnoughMessage = false;
         }
@@ -256,6 +256,7 @@ namespace Team27_RougeLike.Scene.Town
         private void SetItem(Item item)
         {
             if (item == null) return;
+            isSelect = true;
             materialItems = new Dictionary<int, int>();
 
             upgradeItem = item;
@@ -271,6 +272,8 @@ namespace Team27_RougeLike.Scene.Town
                 level = ((WeaponItem)item).GetReinforcement();
                 isBiggest = ((WeaponItem)item).IsLevelMax();
             }
+
+            SetMaterial(level);
         }
 
         //消費したアイテムを消す
@@ -320,7 +323,7 @@ namespace Team27_RougeLike.Scene.Town
             rightWindow.Update();
             messegeWindow.Update();
             backWindow.Update();
-            UpgradeWindow.Update();
+            upgradeWindow.Update();
             foreach (Window w in leftWindows)
             {
                 w.Update();
@@ -330,26 +333,66 @@ namespace Team27_RougeLike.Scene.Town
             {
                 rightWindow.Switch();
             }
-            else
-            {
-                rightWindow.Switch();
-            }   
+            if (!upgradeWindow.CurrentState())
+                upgradeWindow.Switch();
+            if (!backWindow.CurrentState())
+                backWindow.Switch();
+
+            isBiggest = false;
+            isEnough = false;
+            isNotEnoughMessage = false; 
 
             Point mousePos = new Point(
                 (int)input.GetMousePosition().X,
                 (int)input.GetMousePosition().Y);
 
-            if (UpgradeButton.IsClick(mousePos))
+            if (backButton.IsClick(mousePos) && input.IsLeftClick())
             {
-                if (isNotEnough)
+                endFlag = true;
+            }
+
+            if (upgradeButton.IsClick(mousePos) && isSelect && !isBiggest)
+            {
+                if (!isEnough)
                 {
                     isNotEnoughMessage = true;
                 }
                 else
                 {
-                    if (!isBiggest)
+                    if (input.IsLeftClick())
                     {
+                        inventory.RemoveItem(inventory.BagItemIndex(upgradeItem));
+                        if (upgradeItem is WeaponItem)
+                        {
+                            ((WeaponItem)upgradeItem).LevelUp();
+                        }
+                        else
+                        {
+                            ((ProtectionItem)upgradeItem).LevelUp();
+                        }
+                        inventory.AddItem(upgradeItem);
+                        foreach (int id in materialItems.Keys)
+                        {
+                            RemoveItem(id, materialItems[id]);
+                        }
+                        Initialize(SceneType.UpgradeStore);
+                    }
+                }
+            }
 
+            //素材が足りているかどうか
+            if (isSelect)
+            {
+                SetItem(upgradeItem);
+
+                foreach(int id in materialItems.Keys)
+                {
+                    if (consumptions.Keys.Contains(id))
+                    {
+                        if (consumptions[id] >= materialItems[id])
+                        {
+                            isEnough = true;
+                        }
                     }
                 }
             }
@@ -359,14 +402,89 @@ namespace Team27_RougeLike.Scene.Town
                 if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick())
                 {
                     SetItem(leftItems[i]);
-                    isSelect = true;
                 }
             }
         }
 
         public void Draw()
         {
+            blurEffect.WriteRenderTarget(renderer.FogManager.CurrentColor());
+            townScene.Draw();                       //背景は前のシーンを描画
+            blurEffect.ReleaseRenderTarget();
+            blurEffect.Draw(renderer);
 
+            renderer.Begin();
+
+            backWindow.Draw();
+            renderer.DrawString("戻る", backButton.ButtonCenterVector(),
+                Color.White, new Vector2(1, 1), 1.0f, true, true);
+            upgradeWindow.Draw();
+            renderer.DrawString("強化", upgradeButton.ButtonCenterVector(),
+                Color.White, new Vector2(1, 1), 1.0f, true, true);
+
+            leftWindow.Draw();
+            rightWindow.Draw();
+            messegeWindow.Draw();
+
+            renderer.DrawString("バッグ", new Vector2(64, 64), new Vector2(1, 1), Color.White);
+            renderer.DrawString("アイテム名", new Vector2(64, 64 + 32), new Vector2(1, 1), Color.White);
+            renderer.DrawString("タイプ", new Vector2(224, 64 + 32), new Vector2(1, 1), Color.White);
+
+            //左側のリストのアイテムの描画
+            for (int i = 0; i < leftItems.Count; i++)
+            {
+                leftWindows[i].Draw();
+
+                //アイテム名表示
+                if (leftItems[i] is WeaponItem)
+                {
+                    renderer.DrawString(leftItems[i].GetItemName() + "+" + ((WeaponItem)leftItems[i]).GetReinforcement(), leftWindows[i].GetOffsetPosition(),
+                        new Vector2(1, 1), Color.White);
+                }
+                else
+                {
+                    renderer.DrawString(leftItems[i].GetItemName() + "+" + ((ProtectionItem)leftItems[i]).GetReinforcement(), leftWindows[i].GetOffsetPosition(),
+                        new Vector2(1, 1), Color.White);
+                }
+                
+                //アイテムタイプの表示
+                string type;
+                if (leftItems[i] is WeaponItem)
+                {
+                    type = ((WeaponItem)leftItems[i]).GetWeaponType().ToString();
+                }
+                else if (leftItems[i] is ProtectionItem)
+                {
+                    type = ((ProtectionItem)leftItems[i]).GetProtectionType().ToString();
+                }
+                else
+                {
+                    type = ((ConsumptionItem)leftItems[i]).GetTypeText();
+                }
+                renderer.DrawString(type, leftWindows[i].GetOffsetPosition() + new Vector2(160, 0),
+                    new Vector2(1, 1), Color.White);
+            }
+
+            //右側の表示
+            if (isSelect)
+            {
+                //アイテム名の表示
+                if (upgradeItem is WeaponItem)
+                {
+                    renderer.DrawString(upgradeItem.GetItemName() + "+" + ((WeaponItem)upgradeItem).GetReinforcement(), 
+                        new Vector2(1080 / 2 + 64, 96), new Vector2(1, 1), Color.White);
+                }
+                else
+                {
+                    renderer.DrawString(upgradeItem.GetItemName() + "+" + ((ProtectionItem)upgradeItem).GetReinforcement(),
+                        new Vector2(1080 / 2 + 64, 96), new Vector2(1, 1), Color.White);
+                }
+
+                //アイテムのステータス表示
+
+            }
+
+            renderer.End();
         }
 
         public void Shutdown()

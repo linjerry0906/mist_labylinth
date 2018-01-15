@@ -54,6 +54,7 @@ namespace Team27_RougeLike
             sceneManager.AddScene(SceneType.Load, new Load(gameDevice));
             sceneManager.AddScene(SceneType.LoadTown, new LoadTown(gameManager, gameDevice));
             sceneManager.AddScene(SceneType.Town, town);
+            sceneManager.AddScene(SceneType.UpgradeStore, new UpgradeStore(town, gameManager, gameDevice));
             sceneManager.AddScene(SceneType.ItemShop, new ItemShop(town, gameManager, gameDevice));
             sceneManager.AddScene(SceneType.Depot, new Depot(town, gameManager, gameDevice));
             sceneManager.AddScene(SceneType.DungeonSelect, new DungeonSelect(town, gameManager, gameDevice));
