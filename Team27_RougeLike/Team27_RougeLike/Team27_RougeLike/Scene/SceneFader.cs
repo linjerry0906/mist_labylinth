@@ -12,7 +12,7 @@ namespace Team27_RougeLike.Scene
     {
         private Renderer renderer;
         private Timer timer;
-        private static float FADE_TIMER = 2.0f;
+        private static float FADE_TIMER = 1.5f;
         private SceneFadeState startState;
         private SceneFadeState state;
         private IScene scene;

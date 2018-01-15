@@ -97,7 +97,7 @@ namespace Team27_RougeLike.Scene
 
             Vector3 position = new Vector3(
                map.EntryPoint.X * MapDef.TILE_SIZE,
-               MapDef.TILE_SIZE,
+               MapDef.TILE_SIZE / 2,
                map.EntryPoint.Y * MapDef.TILE_SIZE);
 
             pManager = new ParticleManager(gameDevice);
