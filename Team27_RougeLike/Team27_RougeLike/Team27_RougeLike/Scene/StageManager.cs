@@ -94,12 +94,13 @@ namespace Team27_RougeLike.Scene
         /// </summary>
         public void RemoveFog()
         {
-            if (farFog >= FAREST_FOG)
+            float rate = 1.2f * (FAREST_FOG - NEAREST_FOG);
+            if (farFog >= rate)
                 return;
 
             farFog += 1;
-            fogManager.SetNear(farFog);
-            fogManager.SetFar(farFog + FOG_RANGE);
+            fogManager.SetNear(farFog - FOG_RANGE);
+            fogManager.SetFar(farFog);
             renderer.StartFog();
         }
 
@@ -131,7 +132,7 @@ namespace Team27_RougeLike.Scene
         /// <summary>
         /// ダンジョンの進行状況を描画
         /// </summary>
-        public void DrawDungeonInfo()
+        public void DrawDungeonInfo(int currentFloor)
         {
             renderer.DrawString(
                 dungeonName,
@@ -141,7 +142,7 @@ namespace Team27_RougeLike.Scene
                 0.8f, false, true);
 
             renderer.DrawString(
-                "地下" + floor + "階",
+                "地下" + currentFloor + "階",
                 new Vector2(40, 100),
                 Color.WhiteSmoke,
                 new Vector2(1.2f, 1.2f),

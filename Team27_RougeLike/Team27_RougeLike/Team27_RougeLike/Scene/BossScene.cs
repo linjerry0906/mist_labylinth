@@ -61,11 +61,7 @@ namespace Team27_RougeLike.Scene
         public void DrawUI()
         {
             renderer.Begin();
-
-            renderer.DrawString("Boss Scene\n P Key:Pause\n T Key: Back to Town", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
-
             ui.Draw();
-
             renderer.End();
         }
 
@@ -221,6 +217,7 @@ namespace Team27_RougeLike.Scene
 
             //Boss倒したら出現
             map.SwitchDrawExit(true);
+            gameManager.StageManager.RemoveFog();
 
             //階段にたどり着いた場合
             if (map.WorldToMap(characterManager.GetPlayer().GetPosition) == map.EndPoint)

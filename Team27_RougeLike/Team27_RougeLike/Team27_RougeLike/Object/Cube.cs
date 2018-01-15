@@ -20,6 +20,7 @@ namespace Team27_RougeLike.Object
         private Vector3 size;                           //大きさ
 
         private Color color;                            //色付け用
+        private Color wallColor;                        //MiniMap用
 
         public Cube(Vector3 position, Vector3 halfSize, GameDevice gameDevice)
         {
@@ -28,6 +29,7 @@ namespace Team27_RougeLike.Object
             this.size = halfSize;
 
             color = Color.White;
+            wallColor = Color.White;
         }
 
         /// <summary>
@@ -45,7 +47,12 @@ namespace Team27_RougeLike.Object
         /// </summary>
         public void DrawMiniMap()
         {
-            renderer.DrawModel("magic_circle", textureName, position, size * 2, color, 0.7f);
+            renderer.DrawModel("magic_circle", textureName, position, size * 2, wallColor, 0.7f);
+        }
+
+        public void SetMiniMapWallColor(Color color)
+        {
+            wallColor = color;
         }
 
         /// <summary>

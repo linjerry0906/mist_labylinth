@@ -24,6 +24,7 @@ namespace Team27_RougeLike.Scene
         private Renderer renderer;              //レンダラー
         private GameManager gameManager;        //シーンの間に情報を渡す機能のクラス
         private StageManager stageManager;      //ステージ管理者
+        private int currentFloor;               //現在のフロア（描画用）
         private CharacterManager characterManager;
         private bool endFlag;                   //終了フラグ
         private SceneType nextScene;            //次のシーン
@@ -34,7 +35,7 @@ namespace Team27_RougeLike.Scene
 
         private float angle = 0;                //カメラ回転角度
 
-        private DungeonUI ui;             //Popメッセージ
+        private DungeonUI ui;                   //Popメッセージ
 
         private ParticleManager pManager;
 
@@ -68,7 +69,7 @@ namespace Team27_RougeLike.Scene
             renderer.Begin();
 
             stageManager.DrawLimitTime();       //残り時間を表示
-            stageManager.DrawDungeonInfo();
+            stageManager.DrawDungeonInfo(currentFloor);
             ui.Draw();                          //UIの描画
 
             renderer.End();
@@ -83,6 +84,7 @@ namespace Team27_RougeLike.Scene
 
             pManager.Initialize();
             gameDevice.MainProjector.SetRelativePosition(new Vector3(0, 6, 12f));
+            currentFloor = stageManager.CurrentFloor();
 
             #region Map初期化
             map = gameManager.GetDungeonMap();      //生成したマップを取得

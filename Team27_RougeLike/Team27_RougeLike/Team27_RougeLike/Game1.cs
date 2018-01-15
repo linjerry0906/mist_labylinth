@@ -59,8 +59,8 @@ namespace Team27_RougeLike
             sceneManager.AddScene(SceneType.DungeonSelect, new SceneFader(new DungeonSelect(town, gameManager, gameDevice), gameDevice));
             sceneManager.AddScene(SceneType.LoadMap, new LoadMap(gameManager, gameDevice));
             sceneManager.AddScene(SceneType.Dungeon, new SceneFader(dungeon, gameDevice));
-            sceneManager.AddScene(SceneType.LoadBoss, new SceneFader(new LoadBossScene(gameManager, gameDevice), gameDevice));
-            sceneManager.AddScene(SceneType.Boss, boss);
+            sceneManager.AddScene(SceneType.LoadBoss, new LoadBossScene(gameManager, gameDevice));
+            sceneManager.AddScene(SceneType.Boss, new SceneFader(boss, gameDevice));
             sceneManager.AddScene(SceneType.Pause, new PauseScene(dungeon, boss, town, gameManager, gameDevice));
             sceneManager.Change(SceneType.Load);
 
