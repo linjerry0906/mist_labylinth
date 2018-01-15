@@ -37,7 +37,8 @@ namespace Team27_RougeLike.Scene
         {
             //ToDo：Loading画面
             renderer.Begin();
-            renderer.DrawTexture("test", Vector2.Zero);
+            Vector2 screenSize = new Vector2(Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT);
+            renderer.DrawTexture("fade", Vector2.Zero, screenSize);
             renderer.End();
         }
 
@@ -69,7 +70,9 @@ namespace Team27_RougeLike.Scene
         {
             if (!mapGenerator.IsEnd())               //生成が終わってなかったら生成し続ける
             {
-                mapGenerator.LoadFormFile();
+                mapGenerator.LoadFormFile(
+                    stageManager.CurrentDungeonNum(),
+                    stageManager.CurrentFloor());
                 return;
             }
             if (!stageInfoLoader.IsItemLoad())       //Item読み込む

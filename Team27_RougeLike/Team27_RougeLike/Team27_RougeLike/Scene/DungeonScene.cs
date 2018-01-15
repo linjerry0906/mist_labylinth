@@ -227,7 +227,8 @@ namespace Team27_RougeLike.Scene
             //アイテム処理
             mapItemManager.ItemCollision(characterManager.GetPlayer(), ui);
 
-            stageManager.Update();              //時間やFog処理の更新
+            //時間やFog処理の更新
+            stageManager.Update();
 
             //Camera Shake仮実装 ToDo:Class化
             if (gameDevice.InputState.IsLeftClick())
@@ -238,6 +239,7 @@ namespace Team27_RougeLike.Scene
                     gameDevice.Random.Next(-10, 10) / 50.0f);
                 gameDevice.MainProjector.Collision.Position += offset;
             }
+
             CheckEnd();                         //プレイ終了をチェック
         }
 
@@ -272,14 +274,19 @@ namespace Team27_RougeLike.Scene
             }
 
             //死んだ時
-            //gameManager.PlayerItem.RemoveAll();
+            if (characterManager.GetPlayer().IsDead())
+            {
+                gameManager.PlayerItem.RemoveAll();
+                endFlag = true;
+                nextScene = SceneType.LoadTown;
+            }
 
             //時間になったら村に戻される
             if (stageManager.IsTime())
             {
                 gameManager.PlayerItem.RemoveTempItem();
                 endFlag = true;
-                nextScene = SceneType.Town;
+                nextScene = SceneType.LoadTown;
                 gameManager.Save();
                 return;
             }

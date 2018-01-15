@@ -37,7 +37,8 @@ namespace Team27_RougeLike.Scene
         {
             //ToDo：Loading画面
             renderer.Begin();
-            renderer.DrawTexture("test", Vector2.Zero);
+            Vector2 screenSize = new Vector2(Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT);
+            renderer.DrawTexture("fade", Vector2.Zero, screenSize);
             renderer.End();
         }
 

@@ -194,13 +194,15 @@ namespace Team27_RougeLike.Object.Character
 
         public int LiveCharacterCnt()
         {
-            int cnt = 0;
-            foreach (var c in characters)
-            {
-                if (c == player) continue;
-                cnt++;
-            }
-            return cnt;
+            //リンより修正
+            //int cnt = 0;
+            //foreach (var c in characters)
+            //{
+            //    if (c == player) continue;
+            //    cnt++;
+            //}
+            //return cnt;
+            return characters.Count;    //これで十分、全部回らなくてよい（Countは要素数変動の時のみ処理、Foreachを使わずに済む）
         }
 
         private void Load()

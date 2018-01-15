@@ -401,12 +401,23 @@ namespace Team27_RougeLike.Map
             currentState = GenerateState.End;
         }
 
-        public void LoadFormFile()
+        public void LoadFormFile(int dungeonNum, int floor)
         {
-            FileStream fs = new FileStream(@"Content/" + "StageCSV/" + "Stage_boss.csv", FileMode.Open);      //設定ファイルを開く
+            string fileName = @"Content/" + "StageCSV/";
+            //特殊配置があれば
+            if (File.Exists(fileName + "Stage_boss_" + dungeonNum + "_" + floor + ".csv"))
+            {
+                fileName += "Stage_boss_" + dungeonNum + "_" + floor + ".csv";
+            }
+            else
+            {
+                fileName += "Stage_boss.csv";
+            }
+
+            FileStream fs = new FileStream(fileName, FileMode.Open);      //設定ファイルを開く
             StreamReader sr = new StreamReader(fs);
 
-            int lines = 0;
+            int lines = 0;                              //行
             List<int> blocks = new List<int>();
 
             while (!sr.EndOfStream)                     //最後まで読み込む
@@ -423,10 +434,11 @@ namespace Team27_RougeLike.Map
             sr.Close();                                 //読み終わったらファイルをClose
             fs.Close();
 
-            mapChip = new int[lines, blocks.Count / lines];
+            int colum = blocks.Count / lines;           //列
+            mapChip = new int[lines, colum];
             for (int i = 0; i < mapChip.Length; i++)
             {
-                mapChip[i / lines, i % lines] = blocks[i];
+                mapChip[i / colum, i % colum] = blocks[i];
             }
 
             currentState = GenerateState.End;

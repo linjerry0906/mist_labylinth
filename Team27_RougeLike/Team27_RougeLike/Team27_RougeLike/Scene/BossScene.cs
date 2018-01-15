@@ -108,7 +108,7 @@ namespace Team27_RougeLike.Scene
             ui = new DungeonUI(gameManager, gameDevice);
 
             characterManager.Initialize(ui, mapItemManager);
-            characterManager.AddPlayer(position, pManager,gameManager);
+            characterManager.AddPlayer(position, pManager, gameManager);
             //characterManager.AddCharacter(characterManager.Enemys()[4].Clone(bossPosition));
 
             GeneratBoss();
@@ -191,25 +191,50 @@ namespace Team27_RougeLike.Scene
 
             //アイテム処理
             mapItemManager.ItemCollision(characterManager.GetPlayer(), ui);
+
+            //終わるかどうかをチェック
+            CheckEnd();
         }
 
         private void CheckEnd()
         {
-            //Debug 村シーンへ
-            if (input.GetKeyTrigger(Keys.T))
-            {
-                endFlag = true;
-
-                gameManager.UpdateDungeonProcess();     //攻略状況更新
-                gameManager.Save();
-                return;
-            }
-
             //Pause機能
             if (input.GetKeyTrigger(Keys.P))
             {
                 nextScene = SceneType.Pause;
                 endFlag = true;
+                return;
+            }
+
+            //Player死んだ場合
+            if (characterManager.GetPlayer().IsDead())
+            {
+                gameManager.PlayerItem.RemoveAll();
+                endFlag = true;
+                nextScene = SceneType.LoadTown;
+                return;
+            }
+
+            //Player以外に他のキャラがいる場合は終了しない
+            if (characterManager.LiveCharacterCnt() > 1)
+                return;
+
+            //Boss倒したら出現
+            map.SwitchDrawExit(true);
+
+            //階段にたどり着いた場合
+            if (map.WorldToMap(characterManager.GetPlayer().GetPosition) == map.EndPoint)
+            {
+                //ヒント文字を出す
+                ui.HintUI.Switch(true);
+                ui.HintUI.SetMessage("村へ戻る");
+                if (!ui.HintUI.IsPush(Keys.Space))
+                    return;
+
+                //次へ行く処理
+                endFlag = true;
+                nextScene = SceneType.LoadTown;
+                gameManager.UpdateDungeonProcess();     //攻略状況更新
                 return;
             }
         }
