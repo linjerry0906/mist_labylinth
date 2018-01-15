@@ -331,7 +331,14 @@ namespace Team27_RougeLike.Scene.Town
             rightWindows.Add(new Window(gameDevice, position, new Vector2(buttonWidht, buttonHeight)));
             rightWindows[rightWindows.Count - 1].Initialize();
             rightWindows[rightWindows.Count - 1].Switch();
-            totalPrice += item.GetItemPrice();
+            if (modeType == ModeType.Buy)
+            {
+                totalPrice += item.GetItemPrice();
+            }
+            else
+            {
+                totalPrice += item.GetItemPrice() / 2;
+            }
         }
 
         //右リストから指定されたアイテムを消す。
