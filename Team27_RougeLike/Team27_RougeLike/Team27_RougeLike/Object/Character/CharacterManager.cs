@@ -27,7 +27,7 @@ namespace Team27_RougeLike.Object.Character
         private Dictionary<int, EnemyBase> enemys = new Dictionary<int, EnemyBase>();
 
         private string enemyFilename;
-        private const int drawLength = 120;
+        private const int drawLength = 500;
 
         private MapItemManager mapItemManager;      //ステージのアイテムマネージャー
 

@@ -29,6 +29,7 @@ namespace Team27_RougeLike.Device
 
         private BlurEffect blurEffect;          //BlurEffect
         private PolygonEffect polygonEffect;    //透明のポリゴン用のEffect
+        private DepthEffect depthEffect;        //DepthEffect
 
         /// <summary>
         /// Effectを管理するクラス
@@ -53,6 +54,10 @@ namespace Team27_RougeLike.Device
 
             polygonEffect = new PolygonEffect(
                 contents.Load<Effect>("./Effect/polygon"));
+
+            depthEffect = new DepthEffect(
+                graphicsDevice, 
+                contents.Load<Effect>("./Effect/depth"));
         }
 
         /// <summary>
@@ -96,6 +101,15 @@ namespace Team27_RougeLike.Device
         public PolygonEffect GetPolygonEffect()
         {
             return polygonEffect;
+        }
+
+        /// <summary>
+        /// Depthを書き出すEffectを取得
+        /// </summary>
+        /// <returns></returns>
+        public DepthEffect GetDepthEffect()
+        {
+            return depthEffect;
         }
     }
 }

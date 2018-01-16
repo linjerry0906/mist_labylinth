@@ -259,7 +259,7 @@ namespace Team27_RougeLike.Device
         /// <param name="size">大きさ</param>
         /// <param name="color">色</param>
         /// <param name="alpha">透明度</param>
-        public void DrawModel(string name, string textureName,Vector3 position, Vector3 size, Color color, float alpha = 1.0f)
+        public void DrawModel(string name, string textureName, Vector3 position, Vector3 size, Color color, float alpha = 1.0f)
         {
             Model drawModel = models[name];
             foreach (ModelMesh m in drawModel.Meshes)
@@ -292,6 +292,11 @@ namespace Team27_RougeLike.Device
                 }
                 m.Draw();
             }
+        }
+
+        public void DrawDepth(string name, Vector3 position)
+        {
+
         }
 
         public void DrawModel(string name, string textureName, Vector3 position, Vector3 size, float rotation, Color color, float alpha = 1.0f)
@@ -508,6 +513,11 @@ namespace Team27_RougeLike.Device
         public void Begin(Effect effect)
         {
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, DepthStencilState.Default, RasterizerState.CullCounterClockwise, effect);
+        }
+
+        public void Begin(Effect effect, SpriteSortMode mode)
+        {
+            spriteBatch.Begin(mode, BlendState.AlphaBlend, null, DepthStencilState.Default, RasterizerState.CullCounterClockwise, effect);
         }
 
         /// <summary>
