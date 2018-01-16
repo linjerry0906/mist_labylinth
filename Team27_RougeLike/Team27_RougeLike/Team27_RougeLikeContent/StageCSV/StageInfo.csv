@@ -1,7 +1,7 @@
 Start,ダンジョン名,総階層,基本サイズ,Boss間隔,制限時間,Itemファイル番号,イメージ名,拡大する速さ,地面Texture,壁Texture,Fog色　R,G,B
 0,演習場,3,15,3,300,1,dungeon_image_tutorial,1,ground_tutorial,wall_tutorial,0.36,0.3,0.2
 1,洞窟ダンジョン,10,20,5,300,2,dungeon_image2,1,cubeTest,wall_default,0.1,0.1,0.2
-2,氷のダンジョン,30,30,6,480,3,dungeon_image_ice,0,ground_ice,wall_ice,0.99,0.99,0.99
+2,氷のダンジョン,30,27,6,480,3,dungeon_image_ice,0,ground_ice,wall_ice,0.99,0.99,0.99
 3,樹海のダンジョン,50,25,5,600,4,dungeon_image_tree,0,ground_tree,wall_tree,0.3,0.7,0.3
 4,無限回廊,100,15,10,600,5,dungeon_image_thomb,0,ground_infinite,wall_infinite,0.2,0.15,0.1
 End,,,,,,,,,,,,,

@@ -26,6 +26,7 @@ namespace Team27_RougeLike.Map
             Entry = 2,
             Exit = 3,
             Boss = 4,
+            Fall = 5,
         }
     }
 }

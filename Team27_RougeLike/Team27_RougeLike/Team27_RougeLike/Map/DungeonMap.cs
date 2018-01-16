@@ -88,6 +88,14 @@ namespace Team27_RougeLike.Map
                             mapBlocks.Add(c);
                             space.Add(new Point(x, y));
                             break;
+                        case (int)MapDef.BlockDef.Fall:
+                            c = new FallBlock(
+                                new Vector3(x * MapDef.TILE_SIZE, -MapDef.TILE_SIZE / 2, y * MapDef.TILE_SIZE),
+                                new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
+                                gameDevice);
+                            //c.SetTexture(blockDef[MapDef.BlockDef.Space]);
+                            mapBlocks.Add(c);
+                            break;
                         case (int)MapDef.BlockDef.Entry:
                             entryPoint = new Point(x, y);
                             c = new Cube(
@@ -322,6 +330,8 @@ namespace Team27_RougeLike.Map
                     if (mapchipX < 0 || mapchipX > mapChip.GetLength(1) - 1)     //エラー対策
                         continue;
                     int index = mapchipZ * mapChip.GetLength(1) + mapchipX;      //添え字を計算
+                    if (mapBlocks[index] is FallBlock)
+                        continue;
                     if (projecter.Collision.IsCollision(mapBlocks[index].Collision))       //当たっていれば
                     {
                         projecter.Collision.Hit(mapBlocks[index].Collision);       　      //プロジェクターの位置修正
