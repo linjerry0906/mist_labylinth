@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
-using System.Threading.Tasks;
 namespace Team27_RougeLike.Object.Character
 {
     class Spawner

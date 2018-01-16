@@ -1,7 +1,6 @@
 Content\Texture\test.xnb
 Content\Texture\bat.xnb
 Content\Texture\slash.xnb
-Content\Texture\dungeon_image1.xnb
 Content\Texture\dungeon_image2.xnb
 Content\Texture\dungeon_image_ice.xnb
 Content\Texture\dungeon_image_thomb.xnb
@@ -19,6 +18,16 @@ Content\Effect\polygon.xnb
 Content\Sound\slash.xnb
 Content\Sound\sowrd.xnb
 Content\Texture\fog.xnb
+Content\Texture\magic_center.xnb
+Content\Texture\magic_in.xnb
+Content\Texture\magic_middle.xnb
+Content\Texture\magic_out.xnb
+Content\Texture\dungeon_image_tutorial.xnb
+Content\Texture\ground_tree.xnb
+Content\Texture\wall_tree.xnb
+Content\Texture\ground_tutorial.xnb
+Content\Texture\wall_tutorial.xnb
+Content\Model\magic_circle.xnb
 Content\EnemysCSV\Enemy.csv
 Content\ItemCSV\ConsumptionItems.csv
 Content\ItemCSV\EquipmentItems.csv
@@ -36,4 +45,5 @@ Content\StageCSV\StageItem_3.csv
 Content\StageCSV\StageItem_4.csv
 Content\StageCSV\StageItem_5.csv
 Content\StageCSV\Stage_boss.csv
+Content\StageCSV\Stage_boss_1_5.csv
 Content\StoreItemCSV\StoreItem.csv

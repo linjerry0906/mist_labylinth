@@ -29,15 +29,6 @@
       <Time>2018-01-11T12:59:22.8980231+09:00</Time>
     </Item>
     <Item>
-      <Source>Texture\dungeon_image1.png</Source>
-      <Name>Texture\dungeon_image1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image1.xnb</Output>
-      <Time>2018-01-11T15:32:47.2094649+09:00</Time>
-    </Item>
-    <Item>
       <Source>Texture\dungeon_image2.png</Source>
       <Name>Texture\dungeon_image2</Name>
       <Importer>TextureImporter</Importer>
@@ -116,7 +107,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-01-13T17:43:05.8558096+09:00</Time>
+      <Time>2018-01-16T09:59:19.0954098+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -221,7 +212,108 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\fog.xnb</Output>
-      <Time>2018-01-13T14:16:09.2668934+09:00</Time>
+      <Time>2018-01-16T09:59:19.1154631+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\magic_center.png</Source>
+      <Name>Texture\magic_center</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\magic_center.xnb</Output>
+      <Time>2018-01-16T09:59:19.1204772+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\magic_in.png</Source>
+      <Name>Texture\magic_in</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\magic_in.xnb</Output>
+      <Time>2018-01-16T09:59:19.1219805+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\magic_middle.png</Source>
+      <Name>Texture\magic_middle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\magic_middle.xnb</Output>
+      <Time>2018-01-16T09:59:19.1229831+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\magic_out.png</Source>
+      <Name>Texture\magic_out</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\magic_out.xnb</Output>
+      <Time>2018-01-16T09:59:19.1244966+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\dungeon_image_tutorial.png</Source>
+      <Name>Texture\dungeon_image_tutorial</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image_tutorial.xnb</Output>
+      <Time>2018-01-16T09:59:19.1139587+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\ground_tree.png</Source>
+      <Name>Texture\ground_tree</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\ground_tree.xnb</Output>
+      <Time>2018-01-16T09:59:19.1164654+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\wall_tree.png</Source>
+      <Name>Texture\wall_tree</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\wall_tree.xnb</Output>
+      <Time>2018-01-16T09:59:19.1274955+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\ground_tutorial.png</Source>
+      <Name>Texture\ground_tutorial</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\ground_tutorial.xnb</Output>
+      <Time>2018-01-16T09:59:19.1184711+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\wall_tutorial.png</Source>
+      <Name>Texture\wall_tutorial</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\wall_tutorial.xnb</Output>
+      <Time>2018-01-16T09:59:19.1289995+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Model\magic_circle.fbx</Source>
+      <Name>Model\magic_circle</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Model\magic_circle.xnb</Output>
+      <Time>2018-01-16T09:59:19.0964128+09:00</Time>
+      <Dependency>
+        <Key>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\magic_circle_0.xml</Key>
+        <Value>2018-01-16T10:16:16.4272723+09:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Model\magic_circle.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\magic_circle_0.xml</Output>
+      <Time>2018-01-16T09:59:19.0964128+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
