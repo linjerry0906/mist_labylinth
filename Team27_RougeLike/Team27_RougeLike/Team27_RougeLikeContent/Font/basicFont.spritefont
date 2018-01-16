@@ -281,7 +281,12 @@ with.
         <Start>効</Start>
         <End>効</End>
       </CharacterRegion>
+      
       <!-- ご -->
+      <CharacterRegion>
+        <Start>後</Start>
+        <End>後</End>
+      </CharacterRegion>
 
       <!-- ごう -->
       <CharacterRegion>

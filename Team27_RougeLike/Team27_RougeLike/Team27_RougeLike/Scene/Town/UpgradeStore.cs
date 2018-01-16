@@ -30,7 +30,8 @@ namespace Team27_RougeLike.Scene
 
         private List<Item> playerItems; //バッグ
         private Dictionary<int, int> depotConsumptions; //倉庫のアイテム
-        private Item upgradeItem; //強化するアイテム
+        private Item selectItem; //強化するアイテム
+        private Item upgradeItem; //強化後のアイテム
         private Dictionary<int, int> materialItems; //必要な素材
         private Dictionary<int, int> consumptions; //消費アイテム
 
@@ -136,6 +137,18 @@ namespace Team27_RougeLike.Scene
             isNotEnoughMessage = false;
         }
 
+        private void UpdateBlurRate()
+        {
+            if (endFlag)
+            {
+                blurRate -= 0.05f;
+                return;
+            }
+
+            if (blurRate < 0.6f)
+                blurRate += 0.05f;
+        }
+
         //左のリストにアイテムを追加する。
         private void AddLeftList(Item item)
         {
@@ -167,21 +180,11 @@ namespace Team27_RougeLike.Scene
             }
         }
 
-        private void UpdateBlurRate()
-        {
-            if (endFlag)
-            {
-                blurRate -= 0.05f;
-                return;
-            }
-
-            if (blurRate < 0.6f)
-                blurRate += 0.05f;
-        }
-
         //消費素材をセット
         private void SetMaterial(int level)
         {
+            materialItems = new Dictionary<int, int>();
+
             if (level <= 1)
             {
                 materialItems.Add(7, 2);
@@ -257,20 +260,23 @@ namespace Team27_RougeLike.Scene
         {
             if (item == null) return;
             isSelect = true;
-            materialItems = new Dictionary<int, int>();
 
-            upgradeItem = item;
+            selectItem = item;
 
             int level;
             if (item is ProtectionItem)
             {
                 level = ((ProtectionItem)item).GetReinforcement();
                 isBiggest = ((ProtectionItem)item).IsLevelMax();
+                upgradeItem = ((ProtectionItem)item).UniqueClone();
+                ((ProtectionItem)upgradeItem).LevelUp();
             }
             else
             {
                 level = ((WeaponItem)item).GetReinforcement();
                 isBiggest = ((WeaponItem)item).IsLevelMax();
+                upgradeItem = ((WeaponItem)item).UniqueClone();
+                ((WeaponItem)upgradeItem).LevelUp();
             }
 
             SetMaterial(level);
@@ -351,39 +357,18 @@ namespace Team27_RougeLike.Scene
                 endFlag = true;
             }
 
-            if (upgradeButton.IsClick(mousePos) && isSelect && !isBiggest)
+            for (int i = 0; i < leftButtons.Count; i++)
             {
-                if (!isEnough)
+                if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick())
                 {
-                    isNotEnoughMessage = true;
-                }
-                else
-                {
-                    if (input.IsLeftClick())
-                    {
-                        inventory.RemoveItem(inventory.BagItemIndex(upgradeItem));
-                        if (upgradeItem is WeaponItem)
-                        {
-                            ((WeaponItem)upgradeItem).LevelUp();
-                        }
-                        else
-                        {
-                            ((ProtectionItem)upgradeItem).LevelUp();
-                        }
-                        inventory.AddItem(upgradeItem);
-                        foreach (int id in materialItems.Keys)
-                        {
-                            RemoveItem(id, materialItems[id]);
-                        }
-                        Initialize(SceneType.UpgradeStore);
-                    }
+                    SetItem(leftItems[i]);
                 }
             }
 
             //素材が足りているかどうか
             if (isSelect)
             {
-                SetItem(upgradeItem);
+                //SetItem(selectItem);
 
                 foreach(int id in materialItems.Keys)
                 {
@@ -394,14 +379,39 @@ namespace Team27_RougeLike.Scene
                             isEnough = true;
                         }
                     }
+                    if (!isEnough)
+                    {
+                        return;
+                    }
                 }
             }
 
-            for (int i = 0; i < leftButtons.Count; i++)
+            if (upgradeButton.IsClick(mousePos) && isSelect && !isBiggest)
             {
-                if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick())
+                if (!isEnough)
                 {
-                    SetItem(leftItems[i]);
+                    isNotEnoughMessage = true;
+                }
+                else
+                {
+                    if (input.IsLeftClick())
+                    {
+                        inventory.RemoveItem(inventory.BagItemIndex(selectItem));
+                        if (selectItem is WeaponItem)
+                        {
+                            ((WeaponItem)selectItem).LevelUp();
+                        }
+                        else
+                        {
+                            ((ProtectionItem)selectItem).LevelUp();
+                        }
+                        inventory.AddItem(selectItem);
+                        foreach (int id in materialItems.Keys)
+                        {
+                            RemoveItem(id, materialItems[id]);
+                        }
+                        Initialize(SceneType.UpgradeStore);  //変更予定
+                    }
                 }
             }
         }
@@ -468,20 +478,64 @@ namespace Team27_RougeLike.Scene
             //右側の表示
             if (isSelect)
             {
-                //アイテム名の表示
-                if (upgradeItem is WeaponItem)
+                renderer.DrawString("強化前", new Vector2(1080 / 2 + 64, 64), new Vector2(1, 1), Color.White);
+                renderer.DrawString("強化後", new Vector2(1080 / 2 + 270, 64), new Vector2(1, 1), Color.White);
+                if (selectItem is WeaponItem)
                 {
-                    renderer.DrawString(upgradeItem.GetItemName() + "+" + ((WeaponItem)upgradeItem).GetReinforcement(), 
+                    //強化前アイテムの表示
+                    renderer.DrawString(selectItem.GetItemName() + "+" + ((WeaponItem)selectItem).GetReinforcement(), 
                         new Vector2(1080 / 2 + 64, 96), new Vector2(1, 1), Color.White);
+                    
+                    renderer.DrawString("タイプ : " + ((WeaponItem)selectItem).GetWeaponType(),
+                        new Vector2(1080 / 2 + 64, 96 + 32), new Vector2(1, 1), Color.White);
+                    
+                    renderer.DrawString("攻撃力 : " + ((WeaponItem)selectItem).GetPower(),
+                        new Vector2(1080 / 2 + 64, 96 + 64), new Vector2(1, 1), Color.White);
+
+                    renderer.DrawString("守備力 : " + ((WeaponItem)selectItem).GetDefense(),
+                        new Vector2(1080 / 2 + 64, 96 + 96), new Vector2(1, 1), Color.White);
+
+                    //強化後アイテムの表示
+                    renderer.DrawString(upgradeItem.GetItemName() + "+" + ((WeaponItem)upgradeItem).GetReinforcement(),
+                        new Vector2(1080 / 2 + 270, 96), new Vector2(1, 1), Color.White);
+                    
+                    renderer.DrawString("タイプ : " + ((WeaponItem)upgradeItem).GetWeaponType(),
+                        new Vector2(1080 / 2 + 270, 96 + 32), new Vector2(1, 1), Color.White);
+                    
+                    renderer.DrawString("攻撃力 : " + ((WeaponItem)upgradeItem).GetPower(),
+                        new Vector2(1080 / 2 + 270, 96 + 64), new Vector2(1, 1), Color.White);
+
+                    renderer.DrawString("守備力 : " + ((WeaponItem)upgradeItem).GetDefense(),
+                        new Vector2(1080 / 2 + 270, 96 + 96), new Vector2(1, 1), Color.White);
                 }
                 else
                 {
-                    renderer.DrawString(upgradeItem.GetItemName() + "+" + ((ProtectionItem)upgradeItem).GetReinforcement(),
+                    //強化前アイテムの表示
+                    renderer.DrawString(selectItem.GetItemName() + "+" + ((ProtectionItem)selectItem).GetReinforcement(),
                         new Vector2(1080 / 2 + 64, 96), new Vector2(1, 1), Color.White);
+                    
+                    renderer.DrawString("タイプ : " + ((ProtectionItem)selectItem).GetProtectionType(),
+                        new Vector2(1080 / 2 + 64, 96 + 32), new Vector2(1, 1), Color.White);
+                    
+                    renderer.DrawString("攻撃力 : " + ((ProtectionItem)selectItem).GetPower(),
+                        new Vector2(1080 / 2 + 64, 96 + 64), new Vector2(1, 1), Color.White);
+
+                    renderer.DrawString("守備力 : " + ((ProtectionItem)selectItem).GetDefense(),
+                        new Vector2(1080 / 2 + 64, 96 + 96), new Vector2(1, 1), Color.White);
+
+                    //強化後アイテムの表示
+                    renderer.DrawString(upgradeItem.GetItemName() + "+" + ((ProtectionItem)upgradeItem).GetReinforcement(),
+                        new Vector2(1080 / 2 + 270, 96), new Vector2(1, 1), Color.White);
+
+                    renderer.DrawString("タイプ : " + ((ProtectionItem)upgradeItem).GetProtectionType(),
+                        new Vector2(1080 / 2 + 270, 96 + 32), new Vector2(1, 1), Color.White);
+
+                    renderer.DrawString("攻撃力 : " + ((ProtectionItem)upgradeItem).GetPower(),
+                        new Vector2(1080 / 2 + 270, 96 + 64), new Vector2(1, 1), Color.White);
+
+                    renderer.DrawString("守備力 : " + ((ProtectionItem)upgradeItem).GetDefense(),
+                        new Vector2(1080 / 2 + 270, 96 + 96), new Vector2(1, 1), Color.White);
                 }
-
-                //アイテムのステータス表示
-
             }
 
             renderer.End();
