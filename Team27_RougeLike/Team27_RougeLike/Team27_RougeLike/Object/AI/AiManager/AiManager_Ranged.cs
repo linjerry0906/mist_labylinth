@@ -35,7 +35,8 @@ namespace Team27_RougeLike.Object.AI
             }
             else
             {
-                moveAi = new MoveAi_Wait(actor);
+                if (moveAi is MoveAi_Search) return;
+                moveAi = new MoveAi_Search(actor);
             }
             #endregion
 
