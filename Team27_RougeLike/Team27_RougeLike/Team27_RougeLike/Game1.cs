@@ -43,7 +43,7 @@ namespace Team27_RougeLike
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            IsMouseVisible = true;
+            IsMouseVisible = false;
             gameDevice = new GameDevice(Content, GraphicsDevice);
             gameManager = new GameManager(gameDevice);
             
@@ -136,6 +136,7 @@ namespace Team27_RougeLike
 
             // TODO: Add your drawing code here
             sceneManager.Draw();
+            gameDevice.DrawCursor();
 
             base.Draw(gameTime);
         }

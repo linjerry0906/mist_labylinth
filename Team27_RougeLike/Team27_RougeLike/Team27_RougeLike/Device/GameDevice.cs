@@ -94,5 +94,12 @@ namespace Team27_RougeLike.Device
             // 入力状態更新
             input.Update();
         }
+
+        public void DrawCursor()
+        {
+            renderer.Begin();
+            renderer.DrawTexture("cursor", input.GetMousePosition());
+            renderer.End();
+        }
     }
 }

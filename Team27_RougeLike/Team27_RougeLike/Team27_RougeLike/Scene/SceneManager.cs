@@ -67,6 +67,7 @@ namespace Team27_RougeLike.Scene
             {
                 return;
             }
+
             //各シーンのDraw実行、前後に
             currentScene.Draw();
         }

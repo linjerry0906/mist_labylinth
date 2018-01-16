@@ -186,5 +186,6 @@ namespace Team27_RougeLike.Device
                 return false;
             }
         }
+
     }
 }

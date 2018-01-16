@@ -22,11 +22,13 @@ namespace Team27_RougeLike.Scene
             string path = "./Texture/";
             string[,] list = new string[,]
             {
+                {"cursor" ,path},
                 {"test" ,path},
                 {"cubeTest" ,path},
                 {"bat" ,path},
                 {"slash" ,path},
                 {"fog" ,path},
+                {"town" ,path},
                 {"dungeon_image_tutorial" ,path},
                 {"dungeon_image2" ,path},
                 {"dungeon_image_thomb" ,path},
