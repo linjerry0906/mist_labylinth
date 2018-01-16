@@ -15,6 +15,7 @@ using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Object.ParticleSystem;
 using Team27_RougeLike.Map;
 using Team27_RougeLike.UI;
+using Team27_RougeLike.Object;
 
 namespace Team27_RougeLike.Scene
 {
@@ -29,6 +30,7 @@ namespace Team27_RougeLike.Scene
         private SceneType nextScene;
 
         private DungeonMap map;                 //マップ
+        private FogBackground background;       //背景の霧
         private MapItemManager mapItemManager;  //マップ内に落ちているアイテムの管理者
 
         private CharacterManager characterManager;
@@ -49,11 +51,18 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
+            renderer.EffectManager.GetDepthEffect().WriteRenderTarget(renderer.FogManager.CurrentColor());
+
             map.Draw();
             mapItemManager.Draw();      //アイテムの描画
 
             characterManager.Draw();
             pManager.Draw();
+
+            background.Draw(renderer.FogManager.CurrentColor());
+
+            renderer.EffectManager.GetDepthEffect().ReleaseRenderTarget();
+            renderer.EffectManager.GetDepthEffect().Draw(renderer);
 
             DrawUI();
         }
@@ -114,6 +123,7 @@ namespace Team27_RougeLike.Scene
             gameDevice.MainProjector.Initialize(characterManager.GetPlayer().GetPosition);       //カメラを初期化
             #endregion
 
+            background = new FogBackground(gameDevice);
         }
 
         /// <summary>
@@ -171,6 +181,7 @@ namespace Team27_RougeLike.Scene
             if (ui.IsPop())                   //メッセージ表示中は以下Updateしない
                 return;
 
+            background.Update();
             RotateCamera();
 
             //Chara処理

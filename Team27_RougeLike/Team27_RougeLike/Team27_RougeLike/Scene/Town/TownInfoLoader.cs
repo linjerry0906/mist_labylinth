@@ -25,7 +25,7 @@ namespace Team27_RougeLike.Scene.Town
             isItemLoad = false;
         }
 
-        public void LoadStoreItem(ItemManager itemManager, int achievedFloor)
+        public void LoadStoreItem(ItemManager itemManager, DungeonProcess dungeonProcess)
         {
             FileStream fs = new FileStream(@"Content/" + "StoreItemCSV/StoreItem.csv", FileMode.Open);      //設定ファイルを開く
             StreamReader sr = new StreamReader(fs);
@@ -41,17 +41,24 @@ namespace Team27_RougeLike.Scene.Town
                 if (data[0] == "End")                   //End以降は資料として使われないので、脱出
                     break;
 
-                int dataFloor = int.Parse(data[1]);     //階層を読み取る
-                if (dataFloor > achievedFloor)          //到達していない階層のアイテムを読み込む必要がない
-                    break;
+                int dataDungeon = int.Parse(data[1]);   //ダンジョン番号
+                int dataFloor = int.Parse(data[2]);     //階層を読み取る
 
-                int id = int.Parse(data[3]);            //IDを読み取る
-                if (data[2] == "equipment")              //装備アイテムの場合
+                //攻略したことのないダンジョン以降のアイテムを読み込む必要がない
+                if (!dungeonProcess.HasKey(dataDungeon))
+                    continue;
+
+                //到達していない階層のアイテムを読み込む必要がない
+                if (dataFloor > dungeonProcess.GetProcess()[dataDungeon])
+                    continue;
+
+                int id = int.Parse(data[4]);            //IDを読み取る
+                if (data[3] == "equipment")             //装備アイテムの場合
                 {
                     equipList.Add(id);
                 }
 
-                if (data[2] == "consuption")            //使用アイテムの場合
+                if (data[3] == "consuption")            //使用アイテムの場合
                 {
                     consuptionList.Add(id);
                 }

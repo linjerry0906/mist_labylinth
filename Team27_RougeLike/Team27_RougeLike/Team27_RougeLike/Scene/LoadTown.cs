@@ -32,7 +32,6 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
-            //ToDo：Loading画面
             renderer.Begin();
             Vector2 screenSize = new Vector2(Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT);
             renderer.DrawTexture("fade", Vector2.Zero, screenSize);
@@ -66,7 +65,10 @@ namespace Team27_RougeLike.Scene
         {
             if (!townInfoLoader.IsItemLoad())
             {
-                townInfoLoader.LoadStoreItem(gameManager.ItemManager, 1);       //Todo:到達階層を読む
+                //攻略状況により、ショップのアイテムも変わる
+                townInfoLoader.LoadStoreItem(
+                    gameManager.ItemManager, 
+                    gameManager.DungeonProcess); 
                 return;
             }
 
