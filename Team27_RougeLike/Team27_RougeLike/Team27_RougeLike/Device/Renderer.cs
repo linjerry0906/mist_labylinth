@@ -294,11 +294,6 @@ namespace Team27_RougeLike.Device
             }
         }
 
-        public void DrawDepth(string name, Vector3 position)
-        {
-
-        }
-
         public void DrawModel(string name, string textureName, Vector3 position, Vector3 size, float rotation, Color color, float alpha = 1.0f)
         {
             Model drawModel = models[name];
