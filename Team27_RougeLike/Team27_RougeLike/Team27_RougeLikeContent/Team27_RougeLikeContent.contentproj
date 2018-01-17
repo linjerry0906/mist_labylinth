@@ -30,6 +30,11 @@
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Texture\cursor.png">
+      <Name>cursor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Texture\test.png">
       <Name>test</Name>
       <Importer>TextureImporter</Importer>
@@ -323,8 +328,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Texture\cursor.png">
-      <Name>cursor</Name>
+    <Compile Include="Texture\Snow.png">
+      <Name>Snow</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

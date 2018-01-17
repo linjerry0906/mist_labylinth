@@ -9,15 +9,16 @@ using Team27_RougeLike.Object.AI;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Utility;
 using Team27_RougeLike.Object.Box;
+using Team27_RougeLike.Device;
+
 namespace Team27_RougeLike.Object
 {
     class EnemyBase : CharacterBase
     {
-        protected EnemyRange range;
-        protected Status status;
-        protected int exp;
-        protected string aiName;
-
+        protected EnemyRange range;     //各種距離構造体
+        protected Status status;        //ステータスクラス  
+        protected string aiName;        //キャラクタのAi名
+        protected int exp;              //討伐時の経験値
         /// <summary>
         /// オリジナル
         /// </summary>
@@ -69,17 +70,19 @@ namespace Team27_RougeLike.Object
         }
         public override void Attack()
         {
-            var angle = Angle.CheckAngleVector(characterManager.GetPlayer().GetPosition, collision.Position);
             switch (aiManager.ToString())
             {
                 case "Team27_RougeLike.Object.AI.AiManager_Fool":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower, angle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + attackAngle, 10), 1, tag, status.BasePower, attackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + angle, 2), 100, tag, status.BasePower, angle));
+                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 2), 100, tag, status.BasePower, attackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower, angle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + attackAngle, 10), 1, tag, status.BasePower, attackAngle));
+                    break;
+                case "Team27_RougeLike.Object.AI.AiManager_Totem":
+                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 5), 100, tag, status.BasePower, attackAngle));
                     break;
                 default:
                     break;
@@ -91,6 +94,21 @@ namespace Team27_RougeLike.Object
             motion.Update(gameTime);
             Move();
         }
+
+        public override void Draw(Renderer renderer)
+        {
+            base.Draw(renderer);
+            DrawWarning(renderer);
+        }
+
+        public void DrawWarning(Renderer renderer)
+        {
+            if (aiManager.GetAttackAi() is AttackAi_Charge)
+            {
+                renderer.DrawPolygon(textureName, collision.Position + attackAngle * 5, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
+            }
+        }
+
         public virtual void NearUpdate(Player player, GameTime gameTime)
         {
             ((IEnemyAI)aiManager).NearUpdate(player);
@@ -99,6 +117,10 @@ namespace Team27_RougeLike.Object
         public bool SearchCheck(Player player) { return Distance(player) < range.searchRange; }
         public bool AttackCheck(Player player) { return Distance(player) < range.attackRange; }
         public bool WaitPointCheck(Player player) { return Distance(player) < range.waitRange; }
+        public override void SetAttackAngle()
+        {
+            attackAngle = Angle.CheckAngleVector(characterManager.GetPlayer().GetPosition, collision.Position);
+        }
         public EnemyBase Clone(Vector3 position)
         {
             return new EnemyBase
@@ -121,6 +143,8 @@ namespace Team27_RougeLike.Object
                     return new AiManager_Ranged();
                 case "Melee":
                     return new AiManager_Melee();
+                case "Totem":
+                    return new AiManager_Totem();
                 default:
                     return new AiManager_Fool();
             }
@@ -130,13 +154,16 @@ namespace Team27_RougeLike.Object
             switch (aiManager.ToString())
             {
                 case "Team27_RougeLike.Object.AI.AiManager_Fool":
-                    range = new EnemyRange(50, 20, 10);
+                    range = EnemyRange.Fool();
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    range = new EnemyRange(50, 15, 30);
+                    range = EnemyRange.Ranged();
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                    range = new EnemyRange(50, 20, 15);
+                    range = EnemyRange.Melee();
+                    break;
+                case "Team27_RougeLike.Object.AI.AiManager_Totem":
+                    range = EnemyRange.Totem();
                     break;
             }
         }
@@ -155,6 +182,12 @@ namespace Team27_RougeLike.Object
         }
         public override void Move()
         {
+            if (NockBacking())
+            {
+                velocity = nockback;
+                NockBackUpdate();
+            }
+
             if (Math.Abs(velocity.X) < 0.01f)
             {
                 velocity.X = 0;

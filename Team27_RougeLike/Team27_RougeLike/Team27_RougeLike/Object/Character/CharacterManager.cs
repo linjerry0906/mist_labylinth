@@ -23,6 +23,7 @@ namespace Team27_RougeLike.Object.Character
         private List<Spawner> spawners = new List<Spawner>();
         private List<HitBoxBase> hitBoxs = new List<HitBoxBase>();
         private Player player;
+        private EnemyLoader loader;
 
         private Dictionary<int, EnemyBase> enemys = new Dictionary<int, EnemyBase>();
 
@@ -34,9 +35,8 @@ namespace Team27_RougeLike.Object.Character
         public CharacterManager(GameDevice gamedevice)
         {
             this.gamedevice = gamedevice;
-
-            enemyFilename = @"Content/" + "EnemysCSV/Enemy.csv";
-            Load();
+            loader = new EnemyLoader();
+            loader.Initialize(this);
         }
 
         public void Initialize(DungeonUI ui, MapItemManager mapItemManager)
@@ -184,7 +184,7 @@ namespace Team27_RougeLike.Object.Character
 
         public Dictionary<int, EnemyBase> Enemys()
         {
-            return enemys;
+            return loader.Enemys();
         }
 
         public bool DiedCharacters()
@@ -203,47 +203,6 @@ namespace Team27_RougeLike.Object.Character
             //}
             //return cnt;
             return characters.Count;    //これで十分、全部回らなくてよい（Countは要素数変動の時のみ処理、Foreachを使わずに済む）
-        }
-
-        private void Load()
-        {
-            FileStream datefs = new FileStream(enemyFilename, FileMode.Open);
-            StreamReader enemDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
-
-            //ごみ捨て
-
-            var Dust = enemDate.ReadLine();
-
-            while (!enemDate.EndOfStream)
-            {
-                var line = enemDate.ReadLine();
-                string[] data = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                var id = int.Parse(data[0]);
-                var name = data[1];
-                var health = int.Parse(data[2]);
-                var attack = int.Parse(data[3]);
-                var diffence = int.Parse(data[4]);
-                var speed = float.Parse(data[5]);
-                var aiType = data[6];
-                var size = int.Parse(data[7]);
-                var attackspd = int.Parse(data[8]);
-                var exp = int.Parse(data[9]);
-                enemys.Add
-                    (
-                    id,
-                    new EnemyBase
-                        (
-                        new Status(1, health, attack, diffence, attackspd, speed),
-                        new CollisionSphere(Vector3.Zero, size),
-                        aiType,
-                        name,
-                        this,
-                        exp
-                        )
-                    );
-            }
-
-            enemDate.Close();
         }
     }
 }

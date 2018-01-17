@@ -107,7 +107,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-01-16T09:59:19.0954098+09:00</Time>
+      <Time>2018-01-17T09:48:44.2535791+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -293,7 +293,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\wall_tutorial.xnb</Output>
-      <Time>2018-01-16T09:59:19.1289995+09:00</Time>
+      <Time>2018-01-17T09:48:44.2636314+09:00</Time>
     </Item>
     <Item>
       <Source>Model\magic_circle.fbx</Source>
@@ -314,6 +314,15 @@
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\magic_circle_0.xml</Output>
       <Time>2018-01-16T09:59:19.0964128+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\Snow.png</Source>
+      <Name>Texture\Snow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Snow.xnb</Output>
+      <Time>2018-01-17T09:46:41.9753774+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

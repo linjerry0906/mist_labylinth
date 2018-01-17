@@ -27,6 +27,7 @@ namespace Team27_RougeLike.Scene
                 {"cubeTest" ,path},
                 {"bat" ,path},
                 {"slash" ,path},
+                {"Snow" ,path},
                 {"fog" ,path},
                 {"town" ,path},
                 {"dungeon_image_tutorial" ,path},

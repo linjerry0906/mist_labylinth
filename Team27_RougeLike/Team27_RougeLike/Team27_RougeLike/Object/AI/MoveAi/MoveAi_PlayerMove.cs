@@ -48,12 +48,11 @@ namespace Team27_RougeLike.Object.AI
             {
                 velocity += projector.Right;
             }
-
             if (velocity.LengthSquared() != 0)
             {
                 velocity.Normalize();
             }
-            
+
             if (inputState.GetKeyState(Keys.LeftShift) && !actor.Dodge())
             {
                 velocity = velocity * 1.5f;
@@ -62,7 +61,7 @@ namespace Team27_RougeLike.Object.AI
             if (!actor.Dodge())
             {
                 var old = velocity;
-                
+
                 //goto使ってるので変なのを入れないように
                 if (inputState.DualkeyDown(Keys.W))
                 {
@@ -91,6 +90,7 @@ namespace Team27_RougeLike.Object.AI
                     actor.AiManager().SetStateAi(new StateAi_Dodge(actor));
                 }
                 actor.Velocity = velocity;
+
             }
         }
     }

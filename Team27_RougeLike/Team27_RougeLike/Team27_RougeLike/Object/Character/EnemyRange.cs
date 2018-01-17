@@ -16,5 +16,22 @@ namespace Team27_RougeLike.Object.Character
         public int searchRange;      //索敵範囲
         public int waitRange;        //敵のとる間合い
         public int attackRange;      //攻撃範囲
+
+        public static EnemyRange Fool()
+        {
+            return new EnemyRange(50, 20, 10);
+        }
+        public static EnemyRange Ranged()
+        {
+            return new EnemyRange(50, 15, 30);
+        }
+        public static EnemyRange Melee()
+        {
+            return new EnemyRange(50, 20, 15);
+        }
+        public static EnemyRange Totem()
+        {
+            return new EnemyRange(0, 0, 60);
+        }
     }
 }

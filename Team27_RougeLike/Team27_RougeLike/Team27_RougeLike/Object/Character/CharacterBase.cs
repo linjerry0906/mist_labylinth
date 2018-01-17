@@ -18,10 +18,12 @@ namespace Team27_RougeLike.Object
         protected BaseAiManager aiManager;
         protected Motion motion;
 
-        protected string textureName;//テクスチャ名
-        protected string tag;        //敵味方　タグ分け
+        protected string textureName;   //テクスチャ名
+        protected string tag;           //敵味方　タグ分け
 
-        protected Vector3 velocity;
+        protected Vector3 velocity;     //移動ベクトル
+        protected Vector3 attackAngle;  //攻撃方向
+        protected Vector3 nockback;
 
         public string Tag { get { return tag; } }
 
@@ -38,10 +40,32 @@ namespace Team27_RougeLike.Object
         public abstract void Update(GameTime gameTime);
 
         public abstract void Attack();
-
-        public void Draw(Renderer renderer)
+        public virtual void Draw(Renderer renderer)
         {
             renderer.DrawPolygon(textureName, collision.Position, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
+        }
+        public bool Dodge()
+        {
+            return aiManager.GetStateAi() is StateAi_Dodge;
+        }
+
+        protected void NockBackUpdate()
+        {
+            var n = nockback;
+            n.Y = 0;
+            nockback -= n * 0.1f;
+            nockback.Y = 0;
+            if (nockback.X < 0.1f) nockback.X = 0;
+            if (nockback.Z < 0.1f) nockback.Z = 0;
+        }
+        public bool NockBacking()
+        {
+            return nockback != Vector3.Zero;
+        }
+        public abstract void SetAttackAngle();
+        public Vector3 GetAttackAngle()
+        {
+            return attackAngle;
         }
         public abstract void Damage(int num, Vector3 nockback);
         public abstract bool IsDead();
@@ -53,10 +77,6 @@ namespace Team27_RougeLike.Object
         public BaseAiManager AiManager()
         {
             return aiManager;
-        }
-        public bool Dodge  ()
-        {
-            return aiManager.GetStateAi() is StateAi_Dodge;
         }
         public Vector3 Velocity
         {
