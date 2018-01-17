@@ -108,7 +108,7 @@ namespace Team27_RougeLike.Scene
             pManager = new ParticleManager(gameDevice);
             pManager.Initialize();
 
-            characterManager = new CharacterManager(gameDevice);
+            characterManager = new CharacterManager(gameDevice, pManager);
 
             ui = new DungeonUI(gameManager, gameDevice);
 

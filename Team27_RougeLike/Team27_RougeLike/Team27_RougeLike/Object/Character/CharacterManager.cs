@@ -17,7 +17,7 @@ namespace Team27_RougeLike.Object.Character
 {
     class CharacterManager
     {
-        private GameDevice gamedevice;
+        private GameDevice gameDevice;
         private DungeonUI ui;
         private List<CharacterBase> characters = new List<CharacterBase>();
         private List<Spawner> spawners = new List<Spawner>();
@@ -30,10 +30,12 @@ namespace Team27_RougeLike.Object.Character
         private const int drawLength = 500;
 
         private MapItemManager mapItemManager;      //ステージのアイテムマネージャー
-
-        public CharacterManager(GameDevice gamedevice)
+        private ParticleManager pManager; //エフェクトのマネージャー
+ 
+        public CharacterManager(GameDevice gameDevice,ParticleManager pManager)
         {
-            this.gamedevice = gamedevice;
+            this.gameDevice = gameDevice;
+            this.pManager = pManager;
 
             enemyFilename = @"Content/" + "EnemysCSV/Enemy.csv";
             Load();
@@ -119,11 +121,11 @@ namespace Team27_RougeLike.Object.Character
             {
                 if (c is Player)
                 {
-                    c.Draw(gamedevice.Renderer);
+                    c.Draw(gameDevice.Renderer);
                 }
                 if (c is CharacterBase && NearPlayer(c.Collision.Position) && !(c is Player))
                 {
-                    c.Draw(gamedevice.Renderer);
+                    c.Draw(gameDevice.Renderer);
                 }
             }
         }
@@ -145,7 +147,7 @@ namespace Team27_RougeLike.Object.Character
                 (
                 position,
                 gamemanager.PlayerInfo,
-                gamedevice,
+                gameDevice,
                 this,
                 pManager,
                 gamemanager,
@@ -238,6 +240,8 @@ namespace Team27_RougeLike.Object.Character
                         aiType,
                         name,
                         this,
+                        pManager,
+                        gameDevice,
                         exp
                         )
                     );

@@ -4,12 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
+using Team27_RougeLike.Object.ParticleSystem;
+using Team27_RougeLike.Device;
+
 namespace Team27_RougeLike.Object.Box
 {
     class MoveDamageBox : HitBoxBase, iDamageBox
     {
         private int attack;
         private Vector3 angle;
+        private ParticleManager pManager;
 
         public MoveDamageBox(BoundingSphere collision, int time, int attack, Vector3 angle)
             : base(collision, time)
@@ -17,11 +21,13 @@ namespace Team27_RougeLike.Object.Box
             this.attack = attack;
             this.angle = angle;
         }
-        public MoveDamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle)
+        public MoveDamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle,ParticleManager pManager,GameDevice gameDevice)
             : base(collision, time, tag)
         {
             this.attack = attack;
             this.angle = angle;
+            this.pManager = pManager;
+            pManager.AddParticle(new Bullet(gameDevice, this,new Vector2(collision.Radius,collision.Radius)));
         }
         public MoveDamageBox(BoundingSphere collision, int time, List<string> tags, int attack, Vector3 angle)
             : base(collision, time, tags)
