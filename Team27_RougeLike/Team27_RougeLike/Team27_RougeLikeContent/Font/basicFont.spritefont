@@ -262,6 +262,10 @@ with.
         <Start>庫</Start>
         <End>庫</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>告</Start>
+        <End>告</End>
+      </CharacterRegion>
       
       <CharacterRegion>
         <Start>籠</Start>
@@ -459,6 +463,10 @@ with.
         <Start>中</Start>
         <End>中</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>注</Start>
+        <End>注</End>
+      </CharacterRegion>
       
       <!-- ちょう -->
 
@@ -577,6 +585,10 @@ with.
       <!-- へ -->
 
       <!-- ほ -->
+      <CharacterRegion>
+        <Start>報</Start>
+        <End>報</End>
+      </CharacterRegion>
       <!-- ぼ -->
       <CharacterRegion>
         <Start>冒</Start>

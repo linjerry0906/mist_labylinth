@@ -124,7 +124,10 @@
     <Compile Include="Object\PlayerStatus.cs" />
     <Compile Include="Object\PlayerStatusLoader.cs" />
     <Compile Include="QuestSystem\CollectQuest.cs" />
+    <Compile Include="QuestSystem\GuildMenu.cs" />
+    <Compile Include="QuestSystem\IGuildState.cs" />
     <Compile Include="QuestSystem\Quest.cs" />
+    <Compile Include="QuestSystem\QuestStateMachine.cs" />
     <Compile Include="Scene\DungeonProcess.cs" />
     <Compile Include="Scene\Town\GuildScene.cs" />
     <Compile Include="Scene\LoadBossScene.cs" />

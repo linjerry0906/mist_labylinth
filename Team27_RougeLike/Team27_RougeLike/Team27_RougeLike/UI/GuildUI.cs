@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework;
 using Team27_RougeLike.Scene;
 using Team27_RougeLike.Def;
 using Team27_RougeLike.Device;
+using Team27_RougeLike.QuestSystem;
 
 namespace Team27_RougeLike.UI
 {
@@ -20,6 +21,9 @@ namespace Team27_RougeLike.UI
         private Renderer renderer;
         private GameManager gameManager;
         private Window backLayer;
+        private static readonly float LIMIT_ALPHA = 0.5f;
+
+        private QuestStateMachine questStateMachine;
 
         public GuildUI(GameManager gameManager, GameDevice gameDevice)
         {
@@ -37,17 +41,31 @@ namespace Team27_RougeLike.UI
                 new Vector2(40, 40),
                 new Vector2(WindowDef.WINDOW_WIDTH - 80, WindowDef.WINDOW_HEIGHT - 80));
             backLayer.Initialize();
+            backLayer.SetAlphaLimit(LIMIT_ALPHA);
             backLayer.Switch(true);
+
+            questStateMachine = new QuestStateMachine(gameManager, gameDevice);
         }
 
         public void Update()
         {
             backLayer.Update();
+
+            if (questStateMachine.IsEnd())
+            {
+                SwitchOff();
+                return;
+            }
+
+            questStateMachine.Update();
         }
 
         public void Draw()
         {
+            float constractAlpha = 1.0f / LIMIT_ALPHA;
+
             backLayer.Draw();
+            questStateMachine.Draw(constractAlpha, backLayer.CurrentAlpha());
         }
 
         public bool IsEnd()
@@ -58,6 +76,7 @@ namespace Team27_RougeLike.UI
         public void SwitchOff()
         {
             backLayer.Switch(false);
+            questStateMachine.ShutDown();
         }
     }
 }

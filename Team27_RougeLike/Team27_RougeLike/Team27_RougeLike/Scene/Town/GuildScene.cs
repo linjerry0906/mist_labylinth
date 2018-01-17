@@ -51,7 +51,6 @@ namespace Team27_RougeLike.Scene
             blurEffect.Draw(renderer);
 
             renderer.Begin();
-            renderer.DrawString("Guild Scene Test\nB key Back To Town", Vector2.Zero, new Vector2(1.1f, 1.1f), Color.Black);
             DrawUI();
             renderer.End();
         }
@@ -96,11 +95,6 @@ namespace Team27_RougeLike.Scene
 
         private void CheckEnd()
         {
-            if (input.GetKeyTrigger(Keys.B))
-            {
-                guildUI.SwitchOff();
-            }
-
             if (guildUI.IsEnd())
             {
                 endFlag = true;

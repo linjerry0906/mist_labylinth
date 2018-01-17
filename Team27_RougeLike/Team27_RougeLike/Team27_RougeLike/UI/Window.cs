@@ -104,6 +104,11 @@ namespace Team27_RougeLike.UI
             renderer.DrawTexture("fade", offsetPosition, windowSize, alpha);
         }
 
+        public void Draw(float alpha)
+        {
+            renderer.DrawTexture("fade", offsetPosition, windowSize, alpha);
+        }
+
         public void Draw(string name)
         {
             renderer.DrawTexture(name, offsetPosition, windowSize, alpha);
