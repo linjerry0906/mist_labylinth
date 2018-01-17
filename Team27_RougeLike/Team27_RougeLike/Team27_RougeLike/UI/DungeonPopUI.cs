@@ -23,6 +23,7 @@ namespace Team27_RougeLike.UI
         private bool isPop;
 
         private string text;
+        private Vector2 textOffset;
 
         public DungeonPopUI(GameDevice gameDevice)
         {
@@ -39,6 +40,7 @@ namespace Team27_RougeLike.UI
             isPop = false;                                          //Pop状態
 
             text = "";                                              //表示する文字
+            textOffset = new Vector2(0, -20);
         }
 
         /// <summary>
@@ -125,11 +127,16 @@ namespace Team27_RougeLike.UI
             window.Draw();                          //背景レイアウト
             renderer.DrawString(                    //アイテム情報を仮描画
                 text, 
-                window.GetCenter(), 
+                window.GetCenter() + textOffset, 
                 Color.White, 
                 new Vector2(1.0f, 1.0f), 
                 window.CurrentAlpha(), 
                 true, true);
+        }
+
+        public void SetTextOffset(Vector2 offset)
+        {
+            textOffset = offset;
         }
 
         /// <summary>

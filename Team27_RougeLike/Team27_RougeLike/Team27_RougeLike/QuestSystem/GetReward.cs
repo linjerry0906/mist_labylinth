@@ -13,6 +13,7 @@ using Team27_RougeLike.Scene;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.UI;
 using Team27_RougeLike.Def;
+using Team27_RougeLike.Object.Item;
 
 namespace Team27_RougeLike.QuestSystem
 {
@@ -21,13 +22,14 @@ namespace Team27_RougeLike.QuestSystem
         private enum ButtonEnum
         {
             戻る = 0,
-            報告, 
+            報告,
             あきらめる,
             Null,
         }
 
         private GameManager gameManager;
         private GameDevice gameDevice;
+        private ItemManager itemManager;
         private InputState input;
         private Renderer renderer;
         private GuildState nextState;
@@ -49,6 +51,7 @@ namespace Team27_RougeLike.QuestSystem
             this.gameDevice = gameDevice;
             input = gameDevice.InputState;
             renderer = gameDevice.Renderer;
+            itemManager = gameManager.ItemManager;
         }
 
         public void Draw(float constractAlpha, float currentalpha)
@@ -58,6 +61,7 @@ namespace Team27_RougeLike.QuestSystem
 
             DrawMainButton(constractAlpha, currentalpha);
             DrawQuestList(constractAlpha, currentalpha);
+            DrawQuestInfo(constractAlpha, currentalpha);
         }
 
         /// <summary>
@@ -69,10 +73,19 @@ namespace Team27_RougeLike.QuestSystem
         {
             for (int i = 0; i < buttons.Length; i++)
             {
-                if (((ButtonEnum)i) == ButtonEnum.あきらめる ||
-                    ((ButtonEnum)i) == ButtonEnum.報告 && 
+                if ((((ButtonEnum)i) == ButtonEnum.あきらめる ||
+                    ((ButtonEnum)i) == ButtonEnum.報告) &&
                     currentQuestInfo == null)
+                {
                     continue;
+                }
+
+                if (currentQuestInfo != null &&
+                    !currentQuestInfo.IsClear() &&
+                   ((ButtonEnum)i) == ButtonEnum.報告)
+                {
+                    continue;
+                }
 
                 Color color = Color.Black;
                 float adjustAlpha = 1.0f;
@@ -118,6 +131,85 @@ namespace Team27_RougeLike.QuestSystem
                     questButtons[i].ButtonCenterVector(),
                     color, new Vector2(1.1f, 1.1f), constractAlpha * currentAlpha,
                     true, true);
+            }
+        }
+
+        /// <summary>
+        /// クエスト詳細を描画
+        /// </summary>
+        /// <param name="constractAlpha"></param>
+        /// <param name="currentAlpha"></param>
+        private void DrawQuestInfo(float constractAlpha, float currentAlpha)
+        {
+            if (currentQuestInfo == null)
+                return;
+
+            Vector2 position = rightBackLayer.GetOffsetPosition() + new Vector2(10, 10);
+            Vector2 line = new Vector2(0, 40);
+            Color color = Color.Lerp(Color.Gold, Color.Red, currentQuestInfo.Difficulty() / 7.0f);
+            //QuestName
+            renderer.DrawString(
+                currentQuestInfo.QuestName(), position, new Vector2(1.2f, 1.2f),
+                color, constractAlpha * currentAlpha);
+
+            Vector2 fontSize = new Vector2(1.1f, 1.1f);
+            //Quest説明
+            renderer.DrawString(
+                currentQuestInfo.QuestInfo(), position + line, fontSize,
+                Color.White, constractAlpha * currentAlpha);
+            //報酬
+            Vector2 offsetX = new Vector2(15, 0);
+            renderer.DrawString(
+                "報酬", position + 4 * line, fontSize,
+                Color.Gold, constractAlpha * currentAlpha);
+            renderer.DrawString(
+                "賞金", position + 4.5f * line + offsetX, fontSize,
+                Color.White, constractAlpha * currentAlpha);
+            renderer.DrawString(
+                currentQuestInfo.GainMoney().ToString(), position + 5 * line + 2 * offsetX, fontSize,
+                Color.White, constractAlpha * currentAlpha);
+            renderer.DrawString(
+                "ギルドポイント", position + 6 * line + offsetX, fontSize,
+                Color.White, constractAlpha * currentAlpha);
+            renderer.DrawString(
+                currentQuestInfo.GuildExp().ToString(), position + 6.5f * line + 2 * offsetX, fontSize,
+                Color.White, constractAlpha * currentAlpha);
+            renderer.DrawString(
+                "アイテム ", position + 7.5f * line + offsetX, fontSize,
+                Color.White, constractAlpha * currentAlpha);
+
+            if (currentQuestInfo.AwardItem() != null)
+            {
+                for (int i = 0; i < currentQuestInfo.AwardItem().Length; i++)
+                {
+                    Item item = itemManager.GetConsuptionItem(currentQuestInfo.AwardItem()[i]);
+                    renderer.DrawString(
+                        item.GetItemName(), position + (8 + i * 0.5f) * line + 2 * offsetX, fontSize,
+                        Color.White, constractAlpha * currentAlpha);
+                }
+            }
+
+            renderer.DrawString(
+                "達成条件 ", position + 10 * line, fontSize,
+                Color.Red, constractAlpha * currentAlpha);
+
+            for (int i = 0; i < currentQuestInfo.RequireID().Length; i++)
+            {
+                if (currentQuestInfo is CollectQuest)
+                {
+                    Item item = itemManager.GetConsumption(currentQuestInfo.RequireID()[i]);
+                    renderer.DrawString(
+                        item.GetItemName(), position + (10.5f + i * 0.5f) * line + offsetX, fontSize,
+                        Color.White, constractAlpha * currentAlpha);
+
+                    Vector2 numPos = position + (10.5f + i * 0.5f) * line;
+                    numPos.X = rightBackLayer.GetCenter().X + 120;
+                    renderer.DrawString(
+                        currentQuestInfo.CurrentState()[i].currentAmount +
+                        " / " + currentQuestInfo.CurrentState()[i].requireAmount,
+                        numPos, fontSize,
+                        Color.White, constractAlpha * currentAlpha);
+                }
             }
         }
 
@@ -189,8 +281,10 @@ namespace Team27_RougeLike.QuestSystem
         {
             currentButton = ButtonEnum.Null;
 
-            Vector2 mousePos = input.GetMousePosition();
-            CheckMainButton(new Point((int)mousePos.X, (int)mousePos.Y));
+            Point mousePos =
+                new Point((int)input.GetMousePosition().X, (int)input.GetMousePosition().Y);
+            CheckMainButton(mousePos);
+            CheckQuestList(mousePos);
         }
 
         /// <summary>
@@ -214,6 +308,45 @@ namespace Team27_RougeLike.QuestSystem
         }
 
         /// <summary>
+        /// QuestListがクリックされているかをチェック
+        /// </summary>
+        /// <param name="mousePos"></param>
+        private void CheckQuestList(Point mousePos)
+        {
+            questIndex = -1;
+            for (int i = 0; i < questButtons.Count; i++)
+            {
+                if (questButtons[i].IsClick(mousePos))
+                {
+                    questIndex = i;
+                    if (input.IsLeftClick())
+                    {
+                        currentQuestInfo = quests[i];
+                        InitCurrentInfo();
+                    }
+                    return;
+                }
+            }
+        }
+
+        private void InitCurrentInfo()
+        {
+            if (currentQuestInfo is CollectQuest)
+            {
+                for (int i = 0; i < currentQuestInfo.RequireID().Length; i++)
+                {
+                    int id = currentQuestInfo.RequireID()[i];
+                    int amount = 0;
+                    if (gameManager.PlayerItem.DepositoryItem().ContainsKey(id))
+                        amount += gameManager.PlayerItem.DepositoryItem()[id];
+
+                    currentQuestInfo.SetItemAmount(id, amount);
+                }
+            }
+            currentQuestInfo.CheckClear();
+        }
+
+        /// <summary>
         /// 次のStateを決める
         /// </summary>
         /// <param name="current">選択したボタン</param>
@@ -228,19 +361,48 @@ namespace Team27_RougeLike.QuestSystem
                 case ButtonEnum.報告:
                     if (currentQuestInfo == null)
                         return;
-
                     if (!currentQuestInfo.IsClear())
                         return;
-
+                    QuestClear();
                     break;
                 case ButtonEnum.あきらめる:
                     if (currentQuestInfo == null)
                         return;
-
+                    RemoveQuest();
                     break;
                 case ButtonEnum.Null:
                     break;
             }
+        }
+
+        private void RemoveQuest()
+        {
+            gameManager.PlayerQuest.DeleteQuest(currentQuestInfo.QuestID());
+            currentQuestInfo = null;
+            questIndex = -1;
+            Initialize();
+        }
+
+        private void QuestClear()
+        {
+            if(currentQuestInfo is CollectQuest)
+            {
+                for(int i = 0; i < currentQuestInfo.CurrentState().Count; i++)
+                {
+                    int id = currentQuestInfo.CurrentState()[i].id;
+                    int amount = currentQuestInfo.CurrentState()[i].requireAmount;
+                    gameManager.PlayerItem.RemoveDepositoryItem(id, amount);
+                }
+                for(int i = 0; i < currentQuestInfo.AwardItem().Length; i++)
+                {
+                    int id = currentQuestInfo.AwardItem()[i];
+                    gameManager.PlayerItem.DepositoryItem()[id]++;
+                }
+            }
+
+            //ToDo:GuildExp
+            gameManager.PlayerItem.AddMoney(currentQuestInfo.GainMoney());
+            RemoveQuest();
         }
 
         public void ShutDown()

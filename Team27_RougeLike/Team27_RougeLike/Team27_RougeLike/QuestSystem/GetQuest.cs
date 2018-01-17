@@ -140,7 +140,7 @@ namespace Team27_RougeLike.QuestSystem
 
             Vector2 position = rightBackLayer.GetOffsetPosition() + new Vector2(10, 10);
             Vector2 line = new Vector2(0, 40);
-            Color color = Color.Lerp(Color.Gold, Color.Red, currentInfo.Difficulty() / 5.0f);
+            Color color = Color.Lerp(Color.Gold, Color.Red, currentInfo.Difficulty() / 7.0f);
             //QuestName
             renderer.DrawString(
                 currentInfo.QuestName(), position, new Vector2(1.2f, 1.2f),
@@ -239,9 +239,12 @@ namespace Team27_RougeLike.QuestSystem
 
             InitQuest();
 
+            #region PopUI
             popUI = new DungeonPopUI(gameDevice);
             popUI.SetSize(new Vector2(300, 80));
             popUI.SetAlphaLimit(0.9f);
+            popUI.SetTextOffset(Vector2.Zero);
+            #endregion
         }
 
         private void InitQuest()
