@@ -420,11 +420,17 @@ namespace Team27_RougeLike.Scene
                     Color.White, new Vector2(1, 1), 1.0f, true, true);
             }
 
+            if (mode == DepotModeType.equipment)
+            {
+                renderer.DrawString("倉庫(" + depotNowNum + "/" + depotMaxNum + ")", new Vector2(1080 / 2 + 64, 64),
+                    new Vector2(1, 1), Color.White);
+            }
+
             if (mode == DepotModeType.consumption || mode == DepotModeType.equipment)
             {
                 renderer.DrawString("バッグ(" + bagNowNum + "/" + bagMaxNum + ")", new Vector2(64,64),
                     new Vector2(1, 1), Color.White);
-                renderer.DrawString("倉庫(" + depotNowNum + "/" + depotMaxNum + ")", new Vector2(1080 / 2 + 64, 64),
+                renderer.DrawString("倉庫", new Vector2(1080 / 2 + 64, 64),
                     new Vector2(1, 1), Color.White);
 
                 renderer.DrawString("アイテム名", new Vector2(64, 64 + 32), new Vector2(1, 1), Color.White);
