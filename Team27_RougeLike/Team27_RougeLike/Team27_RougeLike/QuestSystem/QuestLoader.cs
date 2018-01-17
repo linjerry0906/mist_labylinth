@@ -15,25 +15,45 @@ namespace Team27_RougeLike.QuestSystem
 {
     class QuestLoader
     {
+        public enum QuestRank
+        {
+            F = 0,
+            E,
+            D,
+            C,
+            B,
+            A,
+            S,
+            NULL,
+        }
         private bool isLoad;
         private static readonly int MAX_QUEST = 10;
+        private QuestRank currentRank;
         private static List<Quest> activeQuest;
-        private static List<Quest> randomQuest;
+        private static List<List<Quest>> randomQuest;
 
         public QuestLoader()
         {
             activeQuest = new List<Quest>();
-            randomQuest = new List<Quest>();
+            randomQuest = new List<List<Quest>>();
+            for (int i = 0; i < (int)QuestRank.NULL; i++)
+            {
+                randomQuest.Add(new List<Quest>());
+            }
         }
 
         public void Initialize()
         {
+            currentRank = QuestRank.F;
             activeQuest.Clear();
-            randomQuest.Clear();
+            for (int i = 0; i < (int)QuestRank.NULL; i++)
+            {
+                randomQuest[i].Clear();
+            }
             isLoad = false;
         }
 
-        public void Load(DungeonProcess dungeonProcess)
+        public void Load(DungeonProcess dungeonProcess, bool loadAll = false)
         {
             FileStream fs = new FileStream(@"Content/" + "QuestCSV/Quest.csv", FileMode.Open);      //設定ファイルを開く
             StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("shift_jis"));
@@ -49,10 +69,13 @@ namespace Team27_RougeLike.QuestSystem
 
                 int dungeonNo = int.Parse(data[9]);
                 int floor = int.Parse(data[10]);
-                if (!dungeonProcess.HasKey(dungeonNo))  //Clearしたことなかったら出現しない
-                    continue;
-                if (dungeonProcess.GetProcess()[dungeonNo] < floor)             //階層達していない
-                    continue;
+                if (!loadAll)
+                {
+                    if (!dungeonProcess.HasKey(dungeonNo))  //Clearしたことなかったら出現しない
+                        continue;
+                    if (dungeonProcess.GetProcess()[dungeonNo] < floor)             //階層達していない
+                        continue;
+                }
 
                 int id = int.Parse(data[0]);
                 string type = data[1];
@@ -70,7 +93,7 @@ namespace Team27_RougeLike.QuestSystem
                 if (data[8] != "null")
                     count++;
                 int[] award = null;
-                if(count > 0)
+                if (count > 0)
                 {
                     award = new int[count];
                     for (int i = 0; i < count; i++)
@@ -112,42 +135,76 @@ namespace Team27_RougeLike.QuestSystem
             isLoad = true;                              //読み終わった
         }
 
+        /// <summary>
+        /// Questをランダムに発生
+        /// </summary>
+        /// <param name="gameDevice"></param>
         public void RandomQuest(GameDevice gameDevice)
         {
-            if(activeQuest.Count < MAX_QUEST)
+            for (int i = 0; i < activeQuest.Count; i++)
             {
-                for (int i = 0; i < activeQuest.Count; i++)
-                {
-                    randomQuest.Add(activeQuest[i].Clone());
-                }
-                return;
+                int rank = activeQuest[i].Difficulty();
+                randomQuest[rank].Add(activeQuest[i]);
             }
 
-            for (int i = 0; i < MAX_QUEST; i++)
+            for (int i = 0; i < (int)QuestRank.NULL; i++)
             {
-                int index = gameDevice.Random.Next(0, activeQuest.Count);
-                if (randomQuest.Exists(q => q.QuestID() == activeQuest[index].QuestID()))
+                if (randomQuest[i].Count < MAX_QUEST)
                     continue;
 
-                randomQuest.Add(activeQuest[index].Clone());
+                for (int amount = 0; amount < randomQuest[i].Count - MAX_QUEST; amount++)
+                {
+                    int removeIndex = gameDevice.Random.Next(0, randomQuest[i].Count);
+                    randomQuest[i].RemoveAt(removeIndex);
+                }
             }
         }
 
+        /// <summary>
+        /// Loadしたか
+        /// </summary>
+        /// <returns></returns>
         public bool IsLoad()
         {
             return isLoad;
         }
 
-
+        /// <summary>
+        /// 現在のランクのリスト
+        /// </summary>
+        /// <returns></returns>
         public List<Quest> GetRandomQuest()
         {
-            return randomQuest;
+            return randomQuest[(int)currentRank];
         }
 
+        /// <summary>
+        /// IDからクエストを生成
+        /// </summary>
+        /// <param name="id">QuestID</param>
+        /// <returns></returns>
+        public Quest GetQuest(int id)
+        {
+            return activeQuest.Find(e => e.QuestID() == id).Clone();
+        }
+
+        /// <summary>
+        /// 現在のランクにあるIDを消す
+        /// </summary>
+        /// <param name="id"></param>
         public void RemoveQuest(int id)
         {
-            if (randomQuest.Exists(q => q.QuestID() == id))
-                randomQuest.RemoveAll(q => q.QuestID() == id);
+            if (randomQuest[(int)currentRank].Exists(q => q.QuestID() == id))
+                randomQuest[(int)currentRank].RemoveAll(q => q.QuestID() == id);
+        }
+
+        /// <summary>
+        /// 見るクエストを変更
+        /// </summary>
+        /// <param name="rank"></param>
+        public void ChangeCurrentRank(QuestRank rank)
+        {
+            currentRank = rank;
         }
     }
 }

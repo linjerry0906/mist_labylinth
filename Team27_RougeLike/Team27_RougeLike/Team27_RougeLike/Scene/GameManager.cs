@@ -47,6 +47,8 @@ namespace Team27_RougeLike.Scene
             enemySettingManager = new EnemySettingManager(gameDevice);
             blockStyle = new BlockStyle();
             questManager = new QuestLoader();
+            questManager.Initialize();
+            questManager.Load(dungeonProcess, true);
             itemManager = new ItemManager();
             dungeonProcess = new DungeonProcess();
 
@@ -81,6 +83,7 @@ namespace Team27_RougeLike.Scene
 
             playerItem.LoadFromFile(saveData);       //Playerアイテム復元
             dungeonProcess.LoadSaveData(saveData);   //攻略情報復元
+            playerQuest.LoadFromSave(saveData);      //Quest情報復元
         }
 
         /// <summary>

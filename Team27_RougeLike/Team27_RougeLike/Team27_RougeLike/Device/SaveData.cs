@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Team27_RougeLike.Scene;
 using Team27_RougeLike.Object;
 using Team27_RougeLike.Object.Item;
+using Team27_RougeLike.QuestSystem;
 
 namespace Team27_RougeLike.Device
 {
@@ -24,6 +25,8 @@ namespace Team27_RougeLike.Device
         private WeaponItem rightHand;                   //右手装備
         private List<Item> depotEquipment;              //倉庫の装備アイテム
         private Dictionary<int, int> depotConsumption;  //倉庫の消費アイテム
+        private List<Quest> quest;                      //受けているクエスト
+        private QuestLoader questLoader;                //QuestLoader
 
         private string saveFileName;
         private bool isSave;
@@ -41,6 +44,7 @@ namespace Team27_RougeLike.Device
             armor = playerInventory.CurrentArmor();
             leftHand = playerInventory.LeftHand();
             rightHand = playerInventory.RightHand();
+            quest = new List<Quest>();
 
             saveFileName = @"Content/SaveCSV/SaveDate.csv";
             isSave = false;
@@ -57,6 +61,8 @@ namespace Team27_RougeLike.Device
             rightHand = playerInventory.RightHand();
             depotEquipment = playerInventory.EquipDepository();
             depotConsumption = playerInventory.DepositoryItem();
+            questLoader = gameManager.QuestManager;
+            quest = gameManager.PlayerQuest.CurrentQuest();
         }
 
         //Itemをテキスト出力するためのメソッド
@@ -124,6 +130,21 @@ namespace Team27_RougeLike.Device
             foreach (int id in depotConsumption.Keys)
             {
                 sw.WriteLine("depot," + "Consumption," + id + "," + depotConsumption[id]);
+            }
+
+            foreach (Quest q in quest)
+            {
+                sw.Write("quest," + q.QuestID() + ",");
+                for (int i = 0; i < 3; i++)
+                {
+                    if (i < q.CurrentState().Count)
+                    {
+                        sw.Write(q.CurrentState()[i].currentAmount + ",");
+                        continue;
+                    }
+                    sw.Write("null,");
+                }
+                sw.WriteLine();
             }
 
             sw.Close();
@@ -268,6 +289,22 @@ namespace Team27_RougeLike.Device
                             itemDates.Add(itemDate);
                         }
                     }
+                    else if (strings[0] == "quest")
+                    {
+                        Quest q = questLoader.GetQuest(int.Parse(strings[1]));
+                        if(q is CollectQuest)
+                        {
+                            for (int i = 0; i < 3; i++)
+                            {
+                                if(i >= q.RequireID().Length)
+                                {
+                                    break;
+                                }
+                                q.SetItemAmount(q.RequireID()[i], int.Parse(strings[i + 2]));
+                            }
+                        }
+                        quest.Add(q);
+                    }
                 }
                 sr.Close();
 
@@ -290,7 +327,7 @@ namespace Team27_RougeLike.Device
                 isLoad = false;
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
                 sr.Close();
@@ -310,7 +347,7 @@ namespace Team27_RougeLike.Device
             }
         }
 
-        public Dictionary<int,int> GetClearDungen()
+        public Dictionary<int, int> GetClearDungen()
         {
             return clearDungen;
         }
@@ -348,6 +385,11 @@ namespace Team27_RougeLike.Device
         public Dictionary<int, int> GetDepotConsumption()
         {
             return depotConsumption;
+        }
+
+        public List<Quest> GetQuest()
+        {
+            return quest;
         }
 
     }

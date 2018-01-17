@@ -1,7 +1,7 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
 // 作成日：2018.1.17
-// 内容  ：GuildのUIState
+// 内容  ：ランクごとにクエストを整理する
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -16,12 +16,17 @@ using Team27_RougeLike.Def;
 
 namespace Team27_RougeLike.QuestSystem
 {
-    class GuildMenu : IGuildState
+    class SelectQuestRank : IGuildState
     {
         private enum ButtonEnum
         {
-            クエスト受注 = 0,
-            クエスト報告,
+            Fランク = 0,
+            Eランク,
+            Dランク,
+            Cランク,
+            Bランク,
+            Aランク,
+            Sランク,
             戻る,
             Null,
         }
@@ -37,7 +42,7 @@ namespace Team27_RougeLike.QuestSystem
         private Button[] buttons;
         private ButtonEnum currentButton;
 
-        public GuildMenu(GameManager gameManager, GameDevice gameDevice)
+        public SelectQuestRank(GameManager gameManager, GameDevice gameDevice)
         {
             this.gameManager = gameManager;
             this.gameDevice = gameDevice;
@@ -62,7 +67,7 @@ namespace Team27_RougeLike.QuestSystem
             for (int i = 0; i < buttons.Length; i++)
             {
                 Color color = Color.Black;
-                float adjustAlpha = 1.0f;         
+                float adjustAlpha = 1.0f;
                 if (i == (int)currentButton)    //OnButton色, 透明度
                 {
                     adjustAlpha = 0.8f;
@@ -90,7 +95,7 @@ namespace Team27_RougeLike.QuestSystem
             backLayer.Switch(true);
 
             isEnd = false;
-            nextState = GuildState.End;
+            nextState = GuildState.Menu;
 
             currentButton = ButtonEnum.Null;
             float buttonWidth = backLayer.GetWindowSize().X - 20;
@@ -149,14 +154,36 @@ namespace Team27_RougeLike.QuestSystem
         {
             switch (current)
             {
-                case ButtonEnum.クエスト受注:
-                    nextState = GuildState.SelectQuestRank;
+                case ButtonEnum.Fランク:
+                    nextState = GuildState.GetQuest;
+                    gameManager.QuestManager.ChangeCurrentRank(QuestLoader.QuestRank.F);
                     break;
-                case ButtonEnum.クエスト報告:
-                    nextState = GuildState.GetAward;
+                case ButtonEnum.Eランク:
+                    nextState = GuildState.GetQuest;
+                    gameManager.QuestManager.ChangeCurrentRank(QuestLoader.QuestRank.E);
+                    break;
+                case ButtonEnum.Dランク:
+                    nextState = GuildState.GetQuest;
+                    gameManager.QuestManager.ChangeCurrentRank(QuestLoader.QuestRank.D);
+                    break;
+                case ButtonEnum.Cランク:
+                    nextState = GuildState.GetQuest;
+                    gameManager.QuestManager.ChangeCurrentRank(QuestLoader.QuestRank.C);
+                    break;
+                case ButtonEnum.Bランク:
+                    nextState = GuildState.GetQuest;
+                    gameManager.QuestManager.ChangeCurrentRank(QuestLoader.QuestRank.B);
+                    break;
+                case ButtonEnum.Aランク:
+                    nextState = GuildState.GetQuest;
+                    gameManager.QuestManager.ChangeCurrentRank(QuestLoader.QuestRank.A);
+                    break;
+                case ButtonEnum.Sランク:
+                    nextState = GuildState.GetQuest;
+                    gameManager.QuestManager.ChangeCurrentRank(QuestLoader.QuestRank.S);
                     break;
                 case ButtonEnum.戻る:
-                    nextState = GuildState.End;
+                    nextState = GuildState.Menu;
                     break;
                 case ButtonEnum.Null:
                     break;

@@ -1,4 +1,4 @@
-Start,Type,クエスト名,説明,難易度（0－5）,報酬金,報酬Item1,報酬Item2,報酬Item3,クリアDungeon番号,クリアフロア,条件ID1,条件数量1,条件ID2,条件数量2,条件ID3,条件数量3
+Start,Type,クエスト名,説明,難易度（0－6）(F~S),報酬金,報酬Item1,報酬Item2,報酬Item3,クリアDungeon番号,クリアフロア,条件ID1,条件数量1,条件ID2,条件数量2,条件ID3,条件数量3
 1,Collection,回復薬の調達,Info,0,300,null,null,null,0,0,1,3,null,null,null,null
 2,Battle,Null,Info,1,500,1,null,null,0,2,1,1,null,null,null,null
 3,Collection,Null,Info,0,400,null,null,null,0,3,2,1,null,null,null,null

@@ -216,7 +216,7 @@ namespace Team27_RougeLike.QuestSystem
             #endregion
 
             isEnd = false;
-            nextState = GuildState.End;
+            nextState = GuildState.SelectQuestRank;
 
             #region メインボタン
             currentButton = ButtonEnum.Null;
@@ -320,7 +320,7 @@ namespace Team27_RougeLike.QuestSystem
             switch (current)
             {
                 case ButtonEnum.戻る:
-                    nextState = GuildState.Menu;
+                    nextState = GuildState.SelectQuestRank;
                     isEnd = true;
                     break;
                 case ButtonEnum.受注:

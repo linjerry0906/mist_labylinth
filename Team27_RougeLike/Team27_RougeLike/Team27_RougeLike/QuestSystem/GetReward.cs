@@ -88,7 +88,7 @@ namespace Team27_RougeLike.QuestSystem
             backLayer.Switch(true);
 
             isEnd = false;
-            nextState = GuildState.End;
+            nextState = GuildState.Menu;
 
             currentButton = ButtonEnum.Null;
             float buttonWidth = backLayer.GetWindowSize().X - 20;

@@ -133,6 +133,7 @@
     <Compile Include="QuestSystem\Quest.cs" />
     <Compile Include="QuestSystem\QuestLoader.cs" />
     <Compile Include="QuestSystem\QuestStateMachine.cs" />
+    <Compile Include="QuestSystem\SelectQuestRank.cs" />
     <Compile Include="Scene\DungeonProcess.cs" />
     <Compile Include="Scene\Town\GuildScene.cs" />
     <Compile Include="Scene\LoadBossScene.cs" />
