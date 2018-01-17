@@ -16,13 +16,11 @@ using Team27_RougeLike.Def;
 
 namespace Team27_RougeLike.QuestSystem
 {
-    class GuildMenu : IGuildState
+    class GetQuest : IGuildState
     {
         private enum ButtonEnum
         {
-            クエスト受注 = 0,
-            クエスト報告,
-            戻る,
+            戻る = 0,
             Null,
         }
 
@@ -37,7 +35,7 @@ namespace Team27_RougeLike.QuestSystem
         private Button[] buttons;
         private ButtonEnum currentButton;
 
-        public GuildMenu(GameManager gameManager, GameDevice gameDevice)
+        public GetQuest(GameManager gameManager, GameDevice gameDevice)
         {
             this.gameManager = gameManager;
             this.gameDevice = gameDevice;
@@ -62,7 +60,7 @@ namespace Team27_RougeLike.QuestSystem
             for (int i = 0; i < buttons.Length; i++)
             {
                 Color color = Color.Black;
-                float adjustAlpha = 1.0f;         
+                float adjustAlpha = 1.0f;
                 if (i == (int)currentButton)    //OnButton色, 透明度
                 {
                     adjustAlpha = 0.8f;
@@ -97,7 +95,7 @@ namespace Team27_RougeLike.QuestSystem
             buttons = new Button[(int)ButtonEnum.Null];
             for (int i = 0; i < buttons.Length; i++)
             {
-                Vector2 position = backLayer.GetOffsetPosition() + new Vector2(10, 10 + (i * 40));
+                Vector2 position = backLayer.GetLeftUnder() + new Vector2(10, -40 - (i * 40));
                 buttons[i] = new Button(position, (int)buttonWidth, 30);
             }
         }
@@ -149,14 +147,8 @@ namespace Team27_RougeLike.QuestSystem
         {
             switch (current)
             {
-                case ButtonEnum.クエスト受注:
-                    nextState = GuildState.GetQuest;
-                    break;
-                case ButtonEnum.クエスト報告:
-                    nextState = GuildState.GetAward;
-                    break;
                 case ButtonEnum.戻る:
-                    nextState = GuildState.End;
+                    nextState = GuildState.Menu;
                     break;
                 case ButtonEnum.Null:
                     break;

@@ -124,6 +124,8 @@
     <Compile Include="Object\PlayerStatus.cs" />
     <Compile Include="Object\PlayerStatusLoader.cs" />
     <Compile Include="QuestSystem\CollectQuest.cs" />
+    <Compile Include="QuestSystem\GetQuest.cs" />
+    <Compile Include="QuestSystem\GetReward.cs" />
     <Compile Include="QuestSystem\GuildMenu.cs" />
     <Compile Include="QuestSystem\IGuildState.cs" />
     <Compile Include="QuestSystem\Quest.cs" />

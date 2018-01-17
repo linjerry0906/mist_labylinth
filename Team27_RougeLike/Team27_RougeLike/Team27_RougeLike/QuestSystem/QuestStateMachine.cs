@@ -33,6 +33,8 @@ namespace Team27_RougeLike.QuestSystem
             this.gameManager = gameManager;
             states = new Dictionary<GuildState, IGuildState>();
             states.Add(GuildState.Menu, new GuildMenu(gameManager, gameDevice));
+            states.Add(GuildState.GetQuest, new GetQuest(gameManager, gameDevice));
+            states.Add(GuildState.GetAward, new GetReward(gameManager, gameDevice));
 
             currentState = GuildState.Menu;
             currentSystem = states[GuildState.Menu];
