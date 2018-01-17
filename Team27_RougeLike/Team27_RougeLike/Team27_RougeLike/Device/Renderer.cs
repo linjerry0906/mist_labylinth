@@ -713,6 +713,23 @@ namespace Team27_RougeLike.Device
                 position.X += 32;
             }
         }
+        public void DrawGage(string name, Vector2 position, float gage, float alpha = 1.0f)
+        {
+            Debug.Assert(
+                   textures.ContainsKey(name),
+                   "アセット名を間違えていませんか？\n" +
+                   "大文字小文字間違っていませんか？\n" +
+                   "LoadTextureメソッドで読み込んでいますか？\n" +
+                   "プログラムを確認してください\n");
+            for (int i = 0; i < gage; i++)
+            {
+                spriteBatch.Draw(
+                       textures[name],
+                       position,
+                       Color.White);
+                position.X += 1;
+            }
+        }
 
         #endregion
     }

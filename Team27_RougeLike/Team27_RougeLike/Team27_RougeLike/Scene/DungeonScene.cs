@@ -77,6 +77,8 @@ namespace Team27_RougeLike.Scene
 
             stageManager.DrawLimitTime();       //残り時間を表示
             stageManager.DrawDungeonInfo(currentFloor);
+            renderer.DrawGage("hp", new Vector2(10, 630),
+                ((float)gameManager.PlayerInfo.GetHP() / (float)gameManager.PlayerInfo.GetMaxHP()) * 200); //残りHPの割合を表示
             ui.Draw();                          //UIの描画
 
             renderer.End();

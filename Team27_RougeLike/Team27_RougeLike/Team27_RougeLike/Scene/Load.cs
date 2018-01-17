@@ -39,6 +39,7 @@ namespace Team27_RougeLike.Scene
                 {"ground_ice" ,path},
                 {"ground_tree" ,path},
                 {"ground_infinite" ,path},
+                {"hp" ,path},
                 {"wall_default" ,path},
                 {"wall_tutorial" ,path},
                 {"wall_ice" ,path},
