@@ -11,6 +11,8 @@ namespace Team27_RougeLike.Object.Item
     {
         private Dictionary<int, Item> equipments;
         private Dictionary<int, Item> consumptions;
+        private Dictionary<int, Item> equipment;
+        private Dictionary<int, Item> consumption;
         private string equipmentFilename;
         private string consuptionFilename;
 
@@ -18,6 +20,8 @@ namespace Team27_RougeLike.Object.Item
         {
             equipments = new Dictionary<int, Item>();
             consumptions = new Dictionary<int, Item>();
+            equipment = new Dictionary<int, Item>();
+            consumption = new Dictionary<int, Item>();
 
             equipmentFilename = @"Content/" + "ItemCSV/EquipmentItems.csv";
             consuptionFilename = @"Content/" + "ItemCSV/ConsumptionItems.csv";
@@ -356,6 +360,157 @@ namespace Team27_RougeLike.Object.Item
             return save;
         }
 
+        //指定されたアイテムをロード
+        public void LoadEquipment(int selectID)
+        {
+            Clear();
+
+            //装備読み込み
+            FileStream datefs = new FileStream(equipmentFilename, FileMode.Open);
+            StreamReader equipmentDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
+
+            //装備生成
+            while (!equipmentDate.EndOfStream)
+            {
+                string line = equipmentDate.ReadLine();
+                string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (items.Length != 17) continue;
+
+                int id = int.Parse(items[0]);
+
+                if (selectID == id) continue;
+
+                string itemName = items[1];
+                string itemExplanation = items[2];
+                int itemPrice = int.Parse(items[3]);
+                int itemRare = int.Parse(items[4]);
+                float itemWeight = float.Parse(items[5]);
+                string type = items[6];
+                int power = int.Parse(items[7]);
+                int defence = int.Parse(items[8]);
+                int reinforcement = int.Parse(items[9]);
+                int reinforcementLimit = int.Parse(items[10]);
+                int upPower = int.Parse(items[11]);
+                int upDefence = int.Parse(items[12]);
+                int randMinP = int.Parse(items[13]);
+                int randMaxP = int.Parse(items[14]);
+                int randMinD = int.Parse(items[15]);
+                int randMaxD = int.Parse(items[16]);
+
+                if (type == "Sword")
+                {
+                    equipment[id] = new WeaponItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Sword,
+                        power, defence, reinforcement, reinforcementLimit,
+                        upPower, upDefence, randMinP, randMaxP, randMinD, randMaxD);
+                }
+                else if (type == "Bow")
+                {
+                    equipment[id] = new WeaponItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Bow,
+                        power, defence, reinforcement, reinforcementLimit,
+                        upPower, upDefence, randMinP, randMaxP, randMinD, randMaxD);
+                }
+                else if (type == "Dagger")
+                {
+                    equipment[id] = new WeaponItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Dagger,
+                        power, defence, reinforcement, reinforcementLimit,
+                        upPower, upDefence, randMinP, randMaxP, randMinD, randMaxD);
+                }
+                else if (type == "Shield")
+                {
+                    equipment[id] = new WeaponItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, WeaponItem.WeaponType.Shield,
+                        power, defence, reinforcement, reinforcementLimit,
+                        upPower, upDefence, randMinP, randMaxP, randMinD, randMaxD);
+                }
+                else if (type == "Helm")
+                {
+                    equipment[id] = new ProtectionItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Helm,
+                        power, defence, reinforcement, reinforcementLimit,
+                        upPower, upDefence, randMinP, randMaxP, randMinD, randMaxD);
+                }
+                else if (type == "Armor")
+                {
+                    equipment[id] = new ProtectionItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Armor,
+                        power, defence, reinforcement, reinforcementLimit,
+                        upPower, upDefence, randMinP, randMaxP, randMinD, randMaxD);
+                }
+                else if (type == "Glove")
+                {
+                    equipment[id] = new ProtectionItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Glove,
+                        power, defence, reinforcement, reinforcementLimit,
+                        upPower, upDefence, randMinP, randMaxP, randMinD, randMaxD);
+                }
+                else
+                {
+                    equipment[id] = new ProtectionItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, ProtectionItem.ProtectionType.Shoes,
+                        power, defence, reinforcement, reinforcementLimit,
+                        upPower, upDefence, randMinP, randMaxP, randMinD, randMaxD);
+                }
+            }
+            equipmentDate.Close();
+            datefs.Close();
+        }
+        
+        public void LoadConsumption(int selectID)
+        {
+
+
+            //消費アイテム読み込み
+            FileStream datefs = new FileStream(consuptionFilename, FileMode.Open);
+            StreamReader consuptionDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
+
+            while (!consuptionDate.EndOfStream)
+            {
+                string line = consuptionDate.ReadLine();
+                string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (items.Length != 9) continue;
+
+                int id = int.Parse(items[0]);
+
+                if (selectID == id) continue;
+
+                string itemName = items[1];
+                string itemExplanation = items[2];
+                int itemPrice = int.Parse(items[3]);
+                int itemRare = int.Parse(items[4]);
+                float itemWeight = float.Parse(items[5]);
+                int amountLimit = int.Parse(items[6]);
+                string type = items[7];
+                int amount = int.Parse(items[8]);
+
+                if (type == "recovary")
+                {
+                    consumption[id] = new ConsumptionItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, amount,
+                        ConsumptionItem.ItemEffectType.recovery,
+                        new Recovery(amount));
+                }
+                else if (type == "damage")
+                {
+                    consumption[id] = new ConsumptionItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, amount,
+                        ConsumptionItem.ItemEffectType.damage,
+                        new Damage(amount));
+                }
+                else
+                {
+                    consumption[id] = new ConsumptionItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, amount,
+                        ConsumptionItem.ItemEffectType.noEffect,
+                        new NoEffect());
+                }
+            }
+            consuptionDate.Close();
+            datefs.Close();
+        }
+
         //Dictionary初期化
         public void Clear()
         {
@@ -419,6 +574,28 @@ namespace Team27_RougeLike.Object.Item
 
             return consumptionList;
         }
+
+        public Item GetConsumption(int id)
+        {
+            if (consumption.ContainsKey(id))
+            {
+                return consumption[id];
+            }
+            LoadConsumption(id);
+            return consumption[id];
+        }
+
+        public Item GetEquipment(int id)
+        {
+            if (equipment.ContainsKey(id))
+            {
+                return equipment[id];
+            }
+            LoadEquipment(id);
+            return equipment[id];
+        }
+
+
 
         public void Debug()
         {
