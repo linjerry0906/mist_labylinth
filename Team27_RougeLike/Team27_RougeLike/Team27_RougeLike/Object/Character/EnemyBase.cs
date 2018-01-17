@@ -81,6 +81,9 @@ namespace Team27_RougeLike.Object
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
                     characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower, angle));
                     break;
+                case "Team27_RougeLike.Object.AI.AiManager_Totem":
+                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + angle, 5), 100, tag, status.BasePower, angle));
+                    break;
                 default:
                     break;
             }
@@ -121,6 +124,8 @@ namespace Team27_RougeLike.Object
                     return new AiManager_Ranged();
                 case "Melee":
                     return new AiManager_Melee();
+                case "Totem":
+                    return new AiManager_Totem();
                 default:
                     return new AiManager_Fool();
             }

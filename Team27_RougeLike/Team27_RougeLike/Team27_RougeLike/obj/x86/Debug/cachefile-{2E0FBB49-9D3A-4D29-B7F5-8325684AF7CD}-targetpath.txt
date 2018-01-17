@@ -28,6 +28,7 @@ Content\Texture\wall_tree.xnb
 Content\Texture\ground_tutorial.xnb
 Content\Texture\wall_tutorial.xnb
 Content\Model\magic_circle.xnb
+Content\Texture\Snow.xnb
 Content\EnemysCSV\Enemy.csv
 Content\ItemCSV\ConsumptionItems.csv
 Content\ItemCSV\EquipmentItems.csv

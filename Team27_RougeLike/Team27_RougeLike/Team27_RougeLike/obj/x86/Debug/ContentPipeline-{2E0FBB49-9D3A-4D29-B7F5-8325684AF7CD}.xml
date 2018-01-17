@@ -315,6 +315,15 @@
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\magic_circle_0.xml</Output>
       <Time>2018-01-16T09:59:19.0964128+09:00</Time>
     </Item>
+    <Item>
+      <Source>Texture\Snow.png</Source>
+      <Name>Texture\Snow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Snow.xnb</Output>
+      <Time>2018-01-16T11:59:30.4836259+09:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{2E0FBB49-9D3A-4D29-B7F5-8325684AF7CD}</ContentProjectGUID>

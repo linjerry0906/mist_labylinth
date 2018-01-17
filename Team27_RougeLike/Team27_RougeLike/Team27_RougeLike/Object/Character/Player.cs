@@ -66,30 +66,38 @@ namespace Team27_RougeLike.Object.Character
         public override void Attack()
         {
             HitBoxBase DBox;
-            //switch (status.GetInventory().LeftHand().GetWeaponType())
-            //{
-            //    case WeaponItem.WeaponType.Bow:
-            //        DBox = new MoveDamageBox(new BoundingSphere(GetPosition + projector.Front *3, 0.5f), 100, tag, status.GetPower(), projector.Front);
-            //        ui.LogUI.AddLog("弓による攻撃");
-            //        break;
-            //    case WeaponItem.WeaponType.Sword:
-            //        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 2, 1), 100, tag, status.GetPower(), projector.Front);
-            //        ui.LogUI.AddLog("剣での攻撃");
-            //        break;
-            //    case WeaponItem.WeaponType.Shield:
-            //        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 2), 100, tag, status.GetPower(), projector.Front);
-            //        ui.LogUI.AddLog("剣での攻撃");
-            //        break;
-            //    case WeaponItem.WeaponType.Dagger:
-            //        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 3), 100, tag, status.GetPower(), projector.Front);
-            //        ui.LogUI.AddLog("短剣での攻撃");
-            //        break;
-            //    default:
-            //        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 100, tag, status.GetPower(), projector.Front);
-            //        break;
-            //}
-            DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 100, tag, status.GetPower(), projector.Front);
+            var t = status.GetInventory().LeftHand();
 
+            if (t == null)
+            {
+                DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 100, tag, status.GetPower(), projector.Front);
+            }
+            else
+            {
+                switch (t.GetWeaponType())
+                {
+                    case WeaponItem.WeaponType.Bow:
+                        DBox = new MoveDamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 0.5f), 100, tag, status.GetPower(), projector.Front);
+                        ui.LogUI.AddLog("弓による攻撃");
+                        break;
+                    case WeaponItem.WeaponType.Sword:
+                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 2, 1), 100, tag, status.GetPower(), projector.Front);
+                        ui.LogUI.AddLog("剣での攻撃");
+                        break;
+                    case WeaponItem.WeaponType.Shield:
+                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 2), 100, tag, status.GetPower(), projector.Front);
+                        ui.LogUI.AddLog("盾での攻撃");
+                        break;
+                    case WeaponItem.WeaponType.Dagger:
+                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 3), 100, tag, status.GetPower(), projector.Front);
+                        ui.LogUI.AddLog("短剣での攻撃");
+                        break;
+                    default:
+                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 100, tag, status.GetPower(), projector.Front);
+                        break;
+                }
+            }
+            
             characterManager.AddHitBox(DBox);
             pManager.AddParticle(new Slash(gameDevice, this, DBox.Position()));
         }
