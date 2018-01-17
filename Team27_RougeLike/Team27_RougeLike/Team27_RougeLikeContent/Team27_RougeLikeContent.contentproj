@@ -97,6 +97,10 @@
       <Name>PlayerStatus</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="QuestCSV\Quest.csv">
+      <Name>Quest</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="StageCSV\StageEnemy_1.csv">
       <Name>StageEnemy_1</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

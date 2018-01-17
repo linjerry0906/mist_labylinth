@@ -10,6 +10,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Scene.Town;
+using Team27_RougeLike.QuestSystem;
 
 namespace Team27_RougeLike.Scene
 {
@@ -20,6 +21,7 @@ namespace Team27_RougeLike.Scene
         private GameManager gameManager;
 
         private TownInfoLoader townInfoLoader;
+        private QuestLoader questManager;
 
         private bool endFlag;
 
@@ -44,6 +46,9 @@ namespace Team27_RougeLike.Scene
 
             townInfoLoader = new TownInfoLoader();
             townInfoLoader.Initialize();
+
+            questManager = gameManager.QuestManager;
+            questManager.Initialize();
         }
 
         public bool IsEnd()
@@ -69,6 +74,13 @@ namespace Team27_RougeLike.Scene
                 townInfoLoader.LoadStoreItem(
                     gameManager.ItemManager, 
                     gameManager.DungeonProcess); 
+                return;
+            }
+            if (!questManager.IsLoad())
+            {
+                questManager.Load(
+                    gameManager.DungeonProcess);
+                questManager.RandomQuest(gameDevice);
                 return;
             }
 

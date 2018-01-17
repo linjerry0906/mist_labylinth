@@ -44,7 +44,7 @@ namespace Team27_RougeLike.Scene
 
             renderer.DrawTexture("town", Vector2.Zero);
 
-            renderer.DrawString("Town\nPress D key to Dungeon", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
+            renderer.DrawString("Town\nPress D key to Dungeon\nPress G key to Guild", Vector2.Zero, new Vector2(1, 1), new Color(1, 1, 1));
             renderer.DrawString("Press S key to ItemShop", new Vector2(0, 100), new Vector2(1, 1), new Color(1, 1, 1));
             renderer.DrawString("Press A key to Depot", new Vector2(0, 200), new Vector2(1, 1), new Color(1, 1, 1));
             renderer.DrawString("Press U key to Depot", new Vector2(0, 300), new Vector2(1, 1), new Color(1, 1, 1));
@@ -121,6 +121,13 @@ namespace Team27_RougeLike.Scene
             if (input.GetKeyTrigger(Keys.U))
             {
                 nextScene = SceneType.UpgradeStore;
+                endFlag = true;
+                return;
+            }
+
+            if (input.GetKeyTrigger(Keys.G))
+            {
+                nextScene = SceneType.Quest;
                 endFlag = true;
                 return;
             }

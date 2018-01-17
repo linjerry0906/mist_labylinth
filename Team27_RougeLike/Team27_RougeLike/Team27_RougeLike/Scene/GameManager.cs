@@ -12,6 +12,7 @@ using Team27_RougeLike.Device;
 using Team27_RougeLike.Map;
 using Team27_RougeLike.Object;
 using Team27_RougeLike.Object.Item;
+using Team27_RougeLike.QuestSystem;
 
 namespace Team27_RougeLike.Scene
 {
@@ -19,9 +20,11 @@ namespace Team27_RougeLike.Scene
     {
         private PlayerStatus playerStatus;                   //Playerのステータス
         private Inventory playerItem;                        //Playerが持つアイテム
+        private PlayerQuest playerQuest;                     //Playerが受けているクエスト
 
         private DungeonProcess dungeonProcess;               //進捗状況
         private ItemManager itemManager;                     //Item Dictionary
+        private QuestLoader questManager;                    //Quest
 
         private GameDevice gameDevice;
 
@@ -43,6 +46,7 @@ namespace Team27_RougeLike.Scene
             stageManager = new StageManager(gameDevice);
             enemySettingManager = new EnemySettingManager(gameDevice);
             blockStyle = new BlockStyle();
+            questManager = new QuestLoader();
             itemManager = new ItemManager();
             dungeonProcess = new DungeonProcess();
 
@@ -54,6 +58,7 @@ namespace Team27_RougeLike.Scene
             playerStatus.Initialize();
 
             playerItem = playerStatus.GetInventory();                     //道具欄を取得
+            playerQuest = new PlayerQuest();
             #endregion
 
             Load();
@@ -129,6 +134,18 @@ namespace Team27_RougeLike.Scene
         }
 
 
+        #endregion
+
+        #region Quest関連
+        public PlayerQuest PlayerQuest
+        {
+            get { return playerQuest; }
+        }
+
+        public QuestLoader QuestManager
+        {
+            get { return questManager; }
+        }
         #endregion
 
         #region Stage関連
