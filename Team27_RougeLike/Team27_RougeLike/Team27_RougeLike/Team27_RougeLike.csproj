@@ -123,7 +123,10 @@
     <Compile Include="Object\ParticleSystem\Slash.cs" />
     <Compile Include="Object\PlayerStatus.cs" />
     <Compile Include="Object\PlayerStatusLoader.cs" />
+    <Compile Include="QuestSystem\CollectQuest.cs" />
+    <Compile Include="QuestSystem\Quest.cs" />
     <Compile Include="Scene\DungeonProcess.cs" />
+    <Compile Include="Scene\Town\GuildScene.cs" />
     <Compile Include="Scene\LoadBossScene.cs" />
     <Compile Include="Scene\SceneFader.cs" />
     <Compile Include="Scene\SceneFadeState.cs" />
@@ -143,6 +146,7 @@
     <Compile Include="UI\DungeonSelectUI.cs" />
     <Compile Include="UI\DungeonUI.cs" />
     <Compile Include="UI\EquipUI.cs" />
+    <Compile Include="UI\GuildUI.cs" />
     <Compile Include="UI\ItemInfoUI.cs" />
     <Compile Include="UI\ItemUI.cs" />
     <Compile Include="UI\LogText.cs" />

@@ -15,6 +15,7 @@ namespace Team27_RougeLike.Scene
         UpgradeStore,
         ItemShop,
         Depot,
+        Quest,
         DungeonSelect,
         LoadMap,
         Dungeon,

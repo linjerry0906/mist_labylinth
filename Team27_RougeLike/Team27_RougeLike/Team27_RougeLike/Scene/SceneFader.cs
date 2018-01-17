@@ -41,7 +41,9 @@ namespace Team27_RougeLike.Scene
                 lastScene == SceneType.ItemShop ||
                 lastScene == SceneType.Depot ||
                 lastScene == SceneType.Town ||
-                lastScene == SceneType.DungeonSelect)
+                lastScene == SceneType.DungeonSelect||
+                lastScene == SceneType.UpgradeStore||
+                lastScene == SceneType.Quest)
                 return true;
 
             return false;
@@ -58,7 +60,9 @@ namespace Team27_RougeLike.Scene
                 nextScene == SceneType.ItemShop ||
                 nextScene == SceneType.Depot ||
                 nextScene == SceneType.Town ||
-                nextScene == SceneType.DungeonSelect)
+                nextScene == SceneType.DungeonSelect||
+                nextScene == SceneType.UpgradeStore||
+                nextScene == SceneType.Quest)
                 return true;
 
             return false;
