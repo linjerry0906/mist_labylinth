@@ -16,8 +16,9 @@ namespace Team27_RougeLike.QuestSystem
 
         public CollectQuest(
             int id, string name, string explanation,
-            int difficulty, int gainMoney, int[] awardID, List<Requirement> requires)
-            : base(id, name, explanation, difficulty, gainMoney, awardID)
+            int difficulty, int gainMoney, int[] awardID, List<Requirement> requires, 
+            int dungeonProcess, int dungeonFloor)
+            : base(id, name, explanation, difficulty, gainMoney, awardID, dungeonProcess, dungeonFloor)
         {
             this.requires = requires;
         }

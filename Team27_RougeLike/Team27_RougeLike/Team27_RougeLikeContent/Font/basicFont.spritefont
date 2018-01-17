@@ -81,6 +81,10 @@ with.
         <Start>足</Start>
         <End>足</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>集</Start>
+        <End>集</End>
+      </CharacterRegion>
       <!-- い -->
 
       <!-- う -->
@@ -178,6 +182,7 @@ with.
         <Start>樹</Start>
         <End>樹</End>
       </CharacterRegion>
+      
 
       <!-- きゃく -->
       <CharacterRegion>
@@ -232,6 +237,10 @@ with.
         <Start>計</Start>
         <End>計</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>件</Start>
+        <End>件</End>
+      </CharacterRegion>
 
       <!-- けん -->
       <CharacterRegion>
@@ -274,6 +283,10 @@ with.
       <CharacterRegion>
         <Start>氷</Start>
         <End>氷</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>個</Start>
+        <End>個</End>
       </CharacterRegion>
       <!-- こう -->
       <CharacterRegion>
@@ -340,6 +353,10 @@ with.
         <Start>取</Start>
         <End>取</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>酬</Start>
+        <End>酬</End>
+      </CharacterRegion>
       <!--　じゅう -->
       
       <CharacterRegion>
@@ -357,6 +374,10 @@ with.
       <CharacterRegion>
         <Start>昇</Start>
         <End>昇</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>賞</Start>
+        <End>賞</End>
       </CharacterRegion>
       
       <CharacterRegion>
@@ -378,6 +399,10 @@ with.
         <Start>場</Start>
         <End>場</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>条</Start>
+        <End>条</End>
+      </CharacterRegion>
       <!-- しん -->
 
       <!-- す -->
@@ -393,6 +418,10 @@ with.
       </CharacterRegion>
       
       <!-- せ -->
+      <CharacterRegion>
+        <Start>成</Start>
+        <End>成</End>
+      </CharacterRegion>
       <!-- せつ -->
       <CharacterRegion>
         <Start>説</Start>
@@ -423,6 +452,10 @@ with.
       </CharacterRegion>
 
       <!-- た -->
+      <CharacterRegion>
+        <Start>達</Start>
+        <End>達</End>
+      </CharacterRegion>
       <!-- たい -->
       <CharacterRegion>
         <Start>体</Start>

@@ -17,5 +17,7 @@ namespace Team27_RougeLike.QuestSystem
         void Draw(float constractAlpha, float currentAlpha);
         bool IsEnd();
         GuildState NextState();
+
+        void ShutDown();
     }
 }

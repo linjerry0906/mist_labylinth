@@ -154,5 +154,9 @@ namespace Team27_RougeLike.QuestSystem
                     break;
             }
         }
+
+        public void ShutDown()
+        {
+        }
     }
 }

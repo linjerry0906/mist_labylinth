@@ -51,6 +51,7 @@ namespace Team27_RougeLike.QuestSystem
             if (currentSystem.IsEnd())
             {
                 currentState = currentSystem.NextState();
+                currentSystem.ShutDown();
 
                 if (currentState == GuildState.End)
                     return;
