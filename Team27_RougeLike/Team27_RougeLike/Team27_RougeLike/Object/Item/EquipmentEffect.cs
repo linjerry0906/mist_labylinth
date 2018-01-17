@@ -107,6 +107,16 @@ namespace Team27_RougeLike.Object.Item
             return (reinforcement == reinforcementLimit);
         }
 
+        public int GetUpPower()
+        {
+            return upPower;
+        }
+
+        public int GetUpDefence()
+        {
+            return upDefense;
+        }
+
         //セーブ用
         public int GetAddPower()
         {
