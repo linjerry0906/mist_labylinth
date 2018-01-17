@@ -83,6 +83,12 @@ with.
       </CharacterRegion>
       <!-- い -->
 
+      <!-- いし -->
+      <CharacterRegion>
+        <Start>石</Start>
+        <End>石</End>
+      </CharacterRegion>
+
       <!-- う -->
       <CharacterRegion>
         <Start>売</Start>
@@ -156,6 +162,12 @@ with.
         <Start>階</Start>
         <End>階</End>
       </CharacterRegion>
+
+      <!-- かわ -->
+      <CharacterRegion>
+        <Start>皮</Start>
+        <End>皮</End>
+      </CharacterRegion>
       
       <!-- かん -->
       <CharacterRegion>
@@ -165,15 +177,17 @@ with.
       
       <!-- き -->
       <CharacterRegion>
+        <Start>木</Start>
+        <End>木</End>
+      </CharacterRegion>
+      <CharacterRegion>
         <Start>基</Start>
         <End>基</End>
       </CharacterRegion>
-
       <CharacterRegion>
         <Start>起</Start>
         <End>起</End>
       </CharacterRegion>
-
       <CharacterRegion>
         <Start>樹</Start>
         <End>樹</End>
@@ -424,6 +438,12 @@ with.
         <Start>体</Start>
         <End>体</End>
       </CharacterRegion>
+
+      <!-- たけ -->
+      <CharacterRegion>
+        <Start>竹</Start>
+        <End>竹</End>
+      </CharacterRegion>
       
       <!-- たて -->
       <CharacterRegion>
@@ -485,6 +505,12 @@ with.
         <End>手</End>
       </CharacterRegion>
 
+      <!-- てつ -->
+      <CharacterRegion>
+        <Start>鉄</Start>
+        <End>鉄</End>
+      </CharacterRegion>
+
       <!-- と -->
       
       <!-- ど -->
@@ -531,6 +557,13 @@ with.
       <!-- にち -->
 
       <!-- ぬ -->
+
+      <!-- ぬの -->
+      <CharacterRegion>
+        <Start>布</Start>
+        <End>布</End>
+      </CharacterRegion>
+      
       <!-- ね -->
       <CharacterRegion>
         <Start>値</Start>
