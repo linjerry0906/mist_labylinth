@@ -16,7 +16,7 @@ namespace Team27_RougeLike.QuestSystem
 
         public CollectQuest(
             int id, string name, string explanation,
-            int difficulty, int gainMoney, int[] awardID, List<Requirement> requires, 
+            int difficulty, int gainMoney, int[] awardID, List<Requirement> requires,
             int dungeonProcess, int dungeonFloor)
             : base(id, name, explanation, difficulty, gainMoney, awardID, dungeonProcess, dungeonFloor)
         {
@@ -31,7 +31,7 @@ namespace Team27_RougeLike.QuestSystem
 
         public override void CheckClear()
         {
-            foreach(Requirement r in requires)
+            foreach (Requirement r in requires)
             {
                 if (r.currentAmount < r.requireAmount)  //クリアされてない条件があればFalse
                 {
@@ -40,6 +40,22 @@ namespace Team27_RougeLike.QuestSystem
                 }
             }
             isClear = true;
+        }
+
+        public override Quest Clone()
+        {
+            int[] award = null;
+            if (awardItemID != null)
+            {
+                award = new int[awardItemID.Length];
+                for (int i = 0; i < awardItemID.Length; i++)
+                {
+                    awardItemID[i] = awardItemID[i];
+                }
+            }
+
+            List<Requirement> require = new List<Requirement>(requires);
+            return new CollectQuest(questID, name, explanation, difficulty, gainMoney, award, requires, dungeonProcess, floorProcess);
         }
 
         public override List<Requirement> CurrentState()

@@ -64,7 +64,7 @@ namespace Team27_RougeLike.QuestSystem
                 if (i == (int)currentButton)    //OnButton色, 透明度
                 {
                     adjustAlpha = 0.8f;
-                    color = Color.DarkBlue;
+                    color = Color.Gold;
                 }
 
                 Vector2 position = new Vector2(buttons[i].Position().X, buttons[i].Position().Y);

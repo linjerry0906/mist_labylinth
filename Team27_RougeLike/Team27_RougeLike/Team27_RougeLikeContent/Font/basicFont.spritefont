@@ -502,7 +502,10 @@ with.
       </CharacterRegion>
       
       <!-- ちょう -->
-
+      <CharacterRegion>
+        <Start>調</Start>
+        <End>調</End>
+      </CharacterRegion>
       <!-- つ -->
       <!-- つう -->
       <CharacterRegion>

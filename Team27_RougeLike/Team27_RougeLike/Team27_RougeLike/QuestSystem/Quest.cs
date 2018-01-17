@@ -99,6 +99,15 @@ namespace Team27_RougeLike.QuestSystem
         }
 
         /// <summary>
+        /// QuestのID番号
+        /// </summary>
+        /// <returns></returns>
+        public int QuestID()
+        {
+            return questID;
+        }
+
+        /// <summary>
         /// クリアしているかを検査
         /// </summary>
         public abstract void CheckClear();
@@ -162,5 +171,7 @@ namespace Team27_RougeLike.QuestSystem
         {
             return floorProcess;
         }
+
+        public abstract Quest Clone();
     }
 }

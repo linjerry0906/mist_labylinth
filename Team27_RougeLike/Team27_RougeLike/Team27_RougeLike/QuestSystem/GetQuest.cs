@@ -149,7 +149,7 @@ namespace Team27_RougeLike.QuestSystem
                 currentInfo.QuestInfo(), position + line, fontSize,
                 Color.White, constractAlpha * currentAlpha);
             //報酬
-            Vector2 offsetX = new Vector2(10, 0);
+            Vector2 offsetX = new Vector2(15, 0);
             renderer.DrawString(
                 "報酬", position + 4 * line, fontSize,
                 Color.Gold, constractAlpha * currentAlpha);
@@ -160,7 +160,7 @@ namespace Team27_RougeLike.QuestSystem
                 currentInfo.GainMoney().ToString(), position + 5 * line + 2 * offsetX, fontSize,
                 Color.White, constractAlpha * currentAlpha);
             renderer.DrawString(
-                "アイテム ", position + 5.5f * line + offsetX, fontSize,
+                "アイテム ", position + 6 * line + offsetX, fontSize,
                 Color.White, constractAlpha * currentAlpha);
 
             if (currentInfo.AwardItem() != null)
@@ -169,14 +169,14 @@ namespace Team27_RougeLike.QuestSystem
                 {
                     Item item = itemManager.GetConsuptionItem(currentInfo.AwardItem()[i]);
                     renderer.DrawString(
-                        item.GetItemName(), position + (6 + i * 0.5f) * line + 2 * offsetX, fontSize,
+                        item.GetItemName(), position + (6.5f + i * 0.5f) * line + 2 * offsetX, fontSize,
                         Color.White, constractAlpha * currentAlpha);
                 }
             }
 
             renderer.DrawString(
                 "達成条件 ", position + 9 * line, fontSize,
-                Color.White, constractAlpha * currentAlpha);
+                Color.Red, constractAlpha * currentAlpha);
 
             for (int i = 0; i < currentInfo.RequireID().Length; i++)
             {
@@ -184,13 +184,13 @@ namespace Team27_RougeLike.QuestSystem
                 {
                     Item item = itemManager.GetConsuptionItem(currentInfo.RequireID()[i]);
                     renderer.DrawString(
-                        item.GetItemName(), position + (9.5f + i * 0.5f) * line + 2 * offsetX, fontSize,
+                        item.GetItemName(), position + (9.5f + i * 0.5f) * line + offsetX, fontSize,
                         Color.White, constractAlpha * currentAlpha);
 
-                    Vector2 numPos = position + (9.5f + i * 0.5f) * line + 2 * offsetX;
-                    numPos.X = rightBackLayer.GetCenter().X + 20;
+                    Vector2 numPos = position + (9.5f + i * 0.5f) * line;
+                    numPos.X = rightBackLayer.GetCenter().X + 120;
                     renderer.DrawString(
-                        currentInfo.CurrentState()[i].requireAmount + "個", 
+                        currentInfo.CurrentState()[i].requireAmount + "個",
                         numPos, fontSize,
                         Color.White, constractAlpha * currentAlpha);
                 }
@@ -236,12 +236,7 @@ namespace Team27_RougeLike.QuestSystem
             questIndex = -1;
             currentInfo = null;
 
-            quests = new List<Quest>();
-            List<Requirement> requires = new List<Requirement>();
-            requires.Add(new Requirement(1, 3));
-            quests.Add(new CollectQuest(0, "回復薬(小)を集め",
-                "村の回復品が足りないので、クエストをだした", 0,
-                100, null, requires, 1, 1));
+            quests = gameManager.QuestManager.GetRandomQuest();
 
             #region QuestButton
             float buttonWidth = leftBackLayer.GetWindowSize().X - 20;
@@ -332,7 +327,13 @@ namespace Team27_RougeLike.QuestSystem
                     if (currentInfo == null)
                         return;
 
-                    //ToDo:Quest追加
+                    if (gameManager.PlayerQuest.AddQuest(currentInfo))
+                    {
+                        questIndex = -1;
+                        gameManager.QuestManager.RemoveQuest(currentInfo.QuestID());
+                        currentInfo = null;
+                        Initialize();
+                    }
                     break;
                 case ButtonEnum.Null:
                     break;
@@ -341,7 +342,6 @@ namespace Team27_RougeLike.QuestSystem
 
         public void ShutDown()
         {
-            quests.Clear();
             questButtons.Clear();
         }
     }
