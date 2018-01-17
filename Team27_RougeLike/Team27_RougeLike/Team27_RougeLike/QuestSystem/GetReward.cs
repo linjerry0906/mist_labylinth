@@ -21,6 +21,8 @@ namespace Team27_RougeLike.QuestSystem
         private enum ButtonEnum
         {
             戻る = 0,
+            報告, 
+            あきらめる,
             Null,
         }
 
@@ -31,9 +33,15 @@ namespace Team27_RougeLike.QuestSystem
         private GuildState nextState;
         private bool isEnd;
 
-        private Window backLayer;
+        private Window leftBackLayer;           //左半分の背景レイヤー
+        private Window rightBackLayer;          //右半分の背景レイヤー
         private Button[] buttons;
         private ButtonEnum currentButton;
+
+        private List<Quest> quests;             //クエスト
+        private List<Button> questButtons;      //Questのリストボタン
+        private int questIndex;
+        private Quest currentQuestInfo;         //現在の選択したクエスト
 
         public GetReward(GameManager gameManager, GameDevice gameDevice)
         {
@@ -45,9 +53,11 @@ namespace Team27_RougeLike.QuestSystem
 
         public void Draw(float constractAlpha, float currentalpha)
         {
-            backLayer.Draw(currentalpha * 1.2f);
+            leftBackLayer.Draw(currentalpha * 1.2f);
+            rightBackLayer.Draw(currentalpha * 1.2f);
 
-            DrawButton(constractAlpha, currentalpha);
+            DrawMainButton(constractAlpha, currentalpha);
+            DrawQuestList(constractAlpha, currentalpha);
         }
 
         /// <summary>
@@ -55,10 +65,15 @@ namespace Team27_RougeLike.QuestSystem
         /// </summary>
         /// <param name="constractAlpha">対比透明度（UI）</param>
         /// <param name="currentalpha">現在透明度（UI）</param>
-        private void DrawButton(float constractAlpha, float currentalpha)
+        private void DrawMainButton(float constractAlpha, float currentalpha)
         {
             for (int i = 0; i < buttons.Length; i++)
             {
+                if (((ButtonEnum)i) == ButtonEnum.あきらめる ||
+                    ((ButtonEnum)i) == ButtonEnum.報告 && 
+                    currentQuestInfo == null)
+                    continue;
+
                 Color color = Color.Black;
                 float adjustAlpha = 1.0f;
                 if (i == (int)currentButton)    //OnButton色, 透明度
@@ -78,26 +93,86 @@ namespace Team27_RougeLike.QuestSystem
             }
         }
 
+        /// <summary>
+        /// QuestListを描画
+        /// </summary>
+        /// <param name="constractAlpha"></param>
+        /// <param name="currentAlpha"></param>
+        private void DrawQuestList(float constractAlpha, float currentAlpha)
+        {
+            for (int i = 0; i < quests.Count; i++)
+            {
+                Color color = Color.Black;
+                float adjustAlpha = 1.0f;
+                if (i == questIndex)            //OnButton色, 透明度
+                {
+                    adjustAlpha = 0.8f;
+                    color = Color.Gold;
+                }
+
+                Vector2 position = new Vector2(questButtons[i].Position().X, questButtons[i].Position().Y);
+                renderer.DrawTexture("white", position, questButtons[i].Size(), currentAlpha * adjustAlpha);
+
+                renderer.DrawString(            //Button文字
+                    quests[i].QuestName(),
+                    questButtons[i].ButtonCenterVector(),
+                    color, new Vector2(1.1f, 1.1f), constractAlpha * currentAlpha,
+                    true, true);
+            }
+        }
+
         public void Initialize()
         {
-            backLayer = new Window(
+            #region 背景
+            leftBackLayer = new Window(
                 gameDevice,
                 new Vector2(60, 60),
                 new Vector2(WindowDef.WINDOW_WIDTH / 2 - 120, WindowDef.WINDOW_HEIGHT - 120));
-            backLayer.Initialize();
-            backLayer.Switch(true);
+            leftBackLayer.Initialize();
+            leftBackLayer.Switch(true);
+
+            rightBackLayer = new Window(
+                gameDevice,
+                new Vector2(WindowDef.WINDOW_WIDTH / 2 + 60, 60),
+                new Vector2(WindowDef.WINDOW_WIDTH / 2 - 120, WindowDef.WINDOW_HEIGHT - 120));
+            rightBackLayer.Initialize();
+            rightBackLayer.Switch(true);
+            #endregion
 
             isEnd = false;
             nextState = GuildState.Menu;
 
+            #region メインボタン
             currentButton = ButtonEnum.Null;
-            float buttonWidth = backLayer.GetWindowSize().X - 20;
+            float buttonWidth = leftBackLayer.GetWindowSize().X - 20;
             buttons = new Button[(int)ButtonEnum.Null];
-            for (int i = 0; i < buttons.Length; i++)
+            Vector2 position = leftBackLayer.GetLeftUnder() + new Vector2(10, -40);
+            buttons[(int)ButtonEnum.戻る] = new Button(position, (int)buttonWidth, 30);
+            position = rightBackLayer.GetLeftUnder() + new Vector2(10, -40);
+            buttons[(int)ButtonEnum.あきらめる] = new Button(position, (int)buttonWidth / 2 - 10, 30);
+            position += new Vector2((int)buttonWidth / 2 + 10, 0);
+            buttons[(int)ButtonEnum.報告] = new Button(position, (int)buttonWidth / 2 - 10, 30);
+            #endregion
+
+            InitQuest();
+        }
+
+        private void InitQuest()
+        {
+            currentQuestInfo = null;
+            questIndex = -1;
+            quests = gameManager.PlayerQuest.CurrentQuest();
+
+            #region QuestButton
+            float buttonWidth = leftBackLayer.GetWindowSize().X - 20;
+            questButtons = new List<Button>();
+            for (int i = 0; i < quests.Count; i++)
             {
-                Vector2 position = backLayer.GetLeftUnder() + new Vector2(10, -40 - (i * 40));
-                buttons[i] = new Button(position, (int)buttonWidth, 30);
+                Vector2 position = leftBackLayer.GetOffsetPosition() + new Vector2(10, 10 + (i * 40));
+                questButtons.Add(
+                    new Button(position, (int)buttonWidth, 30));
             }
+            #endregion
         }
 
         public bool IsEnd()
@@ -115,14 +190,14 @@ namespace Team27_RougeLike.QuestSystem
             currentButton = ButtonEnum.Null;
 
             Vector2 mousePos = input.GetMousePosition();
-            CheckButton(new Point((int)mousePos.X, (int)mousePos.Y));
+            CheckMainButton(new Point((int)mousePos.X, (int)mousePos.Y));
         }
 
         /// <summary>
         /// Button上か、押したか
         /// </summary>
         /// <param name="mousePos">マウス位置</param>
-        private void CheckButton(Point mousePos)
+        private void CheckMainButton(Point mousePos)
         {
             for (int i = 0; i < buttons.Length; i++)
             {
@@ -132,7 +207,6 @@ namespace Team27_RougeLike.QuestSystem
                     if (input.IsLeftClick())
                     {
                         SwitchState(currentButton);
-                        isEnd = true;
                     }
                     return;
                 }
@@ -149,6 +223,20 @@ namespace Team27_RougeLike.QuestSystem
             {
                 case ButtonEnum.戻る:
                     nextState = GuildState.Menu;
+                    isEnd = true;
+                    break;
+                case ButtonEnum.報告:
+                    if (currentQuestInfo == null)
+                        return;
+
+                    if (!currentQuestInfo.IsClear())
+                        return;
+
+                    break;
+                case ButtonEnum.あきらめる:
+                    if (currentQuestInfo == null)
+                        return;
+
                     break;
                 case ButtonEnum.Null:
                     break;
@@ -157,6 +245,7 @@ namespace Team27_RougeLike.QuestSystem
 
         public void ShutDown()
         {
+            buttons = null;
         }
     }
 }

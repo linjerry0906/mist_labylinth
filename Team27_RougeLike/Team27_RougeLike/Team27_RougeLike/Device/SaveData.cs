@@ -45,6 +45,7 @@ namespace Team27_RougeLike.Device
             leftHand = playerInventory.LeftHand();
             rightHand = playerInventory.RightHand();
             quest = new List<Quest>();
+            questLoader = gameManager.QuestManager;
 
             saveFileName = @"Content/SaveCSV/SaveDate.csv";
             isSave = false;

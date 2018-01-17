@@ -192,6 +192,7 @@ namespace Team27_RougeLike.QuestSystem
 
         public void ShutDown()
         {
+            buttons = null;
         }
     }
 }

@@ -87,6 +87,10 @@ with.
       </CharacterRegion>
       <!-- い -->
 
+      <CharacterRegion>
+        <Start>以</Start>
+        <End>以</End>
+      </CharacterRegion>
       <!-- いし -->
       <CharacterRegion>
         <Start>石</Start>

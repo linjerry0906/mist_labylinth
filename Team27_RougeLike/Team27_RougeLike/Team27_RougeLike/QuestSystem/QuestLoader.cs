@@ -71,9 +71,10 @@ namespace Team27_RougeLike.QuestSystem
                 int floor = int.Parse(data[10]);
                 if (!loadAll)
                 {
-                    if (!dungeonProcess.HasKey(dungeonNo))  //Clearしたことなかったら出現しない
+                    if (!dungeonProcess.HasKey(dungeonNo) && floor > 0)  //Clearしたことなかったら出現しない
                         continue;
-                    if (dungeonProcess.GetProcess()[dungeonNo] < floor)             //階層達していない
+                    if (dungeonProcess.HasKey(dungeonNo) &&
+                        dungeonProcess.GetProcess()[dungeonNo] < floor)  //階層達していない
                         continue;
                 }
 
@@ -121,11 +122,13 @@ namespace Team27_RougeLike.QuestSystem
                 }
                 #endregion
 
+                int exp = int.Parse(data[17]);
+
                 if (type == "Collection")
                 {
                     Quest collectionQuest = new CollectQuest(
                         id, name, info, difficulty, money, award,
-                        requires, dungeonNo, floor);
+                        requires, dungeonNo, floor, exp);
                     activeQuest.Add(collectionQuest);
                 }
             }

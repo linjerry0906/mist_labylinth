@@ -474,7 +474,7 @@ namespace Team27_RougeLike.Object.Item
 
                 int id = int.Parse(items[0]);
 
-                if (selectID == id) continue;
+                if (selectID != id) continue;
 
                 string itemName = items[1];
                 string itemExplanation = items[2];

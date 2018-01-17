@@ -39,10 +39,12 @@ namespace Team27_RougeLike.QuestSystem
         private Button[] buttons;               //メインボタン
         private ButtonEnum currentButton;       //現在位置メインボタン
 
-        private List<Quest> quests;             //Todo：クラスでまとめる
+        private List<Quest> quests;             //クエスト
         private List<Button> questButtons;      //Questのリストボタン
         private int questIndex;
         private Quest currentInfo;              //現在選択のクエストの詳細
+
+        private DungeonPopUI popUI;
 
         public GetQuest(GameManager gameManager, GameDevice gameDevice)
         {
@@ -61,6 +63,7 @@ namespace Team27_RougeLike.QuestSystem
             DrawMainButton(constractAlpha, currentAlpha);
             DrawQuestList(constractAlpha, currentAlpha);
             DrawInfo(constractAlpha, currentAlpha);
+            popUI.Draw();
         }
 
         /// <summary>
@@ -83,7 +86,7 @@ namespace Team27_RougeLike.QuestSystem
                 if (i == (int)currentButton)    //OnButton色, 透明度
                 {
                     adjustAlpha = 0.8f;
-                    color = Color.DarkBlue;
+                    color = Color.Gold;
                 }
 
                 Vector2 position = new Vector2(buttons[i].Position().X, buttons[i].Position().Y);
@@ -160,7 +163,13 @@ namespace Team27_RougeLike.QuestSystem
                 currentInfo.GainMoney().ToString(), position + 5 * line + 2 * offsetX, fontSize,
                 Color.White, constractAlpha * currentAlpha);
             renderer.DrawString(
-                "アイテム ", position + 6 * line + offsetX, fontSize,
+                "ギルドポイント", position + 6 * line + offsetX, fontSize,
+                Color.White, constractAlpha * currentAlpha);
+            renderer.DrawString(
+                currentInfo.GuildExp().ToString(), position + 6.5f * line + 2 * offsetX, fontSize,
+                Color.White, constractAlpha * currentAlpha);
+            renderer.DrawString(
+                "アイテム ", position + 7.5f * line + offsetX, fontSize,
                 Color.White, constractAlpha * currentAlpha);
 
             if (currentInfo.AwardItem() != null)
@@ -169,25 +178,25 @@ namespace Team27_RougeLike.QuestSystem
                 {
                     Item item = itemManager.GetConsuptionItem(currentInfo.AwardItem()[i]);
                     renderer.DrawString(
-                        item.GetItemName(), position + (6.5f + i * 0.5f) * line + 2 * offsetX, fontSize,
+                        item.GetItemName(), position + (8 + i * 0.5f) * line + 2 * offsetX, fontSize,
                         Color.White, constractAlpha * currentAlpha);
                 }
             }
 
             renderer.DrawString(
-                "達成条件 ", position + 9 * line, fontSize,
+                "達成条件 ", position + 10 * line, fontSize,
                 Color.Red, constractAlpha * currentAlpha);
 
             for (int i = 0; i < currentInfo.RequireID().Length; i++)
             {
                 if (currentInfo is CollectQuest)
                 {
-                    Item item = itemManager.GetConsuptionItem(currentInfo.RequireID()[i]);
+                    Item item = itemManager.GetConsumption(currentInfo.RequireID()[i]);
                     renderer.DrawString(
-                        item.GetItemName(), position + (9.5f + i * 0.5f) * line + offsetX, fontSize,
+                        item.GetItemName(), position + (10.5f + i * 0.5f) * line + offsetX, fontSize,
                         Color.White, constractAlpha * currentAlpha);
 
-                    Vector2 numPos = position + (9.5f + i * 0.5f) * line;
+                    Vector2 numPos = position + (10.5f + i * 0.5f) * line;
                     numPos.X = rightBackLayer.GetCenter().X + 120;
                     renderer.DrawString(
                         currentInfo.CurrentState()[i].requireAmount + "個",
@@ -229,6 +238,10 @@ namespace Team27_RougeLike.QuestSystem
             #endregion
 
             InitQuest();
+
+            popUI = new DungeonPopUI(gameDevice);
+            popUI.SetSize(new Vector2(300, 80));
+            popUI.SetAlphaLimit(0.9f);
         }
 
         private void InitQuest()
@@ -262,6 +275,14 @@ namespace Team27_RougeLike.QuestSystem
 
         public void Update()
         {
+            popUI.Update();
+            if (popUI.IsPop())
+            {
+                if (input.IsLeftClick())
+                    popUI.PopOff();
+                return;
+            }
+
             currentButton = ButtonEnum.Null;
 
             Point mousePos =
@@ -327,22 +348,41 @@ namespace Team27_RougeLike.QuestSystem
                     if (currentInfo == null)
                         return;
 
-                    if (gameManager.PlayerQuest.AddQuest(currentInfo))
-                    {
-                        questIndex = -1;
-                        gameManager.QuestManager.RemoveQuest(currentInfo.QuestID());
-                        currentInfo = null;
-                        Initialize();
-                    }
+                    AddQuest();
                     break;
                 case ButtonEnum.Null:
                     break;
             }
         }
 
+        private void AddQuest()
+        {
+            int current = 0, max = 0;
+            gameManager.PlayerQuest.Limit(ref current, ref max);
+            if(current >= max)
+            {
+                popUI.SetMessage("これ以上のクエストを受けることができない");
+                popUI.PopUp();
+                return;
+            }
+
+            if (gameManager.PlayerQuest.AddQuest(currentInfo))
+            {
+                questIndex = -1;
+                gameManager.QuestManager.RemoveQuest(currentInfo.QuestID());
+                currentInfo = null;
+                Initialize();
+                return;
+            }
+
+            popUI.SetMessage("すでにこのクエストを受けている");
+            popUI.PopUp();
+        }
+
         public void ShutDown()
         {
             questButtons.Clear();
+            buttons = null;
         }
     }
 }

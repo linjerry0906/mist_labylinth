@@ -35,6 +35,7 @@ namespace Team27_RougeLike.QuestSystem
 
     abstract class Quest
     {
+        protected int guildExp;
         protected int questID;              //QuestID
         protected string name;              //Quest名
         protected string explanation;       //説明
@@ -49,7 +50,8 @@ namespace Team27_RougeLike.QuestSystem
         public Quest(
             int id, string name, string explanation, 
             int difficulty, int gainMoney, int[] awardID,
-            int dungeonProcess, int dungeonFloor)
+            int dungeonProcess, int dungeonFloor,
+            int guildExp)
         {
             this.questID = id;
             this.name = name;
@@ -59,6 +61,7 @@ namespace Team27_RougeLike.QuestSystem
             this.awardItemID = awardID;
             this.dungeonProcess = dungeonProcess;
             this.floorProcess = dungeonFloor;
+            this.guildExp = guildExp;
             isClear = false;
         }
 
@@ -105,6 +108,15 @@ namespace Team27_RougeLike.QuestSystem
         public int QuestID()
         {
             return questID;
+        }
+
+        /// <summary>
+        /// Questのギルドポイント
+        /// </summary>
+        /// <returns></returns>
+        public int GuildExp()
+        {
+            return guildExp;
         }
 
         /// <summary>

@@ -55,6 +55,11 @@ namespace Team27_RougeLike.UI
             window.SetAlphaLimit(0.4f);
         }
 
+        public void SetAlphaLimit(float alpha)
+        {
+            window.SetAlphaLimit(alpha);
+        }
+
         public Vector2 Center
         {
             get { return window.GetCenter(); }
@@ -120,7 +125,7 @@ namespace Team27_RougeLike.UI
             window.Draw();                          //背景レイアウト
             renderer.DrawString(                    //アイテム情報を仮描画
                 text, 
-                window.GetCenter() - new Vector2(0, 20), 
+                window.GetCenter(), 
                 Color.White, 
                 new Vector2(1.0f, 1.0f), 
                 window.CurrentAlpha(), 
