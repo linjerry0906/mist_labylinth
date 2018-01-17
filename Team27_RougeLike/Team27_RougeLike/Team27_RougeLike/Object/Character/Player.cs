@@ -60,9 +60,9 @@ namespace Team27_RougeLike.Object.Character
 
         public override void Attack()
         {
-            HitBoxBase DBox= new MoveDamageBox(new BoundingSphere(Position + projector.Front*10, 10), 100,tag,status.BasePower,projector.Front);
+            HitBoxBase DBox = new MoveDamageBox(new BoundingSphere(Position + projector.Front * 10, 10), 100, tag, status.BasePower, projector.Front, gameDevice);
             characterManager.AddHitBox(DBox);
-            pManager.AddParticle(new Slash(gameDevice,this,DBox.Position()));
+            pManager.AddParticle(new Slash(gameDevice, this, DBox.Position()));
         }
 
         public Projector Projecter

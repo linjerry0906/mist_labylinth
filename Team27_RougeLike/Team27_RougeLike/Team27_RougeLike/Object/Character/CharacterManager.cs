@@ -17,7 +17,7 @@ namespace Team27_RougeLike.Object.Character
 {
     class CharacterManager
     {
-        private GameDevice gamedevice;
+        private GameDevice gameDevice;
         private List<CharacterBase> characters = new List<CharacterBase>();
         private List<Spawner> spawners = new List<Spawner>();
         private List<HitBoxBase> hitBoxs = new List<HitBoxBase>();
@@ -31,7 +31,7 @@ namespace Team27_RougeLike.Object.Character
 
         public CharacterManager(GameDevice gamedevice)
         {
-            this.gamedevice = gamedevice;
+            this.gameDevice = gamedevice;
             enemyFilename = @"Content/" + "EnemysCSV/Enemy.csv";
             Load();
         }
@@ -84,11 +84,11 @@ namespace Team27_RougeLike.Object.Character
             {
                 if (c is Player)
                 {
-                    c.Draw(gamedevice.Renderer);
+                    c.Draw(gameDevice.Renderer);
                 }
                 if (c is CharacterBase && NearPlayer(c.Collision.Position) && !(c is Player))
                 {
-                    c.Draw(gamedevice.Renderer);
+                    c.Draw(gameDevice.Renderer);
                 }
             }
         }
@@ -108,7 +108,7 @@ namespace Team27_RougeLike.Object.Character
         {
             PlayerStatusLoader loader = new PlayerStatusLoader();
             var i = loader.LoadStatus();
-            player = new Player(position, new Status(1, i[0],i[1], i[2],i[3], 0.3f), gamedevice, this,pManager);
+            player = new Player(position, new Status(1, i[0],i[1], i[2],i[3], 0.3f), gameDevice, this,pManager);
             characters.Add(player);
         }
 
@@ -192,7 +192,8 @@ namespace Team27_RougeLike.Object.Character
                         new CollisionSphere(Vector3.Zero, size),
                         aiType,
                         name,
-                        this
+                        this,
+                        gameDevice
                         )
                     );
             }

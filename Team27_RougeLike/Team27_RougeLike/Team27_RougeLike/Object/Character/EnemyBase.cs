@@ -9,12 +9,17 @@ using Team27_RougeLike.Object.AI;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Utility;
 using Team27_RougeLike.Object.Box;
+using Team27_RougeLike.Object.ParticleSystem;
+using Team27_RougeLike.Device;
+
 namespace Team27_RougeLike.Object
 {
     class EnemyBase : CharacterBase
     {
         protected EnemyRange range;
         protected string aiName;
+        private ParticleManager pManager;
+        private GameDevice gameDevice;
 
         /// <summary>
         /// オリジナル
@@ -24,10 +29,11 @@ namespace Team27_RougeLike.Object
         /// <param name="aiName"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager)
+        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, GameDevice gameDevice)
             : base(status, collision, textureName, characterManager)
         {
             this.aiName = aiName;
+            this.gameDevice = gameDevice;
         }
 
 
@@ -39,12 +45,14 @@ namespace Team27_RougeLike.Object
         /// <param name="manager"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager)
+        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager, GameDevice gameDevice)
          : base(status, collision, textureName, characterManager)
         {
             tag = "Enemy";
+            this.gameDevice = gameDevice;
             aiManager = manager;
             motion = new Motion();
+            pManager = new ParticleManager(gameDevice);
             for (int i = 0; i < 6; i++)
             {
                 motion.Add(i, new Rectangle(i * 64, 0, 64, 64));
@@ -67,13 +75,16 @@ namespace Team27_RougeLike.Object
             switch (aiManager.ToString())
             {
                 case "Team27_RougeLike.Object.AI.AiManager_Fool":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower,angle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower, angle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + angle, 2), 100, tag, status.BasePower, angle));
+                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + angle, 2), 100, tag, status.BasePower, angle, gameDevice);
+                    characterManager.AddHitBox(damageBox);
+                    pManager = new ParticleManager(gameDevice);
+                    pManager.AddParticle(new Bullet(new Vector2(10, 10), gameDevice, damageBox));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                   characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower,angle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + angle, 10), 1, tag, status.BasePower, angle));
                     break;
                 default:
                     break;
@@ -101,7 +112,8 @@ namespace Team27_RougeLike.Object
                 new CollisionSphere(position, collision.Radius),
                 SwitchAi(),
                 textureName,
-                characterManager
+                characterManager,
+                gameDevice
                 );
         }
         private BaseAiManager SwitchAi()
