@@ -27,7 +27,7 @@ namespace Team27_RougeLike.Object.AI
 
         public override void Enter()
         {
-
+            actor.SetAttackAngle();
         }
 
         public override void Exit()

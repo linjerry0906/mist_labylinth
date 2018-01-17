@@ -27,7 +27,10 @@ namespace Team27_RougeLike.Object.AI
         public virtual void Update()
         {
             stateAi.Update();
-            moveAi.Update();
+            if (!actor.NockBacking())
+            {
+                moveAi.Update();
+            }
             attackAi.Update();
         }
 
@@ -35,5 +38,7 @@ namespace Team27_RougeLike.Object.AI
         public void SetAttackAi(BaseAi attackAi) { this.attackAi = attackAi; }
         public void SetStateAi(BaseAi stateAi) { this.stateAi = stateAi; }
         public BaseAi GetStateAi() { return stateAi; }
+        public BaseAi GetAttackAi() { return attackAi; }
+
     }
 }
