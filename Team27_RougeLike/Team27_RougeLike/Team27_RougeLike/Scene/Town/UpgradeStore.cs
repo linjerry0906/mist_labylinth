@@ -35,6 +35,9 @@ namespace Team27_RougeLike.Scene
         private Dictionary<int, int> materialItems; //必要な素材
         private Dictionary<int, int> consumptions; //消費アイテム
 
+        private ItemInfoUI selectItemInfoUI;
+        private ItemInfoUI upgradeItemInfoUI;
+
         private Button backButton;
         private Window backWindow;
         private Button upgradeButton;
@@ -64,6 +67,9 @@ namespace Team27_RougeLike.Scene
 
             inventory = gameManager.PlayerItem;
             itemManager = new ItemManager();
+
+            selectItemInfoUI = new ItemInfoUI(new Vector2(1080 / 2 + 64, 96), gameManager, gameDevice);
+            upgradeItemInfoUI = new ItemInfoUI(new Vector2(1080 / 2 + 64, 224 + 32), gameManager, gameDevice);
         }
 
         public void Initialize(SceneType scene)
@@ -109,15 +115,17 @@ namespace Team27_RougeLike.Scene
             leftWindow.Initialize();
             leftWindow.Switch();
             rightWindow = new Window(gameDevice, new Vector2(1080 / 2 + 64, 64),
-                new Vector2(1080 / 2 - 128, 720 - 128 - 64));
+                new Vector2(1080 / 2 - 128, 720 - 160 - 64));
             rightWindow.Initialize();
-            messegeWindow = new Window(gameDevice, new Vector2(1080 / 2 - 160, 720 / 2 - 80), new Vector2(320, 160));
+            rightWindow.SetAlphaLimit(0.6f);
+            messegeWindow = new Window(gameDevice, new Vector2(1080 / 2 - 160, 720 / 2 - 80), new Vector2(384, 160));
             messegeWindow.Initialize();
+            messegeWindow.SetAlphaLimit(1.0f);
 
             backButton = new Button(new Vector2(0, 720 - 64), 64, 32);
             backWindow = new Window(gameDevice, new Vector2(0, 720 - 64), new Vector2(64, 32));
-            upgradeButton = new Button(new Vector2(1080 - 64, 720 - 64), 64, 32);
-            upgradeWindow = new Window(gameDevice, new Vector2(1080 - 64, 720 - 64), new Vector2(64, 32));
+            upgradeButton = new Button(rightWindow.GetLeftUnder() + new Vector2(0, 32), 1080 / 2 - 128, 64);
+            upgradeWindow = new Window(gameDevice, rightWindow.GetLeftUnder() + new Vector2(0, 32), new Vector2(1080 / 2 - 128, 64));
 
             leftItems = new List<Item>();
             leftButtons = new List<Button>();
@@ -262,20 +270,21 @@ namespace Team27_RougeLike.Scene
             isSelect = true;
 
             selectItem = item;
+            upgradeItem = item.UniqueClone();
+
+
 
             int level;
             if (item is ProtectionItem)
             {
                 level = ((ProtectionItem)item).GetReinforcement();
                 isBiggest = ((ProtectionItem)item).IsLevelMax();
-                upgradeItem = ((ProtectionItem)item).UniqueClone();
                 ((ProtectionItem)upgradeItem).LevelUp();
             }
             else
             {
                 level = ((WeaponItem)item).GetReinforcement();
                 isBiggest = ((WeaponItem)item).IsLevelMax();
-                upgradeItem = ((WeaponItem)item).UniqueClone();
                 ((WeaponItem)upgradeItem).LevelUp();
             }
 
@@ -343,6 +352,26 @@ namespace Team27_RougeLike.Scene
                 upgradeWindow.Switch();
             if (!backWindow.CurrentState())
                 backWindow.Switch();
+            if (isNotEnoughMessage)
+            {
+                if (!messegeWindow.CurrentState())
+                    messegeWindow.Switch();
+            }
+            else
+            {
+                if (messegeWindow.CurrentState())
+                    messegeWindow.Switch();
+            }
+            if (isSelect)
+            {
+                if (!upgradeWindow.CurrentState())
+                    upgradeWindow.Switch();
+            }
+            else
+            {
+                if (upgradeWindow.CurrentState())
+                    upgradeWindow.Switch();
+            }
 
             isBiggest = false;
             isEnough = false;
@@ -362,27 +391,6 @@ namespace Team27_RougeLike.Scene
                 if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick())
                 {
                     SetItem(leftItems[i]);
-                }
-            }
-
-            //素材が足りているかどうか
-            if (isSelect)
-            {
-                //SetItem(selectItem);
-
-                foreach(int id in materialItems.Keys)
-                {
-                    if (consumptions.Keys.Contains(id))
-                    {
-                        if (consumptions[id] >= materialItems[id])
-                        {
-                            isEnough = true;
-                        }
-                    }
-                    if (!isEnough)
-                    {
-                        return;
-                    }
                 }
             }
 
@@ -414,6 +422,27 @@ namespace Team27_RougeLike.Scene
                     }
                 }
             }
+
+            //素材が足りているかどうか
+            if (isSelect)
+            {
+                //SetItem(selectItem);
+
+                foreach (int id in materialItems.Keys)
+                {
+                    if (consumptions.Keys.Contains(id))
+                    {
+                        if (consumptions[id] >= materialItems[id])
+                        {
+                            isEnough = true;
+                        }
+                    }
+                    if (!isEnough)
+                    {
+                        return;
+                    }
+                }
+            }
         }
 
         public void Draw()
@@ -429,12 +458,9 @@ namespace Team27_RougeLike.Scene
             renderer.DrawString("戻る", backButton.ButtonCenterVector(),
                 Color.White, new Vector2(1, 1), 1.0f, true, true);
             upgradeWindow.Draw();
-            renderer.DrawString("強化", upgradeButton.ButtonCenterVector(),
-                Color.White, new Vector2(1, 1), 1.0f, true, true);
 
             leftWindow.Draw();
             rightWindow.Draw();
-            messegeWindow.Draw();
 
             renderer.DrawString("バッグ", new Vector2(64, 64), new Vector2(1, 1), Color.White);
             renderer.DrawString("アイテム名", new Vector2(64, 64 + 32), new Vector2(1, 1), Color.White);
@@ -478,64 +504,51 @@ namespace Team27_RougeLike.Scene
             //右側の表示
             if (isSelect)
             {
+                //強化ボタン表示
+                renderer.DrawString("強化", upgradeButton.ButtonCenterVector(),
+                    Color.White, new Vector2(2, 2), 1.0f, true, true);
+                
+
                 renderer.DrawString("強化前", new Vector2(1080 / 2 + 64, 64), new Vector2(1, 1), Color.White);
-                renderer.DrawString("強化後", new Vector2(1080 / 2 + 270, 64), new Vector2(1, 1), Color.White);
-                if (selectItem is WeaponItem)
+                selectItemInfoUI.Draw(selectItem, 1.0f);
+                renderer.DrawString("強化後", new Vector2(1080 / 2 + 64, 192 + 32), new Vector2(1, 1), Color.White);
+                upgradeItemInfoUI.Draw(upgradeItem, 1.0f);
+                
+                //必要素材
+                renderer.DrawString("必要な素材", 
+                    new Vector2(1080 / 2 + 64, 192 + 192), new Vector2(1, 1), Color.White);
+                renderer.DrawString("(必要数 / 所持数)",
+                    new Vector2(1080 / 2 + 160, 192 + 192), new Vector2(1, 1), Color.White);
+
+                int num = 0;
+                foreach (int id in materialItems.Keys)
                 {
-                    //強化前アイテムの表示
-                    renderer.DrawString(selectItem.GetItemName() + "+" + ((WeaponItem)selectItem).GetReinforcement(), 
-                        new Vector2(1080 / 2 + 64, 96), new Vector2(1, 1), Color.White);
-                    
-                    renderer.DrawString("タイプ : " + ((WeaponItem)selectItem).GetWeaponType(),
-                        new Vector2(1080 / 2 + 64, 96 + 32), new Vector2(1, 1), Color.White);
-                    
-                    renderer.DrawString("攻撃力 : " + ((WeaponItem)selectItem).GetPower(),
-                        new Vector2(1080 / 2 + 64, 96 + 64), new Vector2(1, 1), Color.White);
-
-                    renderer.DrawString("守備力 : " + ((WeaponItem)selectItem).GetDefense(),
-                        new Vector2(1080 / 2 + 64, 96 + 96), new Vector2(1, 1), Color.White);
-
-                    //強化後アイテムの表示
-                    renderer.DrawString(upgradeItem.GetItemName() + "+" + ((WeaponItem)upgradeItem).GetReinforcement(),
-                        new Vector2(1080 / 2 + 270, 96), new Vector2(1, 1), Color.White);
-                    
-                    renderer.DrawString("タイプ : " + ((WeaponItem)upgradeItem).GetWeaponType(),
-                        new Vector2(1080 / 2 + 270, 96 + 32), new Vector2(1, 1), Color.White);
-                    
-                    renderer.DrawString("攻撃力 : " + ((WeaponItem)upgradeItem).GetPower(),
-                        new Vector2(1080 / 2 + 270, 96 + 64), new Vector2(1, 1), Color.White);
-
-                    renderer.DrawString("守備力 : " + ((WeaponItem)upgradeItem).GetDefense(),
-                        new Vector2(1080 / 2 + 270, 96 + 96), new Vector2(1, 1), Color.White);
+                    num++;
+                    renderer.DrawString(itemManager.GetConsuptionItem(id).GetItemName(),
+                        new Vector2(1080 / 2 + 64, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                    if (consumptions.Keys.Contains(id))
+                    {
+                        renderer.DrawString("("+materialItems[id] + "/" + consumptions[id]+")",
+                            new Vector2(1080 / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                    }
+                    else
+                    {
+                        renderer.DrawString("("+materialItems[id] + "/0)",
+                            new Vector2(1080 / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                    }
                 }
-                else
-                {
-                    //強化前アイテムの表示
-                    renderer.DrawString(selectItem.GetItemName() + "+" + ((ProtectionItem)selectItem).GetReinforcement(),
-                        new Vector2(1080 / 2 + 64, 96), new Vector2(1, 1), Color.White);
-                    
-                    renderer.DrawString("タイプ : " + ((ProtectionItem)selectItem).GetProtectionType(),
-                        new Vector2(1080 / 2 + 64, 96 + 32), new Vector2(1, 1), Color.White);
-                    
-                    renderer.DrawString("攻撃力 : " + ((ProtectionItem)selectItem).GetPower(),
-                        new Vector2(1080 / 2 + 64, 96 + 64), new Vector2(1, 1), Color.White);
+            }
 
-                    renderer.DrawString("守備力 : " + ((ProtectionItem)selectItem).GetDefense(),
-                        new Vector2(1080 / 2 + 64, 96 + 96), new Vector2(1, 1), Color.White);
+            messegeWindow.Draw();
 
-                    //強化後アイテムの表示
-                    renderer.DrawString(upgradeItem.GetItemName() + "+" + ((ProtectionItem)upgradeItem).GetReinforcement(),
-                        new Vector2(1080 / 2 + 270, 96), new Vector2(1, 1), Color.White);
+            if (isBiggest || !isEnough)
+            {
+                upgradeWindow.Draw();
+            }
 
-                    renderer.DrawString("タイプ : " + ((ProtectionItem)upgradeItem).GetProtectionType(),
-                        new Vector2(1080 / 2 + 270, 96 + 32), new Vector2(1, 1), Color.White);
-
-                    renderer.DrawString("攻撃力 : " + ((ProtectionItem)upgradeItem).GetPower(),
-                        new Vector2(1080 / 2 + 270, 96 + 64), new Vector2(1, 1), Color.White);
-
-                    renderer.DrawString("守備力 : " + ((ProtectionItem)upgradeItem).GetDefense(),
-                        new Vector2(1080 / 2 + 270, 96 + 96), new Vector2(1, 1), Color.White);
-                }
+            if (isNotEnoughMessage)
+            {
+                renderer.DrawString("素材が足りていません。", messegeWindow.GetCenter(), Color.Red, new Vector2(2, 2), 1.0f, true, true);
             }
 
             renderer.End();

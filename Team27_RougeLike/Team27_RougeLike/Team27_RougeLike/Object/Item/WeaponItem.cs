@@ -137,8 +137,13 @@ namespace Team27_RougeLike.Object.Item
         {
             WeaponItem newItem = new WeaponItem(itemID, itemName, itemExplanation,
             itemPrice, itemRare, itemWeight, weaponType,
-            itemPower, itemDefense, reinforcement, reinforcementLimit, upPower, upDefense,
+            effect.GetPower() - effect.GetAddPower(), effect.GetDefense() - effect.GetAddDefense(),
+            GetReinforcement(), effect.GetReinforcementLimit(), effect.GetUpPower(), effect.GetUpDefence(),
             effect.GetAddPower(), effect.GetAddDefense());
+
+            effect = new EquipmentEffect(effect.GetPower() - effect.GetAddPower(), effect.GetDefense() - effect.GetAddDefense(),
+                effect.GetReinforcementLimit(), effect.GetUpPower(), effect.GetUpDefence(),
+                effect.GetAddPower(), effect.GetAddDefense(), GetReinforcement());
 
             return newItem;
         }

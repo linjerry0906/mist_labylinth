@@ -553,6 +553,12 @@ with.
         <Start>左</Start>
         <End>左</End>
       </CharacterRegion>
+
+      <!-- ひつ -->
+      <CharacterRegion>
+        <Start>必</Start>
+        <End>必</End>
+      </CharacterRegion>
       
       <!-- ひん -->
       <CharacterRegion>
@@ -665,6 +671,12 @@ with.
       <CharacterRegion>
         <Start>鎧</Start>
         <End>鎧</End>
+      </CharacterRegion>
+      
+      <!-- よう -->
+      <CharacterRegion>
+        <Start>要</Start>
+        <End>要</End>
       </CharacterRegion>
       <!-- ら -->
       <!-- り -->

@@ -515,6 +515,8 @@ namespace Team27_RougeLike.Object.Item
             rightHand = saveData.GetRightHand();
             money = saveData.GetMoney();
             bag = saveData.GetBagList();
+            equipDepository = saveData.GetDepotEquipment();
+            itemDepository = saveData.GetDepotConsumption();
         }
     }
 }

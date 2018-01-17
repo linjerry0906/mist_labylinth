@@ -16,12 +16,14 @@ namespace Team27_RougeLike.Device
         private ItemManager itemManager;
         private Inventory playerInventory;
 
-        private Dictionary<int, int> clearDungen;             //クリアしたフロア
-        private int money;                  //所持金
-        private List<Item> bag;             //バッグの中身
-        private ProtectionItem[] armor;     //装備中の防具
-        private WeaponItem leftHand;        //左手装備
-        private WeaponItem rightHand;       //右手装備
+        private Dictionary<int, int> clearDungen;       //クリアしたフロア
+        private int money;                              //所持金
+        private List<Item> bag;                         //バッグの中身
+        private ProtectionItem[] armor;                 //装備中の防具
+        private WeaponItem leftHand;                    //左手装備
+        private WeaponItem rightHand;                   //右手装備
+        private List<Item> depotEquipment;              //倉庫の装備アイテム
+        private Dictionary<int, int> depotConsumption;  //倉庫の消費アイテム
 
         private string saveFileName;
         private bool isSave;
@@ -53,6 +55,8 @@ namespace Team27_RougeLike.Device
             armor = playerInventory.CurrentArmor();
             leftHand = playerInventory.LeftHand();
             rightHand = playerInventory.RightHand();
+            depotEquipment = playerInventory.EquipDepository();
+            depotConsumption = playerInventory.DepositoryItem();
         }
 
         //Itemをテキスト出力するためのメソッド
@@ -113,6 +117,15 @@ namespace Team27_RougeLike.Device
                 sw.WriteLine("bag," + ItemSaveString(item));
             }
 
+            foreach (Item item in depotEquipment)
+            {
+                sw.WriteLine("depot," + ItemSaveString(item));
+            }
+            foreach (int id in depotConsumption.Keys)
+            {
+                sw.WriteLine("depot," + "Consumption," + id + "," + depotConsumption[id]);
+            }
+
             sw.Close();
             isSave = false;
         }
@@ -133,6 +146,11 @@ namespace Team27_RougeLike.Device
                 clearDungen = new Dictionary<int, int>();
                 armor = new ProtectionItem[4];
                 bag = new List<Item>();
+                depotEquipment = new List<Item>();
+                depotConsumption = new Dictionary<int, int>();
+
+                int bagNum = 0;
+                int depotNum = 0;
 
                 while (!sr.EndOfStream)
                 {
@@ -206,6 +224,8 @@ namespace Team27_RougeLike.Device
                     }
                     else if (strings[0] == "bag")
                     {
+                        bagNum++;
+
                         if (strings[1] == "Consumption")
                         {
                             string[] itemDate = new string[]
@@ -228,6 +248,26 @@ namespace Team27_RougeLike.Device
                             itemDates.Add(itemDate);
                         }
                     }
+                    else if (strings[0] == "depot")
+                    {
+                        if (strings[1] == "Consumption")
+                        {
+                            depotConsumption.Add(int.Parse(strings[2]), int.Parse(strings[3]));
+                        }
+                        else
+                        {
+                            depotNum++;
+                            string[] itemDate = new string[]
+                            {
+                            strings[1],
+                            strings[2],
+                            strings[3],
+                            strings[4],
+                            strings[5],
+                            };
+                            itemDates.Add(itemDate);
+                        }
+                    }
                 }
                 sr.Close();
 
@@ -238,9 +278,13 @@ namespace Team27_RougeLike.Device
                 armor[1] = (ProtectionItem)items[3];
                 armor[2] = (ProtectionItem)items[4];
                 armor[3] = (ProtectionItem)items[5];
-                for (int i = 6; i < items.Count; i++)
+                for (int i = 6; i < 6 + bagNum; i++)
                 {
                     bag.Add(items[i]);
+                }
+                for (int i = 6 + bagNum; i < 6 + bagNum + depotNum; i++)
+                {
+                    depotEquipment.Add(items[i]);
                 }
 
                 isLoad = false;
@@ -294,6 +338,16 @@ namespace Team27_RougeLike.Device
         public List<Item> GetBagList()
         {
             return bag;
+        }
+
+        public List<Item> GetDepotEquipment()
+        {
+            return depotEquipment;
+        }
+
+        public Dictionary<int, int> GetDepotConsumption()
+        {
+            return depotConsumption;
         }
 
     }
