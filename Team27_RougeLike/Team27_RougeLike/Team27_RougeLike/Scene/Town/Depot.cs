@@ -56,20 +56,28 @@ namespace Team27_RougeLike.Scene
 
         private List<Item> leftItems;
         private List<Item> rightItems;
+
+        private List<Item> leftPageItems;
+        private List<Item> rightPageItems;
         private List<Button> leftButtons;
         private List<Button> rightButtons;
         private List<Window> leftWindows;
         private List<Window> rightWindows;
 
-        private int bagMaxNum;
-        private int bagNowNum;
-        private int depotMaxNum;
-        private int depotNowNum;
+        private int bagMaxNum;                  //バッグの容量
+        private int bagNowNum;                  //バッグの現在のアイテム量
+        private int depotMaxNum;　              //倉庫の容量
+        private int depotNowNum;                //倉庫の現在のアイテム量
 
-        private bool isBagMax;
-        private bool isBagMaxMessaga;
-        private bool isDepotMax;
-        private bool isDepotMaxMessaga;
+        private int leftPage;                   //左のページ
+        private int leftMaxPage;                //左の最大ページ
+        private int rightPage;                  //右のページ
+        private int rightMaxPage;               //右の最大ページ
+
+        private bool isBagMax;                  //バッグがいっぱいかどうか
+        private bool isBagMaxMessaga;           //バッグがいっぱいというメッセージ表示
+        private bool isDepotMax;                //倉庫がいっぱいかどうか
+        private bool isDepotMaxMessaga;         //倉庫がいっぱいというメッセージ表示
 
         public Depot(IScene town, GameManager gameManager, GameDevice gameDevice)
         {
@@ -117,19 +125,30 @@ namespace Team27_RougeLike.Scene
             consumptionWindow.Initialize();
 
             leftItems = new List<Item>();
+            rightItems = new List<Item>();
+
+            leftPageItems = new List<Item>();
             leftButtons = new List<Button>();
             leftWindows = new List<Window>();
-            rightItems = new List<Item>();
+            rightPageItems = new List<Item>();
             rightButtons = new List<Button>();
             rightWindows = new List<Window>();
+
+            leftPage = 1;
+            leftMaxPage = 1;
+            rightPage = 1;
+            rightMaxPage = 1;
         }
 
         private void EquipmentModeInitialize()
         {
             leftItems = new List<Item>();
+            rightItems = new List<Item>();
+
+            leftPageItems = new List<Item>();
             leftButtons = new List<Button>();
             leftWindows = new List<Window>();
-            rightItems = new List<Item>();
+            rightPageItems = new List<Item>();
             rightButtons = new List<Button>();
             rightWindows = new List<Window>();
 
@@ -138,21 +157,27 @@ namespace Team27_RougeLike.Scene
             {
                 if(i is WeaponItem || i is ProtectionItem)
                 {
-                    AddLeftList(i);
+                    leftItems.Add(i);
                 }
             }
             foreach(Item i in equipments)
             {
-                AddRightList(i);
+                rightItems.Add(i);
             }
+
+            leftMaxPage = (leftItems.Count - 1) / 20 + 1;
+            rightMaxPage = (rightItems.Count - 1) / 20 + 1;
         }
 
         private void ConsumptionModeInitialize()
         {
             leftItems = new List<Item>();
+            rightItems = new List<Item>();
+
+            leftPageItems = new List<Item>();
             leftButtons = new List<Button>();
             leftWindows = new List<Window>();
-            rightItems = new List<Item>();
+            rightPageItems = new List<Item>();
             rightButtons = new List<Button>();
             rightWindows = new List<Window>();
 
@@ -161,13 +186,16 @@ namespace Team27_RougeLike.Scene
             {
                 if (i is ConsumptionItem)
                 {
-                    AddLeftList(i);
+                    leftItems.Add(i);
                 }
             }
             foreach(int i in consumptions.Keys)
             {
-                AddRightList(itemManager.GetConsuptionItem(i));
+                rightItems.Add(itemManager.GetConsuptionItem(i));
             }
+
+            leftMaxPage = (leftItems.Count - 1) / 20;
+            rightMaxPage = (rightItems.Count - 1) / 20;
         }
 
         private void UpdateBlurRate()
@@ -185,7 +213,7 @@ namespace Team27_RougeLike.Scene
         //左のリストにアイテムを追加する。
         private void AddLeftList(Item item)
         {
-            leftItems.Add(item);
+            leftPageItems.Add(item);
             Vector2 position = new Vector2(64, 96 + 24 * (leftButtons.Count + 1));
             int buttonWidht = 1080 / 2 - 128;
             int buttonHeight = 20;
@@ -198,25 +226,29 @@ namespace Team27_RougeLike.Scene
         //左のリストから指定されたアイテムを消す。
         private void RemoveLeftList(int key)
         {
-            leftItems.Remove(leftItems[key]);
+            leftPageItems.Remove(leftPageItems[key]);
             leftButtons.Remove(leftButtons[key]);
             leftWindows.Remove(leftWindows[key]);
 
             //上に詰める処理
-            List<Item> copyLeftItems = leftItems;
-            leftItems = new List<Item>();
+            List<Item> copyLeftItems = leftPageItems;
+            leftPageItems = new List<Item>();
             leftButtons = new List<Button>();
             leftWindows = new List<Window>();
             foreach (Item item in copyLeftItems)
             {
                 AddLeftList(item);
             }
+            if (leftItems[leftPage * 20 + 1] != null)
+            {
+                AddLeftList(leftItems[leftPage * 20 + 1]);
+            }
         }
 
         //右のリストにアイテムを追加する。
         private void AddRightList(Item item)
         {
-            rightItems.Add(item);
+            rightPageItems.Add(item);
             Vector2 position = new Vector2(1080 / 2 + 64, 96 + 24 * (rightButtons.Count + 1));
             int buttonWidht = 1080 / 2 - 128;
             int buttonHeight = 20;
@@ -229,19 +261,36 @@ namespace Team27_RougeLike.Scene
         //右リストから指定されたアイテムを消す。
         private void RemoveRightList(int key)
         {
-            rightItems.Remove(rightItems[key]);
+            rightPageItems.Remove(rightPageItems[key]);
             rightButtons.Remove(rightButtons[key]);
             rightWindows.Remove(rightWindows[key]);
 
             //上に詰める処理
-            List<Item> copyRightItems = rightItems;
-            rightItems = new List<Item>();
+            List<Item> copyRightItems = rightPageItems;
+            rightPageItems = new List<Item>();
             rightButtons = new List<Button>();
             rightWindows = new List<Window>();
             foreach (Item item in copyRightItems)
             {
                 AddRightList(item);
             }
+            if (rightItems[rightPage * 20 + 1] != null)
+            {
+                AddRightList(rightItems[rightPage * 20 + 1]);
+            }
+        }
+
+        private void LeftPage(int page)
+        {
+            for(int i = 0 + (page - 1) * 20; i < leftItems.Count || i <= page * 20; i++)
+            {
+                AddLeftList(leftItems[i]);
+            }
+        }
+
+        private void RightPage(int page)
+        {
+
         }
 
         public void Update(GameTime gameTime)
@@ -340,8 +389,8 @@ namespace Team27_RougeLike.Scene
                 {
                     if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isDepotMax)
                     {
-                        AddRightList(leftItems[i]);
-                        inventory.DepositEquip(inventory.BagItemIndex(leftItems[i]));
+                        AddRightList(leftPageItems[i]);
+                        inventory.DepositEquip(inventory.BagItemIndex(leftPageItems[i]));
                         RemoveLeftList(i);
                     }
                 }
@@ -351,8 +400,8 @@ namespace Team27_RougeLike.Scene
                 {
                     if (rightButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isBagMax)
                     {
-                        AddLeftList(rightItems[i]);
-                        inventory.MoveDepositEquipToBag(inventory.DepositEquipIndex(rightItems[i]));
+                        AddLeftList(rightPageItems[i]);
+                        inventory.MoveDepositEquipToBag(inventory.DepositEquipIndex(rightPageItems[i]));
                         RemoveRightList(i);
                     }
                 }
@@ -366,9 +415,9 @@ namespace Team27_RougeLike.Scene
                 {
                     if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isDepotMax)
                     {
-                        inventory.DepositItem(inventory.BagItemIndex(leftItems[i]));
-                        if (consumptions[leftItems[i].GetItemID()] - 1 <= 0)
-                            AddRightList(leftItems[i]);
+                        inventory.DepositItem(inventory.BagItemIndex(leftPageItems[i]));
+                        if (consumptions[leftPageItems[i].GetItemID()] - 1 <= 0)
+                            AddRightList(leftPageItems[i]);
                         RemoveLeftList(i);
                     }
                 }
@@ -378,14 +427,14 @@ namespace Team27_RougeLike.Scene
                 {
                     if (rightButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isBagMax)
                     {
-                        if (consumptions[rightItems[i].GetItemID()] - 1 <= 0)
+                        if (consumptions[rightPageItems[i].GetItemID()] - 1 <= 0)
                         {
-                            inventory.MoveDepositItemToBag(itemManager, rightItems[i].GetItemID());
+                            inventory.MoveDepositItemToBag(itemManager, rightPageItems[i].GetItemID());
                             RemoveRightList(i);
                         }
                         else
                         {
-                            inventory.MoveDepositItemToBag(itemManager, rightItems[i].GetItemID());
+                            inventory.MoveDepositItemToBag(itemManager, rightPageItems[i].GetItemID());
                         }
                         AddLeftList(playerItems[playerItems.Count - 1]);
                     }
@@ -441,54 +490,54 @@ namespace Team27_RougeLike.Scene
                     renderer.DrawString("所持数", new Vector2(1080 / 2 + 320, 64 + 32), new Vector2(1, 1), Color.White);
 
                 //左側のリストのアイテムの描画
-                for (int i = 0; i < leftItems.Count; i++)
+                for (int i = 0; i < leftPageItems.Count; i++)
                 {
                     leftWindows[i].Draw();
 
                     //アイテム名表示
-                    renderer.DrawString(leftItems[i].GetItemName(), leftWindows[i].GetOffsetPosition(),
+                    renderer.DrawString(leftPageItems[i].GetItemName(), leftWindows[i].GetOffsetPosition(),
                         new Vector2(1, 1), Color.White);
 
                     //アイテムタイプの表示
                     string type;
-                    if (leftItems[i] is WeaponItem)
+                    if (leftPageItems[i] is WeaponItem)
                     {
-                        type = ((WeaponItem)leftItems[i]).GetWeaponType().ToString();
+                        type = ((WeaponItem)leftPageItems[i]).GetWeaponType().ToString();
                     }
-                    else if (leftItems[i] is ProtectionItem)
+                    else if (leftPageItems[i] is ProtectionItem)
                     {
-                        type = ((ProtectionItem)leftItems[i]).GetProtectionType().ToString();
+                        type = ((ProtectionItem)leftPageItems[i]).GetProtectionType().ToString();
                     }
                     else
                     {
-                        type = ((ConsumptionItem)leftItems[i]).GetTypeText();
+                        type = ((ConsumptionItem)leftPageItems[i]).GetTypeText();
                     }
                     renderer.DrawString(type, leftWindows[i].GetOffsetPosition() + new Vector2(160, 0),
                         new Vector2(1, 1), Color.White);
                 }
 
                 //右側のリストのアイテムの描画
-                for (int i = 0; i < rightItems.Count; i++)
+                for (int i = 0; i < rightPageItems.Count; i++)
                 {
                     rightWindows[i].Draw();
 
                     //アイテム名の表示
-                    renderer.DrawString(rightItems[i].GetItemName(), rightWindows[i].GetOffsetPosition(),
+                    renderer.DrawString(rightPageItems[i].GetItemName(), rightWindows[i].GetOffsetPosition(),
                         new Vector2(1, 1), Color.White);
 
                     //アイテムタイプの表示
                     string type;
-                    if (rightItems[i] is WeaponItem)
+                    if (rightPageItems[i] is WeaponItem)
                     {
-                        type = ((WeaponItem)rightItems[i]).GetWeaponType().ToString();
+                        type = ((WeaponItem)rightPageItems[i]).GetWeaponType().ToString();
                     }
-                    else if (rightItems[i] is ProtectionItem)
+                    else if (rightPageItems[i] is ProtectionItem)
                     {
-                        type = ((ProtectionItem)rightItems[i]).GetProtectionType().ToString();
+                        type = ((ProtectionItem)rightPageItems[i]).GetProtectionType().ToString();
                     }
                     else
                     {
-                        type = ((ConsumptionItem)rightItems[i]).GetTypeText();
+                        type = ((ConsumptionItem)rightPageItems[i]).GetTypeText();
                     }
                     renderer.DrawString(type, rightWindows[i].GetOffsetPosition() + new Vector2(160, 0),
                         new Vector2(1, 1), Color.White);
@@ -496,7 +545,7 @@ namespace Team27_RougeLike.Scene
                     //所持数の表示(消費アイテムのみ)
                     if (mode == DepotModeType.consumption)
                     {
-                        renderer.DrawString(consumptions[rightItems[i].GetItemID()].ToString(),
+                        renderer.DrawString(consumptions[rightPageItems[i].GetItemID()].ToString(),
                             rightWindows[i].GetOffsetPosition() + new Vector2(256, 0),
                             new Vector2(1, 1), Color.White);
                     }
