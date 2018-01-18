@@ -17,7 +17,7 @@ namespace Team27_RougeLike.Object
         protected CharacterManager characterManager;
         protected BaseAiManager aiManager;
         protected Motion motion;
-
+        protected Buff buff;
         protected string textureName;   //テクスチャ名
         protected string tag;           //敵味方　タグ分け
 
@@ -33,6 +33,7 @@ namespace Team27_RougeLike.Object
             this.textureName = textureName;
             this.characterManager = characterManager;
             velocity = Vector3.Zero;
+            buff = new Buff();
         }
 
         public abstract void Initialize();
@@ -48,7 +49,6 @@ namespace Team27_RougeLike.Object
         {
             return aiManager.GetStateAi() is StateAi_Dodge;
         }
-
         protected void NockBackUpdate()
         {
             var n = nockback;
@@ -68,6 +68,7 @@ namespace Team27_RougeLike.Object
             return attackAngle;
         }
         public abstract void Damage(int num, Vector3 nockback);
+        public abstract void TrueDamage(int num);
         public abstract bool IsDead();
         public abstract void Move();
         public CollisionSphere Collision
@@ -78,11 +79,18 @@ namespace Team27_RougeLike.Object
         {
             return aiManager;
         }
+        public Buff GetBuffs()
+        {
+            return buff;
+        }
         public Vector3 Velocity
         {
             get { return velocity; }
             set { velocity = value; }
         }
-
+        public void Log(string log)
+        {
+            characterManager.Log(log);
+        }
     }
 }

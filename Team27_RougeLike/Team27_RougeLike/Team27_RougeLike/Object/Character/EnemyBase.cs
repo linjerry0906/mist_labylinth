@@ -18,6 +18,7 @@ namespace Team27_RougeLike.Object
     {
         protected EnemyRange range;     //各種距離構造体
         protected Status status;        //ステータスクラス 
+
         protected string name;          //個体名 
         protected string aiName;        //キャラクタのAi名
         protected int id;
@@ -33,7 +34,7 @@ namespace Team27_RougeLike.Object
         /// <param name="aiName"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice,string name,int id)
+        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice, string name, int id)
             : base(collision, textureName, characterManager)
         {
             this.status = status;
@@ -54,7 +55,7 @@ namespace Team27_RougeLike.Object
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
         /// <param name="exp"></param>
-        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp,string name,int id)
+        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp, string name, int id)
         : base(collision, textureName, characterManager)
         {
             this.status = status;
@@ -73,7 +74,7 @@ namespace Team27_RougeLike.Object
         /// <param name="manager"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice,string name,int id)
+        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice, string name, int id)
          : base(collision, textureName, characterManager)
         {
             tag = "Enemy";
@@ -112,13 +113,13 @@ namespace Team27_RougeLike.Object
                     characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + attackAngle, 10), 1, tag, status.BasePower, attackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Totem":
-                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 0.5f), 100, tag, status.BasePower, attackAngle,pManager,gameDevice));
+                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 0.5f), 100, tag, status.BasePower, attackAngle, pManager, gameDevice));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 0.5f), 100, tag, status.BasePower, attackAngle,pManager, gameDevice);
+                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 0.5f), 100, tag, status.BasePower, attackAngle, pManager, gameDevice);
                     characterManager.AddHitBox(damageBox);
                     pManager = new ParticleManager(gameDevice);
-                    pManager.AddParticle(new Bullet(gameDevice, damageBox,new Vector2(10, 10)));
+                    pManager.AddParticle(new Bullet(gameDevice, damageBox, new Vector2(10, 10)));
                     break;
                 default:
                     break;
@@ -136,6 +137,7 @@ namespace Team27_RougeLike.Object
             base.Draw(renderer);
             DrawWarning(renderer);
         }
+
 
         public void DrawWarning(Renderer renderer)
         {
@@ -213,7 +215,10 @@ namespace Team27_RougeLike.Object
             {
                 status.Health -= damage;
             }
-            velocity += nockback;
+            if (!buff.GetBuff(Buff.buff.IRONBODY))
+            {
+                this.nockback = nockback;
+            }
         }
         public override bool IsDead()
         {
@@ -256,6 +261,11 @@ namespace Team27_RougeLike.Object
         public int GetID()
         {
             return id;
+        }
+
+        public override void TrueDamage(int num)
+        {
+            status.Health -= num;
         }
     }
 }
