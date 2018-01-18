@@ -44,18 +44,19 @@ namespace Team27_RougeLike.UI
             input = gameDevice.InputState;
             playerItem = gameManager.PlayerItem;
 
-            parts = new string[6];
+            parts = new string[7];
             parts[0] = "兜";
             parts[1] = "鎧";
             parts[2] = "籠手";
             parts[3] = "靴";
             parts[4] = "左手";
             parts[5] = "右手";
+            parts[6] = "弓矢";
 
-            colors = new Color[6];
+            colors = new Color[7];
 
-            buttons = new Button[6];
-            for(int i = 0; i < buttons.Length; i++)
+            buttons = new Button[7];
+            for (int i = 0; i < buttons.Length; i++)
             {
                 Vector2 drawPos = position + new Vector2(0, i * (cellSize.Y + 5));      //描画位置
                 Vector2 equipPos = drawPos + new Vector2(cellSize.X + 2, 0);            //描画位置   
@@ -71,13 +72,15 @@ namespace Team27_RougeLike.UI
             ProtectionItem[] armor = playerItem.CurrentArmor();     //装備を取得
             WeaponItem leftHand = playerItem.LeftHand();            //左手
             WeaponItem rightHand = playerItem.RightHand();          //右手
-            items = new Item[6];
+            ConsumptionItem arrow = playerItem.Arrow();
+            items = new Item[7];
             for (int i = 0; i < armor.Length; i++)
             {
                 items[i] = armor[i];
             }
             items[4] = leftHand;
             items[5] = rightHand;
+            items[6] = arrow;
 
             currentItem = null;
         }
@@ -94,7 +97,7 @@ namespace Team27_RougeLike.UI
                 return;
 
             Point mousePos = new Point((int)input.GetMousePosition().X, (int)input.GetMousePosition().Y);
-            if(currentItem != null)
+            if (currentItem != null)
             {
                 if (removeButton.IsClick(mousePos))
                 {
@@ -103,9 +106,9 @@ namespace Team27_RougeLike.UI
                 }
             }
 
-            for(int i = 0; i < buttons.Length; i++)
+            for (int i = 0; i < buttons.Length; i++)
             {
-                if(buttons[i].IsClick(mousePos))
+                if (buttons[i].IsClick(mousePos))
                 {
                     currentItem = items[i];
                     isClick = true;
@@ -122,23 +125,32 @@ namespace Team27_RougeLike.UI
                     continue;
                 if (currentItem.Equals(items[i]))
                 {
-                    if(i < 4)
+                    if (i < 4)
                     {
                         playerItem.RemoveArmor(i);
                         currentItem = null;
                         itemUI.Initialize();
                         return;
                     }
-                    if(i == 4)
+                    if (i == 4)
                     {
                         playerItem.RemoveLeftHand();
                         currentItem = null;
                         itemUI.Initialize();
                         return;
                     }
-                    playerItem.RemoveRightHand();
-                    currentItem = null;
-                    itemUI.Initialize();
+                    if (i == 5)
+                    {
+                        playerItem.RemoveRightHand();
+                        currentItem = null;
+                        itemUI.Initialize();
+                    }
+                    if (i == 6)
+                    {
+                        playerItem.RemoveArrow();
+                        currentItem = null;
+                        itemUI.Initialize();
+                    }
                     return;
                 }
             }
@@ -167,7 +179,7 @@ namespace Team27_RougeLike.UI
         {
             SetText();      //文字設定
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < buttons.Length; i++)
             {
                 Vector2 drawPos = position + new Vector2(0, i * (cellSize.Y + 5));      //描画位置
                 Vector2 center = drawPos + cellSize / 2;                                //中心部
@@ -211,9 +223,10 @@ namespace Team27_RougeLike.UI
             ProtectionItem[] armor = playerItem.CurrentArmor();     //装備を取得
             WeaponItem leftHand = playerItem.LeftHand();            //左手
             WeaponItem rightHand = playerItem.RightHand();          //右手
+            ConsumptionItem arrow = playerItem.Arrow();
 
-            equips = new string[6];                                 //装備文字初期化
-            for(int i = 0; i < 4; i++)                              //防具文字を設定
+            equips = new string[7];                                 //装備文字初期化
+            for (int i = 0; i < 4; i++)                              //防具文字を設定
             {
                 colors[i] = Color.White;
                 SetProtectionText(ref equips[i], armor, (ProtectionItem.ProtectionType)i);
@@ -239,6 +252,17 @@ namespace Team27_RougeLike.UI
             {
                 colors[5] = Color.Lerp(Color.White, Color.Gold, rightHand.GetItemRare() / 100.0f);       //レア度で色付け
                 equips[5] = rightHand.GetItemName() + " + " + rightHand.GetReinforcement();
+            }
+
+            if (arrow == null)           //右手に武器がない場合
+            {
+                colors[6] = Color.White;
+                EquipNull(ref equips[6]);
+            }
+            else
+            {
+                colors[6] = Color.Lerp(Color.White, Color.Gold, arrow.GetItemRare() / 100.0f);       //レア度で色付け
+                equips[6] = arrow.GetItemName();
             }
         }
 

@@ -63,7 +63,6 @@ namespace Team27_RougeLike.UI
             itemIndex = -1;
             #endregion
 
-
             #region PopUI
             popUI = new DungeonPopUI(gameDevice);
             popUI.SetSize(new Vector2(300, 120));

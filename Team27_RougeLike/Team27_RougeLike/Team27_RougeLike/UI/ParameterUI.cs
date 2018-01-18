@@ -74,6 +74,10 @@ namespace Team27_RougeLike.UI
         /// <param name="alpha">透明度</param>
         public void Draw(float alpha)
         {
+            renderer.DrawTexture(
+                "fade", position + new Vector2(-7, -15), 
+                new Vector2(COLUM_WIDTH * 2.1f, LINE_HEIGHT * 8), alpha * 0.6f);
+
             for(int i = 0; i < parameter.Length; i++)
             {
                 renderer.DrawString(

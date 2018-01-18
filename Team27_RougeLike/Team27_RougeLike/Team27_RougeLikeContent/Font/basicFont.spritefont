@@ -745,6 +745,10 @@ with.
       </CharacterRegion>
 
       <!-- や -->
+      <CharacterRegion>
+        <Start>矢</Start>
+        <End>矢</End>
+      </CharacterRegion>
       <!-- び -->
       <CharacterRegion>
         <Start>薬</Start>

@@ -25,6 +25,7 @@ namespace Team27_RougeLike.Object.Item
         private ProtectionItem[] armor;               //装備
         private WeaponItem rightHand;               　//右手
         private WeaponItem leftHand;                　//左手
+        private ConsumptionItem arrow;                //弓矢
 
         private int money;                            //所持金
 
@@ -42,6 +43,7 @@ namespace Team27_RougeLike.Object.Item
             }
             rightHand = null;
             leftHand = null;
+            arrow = null;
         }
 
         #region カバン関連
@@ -246,6 +248,34 @@ namespace Team27_RougeLike.Object.Item
         }
 
         /// <summary>
+        /// 弓矢を装備する
+        /// </summary>
+        /// <param name="bagIndex"></param>
+        /// <returns></returns>
+        public bool EquipArrow(int bagIndex)
+        {
+            Item equipArrow = bag[bagIndex];
+            if (!(equipArrow is ConsumptionItem))
+                return false;
+
+            //Type判断
+
+            if (leftHand == null)
+                return false;
+
+            WeaponItem.WeaponType type = leftHand.GetWeaponType();
+            if (type != WeaponItem.WeaponType.Bow)
+                return false;
+
+            if (arrow != null)
+                bag.Add(arrow);
+
+            arrow = (ConsumptionItem)equipArrow;
+            bag.RemoveAt(bagIndex);
+            return true;
+        }
+
+        /// <summary>
         /// バッグ内のアイテム
         /// </summary>
         /// <returns></returns>
@@ -315,6 +345,15 @@ namespace Team27_RougeLike.Object.Item
         }
 
         /// <summary>
+        /// 装備している弓矢
+        /// </summary>
+        /// <returns></returns>
+        public ConsumptionItem Arrow()
+        {
+            return arrow;
+        }
+
+        /// <summary>
         /// 右手に装備している武器
         /// </summary>
         /// <returns></returns>
@@ -349,6 +388,15 @@ namespace Team27_RougeLike.Object.Item
             {
                 bag.Add(rightHand);
                 rightHand = null;
+            }
+        }
+
+        public void RemoveArrow()
+        {
+            if (bag.Count < MAX_ITEM_COUNT_BAG)
+            {
+                bag.Add(arrow);
+                arrow = null;
             }
         }
 
