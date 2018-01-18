@@ -123,6 +123,7 @@
     <Compile Include="Object\ParticleSystem\Particle.cs" />
     <Compile Include="Object\ParticleSystem\ParticleManager.cs" />
     <Compile Include="Object\ParticleSystem\Slash.cs" />
+    <Compile Include="Object\ParticleSystem\SphereParticle.cs" />
     <Compile Include="Object\PlayerStatus.cs" />
     <Compile Include="Object\PlayerStatusLoader.cs" />
     <Compile Include="QuestSystem\BattleQuest.cs" />
