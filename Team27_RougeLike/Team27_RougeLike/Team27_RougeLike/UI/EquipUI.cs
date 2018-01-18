@@ -17,7 +17,11 @@ namespace Team27_RougeLike.UI
     class EquipUI
     {
         private Renderer renderer;
+        private InputState input;
         private Inventory playerItem;
+
+        private Item currentItem;
+        private Item[] items;
 
         private Vector2 position;   //位置
         private string[] parts;     //部位の文字
@@ -27,11 +31,17 @@ namespace Team27_RougeLike.UI
         private readonly Vector2 cellSize = new Vector2(62, 25);            //部位欄の大きさ
         private readonly Vector2 equipCellSize = new Vector2(250, 25);      //装備表示欄の大きさ
 
+        private Button[] buttons;
+        private Button removeButton;            //外すボタン
+        private bool isClick = false;
+        private ItemUI itemUI;
+
         public EquipUI(Vector2 position, GameManager gameManager, GameDevice gameDevice)
         {
             this.position = position;
 
             renderer = gameDevice.Renderer;
+            input = gameDevice.InputState;
             playerItem = gameManager.PlayerItem;
 
             parts = new string[6];
@@ -43,6 +53,110 @@ namespace Team27_RougeLike.UI
             parts[5] = "右手";
 
             colors = new Color[6];
+
+            buttons = new Button[6];
+            for(int i = 0; i < buttons.Length; i++)
+            {
+                Vector2 drawPos = position + new Vector2(0, i * (cellSize.Y + 5));      //描画位置
+                Vector2 equipPos = drawPos + new Vector2(cellSize.X + 2, 0);            //描画位置   
+                buttons[i] = new Button(equipPos, (int)equipCellSize.X, (int)equipCellSize.Y);
+            }
+            removeButton = new Button(new Vector2(480, 620), 100, 30);
+
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            ProtectionItem[] armor = playerItem.CurrentArmor();     //装備を取得
+            WeaponItem leftHand = playerItem.LeftHand();            //左手
+            WeaponItem rightHand = playerItem.RightHand();          //右手
+            items = new Item[6];
+            for (int i = 0; i < armor.Length; i++)
+            {
+                items[i] = armor[i];
+            }
+            items[4] = leftHand;
+            items[5] = rightHand;
+
+            currentItem = null;
+        }
+
+        public void SetItemUI(ItemUI ui)
+        {
+            this.itemUI = ui;
+        }
+
+        public void Update()
+        {
+            isClick = false;
+            if (!input.IsLeftClick())
+                return;
+
+            Point mousePos = new Point((int)input.GetMousePosition().X, (int)input.GetMousePosition().Y);
+            if(currentItem != null)
+            {
+                if (removeButton.IsClick(mousePos))
+                {
+                    RemoveEquip();
+                    return;
+                }
+            }
+
+            for(int i = 0; i < buttons.Length; i++)
+            {
+                if(buttons[i].IsClick(mousePos))
+                {
+                    currentItem = items[i];
+                    isClick = true;
+                    return;
+                }
+            }
+        }
+
+        private void RemoveEquip()
+        {
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (items[i] == null)
+                    continue;
+                if (currentItem.Equals(items[i]))
+                {
+                    if(i < 4)
+                    {
+                        playerItem.RemoveArmor(i);
+                        currentItem = null;
+                        itemUI.Initialize();
+                        return;
+                    }
+                    if(i == 4)
+                    {
+                        playerItem.RemoveLeftHand();
+                        currentItem = null;
+                        itemUI.Initialize();
+                        return;
+                    }
+                    playerItem.RemoveRightHand();
+                    currentItem = null;
+                    itemUI.Initialize();
+                    return;
+                }
+            }
+        }
+
+        public bool IsClick()
+        {
+            return isClick;
+        }
+
+        public void SetNull()
+        {
+            currentItem = null;
+        }
+
+        public Item CurrentItem()
+        {
+            return currentItem;
         }
 
         /// <summary>
@@ -57,7 +171,7 @@ namespace Team27_RougeLike.UI
             {
                 Vector2 drawPos = position + new Vector2(0, i * (cellSize.Y + 5));      //描画位置
                 Vector2 center = drawPos + cellSize / 2;                                //中心部
-                renderer.DrawTexture("fade", drawPos, cellSize, alpha * 0.5f);                 //背景
+                renderer.DrawTexture("fade", drawPos, cellSize, alpha * 0.5f);          //背景
                 renderer.DrawString(
                     parts[i],       //説明欄
                     center,
@@ -67,7 +181,7 @@ namespace Team27_RougeLike.UI
 
                 Vector2 equipPos = drawPos + new Vector2(cellSize.X + 2, 0);            //描画位置       
                 Vector2 equipCenter = equipPos + equipCellSize / 2;                     //中心部
-                renderer.DrawTexture("fade", equipPos, equipCellSize, alpha * 0.5f);           //背景
+                renderer.DrawTexture("fade", equipPos, equipCellSize, alpha * 0.5f);    //背景
                 renderer.DrawString(
                     equips[i],      //装備欄
                     equipCenter,
@@ -75,6 +189,18 @@ namespace Team27_RougeLike.UI
                     new Vector2(1.1f, 1.1f),
                     alpha, true, true);
             }
+
+            if (currentItem == null)
+                return;
+
+            Vector2 buttonPos = new Vector2(removeButton.Position().X, removeButton.Position().Y);
+            renderer.DrawTexture("fade", buttonPos, removeButton.Size(), alpha * 0.5f);           //背景
+            renderer.DrawString(
+                    "はずす",
+                    new Vector2(removeButton.ButtonCenter().X, removeButton.ButtonCenter().Y),
+                    Color.White,
+                    new Vector2(1.0f, 1.0f),
+                    alpha, true, true);
         }
 
         /// <summary>

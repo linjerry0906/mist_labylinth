@@ -90,7 +90,7 @@ namespace Team27_RougeLike.QuestSystem
             backLayer = new Window(
                 gameDevice,
                 new Vector2(60, 60),
-                new Vector2(WindowDef.WINDOW_WIDTH / 2 - 120, WindowDef.WINDOW_HEIGHT - 120));
+                new Vector2(WindowDef.WINDOW_WIDTH / 2 - 200, WindowDef.WINDOW_HEIGHT - 120));
             backLayer.Initialize();
             backLayer.Switch(true);
 

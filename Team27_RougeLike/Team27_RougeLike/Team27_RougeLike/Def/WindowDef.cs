@@ -13,7 +13,7 @@ namespace Team27_RougeLike.Def
     {
         public static readonly string WINDOW_NAME = "";
 
-        public static readonly int WINDOW_WIDTH = 1080;
+        public static readonly int WINDOW_WIDTH = 1280;
         public static readonly int WINDOW_HEIGHT = 720;
     }
 }

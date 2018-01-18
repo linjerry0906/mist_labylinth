@@ -268,7 +268,8 @@ namespace Team27_RougeLike.Object.Item
 
             foreach (Item i in bag)               //ItemListの重量計算
             {
-                weight += i.GetItemWeight();
+                if(i != null)
+                    weight += i.GetItemWeight();
             }
 
             foreach (ProtectionItem p in armor)   //防具の計算
@@ -331,6 +332,33 @@ namespace Team27_RougeLike.Object.Item
         {
             current = bag.Count;
             maxium = MAX_ITEM_COUNT_BAG;
+        }
+
+        public void RemoveArmor(int index)
+        {
+            if(bag.Count < MAX_ITEM_COUNT_BAG)
+            {
+                bag.Add(armor[index]);
+                armor[index] = null;
+            }
+        }
+
+        public void RemoveRightHand()
+        {
+            if (bag.Count < MAX_ITEM_COUNT_BAG)
+            {
+                bag.Add(rightHand);
+                rightHand = null;
+            }
+        }
+
+        public void RemoveLeftHand()
+        {
+            if (bag.Count < MAX_ITEM_COUNT_BAG)
+            {
+                bag.Add(leftHand);
+                leftHand = null;
+            }
         }
 
         #endregion

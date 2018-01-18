@@ -23,6 +23,8 @@ namespace Team27_RougeLike.UI
         private Window backLayer;               //背景レイヤー
         private ParameterUI parameterUI;        //パラメータ表示UI
         private ItemUI itemUI;                  //ItemUI
+        private ItemInfoUI currentInfo;         //選択されているアイテムの表示
+        private EquipUI equipUI;
         private readonly float LIMIT_ALPHA = 0.1f;      //背景Alphaの最大値 
 
         public PauseUI(GameManager gameManager, GameDevice gameDevice)
@@ -44,9 +46,21 @@ namespace Team27_RougeLike.UI
                 backLayer.GetRightTop() + new Vector2(-350, 30),        //背景レイヤーから相対位置を取る
                 gameManager, gameDevice);
 
+
+            currentInfo = new ItemInfoUI(
+                backLayer.GetLeftUnder() + new Vector2(20, -100), gameManager, gameDevice);
+
+            #region EquipUI
+            equipUI = new EquipUI(
+                backLayer.GetRightUnder() + new Vector2(-350, -200),
+                gameManager, gameDevice);
+            #endregion
+
             itemUI = new ItemUI(
                 backLayer.GetOffsetPosition() + new Vector2(20, 20),
-                gameManager, gameDevice);
+                equipUI, gameManager, gameDevice);
+
+            equipUI.SetItemUI(itemUI);
         }
 
         /// <summary>
@@ -56,6 +70,16 @@ namespace Team27_RougeLike.UI
         {
             backLayer.Update();
             itemUI.Update();
+            equipUI.Update();
+            if (itemUI.IsClick())
+            {
+                equipUI.SetNull();
+            }
+            else if (equipUI.IsClick())
+            {
+                itemUI.SetNull();
+            }
+
 
             parameterUI.RefreshInfo();
         }
@@ -87,6 +111,16 @@ namespace Team27_RougeLike.UI
             backLayer.Draw("white");
             parameterUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
             itemUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
+            equipUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
+
+            if (itemUI.CurrentItem() != null)
+            {
+                currentInfo.Draw(itemUI.CurrentItem(), backLayer.CurrentAlpha() * constractAlpha);
+            }
+            else if (equipUI.CurrentItem() != null)
+            {
+                currentInfo.Draw(equipUI.CurrentItem(), backLayer.CurrentAlpha() * constractAlpha);
+            }
         }
     }
 }

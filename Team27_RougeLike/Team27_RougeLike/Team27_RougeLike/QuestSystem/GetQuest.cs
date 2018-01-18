@@ -228,14 +228,14 @@ namespace Team27_RougeLike.QuestSystem
             leftBackLayer = new Window(
                 gameDevice,
                 new Vector2(60, 60),
-                new Vector2(WindowDef.WINDOW_WIDTH / 2 - 120, WindowDef.WINDOW_HEIGHT - 120));
+                new Vector2(WindowDef.WINDOW_WIDTH / 2 - 200, WindowDef.WINDOW_HEIGHT - 120));
             leftBackLayer.Initialize();
             leftBackLayer.Switch(true);
 
             rightBackLayer = new Window(
                 gameDevice,
-                new Vector2(WindowDef.WINDOW_WIDTH / 2 + 60, 60),
-                new Vector2(WindowDef.WINDOW_WIDTH / 2 - 120, WindowDef.WINDOW_HEIGHT - 120));
+                new Vector2(WindowDef.WINDOW_WIDTH / 2 + 100, 60),
+                new Vector2(WindowDef.WINDOW_WIDTH / 2 - 200, WindowDef.WINDOW_HEIGHT - 120));
             rightBackLayer.Initialize();
             rightBackLayer.Switch(true);
             #endregion

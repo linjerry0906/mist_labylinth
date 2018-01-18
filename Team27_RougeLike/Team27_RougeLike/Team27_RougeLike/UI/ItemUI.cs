@@ -27,11 +27,8 @@ namespace Team27_RougeLike.UI
         private Item currentItem;               //選択されているアイテム
         private int itemIndex;                  //特定するための添え字
 
-        private ItemInfoUI currentInfo;         //選択されているアイテムの表示
         private DungeonPopUI popUI;             //PopUi
         private Button[] popButtons;            //PopUiのボタン
-
-        private EquipUI equipUI;
 
         private readonly int WIDTH = 170;       //ボタンの長さ
         private readonly int HEIGHT = 22;       //ボタンの高さ
@@ -39,13 +36,18 @@ namespace Team27_RougeLike.UI
         private Button equipButton;             //装備ボタン
         private Button removeButton;            //捨てるボタン
 
-        public ItemUI(Vector2 position, GameManager gameManager, GameDevice gameDevice)
+        private bool isClick;
+        private EquipUI equipUI;
+
+        public ItemUI(Vector2 position, EquipUI equipUI, GameManager gameManager, GameDevice gameDevice)
         {
             this.position = position;
+            this.equipUI = equipUI;
             renderer = gameDevice.Renderer;
             input = gameDevice.InputState;
             playerItem = gameManager.PlayerItem;
             itemList = playerItem.BagList();
+            isClick = false;
 
             #region Button
             buttons = new List<Button>();
@@ -59,14 +61,8 @@ namespace Team27_RougeLike.UI
             #region ItemInfo
             currentItem = null;
             itemIndex = -1;
-            currentInfo = new ItemInfoUI(position + new Vector2(0, 575), gameManager, gameDevice);
             #endregion
 
-            #region EquipUI
-            equipUI = new EquipUI(
-                position + new Vector2(660, 485),
-                gameManager, gameDevice);
-            #endregion
 
             #region PopUI
             popUI = new DungeonPopUI(gameDevice);
@@ -90,6 +86,12 @@ namespace Team27_RougeLike.UI
             }
         }
 
+        public void Initialize()
+        {
+            itemList = playerItem.BagList();
+            InitButton();
+        }
+
         public void SwitchOff()
         {
             popUI.PopOff();
@@ -100,6 +102,7 @@ namespace Team27_RougeLike.UI
         /// </summary>
         public void Update()
         {
+            isClick = false;
             UpdatePopUI();
             if (popUI.IsPop())      //PopUpなら以下は更新しない
                 return;
@@ -129,6 +132,7 @@ namespace Team27_RougeLike.UI
                 popUI.PopOff();
                 currentItem = null;
                 itemIndex = -1;
+                equipUI.Initialize();
                 return;
             }
 
@@ -138,6 +142,7 @@ namespace Team27_RougeLike.UI
                 popUI.PopOff();
                 currentItem = null;
                 itemIndex = -1;
+                equipUI.Initialize();
                 return;
             }
         }
@@ -170,6 +175,12 @@ namespace Team27_RougeLike.UI
 
             itemIndex = index;
             currentItem = itemList[itemIndex];
+            isClick = true;
+        }
+
+        public bool IsClick()
+        {
+            return isClick;
         }
 
         /// <summary>
@@ -206,10 +217,24 @@ namespace Team27_RougeLike.UI
             }
         }
 
+        public Item CurrentItem()
+        {
+            return currentItem;
+        }
+
         /// <summary>
         /// Itemを使用　まだ未実装
         /// </summary>
         private void Use()
+        {
+            currentItem = null;
+            itemIndex = -1;
+        }
+
+        /// <summary>
+        /// InfoをNullに設定
+        /// </summary>
+        public void SetNull()
         {
             currentItem = null;
             itemIndex = -1;
@@ -229,6 +254,8 @@ namespace Team27_RougeLike.UI
                 if (!EquipWeapon())
                     return;
             }
+
+            equipUI.Initialize();
             currentItem = null;
             itemIndex = -1;
         }
@@ -272,8 +299,6 @@ namespace Team27_RougeLike.UI
             DrawItemList(alpha);
 
             DrawInfo(alpha);
-
-            equipUI.Draw(alpha);
 
             DrawPopUI();
         }
@@ -333,8 +358,6 @@ namespace Team27_RougeLike.UI
                     Color.White,
                     new Vector2(1.0f, 1.0f),
                     alpha, true, true);
-
-            currentInfo.Draw(currentItem, alpha);
 
             string buttonString = "使用";
             if (currentItem is WeaponItem || currentItem is ProtectionItem)
