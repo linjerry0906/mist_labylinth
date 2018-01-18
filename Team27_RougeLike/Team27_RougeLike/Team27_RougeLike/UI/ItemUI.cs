@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Object.Item;
 using Team27_RougeLike.Scene;
+using Team27_RougeLike.Object.Item.ItemEffects;
 
 namespace Team27_RougeLike.UI
 {
@@ -18,6 +19,7 @@ namespace Team27_RougeLike.UI
     {
         private Renderer renderer;
         private InputState input;
+        GameManager gameManager;
 
         private Vector2 position;               //表示位置
         private Inventory playerItem;           //Playerのアイテム
@@ -43,6 +45,7 @@ namespace Team27_RougeLike.UI
         {
             this.position = position;
             this.equipUI = equipUI;
+            this.gameManager = gameManager;
             renderer = gameDevice.Renderer;
             input = gameDevice.InputState;
             playerItem = gameManager.PlayerItem;
@@ -226,6 +229,28 @@ namespace Team27_RougeLike.UI
         /// </summary>
         private void Use()
         {
+            string type = ((ConsumptionItem)currentItem).GetTypeText();
+            ItemEffect effect = ((ConsumptionItem)currentItem).GetItemEffect();
+            if(type == "回復系")
+            {
+                int recovery = ((Recovery)effect).GetAmount();
+                gameManager.PlayerInfo.Heal(recovery);
+                playerItem.RemoveItem(itemIndex);
+                buttons.RemoveAt(buttons.Count - 1);
+            }
+            else if(type == "ダメージ")
+            {
+                int damage = ((Damage)effect).GetAmount();
+                gameManager.PlayerInfo.Damage(damage);
+                playerItem.RemoveItem(itemIndex);
+                buttons.RemoveAt(buttons.Count - 1);
+            }
+            else if(type == "矢")
+            {
+                playerItem.EquipArrow(itemIndex);
+            }
+
+            equipUI.Initialize();
             currentItem = null;
             itemIndex = -1;
         }
@@ -365,8 +390,11 @@ namespace Team27_RougeLike.UI
             }
             else
             {
-                if (((ConsumptionItem)currentItem).GetTypeText() == "なし")       //使用できない
+                string type = ((ConsumptionItem)currentItem).GetTypeText();
+                if (type == "なし")       //使用できない
                     return;
+                if (type == "矢")
+                    buttonString = "装備";
             }
 
             renderer.DrawTexture(

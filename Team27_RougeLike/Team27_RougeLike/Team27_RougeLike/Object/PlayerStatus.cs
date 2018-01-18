@@ -78,6 +78,12 @@ namespace Team27_RougeLike.Object
             status.Health -= damage;
         }
 
+        public void Heal(int recovery)
+        {
+            status.Health += recovery;
+            status.Health = (status.Health > status.MaxHealth) ? status.MaxHealth : status.Health;
+        }
+
         public float GetVelocty()
         {
             CaculateStatus();

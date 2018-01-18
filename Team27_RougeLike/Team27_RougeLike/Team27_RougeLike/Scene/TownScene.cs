@@ -82,6 +82,7 @@ namespace Team27_RougeLike.Scene
             nextScene = SceneType.DungeonSelect;
             endFlag = false;
 
+            gameManager.PlayerInfo.Initialize();
             gameManager.Save();
             if (scene == SceneType.Pause ||
                 scene == SceneType.ItemShop ||
