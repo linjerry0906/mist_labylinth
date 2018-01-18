@@ -84,6 +84,8 @@ namespace Team27_RougeLike.Scene
                 return;
             }
 
+            gameManager.PlayerQuest.UpdateQuestProcess();
+
             endFlag = true;
         }
     }

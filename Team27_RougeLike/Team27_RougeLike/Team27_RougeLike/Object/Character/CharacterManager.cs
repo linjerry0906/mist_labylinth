@@ -31,13 +31,15 @@ namespace Team27_RougeLike.Object.Character
         private const int drawLength = 500;
 
         private MapItemManager mapItemManager;      //ステージのアイテムマネージャー
+        private GameManager gameManager;            //ゲームマネージャー     リンより追加
 
-        public CharacterManager(GameDevice gameDevice)
+        public CharacterManager(GameDevice gameDevice, GameManager gameManager)
         {
             this.gameDevice = gameDevice;
             loader = new EnemyLoader();
             loader.Initialize(this, gameDevice);
             this.gameDevice = gameDevice;
+            this.gameManager = gameManager;
         }
 
         public void Initialize(DungeonUI ui, MapItemManager mapItemManager)
@@ -104,6 +106,7 @@ namespace Team27_RougeLike.Object.Character
                         mapItemManager.AddItemByPossibility(c.Collision.Position, 0.65f, 0.4f);     //落ちる確率65％　装備品の確率40%
                         player.GetPlayerStatus().AddExp(((EnemyBase)c).GetExp());
                         ui.LogUI.AddLog(((EnemyBase)c).GetExp() + "exp ");
+                        gameManager.PlayerQuest.AddKill(((EnemyBase)c).GetID());
                     }
 
                 }

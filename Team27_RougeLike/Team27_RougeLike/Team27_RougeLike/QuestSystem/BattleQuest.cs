@@ -59,7 +59,7 @@ namespace Team27_RougeLike.QuestSystem
             }
 
             List<Requirement> require = new List<Requirement>(requires);
-            return new CollectQuest(questID, name, explanation, difficulty, gainMoney, award, requires, dungeonProcess, floorProcess, guildExp);
+            return new BattleQuest(questID, name, explanation, difficulty, gainMoney, award, requires, dungeonProcess, floorProcess, guildExp);
         }
 
         public override List<Requirement> CurrentState()

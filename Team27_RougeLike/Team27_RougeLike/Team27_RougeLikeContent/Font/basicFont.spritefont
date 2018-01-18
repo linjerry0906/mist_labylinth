@@ -117,6 +117,10 @@ with.
         <Start>演</Start>
         <End>演</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>液</Start>
+        <End>液</End>
+      </CharacterRegion>
       <!-- えら -->
       <CharacterRegion>
         <Start>選</Start>
@@ -440,6 +444,10 @@ with.
         <Start>成</Start>
         <End>成</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>精</Start>
+        <End>精</End>
+      </CharacterRegion>
       <!-- せつ -->
       <CharacterRegion>
         <Start>説</Start>
@@ -747,6 +755,10 @@ with.
       <CharacterRegion>
         <Start>弓</Start>
         <End>弓</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>雪</Start>
+        <End>雪</End>
       </CharacterRegion>
       <!-- よ -->
       <CharacterRegion>

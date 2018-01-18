@@ -214,7 +214,7 @@ namespace Team27_RougeLike.QuestSystem
                 else if (currentQuestInfo is BattleQuest)
                 {
                     string name = "まだ";
-                    //enemyName.GetEnemyName(currentInfo.RequireID()[i]);
+                    name = enemyName.GetEnemyName(currentQuestInfo.RequireID()[i]);
                     renderer.DrawString(
                         name, position + (10.5f + i * 0.5f) * line + offsetX, fontSize,
                         Color.White, constractAlpha * currentAlpha);

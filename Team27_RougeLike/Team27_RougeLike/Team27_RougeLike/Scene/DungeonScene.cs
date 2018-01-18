@@ -46,7 +46,7 @@ namespace Team27_RougeLike.Scene
             renderer = gameDevice.Renderer;
             stageManager = gameManager.StageManager;
 
-            characterManager = new CharacterManager(gameDevice);
+            characterManager = new CharacterManager(gameDevice, gameManager);
             pManager = new ParticleManager(gameDevice);
         }
 

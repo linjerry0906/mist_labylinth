@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Team27_RougeLike.QuestSystem
 {
-    public struct Requirement
+    public class Requirement
     {
         public int id;
         public int requireAmount;

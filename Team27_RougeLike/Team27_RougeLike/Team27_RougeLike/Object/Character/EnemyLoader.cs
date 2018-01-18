@@ -56,7 +56,8 @@ namespace Team27_RougeLike.Object.Character
                         textureName,
                         charactermanager,
                         exp,
-                        name
+                        name,
+                        id
                         )
                     );
             }
@@ -101,7 +102,8 @@ namespace Team27_RougeLike.Object.Character
                         charactermanager,
                         exp,
                         gamedevice,
-                        name
+                        name,
+                        id
                         )
                     );
             }
