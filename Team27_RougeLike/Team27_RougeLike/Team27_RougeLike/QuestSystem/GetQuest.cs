@@ -200,7 +200,7 @@ namespace Team27_RougeLike.QuestSystem
                     Vector2 numPos = position + (10.5f + i * 0.5f) * line;
                     numPos.X = rightBackLayer.GetCenter().X + 120;
                     renderer.DrawString(
-                        currentInfo.CurrentState()[i].requireAmount + "個",
+                        currentInfo.CurrentState()[i].RequireAmount + "個",
                         numPos, fontSize,
                         Color.White, constractAlpha * currentAlpha);
                 }
@@ -215,7 +215,7 @@ namespace Team27_RougeLike.QuestSystem
                     Vector2 numPos = position + (10.5f + i * 0.5f) * line;
                     numPos.X = rightBackLayer.GetCenter().X + 120;
                     renderer.DrawString(
-                        currentInfo.CurrentState()[i].requireAmount + "体",
+                        currentInfo.CurrentState()[i].RequireAmount + "体",
                         numPos, fontSize,
                         Color.White, constractAlpha * currentAlpha);
                 }

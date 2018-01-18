@@ -10,34 +10,6 @@ using System.Text;
 
 namespace Team27_RougeLike.QuestSystem
 {
-    public class Requirement
-    {
-        public int id;
-        public int requireAmount;
-        public int currentAmount;
-        /// <summary>
-        /// 必要なitem、敵ID、数
-        /// </summary>
-        /// <param name="id">ID</param>
-        /// <param name="amount">数</param>
-        public Requirement(int id, int amount)
-        {
-            this.id = id;
-            this.requireAmount = amount;
-            currentAmount = 0;
-        }
-
-        public void SetCurrentAmount(int amount)
-        {
-            currentAmount = amount;
-        }
-
-        public void AddCurrentAmount(int amount)
-        {
-            currentAmount += amount;
-        }
-    }
-
     abstract class Quest
     {
         protected int guildExp;

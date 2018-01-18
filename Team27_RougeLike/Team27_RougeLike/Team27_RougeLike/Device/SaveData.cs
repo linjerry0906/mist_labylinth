@@ -143,7 +143,7 @@ namespace Team27_RougeLike.Device
                 {
                     if (i < q.CurrentState().Count)
                     {
-                        sw.Write(q.CurrentState()[i].currentAmount + ",");
+                        sw.Write(q.CurrentState()[i].CurrentAmount + ",");
                         continue;
                     }
                     sw.Write("null,");

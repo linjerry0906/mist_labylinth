@@ -25,7 +25,7 @@ namespace Team27_RougeLike.QuestSystem
         {
             foreach (Requirement r in requires)
             {
-                if(r.id == id)
+                if(r.ID == id)
                 {
                     r.AddCurrentAmount(amount);
                 }
@@ -37,7 +37,7 @@ namespace Team27_RougeLike.QuestSystem
         {
             foreach (Requirement r in requires)
             {
-                if (r.currentAmount < r.requireAmount)  //クリアされてない条件があればFalse
+                if (r.CurrentAmount < r.RequireAmount)  //クリアされてない条件があればFalse
                 {
                     isClear = false;
                     return;
@@ -72,14 +72,20 @@ namespace Team27_RougeLike.QuestSystem
             int[] ids = new int[requires.Count];
             for (int i = 0; i < ids.Length; i++)
             {
-                ids[i] = requires[i].id;
+                ids[i] = requires[i].ID;
             }
             return ids;
         }
 
         public override void SetItemAmount(int id, int amount)
         {
-            return;
+            foreach (Requirement r in requires)
+            {
+                if (r.ID != id)
+                    continue;
+
+                r.SetCurrentAmount(amount);
+            }
         }
     }
 }
