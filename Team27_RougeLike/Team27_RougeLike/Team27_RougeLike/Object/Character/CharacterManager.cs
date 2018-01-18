@@ -191,6 +191,11 @@ namespace Team27_RougeLike.Object.Character
             return loader.Enemys();
         }
 
+        public List<HitBoxBase> GetHitBoxs()
+        {
+            return hitBoxs;
+        }
+
         public bool DiedCharacters()
         {
             return LiveCharacterCnt() == 0;

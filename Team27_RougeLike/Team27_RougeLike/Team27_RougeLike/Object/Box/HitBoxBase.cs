@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 namespace Team27_RougeLike.Object.Box
 {
     abstract class HitBoxBase
@@ -17,10 +18,11 @@ namespace Team27_RougeLike.Object.Box
 
         private List<string> mask;              //マスク
         private int time;                       //持続時間
-
+        private bool isend;
 
         public HitBoxBase()
         {
+            isend = false; 
         }
 
         /// <summary>
@@ -104,11 +106,16 @@ namespace Team27_RougeLike.Object.Box
                 }
             }
         }
+
         public bool IsEnd()
         {
-            return time <= 0;
+            return time <= 0 || isend;
         }
 
+        public void End()
+        {
+            isend = true;
+        }
         public abstract void Effect(CharacterBase character);
         public Vector3 Position() { return collision.Center; }
 

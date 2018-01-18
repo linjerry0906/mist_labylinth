@@ -14,7 +14,6 @@ namespace Team27_RougeLike.Object.Box
         private int attack;
         private Vector3 angle;
         private ParticleManager pManager;
-
         public MoveDamageBox(BoundingSphere collision, int time, int attack, Vector3 angle)
             : base(collision, time)
         {

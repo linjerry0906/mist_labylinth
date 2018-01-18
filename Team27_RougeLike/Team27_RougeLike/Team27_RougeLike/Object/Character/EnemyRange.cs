@@ -23,11 +23,11 @@ namespace Team27_RougeLike.Object.Character
         }
         public static EnemyRange Ranged()
         {
-            return new EnemyRange(50, 15, 30);
+            return new EnemyRange(60, 25, 50);
         }
         public static EnemyRange Melee()
         {
-            return new EnemyRange(50, 20, 15);
+            return new EnemyRange(50, 30, 15);
         }
         public static EnemyRange Totem()
         {

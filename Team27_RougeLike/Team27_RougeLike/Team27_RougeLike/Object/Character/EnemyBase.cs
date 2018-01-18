@@ -112,10 +112,10 @@ namespace Team27_RougeLike.Object
                     characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + attackAngle, 10), 1, tag, status.BasePower, attackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Totem":
-                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 5), 100, tag, status.BasePower, attackAngle,pManager,gameDevice));
+                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 0.5f), 100, tag, status.BasePower, attackAngle,pManager,gameDevice));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 2), 100, tag, status.BasePower, attackAngle,pManager, gameDevice);
+                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 0.5f), 100, tag, status.BasePower, attackAngle,pManager, gameDevice);
                     characterManager.AddHitBox(damageBox);
                     pManager = new ParticleManager(gameDevice);
                     pManager.AddParticle(new Bullet(gameDevice, damageBox,new Vector2(10, 10)));

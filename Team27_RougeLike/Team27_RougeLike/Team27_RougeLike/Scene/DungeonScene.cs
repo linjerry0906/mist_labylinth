@@ -232,6 +232,7 @@ namespace Team27_RougeLike.Scene
             map.Update();
             map.MapCollision(characterManager.GetPlayer());
             map.MapCollision(characterManager.GetCharacters());
+            map.MapCollision(characterManager.GetHitBoxs());
 
             //アイテム処理
             mapItemManager.ItemCollision(characterManager.GetPlayer(), ui);

@@ -21,7 +21,7 @@ namespace Team27_RougeLike.Object
         protected string textureName;   //テクスチャ名
         protected string tag;           //敵味方　タグ分け
 
-        protected Vector3 velocity;     //移動ベクトル
+        protected Vector3 velocity;     //移動ベクトル0
         protected Vector3 attackAngle;  //攻撃方向
         protected Vector3 nockback;
 

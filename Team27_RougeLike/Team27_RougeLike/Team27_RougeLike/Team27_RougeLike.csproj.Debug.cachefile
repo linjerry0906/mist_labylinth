@@ -34,6 +34,7 @@ Content\Texture\wall_ice.xnb
 Content\Texture\wall_infinite.xnb
 Content\Texture\wall_tree.xnb
 Content\Texture\wall_tutorial.xnb
+Content\Texture\particle.xnb
 Content\EnemysCSV\Enemy.csv
 Content\ItemCSV\ConsumptionItems.csv
 Content\ItemCSV\EquipmentItems.csv
