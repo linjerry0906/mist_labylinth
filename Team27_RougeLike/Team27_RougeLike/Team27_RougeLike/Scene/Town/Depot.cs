@@ -280,18 +280,18 @@ namespace Team27_RougeLike.Scene
                 if (leftWindow.CurrentState()) leftWindow.Switch();
                 if (rightWindow.CurrentState()) rightWindow.Switch();
 
-                if (equipmentButton.IsClick(mousePos) && input.IsLeftClick())
+                if (equipmentButton.IsMouseOn(mousePos) && input.IsLeftClick())
                 {
                     mode = DepotModeType.equipment;
                     EquipmentModeInitialize();
                 }
 
-                if (consumptionButton.IsClick(mousePos) && input.IsLeftClick())
+                if (consumptionButton.IsMouseOn(mousePos) && input.IsLeftClick())
                 {
                     mode = DepotModeType.consumption;
                     ConsumptionModeInitialize();
                 }
-                if (backButton.IsClick(mousePos) && input.IsLeftClick())
+                if (backButton.IsMouseOn(mousePos) && input.IsLeftClick())
                 {
                     mode = DepotModeType.end;
                     endFlag = true;
@@ -313,7 +313,7 @@ namespace Team27_RougeLike.Scene
                 if (bagNowNum >= bagMaxNum) isBagMax = true;
                 foreach(Button b in rightButtons)
                 {
-                    if (b.IsClick(mousePos) && isBagMax)
+                    if (b.IsMouseOn(mousePos) && isBagMax)
                         isBagMaxMessaga = true;
                 }
 
@@ -322,11 +322,11 @@ namespace Team27_RougeLike.Scene
                 if (depotNowNum >= depotMaxNum) isDepotMax = true;
                 foreach(Button b in leftButtons)
                 {
-                    if (b.IsClick(mousePos) && isDepotMax)
+                    if (b.IsMouseOn(mousePos) && isDepotMax)
                         isDepotMaxMessaga = true;
                 }
 
-                if (backButton.IsClick(mousePos) && input.IsLeftClick())
+                if (backButton.IsMouseOn(mousePos) && input.IsLeftClick())
                 {
                     mode = DepotModeType.select;
                 }
@@ -338,7 +338,7 @@ namespace Team27_RougeLike.Scene
                 //バッグ側
                 for (int i = 0; i < leftButtons.Count; i++)
                 {
-                    if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isDepotMax)
+                    if (leftButtons[i].IsMouseOn(mousePos) && input.IsLeftClick() && !isDepotMax)
                     {
                         AddRightList(leftItems[i]);
                         inventory.DepositEquip(inventory.BagItemIndex(leftItems[i]));
@@ -349,7 +349,7 @@ namespace Team27_RougeLike.Scene
                 //倉庫側
                 for (int i = 0; i < rightButtons.Count; i++)
                 {
-                    if (rightButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isBagMax)
+                    if (rightButtons[i].IsMouseOn(mousePos) && input.IsLeftClick() && !isBagMax)
                     {
                         AddLeftList(rightItems[i]);
                         inventory.MoveDepositEquipToBag(inventory.DepositEquipIndex(rightItems[i]));
@@ -364,7 +364,7 @@ namespace Team27_RougeLike.Scene
                 //バッグ側
                 for (int i = 0; i < leftButtons.Count; i++)
                 {
-                    if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isDepotMax)
+                    if (leftButtons[i].IsMouseOn(mousePos) && input.IsLeftClick() && !isDepotMax)
                     {
                         inventory.DepositItem(inventory.BagItemIndex(leftItems[i]));
                         if (consumptions[leftItems[i].GetItemID()] - 1 <= 0)
@@ -376,7 +376,7 @@ namespace Team27_RougeLike.Scene
                 //倉庫側
                 for (int i = 0; i < rightButtons.Count; i++)
                 {
-                    if (rightButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isBagMax)
+                    if (rightButtons[i].IsMouseOn(mousePos) && input.IsLeftClick() && !isBagMax)
                     {
                         if (consumptions[rightItems[i].GetItemID()] - 1 <= 0)
                         {

@@ -127,7 +127,7 @@ namespace Team27_RougeLike.Scene
                     sellWindow.Switch();
                     isMessegePop = true;
                 }
-                if (buyButton.IsClick(mousePos) && input.IsLeftClick())
+                if (buyButton.IsMouseOn(mousePos) && input.IsLeftClick())
                 {
                     mode = ShopMode.buy;
                     store.Initialize();
@@ -137,7 +137,7 @@ namespace Team27_RougeLike.Scene
                     sellWindow.Switch();
                     isMessegePop = false;
                 }
-                else if (sellButton.IsClick(mousePos) && input.IsLeftClick())
+                else if (sellButton.IsMouseOn(mousePos) && input.IsLeftClick())
                 {
                     mode = ShopMode.sell;
                     store.Initialize();

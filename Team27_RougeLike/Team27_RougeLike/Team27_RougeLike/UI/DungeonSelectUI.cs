@@ -93,7 +93,7 @@ namespace Team27_RougeLike.UI
             int index = 0;
             foreach (Button b in dungeons)
             {
-                if (b.IsClick(new Point((int)mosPos.X, (int)mosPos.Y)))
+                if (b.IsMouseOn(new Point((int)mosPos.X, (int)mosPos.Y)))
                 {
                     dungeonIndex = index;
                     InitFloor();
@@ -108,7 +108,7 @@ namespace Team27_RougeLike.UI
             int index = 0;
             foreach (Button b in floors)
             {
-                if (b.IsClick(new Point((int)mosPos.X, (int)mosPos.Y)))
+                if (b.IsMouseOn(new Point((int)mosPos.X, (int)mosPos.Y)))
                 {
                     floorIndex = index;
                     return;
@@ -126,7 +126,7 @@ namespace Team27_RougeLike.UI
             DungeonSelectButtonEnum index = 0;
             foreach (Button b in buttons)
             {
-                if (b.IsClick(new Point((int)mosPos.X, (int)mosPos.Y)))
+                if (b.IsMouseOn(new Point((int)mosPos.X, (int)mosPos.Y)))
                 {
                     SwitchOff();
                     choose = index;

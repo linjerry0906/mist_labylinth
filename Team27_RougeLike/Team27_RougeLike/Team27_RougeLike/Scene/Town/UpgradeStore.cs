@@ -352,14 +352,14 @@ namespace Team27_RougeLike.Scene
                 (int)input.GetMousePosition().X,
                 (int)input.GetMousePosition().Y);
 
-            if (backButton.IsClick(mousePos) && input.IsLeftClick())
+            if (backButton.IsMouseOn(mousePos) && input.IsLeftClick())
             {
                 endFlag = true;
             }
 
             for (int i = 0; i < leftButtons.Count; i++)
             {
-                if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick())
+                if (leftButtons[i].IsMouseOn(mousePos) && input.IsLeftClick())
                 {
                     SetItem(leftItems[i]);
                 }
@@ -386,7 +386,7 @@ namespace Team27_RougeLike.Scene
                 }
             }
 
-            if (upgradeButton.IsClick(mousePos) && isSelect && !isBiggest)
+            if (upgradeButton.IsMouseOn(mousePos) && isSelect && !isBiggest)
             {
                 if (!isEnough)
                 {

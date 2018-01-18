@@ -180,7 +180,7 @@ namespace Team27_RougeLike.Scene.Town
             isInventoryFullMessege = false;
 
             //アイテムを買う処理(お金が足りるか、バックにはいるかチェック)
-            if (button.IsClick(mousePos))
+            if (button.IsMouseOn(mousePos))
             {
                 if (maxNum >= currentNum + rightItems.Count)
                 {
@@ -215,7 +215,7 @@ namespace Team27_RougeLike.Scene.Town
                 leftWindows[i].Update();
 
                 //売り物リストから買う物リストに追加する処理(買い物リストが空いているかチェック)
-                if (leftButtons[i].IsClick(mousePos))
+                if (leftButtons[i].IsMouseOn(mousePos))
                 {
                     if (rightButtons.Count >= 20)
                     {
@@ -233,7 +233,7 @@ namespace Team27_RougeLike.Scene.Town
                 rightWindows[i].Update();
 
                 //買う物リストからアイテムを削除する処理
-                if (rightButtons[i].IsClick(mousePos))
+                if (rightButtons[i].IsMouseOn(mousePos))
                 {
                     if (input.IsLeftClick())
                     {
@@ -246,7 +246,7 @@ namespace Team27_RougeLike.Scene.Town
         public void SellUpdate(Point mousePos)
         {
             //アイテムを売る処理
-            if (button.IsClick(mousePos))
+            if (button.IsMouseOn(mousePos))
             {
                 if (input.IsLeftClick())
                 {
@@ -267,7 +267,7 @@ namespace Team27_RougeLike.Scene.Town
                 leftWindows[i].Update();
 
                 //持ち物を売る物リストに移動
-                if (leftButtons[i].IsClick(mousePos))
+                if (leftButtons[i].IsMouseOn(mousePos))
                 {
                     if (input.IsLeftClick())
                     {
@@ -282,7 +282,7 @@ namespace Team27_RougeLike.Scene.Town
                 rightWindows[i].Update();
 
                 //売る物リストから持ち物リストへ移動
-                if (rightButtons[i].IsClick(mousePos))
+                if (rightButtons[i].IsMouseOn(mousePos))
                 {
                     if (input.IsLeftClick())
                     {

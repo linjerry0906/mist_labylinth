@@ -123,7 +123,7 @@ namespace Team27_RougeLike.UI
                 return;
 
             Point mousePos = new Point((int)input.GetMousePosition().X, (int)input.GetMousePosition().Y);
-            if (popButtons[0].IsClick(mousePos))        //左ボタンをチェック
+            if (popButtons[0].IsMouseOn(mousePos))        //左ボタンをチェック
             {
                 playerItem.EquipLeftHand(itemIndex);
                 popUI.PopOff();
@@ -132,7 +132,7 @@ namespace Team27_RougeLike.UI
                 return;
             }
 
-            if (popButtons[1].IsClick(mousePos))        //右ボタンをチェック
+            if (popButtons[1].IsMouseOn(mousePos))        //右ボタンをチェック
             {
                 playerItem.EquipRightHand(itemIndex);
                 popUI.PopOff();
@@ -154,7 +154,7 @@ namespace Team27_RougeLike.UI
             int index = 0;
             foreach (Button b in buttons)
             {
-                if (b.IsClick(mousePos))    //クリックされたかを確認
+                if (b.IsMouseOn(mousePos))    //クリックされたかを確認
                 {
                     break;
                 }
@@ -185,7 +185,7 @@ namespace Team27_RougeLike.UI
 
             Point mousePos = new Point((int)input.GetMousePosition().X, (int)input.GetMousePosition().Y);
 
-            if (equipButton.IsClick(mousePos))      //装備、使用のボタンをチェック
+            if (equipButton.IsMouseOn(mousePos))      //装備、使用のボタンをチェック
             {
                 if (currentItem is ConsumptionItem)     //使用アイテム
                 {
@@ -200,7 +200,7 @@ namespace Team27_RougeLike.UI
                 return;
             }
 
-            if (removeButton.IsClick(mousePos))     //捨てるボタンのチェック
+            if (removeButton.IsMouseOn(mousePos))     //捨てるボタンのチェック
             {
                 Remove();
             }
