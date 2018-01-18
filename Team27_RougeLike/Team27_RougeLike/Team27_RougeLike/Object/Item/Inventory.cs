@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Team27_RougeLike.Device;
+using Team27_RougeLike.Object.Item.ItemEffects;
 
 namespace Team27_RougeLike.Object.Item
 {
@@ -258,7 +259,8 @@ namespace Team27_RougeLike.Object.Item
             if (!(equipArrow is ConsumptionItem))
                 return false;
 
-            //Type判断
+            if (((ConsumptionItem)equipArrow).GetTypeText() != "矢")
+                return false;
 
             if (leftHand == null)
                 return false;
@@ -323,6 +325,13 @@ namespace Team27_RougeLike.Object.Item
                 power += rightHand.GetPower();
                 defence += rightHand.GetDefense();
                 weight += rightHand.GetItemWeight();
+            }
+
+            if(arrow != null)
+            {
+                ArrowEffect effect = (ArrowEffect)arrow.GetItemEffect();
+                power += effect.GetPower();
+                weight += arrow.GetItemWeight() * arrow.GetStack();
             }
         }
 

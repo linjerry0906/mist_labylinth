@@ -222,7 +222,7 @@ namespace Team27_RougeLike.QuestSystem
                     Vector2 numPos = position + (10.5f + i * 0.5f) * line;
                     numPos.X = rightBackLayer.GetCenter().X + 120;
                     renderer.DrawString(
-                        currentQuestInfo.CurrentState()[i].CurrentAmount + " / " + 
+                        currentQuestInfo.CurrentState()[i].CurrentAmount + " / " +
                         currentQuestInfo.CurrentState()[i].RequireAmount,
                         numPos, fontSize,
                         Color.White, constractAlpha * currentAlpha);
@@ -403,18 +403,21 @@ namespace Team27_RougeLike.QuestSystem
 
         private void QuestClear()
         {
-            if(currentQuestInfo is CollectQuest)
+            if (currentQuestInfo is CollectQuest)
             {
-                for(int i = 0; i < currentQuestInfo.CurrentState().Count; i++)
+                for (int i = 0; i < currentQuestInfo.CurrentState().Count; i++)
                 {
                     int id = currentQuestInfo.CurrentState()[i].ID;
                     int amount = currentQuestInfo.CurrentState()[i].RequireAmount;
                     gameManager.PlayerItem.RemoveDepositoryItem(id, amount);
                 }
-                for(int i = 0; i < currentQuestInfo.AwardItem().Length; i++)
+                if (currentQuestInfo.AwardItem() != null)
                 {
-                    int id = currentQuestInfo.AwardItem()[i];
-                    gameManager.PlayerItem.DepositoryItem()[id]++;
+                    for (int i = 0; i < currentQuestInfo.AwardItem().Length; i++)
+                    {
+                        int id = currentQuestInfo.AwardItem()[i];
+                        gameManager.PlayerItem.DepositoryItem()[id]++;
+                    }
                 }
             }
 

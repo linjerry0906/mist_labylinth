@@ -314,12 +314,12 @@ namespace Team27_RougeLike.UI
                 Color color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 if (i == itemIndex)
                 {
-                    drawAlpha *= 2.0f;       //選択されたアイテムをハイライト
+                    drawAlpha *= 0.8f;       //選択されたアイテムをハイライト
                     color = Color.Yellow;
                 }
                 else
                 {
-                    drawAlpha *= 0.4f;       //選択されてないアイテムは対比するためFadeのAlphaを下げる
+                    drawAlpha *= 0.6f;       //選択されてないアイテムは対比するためFadeのAlphaを下げる
                 }
 
                 renderer.DrawTexture("fade", position + new Vector2(0, i * HEIGHT), new Vector2(WIDTH, HEIGHT - 2), drawAlpha);

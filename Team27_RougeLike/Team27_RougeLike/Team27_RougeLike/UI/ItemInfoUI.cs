@@ -46,6 +46,10 @@ namespace Team27_RougeLike.UI
 
             Color nameColor = Color.Lerp(Color.White, Color.Gold, item.GetItemRare() / 100.0f);     //レア度で名前の色を決める
 
+            renderer.DrawTexture("fade", 
+                position - new Vector2(12, 18), 
+                new Vector2(600, 110), alpha * 0.3f);
+
             //名前
             renderer.DrawString(
                 info[0], position, nameColor, new Vector2(1.2f, 1.2f),
