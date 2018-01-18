@@ -88,6 +88,9 @@ namespace Team27_RougeLike.Scene
         private bool isDepotMax;                //倉庫がいっぱいかどうか
         private bool isDepotMaxMessaga;         //倉庫がいっぱいというメッセージ表示
 
+        private int windowWidth;
+        private int windowHeight;
+
         public Depot(IScene town, GameManager gameManager, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
@@ -100,6 +103,9 @@ namespace Team27_RougeLike.Scene
             mode = DepotModeType.select;
             inventory = gameManager.PlayerItem;
             itemManager = new ItemManager();
+            
+            windowWidth = Def.WindowDef.WINDOW_WIDTH;
+            windowHeight = Def.WindowDef.WINDOW_HEIGHT;
         }
 
         public void Initialize(SceneType scene)
@@ -115,36 +121,36 @@ namespace Team27_RougeLike.Scene
 
             itemManager.LoadAll();
 
-            Vector2 size = new Vector2(1080 / 2 - 128, 720 - 128);
+            Vector2 size = new Vector2(windowWidth / 2 - 128, 720 - 128);
             leftWindow = new Window(gameDevice, new Vector2(64, 64), size);
             leftWindow.Initialize();
-            rightWindow = new Window(gameDevice, new Vector2(1080 / 2 + 64, 64), size);
+            rightWindow = new Window(gameDevice, new Vector2(windowWidth / 2 + 64, 64), size);
             rightWindow.Initialize();
-            messegeWindow = new Window(gameDevice, new Vector2(1080 / 2 - 160, 720 / 2 - 80), new Vector2(320, 160));
+            messegeWindow = new Window(gameDevice, new Vector2(windowWidth / 2 - 160, windowHeight / 2 - 80), new Vector2(320, 160));
             messegeWindow.Initialize();
 
-            backButton = new Button(new Vector2(1080 - 64, 720 - 64), 64, 32);
-            backWindow = new Window(gameDevice, new Vector2(1080 - 64, 720 - 64), new Vector2(64, 32));
+            backButton = new Button(new Vector2(windowWidth - 64, windowHeight - 64), 64, 32);
+            backWindow = new Window(gameDevice, new Vector2(windowWidth - 64, windowHeight - 64), new Vector2(64, 32));
 
-            equipmentButton = new Button(new Vector2(1080 / 2 - 160, 720 / 2 + 80 + 32), 64, 32);
-            consumptionButton = new Button(new Vector2(1080 / 2 + 160 - 64, 720 / 2 + 80 + 32), 64, 32);
-            equipmentWindow = new Window(gameDevice, new Vector2(1080 / 2 - 160, 720 / 2 + 80 + 32), new Vector2(64, 32));
+            equipmentButton = new Button(new Vector2(windowWidth / 2 - 160, windowHeight / 2 + 80 + 32), 64, 32);
+            consumptionButton = new Button(new Vector2(windowWidth / 2 + 160 - 64, windowHeight / 2 + 80 + 32), 64, 32);
+            equipmentWindow = new Window(gameDevice, new Vector2(windowWidth / 2 - 160, windowHeight / 2 + 80 + 32), new Vector2(64, 32));
             equipmentWindow.Initialize();
-            consumptionWindow = new Window(gameDevice, new Vector2(1080 / 2 + 160 - 64, 720 / 2 + 80 + 32), new Vector2(64, 32));
+            consumptionWindow = new Window(gameDevice, new Vector2(windowWidth / 2 + 160 - 64, windowHeight / 2 + 80 + 32), new Vector2(64, 32));
             consumptionWindow.Initialize();
 
             leftItems = new List<Item>();
             rightItems = new List<Item>();
 
-            rightPageRightWindow = new Window(gameDevice, new Vector2(1080 - 1080 / 4 - 64 - 64, 720 - 96), new Vector2(64, 32));
+            rightPageRightWindow = new Window(gameDevice, new Vector2(windowWidth - windowWidth / 4 - 64 - 64, windowHeight - 96), new Vector2(64, 32));
             rightPageRightWindow.Initialize();
-            rightPageLeftWindow = new Window(gameDevice, new Vector2(1080 - 1080 / 4 + 64 , 720 - 96), new Vector2(64, 32));
+            rightPageLeftWindow = new Window(gameDevice, new Vector2(windowWidth - windowWidth / 4 + 64 , windowHeight - 96), new Vector2(64, 32));
             rightPageLeftWindow.Initialize();
             rightPageRightButton = new Button(rightPageRightWindow.GetOffsetPosition(), 64, 32);
             rightPageLeftButton = new Button(rightPageLeftWindow.GetOffsetPosition(), 64, 32);
-            leftPageRightWindow = new Window(gameDevice, new Vector2(1080 / 4 - 64 - 64, 720 - 96), new Vector2(64, 32));
+            leftPageRightWindow = new Window(gameDevice, new Vector2(windowWidth / 4 - 64 - 64, windowHeight - 96), new Vector2(64, 32));
             leftPageRightWindow.Initialize();
-            leftPageLeftWindow = new Window(gameDevice, new Vector2(1080 / 4 + 64, 720 - 96), new Vector2(64, 32));
+            leftPageLeftWindow = new Window(gameDevice, new Vector2(windowWidth / 4 + 64, windowHeight - 96), new Vector2(64, 32));
             leftPageLeftWindow.Initialize();
             leftPageRightButton = new Button(leftPageRightWindow.GetOffsetPosition(), 64, 32);
             leftPageLeftButton = new Button(leftPageLeftWindow.GetOffsetPosition(), 64, 32);
@@ -249,7 +255,7 @@ namespace Team27_RougeLike.Scene
         {
             leftPageItems.Add(item);
             Vector2 position = new Vector2(64, 96 + 24 * (leftButtons.Count + 1));
-            int buttonWidht = 1080 / 2 - 128;
+            int buttonWidht = windowWidth / 2 - 128;
             int buttonHeight = 20;
             leftButtons.Add(new Button(position, buttonWidht, buttonHeight));
             leftWindows.Add(new Window(gameDevice, position, new Vector2(buttonWidht, buttonHeight)));
@@ -284,8 +290,8 @@ namespace Team27_RougeLike.Scene
         private void AddRightList(Item item)
         {
             rightPageItems.Add(item);
-            Vector2 position = new Vector2(1080 / 2 + 64, 96 + 24 * (rightButtons.Count + 1));
-            int buttonWidht = 1080 / 2 - 128;
+            Vector2 position = new Vector2(windowWidth / 2 + 64, 96 + 24 * (rightButtons.Count + 1));
+            int buttonWidht = windowWidth / 2 - 128;
             int buttonHeight = 20;
             rightButtons.Add(new Button(position, buttonWidht, buttonHeight));
             rightWindows.Add(new Window(gameDevice, position, new Vector2(buttonWidht, buttonHeight)));
@@ -635,10 +641,10 @@ namespace Team27_RougeLike.Scene
 
                 renderer.DrawString("アイテム名", new Vector2(64, 64 + 32), new Vector2(1, 1), Color.White);
                 renderer.DrawString("タイプ", new Vector2(224, 64 + 32), new Vector2(1, 1), Color.White);
-                renderer.DrawString("アイテム名", new Vector2(1080 / 2 + 64, 64 + 32), new Vector2(1, 1), Color.White);
-                renderer.DrawString("タイプ", new Vector2(1080 / 2 + 224, 64 + 32), new Vector2(1, 1), Color.White);
+                renderer.DrawString("アイテム名", new Vector2(windowWidth / 2 + 64, 64 + 32), new Vector2(1, 1), Color.White);
+                renderer.DrawString("タイプ", new Vector2(windowWidth / 2 + 224, 64 + 32), new Vector2(1, 1), Color.White);
                 if (mode == DepotModeType.consumption)
-                    renderer.DrawString("所持数", new Vector2(1080 / 2 + 320, 64 + 32), new Vector2(1, 1), Color.White);
+                    renderer.DrawString("所持数", new Vector2(windowWidth / 2 + 320, 64 + 32), new Vector2(1, 1), Color.White);
 
                 //左側のリストのアイテムの描画
                 for (int i = 0; i < leftPageItems.Count; i++)
@@ -706,10 +712,10 @@ namespace Team27_RougeLike.Scene
                 }
 
                 if (isBagMaxMessaga)
-                    renderer.DrawString("バッグがいっぱいです。", new Vector2(320, 720 / 2), new Vector2(2, 2), Color.Red);
+                    renderer.DrawString("バッグがいっぱいです。", new Vector2(320, windowHeight / 2), new Vector2(2, 2), Color.Red);
 
                 if (isDepotMaxMessaga && mode ==DepotModeType.equipment)
-                    renderer.DrawString("倉庫がいっぱいです。", new Vector2(320, 720 / 2), new Vector2(2, 2), Color.Red);
+                    renderer.DrawString("倉庫がいっぱいです。", new Vector2(320, windowHeight / 2), new Vector2(2, 2), Color.Red);
             }
 
             renderer.End();
