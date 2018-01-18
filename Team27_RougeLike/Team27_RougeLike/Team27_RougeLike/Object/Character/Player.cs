@@ -26,7 +26,7 @@ namespace Team27_RougeLike.Object.Character
         private PlayerStatus status;
         private DungeonUI ui;
         public Player(Vector3 position, PlayerStatus status, GameDevice gameDevice, CharacterManager characterManager, ParticleManager pManager, GameManager gameManager, DungeonUI ui)
-            : base(new CollisionSphere(position, 5.0f), "test", characterManager)
+            : base(new CollisionSphere(position, 5.0f), "test", characterManager,"プレイヤー")
         {
             tag = "Player";
 

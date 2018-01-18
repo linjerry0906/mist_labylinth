@@ -85,7 +85,7 @@ namespace Team27_RougeLike.Object.Character
                             //それが攻撃だった場合の判定
                             if (h is iDamageBox)
                             {
-                                ui.LogUI.AddLog(c.Tag + "に" + ((iDamageBox)h).Damage() + "の damageChance");
+                                ui.LogUI.AddLog(c.GetName() + "に" + ((iDamageBox)h).Damage() + "の damageChance");
                             }
                         }
                     }

@@ -80,7 +80,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-01-18T12:56:23.9363943+09:00</Time>
+      <Time>2018-01-18T15:56:40.8676903+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -185,7 +185,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\attack.xnb</Output>
-      <Time>2018-01-18T12:57:40.1809438+09:00</Time>
+      <Time>2018-01-18T14:50:16.763458+09:00</Time>
     </Item>
     <Item>
       <Source>Model\magic_circle.fbx</Source>
