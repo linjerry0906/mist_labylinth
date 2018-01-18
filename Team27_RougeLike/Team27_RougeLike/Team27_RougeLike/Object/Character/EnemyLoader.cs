@@ -35,7 +35,7 @@ namespace Team27_RougeLike.Object.Character
                 var line = enemDate.ReadLine();
                 string[] data = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 var id = int.Parse(data[0]);
-                var name = data[1];
+                var textureName = data[1];
                 var health = int.Parse(data[2]);
                 var attack = int.Parse(data[3]);
                 var diffence = int.Parse(data[4]);
@@ -44,6 +44,7 @@ namespace Team27_RougeLike.Object.Character
                 var size = int.Parse(data[7]);
                 var attackspd = int.Parse(data[8]);
                 var exp = int.Parse(data[9]);
+                var name = data[10];
                 enemys.Add
                     (
                     id,
@@ -52,9 +53,10 @@ namespace Team27_RougeLike.Object.Character
                         new Status(1, health, attack, diffence, attackspd, speed),
                         new CollisionSphere(Vector3.Zero, size),
                         aiType,
-                        name,
+                        textureName,
                         charactermanager,
-                        exp
+                        exp,
+                        name
                         )
                     );
             }
@@ -77,7 +79,7 @@ namespace Team27_RougeLike.Object.Character
                 var line = enemDate.ReadLine();
                 string[] data = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 var id = int.Parse(data[0]);
-                var name = data[1];
+                var textureName = data[1];
                 var health = int.Parse(data[2]);
                 var attack = int.Parse(data[3]);
                 var diffence = int.Parse(data[4]);
@@ -86,6 +88,7 @@ namespace Team27_RougeLike.Object.Character
                 var size = int.Parse(data[7]);
                 var attackspd = int.Parse(data[8]);
                 var exp = int.Parse(data[9]);
+                var name = data[10];
                 enemys.Add
                     (
                     id,
@@ -94,10 +97,11 @@ namespace Team27_RougeLike.Object.Character
                         new Status(1, health, attack, diffence, attackspd, speed),
                         new CollisionSphere(Vector3.Zero, size),
                         aiType,
-                        name,
+                        textureName,
                         charactermanager,
                         exp,
-                        gamedevice
+                        gamedevice,
+                        name
                         )
                     );
             }

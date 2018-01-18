@@ -36,7 +36,7 @@ namespace Team27_RougeLike.Object.Character
         {
             this.gameDevice = gameDevice;
             loader = new EnemyLoader();
-            loader.Initialize(this,gameDevice);
+            loader.Initialize(this, gameDevice);
             this.gameDevice = gameDevice;
         }
 
@@ -98,9 +98,9 @@ namespace Team27_RougeLike.Object.Character
                 //ここがキャラクターの死亡時です
                 if (c.IsDead())
                 {
-                    ui.LogUI.AddLog(c.Tag + " is Dead");
                     if (c is EnemyBase)
                     {
+                        ui.LogUI.AddLog(((EnemyBase)c).GetName() + " is Dead");
                         mapItemManager.AddItemByPossibility(c.Collision.Position, 0.65f, 0.4f);     //落ちる確率65％　装備品の確率40%
                         player.GetPlayerStatus().AddExp(((EnemyBase)c).GetExp());
                         ui.LogUI.AddLog(((EnemyBase)c).GetExp() + "exp ");

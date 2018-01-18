@@ -17,7 +17,8 @@ namespace Team27_RougeLike.Object
     class EnemyBase : CharacterBase
     {
         protected EnemyRange range;     //各種距離構造体
-        protected Status status;        //ステータスクラス  
+        protected Status status;        //ステータスクラス 
+        protected string name;          //個体名 
         protected string aiName;        //キャラクタのAi名
         protected int exp;              //討伐時の経験値
         private ParticleManager pManager;
@@ -31,12 +32,13 @@ namespace Team27_RougeLike.Object
         /// <param name="aiName"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice)
+        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice,string name)
             : base(collision, textureName, characterManager)
         {
             this.status = status;
             this.aiName = aiName;
             this.exp = exp;
+            this.name = name;
             this.gameDevice = gameDevice;
         }
 
@@ -50,11 +52,12 @@ namespace Team27_RougeLike.Object
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
         /// <param name="exp"></param>
-        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp)
+        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp,string name)
         : base(collision, textureName, characterManager)
         {
             this.status = status;
             this.aiName = aiName;
+            this.name = name;
             this.exp = exp;
         }
 
@@ -67,13 +70,14 @@ namespace Team27_RougeLike.Object
         /// <param name="manager"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice)
+        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice,string name)
          : base(collision, textureName, characterManager)
         {
             tag = "Enemy";
             this.status = status;
             this.exp = exp;
             this.gameDevice = gameDevice;
+            this.name = name;
             aiManager = manager;
             motion = new Motion();
             pManager = new ParticleManager(gameDevice);
@@ -159,7 +163,8 @@ namespace Team27_RougeLike.Object
                 textureName,
                 characterManager,
                 exp,
-                gameDevice
+                gameDevice,
+                name
                 );
         }
         private BaseAiManager SwitchAi()
@@ -238,6 +243,10 @@ namespace Team27_RougeLike.Object
         public int GetExp()
         {
             return exp;
+        }
+        public string GetName()
+        {
+            return name;
         }
     }
 }
