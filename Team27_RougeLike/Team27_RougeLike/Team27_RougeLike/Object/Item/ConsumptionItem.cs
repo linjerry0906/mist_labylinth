@@ -13,10 +13,13 @@ namespace Team27_RougeLike.Object.Item
             noEffect,
             recovery,
             damage,
+            arrow,
         }
         private ItemEffectType effectType;
 
         private ItemEffect itemEffect; //効果
+
+        private int stack; //スタック数
 
         public ConsumptionItem(int itemID, string itemName, string itemExplanation,
             int itemPrice, int itemRare, float itemWeight, int amountLimit, ItemEffectType effectType, ItemEffect itemEffect)
@@ -24,6 +27,8 @@ namespace Team27_RougeLike.Object.Item
         {
             this.effectType = effectType;
             this.itemEffect = itemEffect;
+
+            stack = 1;
         }
 
         //コピーコンストラクタ
@@ -33,6 +38,7 @@ namespace Team27_RougeLike.Object.Item
         {
             this.effectType = other.effectType;
             this.itemEffect = other.itemEffect;
+            this.stack = other.stack;
         }
 
         //コピー
@@ -56,10 +62,34 @@ namespace Team27_RougeLike.Object.Item
             {
                 return "ダメージ";
             }
+            else if (effectType == ItemEffectType.arrow)
+            {
+                return "矢";
+            }
             else
             {
                 return "なし";
             }
+        }
+
+        public void SetStack(int num)
+        {
+            stack = num;
+        }
+
+        public void AddStack()
+        {
+            stack++;
+        }
+
+        public void AddStack(int num)
+        {
+            stack += num;
+        }
+
+        public int GetStack()
+        {
+            return stack;
         }
 
         public override Item UniqueClone()

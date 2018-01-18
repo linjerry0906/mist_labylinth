@@ -55,6 +55,9 @@ namespace Team27_RougeLike.Scene
 
         private Rectangle backRect;
 
+        private int windowWidth;
+        private int windowHeight;
+
         public ItemShop(IScene town, GameManager gameManager, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
@@ -67,7 +70,10 @@ namespace Team27_RougeLike.Scene
 
             townScene = town;
 
-            backRect = new Rectangle(0, 720 - 64, 320, 64);
+            windowWidth = Def.WindowDef.WINDOW_WIDTH;
+            windowHeight = Def.WindowDef.WINDOW_HEIGHT;
+
+            backRect = new Rectangle(0, windowHeight - 64, 320, 64);
         }
 
         public void Initialize(SceneType scene)
@@ -82,16 +88,16 @@ namespace Team27_RougeLike.Scene
             Vector2 size = new Vector2(1080 / 2 - 128, 720 - 128);
             leftWindow = new Window(gameDevice, new Vector2(64, 64), size);
             leftWindow.Initialize();
-            rightWindow = new Window(gameDevice, new Vector2(1080 / 2 + 64, 64), size);
+            rightWindow = new Window(gameDevice, new Vector2(windowWidth / 2 + 64, 64), size);
             rightWindow.Initialize();
-            messegeWindow = new Window(gameDevice, new Vector2(1080 / 2 - 160, 720 / 2 - 80), new Vector2(320, 160));
+            messegeWindow = new Window(gameDevice, new Vector2(windowWidth / 2 - 160, 720 / 2 - 80), new Vector2(320, 160));
             messegeWindow.Initialize();
 
-            buyButton = new Button(new Vector2(1080 / 2 - 160, 720 / 2 + 80 + 32), 64, 32);
-            sellButton = new Button(new Vector2(1080 / 2 + 160 - 64, 720 / 2 + 80 + 32), 64, 32);
-            buyWindow = new Window(gameDevice, new Vector2(1080 / 2 - 160, 720 / 2 + 80 + 32), new Vector2(64, 32));
+            buyButton = new Button(new Vector2(windowWidth / 2 - 160, windowHeight / 2 + 80 + 32), 64, 32);
+            sellButton = new Button(new Vector2(windowWidth / 2 + 160 - 64, 720 / 2 + 80 + 32), 64, 32);
+            buyWindow = new Window(gameDevice, new Vector2(windowWidth / 2 - 160, windowHeight / 2 + 80 + 32), new Vector2(64, 32));
             buyWindow.Initialize();
-            sellWindow = new Window(gameDevice, new Vector2(1080 / 2 + 160 - 64, 720 / 2 +80 + 32), new Vector2(64, 32));
+            sellWindow = new Window(gameDevice, new Vector2(windowWidth / 2 + 160 - 64, windowHeight / 2 +80 + 32), new Vector2(64, 32));
             sellWindow.Initialize();
 
             mode = ShopMode.select;
@@ -182,7 +188,7 @@ namespace Team27_RougeLike.Scene
 
             renderer.Begin();
 
-            renderer.DrawString("戻る", new Vector2(0, 720 - 64), new Vector2(1, 1), Color.White);
+            renderer.DrawString("戻る", new Vector2(0, windowHeight - 64), new Vector2(1, 1), Color.White);
 
             leftWindow.Draw();
             rightWindow.Draw();
@@ -204,13 +210,13 @@ namespace Team27_RougeLike.Scene
                 if (mode == ShopMode.buy)
                 {
                     renderer.DrawString("売り物リスト", new Vector2(64, 64), new Vector2(1, 1), Color.White);
-                    renderer.DrawString("買う物リスト", new Vector2(1080 / 2 + 64, 64), new Vector2(1, 1), Color.White);
+                    renderer.DrawString("買う物リスト", new Vector2(windowWidth / 2 + 64, 64), new Vector2(1, 1), Color.White);
                     store.DrawEquip();
                 }
                 else if (mode == ShopMode.sell)
                 {
                     renderer.DrawString("持ち物リスト", new Vector2(64, 64), new Vector2(1, 1), Color.White);
-                    renderer.DrawString("売る物のリスト", new Vector2(1080 / 2 + 64, 64), new Vector2(1, 1), Color.White);
+                    renderer.DrawString("売る物のリスト", new Vector2(windowWidth / 2 + 64, 64), new Vector2(1, 1), Color.White);
                     store.DrawEquip();
                 }
             }

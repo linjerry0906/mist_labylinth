@@ -48,12 +48,15 @@ namespace Team27_RougeLike.Scene.Town
         private int maxNum;
         private int currentNum;
 
-        private int buttonWidht = 1080 / 2 - 128;
+        private int buttonWidht;
         private int buttonHeight = 20;
         
         private Vector2 buttonPosition;
         private Window buttonWindow;
         private Button button;
+
+        private int windowWidth;
+        private int windowHeight;
 
         public Store(GameManager gameManager, GameDevice gameDevice)
         {
@@ -71,9 +74,14 @@ namespace Team27_RougeLike.Scene.Town
             isRightListFull = false;
             isNoMoney = false;
 
-            messegeWindow = new Window(gameDevice, new Vector2(1080 / 4, 720 / 2 - 10), new Vector2(1080 / 2, 720 / 12));
+            windowWidth = Def.WindowDef.WINDOW_WIDTH;
+            windowHeight = Def.WindowDef.WINDOW_HEIGHT;
 
-            buttonPosition = new Vector2(1080 - 64, 720 - 64);
+            buttonWidht = windowWidth / 2 - 128;
+
+            messegeWindow = new Window(gameDevice, new Vector2(windowWidth / 4, windowHeight / 2 - 10), new Vector2(windowWidth / 2, 720 / 12));
+
+            buttonPosition = new Vector2(windowWidth - 64, windowHeight - 64);
             buttonWindow = new Window(gameDevice, buttonPosition, new Vector2(64, 32));
             button = new Button(buttonPosition, 64, 32);
         }
@@ -326,7 +334,7 @@ namespace Team27_RougeLike.Scene.Town
         private void AddRightList(Item item)
         {
             rightItems.Add(item);
-            Vector2 position = new Vector2(1080 / 2 + 64, 96 + 24 * (rightButtons.Count + 1));
+            Vector2 position = new Vector2(windowWidth / 2 + 64, 96 + 24 * (rightButtons.Count + 1));
             rightButtons.Add(new Button(position, buttonWidht, buttonHeight));
             rightWindows.Add(new Window(gameDevice, position, new Vector2(buttonWidht, buttonHeight)));
             rightWindows[rightWindows.Count - 1].Initialize();
@@ -367,8 +375,8 @@ namespace Team27_RougeLike.Scene.Town
 
             if (modeType == ModeType.Buy)
             {
-                renderer.DrawString("バッグ(" + currentNum + "/" + maxNum + ")", new Vector2(1080 - 240, 64), new Vector2(1, 1), Color.White);
-                renderer.DrawString("所持金 : " + playerInventory.CurrentMoney(), new Vector2(1080 / 2 + 120, 720 - 128 + 32), new Vector2(1, 1), Color.White);
+                renderer.DrawString("バッグ(" + currentNum + "/" + maxNum + ")", new Vector2(windowWidth - 240, 64), new Vector2(1, 1), Color.White);
+                renderer.DrawString("所持金 : " + playerInventory.CurrentMoney(), new Vector2(windowWidth / 2 + 120, windowHeight - 128 + 32), new Vector2(1, 1), Color.White);
             }
 
             renderer.DrawString("アイテム名", new Vector2(64, 64 + 32), new Vector2(1, 1), Color.White);
@@ -387,14 +395,17 @@ namespace Team27_RougeLike.Scene.Town
             {
                 leftWindows[i].Draw();
 
-                renderer.DrawString(leftItems[i].GetItemName(), leftWindows[i].GetOffsetPosition(), new Vector2(1, 1), Color.White);
+                renderer.DrawString(leftItems[i].GetItemName(), 
+                    leftWindows[i].GetOffsetPosition(), new Vector2(1, 1), Color.White);
                 if (modeType == ModeType.Buy)
                 {
-                    renderer.DrawString(leftItems[i].GetItemPrice().ToString(), leftWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
+                    renderer.DrawString(leftItems[i].GetItemPrice().ToString(),
+                        leftWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
                 }
                 else if (modeType == ModeType.Sell)
                 {
-                    renderer.DrawString((leftItems[i].GetItemPrice() / 2).ToString(), leftWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
+                    renderer.DrawString((leftItems[i].GetItemPrice() / 2).ToString(), 
+                        leftWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
                 }
                 string type;
                 if (leftItems[i] is WeaponItem)
@@ -417,14 +428,17 @@ namespace Team27_RougeLike.Scene.Town
             {
                 rightWindows[i].Draw();
 
-                renderer.DrawString(rightItems[i].GetItemName(), rightWindows[i].GetOffsetPosition(), new Vector2(1, 1), Color.White);
+                renderer.DrawString(rightItems[i].GetItemName(), 
+                    rightWindows[i].GetOffsetPosition(), new Vector2(1, 1), Color.White);
                 if (modeType == ModeType.Buy)
                 {
-                    renderer.DrawString(rightItems[i].GetItemPrice().ToString(), rightWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
+                    renderer.DrawString(rightItems[i].GetItemPrice().ToString(), 
+                        rightWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
                 }
                 else if (modeType == ModeType.Sell)
                 {
-                    renderer.DrawString((rightItems[i].GetItemPrice() / 2).ToString(), rightWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
+                    renderer.DrawString((rightItems[i].GetItemPrice() / 2).ToString(), 
+                        rightWindows[i].GetOffsetPosition() + new Vector2(160, 0), new Vector2(1, 1), Color.White);
                 }
                 string type;
                 if (rightItems[i] is WeaponItem)
@@ -445,18 +459,18 @@ namespace Team27_RougeLike.Scene.Town
             messegeWindow.Draw();
             if (isRightListFull)
             {
-                renderer.DrawString("買う物リストがいっぱいです。", new Vector2(320, 720 / 2), new Vector2(2, 2), Color.Red);
+                renderer.DrawString("買う物リストがいっぱいです。", new Vector2(320, windowHeight / 2), new Vector2(2, 2), Color.Red);
             }
             if (isInventoryFullMessege)
             {
-                renderer.DrawString("バッグにはいりきりません。", new Vector2(320, 720 / 2), new Vector2(2, 2), Color.Red);
+                renderer.DrawString("バッグにはいりきりません。", new Vector2(320, windowHeight / 2), new Vector2(2, 2), Color.Red);
             }
             if (isNoMoney)
             {
-                renderer.DrawString("所持金が足りません。", new Vector2(320, 720 / 2), new Vector2(2, 2), Color.Red);
+                renderer.DrawString("所持金が足りません。", new Vector2(320, windowHeight / 2), new Vector2(2, 2), Color.Red);
             }
 
-            renderer.DrawString("合計金額 : " + totalPrice, new Vector2(1080 - 240, 720 - 128 + 32), new Vector2(1, 1), Color.White);
+            renderer.DrawString("合計金額 : " + totalPrice, new Vector2(windowWidth - 240, windowHeight - 128 + 32), new Vector2(1, 1), Color.White);
         }
     }
 }
