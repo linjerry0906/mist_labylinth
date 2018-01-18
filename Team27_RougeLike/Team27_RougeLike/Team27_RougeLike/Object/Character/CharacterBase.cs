@@ -17,22 +17,25 @@ namespace Team27_RougeLike.Object
         protected CharacterManager characterManager;
         protected BaseAiManager aiManager;
         protected Motion motion;
-
+        protected Buff buff;
         protected string textureName;   //テクスチャ名
         protected string tag;           //敵味方　タグ分け
+        protected string name;          //個体名
 
-        protected Vector3 velocity;     //移動ベクトル
+        protected Vector3 velocity;     //移動ベクトル0
         protected Vector3 attackAngle;  //攻撃方向
         protected Vector3 nockback;
 
         public string Tag { get { return tag; } }
 
-        public CharacterBase(CollisionSphere collision, string textureName, CharacterManager characterManager)
+        public CharacterBase(CollisionSphere collision, string textureName, CharacterManager characterManager,string name)
         {
             this.collision = collision;
             this.textureName = textureName;
             this.characterManager = characterManager;
+            this.name = name;
             velocity = Vector3.Zero;
+            buff = new Buff(this);
         }
 
         public abstract void Initialize();
@@ -42,13 +45,12 @@ namespace Team27_RougeLike.Object
         public abstract void Attack();
         public virtual void Draw(Renderer renderer)
         {
-            renderer.DrawPolygon(textureName, collision.Position, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
+            renderer.DrawPolygon(textureName, collision.Position, new Vector2(collision.Radius), motion.DrawingRange(), Color.Cyan);
         }
         public bool Dodge()
         {
             return aiManager.GetStateAi() is StateAi_Dodge;
         }
-
         protected void NockBackUpdate()
         {
             var n = nockback;
@@ -68,6 +70,7 @@ namespace Team27_RougeLike.Object
             return attackAngle;
         }
         public abstract void Damage(int num, Vector3 nockback);
+        public abstract void TrueDamage(int num);
         public abstract bool IsDead();
         public abstract void Move();
         public CollisionSphere Collision
@@ -78,11 +81,23 @@ namespace Team27_RougeLike.Object
         {
             return aiManager;
         }
+        public Buff GetBuffs()
+        {
+            return buff;
+        }
         public Vector3 Velocity
         {
             get { return velocity; }
             set { velocity = value; }
         }
+        public void Log(string log)
+        {
+            characterManager.Log(log);
+        }
 
+        public string GetName()
+        {
+            return name;
+        }
     }
 }

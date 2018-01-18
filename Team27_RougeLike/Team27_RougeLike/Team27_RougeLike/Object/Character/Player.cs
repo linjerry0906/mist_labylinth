@@ -26,7 +26,7 @@ namespace Team27_RougeLike.Object.Character
         private PlayerStatus status;
         private DungeonUI ui;
         public Player(Vector3 position, PlayerStatus status, GameDevice gameDevice, CharacterManager characterManager, ParticleManager pManager, GameManager gameManager, DungeonUI ui)
-            : base(new CollisionSphere(position, 5.0f), "test", characterManager)
+            : base(new CollisionSphere(position, 5.0f), "test", characterManager,"プレイヤー")
         {
             tag = "Player";
 
@@ -45,6 +45,7 @@ namespace Team27_RougeLike.Object.Character
                 motion.Add(i, new Rectangle(i * 64, 0, 64, 64));
             }
             motion.Initialize(new Range(0, 5), new Timer(0.1f));
+
         }
 
         public override void Update(GameTime gameTime)
@@ -71,7 +72,6 @@ namespace Team27_RougeLike.Object.Character
         {
             HitBoxBase DBox;
             var t = status.GetInventory().LeftHand();
-
             if (t == null)
             {
                 DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 100, tag, status.GetPower(), attackAngle);
@@ -81,7 +81,7 @@ namespace Team27_RougeLike.Object.Character
                 switch (t.GetWeaponType())
                 {
                     case WeaponItem.WeaponType.Bow:
-                        DBox = new MoveDamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 0.5f), 100, tag, status.GetPower(), attackAngle,pManager,gameDevice);
+                        DBox = new MoveDamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 0.5f), 100, tag, status.GetPower(), attackAngle, pManager, gameDevice);
                         ui.LogUI.AddLog("弓による攻撃");
                         break;
                     case WeaponItem.WeaponType.Sword:
@@ -119,8 +119,10 @@ namespace Team27_RougeLike.Object.Character
             {
                 status.Damage(damage);
             }
-
-            this.nockback = nockback;
+            if (!buff.GetBuff(Buff.buff.IRONBODY))
+            {
+                this.nockback = nockback;
+            }
         }
 
         public override bool IsDead()
@@ -151,6 +153,10 @@ namespace Team27_RougeLike.Object.Character
             v.Y = 0;
             velocity -= v * 0.1f;
             collision.Force(velocity, status.GetVelocty() / 2); //ベースを1とするととても速いので半減
+        }
+        public override void TrueDamage(int num)
+        {
+            status.Damage(num);
         }
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Object;
 using Team27_RougeLike.Device;
-using Team27_RougeLike.Object.Character;
+using Team27_RougeLike.Object.Box;
 
 namespace Team27_RougeLike.Map
 {
@@ -248,6 +248,58 @@ namespace Team27_RougeLike.Map
         public void MapCollision(List<CharacterBase> characters)
         {
             characters.ForEach(c => MapCollision(c));
+        }
+
+        /// <summary>
+        /// 飯泉　多数の移動する箱と当たり判定
+        /// </summary>
+        /// <param name="characters"></param>
+        public void MapCollision(List<HitBoxBase> boxs)
+        {
+            boxs.ForEach(c => { if (c is MoveDamageBox) { MapCollision(c); } });
+        }
+        /// <summary>
+        /// 箱とマップのあたり判定
+        /// </summary>
+        /// <param name="chara">チェックするキャラクター</param>
+        public void MapCollision(HitBoxBase hitbox)
+        {
+            float floatX = ((MapDef.TILE_SIZE / 2.0f + hitbox.collision.Center.X) / MapDef.TILE_SIZE);      //そのマスの左右半分
+            float floatZ = ((MapDef.TILE_SIZE / 2.0f + hitbox.collision.Center.Z) / MapDef.TILE_SIZE);      //そのマスの上下半分
+            int x = (int)((MapDef.TILE_SIZE / 2.0f + hitbox.collision.Center.X) / MapDef.TILE_SIZE);        //マス：X
+            int z = (int)((MapDef.TILE_SIZE / 2.0f + hitbox.collision.Center.Z) / MapDef.TILE_SIZE);        //マス：Y
+            //判定半径（キャラクターのサイズにより違う）
+            int collisionRange = (int)(hitbox.collision.Radius * 2 / MapDef.TILE_SIZE) + 1;
+            Point checkDir = new Point(0, 0);           //判定基準点
+            if (floatX - x > 0.5f)      //int型を引くと値は0～1まで　判定方向もわかる
+                checkDir.X = 0;         //右半分と判定する場合は基準変動なし
+            else
+                checkDir.X = -1 * collisionRange;       //左半分と判定する場合は基準をずらす
+            if (floatZ - z > 0.5f)      //X軸と同じ
+                checkDir.Y = 0;
+            else
+                checkDir.Y = -1 * collisionRange;
+
+            x += checkDir.X;            //基準をずらす
+            z += checkDir.Y;
+
+            ClampPoint(ref x, ref z);   //エラー対策
+
+            for (int mapchipZ = z; mapchipZ <= z + collisionRange; mapchipZ++)   //基準から半径の長さのマスと判定
+            {
+                if (mapchipZ < 0 || mapchipZ > mapChip.GetLength(0) - 1)         //エラー対策
+                    continue;
+                for (int mapchipX = x; mapchipX <= x + collisionRange; mapchipX++)
+                {
+                    if (mapchipX < 0 || mapchipX > mapChip.GetLength(1) - 1)     //エラー対策
+                        continue;
+                    int index = mapchipZ * mapChip.GetLength(1) + mapchipX;      //添え字を計算
+                    if (hitbox.collision.Intersects(mapBlocks[index].Collision))       //当たっていれば
+                    {
+                        ((MoveDamageBox)hitbox).End();     　//キャラクターの位置修正
+                    }
+                }
+            }
         }
 
         /// <summary>

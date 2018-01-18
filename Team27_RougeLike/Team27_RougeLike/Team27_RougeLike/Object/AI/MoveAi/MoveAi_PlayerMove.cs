@@ -34,19 +34,19 @@ namespace Team27_RougeLike.Object.AI
         {
             if (inputState.GetKeyState(Keys.W))
             {
-                velocity += projector.Front;
+                velocity = actor.GetBuffs().GetBuff(Buff.buff.CONFUSE) ? velocity - projector.Front : velocity + projector.Front;
             }
             if (inputState.GetKeyState(Keys.S))
             {
-                velocity += projector.Back;
+                velocity = actor.GetBuffs().GetBuff(Buff.buff.CONFUSE) ? velocity - projector.Back : velocity + projector.Back;
             }
             if (inputState.GetKeyState(Keys.A))
             {
-                velocity += projector.Left;
+                velocity = actor.GetBuffs().GetBuff(Buff.buff.CONFUSE) ? velocity - projector.Left : velocity + projector.Left;
             }
             if (inputState.GetKeyState(Keys.D))
             {
-                velocity += projector.Right;
+                velocity = actor.GetBuffs().GetBuff(Buff.buff.CONFUSE) ? velocity - projector.Right : velocity + projector.Right;
             }
             if (velocity.LengthSquared() != 0)
             {
@@ -55,7 +55,7 @@ namespace Team27_RougeLike.Object.AI
 
             if (inputState.GetKeyState(Keys.LeftShift) && !actor.Dodge())
             {
-                velocity = velocity * 1.5f;
+                velocity = actor.GetBuffs().GetBuff(Buff.buff.ACCELERATE) ? velocity * 2: velocity * 1.5f;
             }
 
             if (!actor.Dodge())
@@ -65,22 +65,23 @@ namespace Team27_RougeLike.Object.AI
                 //goto使ってるので変なのを入れないように
                 if (inputState.DualkeyDown(Keys.W))
                 {
-                    velocity += projector.Front * 5.5f;
+                    velocity = actor.GetBuffs().GetBuff(Buff.buff.CONFUSE) ? velocity - projector.Front * 5.5f : velocity + projector.Front * 5.5f;
+
                     goto END;
                 }
                 if (inputState.DualkeyDown(Keys.D))
                 {
-                    velocity += projector.Right * 5.5f;
+                    velocity = actor.GetBuffs().GetBuff(Buff.buff.CONFUSE) ? velocity - projector.Right * 5.5f : velocity + projector.Right * 5.5f;
                     goto END;
                 }
                 if (inputState.DualkeyDown(Keys.A))
                 {
-                    velocity += projector.Left * 5.5f;
+                    velocity = actor.GetBuffs().GetBuff(Buff.buff.CONFUSE) ? velocity - projector.Left * 5.5f : velocity + projector.Left * 5.5f;
                     goto END;
                 }
                 if (inputState.DualkeyDown(Keys.S))
                 {
-                    velocity += projector.Back * 5.5f;
+                    velocity = actor.GetBuffs().GetBuff(Buff.buff.CONFUSE) ? velocity - projector.Back * 5.5f : velocity + projector.Back * 5.5f;
                 }
 
                 END:

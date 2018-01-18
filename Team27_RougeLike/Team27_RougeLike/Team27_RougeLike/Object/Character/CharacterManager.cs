@@ -85,7 +85,7 @@ namespace Team27_RougeLike.Object.Character
                             //それが攻撃だった場合の判定
                             if (h is iDamageBox)
                             {
-                                ui.LogUI.AddLog(c.Tag + "に" + ((iDamageBox)h).Damage() + "の damageChance");
+                                ui.LogUI.AddLog(c.GetName() + "に" + ((iDamageBox)h).Damage() + "の damageChance");
                             }
                         }
                     }
@@ -191,6 +191,11 @@ namespace Team27_RougeLike.Object.Character
             return loader.Enemys();
         }
 
+        public List<HitBoxBase> GetHitBoxs()
+        {
+            return hitBoxs;
+        }
+
         public bool DiedCharacters()
         {
             return LiveCharacterCnt() == 0;
@@ -199,6 +204,10 @@ namespace Team27_RougeLike.Object.Character
         public int LiveCharacterCnt()
         {
             return characters.Count;    //これで十分、全部回らなくてよい（Countは要素数変動の時のみ処理、Foreachを使わずに済む）
+        }
+        public void Log(string log)
+        {
+            ui.LogUI.AddLog(log);
         }
     }
 }

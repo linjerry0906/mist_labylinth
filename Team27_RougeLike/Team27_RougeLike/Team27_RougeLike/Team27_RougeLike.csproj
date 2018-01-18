@@ -95,6 +95,7 @@
     <Compile Include="Map\StageInfoLoader.cs" />
     <Compile Include="Object\Box\iDamageBox.cs" />
     <Compile Include="Object\Box\MoveDamageBox.cs" />
+    <Compile Include="Object\Buff.cs" />
     <Compile Include="Object\Character\EnemyLoader.cs" />
     <Compile Include="Object\Character\EnemyRange.cs" />
     <Compile Include="Object\Character\Player.cs" />
