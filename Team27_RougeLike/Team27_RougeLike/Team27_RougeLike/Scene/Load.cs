@@ -23,7 +23,7 @@ namespace Team27_RougeLike.Scene
             string[,] list = new string[,]
             {
                 {"cursor" ,path},
-                    {"attack" ,path},
+                {"attack" ,path},
                 {"test" ,path},
                 {"cubeTest" ,path},
                 {"bat" ,path},
@@ -49,6 +49,12 @@ namespace Team27_RougeLike.Scene
                 {"magic_in" ,path},
                 {"magic_middle" ,path},
                 {"magic_out" ,path},
+                {"particle" ,path},
+                {"Depotbutton" ,path},
+                {"Dungeonbutton" ,path},
+                {"Guildtbutton" ,path},
+                {"Shopbutton" ,path},
+                {"Upgradebutton" ,path},
             };
             return list;
         }
