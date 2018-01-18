@@ -30,11 +30,6 @@
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Texture\cursor.png">
-      <Name>cursor</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Texture\test.png">
       <Name>test</Name>
       <Importer>TextureImporter</Importer>
@@ -101,7 +96,15 @@
       <Name>Quest</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="QuestCSV\Quest.xlsx">
+      <Name>Quest</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="StageCSV\StageEnemy_1.csv">
+      <Name>StageEnemy_1</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="StageCSV\StageEnemy_1.xlsx">
       <Name>StageEnemy_1</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -224,8 +227,32 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Texture\attack.png">
+      <Name>attack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Texture\cubeTest.png">
       <Name>cubeTest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Texture\cursor.png">
+      <Name>cursor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Texture\dungeon_image_tutorial.png">
+      <Name>dungeon_image_tutorial</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Texture\fog.png">
+      <Name>fog</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -234,25 +261,21 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Texture\wall_default.png">
-      <Name>wall_default</Name>
+    <Compile Include="Texture\ground_infinite.png">
+      <Name>ground_infinite</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Texture\wall_ice.png">
-      <Name>wall_ice</Name>
+    <Compile Include="Texture\ground_tree.png">
+      <Name>ground_tree</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Texture\fog.png">
-      <Name>fog</Name>
+    <Compile Include="Texture\ground_tutorial.png">
+      <Name>ground_tutorial</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Texture\magic_center.png">
       <Name>magic_center</Name>
       <Importer>TextureImporter</Importer>
@@ -273,48 +296,23 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Texture\dungeon_image_tutorial.png">
-      <Name>dungeon_image_tutorial</Name>
+    <Compile Include="Texture\Snow.png">
+      <Name>Snow</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Texture\ground_tree.png">
-      <Name>ground_tree</Name>
+    <Compile Include="Texture\town.png">
+      <Name>town</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Texture\wall_tree.png">
-      <Name>wall_tree</Name>
+    <Compile Include="Texture\wall_default.png">
+      <Name>wall_default</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Texture\ground_tutorial.png">
-      <Name>ground_tutorial</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Texture\wall_tutorial.png">
-      <Name>wall_tutorial</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Effect\depth.fx">
-      <Name>depth</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Texture\ground_infinite.png">
-      <Name>ground_infinite</Name>
+    <Compile Include="Texture\wall_ice.png">
+      <Name>wall_ice</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -323,17 +321,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Texture\town.png">
-      <Name>town</Name>
+    <Compile Include="Texture\wall_tree.png">
+      <Name>wall_tree</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Texture\Snow.png">
-      <Name>Snow</Name>
+    <Compile Include="Texture\wall_tutorial.png">
+      <Name>wall_tutorial</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

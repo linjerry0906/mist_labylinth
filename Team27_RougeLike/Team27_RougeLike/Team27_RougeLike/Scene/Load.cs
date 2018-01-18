@@ -23,6 +23,7 @@ namespace Team27_RougeLike.Scene
             string[,] list = new string[,]
             {
                 {"cursor" ,path},
+                    {"attack" ,path},
                 {"test" ,path},
                 {"cubeTest" ,path},
                 {"bat" ,path},

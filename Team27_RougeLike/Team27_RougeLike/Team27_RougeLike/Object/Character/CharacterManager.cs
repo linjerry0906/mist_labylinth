@@ -17,8 +17,9 @@ namespace Team27_RougeLike.Object.Character
 {
     class CharacterManager
     {
-        private GameDevice gamedevice;
+        private GameDevice gameDevice;
         private DungeonUI ui;
+
         private List<CharacterBase> characters = new List<CharacterBase>();
         private List<Spawner> spawners = new List<Spawner>();
         private List<HitBoxBase> hitBoxs = new List<HitBoxBase>();
@@ -27,16 +28,16 @@ namespace Team27_RougeLike.Object.Character
 
         private Dictionary<int, EnemyBase> enemys = new Dictionary<int, EnemyBase>();
 
-        private string enemyFilename;
         private const int drawLength = 500;
 
         private MapItemManager mapItemManager;      //ステージのアイテムマネージャー
 
-        public CharacterManager(GameDevice gamedevice)
+        public CharacterManager(GameDevice gameDevice)
         {
-            this.gamedevice = gamedevice;
+            this.gameDevice = gameDevice;
             loader = new EnemyLoader();
-            loader.Initialize(this);
+            loader.Initialize(this,gameDevice);
+            this.gameDevice = gameDevice;
         }
 
         public void Initialize(DungeonUI ui, MapItemManager mapItemManager)
@@ -119,11 +120,11 @@ namespace Team27_RougeLike.Object.Character
             {
                 if (c is Player)
                 {
-                    c.Draw(gamedevice.Renderer);
+                    c.Draw(gameDevice.Renderer);
                 }
                 if (c is CharacterBase && NearPlayer(c.Collision.Position) && !(c is Player))
                 {
-                    c.Draw(gamedevice.Renderer);
+                    c.Draw(gameDevice.Renderer);
                 }
             }
         }
@@ -145,7 +146,7 @@ namespace Team27_RougeLike.Object.Character
                 (
                 position,
                 gamemanager.PlayerInfo,
-                gamedevice,
+                gameDevice,
                 this,
                 pManager,
                 gamemanager,
@@ -194,14 +195,6 @@ namespace Team27_RougeLike.Object.Character
 
         public int LiveCharacterCnt()
         {
-            //リンより修正
-            //int cnt = 0;
-            //foreach (var c in characters)
-            //{
-            //    if (c == player) continue;
-            //    cnt++;
-            //}
-            //return cnt;
             return characters.Count;    //これで十分、全部回らなくてよい（Countは要素数変動の時のみ処理、Foreachを使わずに済む）
         }
     }

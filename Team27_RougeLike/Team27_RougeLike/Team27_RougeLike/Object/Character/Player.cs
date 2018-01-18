@@ -81,7 +81,7 @@ namespace Team27_RougeLike.Object.Character
                 switch (t.GetWeaponType())
                 {
                     case WeaponItem.WeaponType.Bow:
-                        DBox = new MoveDamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 0.5f), 100, tag, status.GetPower(), attackAngle);
+                        DBox = new MoveDamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 0.5f), 100, tag, status.GetPower(), attackAngle,pManager,gameDevice);
                         ui.LogUI.AddLog("弓による攻撃");
                         break;
                     case WeaponItem.WeaponType.Sword:
@@ -101,7 +101,6 @@ namespace Team27_RougeLike.Object.Character
                         break;
                 }
             }
-
             characterManager.AddHitBox(DBox);
             pManager.AddParticle(new Slash(gameDevice, this, DBox.Position()));
         }
@@ -120,8 +119,8 @@ namespace Team27_RougeLike.Object.Character
             {
                 status.Damage(damage);
             }
-           
-                this.nockback = nockback;
+
+            this.nockback = nockback;
         }
 
         public override bool IsDead()
