@@ -71,6 +71,12 @@ namespace Team27_RougeLike.Map
             #endregion
         }
 
+        public void Reset()
+        {
+            alpha = 0;
+            alphaSwitch = true;
+        }
+
         /// <summary>
         /// 描画
         /// </summary>

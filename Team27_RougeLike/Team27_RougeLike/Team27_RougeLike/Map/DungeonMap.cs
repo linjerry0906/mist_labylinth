@@ -376,6 +376,9 @@ namespace Team27_RougeLike.Map
         /// <param name="toDraw">trueは描画</param>
         public void SwitchDrawExit(bool toDraw)
         {
+            if (drawExit != toDraw)
+                exitEffect.Reset();
+
             drawExit = toDraw;
         }
 
