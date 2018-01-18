@@ -27,6 +27,7 @@ namespace Team27_RougeLike.Device
         private Dictionary<int, int> depotConsumption;  //倉庫の消費アイテム
         private List<Quest> quest;                      //受けているクエスト
         private QuestLoader questLoader;                //QuestLoader
+        private PlayerGuildRank guildRank;               //ギルト情報
 
         private string saveFileName;
         private bool isSave;
@@ -46,6 +47,7 @@ namespace Team27_RougeLike.Device
             rightHand = playerInventory.RightHand();
             quest = new List<Quest>();
             questLoader = gameManager.QuestManager;
+            guildRank = gameManager.GuildInfo;
 
             saveFileName = @"Content/SaveCSV/SaveDate.csv";
             isSave = false;
@@ -64,6 +66,7 @@ namespace Team27_RougeLike.Device
             depotConsumption = playerInventory.DepositoryItem();
             questLoader = gameManager.QuestManager;
             quest = gameManager.PlayerQuest.CurrentQuest();
+            guildRank = gameManager.GuildInfo;
         }
 
         //Itemをテキスト出力するためのメソッド
@@ -147,6 +150,10 @@ namespace Team27_RougeLike.Device
                 }
                 sw.WriteLine();
             }
+
+            #region Guild
+            sw.WriteLine("guild," + (int)(guildRank.Rank()) + "," + guildRank.CurrentExp());
+            #endregion
 
             sw.Close();
             isSave = false;
@@ -293,18 +300,19 @@ namespace Team27_RougeLike.Device
                     else if (strings[0] == "quest")
                     {
                         Quest q = questLoader.GetQuest(int.Parse(strings[1]));
-                        if(q is CollectQuest)
+                        for (int i = 0; i < 3; i++)
                         {
-                            for (int i = 0; i < 3; i++)
+                            if (i >= q.RequireID().Length)
                             {
-                                if(i >= q.RequireID().Length)
-                                {
-                                    break;
-                                }
-                                q.SetItemAmount(q.RequireID()[i], int.Parse(strings[i + 2]));
+                                break;
                             }
+                            q.SetItemAmount(q.RequireID()[i], int.Parse(strings[i + 2]));
                         }
                         quest.Add(q);
+                    }
+                    else if (strings[0] == "guild")
+                    {
+                        guildRank = new PlayerGuildRank(int.Parse(strings[1]), int.Parse(strings[2]));
                     }
                 }
                 sr.Close();
@@ -393,5 +401,9 @@ namespace Team27_RougeLike.Device
             return quest;
         }
 
+        public PlayerGuildRank GetGuildInfo()
+        {
+            return guildRank;
+        }
     }
 }

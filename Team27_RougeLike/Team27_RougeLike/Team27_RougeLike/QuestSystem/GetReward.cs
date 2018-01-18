@@ -44,6 +44,7 @@ namespace Team27_RougeLike.QuestSystem
         private List<Button> questButtons;      //Questのリストボタン
         private int questIndex;
         private Quest currentQuestInfo;         //現在の選択したクエスト
+        private EnemyNameLoader enemyName;
 
         public GetReward(GameManager gameManager, GameDevice gameDevice)
         {
@@ -205,8 +206,24 @@ namespace Team27_RougeLike.QuestSystem
                     Vector2 numPos = position + (10.5f + i * 0.5f) * line;
                     numPos.X = rightBackLayer.GetCenter().X + 120;
                     renderer.DrawString(
-                        currentQuestInfo.CurrentState()[i].currentAmount +
-                        " / " + currentQuestInfo.CurrentState()[i].requireAmount,
+                        currentQuestInfo.CurrentState()[i].currentAmount + " / " +
+                        currentQuestInfo.CurrentState()[i].requireAmount,
+                        numPos, fontSize,
+                        Color.White, constractAlpha * currentAlpha);
+                }
+                else if (currentQuestInfo is BattleQuest)
+                {
+                    string name = "まだ";
+                    //enemyName.GetEnemyName(currentInfo.RequireID()[i]);
+                    renderer.DrawString(
+                        name, position + (10.5f + i * 0.5f) * line + offsetX, fontSize,
+                        Color.White, constractAlpha * currentAlpha);
+
+                    Vector2 numPos = position + (10.5f + i * 0.5f) * line;
+                    numPos.X = rightBackLayer.GetCenter().X + 120;
+                    renderer.DrawString(
+                        currentQuestInfo.CurrentState()[i].currentAmount + " / " + 
+                        currentQuestInfo.CurrentState()[i].requireAmount,
                         numPos, fontSize,
                         Color.White, constractAlpha * currentAlpha);
                 }
@@ -247,6 +264,7 @@ namespace Team27_RougeLike.QuestSystem
             #endregion
 
             InitQuest();
+            enemyName = gameManager.EnemyName;
         }
 
         private void InitQuest()
@@ -400,7 +418,7 @@ namespace Team27_RougeLike.QuestSystem
                 }
             }
 
-            //ToDo:GuildExp
+            gameManager.GuildInfo.AddExp(currentQuestInfo.GuildExp());
             gameManager.PlayerItem.AddMoney(currentQuestInfo.GainMoney());
             RemoveQuest();
         }

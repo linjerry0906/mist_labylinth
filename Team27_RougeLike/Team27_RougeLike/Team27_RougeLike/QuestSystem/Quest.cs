@@ -31,6 +31,11 @@ namespace Team27_RougeLike.QuestSystem
         {
             currentAmount = amount;
         }
+
+        public void AddCurrentAmount(int amount)
+        {
+            currentAmount += amount;
+        }
     }
 
     abstract class Quest

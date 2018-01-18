@@ -131,6 +131,13 @@ namespace Team27_RougeLike.QuestSystem
                         requires, dungeonNo, floor, exp);
                     activeQuest.Add(collectionQuest);
                 }
+                else if (type == "Battle")
+                {
+                    Quest battleQuest = new BattleQuest(
+                        id, name, info, difficulty, money, award,
+                        requires, dungeonNo, floor, exp);
+                    activeQuest.Add(battleQuest);
+                }
             }
             sr.Close();                                 //読み終わったらファイルをClose
             fs.Close();
@@ -147,7 +154,7 @@ namespace Team27_RougeLike.QuestSystem
             for (int i = 0; i < activeQuest.Count; i++)
             {
                 int rank = activeQuest[i].Difficulty();
-                randomQuest[rank].Add(activeQuest[i]);
+                randomQuest[rank].Add(activeQuest[i].Clone());
             }
 
             for (int i = 0; i < (int)QuestRank.NULL; i++)

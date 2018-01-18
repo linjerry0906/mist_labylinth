@@ -41,6 +41,7 @@ namespace Team27_RougeLike.QuestSystem
             currentState = GuildState.Menu;
             currentSystem = states[GuildState.Menu];
             currentSystem.Initialize();
+            //gameManager.EnemyName.Load();
         }
 
         public void Update()
@@ -75,6 +76,7 @@ namespace Team27_RougeLike.QuestSystem
         public void ShutDown()
         {
             states.Clear();
+            gameManager.EnemyName.Clear();
         }
     }
 }

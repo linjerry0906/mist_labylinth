@@ -1,7 +1,7 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2018.1.17
-// 内容  ：アイテム集めQuest
+// 作成日：2018.1.18
+// 内容  ：敵を倒すQuest
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -10,12 +10,10 @@ using System.Text;
 
 namespace Team27_RougeLike.QuestSystem
 {
-    class CollectQuest : Quest
+    class BattleQuest : Quest
     {
         private List<Requirement> requires;         //クリア条件
-
-        public CollectQuest(
-            int id, string name, string explanation,
+        public BattleQuest(int id, string name, string explanation,
             int difficulty, int gainMoney, int[] awardID, List<Requirement> requires,
             int dungeonProcess, int dungeonFloor, int guildExp)
             : base(id, name, explanation, difficulty, gainMoney, awardID, dungeonProcess, dungeonFloor, guildExp)
@@ -25,7 +23,13 @@ namespace Team27_RougeLike.QuestSystem
 
         public override void AddAmount(int id, int amount)
         {
-            //Itemは直接Iventoryで設定
+            foreach (Requirement r in requires)
+            {
+                if(r.id == id)
+                {
+                    r.AddCurrentAmount(amount);
+                }
+            }
             return;
         }
 
@@ -75,13 +79,7 @@ namespace Team27_RougeLike.QuestSystem
 
         public override void SetItemAmount(int id, int amount)
         {
-            foreach (Requirement r in requires)
-            {
-                if (r.id != id)
-                    continue;
-
-                r.SetCurrentAmount(amount);
-            }
+            return;
         }
     }
 }

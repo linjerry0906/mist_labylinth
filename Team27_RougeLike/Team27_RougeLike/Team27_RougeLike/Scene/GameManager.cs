@@ -21,10 +21,12 @@ namespace Team27_RougeLike.Scene
         private PlayerStatus playerStatus;                   //Playerのステータス
         private Inventory playerItem;                        //Playerが持つアイテム
         private PlayerQuest playerQuest;                     //Playerが受けているクエスト
+        private PlayerGuildRank playerGuildRank;             //Playerのギルトレベル
 
         private DungeonProcess dungeonProcess;               //進捗状況
         private ItemManager itemManager;                     //Item Dictionary
         private QuestLoader questManager;                    //Quest
+        private EnemyNameLoader enemyName;                   //EnemyName
 
         private GameDevice gameDevice;
 
@@ -51,6 +53,7 @@ namespace Team27_RougeLike.Scene
             questManager.Load(dungeonProcess, true);
             itemManager = new ItemManager();
             dungeonProcess = new DungeonProcess();
+            enemyName = new EnemyNameLoader();
 
             #region Player初期化
             PlayerStatusLoader psLoader = new PlayerStatusLoader();
@@ -61,6 +64,7 @@ namespace Team27_RougeLike.Scene
 
             playerItem = playerStatus.GetInventory();                     //道具欄を取得
             playerQuest = new PlayerQuest();
+            playerGuildRank = new PlayerGuildRank();
             #endregion
 
             Load();
@@ -84,6 +88,7 @@ namespace Team27_RougeLike.Scene
             playerItem.LoadFromFile(saveData);       //Playerアイテム復元
             dungeonProcess.LoadSaveData(saveData);   //攻略情報復元
             playerQuest.LoadFromSave(saveData);      //Quest情報復元
+            playerGuildRank.LoadSaveData(saveData);
         }
 
         /// <summary>
@@ -149,6 +154,17 @@ namespace Team27_RougeLike.Scene
         {
             get { return questManager; }
         }
+
+        public EnemyNameLoader EnemyName
+        {
+            get { return enemyName; }
+        }
+
+        public PlayerGuildRank GuildInfo
+        {
+            get { return playerGuildRank; }
+        }
+
         #endregion
 
         #region Stage関連

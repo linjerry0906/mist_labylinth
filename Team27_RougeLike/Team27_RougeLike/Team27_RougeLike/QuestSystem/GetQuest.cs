@@ -43,6 +43,7 @@ namespace Team27_RougeLike.QuestSystem
         private List<Button> questButtons;      //Questのリストボタン
         private int questIndex;
         private Quest currentInfo;              //現在選択のクエストの詳細
+        private EnemyNameLoader enemyName;
 
         private DungeonPopUI popUI;
 
@@ -203,6 +204,21 @@ namespace Team27_RougeLike.QuestSystem
                         numPos, fontSize,
                         Color.White, constractAlpha * currentAlpha);
                 }
+                else if (currentInfo is BattleQuest)
+                {
+                    string name = "まだ";
+                    //enemyName.GetEnemyName(currentInfo.RequireID()[i]);
+                    renderer.DrawString(
+                        name, position + (10.5f + i * 0.5f) * line + offsetX, fontSize,
+                        Color.White, constractAlpha * currentAlpha);
+
+                    Vector2 numPos = position + (10.5f + i * 0.5f) * line;
+                    numPos.X = rightBackLayer.GetCenter().X + 120;
+                    renderer.DrawString(
+                        currentInfo.CurrentState()[i].requireAmount + "体",
+                        numPos, fontSize,
+                        Color.White, constractAlpha * currentAlpha);
+                }
             }
         }
 
@@ -245,6 +261,8 @@ namespace Team27_RougeLike.QuestSystem
             popUI.SetAlphaLimit(0.9f);
             popUI.SetTextOffset(Vector2.Zero);
             #endregion
+
+            enemyName = gameManager.EnemyName;
         }
 
         private void InitQuest()
