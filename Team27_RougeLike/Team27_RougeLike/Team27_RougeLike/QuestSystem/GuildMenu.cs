@@ -50,6 +50,7 @@ namespace Team27_RougeLike.QuestSystem
             backLayer.Draw(currentalpha * 1.2f);
 
             DrawButton(constractAlpha, currentalpha);
+            DrawGuildRank(constractAlpha, currentalpha);
         }
 
         /// <summary>
@@ -78,6 +79,17 @@ namespace Team27_RougeLike.QuestSystem
                     color, new Vector2(1.1f, 1.1f), constractAlpha * currentalpha,
                     true, true);
             }
+        }
+
+        private void DrawGuildRank(float constractAlpha, float currentalpha)
+        {
+            string rank = gameManager.GuildInfo.Rank().ToString();
+            Vector2 rankPosition = backLayer.GetRightCenter() + new Vector2(200, -40);
+            renderer.DrawString(
+                rank, rankPosition, new Vector2(4, 4),
+                Color.White, constractAlpha * currentalpha);
+
+            //Todo画像の追加
         }
 
         public void Initialize()

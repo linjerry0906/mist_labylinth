@@ -80,7 +80,9 @@ namespace Team27_RougeLike.Scene
             {
                 questManager.Load(
                     gameManager.DungeonProcess);
-                questManager.RandomQuest(gameDevice);
+                questManager.RandomQuest(
+                    gameDevice, 
+                    gameManager.GuildInfo);
                 return;
             }
 
