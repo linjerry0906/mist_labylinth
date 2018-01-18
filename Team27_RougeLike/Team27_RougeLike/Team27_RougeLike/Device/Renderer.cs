@@ -438,6 +438,7 @@ namespace Team27_RougeLike.Device
                 Matrix.CreateBillboard(position, currentProjector.Position, axis, currentProjector.Front)); //ビルボードマトリクス 
             effectManager.GetPolygonEffect().View.SetValue(currentProjector.LookAt);
             effectManager.GetPolygonEffect().Projection.SetValue(currentProjector.Projection);
+            effectManager.GetPolygonEffect().Color.SetValue(color.ToVector4());
             foreach (var effect in effectManager.GetPolygonEffect().GetEffect().CurrentTechnique.Passes)
             {
                 effect.Apply();

@@ -5,6 +5,7 @@ float4x4 Projection;
 // TODO: add effect parameters here.
 texture Texture0;
 float alpha;
+float4 color;
 
 sampler MainSampler : register(s0) = sampler_state
 {
@@ -47,12 +48,12 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
 	// TODO: add your pixel shader code here.
-	float4 color = tex2D(MainSampler, input.TexUV0) * alpha;
+	float4 tex = tex2D(MainSampler, input.TexUV0) * alpha;
 
-	if (color.a < 0.2f)		//“§–¾“x‚ª0.2ˆÈ‰º‚Ìê‡‚Í•úŠü
+	if (tex.a < 0.2f)		//“§–¾“x‚ª0.2ˆÈ‰º‚Ìê‡‚Í•úŠü
 		discard;
 
-	return color;
+	return tex * color;
 }
 
 technique Technique1

@@ -21,6 +21,7 @@ namespace Team27_RougeLike.Effects
         private EffectParameter projection;         //描画のProjectionマトリクス
         private EffectParameter texture;            //Texture
         private EffectParameter alpha;              //透明度
+        private EffectParameter color;              //色
 
         public PolygonEffect(Effect effect)
         {
@@ -35,6 +36,7 @@ namespace Team27_RougeLike.Effects
             projection = effect.Parameters["Projection"];    //描画のProjectionマトリクス
             texture = effect.Parameters["Texture0"];         //Texture
             alpha = effect.Parameters["alpha"];              //透明度
+            color = effect.Parameters["color"];
         }
 
         public EffectParameter World
@@ -56,6 +58,11 @@ namespace Team27_RougeLike.Effects
         public EffectParameter Alpha
         {
             get { return alpha; }
+        }
+
+        public EffectParameter Color
+        {
+            get { return color; }
         }
 
         public Effect GetEffect()
