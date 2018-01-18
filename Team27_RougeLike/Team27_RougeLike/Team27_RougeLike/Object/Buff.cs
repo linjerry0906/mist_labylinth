@@ -56,12 +56,16 @@ namespace Team27_RougeLike.Object
             switch (buffname)
             {
                 case buff.ACCELERATE:
+                    actor.Log(actor.GetName() + "はspeedupした");
                     break;
                 case buff.CONFUSE:
+                    actor.Log(actor.GetName() + "はconfuseした");
                     break;
                 case buff.IRONBODY:
+                    actor.Log(actor.GetName() + "はhard");
                     break;
                 case buff.POISON:
+                    actor.Log(actor.GetName() + "はpoison");
                     break;
             }
             buffs[buffname] = true;
