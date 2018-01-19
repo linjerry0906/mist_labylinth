@@ -26,7 +26,7 @@ namespace Team27_RougeLike.Object.Character
         private PlayerStatus status;
         private DungeonUI ui;
         public Player(Vector3 position, PlayerStatus status, GameDevice gameDevice, CharacterManager characterManager, ParticleManager pManager, GameManager gameManager, DungeonUI ui)
-            : base(new CollisionSphere(position, 5.0f), "test", characterManager,"プレイヤー")
+            : base(new CollisionSphere(position, 5.0f), "test", characterManager,"プレイヤー","White")
         {
             tag = "Player";
 
@@ -45,7 +45,6 @@ namespace Team27_RougeLike.Object.Character
                 motion.Add(i, new Rectangle(i * 64, 0, 64, 64));
             }
             motion.Initialize(new Range(0, 5), new Timer(0.1f));
-
         }
 
         public override void Update(GameTime gameTime)

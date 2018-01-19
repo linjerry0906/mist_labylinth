@@ -1,6 +1,6 @@
-ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name
-1,test,10,7,1,0.4,Fool,3,1,3,Ç§Ç≤ÇﬂÇ≠âtëÃ
-2,bat,20,3,1,0.4,Melee,6,1,5,ëÂÇ±Ç§Ç‡ÇË
-3,test,10,1,1,0.3,Ranged,1,1,5,Ç§Ç≤ÇﬂÇ≠è¨âtëÃ
-4,test,200,1,1,0.3,Ranged,9,1,5,Ç§Ç≤ÇﬂÇ≠ëÂâtëÃ
-5,Snow,20,5,1,0.4,Totem,5,1,7,ê·ÇÃê∏
+ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
+1,test,10,7,1,0.4,Fool,3,60,3,Ç§Ç≤ÇﬂÇ≠âtëÃ,White
+2,bat,20,3,1,0.4,Melee,6,30,5,ëÂÇ±Ç§Ç‡ÇË,White
+3,test,10,1,1,0.3,Ranged,2,90,5,Ç§Ç≤ÇﬂÇ≠è¨âtëÃ,White
+4,test,200,1,1,0.3,Ranged,9,20,5,Ç§Ç≤ÇﬂÇ≠ëÂâtëÃ,White
+5,Snow,20,5,1,0.4,Totem,5,40,7,ê·ÇÃê∏,White

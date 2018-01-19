@@ -18,6 +18,7 @@ namespace Team27_RougeLike.Object
         protected BaseAiManager aiManager;
         protected Motion motion;
         protected Buff buff;
+        protected string color;
         protected string textureName;   //テクスチャ名
         protected string tag;           //敵味方　タグ分け
         protected string name;          //個体名
@@ -28,12 +29,13 @@ namespace Team27_RougeLike.Object
 
         public string Tag { get { return tag; } }
 
-        public CharacterBase(CollisionSphere collision, string textureName, CharacterManager characterManager,string name)
+        public CharacterBase(CollisionSphere collision, string textureName, CharacterManager characterManager,string name,string color)
         {
             this.collision = collision;
             this.textureName = textureName;
             this.characterManager = characterManager;
             this.name = name;
+            this.color = color;
             velocity = Vector3.Zero;
             buff = new Buff(this);
         }
@@ -45,7 +47,7 @@ namespace Team27_RougeLike.Object
         public abstract void Attack();
         public virtual void Draw(Renderer renderer)
         {
-            renderer.DrawPolygon(textureName, collision.Position, new Vector2(collision.Radius), motion.DrawingRange(), Color.Cyan);
+            renderer.DrawPolygon(textureName, collision.Position, new Vector2(collision.Radius), motion.DrawingRange(), ColorLoad.GetColor(color));
         }
         public bool Dodge()
         {

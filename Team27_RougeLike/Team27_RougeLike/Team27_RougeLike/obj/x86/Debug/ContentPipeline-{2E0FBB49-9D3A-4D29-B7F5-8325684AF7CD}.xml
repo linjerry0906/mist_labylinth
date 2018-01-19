@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\bat.xnb</Output>
-      <Time>2017-12-20T22:06:56.471904+09:00</Time>
+      <Time>2018-01-19T13:23:34.6179294+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\slash.png</Source>
@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image2.xnb</Output>
-      <Time>2018-01-11T15:32:47.2169849+09:00</Time>
+      <Time>2018-01-19T13:23:34.6259207+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\dungeon_image_ice.png</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image_ice.xnb</Output>
-      <Time>2018-01-12T18:11:08.9584496+09:00</Time>
+      <Time>2018-01-19T13:23:34.6319344+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\dungeon_image_thomb.png</Source>
@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image_thomb.xnb</Output>
-      <Time>2018-01-12T18:11:08.9624603+09:00</Time>
+      <Time>2018-01-19T13:23:34.6374498+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\dungeon_image_tree.png</Source>
@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image_tree.xnb</Output>
-      <Time>2018-01-12T18:11:08.970482+09:00</Time>
+      <Time>2018-01-19T13:23:34.644971+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\cubeTest.png</Source>
@@ -80,7 +80,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-01-18T15:56:40.8676903+09:00</Time>
+      <Time>2018-01-19T13:23:34.6068677+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -92,7 +92,7 @@
       <Time>2017-12-14T15:57:16.43411+09:00</Time>
       <Dependency>
         <Key>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\ItemModel_0.xml</Key>
-        <Value>2018-01-12T18:56:29.4225021+09:00</Value>
+        <Value>2018-01-19T13:35:05.7069408+09:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -105,7 +105,7 @@
       <Time>2018-01-10T09:45:44.6477728+09:00</Time>
       <Dependency>
         <Key>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\B_01_0.xml</Key>
-        <Value>2018-01-12T18:56:29.5348415+09:00</Value>
+        <Value>2018-01-19T13:35:05.8508693+09:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -118,7 +118,7 @@
       <Time>2018-01-11T13:01:08.7302432+09:00</Time>
       <Dependency>
         <Key>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\map_block_0.xml</Key>
-        <Value>2018-01-12T18:56:29.5963076+09:00</Value>
+        <Value>2018-01-19T13:35:05.8990483+09:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -137,7 +137,7 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\polygon.xnb</Output>
-      <Time>2017-12-21T13:03:50.9443837+09:00</Time>
+      <Time>2018-01-19T13:23:34.6048628+09:00</Time>
     </Item>
     <Item>
       <Source>Sound\slash.wav</Source>
@@ -197,7 +197,7 @@
       <Time>2018-01-16T09:59:19.0964128+09:00</Time>
       <Dependency>
         <Key>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\obj\x86\Debug\Model\magic_circle_0.xml</Key>
-        <Value>2018-01-18T13:44:18.2029136+09:00</Value>
+        <Value>2018-01-19T13:35:05.9482129+09:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -223,7 +223,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image_tutorial.xnb</Output>
-      <Time>2018-01-16T09:59:19.1139587+09:00</Time>
+      <Time>2018-01-19T13:23:34.6525254+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\fog.png</Source>
@@ -232,7 +232,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\fog.xnb</Output>
-      <Time>2018-01-16T09:59:19.1154631+09:00</Time>
+      <Time>2018-01-19T13:23:34.6539942+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\ground_ice.png</Source>
@@ -322,7 +322,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\town.xnb</Output>
-      <Time>2018-01-18T12:56:23.9594936+09:00</Time>
+      <Time>2018-01-19T13:23:34.663053+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\wall_default.png</Source>
@@ -376,7 +376,61 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\particle.xnb</Output>
-      <Time>2018-01-18T17:57:17.1735613+09:00</Time>
+      <Time>2018-01-18T20:56:12.9413144+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\Depotbutton.png</Source>
+      <Name>Texture\Depotbutton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Depotbutton.xnb</Output>
+      <Time>2018-01-19T13:23:34.6108784+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\Dungeonbutton.png</Source>
+      <Name>Texture\Dungeonbutton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Dungeonbutton.xnb</Output>
+      <Time>2018-01-19T13:23:34.612384+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\Guildtbutton.png</Source>
+      <Name>Texture\Guildtbutton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Guildtbutton.xnb</Output>
+      <Time>2018-01-19T13:23:34.613387+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\Shopbutton.png</Source>
+      <Name>Texture\Shopbutton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Shopbutton.xnb</Output>
+      <Time>2018-01-19T13:23:34.614889+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\Upgradebutton.png</Source>
+      <Name>Texture\Upgradebutton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Upgradebutton.xnb</Output>
+      <Time>2018-01-19T13:23:34.6158929+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Effect\depth.fx</Source>
+      <Name>Effect\depth</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\depth.xnb</Output>
+      <Time>2018-01-18T12:56:23.9338904+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

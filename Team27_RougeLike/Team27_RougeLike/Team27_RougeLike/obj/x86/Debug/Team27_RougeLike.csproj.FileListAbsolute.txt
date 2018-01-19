@@ -162,3 +162,9 @@ C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Te
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\StageCSV\Stage_boss_1_5.csv
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\StageCSV\Stage_boss_3_5.csv
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\particle.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Depotbutton.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Dungeonbutton.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Guildtbutton.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Shopbutton.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Upgradebutton.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\depth.xnb
