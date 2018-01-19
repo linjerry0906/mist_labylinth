@@ -73,7 +73,7 @@ namespace Team27_RougeLike.Scene
             windowWidth = Def.WindowDef.WINDOW_WIDTH;
             windowHeight = Def.WindowDef.WINDOW_HEIGHT;
 
-            backRect = new Rectangle(0, windowHeight - 64, 320, 64);
+            backRect = new Rectangle(0, windowHeight - 64, 64, 32);
         }
 
         public void Initialize(SceneType scene)
@@ -85,7 +85,7 @@ namespace Team27_RougeLike.Scene
             store = new Store(gameManager, gameDevice);
             store.Initialize();
 
-            Vector2 size = new Vector2(1080 / 2 - 128, 720 - 128);
+            Vector2 size = new Vector2(windowWidth / 2 - 128, windowHeight - 128);
             leftWindow = new Window(gameDevice, new Vector2(64, 64), size);
             leftWindow.Initialize();
             rightWindow = new Window(gameDevice, new Vector2(windowWidth / 2 + 64, 64), size);
@@ -194,7 +194,6 @@ namespace Team27_RougeLike.Scene
             }
             else
             {
-                renderer.DrawString("0でselectに戻る", new Vector2(0, 32), new Vector2(1, 1), Color.Black);
                 if (mode == ShopMode.buy)
                 {
                     renderer.DrawString("売り物リスト", new Vector2(64, 64), new Vector2(1, 1), Color.White);

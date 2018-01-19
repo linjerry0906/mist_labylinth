@@ -56,6 +56,9 @@ namespace Team27_RougeLike.Scene
         private bool isNotEnoughMessage; //素材が足りてないメッセージ;
         private bool isBiggest; //レベルがマックスかどうか
 
+        private int windowWidth;
+        private int windowHeight;
+
         public UpgradeStore(IScene town, GameManager gameManager, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
@@ -68,8 +71,11 @@ namespace Team27_RougeLike.Scene
             inventory = gameManager.PlayerItem;
             itemManager = new ItemManager();
 
-            selectItemInfoUI = new ItemInfoUI(new Vector2(1080 / 2 + 64, 96), gameManager, gameDevice);
-            upgradeItemInfoUI = new ItemInfoUI(new Vector2(1080 / 2 + 64, 224 + 32), gameManager, gameDevice);
+            windowWidth = Def.WindowDef.WINDOW_WIDTH;
+            windowHeight = Def.WindowDef.WINDOW_HEIGHT;
+
+            selectItemInfoUI = new ItemInfoUI(new Vector2(windowWidth / 2 + 64, 96), gameManager, gameDevice);
+            upgradeItemInfoUI = new ItemInfoUI(new Vector2(windowWidth / 2 + 64, 224 + 32), gameManager, gameDevice);
         }
 
         public void Initialize(SceneType scene)
@@ -111,21 +117,21 @@ namespace Team27_RougeLike.Scene
             itemManager.LoadAll();
             
             leftWindow = new Window(gameDevice, new Vector2(64, 64),
-                new Vector2(1080 / 2 - 128, 720 - 128));
+                new Vector2(windowWidth / 2 - 128, windowHeight - 128));
             leftWindow.Initialize();
             leftWindow.Switch();
-            rightWindow = new Window(gameDevice, new Vector2(1080 / 2 + 64, 64),
-                new Vector2(1080 / 2 - 128, 720 - 160 - 64));
+            rightWindow = new Window(gameDevice, new Vector2(windowWidth / 2 + 64, 64),
+                new Vector2(windowWidth / 2 - 128, windowHeight - 160 - 64));
             rightWindow.Initialize();
             rightWindow.SetAlphaLimit(0.6f);
-            messegeWindow = new Window(gameDevice, new Vector2(1080 / 2 - 160, 720 / 2 - 80), new Vector2(384, 160));
+            messegeWindow = new Window(gameDevice, new Vector2(windowWidth / 2 - 160, windowHeight / 2 - 80), new Vector2(384, 160));
             messegeWindow.Initialize();
             messegeWindow.SetAlphaLimit(1.0f);
 
-            backButton = new Button(new Vector2(0, 720 - 64), 64, 32);
-            backWindow = new Window(gameDevice, new Vector2(0, 720 - 64), new Vector2(64, 32));
-            upgradeButton = new Button(rightWindow.GetLeftUnder() + new Vector2(0, 32), 1080 / 2 - 128, 64);
-            upgradeWindow = new Window(gameDevice, rightWindow.GetLeftUnder() + new Vector2(0, 32), new Vector2(1080 / 2 - 128, 64));
+            backButton = new Button(new Vector2(0, windowHeight - 64), 64, 32);
+            backWindow = new Window(gameDevice, new Vector2(0, windowHeight - 64), new Vector2(64, 32));
+            upgradeButton = new Button(rightWindow.GetLeftUnder() + new Vector2(0, 32), windowWidth / 2 - 128, 64);
+            upgradeWindow = new Window(gameDevice, rightWindow.GetLeftUnder() + new Vector2(0, 32), new Vector2(windowWidth / 2 - 128, 64));
 
             leftItems = new List<Item>();
             leftButtons = new List<Button>();
@@ -162,7 +168,7 @@ namespace Team27_RougeLike.Scene
         {
             leftItems.Add(item);
             Vector2 position = new Vector2(64, 96 + 24 * (leftButtons.Count + 1));
-            int buttonWidht = 1080 / 2 - 128;
+            int buttonWidht = windowWidth / 2 - 128;
             int buttonHeight = 20;
             leftButtons.Add(new Button(position, buttonWidht, buttonHeight));
             leftWindows.Add(new Window(gameDevice, position, new Vector2(buttonWidht, buttonHeight)));
@@ -509,32 +515,32 @@ namespace Team27_RougeLike.Scene
                     Color.White, new Vector2(2, 2), 1.0f, true, true);
                 
 
-                renderer.DrawString("強化前", new Vector2(1080 / 2 + 64, 64), new Vector2(1, 1), Color.White);
+                renderer.DrawString("強化前", new Vector2(windowWidth / 2 + 64, 64), new Vector2(1, 1), Color.White);
                 selectItemInfoUI.Draw(selectItem, 1.0f);
-                renderer.DrawString("強化後", new Vector2(1080 / 2 + 64, 192 + 32), new Vector2(1, 1), Color.White);
+                renderer.DrawString("強化後", new Vector2(windowWidth / 2 + 64, 192 + 32), new Vector2(1, 1), Color.White);
                 upgradeItemInfoUI.Draw(upgradeItem, 1.0f);
                 
                 //必要素材
                 renderer.DrawString("必要な素材", 
-                    new Vector2(1080 / 2 + 64, 192 + 192), new Vector2(1, 1), Color.White);
-                renderer.DrawString("(必要数 / 所持数)",
-                    new Vector2(1080 / 2 + 160, 192 + 192), new Vector2(1, 1), Color.White);
+                    new Vector2(windowWidth / 2 + 64, 192 + 192), new Vector2(1, 1), Color.White);
+                renderer.DrawString("(所持数 / 必要数)",
+                    new Vector2(windowWidth / 2 + 160, 192 + 192), new Vector2(1, 1), Color.White);
 
                 int num = 0;
                 foreach (int id in materialItems.Keys)
                 {
                     num++;
                     renderer.DrawString(itemManager.GetConsuptionItem(id).GetItemName(),
-                        new Vector2(1080 / 2 + 64, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                        new Vector2(windowWidth / 2 + 64, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
                     if (consumptions.Keys.Contains(id))
                     {
-                        renderer.DrawString("("+materialItems[id] + "/" + consumptions[id]+")",
-                            new Vector2(1080 / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                        renderer.DrawString("("+ consumptions[id] + "/" + materialItems[id]+")",
+                            new Vector2(windowWidth / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
                     }
                     else
                     {
-                        renderer.DrawString("("+materialItems[id] + "/0)",
-                            new Vector2(1080 / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                        renderer.DrawString("(0/" + materialItems[id] + ")",
+                            new Vector2(windowWidth / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
                     }
                 }
             }
