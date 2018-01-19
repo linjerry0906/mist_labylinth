@@ -35,7 +35,6 @@ namespace Team27_RougeLike.Scene
         }
         public void Draw()
         {
-            //ToDo：Loading画面
             renderer.Begin();
             Vector2 screenSize = new Vector2(Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT);
             renderer.DrawTexture("fade", Vector2.Zero, screenSize);
@@ -46,7 +45,6 @@ namespace Team27_RougeLike.Scene
         {
             endFlag = false;
 
-            //ToDo：GameManagerから今の進捗状況によってマップのサイズを指定
             mapGenerator = new MapGenerator(stageManager.StageSize(), gameDevice);
             stageInfoLoader = new StageInfoLoader();
             stageInfoLoader.Initialize();

@@ -82,6 +82,7 @@ namespace Team27_RougeLike.QuestSystem
                 string type = data[1];
                 string name = data[2];
                 string info = data[3];
+                info = info.Replace("nl", "\n");
                 int difficulty = int.Parse(data[4]);
                 int money = int.Parse(data[5]);
 

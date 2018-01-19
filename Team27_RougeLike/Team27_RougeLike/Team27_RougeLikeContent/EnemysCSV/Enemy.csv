@@ -4,3 +4,4 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
 3,test,10,1,1,0.3,Ranged,2,90,5,‚¤‚²‚ß‚­¬‰t‘Ì,White
 4,test,200,1,1,0.3,Ranged,9,20,5,‚¤‚²‚ß‚­‘å‰t‘Ì,White
 5,Snow,20,5,1,0.4,Totem,5,40,7,á‚Ì¸,White
+6,test,100,8,2,0.2,Fool,10,20,10,ˆÙ•Ï‚Ì‘å‰t‘Ì,Green
