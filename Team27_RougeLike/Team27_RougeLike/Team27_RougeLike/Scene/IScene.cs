@@ -8,6 +8,7 @@ namespace Team27_RougeLike.Scene
 {
     public enum SceneType
     {
+        Logo,
         Title,
         Load,
         LoadTown,

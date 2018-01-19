@@ -55,6 +55,7 @@ namespace Team27_RougeLike.Scene
                 {"Guildtbutton" ,path},
                 {"Shopbutton" ,path},
                 {"Upgradebutton" ,path},
+                {"NEEC1280black" ,path},
             };
             return list;
         }
@@ -110,9 +111,21 @@ namespace Team27_RougeLike.Scene
 
         public void Update(GameTime gameTime)
         {
-            textureLoader.Update();
-            bgmLoader.Update();
-            seLoader.Update();
+            if (!textureLoader.IsEnd())
+            {
+                textureLoader.Update();
+                return;
+            }
+            if (!bgmLoader.IsEnd())
+            {
+                bgmLoader.Update();
+                return;
+            }
+            if (!seLoader.IsEnd())
+            {
+                seLoader.Update();
+                return;
+            }
 
 
             //読み込み処理が終わっていたらシーンを終了
@@ -153,7 +166,7 @@ namespace Team27_RougeLike.Scene
 
         public SceneType Next()
         {
-            return SceneType.LoadTown;
+            return SceneType.Logo;
         }
 
         public bool IsEnd()

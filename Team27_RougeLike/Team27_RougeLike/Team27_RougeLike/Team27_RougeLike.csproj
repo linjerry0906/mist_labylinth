@@ -143,6 +143,7 @@
     <Compile Include="QuestSystem\Requirement.cs" />
     <Compile Include="QuestSystem\SelectQuestRank.cs" />
     <Compile Include="Scene\DungeonProcess.cs" />
+    <Compile Include="Scene\LogoScene.cs" />
     <Compile Include="Scene\Town\GuildScene.cs" />
     <Compile Include="Scene\LoadBossScene.cs" />
     <Compile Include="Scene\SceneFader.cs" />
