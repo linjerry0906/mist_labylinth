@@ -1,9 +1,10 @@
 Start,Type,クエスト名,説明,難易度（0－6）(F~S),報酬金,報酬Item1,報酬Item2,報酬Item3,クリアDungeon番号,クリアフロア,条件ID1,条件数量1,条件ID2,条件数量2,条件ID3,条件数量3,ギルドポイント
-1,Collection,回復薬の調達・1,村の回復薬が足りなくなった。nlだれかが回復薬（小）を調達してください。,0,100,null,null,null,0,0,1,3,null,null,null,null,2
-2,Battle,バットを倒そう,演習場のバットが大量繁殖した。nl退治してくれる冒険者を募集中！,0,200,1,null,null,0,0,2,20,null,null,null,null,5
-3,Collection,痛薬がほしい！,実験用で痛薬が必要。だれか調達してください。nlnl依頼者不明,0,150,null,null,null,0,1,5,5,null,null,null,null,3
-4,Collection,ゴミ拾い,多くの冒険者に使われている演習場をnl整理する必要がある。nlnlギルトより,0,150,null,null,null,0,0,6,20,null,null,null,null,3
+1,Collection,回復薬の調達・1,村の回復薬が足りなくなった。nlだれか回復薬（小）を調達してくれ！nlnl村人より,0,100,null,null,null,0,0,1,3,null,null,null,null,2
+2,Battle,バットを倒そう,演習場のバットが大量発生した！nl退治してくれる冒険者を募集中！nlnlギルトより,0,200,1,null,null,0,0,2,20,null,null,null,null,5
+3,Collection,痛薬がほしい！,実験用で痛薬が必要だ。だれか調達してきてくれ。nlnl依頼者不明,0,150,null,null,null,0,1,5,5,null,null,null,null,3
+4,Collection,ゴミ拾い,多くの冒険者に使われている演習場を清掃する必nl要がある。nlnlギルトより,0,150,null,null,null,0,0,6,20,null,null,null,null,3
 5,Battle,うごめく小液体を倒そう,演習場の小液体を20体倒してくれ。,0,200,1,null,null,0,0,3,20,null,null,null,null,5
-6,Battle,総合戦闘演習・1,演習場で小液体と大こうもりをそれぞれnl15体を倒す。nlnlギルトより,0,300,1,1,null,0,1,2,15,3,15,null,null,8
-7,Battle,総合戦闘演習・2,演習場最後のボス・異変の大液体を倒そう！nlnlギルトより,0,250,2,null,null,0,2,6,1,null,null,null,null,10
+6,Battle,総合戦闘演習・1,演習場で小液体15体、大こうもり15体を討伐。nlnlギルトより,0,300,1,1,null,0,1,2,15,3,15,null,null,8
+7,Battle,総合戦闘演習・2,演習場の最後のボス「異変の大液体」の討伐。nlnlギルトより,0,250,2,null,null,0,2,6,1,null,null,null,null,10
+8,Battle,うごめく液体を倒そう,演習場二階で稀に出るうごめく液体がいるらしい。nl10体を討伐してくれ。nlnl新米冒険者より,0,200,null,null,null,1,2,1,10,null,null,null,null,8
 End,,,,,,,,,,,,,,,,,

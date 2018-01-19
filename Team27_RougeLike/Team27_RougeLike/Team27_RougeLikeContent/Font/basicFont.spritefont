@@ -89,6 +89,10 @@ with.
         <End>・</End>
       </CharacterRegion>
       <CharacterRegion>
+        <Start>、</Start>
+        <End>、</End>
+      </CharacterRegion>
+      <CharacterRegion>
         <Start>。</Start>
         <End>。</End>
       </CharacterRegion>
@@ -96,12 +100,18 @@ with.
         <Start>（</Start>
         <End>（</End>
       </CharacterRegion>
-
       <CharacterRegion>
         <Start>）</Start>
         <End>）</End>
       </CharacterRegion>
-
+      <CharacterRegion>
+        <Start>「</Start>
+        <End>「</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>」</Start>
+        <End>」</End>
+      </CharacterRegion>
 
 
 
@@ -503,6 +513,10 @@ with.
         <End>条</End>
       </CharacterRegion>
       <!-- しん -->
+      <CharacterRegion>
+        <Start>新</Start>
+        <End>新</End>
+      </CharacterRegion>
 
       <!-- す -->
       <CharacterRegion>
@@ -517,6 +531,10 @@ with.
       </CharacterRegion>
       
       <!-- せ -->
+      <CharacterRegion>
+        <Start>生</Start>
+        <End>生</End>
+      </CharacterRegion>
       
       <!-- せつ -->
       <CharacterRegion>
@@ -525,8 +543,8 @@ with.
       </CharacterRegion>
       <!-- せい -->
       <CharacterRegion>
-        <Start>整</Start>
-        <End>整</End>
+        <Start>清</Start>
+        <End>清</End>
       </CharacterRegion>
       <CharacterRegion>
         <Start>成</Start>
@@ -551,7 +569,10 @@ with.
         <Start>総</Start>
         <End>総</End>
       </CharacterRegion>
-
+      <CharacterRegion>
+        <Start>掃</Start>
+        <End>掃</End>
+      </CharacterRegion>
 
       <CharacterRegion>
         <Start>素</Start>
@@ -669,6 +690,11 @@ with.
         <Start>手</Start>
         <End>手</End>
       </CharacterRegion>
+      <!-- で -->
+      <CharacterRegion>
+        <Start>出</Start>
+        <End>出</End>
+      </CharacterRegion>
 
       <!-- てつ -->
       <CharacterRegion>
@@ -680,6 +706,10 @@ with.
       <CharacterRegion>
         <Start>闘</Start>
         <End>闘</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>討</Start>
+        <End>討</End>
       </CharacterRegion>
       
       <!-- ど -->
@@ -742,8 +772,13 @@ with.
 
       <!-- は -->
       <CharacterRegion>
-        <Start>繁</Start>
-        <End>繁</End>
+        <Start>発</Start>
+        <End>発</End>
+      </CharacterRegion>
+      <!-- ば -->
+      <CharacterRegion>
+        <Start>伐</Start>
+        <End>伐</End>
       </CharacterRegion>
       <!-- ばい -->
       <CharacterRegion>
@@ -766,6 +801,10 @@ with.
       <CharacterRegion>
         <Start>拾</Start>
         <End>拾</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>人</Start>
+        <End>人</End>
       </CharacterRegion>
 
       <!-- ひつ -->
@@ -835,6 +874,14 @@ with.
 
 
       <!-- ま -->
+      <CharacterRegion>
+        <Start>稀</Start>
+        <End>稀</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>米</Start>
+        <End>米</End>
+      </CharacterRegion>
       <!-- まえ -->
       <CharacterRegion>
         <Start>前</Start>
