@@ -11,7 +11,7 @@ namespace Team27_RougeLike.Def
 {
     static class WindowDef
     {
-        public static readonly string WINDOW_NAME = "";
+        public static readonly string WINDOW_NAME = "Mist Labyrinth";
 
         public static readonly int WINDOW_WIDTH = 1280;
         public static readonly int WINDOW_HEIGHT = 720;
