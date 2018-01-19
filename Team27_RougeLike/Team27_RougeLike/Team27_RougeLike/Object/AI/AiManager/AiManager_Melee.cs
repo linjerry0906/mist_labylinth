@@ -46,7 +46,7 @@ namespace Team27_RougeLike.Object.AI
             {
                 if (attackAi is AttackAi_Wait)
                 {
-                    attackAi = new AttackAi_Charge(actor, enemyActor.GetStatus().Attackspd*30, 1, enemyActor.GetStatus().Attackspd * 60);
+                    attackAi = new AttackAi_Charge(actor, enemyActor.GetStatus().Attackspd, 1, enemyActor.GetStatus().Attackspd);
                 }
                 if (moveAi is MoveAi_Chase)
                 {

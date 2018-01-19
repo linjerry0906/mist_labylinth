@@ -45,6 +45,7 @@ namespace Team27_RougeLike.Object.Character
                 var attackspd = int.Parse(data[8]);
                 var exp = int.Parse(data[9]);
                 var name = data[10];
+                var color = data[11];
                 enemys.Add
                     (
                     id,
@@ -57,7 +58,8 @@ namespace Team27_RougeLike.Object.Character
                         charactermanager,
                         exp,
                         name,
-                        id
+                        id,
+                        color
                         )
                     );
             }
@@ -90,6 +92,7 @@ namespace Team27_RougeLike.Object.Character
                 var attackspd = int.Parse(data[8]);
                 var exp = int.Parse(data[9]);
                 var name = data[10];
+                var color = data[11];
                 enemys.Add
                     (
                     id,
@@ -103,7 +106,8 @@ namespace Team27_RougeLike.Object.Character
                         exp,
                         gamedevice,
                         name,
-                        id
+                        id,
+                        color
                         )
                     );
             }

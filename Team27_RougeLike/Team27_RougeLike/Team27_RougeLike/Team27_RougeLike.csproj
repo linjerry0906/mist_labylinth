@@ -85,6 +85,7 @@
     <Compile Include="Object\AI\MoveAi\MoveAi_PlayerMove.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_Search.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Dodge.cs" />
+    <Compile Include="Object\Box\BuffBox.cs" />
     <Compile Include="Object\Box\DamageBox.cs" />
     <Compile Include="Object\Box\HitBoxBase.cs" />
     <Compile Include="Map\DungeonMap.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Scene\StageManager.cs" />
     <Compile Include="Scene\Title.cs" />
     <Compile Include="Scene\TownScene.cs" />
+    <Compile Include="Utility\ColorLoad.cs" />
     <Compile Include="Utility\Motion.cs" />
     <Compile Include="Utility\Range.cs" />
     <Compile Include="Utility\Timer.cs" />

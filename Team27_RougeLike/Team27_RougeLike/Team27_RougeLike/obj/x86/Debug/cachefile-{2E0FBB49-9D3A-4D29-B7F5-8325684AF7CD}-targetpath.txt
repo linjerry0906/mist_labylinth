@@ -35,6 +35,12 @@ Content\Texture\wall_infinite.xnb
 Content\Texture\wall_tree.xnb
 Content\Texture\wall_tutorial.xnb
 Content\Texture\particle.xnb
+Content\Texture\Depotbutton.xnb
+Content\Texture\Dungeonbutton.xnb
+Content\Texture\Guildtbutton.xnb
+Content\Texture\Shopbutton.xnb
+Content\Texture\Upgradebutton.xnb
+Content\Effect\depth.xnb
 Content\EnemysCSV\Enemy.csv
 Content\ItemCSV\ConsumptionItems.csv
 Content\ItemCSV\EquipmentItems.csv
