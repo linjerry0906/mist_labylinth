@@ -37,6 +37,9 @@ namespace Team27_RougeLike.Scene
 
         private Button[] buttons;
         private ButtonEnum onButton;
+        private Vector2 hintPos;
+        private DungeonHintUI hintUI;
+        private string[] hint;
 
         public TownScene(GameManager gameManager, GameDevice gameDevice)
         {
@@ -74,6 +77,11 @@ namespace Team27_RougeLike.Scene
                     size);
             }
 
+            renderer.DrawTexture(
+                "fade", new Vector2(0, Def.WindowDef.WINDOW_HEIGHT - 45),
+                new Vector2(Def.WindowDef.WINDOW_WIDTH, 32), hintUI.CurrentAlpha() * 0.6f);
+            hintUI.Draw();
+
             renderer.End();
         }
 
@@ -93,6 +101,8 @@ namespace Team27_RougeLike.Scene
 
             InitButton();
 
+            InitHint();
+
             gameManager.PlayerItem.RemoveTemp();       //一時的なアイテムを削除
             gameManager.PlayerInfo.Initialize();       //レベルなどの初期化処理
         }
@@ -108,6 +118,22 @@ namespace Team27_RougeLike.Scene
             }
 
             onButton = ButtonEnum.NULL;
+        }
+
+        private void InitHint()
+        {
+            hintPos = new Vector2(30, Def.WindowDef.WINDOW_HEIGHT - 30);
+            hintUI = new DungeonHintUI(gameDevice);
+            hintUI.SetPosition(hintPos);
+            hintUI.Switch(false);
+            hintUI.SetSpeed(0.07f);
+
+            hint = new string[(int)ButtonEnum.NULL];
+            hint[(int)ButtonEnum.Dungeonbutton] = "ダンジョンへ冒険する";
+            hint[(int)ButtonEnum.Guildtbutton] = "ギルトで依頼を受ける";
+            hint[(int)ButtonEnum.Shopbutton] = "ショップはアイテムを売買できる";
+            hint[(int)ButtonEnum.Upgradebutton] = "鍛冶屋は武器や防具の強化ができる";
+            hint[(int)ButtonEnum.Depotbutton] = "倉庫にアイテムを保存できる";
         }
 
         public bool IsEnd()
@@ -127,6 +153,8 @@ namespace Team27_RougeLike.Scene
         public void Update(GameTime gameTime)
         {
             CheckButton();
+
+            UpdateHint();
 
             CheckIsEnd();
         }
@@ -149,6 +177,22 @@ namespace Team27_RougeLike.Scene
                     break;
                 }
             }
+        }
+
+        private void UpdateHint()
+        {
+            hintUI.Update();
+            Vector2 pos = Vector2.Lerp(hintPos + new Vector2(200, 0), hintPos, hintUI.CurrentAlpha());
+            hintUI.SetPosition(pos);
+
+            if (onButton == ButtonEnum.NULL)
+            {
+                hintUI.Switch(false);
+                return;
+            }
+
+            hintUI.Switch(true);
+            hintUI.SetMessage(hint[(int)onButton]);
         }
 
         /// <summary>

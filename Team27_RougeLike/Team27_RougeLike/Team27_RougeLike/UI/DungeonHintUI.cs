@@ -21,6 +21,7 @@ namespace Team27_RougeLike.UI
         private string message;         //描画文字
         private bool isOn;              //表示するか
         private float alpha;            //透明度
+        private float speed;            //変化速度
 
         public DungeonHintUI(GameDevice gameDevice)
         {
@@ -31,6 +32,12 @@ namespace Team27_RougeLike.UI
 
             position = new Vector2(15, Def.WindowDef.WINDOW_HEIGHT - 15);
             alpha = 0.0f;
+            speed = 0.05f;
+        }
+
+        public void SetPosition(Vector2 position)
+        {
+            this.position = position;
         }
 
         /// <summary>
@@ -40,11 +47,11 @@ namespace Team27_RougeLike.UI
         {
             if (isOn)
             {
-                alpha = alpha < 1.0f ? alpha + 0.05f : alpha;
+                alpha = alpha < 1.0f ? alpha + speed : alpha;
             }
             else
             {
-                alpha = alpha > 0.0f ? alpha - 0.05f : alpha;
+                alpha = alpha > 0.0f ? alpha - speed : alpha;
             }
         }
 
@@ -59,7 +66,7 @@ namespace Team27_RougeLike.UI
             renderer.DrawString(
                 message, 
                 position, 
-                new Color(1.0f, 1.0f, 1.0f), 
+                Color.White, 
                 new Vector2(1.2f, 1.2f),        //文字の大きさ
                 alpha, false, true);
         }
@@ -74,12 +81,30 @@ namespace Team27_RougeLike.UI
         }
 
         /// <summary>
+        /// 変化速度を設定
+        /// </summary>
+        /// <param name="speed"></param>
+        public void SetSpeed(float speed)
+        {
+            this.speed = speed;
+        }
+
+        /// <summary>
         /// 表示するか
         /// </summary>
         /// <param name="onoff"></param>
         public void Switch(bool onoff)
         {
             isOn = onoff;
+        }
+
+        /// <summary>
+        /// 現在のアルファ値
+        /// </summary>
+        /// <returns></returns>
+        public float CurrentAlpha()
+        {
+            return alpha;
         }
 
         /// <summary>
