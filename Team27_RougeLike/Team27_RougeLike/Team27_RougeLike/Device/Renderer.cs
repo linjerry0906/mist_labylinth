@@ -81,6 +81,11 @@ namespace Team27_RougeLike.Device
             get { return effectManager; }
         }
 
+        public GraphicsDevice GraphicsDevice
+        {
+            get { return graphicsDevice; }
+        }
+
         /// <summary>
         /// 画像の読み込み
         /// </summary>
@@ -624,6 +629,31 @@ namespace Team27_RougeLike.Device
                 color * alpha,          // 透過
                 0.0f,                   // 回転
                 Vector2.Zero,           // 回転軸の位置
+                scale,                  // 拡大縮小
+                SpriteEffects.None,     // 表示反転効果
+                0.0f                    // スプライト表示深度
+                );
+        }
+
+        /// <summary>
+        /// Effect用
+        /// </summary>
+        /// <param name="texture">テクスチャ</param>
+        /// <param name="position">位置</param>
+        /// <param name="scale">大きさ</param>
+        /// <param name="origin">回転、描画中心</param>
+        /// <param name="color">色</param>
+        /// <param name="alpha">透明度</param>
+        public void DrawTexture(Texture2D texture, Vector2 position,
+                               Vector2 scale, Vector2 origin, Color color, float alpha = 1.0f)
+        {
+            spriteBatch.Draw(
+                texture,         // 画像
+                position,               // 位置
+                null,                   // 切り取り範囲
+                color * alpha,          // 透過
+                0.0f,                   // 回転
+                origin,                 // 回転軸の位置
                 scale,                  // 拡大縮小
                 SpriteEffects.None,     // 表示反転効果
                 0.0f                    // スプライト表示深度

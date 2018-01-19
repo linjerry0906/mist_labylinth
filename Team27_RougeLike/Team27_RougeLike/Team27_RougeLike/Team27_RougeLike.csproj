@@ -73,6 +73,7 @@
     <Compile Include="Effects\BlurEffect.cs" />
     <Compile Include="Effects\DepthEffect.cs" />
     <Compile Include="Effects\PolygonEffect.cs" />
+    <Compile Include="Effects\TownEffect.cs" />
     <Compile Include="Map\BlockStyle.cs" />
     <Compile Include="Map\EndPoint.cs" />
     <Compile Include="Map\EnemySettingManager.cs" />

@@ -11,6 +11,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.UI;
+using Team27_RougeLike.Effects;
+using Team27_RougeLike.Utility;
 
 namespace Team27_RougeLike.Scene
 {
@@ -31,15 +33,18 @@ namespace Team27_RougeLike.Scene
         private Renderer renderer;
         private GameManager gameManager;
 
+        private TownEffect townEffect;      //Effect
+        private Timer effectTimer;          //Effectを制御するタイマー
+
         private bool endFlag;
 
         private SceneType nextScene;
 
-        private Button[] buttons;
-        private ButtonEnum onButton;
-        private Vector2 hintPos;
-        private DungeonHintUI hintUI;
-        private string[] hint;
+        private Button[] buttons;           //メインボタン
+        private ButtonEnum onButton;        //どのボタンにある
+        private Vector2 hintPos;            //Hint描画位置
+        private DungeonHintUI hintUI;       //HintUI
+        private string[] hint;              //Hint文字
 
         public TownScene(GameManager gameManager, GameDevice gameDevice)
         {
@@ -51,11 +56,16 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
+            townEffect.WriteRenderTarget(Color.White);
+
             renderer.Begin();
             renderer.DrawTexture("town", Vector2.Zero);
             renderer.End();
 
             DrawUI();
+
+            townEffect.ReleaseRenderTarget();
+            townEffect.Draw();
         }
 
         private void DrawUI()
@@ -96,17 +106,37 @@ namespace Team27_RougeLike.Scene
                 scene == SceneType.ItemShop ||
                 scene == SceneType.DungeonSelect ||
                 scene == SceneType.Depot ||
-                scene == SceneType.Quest)
+                scene == SceneType.Quest || 
+                scene == SceneType.UpgradeStore)
                 return;
 
+            InitEffect();
             InitButton();
-
             InitHint();
 
             gameManager.PlayerItem.RemoveTemp();       //一時的なアイテムを削除
             gameManager.PlayerInfo.Initialize();       //レベルなどの初期化処理
         }
 
+        /// <summary>
+        /// Effectを初期化
+        /// </summary>
+        private void InitEffect()
+        {
+            townEffect = new TownEffect(
+                new Vector2(Def.WindowDef.WINDOW_WIDTH / 2 + 300, 300),
+                gameDevice);
+            townEffect.Initialize();
+
+            effectTimer = new Timer(1.2f);
+            effectTimer.Initialize();
+
+            townEffect.SetScaleRate(effectTimer.Rate() * 1.5f + 1);
+        }
+
+        /// <summary>
+        /// ボタンを初期化
+        /// </summary>
         private void InitButton()
         {
             buttons = new Button[(int)ButtonEnum.NULL];
@@ -120,6 +150,9 @@ namespace Team27_RougeLike.Scene
             onButton = ButtonEnum.NULL;
         }
 
+        /// <summary>
+        /// ヒントUI、メッセージを初期化
+        /// </summary>
         private void InitHint()
         {
             hintPos = new Vector2(30, Def.WindowDef.WINDOW_HEIGHT - 30);
@@ -152,11 +185,24 @@ namespace Team27_RougeLike.Scene
 
         public void Update(GameTime gameTime)
         {
+            UpdateEffect();
+            if (!effectTimer.IsTime())      //Effect中は他の操作できな
+                return;
+
             CheckButton();
 
             UpdateHint();
 
             CheckIsEnd();
+        }
+
+        /// <summary>
+        /// Effectを更新
+        /// </summary>
+        private void UpdateEffect()
+        {
+            effectTimer.Update();
+            townEffect.SetScaleRate(effectTimer.Rate() * 1.5f + 1);
         }
 
         /// <summary>
@@ -179,20 +225,23 @@ namespace Team27_RougeLike.Scene
             }
         }
 
+        /// <summary>
+        /// ヒントUIの更新
+        /// </summary>
         private void UpdateHint()
         {
             hintUI.Update();
             Vector2 pos = Vector2.Lerp(hintPos + new Vector2(200, 0), hintPos, hintUI.CurrentAlpha());
-            hintUI.SetPosition(pos);
+            hintUI.SetPosition(pos);             //文字位置調整
 
-            if (onButton == ButtonEnum.NULL)
+            if (onButton == ButtonEnum.NULL)     //マウスがボタン上でない場合
             {
-                hintUI.Switch(false);
+                hintUI.Switch(false);            //表示しない
                 return;
             }
 
-            hintUI.Switch(true);
-            hintUI.SetMessage(hint[(int)onButton]);
+            hintUI.Switch(true);                        //表示する
+            hintUI.SetMessage(hint[(int)onButton]);     //Hint文字設定
         }
 
         /// <summary>
