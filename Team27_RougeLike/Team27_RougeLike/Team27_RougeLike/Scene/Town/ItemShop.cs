@@ -162,6 +162,14 @@ namespace Team27_RougeLike.Scene
                     rightWindow.Switch();
                     isPop = true;
                 }
+
+                if (backRect.Contains(mousePos) && input.IsLeftClick())
+                {
+                    mode = ShopMode.select;
+                    leftWindow.Switch();
+                    rightWindow.Switch();
+                    isPop = false;
+                }
             }
 
             UpdateBlurRate();
