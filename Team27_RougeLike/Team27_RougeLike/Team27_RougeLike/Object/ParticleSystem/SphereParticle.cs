@@ -27,7 +27,7 @@ namespace Team27_RougeLike.Object.ParticleSystem
 
         public override void Draw(Renderer renderer)
         {
-            renderer.DrawPolygon("particle", position, size, new Rectangle(0, 0, 64, 64), color, alpha);
+            renderer.DrawPolygon("particle", position, size, new Rectangle(0, 0, 16, 16), color, alpha);
         }
 
         public override void Initialize()
@@ -36,7 +36,7 @@ namespace Team27_RougeLike.Object.ParticleSystem
 
             alphaFlag = true;
             size = new Vector2(
-                gameDevice.Random.Next(20, 30) / 10.0f);
+                gameDevice.Random.Next(1, 7) / 10.0f);
             alpha = gameDevice.Random.Next(1, 4) / 10.0f;
             speed = gameDevice.Random.Next(7, 15) / 100.0f;
             velocity = new Vector3(
@@ -49,13 +49,13 @@ namespace Team27_RougeLike.Object.ParticleSystem
         {
             if (alphaFlag)
             {
-                alpha += 0.001f;
-                if (alpha >= 0.6f)
+                alpha += 0.002f;
+                if (alpha >= 0.55f)
                     alphaFlag = false;
             }
             else
             {
-                alpha -= 0.001f;
+                alpha -= 0.002f;
                 if (alpha <= 0.0f)
                     isDead = true;
             }

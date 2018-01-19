@@ -54,7 +54,7 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 	Color += tex2D(MainSampler, input.TexUV0 + float2(-0.002f, 0.0f));
 	Color += tex2D(MainSampler, input.TexUV0 + float2(-0.001f, 0.001f));
 	Color += tex2D(MainSampler, input.TexUV0 + float2(0.0f, -0.002f));
-	Color += tex2D(MainSampler, input.TexUV0 + float2(0.0f, 0.0f));
+	Color += tex2D(MainSampler, input.TexUV0) * 2;
 	Color += tex2D(MainSampler, input.TexUV0 + float2(0.0f, 0.002f));
 	Color += tex2D(MainSampler, input.TexUV0 + float2(0.001f, -0.001f));
 	Color += tex2D(MainSampler, input.TexUV0 + float2(0.002f, 0.0f));

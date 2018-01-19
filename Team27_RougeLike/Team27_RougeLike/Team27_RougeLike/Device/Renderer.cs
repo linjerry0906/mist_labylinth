@@ -232,7 +232,7 @@ namespace Team27_RougeLike.Device
             Model drawModel = models[name];
             foreach (ModelMesh m in drawModel.Meshes)
             {
-                foreach(BasicEffect e in m.Effects)
+                foreach (BasicEffect e in m.Effects)
                 {
                     e.TextureEnabled = true;
                     e.Texture = textures["cubeTest"];
@@ -243,7 +243,7 @@ namespace Team27_RougeLike.Device
                     e.FogColor = fogManager.CurrentColor().ToVector3();
                     e.View = currentProjector.LookAt;
                     e.Projection = currentProjector.Projection;
-                    e.World = Matrix.CreateScale(size) * 
+                    e.World = Matrix.CreateScale(size) *
                         Matrix.CreateTranslation(position);
                 }
                 m.Draw();
@@ -315,7 +315,7 @@ namespace Team27_RougeLike.Device
                     e.View = currentProjector.LookAt;
                     e.Projection = currentProjector.Projection;
                     e.World = Matrix.CreateScale(size) *
-                        Matrix.CreateRotationY(rotation) * 
+                        Matrix.CreateRotationY(rotation) *
                         Matrix.CreateTranslation(position);
                 }
                 m.Draw();
@@ -396,7 +396,7 @@ namespace Team27_RougeLike.Device
         /// <param name="rect">アセットのUV</param>
         /// <param name="color">ポリゴンの色</param>
         /// <param name="alpha">アルファ値</param>
-        public void DrawPolygon(string name, Vector3 position, Vector2 size, Rectangle rect, Color color,float alpha = 1)
+        public void DrawPolygon(string name, Vector3 position, Vector2 size, Rectangle rect, Color color, float alpha = 1)
         {
             graphicsDevice.DepthStencilState = DepthStencilState.Default;
             graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
@@ -556,7 +556,7 @@ namespace Team27_RougeLike.Device
         /// <param name="position">位置</param>
         /// <param name="rect">画像の切り出し範囲</param>
         /// <param name="alpha">透明値</param>
-        public void DrawTexture(string name, Vector2 position, 
+        public void DrawTexture(string name, Vector2 position,
                                         Rectangle rect, float alpha = 1.0f)
         {
             // 登録されているキーがなければエラー表示
@@ -610,7 +610,7 @@ namespace Team27_RougeLike.Device
         /// <param name="scale">拡大縮小値</param>
         /// <param name="alpha">透明値</param>
         public void DrawTexture(string name, Vector2 position,
-                                Vector2 scale, Color color,float alpha = 1.0f)
+                                Vector2 scale, Color color, float alpha = 1.0f)
         {
             Debug.Assert(textures.ContainsKey(name),
                 "アセット名を間違えていませんか？\n" +

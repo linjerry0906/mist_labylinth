@@ -50,10 +50,11 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 	// TODO: add your pixel shader code here.
 	float4 tex = tex2D(MainSampler, input.TexUV0) * alpha;
 
-	if (tex.a < 0.2f)		//“§–¾“x‚ª0.2ˆÈ‰º‚Ìê‡‚Í•úŠü
+	if (tex.a < 0.1f)		//“§–¾“x‚ª0.1ˆÈ‰º‚Ìê‡‚Í•úŠü
 		discard;
 
-	return tex * color;
+	tex *= color;
+	return tex;
 }
 
 technique Technique1

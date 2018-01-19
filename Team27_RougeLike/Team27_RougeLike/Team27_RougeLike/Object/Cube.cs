@@ -39,7 +39,7 @@ namespace Team27_RougeLike.Object
         {
             renderer.DefaultRenderSetting();
             renderer.RenderMainProjector();
-            renderer.DrawModel("map_block", textureName, position, size  * 2, color);
+            renderer.DrawModel("map_block", textureName, position, size * 2, color);
         }
 
         /// <summary>

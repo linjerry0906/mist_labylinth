@@ -33,8 +33,8 @@ namespace Team27_RougeLike.Object
         /// </summary>
         public void Update()
         {
-            position.X -= 0.6f;                   //ずらす
-            position2.X += 1.2f;
+            position.X -= 0.7f;                   //ずらす
+            position2.X += 1.5f;
 
             if (position.X < -offset)              //大きさを超えたら元に戻す
                 position.X = 0;
@@ -50,10 +50,10 @@ namespace Team27_RougeLike.Object
         {
             renderer.Begin();
             renderer.ChangeBlendState(BlendState.Additive);
-            renderer.DrawTexture("fog", position, new Vector2(4, 4), color, 0.25f);
-            renderer.DrawTexture("fog", position + new Vector2(offset, 0), new Vector2(4, 4), color, 0.25f);
-            renderer.DrawTexture("fog", position2, new Vector2(4, 4), color, 0.2f);
-            renderer.DrawTexture("fog", position2 + new Vector2(-offset, 0), new Vector2(4, 4), color, 0.2f);
+            renderer.DrawTexture("fog", position, new Vector2(4, 4), color, 0.22f);
+            renderer.DrawTexture("fog", position + new Vector2(offset, 0), new Vector2(4, 4), color, 0.22f);
+            renderer.DrawTexture("fog", position2, new Vector2(4, 4), color, 0.18f);
+            renderer.DrawTexture("fog", position2 + new Vector2(-offset, 0), new Vector2(4, 4), color, 0.18f);
             renderer.ChangeBlendState(BlendState.AlphaBlend);
             renderer.End();
         }
