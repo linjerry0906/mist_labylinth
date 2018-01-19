@@ -760,6 +760,10 @@ with.
       </CharacterRegion>
 
       <!-- も -->
+      <CharacterRegion>
+        <Start>持</Start>
+        <End>持</End>
+      </CharacterRegion>
       <!-- もど -->
       <CharacterRegion>
         <Start>戻</Start>

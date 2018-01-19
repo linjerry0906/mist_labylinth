@@ -197,6 +197,21 @@ namespace Team27_RougeLike.Scene
             map.MapCollision(characterManager.GetCharacters());
             map.MapCollision(characterManager.GetHitBoxs());
 
+            //Particle追加
+            if (pManager.Count() < 1500)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Vector3 position = characterManager.GetPlayer().GetPosition;
+                    position += new Vector3(
+                        gameDevice.Random.Next(-30000, 30001) / 100.0f,
+                        gameDevice.Random.Next(-30000, 30001) / 100.0f,
+                        gameDevice.Random.Next(-30000, 30001) / 100.0f);
+                    position.Y = 10;
+                    pManager.AddParticle(new SphereParticle(position, Color.GreenYellow, gameDevice));
+                }
+            }
+
             //アイテム処理
             mapItemManager.ItemCollision(characterManager.GetPlayer(), ui);
 

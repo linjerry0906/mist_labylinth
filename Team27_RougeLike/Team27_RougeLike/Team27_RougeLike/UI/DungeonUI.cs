@@ -25,7 +25,7 @@ namespace Team27_RougeLike.UI
             hintUI = new DungeonHintUI(gameDevice);
             logUI = new DungeonLog(
                 new Vector2(30, Def.WindowDef.WINDOW_HEIGHT - 250),
-                new Vector2(280, 150), gameDevice);
+                new Vector2(350, 150), gameDevice);
         }
 
         /// <summary>

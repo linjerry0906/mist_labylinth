@@ -20,7 +20,7 @@ namespace Team27_RougeLike.UI
         private List<LogText> logs;         //LogList
 
         private readonly static int HEIGHT = 21;         //Logの間隔
-        private readonly static int TEXT_LIMIT = 5;      //メッセージ最大の数
+        private readonly static int TEXT_LIMIT = 7;      //メッセージ最大の数
 
         public DungeonLog(Vector2 position, Vector2 size, GameDevice gameDevice)
         {
@@ -43,7 +43,7 @@ namespace Team27_RougeLike.UI
             Vector2 position = window.GetOffsetPosition();
             for(int i = 0; i < logs.Count; i++)
             {
-                logs[i].Alpha -= 0.005f;                //Logの透明どを下げる
+                logs[i].Alpha -= 0.01f;                //Logの透明どを下げる
                 logs[i].Update(position + new Vector2(2, i * HEIGHT));
             }
 
@@ -78,7 +78,7 @@ namespace Team27_RougeLike.UI
 
             logs.Add(new LogText(log, color, position));      //Log追加
             window.Switch(true);                              //Windowを開く
-            window.SetAlpha(0.5f);                            //透明度設定
+            window.SetAlpha(0.6f);                            //透明度設定
         }
 
         /// <summary>
