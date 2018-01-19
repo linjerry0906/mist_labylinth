@@ -72,6 +72,14 @@ with.
         <Start>&#x3000;</Start>
         <End>&#x303F;</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>←</Start>
+        <End>←</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>→</Start>
+        <End>→</End>
+      </CharacterRegion>
 
 
 
