@@ -129,8 +129,8 @@ namespace Team27_RougeLike.Scene
             messegeWindow = new Window(gameDevice, new Vector2(windowWidth / 2 - 160, windowHeight / 2 - 80), new Vector2(320, 160));
             messegeWindow.Initialize();
 
-            backButton = new Button(new Vector2(windowWidth - 64, windowHeight - 64), 64, 32);
-            backWindow = new Window(gameDevice, new Vector2(windowWidth - 64, windowHeight - 64), new Vector2(64, 32));
+            backButton = new Button(new Vector2(0, windowHeight - 64), 64, 32);
+            backWindow = new Window(gameDevice, new Vector2(0, windowHeight - 64), new Vector2(64, 32));
 
             equipmentButton = new Button(new Vector2(windowWidth / 2 - 160, windowHeight / 2 + 80 + 32), 64, 32);
             consumptionButton = new Button(new Vector2(windowWidth / 2 + 160 - 64, windowHeight / 2 + 80 + 32), 64, 32);
@@ -142,18 +142,18 @@ namespace Team27_RougeLike.Scene
             leftItems = new List<Item>();
             rightItems = new List<Item>();
 
-            rightPageRightWindow = new Window(gameDevice, new Vector2(windowWidth - windowWidth / 4 - 64 - 64, windowHeight - 96), new Vector2(64, 32));
-            rightPageRightWindow.Initialize();
-            rightPageLeftWindow = new Window(gameDevice, new Vector2(windowWidth - windowWidth / 4 + 64 , windowHeight - 96), new Vector2(64, 32));
+            rightPageLeftWindow = new Window(gameDevice, new Vector2(windowWidth - windowWidth / 4 - 64 - 64, windowHeight - 96), new Vector2(64, 32));
             rightPageLeftWindow.Initialize();
-            rightPageRightButton = new Button(rightPageRightWindow.GetOffsetPosition(), 64, 32);
+            rightPageRightWindow = new Window(gameDevice, new Vector2(windowWidth - windowWidth / 4 + 64 , windowHeight - 96), new Vector2(64, 32));
+            rightPageRightWindow.Initialize();
             rightPageLeftButton = new Button(rightPageLeftWindow.GetOffsetPosition(), 64, 32);
-            leftPageRightWindow = new Window(gameDevice, new Vector2(windowWidth / 4 - 64 - 64, windowHeight - 96), new Vector2(64, 32));
-            leftPageRightWindow.Initialize();
-            leftPageLeftWindow = new Window(gameDevice, new Vector2(windowWidth / 4 + 64, windowHeight - 96), new Vector2(64, 32));
+            rightPageRightButton = new Button(rightPageRightWindow.GetOffsetPosition(), 64, 32);
+            leftPageLeftWindow = new Window(gameDevice, new Vector2(windowWidth / 4 - 64 - 64, windowHeight - 96), new Vector2(64, 32));
             leftPageLeftWindow.Initialize();
-            leftPageRightButton = new Button(leftPageRightWindow.GetOffsetPosition(), 64, 32);
+            leftPageRightWindow = new Window(gameDevice, new Vector2(windowWidth / 4 + 64, windowHeight - 96), new Vector2(64, 32));
+            leftPageRightWindow.Initialize();
             leftPageLeftButton = new Button(leftPageLeftWindow.GetOffsetPosition(), 64, 32);
+            leftPageRightButton = new Button(leftPageRightWindow.GetOffsetPosition(), 64, 32);
 
             leftPageItems = new List<Item>();
             leftButtons = new List<Button>();
@@ -324,17 +324,24 @@ namespace Team27_RougeLike.Scene
 
         private void LeftPage(int page)
         {
-            for(int i = 0 + (page - 1) * 20; i < leftItems.Count && i <= page * 20; i++)
+            leftPageItems = new List<Item>();
+            leftButtons = new List<Button>();
+            leftWindows = new List<Window>();
+            for (int i = 0; i < leftItems.Count - (page - 1) * 20 && i < 20; i++)
             {
-                AddLeftList(leftItems[i]);
+                AddLeftList(leftItems[i + (page - 1) * 20]);
+
             }
         }
 
         private void RightPage(int page)
         {
-            for (int i = 0 + (page - 1) * 20; i < rightItems.Count && i <= page * 20; i++)
+            rightPageItems = new List<Item>();
+            rightButtons = new List<Button>();
+            rightWindows = new List<Window>();
+            for (int i = 0; i < rightItems.Count - (page - 1) * 20 && i <= 20; i++)
             {
-                AddRightList(rightItems[i]);
+                AddRightList(rightItems[i + (page - 1) * 20]);
             }
         }
 
@@ -396,8 +403,17 @@ namespace Team27_RougeLike.Scene
                     mode = DepotModeType.end;
                     endFlag = true;
                 }
+
+                if (leftPageLeftWindow.CurrentState())
+                    leftPageLeftWindow.Switch();
+                if (leftPageRightWindow.CurrentState())
+                    leftPageRightWindow.Switch();
+                if (rightPageLeftWindow.CurrentState())
+                    rightPageLeftWindow.CurrentState();
+                if (rightPageRightWindow.CurrentState())
+                    rightPageRightWindow.Switch();
             }
-            else //セレクト外共通処理
+            else if (mode != DepotModeType.end) //セレクト外共通処理
             {
                 if (messegeWindow.CurrentState()) messegeWindow.Switch();
                 if (equipmentWindow.CurrentState()) equipmentWindow.Switch();
@@ -412,42 +428,90 @@ namespace Team27_RougeLike.Scene
                 if (leftPage > leftMaxPage)
                 {
                     leftPage = leftMaxPage;
+                    LeftPage(leftPage);
                 }
                 if (rightPage > rightMaxPage)
                 {
                     rightPage = rightMaxPage;
+                    RightPage(rightPage);
                 }
-                if (leftPage > 1 && !leftPageLeftWindow.CurrentState())
+                //左側
+                if (leftPage > 1)
                 {
-                    leftPageLeftWindow.Switch(); //表示させる
-                }
-                else
-                {
-                    leftPageLeftWindow.Switch(); //消す
-                }
-                if (leftPage < leftMaxPage && !leftPageRightWindow.CurrentState())
-                {
-                    leftPageRightWindow.Switch(); //表示させる
-                }
-                else
-                {
-                    leftPageRightWindow.Switch(); //消す
-                }
-                if (rightPage > 1 && !rightPageLeftWindow.CurrentState())
-                {
-                    rightPageLeftWindow.Switch();
+                    if (!leftPageLeftWindow.CurrentState())
+                    {
+                        leftPageLeftWindow.Switch();
+                    }
+                    if (leftPageLeftButton.IsClick(mousePos) && input.IsLeftClick())
+                    {
+                        leftPage--;
+                        LeftPage(leftPage);
+                    }
                 }
                 else
                 {
-                    rightPageLeftWindow.Switch();
+                    if (leftPageLeftWindow.CurrentState())
+                    {
+                        leftPageLeftWindow.Switch(); //消す
+                    }
                 }
-                if (rightPage < rightMaxPage && !rightPageRightWindow.CurrentState())
+                if (leftPage < leftMaxPage)
                 {
-                    rightPageRightWindow.Switch();
+                    if (!leftPageRightWindow.CurrentState())
+                    {
+                        leftPageRightWindow.Switch();
+                    }
+                    if (leftPageRightButton.IsClick(mousePos) && input.IsLeftClick())
+                    {
+                        leftPage++;
+                        LeftPage(leftPage);
+                    }
                 }
                 else
                 {
-                    rightPageRightWindow.Switch();
+                    if (leftPageRightWindow.CurrentState())
+                    {
+                        leftPageRightWindow.Switch(); //消す
+                    }
+                }
+                //右側
+                if (rightPage > 1)
+                {
+                    if (!rightPageLeftWindow.CurrentState())
+                    {
+                        rightPageLeftWindow.Switch();
+                    }
+                    if (rightPageLeftButton.IsClick(mousePos) && input.IsLeftClick())
+                    {
+                        rightPage--;
+                        RightPage(rightPage);
+                    }
+                }
+                else
+                {
+                    if (rightPageLeftWindow.CurrentState())
+                    {
+                        rightPageLeftWindow.Switch(); //消す
+                    }
+                }
+                if (rightPage < rightMaxPage)
+                {
+                    if (!rightPageRightWindow.CurrentState())
+                    {
+                        rightPageRightWindow.Switch();
+                    }
+                    if (rightPageRightButton.IsClick(mousePos) && input.IsLeftClick())
+                    {
+                        rightPage++;
+                        RightPage(rightPage);
+                    }
+                }
+                else
+                {
+                    if (rightPageRightWindow.CurrentState())
+                    {
+                        rightPageRightWindow.Switch(); //消す
+                    }
                 }
 
 
@@ -510,7 +574,8 @@ namespace Team27_RougeLike.Scene
                         rightItems.Add(leftItems[i + (leftPage - 1) * 20]);
                         RemoveLeftList(i);
 
-                        leftMaxPage = (leftItems.Count) / 20 + 1;
+                        leftMaxPage = (leftItems.Count - 1) / 20 + 1;
+                        rightMaxPage = (rightItems.Count - 1) / 20 + 1;
                     }
                 }
 
@@ -526,7 +591,8 @@ namespace Team27_RougeLike.Scene
                         inventory.MoveDepositEquipToBag(inventory.DepositEquipIndex(rightItems[i + (rightPage - 1) * 20]));
                         RemoveRightList(i);
 
-                        rightMaxPage = (rightItems.Count) / 20 + 1;
+                        leftMaxPage = (leftItems.Count - 1) / 20 + 1;
+                        rightMaxPage = (rightItems.Count - 1) / 20 + 1;
                     }
                 }
             }
@@ -565,7 +631,8 @@ namespace Team27_RougeLike.Scene
                         rightItems.Add(leftItems[i + (leftPage - 1) * 20]);
                         RemoveLeftList(i);
 
-                        leftMaxPage = (leftItems.Count) / 20 + 1;
+                        leftMaxPage = (leftItems.Count - 1) / 20 + 1;
+                        rightMaxPage = (rightItems.Count - 1) / 20 + 1;
                     }
                 }
 
@@ -588,7 +655,8 @@ namespace Team27_RougeLike.Scene
                             AddLeftList(playerItems[playerItems.Count - 1]);
                         }
 
-                        rightMaxPage = (rightItems.Count) / 20 + 1;
+                        leftMaxPage = (leftItems.Count - 1) / 20 + 1;
+                        rightMaxPage = (rightItems.Count - 1) / 20 + 1;
                     }
                 }
             }
@@ -628,7 +696,7 @@ namespace Team27_RougeLike.Scene
 
             if (mode == DepotModeType.equipment)
             {
-                renderer.DrawString("倉庫(" + depotNowNum + "/" + depotMaxNum + ")", new Vector2(1080 / 2 + 64, 64),
+                renderer.DrawString("倉庫(" + depotNowNum + "/" + depotMaxNum + ")", new Vector2(windowWidth / 2 + 64, 64),
                     new Vector2(1, 1), Color.White);
             }
 
@@ -636,8 +704,20 @@ namespace Team27_RougeLike.Scene
             {
                 renderer.DrawString("バッグ(" + bagNowNum + "/" + bagMaxNum + ")", new Vector2(64,64),
                     new Vector2(1, 1), Color.White);
-                renderer.DrawString("倉庫", new Vector2(1080 / 2 + 64, 64),
+                renderer.DrawString("倉庫", new Vector2(windowWidth / 2 + 64, 64),
                     new Vector2(1, 1), Color.White);
+
+                renderer.DrawString("ページ(" + leftPage + "/" + leftMaxPage + ")", new Vector2(windowWidth / 4 - 48, windowHeight - 96), new Vector2(1, 1), Color.White);
+                renderer.DrawString("ページ(" + rightPage + "/" + rightMaxPage + ")", new Vector2(windowWidth - windowWidth / 4 - 48, windowHeight - 96), new Vector2(1, 1), Color.White);
+
+                if (leftPageLeftWindow.CurrentState())
+                    renderer.DrawString("←", leftPageLeftWindow.GetCenter(), Color.White, new Vector2(1, 1), 1.0f, true, true);
+                if (leftPageRightWindow.CurrentState())
+                    renderer.DrawString("→", leftPageRightWindow.GetCenter(), Color.White, new Vector2(1, 1), 1.0f, true, true);
+                if (rightPageLeftWindow.CurrentState())
+                    renderer.DrawString("←", rightPageLeftWindow.GetCenter(), Color.White, new Vector2(1, 1), 1.0f, true, true);
+                if (rightPageRightWindow.CurrentState())
+                    renderer.DrawString("→", rightPageRightWindow.GetCenter(), Color.White, new Vector2(1, 1), 1.0f, true, true);
 
                 renderer.DrawString("アイテム名", new Vector2(64, 64 + 32), new Vector2(1, 1), Color.White);
                 renderer.DrawString("タイプ", new Vector2(224, 64 + 32), new Vector2(1, 1), Color.White);
@@ -733,7 +813,7 @@ namespace Team27_RougeLike.Scene
 
         public bool IsEnd()
         {
-            return endFlag;
+            return endFlag && blurRate <= 0;
         }
 
         public SceneType Next()

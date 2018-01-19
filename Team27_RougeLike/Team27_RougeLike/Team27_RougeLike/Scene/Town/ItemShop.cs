@@ -162,17 +162,7 @@ namespace Team27_RougeLike.Scene
                     rightWindow.Switch();
                     isPop = true;
                 }
-                if (input.GetKeyState(Keys.D0) || backRect.Contains(mousePos) && input.IsLeftClick())
-                {
-                    mode = ShopMode.select;
-                    leftWindow.Switch();
-                    rightWindow.Switch();
-                    isPop = false;
-                }
             }
-
-            if (input.GetKeyTrigger(Keys.B))
-                endFlag = true;
 
             UpdateBlurRate();
             blurEffect.Update(blurRate);
@@ -195,8 +185,6 @@ namespace Team27_RougeLike.Scene
             messegeWindow.Draw();
             buyWindow.Draw();
             sellWindow.Draw();
-
-            renderer.DrawString("B key back to Town", Vector2.Zero, new Vector2(1, 1), Color.Black);
 
             if (mode == ShopMode.select)
             {
