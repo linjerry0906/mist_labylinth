@@ -108,7 +108,8 @@ namespace Team27_RougeLike.Scene
             #region Item初期化
             mapItemManager = new MapItemManager(gameManager, gameDevice);
             mapItemManager.Initialize();
-            int itemAmount = stageManager.CurrentFloor() / 10 + stageManager.StageSize() / 5;    //初期落ちているアイテムの数
+            int itemAmount = stageManager.CurrentFloor() / 10 + stageManager.StageSize() / 10;    //初期落ちているアイテムの数
+            itemAmount = gameDevice.Random.Next(0, itemAmount + 1);
             for (int i = 0; i < itemAmount; i++)
             {
                 Vector3 randomSpace = map.RandomSpace();
@@ -136,8 +137,8 @@ namespace Team27_RougeLike.Scene
             //characterManager.AddSpawner(new Spawner(500, characterManager.GetPlayer().Position, 1, 10, 1, characterManager));
 
             int spawnerAmount =
-                stageManager.StageSize() / 5 +              //サイズ補正
-                stageManager.CurrentFloor() / 10 +          //Floor補正
+                stageManager.StageSize() / 3 +              //サイズ補正
+                stageManager.CurrentFloor() / 5 +          //Floor補正
                 stageManager.CurrentDungeonNum() / 2;   　  //ダンジョンの難易度補正
 
             GenerateSpawner(spawnerAmount);

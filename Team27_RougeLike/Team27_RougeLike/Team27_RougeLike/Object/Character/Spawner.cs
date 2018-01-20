@@ -73,7 +73,7 @@ namespace Team27_RougeLike.Object.Character
         /// </summary>
         public void InitCurrentTime()
         {
-            currentTime = rand.Next(0, spawnrate);
+            currentTime = rand.Next(spawnrate - 600, spawnrate);
         }
 
         public void Update()
