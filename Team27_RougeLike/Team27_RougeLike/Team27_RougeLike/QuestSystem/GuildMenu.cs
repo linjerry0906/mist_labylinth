@@ -83,13 +83,15 @@ namespace Team27_RougeLike.QuestSystem
 
         private void DrawGuildRank(float constractAlpha, float currentalpha)
         {
-            string rank = gameManager.GuildInfo.Rank().ToString();
-            Vector2 rankPosition = backLayer.GetRightCenter() + new Vector2(200, -40);
-            renderer.DrawString(
-                rank, rankPosition, new Vector2(4, 4),
-                Color.White, constractAlpha * currentalpha);
+            QuestLoader.QuestRank rank = gameManager.GuildInfo.Rank();
+            Vector2 rankPosition = 
+                backLayer.GetRightCenter() + 
+                new Vector2(Def.WindowDef.WINDOW_WIDTH / 2 - 380, -220);
 
-            //Todo画像の追加
+            renderer.DrawTexture(
+                "guild_rank", rankPosition,
+                new Rectangle((int)rank * 256, 0, 256, 256),
+                constractAlpha * currentalpha);
         }
 
         public void Initialize()

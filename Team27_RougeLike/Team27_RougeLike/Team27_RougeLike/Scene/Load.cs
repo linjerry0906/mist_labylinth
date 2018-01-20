@@ -31,6 +31,7 @@ namespace Team27_RougeLike.Scene
                 {"Snow" ,path},
                 {"fog" ,path},
                 {"town" ,path},
+                {"guild_rank" ,path},
                 {"dungeon_image_tutorial" ,path},
                 {"dungeon_image2" ,path},
                 {"dungeon_image_thomb" ,path},

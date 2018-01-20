@@ -249,6 +249,10 @@ namespace Team27_RougeLike.Device
                             };
                             itemDates.Add(itemDate);
                         }
+                        else
+                        {
+                            itemDates.Add(null);
+                        }
                     }
                     else if (strings[0] == "armor")
                     {
