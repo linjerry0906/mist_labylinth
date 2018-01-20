@@ -21,7 +21,7 @@ namespace Team27_RougeLike.UI
         private Renderer renderer;
         private GameManager gameManager;
         private Window backLayer;
-        private static readonly float LIMIT_ALPHA = 0.5f;
+        private static readonly float LIMIT_ALPHA = 0.4f;
 
         private QuestStateMachine questStateMachine;
 
