@@ -228,6 +228,10 @@ namespace Team27_RougeLike.Scene
             {
                 AddLeftList(item);
             }
+            if (leftItems.Count >= leftPage * 20)
+            {
+                AddLeftList(leftItems[leftPage * 20 - 1]);
+            }
         }
 
         //消費素材をセット
