@@ -436,14 +436,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sound\BGM\Forgotten-Place.mp3">
-      <Name>Forgotten-Place</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sound\BGM\m-art_Komorebi.mp3">
       <Name>m-art_Komorebi</Name>
       <Importer>Mp3Importer</Importer>
@@ -536,6 +528,14 @@
     </Compile>
     <Compile Include="Sound\BGM\m-art_Cristea.mp3">
       <Name>m-art_Cristea</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sound\BGM\m-art_SnowyNight.mp3">
+      <Name>m-art_SnowyNight</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
