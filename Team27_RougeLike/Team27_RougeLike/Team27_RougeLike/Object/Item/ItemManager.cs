@@ -29,8 +29,8 @@ namespace Team27_RougeLike.Object.Item
 
         public void LoadAll()
         {
-            int equipmentNum = 8;
-            int consumptionNum = 14;
+            int equipmentNum = 20;//装備アイテムのIDで一番大きなID
+            int consumptionNum = 40;//消費アイテムのIDで一番大きなID
 
             int[] equipmentIDs = new int[equipmentNum];
             for(int i = 1; i <= equipmentNum; i++)
@@ -182,6 +182,13 @@ namespace Team27_RougeLike.Object.Item
                         itemPrice, itemRare, itemWeight, amount,
                         ConsumptionItem.ItemEffectType.damage,
                         new Damage(amount));
+                }
+                else if (type == "arrow")
+                {
+                    consumptions[id] = ((new ConsumptionItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, amount,
+                        ConsumptionItem.ItemEffectType.arrow,
+                        new ArrowEffect(amount))));
                 }
                 else if (type == "noEffect")
                 {
@@ -514,6 +521,13 @@ namespace Team27_RougeLike.Object.Item
                         itemPrice, itemRare, itemWeight, amount,
                         ConsumptionItem.ItemEffectType.damage,
                         new Damage(amount));
+                }
+                else if (type == "arrow")
+                {
+                    consumptions[id] = ((new ConsumptionItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, amount,
+                        ConsumptionItem.ItemEffectType.arrow,
+                        new ArrowEffect(amount))));
                 }
                 else
                 {
