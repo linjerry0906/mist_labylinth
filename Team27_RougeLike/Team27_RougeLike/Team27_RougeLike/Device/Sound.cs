@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Audio;    // WAVデータ
 using Microsoft.Xna.Framework.Media;    // MP3データ
 
 using System.Diagnostics;               // Assert
+using Team27_RougeLike.Utility;
 
 namespace Team27_RougeLike.Device
 {
@@ -28,6 +29,8 @@ namespace Team27_RougeLike.Device
 
         // 現在再生中のアセット名
         private string currentBGM;
+        //Fade用Timer
+        private Timer fadeTimer;
 
         /// <summary>
         /// コンストラクタ
@@ -50,6 +53,9 @@ namespace Team27_RougeLike.Device
 
             // 何も再生していないのでnull初期化
             currentBGM = null;
+
+            fadeTimer = new Timer(1.3f);
+            fadeTimer.Initialize();
         }
 
         /// <summary>
@@ -114,8 +120,17 @@ namespace Team27_RougeLike.Device
         /// </summary>
         public void StopBGM()
         {
-            MediaPlayer.Stop();
-            currentBGM = null;
+            fadeTimer.Update();
+            if (fadeTimer.IsTime())
+            {
+                MediaPlayer.Stop();
+                currentBGM = null;
+                fadeTimer.Initialize();
+            }
+            else
+            {
+                MediaPlayer.Volume = fadeTimer.Rate() * 0.9f;
+            }
         }
 
         /// <summary>
@@ -125,6 +140,12 @@ namespace Team27_RougeLike.Device
         public void PlayBGM(string name)
         {
             Debug.Assert(bgms.ContainsKey(name), ErrorMessage(name));
+
+            if (MediaPlayer.Volume < 0.9f)
+            {
+                MediaPlayer.Volume += 0.003f;
+            }
+
             // 同じ曲か？
             if (currentBGM == name)
             {
@@ -137,10 +158,10 @@ namespace Team27_RougeLike.Device
             {
                 // 再生中の場合、停止処理をする
                 StopBGM();
+                return;
             }
 
-            // ボリューム設定（BGMはSEに比べて音量半分が普通）
-            MediaPlayer.Volume = 0.5f;
+            MediaPlayer.Volume = 0.0f;
 
             // 現在のBGM名を設定
             currentBGM = name;
