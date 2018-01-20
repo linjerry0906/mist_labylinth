@@ -153,7 +153,7 @@ namespace Team27_RougeLike.Map
         public void LoadBossBGM(int dungeonNum, int floor, Sound sound)
         {
             FileStream fs = new FileStream(@"Content/" + "StageCSV/Boss_bgm.csv", FileMode.Open);      //設定ファイルを開く
-            StreamReader sr = new StreamReader(fs);
+            StreamReader sr = new StreamReader(fs, Encoding.GetEncoding(932));
 
             bossBgm = "Battle-ricercare";
 
