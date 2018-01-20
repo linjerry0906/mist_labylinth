@@ -5,5 +5,5 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
 4,test,200,1,1,0.3,Ranged,9,20,5,うごめく大液体,White
 5,Snow,20,5,1,0.4,Totem,5,40,7,雪の精,White
 6,test,50,7,2,0.2,Fool,10,20,10,異変の大液体,Green
-7,bat,40,6,2,0.4,Melee,4,25,6,洞窟コウモリ,Blue
-8,bat,100,10,5,0.3,Fool,10,30,15,吸血コウモリ,Red
+7,bat,40,14,2,0.4,Melee,3,30,7,洞窟コウモリ,Blue
+8,bat,100,20,5,0.3,Fool,15,35,15,吸血コウモリ,Red

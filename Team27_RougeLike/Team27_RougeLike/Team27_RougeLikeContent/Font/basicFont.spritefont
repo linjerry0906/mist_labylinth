@@ -320,6 +320,11 @@ with.
         <Start>銀</Start>
         <End>銀</End>
       </CharacterRegion>
+      <!-- ぎょ -->
+      <CharacterRegion>
+        <Start>業</Start>
+        <End>業</End>
+      </CharacterRegion>
 
       <!-- がく -->
       <CharacterRegion>
@@ -331,6 +336,10 @@ with.
       <CharacterRegion>
         <Start>来</Start>
         <End>来</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>掘</Start>
+        <End>掘</End>
       </CharacterRegion>
       <!-- ぐ -->
       <CharacterRegion>
@@ -446,10 +455,18 @@ with.
         <Start>探</Start>
         <End>探</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>作</Start>
+        <End>作</End>
+      </CharacterRegion>
       <!-- さい -->
       <CharacterRegion>
         <Start>最</Start>
         <End>最</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>採</Start>
+        <End>採</End>
       </CharacterRegion>
       <!-- ざ -->
       <!-- ざい -->
@@ -511,6 +528,10 @@ with.
         <Start>酬</Start>
         <End>酬</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>習</Start>
+        <End>習</End>
+      </CharacterRegion>
       <!--　じゅう -->
       
       <CharacterRegion>
@@ -526,6 +547,10 @@ with.
       <CharacterRegion>
         <Start>殖</Start>
         <End>殖</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>職</Start>
+        <End>職</End>
       </CharacterRegion>
       
       <!-- しょう -->
@@ -1118,6 +1143,11 @@ with.
         <Start>錬</Start>
         <End>錬</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>練</Start>
+        <End>練</End>
+      </CharacterRegion>
+
 
       <!-- ろ -->
       <CharacterRegion>
@@ -1125,6 +1155,10 @@ with.
         <End>廊</End>
       </CharacterRegion>
       <!-- わ -->
+      <CharacterRegion>
+        <Start>若</Start>
+        <End>若</End>
+      </CharacterRegion>
       <!-- を -->
       <!-- ん -->
 

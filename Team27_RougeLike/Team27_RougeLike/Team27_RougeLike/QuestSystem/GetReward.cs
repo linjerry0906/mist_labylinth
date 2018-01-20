@@ -183,7 +183,7 @@ namespace Team27_RougeLike.QuestSystem
             {
                 for (int i = 0; i < currentQuestInfo.AwardItem().Length; i++)
                 {
-                    Item item = itemManager.GetConsuptionItem(currentQuestInfo.AwardItem()[i]);
+                    Item item = itemManager.GetConsumption(currentQuestInfo.AwardItem()[i]);
                     renderer.DrawString(
                         item.GetItemName(), position + (8 + i * 0.5f) * line + 2 * offsetX, fontSize,
                         Color.White, constractAlpha * currentAlpha);

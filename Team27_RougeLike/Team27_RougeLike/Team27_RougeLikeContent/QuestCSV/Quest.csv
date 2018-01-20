@@ -10,4 +10,9 @@ Start,Type,クエスト名,説明,難易度（0－6）(F~S),報酬金,報酬Item1,報酬Item2,報酬It
 9,Collection,大コウモリの牙が欲しい！,そうしょくにつかいたい！nlnlむらのこども,0,0,19,null,null,0,0,16,2,null,null,null,null,3
 10,Collection,清らかな水を探してくれないか？,演習場3階に水を浄化するモンスターがいるそうnlのう。もしそやつからキレイな水をもらったら、nlわしに譲ってくれないか？nlnl村人より,0,100,null,null,null,0,3,20,1,null,null,null,null,5
 11,Collection,あのぬるぬるなやつ、知ってるか？,演習場のぬるぬるなやつを片付けくれないか。証nl明としてぬるぬる液体を10個持ってこい。nlnl新米冒険者より,0,80,null,null,null,0,0,17,10,null,null,null,null,3
+12,Battle,モゴルク鉱山のコウモリ・1,鉱山のほうに洞窟コウモリが大量発生した！採掘nl作業ができなくなった。だれか退治してくれ。nlnl鉱業ギルドより,1,300,26,null,null,0,3,7,20,null,null,null,null,15
+13,Collection,使えない鉄鉱石はないか？,精錬を練習したいので、ただで精錬してあげるnlnl若手鍛冶職人より,1,0,27,null,null,0,3,26,3,null,null,null,null,10
+14,Collection,さらに毒薬,実験用で毒薬が必要だ。だれか調達してきてくれ。nlnl依頼者不明,1,200,null,null,null,0,3,18,3,null,null,null,null,10
+15,Collection,その石、ぼくとこうかんしないか,たくさんの石をあつめています！nlnlむらのこども,0,0,19,null,null,1,2,25,3,null,null,null,null,5
+16,Battle,モゴルク鉱山のコウモリ・2,モゴルク鉱山3階の吸血コウモリをなんとかしてくnlれないか。nlnl鉱業ギルドより,1,0,11,27,27,1,4,8,1,null,null,null,null,20
 End,,,,,,,,,,,,,,,,,
