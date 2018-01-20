@@ -196,7 +196,10 @@ with.
         <Start>片</Start>
         <End>片</End>
       </CharacterRegion>
-
+      <CharacterRegion>
+        <Start>皮</Start>
+        <End>皮</End>
+      </CharacterRegion>
 
       <CharacterRegion>
         <Start>何</Start>
@@ -295,6 +298,10 @@ with.
         <Start>宮</Start>
         <End>宮</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>吸</Start>
+        <End>吸</End>
+      </CharacterRegion>
 
       <!-- きょう -->
       <CharacterRegion>
@@ -372,6 +379,11 @@ with.
         <Start>限</Start>
         <End>限</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>原</Start>
+        <End>原</End>
+      </CharacterRegion>
+
 
       <!-- げき -->
       <CharacterRegion>
@@ -580,7 +592,12 @@ with.
         <Start>生</Start>
         <End>生</End>
       </CharacterRegion>
-      
+      <CharacterRegion>
+        <Start>精</Start>
+        <End>精</End>
+      </CharacterRegion>
+
+
       <!-- せつ -->
       <CharacterRegion>
         <Start>説</Start>
@@ -697,6 +714,10 @@ with.
         <Start>地</Start>
         <End>地</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>血</Start>
+        <End>血</End>
+      </CharacterRegion>
 
       <!--ちゅう-->
       <CharacterRegion>
@@ -721,6 +742,10 @@ with.
       <CharacterRegion>
         <Start>作</Start>
         <End>作</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>爪</Start>
+        <End>爪</End>
       </CharacterRegion>
 
       <!-- つう -->
@@ -1089,6 +1114,11 @@ with.
       </CharacterRegion>
       <!-- る -->
       <!-- れ -->
+      <CharacterRegion>
+        <Start>錬</Start>
+        <End>錬</End>
+      </CharacterRegion>
+
       <!-- ろ -->
       <CharacterRegion>
         <Start>廊</Start>
