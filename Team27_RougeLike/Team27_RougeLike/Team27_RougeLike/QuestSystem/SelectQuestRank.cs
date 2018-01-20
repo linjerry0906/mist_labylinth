@@ -55,6 +55,7 @@ namespace Team27_RougeLike.QuestSystem
             backLayer.Draw(currentalpha * 1.2f);
 
             DrawButton(constractAlpha, currentalpha);
+            DrawGuildRank(constractAlpha, currentalpha);
         }
 
         /// <summary>
@@ -83,6 +84,32 @@ namespace Team27_RougeLike.QuestSystem
                     color, new Vector2(1.1f, 1.1f), constractAlpha * currentalpha,
                     true, true);
             }
+        }
+
+        private void DrawGuildRank(float constractAlpha, float currentalpha)
+        {
+            QuestLoader.QuestRank rank = gameManager.GuildInfo.Rank();
+            Vector2 rankPosition =
+                backLayer.GetRightCenter() +
+                new Vector2(Def.WindowDef.WINDOW_WIDTH / 2 - 380, -220);
+
+            renderer.DrawTexture(
+                "guild_rank", rankPosition,
+                new Rectangle((int)rank * 256, 0, 256, 256),
+                constractAlpha * currentalpha);
+
+            Vector2 gagePos = rankPosition + new Vector2(-128, 300);
+            float expRate = gameManager.GuildInfo.Rate();
+            renderer.DrawTexture(
+                "guild_gage_back", gagePos,
+                constractAlpha * currentalpha);
+            renderer.DrawTexture(
+                "guild_gage_middle", gagePos,
+                new Rectangle(0, 0, (int)(512 * expRate), 64),
+                constractAlpha * currentalpha);
+            renderer.DrawTexture(
+                "guild_gage_front", gagePos,
+                constractAlpha * currentalpha);
         }
 
         public void Initialize()

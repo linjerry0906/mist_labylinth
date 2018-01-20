@@ -92,6 +92,19 @@ namespace Team27_RougeLike.QuestSystem
                 "guild_rank", rankPosition,
                 new Rectangle((int)rank * 256, 0, 256, 256),
                 constractAlpha * currentalpha);
+
+            Vector2 gagePos = rankPosition + new Vector2(-128, 300);
+            float expRate = gameManager.GuildInfo.Rate();
+            renderer.DrawTexture(
+                "guild_gage_back", gagePos,
+                constractAlpha * currentalpha);
+            renderer.DrawTexture(
+                "guild_gage_middle", gagePos,
+                new Rectangle(0, 0, (int)(512 * expRate), 64),
+                constractAlpha * currentalpha);
+            renderer.DrawTexture(
+                "guild_gage_front", gagePos,
+                constractAlpha * currentalpha);
         }
 
         public void Initialize()
