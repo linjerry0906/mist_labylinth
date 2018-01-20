@@ -33,8 +33,10 @@ namespace Team27_RougeLike.Scene
         private static readonly float FOG_RANGE = 200;
         private float farFog;
 
-        private Vector3 constractColor;
-        bool isParicle;
+        private Vector3 constractColor; //対比色
+        bool isParicle;                 //パーティクル使用するか
+
+        private string bgmName;         //BGM名
 
         public StageManager(GameDevice gameDevice)
         {
@@ -65,7 +67,7 @@ namespace Team27_RougeLike.Scene
         /// <param name="fogColor">霧の色</param>
         public void Initialize(int dungeonNum, string dungeonName, 
             int limitSecond, int floor, int totalFloor, int bossRange, int stageSize, int expandRate,
-            Vector3 fogColor, Vector3 constractColor, bool isParicle)
+            Vector3 fogColor, Vector3 constractColor, bool isParicle, string bgmName)
         {
             this.dungeonName = dungeonName;
             this.dungeonNum = dungeonNum;
@@ -78,6 +80,7 @@ namespace Team27_RougeLike.Scene
             fogManager.SetColor(fogColor);
             this.isParicle = isParicle;
             this.constractColor = constractColor;
+            this.bgmName = bgmName;
         }
 
         /// <summary>
@@ -85,6 +88,7 @@ namespace Team27_RougeLike.Scene
         /// </summary>
         public void Update()
         {
+            gameDevice.Sound.PlayBGM(bgmName);
             limitTime.Update();
 
             //Fog
@@ -226,6 +230,31 @@ namespace Team27_RougeLike.Scene
         public bool UseParticle()
         {
             return isParicle;
+        }
+
+        /// <summary>
+        /// BGMのアセット名を切り替わる
+        /// </summary>
+        /// <param name="bgmName">アセット名</param>
+        public void SetBGM(string bgmName)
+        {
+            this.bgmName = bgmName;
+        }
+
+        /// <summary>
+        /// BossのBGMを解放
+        /// </summary>
+        public void ReleaseBossBGM()
+        {
+            gameDevice.Sound.UnLoadBGM(bgmName);
+        }
+
+        /// <summary>
+        /// BossBGMをプレイする
+        /// </summary>
+        public void PlayBossBGM()
+        {
+            gameDevice.Sound.PlayBGM(bgmName);
         }
     }
 }

@@ -89,6 +89,15 @@ namespace Team27_RougeLike.Device
         }
 
         /// <summary>
+        /// 特定のBGMを解放
+        /// </summary>
+        /// <param name="name">アセット名</param>
+        public void UnLoadBGM(string name)
+        {
+            bgms.Remove(name);
+        }
+
+        /// <summary>
         /// BGMが停止中か？
         /// </summary>
         /// <returns>停止していたらtrue</returns>
@@ -129,7 +138,7 @@ namespace Team27_RougeLike.Device
             }
             else
             {
-                MediaPlayer.Volume = fadeTimer.Rate() * 0.9f;
+                MediaPlayer.Volume = fadeTimer.Rate() * 0.7f;
             }
         }
 
@@ -141,7 +150,7 @@ namespace Team27_RougeLike.Device
         {
             Debug.Assert(bgms.ContainsKey(name), ErrorMessage(name));
 
-            if (MediaPlayer.Volume < 0.9f)
+            if (MediaPlayer.Volume < 0.7f)
             {
                 MediaPlayer.Volume += 0.003f;
             }

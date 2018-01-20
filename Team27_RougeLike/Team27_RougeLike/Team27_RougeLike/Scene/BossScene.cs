@@ -177,10 +177,14 @@ namespace Team27_RougeLike.Scene
             gameManager.EnemySetting.Clear();
 
             ui = null;
+
+            stageManager.ReleaseBossBGM();
         }
 
         public void Update(GameTime gameTime)
         {
+            stageManager.PlayBossBGM();
+
             ui.Update();
             if (ui.IsPop())                   //メッセージ表示中は以下Updateしない
                 return;

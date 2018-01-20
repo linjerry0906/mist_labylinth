@@ -344,7 +344,8 @@ namespace Team27_RougeLike.UI
                 nextStage.expandRate,
                 nextStage.fogColor,
                 nextStage.constractColor,
-                nextStage.useParticle);
+                nextStage.useParticle,
+                nextStage.bgmName);
 
             //BlockStyle設定
             gameManager.ClearBlockStyle();

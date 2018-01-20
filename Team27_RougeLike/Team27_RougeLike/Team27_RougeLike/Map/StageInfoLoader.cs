@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Team27_RougeLike.Object.Item;
+using Team27_RougeLike.Device;
 
 namespace Team27_RougeLike.Map
 {
@@ -16,6 +17,8 @@ namespace Team27_RougeLike.Map
     {
         private bool isItemLoad;            //Item読み込んだフラグ
         private bool isMonsterLoad;         //敵の配置とスポナーを読み込んだフラグ
+        private bool isBossBGMLoad;         //BossBgmロードしたか
+        private string bossBgm;
 
         public StageItemEnemyLoader()
         {
@@ -28,6 +31,7 @@ namespace Team27_RougeLike.Map
         {
             isItemLoad = false;
             isMonsterLoad = false;
+            isBossBGMLoad = false;
         }
 
         /// <summary>
@@ -138,6 +142,64 @@ namespace Team27_RougeLike.Map
         public bool IsEnemyLoad()
         {
             return isMonsterLoad;
+        }
+
+        /// <summary>
+        /// ボスBGMをロードする
+        /// </summary>
+        /// <param name="dungeonNum">ダンジョン番号</param>
+        /// <param name="floor">階層</param>
+        /// <param name="sound">サウンドクラス</param>
+        public void LoadBossBGM(int dungeonNum, int floor, Sound sound)
+        {
+            FileStream fs = new FileStream(@"Content/" + "StageCSV/Boss_bgm.csv", FileMode.Open);      //設定ファイルを開く
+            StreamReader sr = new StreamReader(fs);
+
+            bossBgm = "Battle-ricercare";
+
+            while (!sr.EndOfStream)                     //最後まで読み込む
+            {
+                string line = sr.ReadLine();            //一行つず読み込む
+                string[] data = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (data[0] == "Start")                 //最初の欄がStartの場合は定義用、Skipする
+                    continue;
+                if (data[0] == "End")                   //End以降は資料として使われないので、脱出
+                    break;
+
+                int dataDungeon = int.Parse(data[0]);
+                int dataFloor = int.Parse(data[1]);
+                if (dataDungeon != dungeonNum)                 //指定のダンジョン以外は読み込まない
+                    continue;
+                if (dataFloor != floor)                        //指定の階層以外は読み込まない
+                    continue;
+
+                bossBgm = data[2];
+                break;
+            }
+            sr.Close();                                        //読み終わったらファイルをClose
+            fs.Close();
+
+            sound.LoadBGM(bossBgm, "./Sound/BGM/");
+
+            isBossBGMLoad = true;
+        }
+
+        /// <summary>
+        /// BGMロードしたか
+        /// </summary>
+        /// <returns></returns>
+        public bool IsBossBGMLoad()
+        {
+            return isBossBGMLoad;
+        }
+
+        /// <summary>
+        /// BGM名
+        /// </summary>
+        /// <returns></returns>
+        public string BGMName()
+        {
+            return bossBgm;
         }
     }
 }

@@ -91,7 +91,16 @@ namespace Team27_RougeLike.Scene
                     stageManager.CurrentFloor());
                 return;
             }
+            if (!stageInfoLoader.IsBossBGMLoad())    //BGMを読み込む
+            {
+                stageInfoLoader.LoadBossBGM(
+                    gameManager.StageNum,
+                    stageManager.CurrentFloor(),
+                    gameDevice.Sound);
+                return;
+            }
 
+            stageManager.SetBGM(stageInfoLoader.BGMName());             //BGMを設定
 
             gameManager.GenerateMapInstance(mapGenerator.MapChip);      //実体を生成し、シーンを終わらせる
             endFlag = true;

@@ -1,9 +1,9 @@
 ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
-1,test,10,7,1,0.4,Fool,3,60,3,‚¤‚²‚ß‚­‰t‘Ì,White
+1,test,10,7,1,0.4,Fool,4,60,3,‚¤‚²‚ß‚­‰t‘Ì,White
 2,bat,20,3,1,0.4,Melee,6,30,5,‘å‚±‚¤‚à‚è,White
-3,test,10,1,1,0.3,Ranged,2,90,5,‚¤‚²‚ß‚­¬‰t‘Ì,White
+3,test,10,1,1,0.3,Ranged,3,90,5,‚¤‚²‚ß‚­¬‰t‘Ì,White
 4,test,200,1,1,0.3,Ranged,9,20,5,‚¤‚²‚ß‚­‘å‰t‘Ì,White
 5,Snow,20,5,1,0.4,Totem,5,40,7,á‚Ì¸,White
-6,test,50,7,2,0.2,Fool,10,20,10,ˆÙ•Ï‚Ì‘å‰t‘Ì,Green
+6,test,50,7,2,0.2,Fool,12,20,10,ˆÙ•Ï‚Ì‘å‰t‘Ì,Green
 7,bat,40,14,2,0.4,Melee,3,30,7,“´ŒAƒRƒEƒ‚ƒŠ,Blue
 8,bat,100,20,5,0.3,Fool,15,35,15,‹zŒŒƒRƒEƒ‚ƒŠ,Red

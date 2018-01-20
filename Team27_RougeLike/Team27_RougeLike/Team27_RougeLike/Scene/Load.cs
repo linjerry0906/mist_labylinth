@@ -67,10 +67,16 @@ namespace Team27_RougeLike.Scene
 
         private string[,] BGMList()
         {
-            string path = "./Sound/";
+            string path = "./Sound/BGM/";
             string[,] list = new string[,]
             {
-
+                {"Remotest-Liblary_SE", path },         //Title
+                {"Voyage_SE", path },                   //村
+                {"m-art_The11thSephirah", path },       //演習場
+                {"m-art_Candle", path },                //鉱山
+                {"Forgotten-Place", path },             //宮殿
+                {"m-art_Komorebi", path },              //樹海
+                {"n14", path },                         //回廊
             };
             return list;
         }

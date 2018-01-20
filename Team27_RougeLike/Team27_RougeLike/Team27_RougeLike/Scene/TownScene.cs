@@ -185,8 +185,10 @@ namespace Team27_RougeLike.Scene
 
         public void Update(GameTime gameTime)
         {
+            gameDevice.Sound.PlayBGM("Voyage_SE");
+
             UpdateEffect();
-            if (!effectTimer.IsTime())      //Effect中は他の操作できな
+            if (!effectTimer.IsTime())      //Effect中は他の操作できない
                 return;
 
             CheckButton();
