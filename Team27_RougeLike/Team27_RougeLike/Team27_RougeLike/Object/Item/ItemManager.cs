@@ -68,6 +68,7 @@ namespace Team27_RougeLike.Object.Item
 
                 string itemName = items[1];
                 string itemExplanation = items[2];
+                itemExplanation = itemExplanation.Replace("nl", "\n");
                 int itemPrice = int.Parse(items[3]);
                 int itemRare = int.Parse(items[4]);
                 float itemWeight = float.Parse(items[5]);
@@ -160,6 +161,7 @@ namespace Team27_RougeLike.Object.Item
 
                 string itemName = items[1];
                 string itemExplanation = items[2];
+                itemExplanation = itemExplanation.Replace("nl", "\n");
                 int itemPrice = int.Parse(items[3]);
                 int itemRare = int.Parse(items[4]);
                 float itemWeight = float.Parse(items[5]);
@@ -234,6 +236,7 @@ namespace Team27_RougeLike.Object.Item
 
                         string itemName = items[1];
                         string itemExplanation = items[2];
+                        itemExplanation = itemExplanation.Replace("nl", "\n");
                         int itemPrice = int.Parse(items[3]);
                         int itemRare = int.Parse(items[4]);
                         float itemWeight = float.Parse(items[5]);
@@ -323,6 +326,7 @@ namespace Team27_RougeLike.Object.Item
 
                         string itemName = items[1];
                         string itemExplanation = items[2];
+                        itemExplanation = itemExplanation.Replace("nl", "\n");
                         int itemPrice = int.Parse(items[3]);
                         int itemRare = int.Parse(items[4]);
                         float itemWeight = float.Parse(items[5]);
@@ -382,6 +386,7 @@ namespace Team27_RougeLike.Object.Item
 
                 string itemName = items[1];
                 string itemExplanation = items[2];
+                itemExplanation = itemExplanation.Replace("nl", "\n");
                 int itemPrice = int.Parse(items[3]);
                 int itemRare = int.Parse(items[4]);
                 float itemWeight = float.Parse(items[5]);
@@ -478,6 +483,7 @@ namespace Team27_RougeLike.Object.Item
 
                 string itemName = items[1];
                 string itemExplanation = items[2];
+                itemExplanation = itemExplanation.Replace("nl", "\n");
                 int itemPrice = int.Parse(items[3]);
                 int itemRare = int.Parse(items[4]);
                 float itemWeight = float.Parse(items[5]);
