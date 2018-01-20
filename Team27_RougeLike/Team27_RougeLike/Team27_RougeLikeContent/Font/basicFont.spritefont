@@ -710,6 +710,10 @@ with.
         <Start>付</Start>
         <End>付</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>作</Start>
+        <End>作</End>
+      </CharacterRegion>
 
       <!-- つう -->
       <CharacterRegion>

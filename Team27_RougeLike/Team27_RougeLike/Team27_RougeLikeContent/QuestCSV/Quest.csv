@@ -6,8 +6,8 @@ Start,Type,クエスト名,説明,難易度（0－6）(F~S),報酬金,報酬Item1,報酬Item2,報酬It
 5,Battle,うごめく小液体を倒そう,演習場の小液体を20体倒してくれ。,0,200,1,null,null,0,0,3,20,null,null,null,null,5
 6,Battle,総合戦闘演習・1,演習場で小液体15体、大こうもり15体を討伐。nlnlギルトより,0,300,1,1,null,0,1,2,15,3,15,null,null,8
 7,Battle,総合戦闘演習・2,演習場の最後のボス「異変の大液体」の討伐。nlnlギルトより,0,250,2,null,null,0,2,6,1,null,null,null,null,10
-8,Battle,うごめく液体を倒そう,演習場二階で稀に出るうごめく液体がいるらしい。nl10体を討伐してくれ。nlnl新米冒険者より,0,200,null,null,null,1,2,1,10,null,null,null,null,8
+8,Battle,うごめく液体を倒そう,演習場2階で稀に出るうごめく液体がいるらしい。nl10体を討伐してくれ。nlnl新米冒険者より,0,200,null,null,null,1,2,1,10,null,null,null,null,8
 9,Collection,大コウモリの牙が欲しい！,そうしょくにつかいたい！nlnlむらのこども,0,0,19,null,null,0,0,16,2,null,null,null,null,3
-10,Collection,清らかな水を探してくれないか？,演習場三階に水を浄化するモンスターがいるそうnlのう。もしそやつからキレイな水をもらったら、nlわしに譲ってくれないか？nlnl村人より,0,100,null,null,null,0,3,20,1,null,null,null,null,5
+10,Collection,清らかな水を探してくれないか？,演習場3階に水を浄化するモンスターがいるそうnlのう。もしそやつからキレイな水をもらったら、nlわしに譲ってくれないか？nlnl村人より,0,100,null,null,null,0,3,20,1,null,null,null,null,5
 11,Collection,あのぬるぬるなやつ、知ってるか？,演習場のぬるぬるなやつを片付けくれないか。証nl明としてぬるぬる液体を10個持ってこい。nlnl新米冒険者より,0,80,null,null,null,0,0,17,10,null,null,null,null,3
 End,,,,,,,,,,,,,,,,,
