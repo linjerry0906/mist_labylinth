@@ -23,6 +23,7 @@ namespace Team27_RougeLike.Device
         private ProtectionItem[] armor;                 //装備中の防具
         private WeaponItem leftHand;                    //左手装備
         private WeaponItem rightHand;                   //右手装備
+        private ConsumptionItem arrow;                  //矢
         private List<Item> depotEquipment;              //倉庫の装備アイテム
         private Dictionary<int, int> depotConsumption;  //倉庫の消費アイテム
         private List<Quest> quest;                      //受けているクエスト
@@ -45,6 +46,7 @@ namespace Team27_RougeLike.Device
             armor = playerInventory.CurrentArmor();
             leftHand = playerInventory.LeftHand();
             rightHand = playerInventory.RightHand();
+            //arrowをInventoruから受け取る処理
             quest = new List<Quest>();
             questLoader = gameManager.QuestManager;
             guildRank = gameManager.GuildInfo;
@@ -62,6 +64,7 @@ namespace Team27_RougeLike.Device
             armor = playerInventory.CurrentArmor();
             leftHand = playerInventory.LeftHand();
             rightHand = playerInventory.RightHand();
+            //arrowをInventoruから受け取る処理
             depotEquipment = playerInventory.EquipDepository();
             depotConsumption = playerInventory.DepositoryItem();
             questLoader = gameManager.QuestManager;
@@ -91,7 +94,8 @@ namespace Team27_RougeLike.Device
             else if (item is ConsumptionItem)
             {
                 return "Consumption" + "," +
-                    item.GetItemID();
+                    item.GetItemID() + "," +
+                    ((ConsumptionItem)item).GetStack();
             }
             else
             {
@@ -118,6 +122,7 @@ namespace Team27_RougeLike.Device
             sw.WriteLine("money," + money);
             sw.WriteLine("leftHand," + ItemSaveString(leftHand));
             sw.WriteLine("rightHand," + ItemSaveString(rightHand));
+            sw.WriteLine("arrow," + ItemSaveString(arrow));
             foreach (Item item in armor)
             {
                 sw.WriteLine("armor," + ItemSaveString(item));
@@ -232,6 +237,19 @@ namespace Team27_RougeLike.Device
                             itemDates.Add(null);
                         }
                     }
+                    else if (strings[0] == "arrow")
+                    {
+                        if (strings[1] != "no")
+                        {
+                            string[] itemDate = new string[]
+                            {
+                            strings[1],
+                            strings[2],
+                            strings[3]
+                            };
+                            itemDates.Add(itemDate);
+                        }
+                    }
                     else if (strings[0] == "armor")
                     {
                         if (strings[1] != "no")
@@ -320,15 +338,16 @@ namespace Team27_RougeLike.Device
                 List<Item> items = itemManager.LoadSaveItem(itemDates);
                 leftHand = (WeaponItem)items[0];
                 rightHand = (WeaponItem)items[1];
-                armor[0] = (ProtectionItem)items[2];
-                armor[1] = (ProtectionItem)items[3];
-                armor[2] = (ProtectionItem)items[4];
-                armor[3] = (ProtectionItem)items[5];
-                for (int i = 6; i < 6 + bagNum; i++)
+                arrow = (ConsumptionItem)items[2];
+                armor[0] = (ProtectionItem)items[3];
+                armor[1] = (ProtectionItem)items[4];
+                armor[2] = (ProtectionItem)items[5];
+                armor[3] = (ProtectionItem)items[6];
+                for (int i = 7; i < 7 + bagNum; i++)
                 {
                     bag.Add(items[i]);
                 }
-                for (int i = 6 + bagNum; i < 6 + bagNum + depotNum; i++)
+                for (int i = 7 + bagNum; i < 7 + bagNum + depotNum; i++)
                 {
                     depotEquipment.Add(items[i]);
                 }

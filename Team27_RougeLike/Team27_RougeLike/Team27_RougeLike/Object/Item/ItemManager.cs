@@ -309,6 +309,7 @@ namespace Team27_RougeLike.Object.Item
                 }
                 else if (kind == "Consumption")
                 {
+                    int stack = int.Parse(saveItem[2]);
 
                     //消費アイテム読み込み
                     FileStream datefs = new FileStream(consuptionFilename, FileMode.Open);
@@ -347,6 +348,15 @@ namespace Team27_RougeLike.Object.Item
                                 itemPrice, itemRare, itemWeight, amount,
                                 ConsumptionItem.ItemEffectType.damage,
                                 new Damage(amount)));
+                        }
+                        else if (type == "arrow")
+                        {
+                            ConsumptionItem arrow = ((new ConsumptionItem(id, itemName, itemExplanation,
+                                itemPrice, itemRare, itemWeight, amount,
+                                ConsumptionItem.ItemEffectType.arrow,
+                                new ArrowEffect(amount))));
+                            arrow.SetStack(stack);
+                            save.Add(arrow);
                         }
                         else if (type == "noEffect")
                         {
