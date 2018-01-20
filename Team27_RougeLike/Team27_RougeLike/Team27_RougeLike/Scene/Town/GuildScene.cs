@@ -47,6 +47,9 @@ namespace Team27_RougeLike.Scene
         {
             blurEffect.WriteRenderTarget(renderer.FogManager.CurrentColor());
             townScene.Draw();                       //背景は前のシーンを描画
+            renderer.Begin();
+            guildUI.DrawBackground();
+            renderer.End();
             blurEffect.ReleaseRenderTarget();
             blurEffect.Draw(renderer);
 

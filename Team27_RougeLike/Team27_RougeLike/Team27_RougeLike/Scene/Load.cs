@@ -32,6 +32,7 @@ namespace Team27_RougeLike.Scene
                 {"fog" ,path},
                 {"town" ,path},
                 {"guild_rank" ,path},
+                {"guild_background" ,path},
                 {"guild_gage_back" ,path},
                 {"guild_gage_middle" ,path},
                 {"guild_gage_front" ,path},

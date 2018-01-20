@@ -68,6 +68,15 @@ namespace Team27_RougeLike.UI
             questStateMachine.Draw(constractAlpha, backLayer.CurrentAlpha());
         }
 
+        public void DrawBackground()
+        {
+            float alpha = 1.0f / LIMIT_ALPHA * backLayer.CurrentAlpha();
+
+            renderer.DrawTexture(
+                "guild_background",
+                Vector2.Zero, alpha);
+        }
+
         public bool IsEnd()
         {
             return backLayer.IsEnd();
