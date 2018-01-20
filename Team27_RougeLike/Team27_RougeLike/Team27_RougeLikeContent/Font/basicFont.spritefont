@@ -290,6 +290,11 @@ with.
         <Start>却</Start>
         <End>却</End>
       </CharacterRegion>
+      <!-- きゅ -->
+      <CharacterRegion>
+        <Start>宮</Start>
+        <End>宮</End>
+      </CharacterRegion>
 
       <!-- きょう -->
       <CharacterRegion>
@@ -385,7 +390,10 @@ with.
         <Start>告</Start>
         <End>告</End>
       </CharacterRegion>
-      
+      <CharacterRegion>
+        <Start>鉱</Start>
+        <End>鉱</End>
+      </CharacterRegion>
       <CharacterRegion>
         <Start>籠</Start>
         <End>籠</End>
@@ -741,6 +749,10 @@ with.
         <Start>出</Start>
         <End>出</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>殿</Start>
+        <End>殿</End>
+      </CharacterRegion>
 
       <!-- てつ -->
       <CharacterRegion>
@@ -1015,6 +1027,10 @@ with.
       <CharacterRegion>
         <Start>屋</Start>
         <End>屋</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>山</Start>
+        <End>山</End>
       </CharacterRegion>
       <!-- び -->
       <CharacterRegion>
