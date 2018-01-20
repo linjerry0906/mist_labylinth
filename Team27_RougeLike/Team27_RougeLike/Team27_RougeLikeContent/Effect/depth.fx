@@ -49,6 +49,16 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 	float4 Color;
 
 	Color = tex2D(MainSampler, input.TexUV0);
+	float gray = Color.r * 0.2125 + Color.g * 0.7154 + Color.b * 0.0721;
+	Color *= lerp(Color * 0.2f, Color * 1.1f, gray);
+	/*if (gray > 0.5f)
+	{
+		Color *= 1.2f;
+	}
+	else
+	{
+		Color *= 0.5f;
+	}*/
 
 	Color += tex2D(MainSampler, input.TexUV0 + float2(-0.001f, -0.001f));
 	Color += tex2D(MainSampler, input.TexUV0 + float2(-0.002f, 0.0f));
@@ -59,8 +69,9 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 	Color += tex2D(MainSampler, input.TexUV0 + float2(0.001f, -0.001f));
 	Color += tex2D(MainSampler, input.TexUV0 + float2(0.002f, 0.0f));
 	Color += tex2D(MainSampler, input.TexUV0 + float2(0.001f, 0.001f));
+	Color /= 11.0f;
 
-    return Color / 10.0f;
+    return Color;
 }
 
 technique Technique1

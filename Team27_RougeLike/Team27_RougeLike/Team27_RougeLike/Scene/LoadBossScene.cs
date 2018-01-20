@@ -19,7 +19,7 @@ namespace Team27_RougeLike.Scene
         private Renderer renderer;
         private GameManager gameManager;        //ゲーム情報管理者
         private StageManager stageManager;      //ステージ管理者
-        private StageInfoLoader stageInfoLoader;        //Stage情報をロードするクラス
+        private StageItemEnemyLoader stageInfoLoader;        //Stage情報をロードするクラス
 
         private bool endFlag;                   //シーンの終わるフラグ
 
@@ -47,7 +47,7 @@ namespace Team27_RougeLike.Scene
             endFlag = false;
 
             mapGenerator = new MapGenerator(stageManager.StageSize(), gameDevice);
-            stageInfoLoader = new StageInfoLoader();
+            stageInfoLoader = new StageItemEnemyLoader();
             stageInfoLoader.Initialize();
         }
 

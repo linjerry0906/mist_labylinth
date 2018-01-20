@@ -33,6 +33,9 @@ namespace Team27_RougeLike.Scene
         private static readonly float FOG_RANGE = 200;
         private float farFog;
 
+        private Vector3 constractColor;
+        bool isParicle;
+
         public StageManager(GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
@@ -62,7 +65,7 @@ namespace Team27_RougeLike.Scene
         /// <param name="fogColor">霧の色</param>
         public void Initialize(int dungeonNum, string dungeonName, 
             int limitSecond, int floor, int totalFloor, int bossRange, int stageSize, int expandRate,
-            Vector3 fogColor)
+            Vector3 fogColor, Vector3 constractColor, bool isParicle)
         {
             this.dungeonName = dungeonName;
             this.dungeonNum = dungeonNum;
@@ -73,6 +76,8 @@ namespace Team27_RougeLike.Scene
             this.bossRange = bossRange;
             this.expandRate = expandRate;
             fogManager.SetColor(fogColor);
+            this.isParicle = isParicle;
+            this.constractColor = constractColor;
         }
 
         /// <summary>
@@ -210,6 +215,17 @@ namespace Team27_RougeLike.Scene
         public int StageSize()
         {
             return stageSize;
+        }
+
+        public Color ConstactColor()
+        {
+            Color color = new Color((int)constractColor.X, (int)constractColor.Y, (int)constractColor.Z);
+            return color;
+        }
+
+        public bool UseParticle()
+        {
+            return isParicle;
         }
     }
 }

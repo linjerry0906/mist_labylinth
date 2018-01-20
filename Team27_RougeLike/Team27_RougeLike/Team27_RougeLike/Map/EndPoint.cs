@@ -15,6 +15,7 @@ namespace Team27_RougeLike.Map
         private Vector3 position;       //位置
         private static Vector3 size = new Vector3(MapDef.TILE_SIZE * 0.9f);    //大きさ
         private static Vector3 up = new Vector3(0, 0.001f, 0);                 //上に乗せる
+        private Color color;            //色
         private bool alphaSwitch;       //透明度の切り替え
         private float alpha;            //透明度
         private float centerAngle;      //中心回転角度
@@ -32,6 +33,7 @@ namespace Team27_RougeLike.Map
             outAngle = 0;
             alpha = 0.4f;
             alphaSwitch = true;
+            color = Color.White;
         }
 
         /// <summary>
@@ -77,16 +79,21 @@ namespace Team27_RougeLike.Map
             alphaSwitch = true;
         }
 
+        public void SetColor(Color color)
+        {
+            this.color = color;
+        }
+
         /// <summary>
         /// 描画
         /// </summary>
         public void Draw()
         {
             renderer.ChangeBlendState(BlendState.Additive);
-            renderer.DrawModel("magic_circle", "magic_out", position, size, MathHelper.ToRadians(outAngle), Color.White, alpha);
-            renderer.DrawModel("magic_circle", "magic_middle", position + up, size, MathHelper.ToRadians(middleAngle), Color.White, alpha);
-            renderer.DrawModel("magic_circle", "magic_in", position + 2 * up, size, MathHelper.ToRadians(inAngle), Color.White, alpha);
-            renderer.DrawModel("magic_circle", "magic_center", position + 3 * up, size, MathHelper.ToRadians(centerAngle), Color.White, alpha);
+            renderer.DrawModel("magic_circle", "magic_out", position, size, MathHelper.ToRadians(outAngle), color, alpha);
+            renderer.DrawModel("magic_circle", "magic_middle", position + up, size, MathHelper.ToRadians(middleAngle), color, alpha);
+            renderer.DrawModel("magic_circle", "magic_in", position + 2 * up, size, MathHelper.ToRadians(inAngle), color, alpha);
+            renderer.DrawModel("magic_circle", "magic_center", position + 3 * up, size, MathHelper.ToRadians(centerAngle), color, alpha);
             renderer.ChangeBlendState(BlendState.AlphaBlend);
         }
     }

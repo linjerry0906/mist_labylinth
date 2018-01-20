@@ -1,4 +1,9 @@
-﻿using System;
+﻿//--------------------------------------------------------------------------------------------------
+// 作成者：林　佳叡
+// 作成日：2018.1.18
+// 内容　：浮遊粒子
+//--------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,7 +46,7 @@ namespace Team27_RougeLike.Object.ParticleSystem
             speed = gameDevice.Random.Next(7, 15) / 100.0f;
             velocity = new Vector3(
                 gameDevice.Random.Next(-70, 71) / 100.0f,
-                gameDevice.Random.Next(1, 101) / 100.0f,
+                gameDevice.Random.Next(1, 81) / 100.0f,
                 gameDevice.Random.Next(-70, 71) / 100.0f);
         }
 
@@ -49,13 +54,13 @@ namespace Team27_RougeLike.Object.ParticleSystem
         {
             if (alphaFlag)
             {
-                alpha += 0.002f;
-                if (alpha >= 0.55f)
+                alpha += 0.004f;
+                if (alpha >= 0.7f)
                     alphaFlag = false;
             }
             else
             {
-                alpha -= 0.002f;
+                alpha -= 0.004f;
                 if (alpha <= 0.0f)
                     isDead = true;
             }

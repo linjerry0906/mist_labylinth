@@ -342,7 +342,9 @@ namespace Team27_RougeLike.UI
                 nextStage.bossRange,
                 nextStage.baseSize + (chooseFloor - 1) * nextStage.expandRate,
                 nextStage.expandRate,
-                nextStage.fogColor);
+                nextStage.fogColor,
+                nextStage.constractColor,
+                nextStage.useParticle);
 
             //BlockStyle設定
             gameManager.ClearBlockStyle();

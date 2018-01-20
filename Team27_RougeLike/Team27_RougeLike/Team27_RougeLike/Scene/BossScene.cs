@@ -23,6 +23,7 @@ namespace Team27_RougeLike.Scene
     {
         private GameDevice gameDevice;
         private GameManager gameManager;
+        private StageManager stageManager;
         private Renderer renderer;
         private InputState input;
 
@@ -82,6 +83,8 @@ namespace Team27_RougeLike.Scene
             if (scene == SceneType.Pause)
                 return;
 
+            stageManager = gameManager.StageManager;
+
             #region Map初期化
             map = gameManager.GetDungeonMap();      //生成したマップを取得
             if (map == null)                         //エラー対策　マップが正常に生成されてなかったらLoadingに戻る
@@ -92,6 +95,7 @@ namespace Team27_RougeLike.Scene
             }
 
             map.Initialize(gameManager.BlockStyle);                       //マップを初期化
+            map.SetExitColor(stageManager.ConstactColor());
             map.SwitchDrawExit(false);
             #endregion
 
@@ -198,6 +202,20 @@ namespace Team27_RougeLike.Scene
             map.MapCollision(characterManager.GetHitBoxs());
 
             //Particle追加
+            AddSphereParticle();
+
+            //アイテム処理
+            mapItemManager.ItemCollision(characterManager.GetPlayer(), ui);
+
+            //終わるかどうかをチェック
+            CheckEnd();
+        }
+
+        private void AddSphereParticle()
+        {
+            if (!stageManager.UseParticle())
+                return;
+
             if (pManager.Count() < 1500)
             {
                 for (int i = 0; i < 10; i++)
@@ -208,15 +226,9 @@ namespace Team27_RougeLike.Scene
                         gameDevice.Random.Next(-30000, 30001) / 100.0f,
                         gameDevice.Random.Next(-30000, 30001) / 100.0f);
                     position.Y = 10;
-                    pManager.AddParticle(new SphereParticle(position, Color.GreenYellow, gameDevice));
+                    pManager.AddParticle(new SphereParticle(position, stageManager.ConstactColor(), gameDevice));
                 }
             }
-
-            //アイテム処理
-            mapItemManager.ItemCollision(characterManager.GetPlayer(), ui);
-
-            //終わるかどうかをチェック
-            CheckEnd();
         }
 
         private void CheckEnd()

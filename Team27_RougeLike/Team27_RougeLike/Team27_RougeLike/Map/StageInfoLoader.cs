@@ -12,12 +12,12 @@ using Team27_RougeLike.Object.Item;
 
 namespace Team27_RougeLike.Map
 {
-    class StageInfoLoader
+    class StageItemEnemyLoader
     {
         private bool isItemLoad;            //Item読み込んだフラグ
         private bool isMonsterLoad;         //敵の配置とスポナーを読み込んだフラグ
 
-        public StageInfoLoader()
+        public StageItemEnemyLoader()
         {
         }
 

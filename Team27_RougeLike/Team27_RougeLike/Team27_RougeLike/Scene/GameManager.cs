@@ -180,12 +180,13 @@ namespace Team27_RougeLike.Scene
         /// <param name="expandRate">拡大の比率</param>
         public void InitStage(int dungeonNum, string dungeonName,
             int limitSecond, int floor, int totalFloor, int bossRange, int stageSize, int expandRate,
-            Vector3 fogColor)
+            Vector3 fogColor, Vector3 constractColor, bool isParicle)
         {
             stageManager.Initialize(
                 dungeonNum, dungeonName, limitSecond,
                 floor, totalFloor, bossRange,
-                stageSize, expandRate, fogColor);
+                stageSize, expandRate, fogColor, 
+                constractColor, isParicle);
         }
 
         /// <summary>

@@ -434,6 +434,11 @@ namespace Team27_RougeLike.Map
             drawExit = toDraw;
         }
 
+        public void SetExitColor(Color color)
+        {
+            exitEffect.SetColor(color);
+        }
+
         /// <summary>
         /// 空地の座標を返す
         /// </summary>

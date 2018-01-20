@@ -101,8 +101,8 @@ namespace Team27_RougeLike.Scene
                 endFlag = true;
                 return;
             }
-
             map.Initialize(gameManager.BlockStyle);                       //マップを初期化
+            map.SetExitColor(stageManager.ConstactColor());
             #endregion
 
             #region Item初期化
@@ -241,19 +241,7 @@ namespace Team27_RougeLike.Scene
             //時間やFog処理の更新
             stageManager.Update();
 
-            if (pManager.Count() < 1500)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    Vector3 position = characterManager.GetPlayer().GetPosition;
-                    position += new Vector3(
-                        gameDevice.Random.Next(-30000, 30001) / 100.0f,
-                        gameDevice.Random.Next(-30000, 30001) / 100.0f,
-                        gameDevice.Random.Next(-30000, 30001) / 100.0f);
-                    position.Y = 10;
-                    pManager.AddParticle(new SphereParticle(position, Color.GreenYellow, gameDevice));
-                }
-            }
+            AddSphereParticle();
 
             //Camera Shake仮実装 ToDo:Class化
             if (gameDevice.InputState.IsLeftClick())
@@ -266,6 +254,26 @@ namespace Team27_RougeLike.Scene
             }
 
             CheckEnd();                         //プレイ終了をチェック
+        }
+
+        private void AddSphereParticle()
+        {
+            if (!stageManager.UseParticle())
+                return;
+
+            if (pManager.Count() < 2000)
+            {
+                for (int i = 0; i < 20; i++)
+                {
+                    Vector3 position = characterManager.GetPlayer().GetPosition;
+                    position += new Vector3(
+                        gameDevice.Random.Next(-30000, 30001) / 100.0f,
+                        gameDevice.Random.Next(-30000, 30001) / 100.0f,
+                        gameDevice.Random.Next(-30000, 30001) / 100.0f);
+                    position.Y = 10;
+                    pManager.AddParticle(new SphereParticle(position, stageManager.ConstactColor(), gameDevice));
+                }
+            }
         }
 
         /// <summary>
