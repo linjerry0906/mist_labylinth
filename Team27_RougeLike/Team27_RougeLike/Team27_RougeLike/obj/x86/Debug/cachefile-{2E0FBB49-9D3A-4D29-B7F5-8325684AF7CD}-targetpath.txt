@@ -80,6 +80,7 @@ Content\Sound\BGM\m-art_Cristea.xnb
 Content\Sound\BGM\m-art_Cristea.wma
 Content\Sound\BGM\m-art_SnowyNight.xnb
 Content\Sound\BGM\m-art_SnowyNight.wma
+Content\Texture\warning.xnb
 Content\Sound\BGM\m-art_The11thSephirah.mp3
 Content\Sound\BGM\m-art_Candle.mp3
 Content\Sound\BGM\m-art_Komorebi.mp3
