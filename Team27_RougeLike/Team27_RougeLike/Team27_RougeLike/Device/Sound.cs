@@ -54,7 +54,7 @@ namespace Team27_RougeLike.Device
             // 何も再生していないのでnull初期化
             currentBGM = null;
 
-            fadeTimer = new Timer(1.3f);
+            fadeTimer = new Timer(2.0f);
             fadeTimer.Initialize();
         }
 

@@ -90,10 +90,9 @@ namespace Team27_RougeLike.Map
                             break;
                         case (int)MapDef.BlockDef.Fall:
                             c = new FallBlock(
-                                new Vector3(x * MapDef.TILE_SIZE, -MapDef.TILE_SIZE / 2, y * MapDef.TILE_SIZE),
+                                new Vector3(x * MapDef.TILE_SIZE, -MapDef.TILE_SIZE + 5, y * MapDef.TILE_SIZE),
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
-                            //c.SetTexture(blockDef[MapDef.BlockDef.Space]);
                             mapBlocks.Add(c);
                             break;
                         case (int)MapDef.BlockDef.Entry:
@@ -432,6 +431,11 @@ namespace Team27_RougeLike.Map
                 exitEffect.Reset();
 
             drawExit = toDraw;
+        }
+
+        public bool IsOver()
+        {
+            return drawExit;
         }
 
         public void SetExitColor(Color color)

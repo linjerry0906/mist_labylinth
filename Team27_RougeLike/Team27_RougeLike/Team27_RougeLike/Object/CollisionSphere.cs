@@ -72,7 +72,7 @@ namespace Team27_RougeLike.Object
             switch (dir)
             {
                 case Direction.Xminus:
-                    while(IsCollision(other))
+                    while (IsCollision(other))
                         position += -Vector3.UnitX * 0.1f;
                     break;
                 case Direction.Xplus:
@@ -105,9 +105,18 @@ namespace Team27_RougeLike.Object
         private Direction CheckDirection(BoundingBox other)
         {
             Vector3 otherCenter = (other.Max + other.Min) / 2.0f;   //相手の中心座標
+            float otherHight = other.Max.Y - otherCenter.Y;
+            float otherWidth = other.Max.X - otherCenter.X;
             Vector3 dir = position - otherCenter;                   //方向
+
+            //比率で判定
+            Vector3 rate = new Vector3(
+                Math.Abs(dir.X) / otherWidth,
+                Math.Abs(dir.Y) / otherHight,
+                Math.Abs(dir.Z) / otherWidth);
+
             //Y軸方向
-            if (Math.Abs(dir.Y) > Math.Abs(dir.X) && Math.Abs(dir.Y) > Math.Abs(dir.Z))
+            if(rate.Y > rate.X && rate.Y > rate.Z)
             {
                 if (dir.Y > 0)
                     return Direction.Yplus;
@@ -115,7 +124,7 @@ namespace Team27_RougeLike.Object
                     return Direction.Yminus;
             }
             //Z軸方向
-            else if (Math.Abs(dir.Z) > Math.Abs(dir.X) && Math.Abs(dir.Z) > Math.Abs(dir.Y))
+            else if (rate.Z > rate.X && rate.Z > rate.Y)
             {
                 if (dir.Z > 0)
                     return Direction.Zplus;
