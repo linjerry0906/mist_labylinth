@@ -386,7 +386,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-01-21T20:16:55.1943743+09:00</Time>
+      <Time>2018-01-21T21:56:37.0758022+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -679,7 +679,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\player.xnb</Output>
-      <Time>2018-01-21T20:14:26.9600378+09:00</Time>
+      <Time>2018-01-21T21:56:09.9882946+09:00</Time>
     </Item>
     <Item>
       <Source>Sound\BGM\Ariadne-battle01.mp3</Source>
@@ -898,7 +898,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\player_run.xnb</Output>
-      <Time>2018-01-21T20:19:08.0194752+09:00</Time>
+      <Time>2018-01-21T21:56:09.9887959+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

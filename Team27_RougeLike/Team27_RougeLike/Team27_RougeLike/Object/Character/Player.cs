@@ -151,7 +151,7 @@ namespace Team27_RougeLike.Object.Character
             var v = velocity;
             v.Y = 0;
             velocity -= v * 0.1f;
-            if (Math.Abs(velocity.X) > 0.5f || Math.Abs(velocity.Z) > 0.5f)
+            if (Math.Abs(velocity.X) > 0.3f || Math.Abs(velocity.Z) > 0.3f)
             {
                 TexChange("_run");
             }

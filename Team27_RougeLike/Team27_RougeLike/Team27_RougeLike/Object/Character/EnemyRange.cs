@@ -33,5 +33,10 @@ namespace Team27_RougeLike.Object.Character
         {
             return new EnemyRange(0, 0, 60);
         }
+
+        public static EnemyRange Escape()
+        {
+            return new EnemyRange(80, 0, 0);
+        }
     }
 }
