@@ -65,6 +65,8 @@ namespace Team27_RougeLike.Scene
                 {"Upgradebutton" ,path},
                 {"NEEC1280black" ,path},
                 {"warning" ,path},
+                {"player" ,path},
+                {"player_run" ,path},
             };
             return list;
         }

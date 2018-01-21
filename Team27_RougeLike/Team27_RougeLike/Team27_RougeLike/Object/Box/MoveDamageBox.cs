@@ -38,13 +38,14 @@ namespace Team27_RougeLike.Object.Box
         public override void Update()
         {
             base.Update();
-            collision.Center += angle;
+            collision.Center += angle * 1.3f;
         }
 
         public override void Effect(CharacterBase character)
         {
             effectedCharacters.Add(character);
             character.Damage(attack, angle);
+            End();
         }
         public int Damage()
         {

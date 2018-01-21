@@ -22,13 +22,13 @@ namespace Team27_RougeLike.Object
         protected string textureName;   //テクスチャ名
         protected string tag;           //敵味方　タグ分け
         protected string name;          //個体名
-
+        protected string plusalpha;     //ほんとはもっとスマートにできるけど、間に合わせ目的でのもの
         protected Vector3 velocity;     //移動ベクトル0
         protected Vector3 attackAngle;  //攻撃方向
-        protected Vector3 nockback;           
+        protected Vector3 nockback;
         public string Tag { get { return tag; } }
 
-        public CharacterBase(CollisionSphere collision, string textureName, CharacterManager characterManager,string name,string color)
+        public CharacterBase(CollisionSphere collision, string textureName, CharacterManager characterManager, string name, string color)
         {
             this.collision = collision;
             this.textureName = textureName;
@@ -46,7 +46,14 @@ namespace Team27_RougeLike.Object
         public abstract void Attack();
         public virtual void Draw(Renderer renderer)
         {
-            renderer.DrawPolygon(textureName, collision.Position, new Vector2(collision.Radius), motion.DrawingRange(), ColorLoad.GetColor(color));
+            if (NockBacking())
+            {
+                renderer.DrawPolygon(textureName + plusalpha, collision.Position, new Vector2(collision.Radius*2), motion.DrawingRange(), Color.Red);
+            }
+            else
+            {
+                renderer.DrawPolygon(textureName + plusalpha, collision.Position, new Vector2(collision.Radius*2), motion.DrawingRange(), ColorLoad.GetColor(color));
+            }
         }
         public bool Dodge()
         {
@@ -100,5 +107,12 @@ namespace Team27_RougeLike.Object
         {
             return name;
         }
+
+        public void TexChange(string plusalpha)
+        {
+            this.plusalpha = plusalpha;
+        }
+
+        public abstract int GetDiffence();
     }
 }

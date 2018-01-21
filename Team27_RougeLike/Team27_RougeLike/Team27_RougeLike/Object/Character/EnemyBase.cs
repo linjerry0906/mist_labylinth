@@ -274,5 +274,10 @@ namespace Team27_RougeLike.Object
         {
             return infinity;
         }
+
+        public override int GetDiffence()
+        {
+            return status.BaseArmor;
+        }
     }
 }
