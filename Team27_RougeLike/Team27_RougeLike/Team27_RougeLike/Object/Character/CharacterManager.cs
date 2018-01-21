@@ -222,5 +222,16 @@ namespace Team27_RougeLike.Object.Character
         {
             ui.LogUI.AddLog(log);
         }
+        public void AreaDamage(int num)
+        {
+            characters.ForEach(c => 
+            {
+                if (!(c is Player))
+                {
+                    Log(c.GetName() + "に" + num + "のダメージ");
+                    c.TrueDamage(num);
+                }
+            });
+        }
     }
 }

@@ -106,16 +106,16 @@ namespace Team27_RougeLike.Object
             switch (aiManager.ToString())
             {
                 case "Team27_RougeLike.Object.AI.AiManager_Fool":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + attackAngle, 3), 1, tag, status.BasePower, attackAngle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (attackAngle * collision.Radius), 3), 1, tag, status.BasePower, attackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + attackAngle, 3), 1, tag, status.BasePower, attackAngle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (attackAngle * collision.Radius), 3), 1, tag, status.BasePower, attackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Totem":
-                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 0.5f), 100, tag, status.BasePower, attackAngle, pManager, gameDevice));
+                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + (attackAngle * collision.Radius), 0.5f), 100, tag, status.BasePower, attackAngle, pManager, gameDevice));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 0.5f), 100, tag, status.BasePower, attackAngle, pManager, gameDevice);
+                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + (attackAngle * collision.Radius), 0.5f), 100, tag, status.BasePower, attackAngle, pManager, gameDevice);
                     characterManager.AddHitBox(damageBox);
                     pManager = new ParticleManager(gameDevice);
                     pManager.AddParticle(new Bullet(gameDevice, damageBox, new Vector2(10, 10)));
