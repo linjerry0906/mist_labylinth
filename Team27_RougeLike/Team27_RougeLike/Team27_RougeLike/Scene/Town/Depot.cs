@@ -225,7 +225,7 @@ namespace Team27_RougeLike.Scene
             }
             foreach(int i in consumptions.Keys)
             {
-                rightItems.Add(itemManager.GetConsuptionItem(i));
+                rightItems.Add(itemManager.GetConsumption(i));
             }
 
             leftPage = 1;
@@ -614,7 +614,7 @@ namespace Team27_RougeLike.Scene
                 rightItems = new List<Item>();
                 foreach (int id in consumptions.Keys)
                 {
-                    rightItems.Add(itemManager.GetConsuptionItem(id));
+                    rightItems.Add(itemManager.GetConsumption(id));
                 }
 
                 //バッグ側
