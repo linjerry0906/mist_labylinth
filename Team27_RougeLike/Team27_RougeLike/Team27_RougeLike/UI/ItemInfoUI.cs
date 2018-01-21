@@ -114,8 +114,8 @@ namespace Team27_RougeLike.UI
             int[] diff = new int[2];            //現在装備している武器（左手）との差を取得
             if (currentWeapon != null)
             {
-                diff[0] = currentWeapon.GetPower() - weapon.GetPower();
-                diff[1] = currentWeapon.GetDefense() - weapon.GetDefense();
+                diff[0] = weapon.GetPower() - currentWeapon.GetPower();
+                diff[1] = weapon.GetDefense() - currentWeapon.GetDefense();
             }
             else
             {
@@ -147,8 +147,8 @@ namespace Team27_RougeLike.UI
             int[] diff = new int[2];            //現在装備しているアーマーとの差を取得
             if (currentArmor != null)
             {
-                diff[0] = currentArmor.GetPower() - armor.GetPower();
-                diff[1] = currentArmor.GetDefense() - armor.GetDefense();
+                diff[0] = armor.GetPower() - currentArmor.GetPower();
+                diff[1] = armor.GetDefense() - currentArmor.GetDefense();
             }
             else
             {
