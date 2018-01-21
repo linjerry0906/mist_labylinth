@@ -45,6 +45,10 @@ namespace Team27_RougeLike.Utility
                     return Color.Yellow;
                 case "Purple":
                     return Color.Purple;
+                case "DarkBlue":
+                    return new Color(80, 80, 220);
+                case "DarkGray":
+                    return new Color(75, 75, 75);
                 default:
                     return Color.White;
             }
