@@ -108,6 +108,10 @@ namespace Team27_RougeLike.UI
         public void Draw()
         {
             float constractAlpha = 1.0f / LIMIT_ALPHA;
+            renderer.DrawTexture("fade",
+                backLayer.GetLeftUnder() + new Vector2(15, -115),
+                new Vector2(570, 100),
+                backLayer.CurrentAlpha() * constractAlpha * 0.6f);
             backLayer.Draw("white");
             parameterUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
             itemUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
