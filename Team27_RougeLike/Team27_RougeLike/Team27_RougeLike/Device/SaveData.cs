@@ -283,6 +283,7 @@ namespace Team27_RougeLike.Device
                             {
                             strings[1],
                             strings[2],
+                            strings[3],
                             };
                             itemDates.Add(itemDate);
                         }

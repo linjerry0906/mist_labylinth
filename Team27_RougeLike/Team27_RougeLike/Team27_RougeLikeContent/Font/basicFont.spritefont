@@ -325,6 +325,10 @@ with.
         <Start>業</Start>
         <End>業</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>形</Start>
+        <End>形</End>
+      </CharacterRegion>
 
       <!-- がく -->
       <CharacterRegion>
@@ -458,6 +462,10 @@ with.
       <CharacterRegion>
         <Start>作</Start>
         <End>作</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>彷</Start>
+        <End>彷</End>
       </CharacterRegion>
       <!-- さい -->
       <CharacterRegion>
@@ -819,6 +827,10 @@ with.
         <Start>討</Start>
         <End>討</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>灯</Start>
+        <End>灯</End>
+      </CharacterRegion>
       
       <!-- ど -->
       <CharacterRegion>
@@ -828,6 +840,10 @@ with.
       <CharacterRegion>
         <Start>毒</Start>
         <End>毒</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>泥</Start>
+        <End>泥</End>
       </CharacterRegion>
       
       <!-- どう -->
@@ -868,6 +884,10 @@ with.
       <!-- にち -->
 
       <!-- ぬ -->
+      <CharacterRegion>
+        <Start>主</Start>
+        <End>主</End>
+      </CharacterRegion>
 
       <!-- ぬの -->
       <CharacterRegion>
@@ -921,6 +941,10 @@ with.
       <CharacterRegion>
         <Start>人</Start>
         <End>人</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>火</Start>
+        <End>火</End>
       </CharacterRegion>
 
       <!-- ひつ -->
@@ -1111,10 +1135,15 @@ with.
         <End>鎧</End>
       </CharacterRegion>
       
+      
       <!-- よう -->
       <CharacterRegion>
         <Start>要</Start>
         <End>要</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>徨</Start>
+        <End>徨</End>
       </CharacterRegion>
       <!-- ら -->
       <CharacterRegion>

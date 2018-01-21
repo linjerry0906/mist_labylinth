@@ -160,6 +160,10 @@
       <Name>Stage_boss_0_3</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="StageCSV\Stage_boss_1_10.csv">
+      <Name>Stage_boss_1_10</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="StageCSV\Stage_boss_1_5.csv">
       <Name>Stage_boss_1_5</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -539,6 +543,23 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Texture\enemy_light.png">
+      <Name>enemy_light</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Texture\enemy_mud.png">
+      <Name>enemy_mud</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Texture\enemy_snowman.png">
+      <Name>enemy_snowman</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
