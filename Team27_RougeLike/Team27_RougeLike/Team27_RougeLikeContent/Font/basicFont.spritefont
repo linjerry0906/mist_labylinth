@@ -332,6 +332,10 @@ with.
         <Start>吸</Start>
         <End>吸</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>級</Start>
+        <End>級</End>
+      </CharacterRegion>
 
       <!-- きょう -->
       <CharacterRegion>
@@ -655,6 +659,10 @@ with.
         <Start>捨</Start>
         <End>捨</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>少</Start>
+        <End>少</End>
+      </CharacterRegion>
 
       <!-- すう -->
       <CharacterRegion>
@@ -756,6 +764,10 @@ with.
       <CharacterRegion>
         <Start>玉</Start>
         <End>玉</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>高</Start>
+        <End>高</End>
       </CharacterRegion>
       <!-- たい -->
       <CharacterRegion>
@@ -943,6 +955,10 @@ with.
 
 
       <!-- に -->
+      <CharacterRegion>
+        <Start>肉</Start>
+        <End>肉</End>
+      </CharacterRegion>
       <!-- にち -->
 
       <!-- ぬ -->
@@ -1193,11 +1209,15 @@ with.
         <Start>山</Start>
         <End>山</End>
       </CharacterRegion>
-      <!-- び -->
       <CharacterRegion>
         <Start>薬</Start>
         <End>薬</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>焼</Start>
+        <End>焼</End>
+      </CharacterRegion>
+      <!-- び -->
       
       <!-- ゆ -->
       <CharacterRegion>
@@ -1246,6 +1266,10 @@ with.
       <CharacterRegion>
         <Start>量</Start>
         <End>量</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>料</Start>
+        <End>料</End>
       </CharacterRegion>
       
       <!-- りょく -->
