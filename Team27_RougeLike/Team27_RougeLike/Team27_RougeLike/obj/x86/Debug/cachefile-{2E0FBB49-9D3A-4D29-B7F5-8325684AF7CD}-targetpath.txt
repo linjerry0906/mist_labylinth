@@ -182,9 +182,9 @@ Content\StageCSV\StageItem_3.csv
 Content\StageCSV\StageItem_4.csv
 Content\StageCSV\StageItem_5.csv
 Content\StageCSV\Stage_boss.csv
-Content\StageCSV\Stage_boss_0_3.csv
-Content\StageCSV\Stage_boss_1_10.csv
-Content\StageCSV\Stage_boss_1_5.csv
-Content\StageCSV\Stage_boss_3_5.csv
+Content\StageCSV\Stage_boss_1_3.csv
+Content\StageCSV\Stage_boss_2_10.csv
+Content\StageCSV\Stage_boss_2_5.csv
+Content\StageCSV\Stage_boss_4_5.csv
 Content\StoreItemCSV\StoreItem.csv
 Content\BGM使用.txt

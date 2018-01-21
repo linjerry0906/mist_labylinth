@@ -186,6 +186,8 @@ namespace Team27_RougeLike.Object
                     return new AiManager_Melee();
                 case "Totem":
                     return new AiManager_Totem();
+                case "Escape":
+                    return new AiManager_Escape();
                 default:
                     return new AiManager_Fool();
             }
@@ -205,6 +207,9 @@ namespace Team27_RougeLike.Object
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Totem":
                     range = EnemyRange.Totem();
+                    break;
+                case "Team27_RougeLike.Object.AI.AiManager_Escape":
+                    range = EnemyRange.Escape();
                     break;
             }
         }

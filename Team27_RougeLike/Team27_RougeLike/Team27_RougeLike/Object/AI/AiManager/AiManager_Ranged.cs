@@ -70,6 +70,20 @@ namespace Team27_RougeLike.Object.AI
             }
             #endregion
 
+            #region 攻撃範囲内
+
+            if (enemyActor.AttackCheck(player))
+            {
+                if (attackAi is AttackAi_Wait)
+                {
+                    //時間は仮実装
+                    attackAi = new AttackAi_Charge(actor, enemyActor.GetStatus().Attackspd, 1, enemyActor.GetStatus().Attackspd);
+                }
+            }
+            #endregion
+
+
+
             #region 逃げる範囲
             if (enemyActor.WaitPointCheck(player))
             {
