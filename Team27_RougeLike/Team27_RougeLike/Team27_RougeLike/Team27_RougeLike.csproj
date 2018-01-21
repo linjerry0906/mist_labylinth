@@ -86,7 +86,6 @@
     <Compile Include="Object\AI\MoveAi\MoveAi_PlayerMove.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_Search.cs" />
     <Compile Include="Object\AI\StateAi\StateAi_Dodge.cs" />
-    <Compile Include="Object\Box\BuffBox.cs" />
     <Compile Include="Object\Box\DamageBox.cs" />
     <Compile Include="Object\Box\HitBoxBase.cs" />
     <Compile Include="Map\DungeonMap.cs" />

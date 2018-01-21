@@ -73,8 +73,7 @@ namespace Team27_RougeLike.Object.Character
             var t = status.GetInventory().LeftHand();
             if (t == null)
             {
-                DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 1, tag, status.GetPower(), attackAngle);
-                //characterManager.AreaDamage(3);
+                DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 1, tag, status.GetPower(), attackAngle, Buff.buff.POISON);
             }
             else
             {
