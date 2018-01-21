@@ -23,6 +23,7 @@ namespace Team27_RougeLike.Object
         protected int exp;              //討伐時の経験値
         private ParticleManager pManager;
         private GameDevice gameDevice;
+        protected bool infinity;
 
         /// <summary>
         /// オリジナル
@@ -105,10 +106,10 @@ namespace Team27_RougeLike.Object
             switch (aiManager.ToString())
             {
                 case "Team27_RougeLike.Object.AI.AiManager_Fool":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + attackAngle, 10), 1, tag, status.BasePower, attackAngle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + attackAngle, 3), 1, tag, status.BasePower, attackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + attackAngle, 10), 1, tag, status.BasePower, attackAngle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + attackAngle, 3), 1, tag, status.BasePower, attackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Totem":
                     characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + attackAngle, 0.5f), 100, tag, status.BasePower, attackAngle, pManager, gameDevice));
@@ -141,7 +142,7 @@ namespace Team27_RougeLike.Object
         {
             if (aiManager.GetAttackAi() is AttackAi_Charge)
             {
-                renderer.DrawPolygon(textureName, collision.Position + attackAngle * 5, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
+                renderer.DrawPolygon("warning", collision.Position + attackAngle * 5, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
             }
         }
 
@@ -261,6 +262,17 @@ namespace Team27_RougeLike.Object
         public override void TrueDamage(int num)
         {
             status.Health -= num;
+        }
+
+        public void InfintyRange()
+        {
+            infinity = true;
+            range.searchRange = 10000;
+        }
+
+        public bool UpdateAllRange()
+        {
+            return infinity;
         }
     }
 }

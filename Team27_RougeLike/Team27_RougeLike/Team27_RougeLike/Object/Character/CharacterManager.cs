@@ -64,7 +64,7 @@ namespace Team27_RougeLike.Object.Character
                 if (c1 is EnemyBase)
                 {
                     //敵の距離によってアップデートを分けた
-                    if (NearPlayer(c1.Collision.Position))
+                    if (NearPlayer(c1.Collision.Position) || ((EnemyBase)c1).UpdateAllRange())
                     {
                         ((EnemyBase)c1).NearUpdate(player, gameTime);
                     }
@@ -85,7 +85,7 @@ namespace Team27_RougeLike.Object.Character
                             //それが攻撃だった場合の判定
                             if (h is iDamageBox)
                             {
-                                ui.LogUI.AddLog(c.GetName() + "に" + ((iDamageBox)h).Damage() + "の damageChance");
+                                ui.LogUI.AddLog(c.GetName() + "に" + ((iDamageBox)h).Damage() + "のダメージ");
                             }
                         }
                     }
@@ -139,6 +139,18 @@ namespace Team27_RougeLike.Object.Character
 
         public CharacterBase AddCharacter(CharacterBase character)
         {
+            characters.Add(character);
+            return character;
+        }
+
+        /// <summary>
+        /// 生成した敵のプレイヤー索敵範囲が莫大な数値になる
+        /// </summary>
+        /// <param name="character"></param>
+        /// <returns></returns>
+        public CharacterBase AddCharacterBossScene(CharacterBase character)
+        {
+            ((EnemyBase)character).InfintyRange();
             characters.Add(character);
             return character;
         }

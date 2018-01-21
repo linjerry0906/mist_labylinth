@@ -25,8 +25,7 @@ namespace Team27_RougeLike.Object
 
         protected Vector3 velocity;     //移動ベクトル0
         protected Vector3 attackAngle;  //攻撃方向
-        protected Vector3 nockback;
-
+        protected Vector3 nockback;           
         public string Tag { get { return tag; } }
 
         public CharacterBase(CollisionSphere collision, string textureName, CharacterManager characterManager,string name,string color)
