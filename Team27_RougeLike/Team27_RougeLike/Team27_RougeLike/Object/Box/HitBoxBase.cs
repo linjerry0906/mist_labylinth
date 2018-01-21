@@ -24,7 +24,7 @@ namespace Team27_RougeLike.Object.Box
 
         public HitBoxBase()
         {
-            isend = false; 
+            isend = false;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Team27_RougeLike.Object.Box
         /// </summary>
         /// <param name="collision"></param>
         /// <param name="time"></param>
-        public HitBoxBase(BoundingSphere collision,int time)
+        public HitBoxBase(BoundingSphere collision, int time)
         {
             this.collision = collision;
             this.time = time;
@@ -44,7 +44,7 @@ namespace Team27_RougeLike.Object.Box
         /// <param name="collision"></param>
         /// <param name="time"></param>
         /// <param name="tag"></param>
-        public HitBoxBase(BoundingSphere collision, int time,string tag)
+        public HitBoxBase(BoundingSphere collision, int time, string tag)
         {
             this.collision = collision;
             this.time = time;
@@ -58,7 +58,7 @@ namespace Team27_RougeLike.Object.Box
         /// <param name="collision"></param>
         /// <param name="time"></param>
         /// <param name="tags"></param>
-        public HitBoxBase(BoundingSphere collision, int time,List<string> tags)
+        public HitBoxBase(BoundingSphere collision, int time, List<string> tags)
         {
             this.collision = collision;
             this.time = time;
@@ -70,7 +70,7 @@ namespace Team27_RougeLike.Object.Box
         /// </summary>
         /// <param name="collision"></param>
         /// <param name="time"></param>
-        public HitBoxBase(BoundingSphere collision, int time,Buff.buff buff)
+        public HitBoxBase(BoundingSphere collision, int time, Buff.buff buff)
         {
             this.collision = collision;
             this.time = time;
@@ -83,7 +83,7 @@ namespace Team27_RougeLike.Object.Box
         /// <param name="collision"></param>
         /// <param name="time"></param>
         /// <param name="tag"></param>
-        public HitBoxBase(BoundingSphere collision, int time, string tag,Buff.buff buff)
+        public HitBoxBase(BoundingSphere collision, int time, string tag, Buff.buff buff)
         {
             this.collision = collision;
             this.time = time;
@@ -98,7 +98,7 @@ namespace Team27_RougeLike.Object.Box
         /// <param name="collision"></param>
         /// <param name="time"></param>
         /// <param name="tags"></param>
-        public HitBoxBase(BoundingSphere collision, int time, List<string> tags,Buff.buff buff)
+        public HitBoxBase(BoundingSphere collision, int time, List<string> tags, Buff.buff buff)
         {
             this.collision = collision;
             this.time = time;
@@ -118,12 +118,12 @@ namespace Team27_RougeLike.Object.Box
         /// <returns></returns>
         public bool HitCheck(CharacterBase character)
         {
-            if(mask != null)
+            if (mask != null)
             {
                 //マスクチェック 
                 foreach (var m in mask)
                 {
-                    if(m == character.Tag)
+                    if (m == character.Tag)
                     {
                         return false;
                     }
@@ -161,7 +161,10 @@ namespace Team27_RougeLike.Object.Box
         }
         public virtual void Effect(CharacterBase character)
         {
-            character.GetBuffs().AddBuff(buff);
+            if (buff != Buff.buff.START)
+            {
+                character.GetBuffs().AddBuff(buff);
+            }
         }
         public Vector3 Position() { return collision.Center; }
 

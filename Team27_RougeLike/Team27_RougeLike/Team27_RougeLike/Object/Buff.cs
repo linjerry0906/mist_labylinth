@@ -10,6 +10,7 @@ namespace Team27_RougeLike.Object
         private CharacterBase actor;
         public enum buff
         {
+            START,
             POISON,
             IRONBODY,
             CONFUSE,
