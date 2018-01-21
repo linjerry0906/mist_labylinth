@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Team27_RougeLike.Device;
@@ -72,6 +73,8 @@ namespace Team27_RougeLike.Scene
 
         private int windowWidth;
         private int windowHeight;
+
+        private string materialFilename = @"Content/ItemCSV/MaterialItem.csv";
 
         public UpgradeStore(IScene town, GameManager gameManager, GameDevice gameDevice)
         {
@@ -244,89 +247,40 @@ namespace Team27_RougeLike.Scene
         }
 
         //消費素材をセット
-        private void SetMaterial(int level)
+        private void SetMaterial(int level, string type, int rare)
         {
+            //csvで読み込む要素
+            //type, rare, level, useMone, material1ID, 個数 , material2ID, 個数 , material3ID, 個数 
+
             materialItems = new Dictionary<int, int>();
+
+            FileStream fs = new FileStream(materialFilename, FileMode.Open);
+            StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("shift_jis"));
+
+            while (sr.EndOfStream)
+            {
+                string line = sr.ReadLine();
+                string[] csvDate = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (csvDate.Length > 10) continue;
+
+                if (type == csvDate[0] && rare == int.Parse(csvDate[1]) && level <= int.Parse(csvDate[2]))
+                {
+                    useMoney = int.Parse(csvDate[3]);
+                    for(int i = 4; i < csvDate.Length; i += 2)
+                    {
+                        materialItems.Add(int.Parse(csvDate[i]), int.Parse(csvDate[i + 1]));
+                    }
+                }
+
+
+            }
+
+            sr.Close();
+            fs.Close();
 
             if (level <= 1)
             {
                 materialItems.Add(7, 2);
-                useMoney = 0;
-            }
-            else if (level <= 5)
-            {
-                materialItems.Add(7, 3);
-                useMoney = 0;
-            }
-            else if (level <= 10)
-            {
-                materialItems.Add(7, 2);
-                materialItems.Add(8, 1);
-                useMoney = 0;
-            }
-            else if (level <= 15)
-            {
-                materialItems.Add(8, 2);
-                useMoney = 0;
-            }
-            else if (level <= 20)
-            {
-                materialItems.Add(8, 3);
-                useMoney = 0;
-            }
-            else if (level <= 25)
-            {
-                materialItems.Add(7, 2);
-                materialItems.Add(8, 2);
-                useMoney = 0;
-            }
-            else if (level <= 30)
-            {
-                materialItems.Add(7, 3);
-                materialItems.Add(8, 2);
-                materialItems.Add(9, 1);
-                useMoney = 0;
-            }
-            else if (level <= 40)
-            {
-                materialItems.Add(7, 5);
-                materialItems.Add(8, 3);
-                materialItems.Add(9, 1);
-                useMoney = 0;
-            }
-            else if (level <= 50)
-            {
-                materialItems.Add(7, 6);
-                materialItems.Add(8, 4);
-                materialItems.Add(9, 1);
-                useMoney = 0;
-            }
-            else if (level <= 60)
-            {
-                materialItems.Add(7, 7);
-                materialItems.Add(8, 5);
-                materialItems.Add(9, 1);
-                useMoney = 0;
-            }
-            else if (level <= 80)
-            {
-                materialItems.Add(7, 7);
-                materialItems.Add(8, 5);
-                materialItems.Add(9, 1);
-                useMoney = 0;
-            }
-            else if (level <= 90)
-            {
-                materialItems.Add(7, 10);
-                materialItems.Add(8, 6);
-                materialItems.Add(9, 2);
-                useMoney = 0;
-            }
-            else if (level <= 10)
-            {
-                materialItems.Add(7, 13);
-                materialItems.Add(8, 8);
-                materialItems.Add(9, 3);
                 useMoney = 0;
             }
         }
@@ -341,6 +295,8 @@ namespace Team27_RougeLike.Scene
             upgradeItem = item.UniqueClone();
             
             int level;
+            string type = "no";
+            int rare = selectItem.GetItemRare();
             if (item is ProtectionItem)
             {
                 level = ((ProtectionItem)item).GetReinforcement();
@@ -348,6 +304,7 @@ namespace Team27_RougeLike.Scene
                 if (!isBiggest)
                 {
                     ((ProtectionItem)upgradeItem).LevelUp();
+                    type = ((ProtectionItem)selectItem).GetProtectionType().ToString();
                 }
             }
             else
@@ -357,10 +314,11 @@ namespace Team27_RougeLike.Scene
                 if (!isBiggest)
                 {
                     ((WeaponItem)upgradeItem).LevelUp();
+                    type = ((WeaponItem)selectItem).GetWeaponType().ToString();
                 }
             }
 
-            SetMaterial(level);
+            SetMaterial(level,type, rare);
         }
 
         //消費したアイテムを消す
