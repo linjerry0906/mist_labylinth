@@ -31,9 +31,28 @@ namespace Team27_RougeLike.Object.Box
             this.attack = attack;
             this.angle = angle;
         }
+        public DamageBox(BoundingSphere collision, int time, int attack, Vector3 angle,Buff.buff buff)
+            : base(collision, time,buff)
+        {
+            this.attack = attack;
+            this.angle = angle;
+        }
+        public DamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle, Buff.buff buff)
+            : base(collision, time, tag,buff)
+        {
+            this.attack = attack;
+            this.angle = angle;
+        }
+        public DamageBox(BoundingSphere collision, int time, List<string> tags, int attack, Vector3 angle,Buff.buff buff)
+            : base(collision, time, tags,buff)
+        {
+            this.attack = attack;
+            this.angle = angle;
+        }
 
         public override void Effect(CharacterBase character)
         {
+            base.Effect(character);
             effectedCharacters.Add(character);
             character.Damage(attack, angle);
         }

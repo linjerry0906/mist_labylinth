@@ -74,7 +74,6 @@ namespace Team27_RougeLike.Object.Character
             if (t == null)
             {
                 DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 1, tag, status.GetPower(), attackAngle);
-                //characterManager.AreaDamage(3);
             }
             else
             {
