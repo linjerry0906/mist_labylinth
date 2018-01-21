@@ -22,7 +22,7 @@ namespace Team27_RougeLike.Object
             get
             {
                 Vector3 tempPos = new Vector3(position.X, Map.MapDef.TILE_SIZE, position.Z);
-                Vector3 boundSize = new Vector3(size.X, collisionHeight, size.Z);
+                Vector3 boundSize = new Vector3(size.X - 2, collisionHeight, size.Z - 2);
                 return new BoundingBox(tempPos - boundSize, tempPos + boundSize);
             }
         }

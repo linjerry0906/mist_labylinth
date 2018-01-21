@@ -183,7 +183,8 @@ namespace Team27_RougeLike.Scene
 
         public void Update(GameTime gameTime)
         {
-            stageManager.PlayBossBGM();
+            if(!map.IsOver())
+                stageManager.PlayBossBGM();
 
             ui.Update();
             if (ui.IsPop())                   //メッセージ表示中は以下Updateしない
@@ -261,6 +262,7 @@ namespace Team27_RougeLike.Scene
             //Boss倒したら出現
             map.SwitchDrawExit(true);
             gameManager.StageManager.RemoveFog();
+            gameDevice.Sound.StopBGM();
 
             //階段にたどり着いた場合
             if (map.WorldToMap(characterManager.GetPlayer().GetPosition) == map.EndPoint)
