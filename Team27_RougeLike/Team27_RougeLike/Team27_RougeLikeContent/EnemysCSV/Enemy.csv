@@ -9,4 +9,4 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
 8,bat,100,20,5,0.3,Fool,17,35,15,‹zŒŒƒRƒEƒ‚ƒŠ,Red
 9,enemy_light,50,16,3,0.3,Ranged,6,50,8,œfœr‚¤“”‰Î,White
 10,enemy_mud,60,20,4,0.2,Fool,7,50,10,“DlŒ`,White
-11,enemy_mud,150,28,5,0.3,Totem,17,60,20,“´ŒA‚Ìå,Silver
+11,enemy_mud,150,28,5,0.3,Totem,17,60,20,zR‚Ìå,Black
