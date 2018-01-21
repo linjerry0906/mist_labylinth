@@ -28,12 +28,14 @@ namespace Team27_RougeLike.Scene
         private Inventory inventory;
         private ItemManager itemManager;
 
-        private List<Item> playerItems; //バッグ
+        private List<Item> playerItems;                 //バッグ
         private Dictionary<int, int> depotConsumptions; //倉庫のアイテム
-        private Item selectItem; //強化するアイテム
-        private Item upgradeItem; //強化後のアイテム
-        private Dictionary<int, int> materialItems; //必要な素材
-        private Dictionary<int, int> consumptions; //消費アイテム
+        private Item selectItem;                        //強化するアイテム
+        private Item upgradeItem;                       //強化後のアイテム
+        private Dictionary<int, int> materialItems;     //必要な素材
+        private Dictionary<int, int> consumptions;      //消費アイテム
+        private int myMoney;                            //所持金
+        private int useMoney;                           //消費金額
 
         private ItemInfoUI selectItemInfoUI;
         private ItemInfoUI upgradeItemInfoUI;
@@ -62,8 +64,11 @@ namespace Team27_RougeLike.Scene
 
         private bool isSelect;                  //アイテムを選んだかどうか
         private bool isEnough;                  //素材が足りてるかどうか
-        private bool isNotEnoughMessage;        //素材が足りてないメッセージ;
+        private bool isNotEnoughMessage;        //素材が足りてないメッセージ
+        private bool isMoney;                 //お金が足りているかどうか
+        private bool isNoMoneyMessage;          //お金が足りていない時のメッセージ
         private bool isBiggest;                 //レベルがマックスかどうか
+        private bool isBiggestMessage;          //装備レベルが最大時のメッセージ
 
         private int windowWidth;
         private int windowHeight;
@@ -100,6 +105,7 @@ namespace Team27_RougeLike.Scene
 
             blurRate = 0.0f;
 
+            myMoney = inventory.CurrentMoney();
             playerItems = inventory.BagList();
             depotConsumptions = inventory.DepositoryItem();
             consumptions = new Dictionary<int, int>();
@@ -168,8 +174,11 @@ namespace Team27_RougeLike.Scene
 
             isSelect = false;
             isEnough = false;
+            isMoney = false;
             isBiggest = false;
             isNotEnoughMessage = false;
+            isNoMoneyMessage = false;
+            isBiggestMessage = false;
             
             leftMaxPage = (leftItems.Count - 1) / 20 + 1;
 
@@ -242,70 +251,83 @@ namespace Team27_RougeLike.Scene
             if (level <= 1)
             {
                 materialItems.Add(7, 2);
+                useMoney = 0;
             }
             else if (level <= 5)
             {
                 materialItems.Add(7, 3);
+                useMoney = 0;
             }
             else if (level <= 10)
             {
                 materialItems.Add(7, 2);
                 materialItems.Add(8, 1);
+                useMoney = 0;
             }
             else if (level <= 15)
             {
                 materialItems.Add(8, 2);
+                useMoney = 0;
             }
             else if (level <= 20)
             {
                 materialItems.Add(8, 3);
+                useMoney = 0;
             }
             else if (level <= 25)
             {
                 materialItems.Add(7, 2);
                 materialItems.Add(8, 2);
+                useMoney = 0;
             }
             else if (level <= 30)
             {
                 materialItems.Add(7, 3);
                 materialItems.Add(8, 2);
                 materialItems.Add(9, 1);
+                useMoney = 0;
             }
             else if (level <= 40)
             {
                 materialItems.Add(7, 5);
                 materialItems.Add(8, 3);
                 materialItems.Add(9, 1);
+                useMoney = 0;
             }
             else if (level <= 50)
             {
                 materialItems.Add(7, 6);
                 materialItems.Add(8, 4);
                 materialItems.Add(9, 1);
+                useMoney = 0;
             }
             else if (level <= 60)
             {
                 materialItems.Add(7, 7);
                 materialItems.Add(8, 5);
                 materialItems.Add(9, 1);
+                useMoney = 0;
             }
             else if (level <= 80)
             {
                 materialItems.Add(7, 7);
                 materialItems.Add(8, 5);
                 materialItems.Add(9, 1);
+                useMoney = 0;
             }
             else if (level <= 90)
             {
                 materialItems.Add(7, 10);
                 materialItems.Add(8, 6);
                 materialItems.Add(9, 2);
+                useMoney = 0;
             }
             else if (level <= 10)
             {
                 materialItems.Add(7, 13);
                 materialItems.Add(8, 8);
                 materialItems.Add(9, 3);
+                useMoney = 0;
             }
         }
 
@@ -317,21 +339,25 @@ namespace Team27_RougeLike.Scene
 
             selectItem = item;
             upgradeItem = item.UniqueClone();
-
-
-
+            
             int level;
             if (item is ProtectionItem)
             {
                 level = ((ProtectionItem)item).GetReinforcement();
                 isBiggest = ((ProtectionItem)item).IsLevelMax();
-                ((ProtectionItem)upgradeItem).LevelUp();
+                if (!isBiggest)
+                {
+                    ((ProtectionItem)upgradeItem).LevelUp();
+                }
             }
             else
             {
                 level = ((WeaponItem)item).GetReinforcement();
                 isBiggest = ((WeaponItem)item).IsLevelMax();
-                ((WeaponItem)upgradeItem).LevelUp();
+                if (!isBiggest)
+                {
+                    ((WeaponItem)upgradeItem).LevelUp();
+                }
             }
 
             SetMaterial(level);
@@ -389,10 +415,20 @@ namespace Team27_RougeLike.Scene
             {
                 w.Update();
             }
+            if (isNotEnoughMessage || isNoMoneyMessage || isBiggestMessage)
+            {
+                if (!messegeWindow.CurrentState())
+                    messegeWindow.Switch();
+            }
+            else if (!isNotEnoughMessage && !isNoMoneyMessage && !isBiggestMessage)
+            {
+                if (messegeWindow.CurrentState())
+                    messegeWindow.Switch();
+            }
 
-            isBiggest = false;
-            isEnough = false;
             isNotEnoughMessage = false;
+            isNoMoneyMessage = false;
+            isBiggestMessage = false;
 
             Point mousePos = new Point(
                 (int)input.GetMousePosition().X,
@@ -406,16 +442,6 @@ namespace Team27_RougeLike.Scene
                 upgradeWindow.Switch();
             if (!backWindow.CurrentState())
                 backWindow.Switch();
-            if (isNotEnoughMessage)
-            {
-                if (!messegeWindow.CurrentState())
-                    messegeWindow.Switch();
-            }
-            else
-            {
-                if (messegeWindow.CurrentState())
-                    messegeWindow.Switch();
-            }
             if (isSelect)
             {
                 if (!upgradeWindow.CurrentState())
@@ -499,18 +525,27 @@ namespace Team27_RougeLike.Scene
                 }
             }
 
-            //左側
-            if (upgradeButton.IsClick(mousePos) && isSelect && !isBiggest)
+            //強化ボタン
+            if (upgradeButton.IsClick(mousePos) && isSelect)
             {
                 if (!isEnough)
                 {
                     isNotEnoughMessage = true;
                 }
-                else
+                if (!isMoney)
+                {
+                    isNoMoneyMessage = true;
+                }
+                if (isBiggest)
+                {
+                    isBiggestMessage = true;
+                }
+                if (isEnough && isMoney && !isBiggest)
                 {
                     if (input.IsLeftClick())
                     {
                         inventory.RemoveItem(inventory.BagItemIndex(selectItem));
+                        inventory.SpendMoney(useMoney);
                         if (selectItem is WeaponItem)
                         {
                             ((WeaponItem)selectItem).LevelUp();
@@ -528,12 +563,20 @@ namespace Team27_RougeLike.Scene
                     }
                 }
             }
-
-            //素材が足りているかどうか
-            if (isSelect)
+            if (isSelect && !isBiggest)
             {
-                //SetItem(selectItem);
+                //お金が足りているか
+                if (myMoney >= useMoney)
+                {
+                    isMoney = true;
+                }
+                else
+                {
+                    isMoney = false;
+                }
 
+
+                //素材が足りているかどうか
                 foreach (int id in materialItems.Keys)
                 {
                     if (consumptions.Keys.Contains(id))
@@ -545,6 +588,7 @@ namespace Team27_RougeLike.Scene
                     }
                     if (!isEnough)
                     {
+                        isEnough = false;
                         return;
                     }
                 }
@@ -623,47 +667,80 @@ namespace Team27_RougeLike.Scene
                 renderer.DrawString("強化", upgradeButton.ButtonCenterVector(),
                     Color.White, new Vector2(2, 2), 1.0f, true, true);
                 
-
+                //選択されたアイテム
                 renderer.DrawString("強化前", new Vector2(windowWidth / 2 + 64, 64), new Vector2(1, 1), Color.White);
                 selectItemInfoUI.Draw(selectItem, 1.0f);
-                renderer.DrawString("強化後", new Vector2(windowWidth / 2 + 64, 192 + 32), new Vector2(1, 1), Color.White);
-                upgradeItemInfoUI.Draw(upgradeItem, 1.0f);
-                
-                //必要素材
-                renderer.DrawString("必要な素材", 
-                    new Vector2(windowWidth / 2 + 64, 192 + 192), new Vector2(1, 1), Color.White);
-                renderer.DrawString("(所持数 / 必要数)",
-                    new Vector2(windowWidth / 2 + 160, 192 + 192), new Vector2(1, 1), Color.White);
 
-                int num = 0;
-                foreach (int id in materialItems.Keys)
+                //選択されたアイテムの強化後
+                if (!isBiggest)
                 {
-                    num++;
-                    renderer.DrawString(itemManager.GetConsuptionItem(id).GetItemName(),
-                        new Vector2(windowWidth / 2 + 64, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
-                    if (consumptions.Keys.Contains(id))
+                    renderer.DrawString("強化後", new Vector2(windowWidth / 2 + 64, 192 + 32), new Vector2(1, 1), Color.White);
+                    upgradeItemInfoUI.Draw(upgradeItem, 1.0f);
+                }
+
+                if (!isBiggest)
+                {
+                    //必要素材
+                    renderer.DrawString("必要な素材",
+                        new Vector2(windowWidth / 2 + 64, 192 + 192), new Vector2(1, 1), Color.White);
+                    renderer.DrawString("(所持数 / 必要数)",
+                        new Vector2(windowWidth / 2 + 160, 192 + 192), new Vector2(1, 1), Color.White);
+
+                    int num = 0;
+                    foreach (int id in materialItems.Keys)
                     {
-                        renderer.DrawString("("+ consumptions[id] + "/" + materialItems[id]+")",
-                            new Vector2(windowWidth / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                        num++;
+                        renderer.DrawString(itemManager.GetConsuptionItem(id).GetItemName(),
+                            new Vector2(windowWidth / 2 + 64, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                        if (consumptions.Keys.Contains(id))
+                        {
+                            renderer.DrawString("(" + consumptions[id] + "/" + materialItems[id] + ")",
+                                new Vector2(windowWidth / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                        }
+                        else
+                        {
+                            renderer.DrawString("(0/" + materialItems[id] + ")",
+                                new Vector2(windowWidth / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                        }
                     }
-                    else
-                    {
-                        renderer.DrawString("(0/" + materialItems[id] + ")",
-                            new Vector2(windowWidth / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
-                    }
+
+                    //お金
+                    renderer.DrawString("消費金額 : " + useMoney, 
+                        rightWindow.GetLeftUnder() + new Vector2(0, -32), new Vector2(1, 1), Color.White);
                 }
             }
 
             messegeWindow.Draw();
 
-            if (isBiggest || !isEnough)
+            if (isBiggest || !isEnough || !isMoney)
             {
                 upgradeWindow.Draw();
             }
+            string messageText = "noMessage";
 
             if (isNotEnoughMessage)
             {
-                renderer.DrawString("素材が足りていません。", messegeWindow.GetCenter(), Color.Red, new Vector2(2, 2), 1.0f, true, true);
+                messageText = "素材が足りていません";
+            }
+            if (isNoMoneyMessage)
+            {
+                if(messageText == "noMessage")
+                {
+                    messageText = "お金が足りていません";
+                }
+                else
+                {
+                    messageText = "素材とお金が足りていません。";
+                }
+            }
+            if (isBiggestMessage)
+            {
+                messageText = "選択された装備はレベルマックスです。";
+            }
+
+            if (messageText != "noMessage")
+            {
+                renderer.DrawString(messageText, messegeWindow.GetCenter(), Color.Red, new Vector2(2, 2), 1.0f, true, true);
             }
 
             renderer.End();
