@@ -29,8 +29,8 @@ namespace Team27_RougeLike.Object.Item
 
         public void LoadAll()
         {
-            int equipmentNum = 20;//装備アイテムのIDで一番大きなID
-            int consumptionNum = 40;//消費アイテムのIDで一番大きなID
+            int equipmentNum = 40;//装備アイテムのIDで一番大きなID
+            int consumptionNum = 44;//消費アイテムのIDで一番大きなID
 
             int[] equipmentIDs = new int[equipmentNum];
             for(int i = 1; i <= equipmentNum; i++)

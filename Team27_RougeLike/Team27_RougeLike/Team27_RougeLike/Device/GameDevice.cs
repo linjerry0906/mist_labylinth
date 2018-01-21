@@ -93,6 +93,7 @@ namespace Team27_RougeLike.Device
         {
             // 入力状態更新
             input.Update();
+            sound.UpdateVolume();
         }
 
         public void DrawCursor()
