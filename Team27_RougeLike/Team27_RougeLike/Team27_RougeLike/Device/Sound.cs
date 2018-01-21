@@ -31,6 +31,7 @@ namespace Team27_RougeLike.Device
         private string currentBGM;
         //Fade用Timer
         private Timer fadeTimer;
+        private bool isFade;
 
         /// <summary>
         /// コンストラクタ
@@ -56,6 +57,8 @@ namespace Team27_RougeLike.Device
 
             fadeTimer = new Timer(2.0f);
             fadeTimer.Initialize();
+
+            isFade = false;
         }
 
         /// <summary>
@@ -130,15 +133,31 @@ namespace Team27_RougeLike.Device
         public void StopBGM()
         {
             fadeTimer.Update();
+            isFade = true;
             if (fadeTimer.IsTime())
             {
                 MediaPlayer.Stop();
                 currentBGM = null;
                 fadeTimer.Initialize();
+                isFade = false;
             }
             else
             {
                 MediaPlayer.Volume = fadeTimer.Rate() * 0.7f;
+            }
+        }
+
+        /// <summary>
+        /// ロード中などのシーンもFade処理
+        /// </summary>
+        public void UpdateVolume()
+        {
+            if (isFade)
+                return;
+
+            if (MediaPlayer.Volume < 0.7f)
+            {
+                MediaPlayer.Volume += 0.003f;
             }
         }
 
@@ -150,7 +169,8 @@ namespace Team27_RougeLike.Device
         {
             Debug.Assert(bgms.ContainsKey(name), ErrorMessage(name));
 
-            if (MediaPlayer.Volume < 0.7f)
+            
+            if (MediaPlayer.Volume < 0.7f && !isFade)
             {
                 MediaPlayer.Volume += 0.003f;
             }

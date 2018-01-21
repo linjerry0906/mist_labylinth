@@ -203,7 +203,19 @@ with.
         <Start>教</Start>
         <End>教</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>王</Start>
+        <End>王</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>奥</Start>
+        <End>奥</End>
+      </CharacterRegion>
       <!-- か -->
+      <CharacterRegion>
+        <Start>開</Start>
+        <End>開</End>
+      </CharacterRegion>
       <CharacterRegion>
         <Start>果</Start>
         <End>果</End>
@@ -389,6 +401,10 @@ with.
       <CharacterRegion>
         <Start>掘</Start>
         <End>掘</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>国</Start>
+        <End>国</End>
       </CharacterRegion>
       <!-- ぐ -->
       <CharacterRegion>
