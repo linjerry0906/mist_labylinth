@@ -26,7 +26,7 @@ namespace Team27_RougeLike.Object.Character
         private PlayerStatus status;
         private DungeonUI ui;
         public Player(Vector3 position, PlayerStatus status, GameDevice gameDevice, CharacterManager characterManager, ParticleManager pManager, GameManager gameManager, DungeonUI ui)
-            : base(new CollisionSphere(position, 5.0f), "test", characterManager,"プレイヤー","White")
+            : base(new CollisionSphere(position, 5.0f), "player", characterManager,"プレイヤー","White")
         {
             tag = "Player";
 
@@ -73,7 +73,8 @@ namespace Team27_RougeLike.Object.Character
             var t = status.GetInventory().LeftHand();
             if (t == null)
             {
-                DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 100, tag, status.GetPower(), attackAngle);
+                DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 1, tag, status.GetPower(), attackAngle);
+                //characterManager.AreaDamage(3);
             }
             else
             {
@@ -84,19 +85,19 @@ namespace Team27_RougeLike.Object.Character
                         ui.LogUI.AddLog("弓による攻撃");
                         break;
                     case WeaponItem.WeaponType.Sword:
-                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 1), 100, tag, status.GetPower(), attackAngle);
+                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 3), 1, tag, status.GetPower(), attackAngle);
                         ui.LogUI.AddLog("剣での攻撃");
                         break;
                     case WeaponItem.WeaponType.Shield:
-                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 3), 100, tag, status.GetPower(), attackAngle);
+                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 3), 1, tag, status.GetPower(), attackAngle);
                         ui.LogUI.AddLog("盾での攻撃");
                         break;
                     case WeaponItem.WeaponType.Dagger:
-                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 3), 100, tag, status.GetPower(), attackAngle);
+                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 3), 1, tag, status.GetPower(), attackAngle);
                         ui.LogUI.AddLog("短剣での攻撃");
                         break;
                     default:
-                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 10), 100, tag, status.GetPower(), attackAngle);
+                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 10), 1, tag, status.GetPower(), attackAngle);
                         break;
                 }
             }
@@ -151,11 +152,24 @@ namespace Team27_RougeLike.Object.Character
             var v = velocity;
             v.Y = 0;
             velocity -= v * 0.1f;
-            collision.Force(velocity, status.GetVelocty() / 2); //ベースを1とするととても速いので半減
+            if (Math.Abs(velocity.X) > 0.5f || Math.Abs(velocity.Z) > 0.5f)
+            {
+                TexChange("_run");
+            }
+            else
+            {
+                TexChange(string.Empty);
+            }
+    collision.Force(velocity, status.GetVelocty() / 2); //ベースを1とするととても速いので半減
         }
         public override void TrueDamage(int num)
         {
             status.Damage(num);
+        }
+
+        public override int GetDiffence()
+        {
+            return status.GetDefence();
         }
     }
 }

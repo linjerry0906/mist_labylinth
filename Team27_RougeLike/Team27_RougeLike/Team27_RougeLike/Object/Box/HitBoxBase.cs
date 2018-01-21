@@ -9,13 +9,13 @@ namespace Team27_RougeLike.Object.Box
     abstract class HitBoxBase
     {
 
-        /// <summary>
-        /// 注　このマスクに入れるものは、触らせたくないもの
-        /// </summary>
         public BoundingSphere collision;        //当たり判定
 
         protected List<CharacterBase> effectedCharacters = new List<CharacterBase>(); //既に当たっているキャラクタ
 
+        /// <summary>
+        /// 注　このマスクに入れるものは、触らせたくないもの
+        /// </summary>
         private List<string> mask;              //マスク
         private int time;                       //持続時間
         private bool isend;
