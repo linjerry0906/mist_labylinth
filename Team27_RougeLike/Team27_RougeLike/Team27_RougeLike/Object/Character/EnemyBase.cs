@@ -23,6 +23,7 @@ namespace Team27_RougeLike.Object
         protected int exp;              //討伐時の経験値
         private ParticleManager pManager;
         private GameDevice gameDevice;
+        protected bool infinity;
 
         /// <summary>
         /// オリジナル
@@ -261,6 +262,17 @@ namespace Team27_RougeLike.Object
         public override void TrueDamage(int num)
         {
             status.Health -= num;
+        }
+
+        public void InfintyRange()
+        {
+            infinity = true;
+            range.searchRange = 10000;
+        }
+
+        public bool UpdateAllRange()
+        {
+            return infinity;
         }
     }
 }
