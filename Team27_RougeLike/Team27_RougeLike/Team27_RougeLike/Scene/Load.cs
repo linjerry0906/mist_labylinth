@@ -77,9 +77,10 @@ namespace Team27_RougeLike.Scene
                 {"Voyage_SE", path },                   //村
                 {"m-art_The11thSephirah", path },       //演習場
                 {"m-art_Candle", path },                //鉱山
-                {"m-art_SnowyNight", path },             //宮殿
+                {"m-art_SnowyNight", path },            //宮殿
                 {"m-art_Komorebi", path },              //樹海
                 {"n14", path },                         //回廊
+                {"n17", path },                         //Boss後
             };
             return list;
         }

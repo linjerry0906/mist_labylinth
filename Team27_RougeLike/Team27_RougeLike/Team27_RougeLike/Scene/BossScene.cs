@@ -262,7 +262,7 @@ namespace Team27_RougeLike.Scene
             //Boss倒したら出現
             map.SwitchDrawExit(true);
             gameManager.StageManager.RemoveFog();
-            gameDevice.Sound.StopBGM();
+            gameDevice.Sound.PlayBGM("n17");
 
             //階段にたどり着いた場合
             if (map.WorldToMap(characterManager.GetPlayer().GetPosition) == map.EndPoint)
@@ -288,12 +288,12 @@ namespace Team27_RougeLike.Scene
         {
             if (gameDevice.InputState.GetKeyState(Keys.Q))
             {
-                angle += 1;
+                angle += 1.5f;
                 angle = (angle > 360) ? angle - 360 : angle;
             }
             else if (gameDevice.InputState.GetKeyState(Keys.E))
             {
-                angle -= 1;
+                angle -= 1.5f;
                 angle = (angle < 0) ? angle + 360 : angle;
             }
             gameDevice.MainProjector.Rotate(angle);
