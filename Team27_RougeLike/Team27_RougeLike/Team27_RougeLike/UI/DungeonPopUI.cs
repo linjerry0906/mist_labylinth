@@ -130,7 +130,7 @@ namespace Team27_RougeLike.UI
                 window.GetCenter() + textOffset, 
                 Color.White, 
                 new Vector2(1.0f, 1.0f), 
-                window.CurrentAlpha(), 
+                window.CurrentAlpha() * 3.0f, 
                 true, true);
         }
 

@@ -35,6 +35,12 @@ namespace Team27_RougeLike.UI
             colors = new Color[2];
         }
 
+        public Vector2 Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+
         /// <summary>
         /// 詳細を描画
         /// </summary>

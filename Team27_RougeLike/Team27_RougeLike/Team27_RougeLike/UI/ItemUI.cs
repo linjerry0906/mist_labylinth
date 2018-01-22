@@ -41,6 +41,8 @@ namespace Team27_RougeLike.UI
 
         private static readonly int PAGE_MAX_ITEM = 10;
         private int currentPage;
+        private int hintIndex;
+        private ItemInfoUI hintInfo;
 
         private bool isClick;
         private EquipUI equipUI;
@@ -70,6 +72,9 @@ namespace Team27_RougeLike.UI
             #region ItemInfo
             currentItem = null;
             itemIndex = -1;
+
+            hintIndex = -1;
+            hintInfo = new ItemInfoUI(Vector2.Zero, gameManager, gameDevice);
             #endregion
 
             #region PopUI
@@ -201,10 +206,10 @@ namespace Team27_RougeLike.UI
         /// </summary>
         private void ClickList()
         {
-            if (!input.IsLeftClick())       //clickしていなかったら判定
-                return;
+            hintIndex = -1;
 
             Point mousePos = new Point((int)input.GetMousePosition().X, (int)input.GetMousePosition().Y);
+
             int index = 0;
             foreach (Button b in buttons)
             {
@@ -219,6 +224,12 @@ namespace Team27_RougeLike.UI
             {
                 return;
             }
+
+            hintIndex = (currentPage - 1) * PAGE_MAX_ITEM + index;
+            hintInfo.Position = input.GetMousePosition() + new Vector2(35, 50);
+
+            if (!input.IsLeftClick())       //clickしていなかったら判定
+                return;
 
             itemIndex = (currentPage - 1) * PAGE_MAX_ITEM + index;
             currentItem = itemList[itemIndex];
@@ -420,6 +431,8 @@ namespace Team27_RougeLike.UI
 
             DrawInfo(alpha);
 
+            DrawHint(alpha);
+
             DrawPopUI();
         }
 
@@ -445,9 +458,14 @@ namespace Team27_RougeLike.UI
                 float drawAlpha = alpha;
                 Color color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 int currentItemIndex = (currentPage - 1) * PAGE_MAX_ITEM + i;
-                if (currentItemIndex == itemIndex)
+
+                if(currentItemIndex == hintIndex)
                 {
-                    drawAlpha *= 0.8f;       //選択されたアイテムをハイライト
+                    drawAlpha *= 0.75f;       //Mouse Onアイテムをハイライト
+                }
+                else if (currentItemIndex == itemIndex)
+                {
+                    drawAlpha *= 0.85f;       //選択されたアイテムをハイライト
                     color = Color.Yellow;
                 }
                 else
@@ -475,6 +493,10 @@ namespace Team27_RougeLike.UI
 
         }
 
+        /// <summary>
+        /// PageButtonを描画
+        /// </summary>
+        /// <param name="alpha"></param>
         private void DrawPageButton(float alpha)
         {
             int maxPage = (itemList.Count - 1) / PAGE_MAX_ITEM + 1;
@@ -591,6 +613,22 @@ namespace Team27_RougeLike.UI
                     Color.White,
                     new Vector2(1.0f, 1.0f),
                     popUI.Alpha * 2, true, true);
+        }
+
+        /// <summary>
+        /// カーソルに合わせて詳細表示
+        /// </summary>
+        /// <param name="alpha"></param>
+        private void DrawHint(float alpha)
+        {
+            if (hintIndex == -1)
+                return;
+
+            renderer.DrawTexture("fade", hintInfo.Position + new Vector2(-10, -15), 
+                new Vector2(420, 100), alpha * 0.8f);
+
+            hintInfo.Draw(
+                itemList[hintIndex], alpha);
         }
     }
 }

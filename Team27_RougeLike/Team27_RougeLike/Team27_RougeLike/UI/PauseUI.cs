@@ -114,7 +114,7 @@ namespace Team27_RougeLike.UI
                 backLayer.CurrentAlpha() * constractAlpha * 0.6f);
             backLayer.Draw("white");
             parameterUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
-            itemUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
+            
             equipUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
 
             if (itemUI.CurrentItem() != null)
@@ -125,6 +125,8 @@ namespace Team27_RougeLike.UI
             {
                 currentInfo.Draw(equipUI.CurrentItem(), backLayer.CurrentAlpha() * constractAlpha);
             }
+
+            itemUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
         }
     }
 }
