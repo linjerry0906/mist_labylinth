@@ -100,7 +100,7 @@ namespace Team27_RougeLike.Scene
             nextScene = SceneType.DungeonSelect;
             endFlag = false;
 
-            gameManager.PlayerInfo.Initialize();
+            gameManager.PlayerInfo.Initialize();       //レベルなどの初期化処理
             gameManager.Save();
             if (scene == SceneType.Pause ||
                 scene == SceneType.ItemShop ||
@@ -115,7 +115,6 @@ namespace Team27_RougeLike.Scene
             InitHint();
 
             gameManager.PlayerItem.RemoveTemp();       //一時的なアイテムを削除
-            gameManager.PlayerInfo.Initialize();       //レベルなどの初期化処理
         }
 
         /// <summary>

@@ -139,6 +139,7 @@ namespace Team27_RougeLike.UI
 
             questUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
             itemUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
+            questUI.DrawQuestInfo(backLayer.CurrentAlpha() * constractAlpha);
         }
     }
 }
