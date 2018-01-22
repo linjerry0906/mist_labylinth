@@ -133,6 +133,10 @@ with.
         <Start>操</Start>
         <End>操</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>暴</Start>
+        <End>暴</End>
+      </CharacterRegion>
       <!-- い -->
       <CharacterRegion>
         <Start>依</Start>

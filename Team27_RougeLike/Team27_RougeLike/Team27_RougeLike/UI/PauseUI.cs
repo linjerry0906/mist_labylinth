@@ -24,7 +24,8 @@ namespace Team27_RougeLike.UI
         private ParameterUI parameterUI;        //パラメータ表示UI
         private ItemUI itemUI;                  //ItemUI
         private ItemInfoUI currentInfo;         //選択されているアイテムの表示
-        private EquipUI equipUI;
+        private EquipUI equipUI;                //装備欄
+        private PlayerQuestUI questUI;          //受けているクエストUI
         private readonly float LIMIT_ALPHA = 0.1f;      //背景Alphaの最大値 
 
         public PauseUI(GameManager gameManager, GameDevice gameDevice)
@@ -34,6 +35,7 @@ namespace Team27_RougeLike.UI
             input = gameDevice.InputState;
             renderer = gameDevice.Renderer;
 
+            #region 背景
             backLayer = new Window(
                 gameDevice,
                 new Vector2(10, 10),
@@ -41,14 +43,16 @@ namespace Team27_RougeLike.UI
             backLayer.Initialize();         //初期化
             backLayer.SetAlphaLimit(LIMIT_ALPHA);
             backLayer.Switch();             //開く
+            #endregion
 
+            #region Parameter
             parameterUI = new ParameterUI(
-                backLayer.GetRightTop() + new Vector2(-350, 30),        //背景レイヤーから相対位置を取る
+                backLayer.GetRightTop() + new Vector2(-350, 35),        //背景レイヤーから相対位置を取る
                 gameManager, gameDevice);
-
+            #endregion
 
             currentInfo = new ItemInfoUI(
-                backLayer.GetLeftUnder() + new Vector2(50, -100), gameManager, gameDevice);
+                backLayer.GetLeftUnder() + new Vector2(55, -102), gameManager, gameDevice);
 
             #region EquipUI
             equipUI = new EquipUI(
@@ -61,6 +65,10 @@ namespace Team27_RougeLike.UI
                 equipUI, gameManager, gameDevice);
 
             equipUI.SetItemUI(itemUI);
+
+            questUI = new PlayerQuestUI(
+                backLayer.GetCenterTop() + new Vector2(-200, 20),
+                gameManager, gameDevice);
         }
 
         /// <summary>
@@ -70,6 +78,10 @@ namespace Team27_RougeLike.UI
         {
             backLayer.Update();
             itemUI.Update();
+            if (itemUI.IsPop())
+                return;
+
+            questUI.Update();
             equipUI.Update();
             if (itemUI.IsClick())
             {
@@ -79,7 +91,6 @@ namespace Team27_RougeLike.UI
             {
                 itemUI.SetNull();
             }
-
 
             parameterUI.RefreshInfo();
         }
@@ -109,8 +120,8 @@ namespace Team27_RougeLike.UI
         {
             float constractAlpha = 1.0f / LIMIT_ALPHA;
             renderer.DrawTexture("fade",
-                backLayer.GetLeftUnder() + new Vector2(40, -115),
-                new Vector2(570, 100),
+                backLayer.GetLeftUnder() + new Vector2(45, -120),
+                new Vector2(670, 105),
                 backLayer.CurrentAlpha() * constractAlpha * 0.6f);
             backLayer.Draw("white");
             parameterUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
@@ -126,6 +137,7 @@ namespace Team27_RougeLike.UI
                 currentInfo.Draw(equipUI.CurrentItem(), backLayer.CurrentAlpha() * constractAlpha);
             }
 
+            questUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
             itemUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
         }
     }

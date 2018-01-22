@@ -172,6 +172,7 @@
     <Compile Include="UI\LogText.cs" />
     <Compile Include="UI\ParameterUI.cs" />
     <Compile Include="UI\PauseUI.cs" />
+    <Compile Include="UI\PlayerQuestUI.cs" />
     <Compile Include="UI\Window.cs" />
     <Compile Include="Utility\Angle.cs" />
     <Compile Include="Object\Character\CharacterBase.cs" />

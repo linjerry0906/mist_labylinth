@@ -62,7 +62,7 @@ namespace Team27_RougeLike.UI
                 Vector2 equipPos = drawPos + new Vector2(cellSize.X + 2, 0);            //描画位置   
                 buttons[i] = new Button(equipPos, (int)equipCellSize.X, (int)equipCellSize.Y);
             }
-            removeButton = new Button(new Vector2(505, 620), 100, 30);
+            removeButton = new Button(new Vector2(605, 610), 100, 30);
 
             Initialize();
         }

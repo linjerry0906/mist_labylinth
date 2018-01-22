@@ -257,8 +257,8 @@ namespace Team27_RougeLike.QuestSystem
 
             #region PopUI
             popUI = new DungeonPopUI(gameDevice);
-            popUI.SetSize(new Vector2(300, 80));
-            popUI.SetAlphaLimit(0.9f);
+            popUI.SetSize(new Vector2(450, 80));
+            popUI.SetAlphaLimit(0.7f);
             popUI.SetTextOffset(Vector2.Zero);
             #endregion
 

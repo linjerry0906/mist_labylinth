@@ -65,8 +65,8 @@ namespace Team27_RougeLike.UI
 
             InitButton();
 
-            equipButton = new Button(position + new Vector2(450, 590), 100, 30);
-            removeButton = new Button(position + new Vector2(450, 630), 100, 30);
+            equipButton = new Button(position + new Vector2(550, 580), 100, 30);
+            removeButton = new Button(position + new Vector2(550, 620), 100, 30);
             #endregion
 
             #region ItemInfo
@@ -80,6 +80,7 @@ namespace Team27_RougeLike.UI
             #region PopUI
             popUI = new DungeonPopUI(gameDevice);
             popUI.SetSize(new Vector2(300, 120));
+            popUI.SetAlphaLimit(0.8f);
             popButtons = new Button[2];
             popButtons[0] = new Button(popUI.Center + new Vector2(-130, 10), 100, 30);
             popButtons[1] = new Button(popUI.Center + new Vector2(20, 10), 100, 30);
@@ -453,6 +454,7 @@ namespace Team27_RougeLike.UI
             if (itemList.Count <= 0)
                 return;
 
+            #region List描画
             for (int i = 0; i < buttons.Count; i++)
             {
                 float drawAlpha = alpha;
@@ -490,7 +492,7 @@ namespace Team27_RougeLike.UI
                     new Vector2(1.1f, 1.1f),
                     alpha, false, true);
             }
-
+            #endregion
         }
 
         /// <summary>
@@ -594,25 +596,34 @@ namespace Team27_RougeLike.UI
 
             popUI.Draw();
 
-            renderer.DrawTexture("fade",
+            renderer.DrawTexture("white",
                 new Vector2(popButtons[0].Position().X, popButtons[0].Position().Y),
-                new Vector2(100, 30), popUI.Alpha * 2);
+                new Vector2(100, 30), popUI.Alpha * 0.9f);
             renderer.DrawString(
                     "左手",
                     new Vector2(popButtons[0].ButtonCenter().X, popButtons[0].ButtonCenter().Y),
-                    Color.White,
+                    Color.Black,
                     new Vector2(1.0f, 1.0f),
-                    popUI.Alpha * 2, true, true);
+                    popUI.Alpha * 3, true, true);
 
-            renderer.DrawTexture("fade",
+            renderer.DrawTexture("white",
                 new Vector2(popButtons[1].Position().X, popButtons[1].Position().Y),
-                new Vector2(100, 30), popUI.Alpha * 2);
+                new Vector2(100, 30), popUI.Alpha * 0.9f);
             renderer.DrawString(
                     "右手",
                     new Vector2(popButtons[1].ButtonCenter().X, popButtons[1].ButtonCenter().Y),
-                    Color.White,
+                    Color.Black,
                     new Vector2(1.0f, 1.0f),
-                    popUI.Alpha * 2, true, true);
+                    popUI.Alpha * 3, true, true);
+        }
+
+        /// <summary>
+        /// PopWindow動作中か
+        /// </summary>
+        /// <returns></returns>
+        public bool IsPop()
+        {
+            return popUI.IsPop();
         }
 
         /// <summary>

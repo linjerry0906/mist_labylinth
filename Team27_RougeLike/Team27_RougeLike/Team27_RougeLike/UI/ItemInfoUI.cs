@@ -183,10 +183,10 @@ namespace Team27_RougeLike.UI
         private Color GetColor(int diff)
         {
             if (diff > 0)
-                return Color.Red;
+                return Color.PaleVioletRed;
             if (diff == 0)
                 return Color.White;
-            return Color.Blue;
+            return Color.CornflowerBlue;
         }
 
         /// <summary>
