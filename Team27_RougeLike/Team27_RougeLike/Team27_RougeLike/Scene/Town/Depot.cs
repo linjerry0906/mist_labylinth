@@ -339,7 +339,7 @@ namespace Team27_RougeLike.Scene
             rightPageItems = new List<Item>();
             rightButtons = new List<Button>();
             rightWindows = new List<Window>();
-            for (int i = 0; i < rightItems.Count - (page - 1) * 20 && i <= 20; i++)
+            for (int i = 0; i < rightItems.Count - (page - 1) * 20 && i < 20; i++)
             {
                 AddRightList(rightItems[i + (page - 1) * 20]);
             }
