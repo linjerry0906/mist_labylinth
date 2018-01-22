@@ -764,11 +764,11 @@ namespace Team27_RougeLike.Scene
 
                     //アイテムタイプの表示
                     string type;
-                    if (rightPageItems[i] is WeaponItem)
+                    if (rightItems[i + (rightPage - 1) * 20] is WeaponItem)
                     {
                         type = ((WeaponItem)rightItems[i + (rightPage - 1) * 20]).GetWeaponType().ToString();
                     }
-                    else if (rightPageItems[i] is ProtectionItem)
+                    else if (rightItems[i + (rightPage - 1) * 20] is ProtectionItem)
                     {
                         type = ((ProtectionItem)rightItems[i + (rightPage - 1) * 20]).GetProtectionType().ToString();
                     }
