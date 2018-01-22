@@ -66,7 +66,7 @@ namespace Team27_RougeLike.Scene
         private bool isSelect;                  //アイテムを選んだかどうか
         private bool isEnough;                  //素材が足りてるかどうか
         private bool isNotEnoughMessage;        //素材が足りてないメッセージ
-        private bool isMoney;                 //お金が足りているかどうか
+        private bool isMoney;                   //お金が足りているかどうか
         private bool isNoMoneyMessage;          //お金が足りていない時のメッセージ
         private bool isBiggest;                 //レベルがマックスかどうか
         private bool isBiggestMessage;          //装備レベルが最大時のメッセージ
@@ -268,6 +268,10 @@ namespace Team27_RougeLike.Scene
                     useMoney = int.Parse(csvDate[3]);
                     for(int i = 4; i < csvDate.Length; i += 2)
                     {
+                        if (csvDate[i] == "no")
+                        {
+                            break;
+                        }
                         materialItems.Add(int.Parse(csvDate[i]), int.Parse(csvDate[i + 1]));
                     }
                 }
