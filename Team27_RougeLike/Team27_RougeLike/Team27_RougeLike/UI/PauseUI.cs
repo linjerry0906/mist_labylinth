@@ -48,16 +48,16 @@ namespace Team27_RougeLike.UI
 
 
             currentInfo = new ItemInfoUI(
-                backLayer.GetLeftUnder() + new Vector2(20, -100), gameManager, gameDevice);
+                backLayer.GetLeftUnder() + new Vector2(50, -100), gameManager, gameDevice);
 
             #region EquipUI
             equipUI = new EquipUI(
-                backLayer.GetRightUnder() + new Vector2(-350, -220),
+                backLayer.GetRightUnder() + new Vector2(-360, -220),
                 gameManager, gameDevice);
             #endregion
 
             itemUI = new ItemUI(
-                backLayer.GetOffsetPosition() + new Vector2(20, 20),
+                backLayer.GetOffsetPosition() + new Vector2(45, 20),
                 equipUI, gameManager, gameDevice);
 
             equipUI.SetItemUI(itemUI);
@@ -109,7 +109,7 @@ namespace Team27_RougeLike.UI
         {
             float constractAlpha = 1.0f / LIMIT_ALPHA;
             renderer.DrawTexture("fade",
-                backLayer.GetLeftUnder() + new Vector2(15, -115),
+                backLayer.GetLeftUnder() + new Vector2(40, -115),
                 new Vector2(570, 100),
                 backLayer.CurrentAlpha() * constractAlpha * 0.6f);
             backLayer.Draw("white");

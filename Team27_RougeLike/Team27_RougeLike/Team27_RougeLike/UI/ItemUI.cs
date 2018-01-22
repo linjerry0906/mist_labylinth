@@ -31,12 +31,16 @@ namespace Team27_RougeLike.UI
 
         private DungeonPopUI popUI;             //PopUi
         private Button[] popButtons;            //PopUiのボタン
+        private Button[] pageButtons;           //PageButtons
 
-        private readonly int WIDTH = 170;       //ボタンの長さ
-        private readonly int HEIGHT = 22;       //ボタンの高さ
+        private readonly int WIDTH = 280;       //ボタンの長さ
+        private readonly int HEIGHT = 42;       //ボタンの高さ
 
         private Button equipButton;             //装備ボタン
         private Button removeButton;            //捨てるボタン
+
+        private static readonly int PAGE_MAX_ITEM = 10;
+        private int currentPage;
 
         private bool isClick;
         private EquipUI equipUI;
@@ -51,6 +55,8 @@ namespace Team27_RougeLike.UI
             playerItem = gameManager.PlayerItem;
             itemList = playerItem.BagList();
             isClick = false;
+
+            currentPage = 1;
 
             #region Button
             buttons = new List<Button>();
@@ -81,11 +87,36 @@ namespace Team27_RougeLike.UI
         private void InitButton()
         {
             buttons.Clear();
-            for (int i = 0; i < itemList.Count; i++)
+            int maxPage = (itemList.Count - 1) / PAGE_MAX_ITEM + 1;
+            int buttonAmount = ButtonAmount(maxPage);
+
+            for (int i = 0; i < buttonAmount; i++)
             {
                 buttons.Add(
-                    new Button(position + new Vector2(0, i * HEIGHT), WIDTH, HEIGHT));
+                    new Button(position + new Vector2(0, 30 + i * (HEIGHT + 5)), WIDTH, HEIGHT));
             }
+
+            pageButtons = new Button[2];
+            pageButtons[0] = new Button(position + new Vector2(0, 30 + 11.5f * HEIGHT), WIDTH / 2 - 70, 25);
+            pageButtons[1] = new Button(position + new Vector2(WIDTH / 2 + 70, 30 + 11.5f * HEIGHT), WIDTH / 2 - 70, 25);
+        }
+
+        /// <summary>
+        /// Button数を計算
+        /// </summary>
+        /// <param name="maxPage">現在最大ページ</param>
+        /// <returns></returns>
+        private int ButtonAmount(int maxPage)
+        {
+            if (maxPage < 2)                //ページ1しかない
+            {
+                return itemList.Count;
+            }
+            if (currentPage == maxPage)     //最後のページ
+            {
+                return itemList.Count % PAGE_MAX_ITEM;
+            }
+            return PAGE_MAX_ITEM;             //中間ページ
         }
 
         public void Initialize()
@@ -111,6 +142,8 @@ namespace Team27_RougeLike.UI
 
             ClickList();
 
+            ClickPage();
+
             CheckInfoButton();
         }
 
@@ -132,9 +165,16 @@ namespace Team27_RougeLike.UI
             {
                 playerItem.EquipLeftHand(itemIndex);
                 popUI.PopOff();
+
+                if (buttons.Count - 1 < 0 && currentPage > 1)
+                {
+                    currentPage--;
+                }
+
                 currentItem = null;
                 itemIndex = -1;
                 equipUI.Initialize();
+                Initialize();
                 return;
             }
 
@@ -142,9 +182,16 @@ namespace Team27_RougeLike.UI
             {
                 playerItem.EquipRightHand(itemIndex);
                 popUI.PopOff();
+
+                if (buttons.Count - 1 < 0 && currentPage > 1)
+                {
+                    currentPage--;
+                }
+
                 currentItem = null;
                 itemIndex = -1;
                 equipUI.Initialize();
+                Initialize();
                 return;
             }
         }
@@ -168,16 +215,48 @@ namespace Team27_RougeLike.UI
                 index++;
             }
 
-            InitButton();
-
-            if (index == buttons.Count || index >= itemList.Count)     //最後までなかったら
+            if (index >= buttons.Count)    //最後までなかったら
             {
                 return;
             }
 
-            itemIndex = index;
+            itemIndex = (currentPage - 1) * PAGE_MAX_ITEM + index;
             currentItem = itemList[itemIndex];
             isClick = true;
+        }
+
+        /// <summary>
+        /// PageButtonがクリックされたか
+        /// </summary>
+        private void ClickPage()
+        {
+            if (!input.IsLeftClick())       //clickしていなかったら判定
+                return;
+
+            int maxPage = (itemList.Count - 1) / PAGE_MAX_ITEM + 1;
+            if (maxPage < 2)
+                return;
+
+            Point mousePos = new Point((int)input.GetMousePosition().X, (int)input.GetMousePosition().Y);
+
+            if(currentPage > 1)
+            {
+                if (pageButtons[0].IsClick(mousePos))
+                {
+                    currentPage--;
+                    Initialize();
+                    return;
+                }
+            }
+            if (currentPage < maxPage)
+            {
+                if (pageButtons[1].IsClick(mousePos))
+                {
+                    currentPage++;
+                    Initialize();
+                    return;
+                }
+            }
         }
 
         public bool IsClick()
@@ -225,32 +304,36 @@ namespace Team27_RougeLike.UI
         }
 
         /// <summary>
-        /// Itemを使用　まだ未実装
+        /// Itemを使用
         /// </summary>
         private void Use()
         {
             string type = ((ConsumptionItem)currentItem).GetTypeText();
             ItemEffect effect = ((ConsumptionItem)currentItem).GetItemEffect();
-            if(type == "回復系")
+            if (type == "回復系")
             {
                 int recovery = ((Recovery)effect).GetAmount();
                 gameManager.PlayerInfo.Heal(recovery);
                 playerItem.RemoveItem(itemIndex);
-                buttons.RemoveAt(buttons.Count - 1);
             }
-            else if(type == "ダメージ")
+            else if (type == "ダメージ")
             {
                 int damage = ((Damage)effect).GetAmount();
                 gameManager.PlayerInfo.Damage(damage);
                 playerItem.RemoveItem(itemIndex);
-                buttons.RemoveAt(buttons.Count - 1);
             }
-            else if(type == "矢")
+            else if (type == "矢")
             {
                 playerItem.EquipArrow(itemIndex);
             }
 
+            if (buttons.Count - 1 < 0 && currentPage > 1)
+            {
+                currentPage--;
+            }
+
             equipUI.Initialize();
+            Initialize();
             currentItem = null;
             itemIndex = -1;
         }
@@ -279,7 +362,13 @@ namespace Team27_RougeLike.UI
                     return;
             }
 
+            if (buttons.Count - 1 < 0 && currentPage > 1)
+            {
+                currentPage--;
+            }
+
             equipUI.Initialize();
+            Initialize();
             currentItem = null;
             itemIndex = -1;
         }
@@ -308,8 +397,13 @@ namespace Team27_RougeLike.UI
         private void Remove()
         {
             playerItem.RemoveItem(itemIndex);
-            buttons.RemoveAt(buttons.Count - 1);
 
+            if (buttons.Count - 1 <= 0 && currentPage > 1)
+            {
+                currentPage--;
+            }
+
+            Initialize();
             currentItem = null;
             itemIndex = -1;
         }
@@ -322,6 +416,8 @@ namespace Team27_RougeLike.UI
         {
             DrawItemList(alpha);
 
+            DrawPageButton(alpha);
+
             DrawInfo(alpha);
 
             DrawPopUI();
@@ -333,11 +429,23 @@ namespace Team27_RougeLike.UI
         /// <param name="alpha">透明度</param>
         private void DrawItemList(float alpha)
         {
-            for (int i = 0; i < itemList.Count; i++)
+            int currentCount = 0, maxCount = 0;
+            playerItem.BagItemCount(ref currentCount, ref maxCount);
+            renderer.DrawTexture("fade", position, new Vector2(WIDTH, 22), alpha * 0.6f);
+            renderer.DrawString(
+                "アイテム（" + currentCount +  "/" + maxCount + "）",
+                position + new Vector2(WIDTH / 2, 0), Color.White,
+                new Vector2(1.1f, 1.1f), alpha * 1.5f, true);
+
+            if (itemList.Count <= 0)
+                return;
+
+            for (int i = 0; i < buttons.Count; i++)
             {
                 float drawAlpha = alpha;
                 Color color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-                if (i == itemIndex)
+                int currentItemIndex = (currentPage - 1) * PAGE_MAX_ITEM + i;
+                if (currentItemIndex == itemIndex)
                 {
                     drawAlpha *= 0.8f;       //選択されたアイテムをハイライト
                     color = Color.Yellow;
@@ -347,19 +455,63 @@ namespace Team27_RougeLike.UI
                     drawAlpha *= 0.6f;       //選択されてないアイテムは対比するためFadeのAlphaを下げる
                 }
 
-                renderer.DrawTexture("fade", position + new Vector2(0, i * HEIGHT), new Vector2(WIDTH, HEIGHT - 2), drawAlpha);
-                string name = itemList[i].GetItemName();
-                if (itemList[i] is WeaponItem)
-                    name += " + " + ((WeaponItem)itemList[i]).GetReinforcement();
-                if (itemList[i] is ProtectionItem)
-                    name += " + " + ((ProtectionItem)itemList[i]).GetReinforcement();
+                Vector2 drawPos = new Vector2(buttons[i].Position().X, buttons[i].Position().Y);
+
+                renderer.DrawTexture("fade", drawPos, buttons[i].Size(), drawAlpha);
+                int index = (currentPage - 1) * PAGE_MAX_ITEM + i;
+                string name = itemList[index].GetItemName();
+                if (itemList[index] is WeaponItem)
+                    name += " + " + ((WeaponItem)itemList[index]).GetReinforcement();
+                if (itemList[index] is ProtectionItem)
+                    name += " + " + ((ProtectionItem)itemList[index]).GetReinforcement();
 
                 renderer.DrawString(
                     name,
-                    position + new Vector2(0, i * HEIGHT),
+                    drawPos + new Vector2(10, HEIGHT / 2),
                     color,
                     new Vector2(1.1f, 1.1f),
-                    alpha, false, false);
+                    alpha, false, true);
+            }
+
+        }
+
+        private void DrawPageButton(float alpha)
+        {
+            int maxPage = (itemList.Count - 1) / PAGE_MAX_ITEM + 1;
+
+            Vector2 pageInfoPos =
+                new Vector2(pageButtons[0].Position().X, pageButtons[0].Position().Y) +
+                new Vector2(WIDTH / 2, 0);
+            renderer.DrawString(currentPage + " / " + maxPage, pageInfoPos,
+                Color.Black, new Vector2(1.1f, 1.1f), alpha, true);
+
+            if (maxPage < 2)
+                return;
+
+            if (currentPage != 1)
+            {
+                Vector2 drawPos = new Vector2(pageButtons[0].Position().X, pageButtons[0].Position().Y);
+                renderer.DrawTexture(
+                    "fade",
+                    drawPos,
+                    pageButtons[0].Size(), alpha * 0.6f);
+                renderer.DrawString("←",
+                    pageButtons[0].ButtonCenterVector(), Color.White,
+                    new Vector2(1.1f, 1.1f), alpha * 1.5f,
+                    true, true);
+            }
+            if(currentPage != maxPage)
+            {
+                Vector2 drawPos = new Vector2(pageButtons[1].Position().X, pageButtons[1].Position().Y);
+                renderer.DrawTexture(
+                    "fade",
+                    drawPos,
+                    pageButtons[1].Size(), alpha * 0.6f);
+
+                renderer.DrawString("→",
+                    pageButtons[1].ButtonCenterVector(), Color.White,
+                    new Vector2(1.1f, 1.1f), alpha * 1.5f,
+                    true, true);
             }
         }
 
