@@ -281,12 +281,6 @@ namespace Team27_RougeLike.Scene
 
             sr.Close();
             fs.Close();
-
-            if (level <= 1)
-            {
-                materialItems.Add(7, 2);
-                useMoney = 0;
-            }
         }
 
         //強化するアイテムをセット
