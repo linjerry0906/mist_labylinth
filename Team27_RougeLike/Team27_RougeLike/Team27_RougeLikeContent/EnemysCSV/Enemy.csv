@@ -4,11 +4,12 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
 3,test,10,1,1,0.3,Ranged,5,90,5,うごめく小液体,White
 4,test,200,1,1,0.3,Ranged,9,20,5,うごめく大液体,White
 5,Snow,20,12,2,0.4,Totem,5,40,7,雪の精,White
-6,test,50,7,2,0.2,Fool,12,20,10,異変の大液体,Green
+6,test,50,7,2,0.2,Fool,11,20,10,異変の大液体,LightGreen
 7,bat,40,14,2,0.4,Melee,5,30,7,洞窟コウモリ,DarkBlue
-8,bat,100,20,5,0.3,Fool,12,35,15,吸血コウモリ,Red
+8,bat,100,20,5,0.3,Fool,11,35,15,吸血コウモリ,Red
 9,enemy_light,50,16,3,0.3,Ranged,6,50,8,彷徨う灯火,White
 10,enemy_mud,60,20,4,0.2,Fool,7,50,10,泥人形,White
-11,enemy_mud,150,28,5,0.3,Totem,17,60,20,鉱山の主,DarkGray
+11,enemy_mud,150,28,8,0.3,Totem,11,60,20,鉱山の主,DarkGray
 12,bat,45,15,2,0.3,Melee,6,30,7,氷コウモリ,LightBlue
 13,Snow,100,22,5,0.2,Totem,10,45,10,大雪の精,White
+14,enemy_snowman,300,40,20,0.4,Melee,11,20,30,イエティ,White
