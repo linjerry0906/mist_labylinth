@@ -363,6 +363,25 @@ namespace Team27_RougeLike.Object.Item
         }
 
         /// <summary>
+        /// 矢を装備しているか
+        /// </summary>
+        /// <returns></returns>
+        public bool IsArrowEquiped()
+        {
+            return arrow != null;
+        }
+
+        /// <summary>
+        /// 矢を一つ減少
+        /// </summary>
+        public void DecreaseArrow()
+        {
+            arrow.AddStack(-1);
+            if (arrow.GetStack() <= 0)
+                arrow = null;
+        }
+
+        /// <summary>
         /// 右手に装備している武器
         /// </summary>
         /// <returns></returns>
