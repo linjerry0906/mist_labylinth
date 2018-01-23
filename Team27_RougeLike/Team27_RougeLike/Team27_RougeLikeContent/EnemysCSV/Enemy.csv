@@ -10,6 +10,9 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
 9,enemy_light,50,16,3,0.3,Ranged,6,50,8,彷徨う灯火,White
 10,enemy_mud,60,20,4,0.2,Fool,7,50,10,泥人形,White
 11,enemy_mud,150,28,8,0.3,Totem,11,60,20,鉱山の主,DarkGray
-12,bat,45,15,2,0.3,Melee,6,30,7,氷コウモリ,LightBlue
+12,bat,45,15,3,0.3,Melee,6,30,7,氷コウモリ,LightBlue
 13,Snow,100,22,5,0.2,Totem,10,45,10,大雪の精,White
 14,enemy_snowman,300,40,20,0.4,Melee,11,20,30,イエティ,White
+15,enemy_snowman,70,25,8,0.5,Fool,6,30,10,スノーマン,White
+16,enemy_light,60,35,5,0.4,Ranged,5,45,12,雪の魂,DarkBlue
+17,Snow,500,40,35,0.4,Melee,11,50,35,アイススプライト,LightBlue

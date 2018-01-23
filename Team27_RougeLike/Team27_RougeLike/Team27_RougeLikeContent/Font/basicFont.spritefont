@@ -820,6 +820,10 @@ with.
         <Start>立</Start>
         <End>立</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>魂</Start>
+        <End>魂</End>
+      </CharacterRegion>
       <!-- たい -->
       <CharacterRegion>
         <Start>体</Start>
