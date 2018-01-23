@@ -26,6 +26,7 @@ namespace Team27_RougeLike.UI
         private ItemInfoUI currentInfo;         //選択されているアイテムの表示
         private EquipUI equipUI;                //装備欄
         private PlayerQuestUI questUI;          //受けているクエストUI
+        private MoneyUI moneyUI;                //所持金を表示するUI
         private readonly float LIMIT_ALPHA = 0.1f;      //背景Alphaの最大値 
 
         public PauseUI(GameManager gameManager, GameDevice gameDevice)
@@ -47,12 +48,14 @@ namespace Team27_RougeLike.UI
 
             #region Parameter
             parameterUI = new ParameterUI(
-                backLayer.GetRightTop() + new Vector2(-350, 35),        //背景レイヤーから相対位置を取る
+                backLayer.GetRightTop() + new Vector2(-360, 35),        //背景レイヤーから相対位置を取る
                 gameManager, gameDevice);
             #endregion
 
+            #region アイテム詳細
             currentInfo = new ItemInfoUI(
                 backLayer.GetLeftUnder() + new Vector2(55, -102), gameManager, gameDevice);
+            #endregion
 
             #region EquipUI
             equipUI = new EquipUI(
@@ -60,15 +63,25 @@ namespace Team27_RougeLike.UI
                 gameManager, gameDevice);
             #endregion
 
+            #region アイテム欄
             itemUI = new ItemUI(
                 backLayer.GetOffsetPosition() + new Vector2(45, 20),
                 equipUI, gameManager, gameDevice);
 
             equipUI.SetItemUI(itemUI);
+            #endregion
 
+            #region Quest
             questUI = new PlayerQuestUI(
                 backLayer.GetCenterTop() + new Vector2(-200, 20),
                 gameManager, gameDevice);
+            #endregion
+
+            #region Money
+            moneyUI = new MoneyUI(
+                backLayer.GetRightTop() + new Vector2(-360, 280),
+                gameManager, gameDevice);
+            #endregion
         }
 
         /// <summary>
@@ -76,13 +89,15 @@ namespace Team27_RougeLike.UI
         /// </summary>
         public void Update()
         {
-            backLayer.Update();
-            itemUI.Update();
-            if (itemUI.IsPop())
+            backLayer.Update();     //背景更新
+            itemUI.Update();        //アイテムリスト更新
+            if (itemUI.IsPop())     //メッセージボックスPopした状態は以降更新しない
                 return;
 
-            questUI.Update();
-            equipUI.Update();
+            questUI.Update();       //クエスト
+            equipUI.Update();       //装備欄
+
+            #region 詳細設定
             if (itemUI.IsClick())
             {
                 equipUI.SetNull();
@@ -91,8 +106,9 @@ namespace Team27_RougeLike.UI
             {
                 itemUI.SetNull();
             }
+            #endregion
 
-            parameterUI.RefreshInfo();
+            parameterUI.RefreshInfo();      //パラメータ更新
         }
 
         /// <summary>
@@ -109,8 +125,8 @@ namespace Team27_RougeLike.UI
         /// </summary>
         public void SwitchOff()
         {
-            backLayer.Switch();
-            itemUI.SwitchOff();
+            backLayer.Switch();     //背景を閉じる
+            itemUI.SwitchOff();     //メッセージボックスを閉じる
         }
 
         /// <summary>
@@ -118,28 +134,32 @@ namespace Team27_RougeLike.UI
         /// </summary>
         public void Draw()
         {
-            float constractAlpha = 1.0f / LIMIT_ALPHA;
-            renderer.DrawTexture("fade",
+            float alpha = backLayer.CurrentAlpha() / LIMIT_ALPHA;       //背景Alphaから逆算
+            backLayer.Draw("white");        //背景
+
+            parameterUI.Draw(alpha);        //能力欄
+            moneyUI.Draw(alpha);            //所持金
+            questUI.Draw(alpha);            //クエスト欄
+            equipUI.Draw(alpha);            //装備欄
+
+            #region Item詳細
+            renderer.DrawTexture("fade",    //詳細背景
                 backLayer.GetLeftUnder() + new Vector2(45, -120),
                 new Vector2(670, 105),
-                backLayer.CurrentAlpha() * constractAlpha * 0.6f);
-            backLayer.Draw("white");
-            parameterUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
-            
-            equipUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
+                alpha * 0.6f);
 
             if (itemUI.CurrentItem() != null)
             {
-                currentInfo.Draw(itemUI.CurrentItem(), backLayer.CurrentAlpha() * constractAlpha);
+                currentInfo.Draw(itemUI.CurrentItem(), alpha);
             }
             else if (equipUI.CurrentItem() != null)
             {
-                currentInfo.Draw(equipUI.CurrentItem(), backLayer.CurrentAlpha() * constractAlpha);
+                currentInfo.Draw(equipUI.CurrentItem(), alpha);
             }
+            #endregion
 
-            questUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
-            itemUI.Draw(backLayer.CurrentAlpha() * constractAlpha);
-            questUI.DrawQuestInfo(backLayer.CurrentAlpha() * constractAlpha);
+            itemUI.Draw(alpha);             //所持アイテム
+            questUI.DrawQuestInfo(alpha);   //カーソルに合わせて表示するクエスト詳細
         }
     }
 }

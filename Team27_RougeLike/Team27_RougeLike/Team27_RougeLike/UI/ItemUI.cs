@@ -40,12 +40,12 @@ namespace Team27_RougeLike.UI
         private Button removeButton;            //捨てるボタン
 
         private static readonly int PAGE_MAX_ITEM = 10;
-        private int currentPage;
-        private int hintIndex;
-        private ItemInfoUI hintInfo;
+        private int currentPage;                //現在ページ
+        private int hintIndex;                  //ヒントアイテム
+        private ItemInfoUI hintInfo;            //Info表示
 
         private bool isClick;
-        private EquipUI equipUI;
+        private EquipUI equipUI;                //装備欄UI
 
         public ItemUI(Vector2 position, EquipUI equipUI, GameManager gameManager, GameDevice gameDevice)
         {
@@ -125,12 +125,18 @@ namespace Team27_RougeLike.UI
             return PAGE_MAX_ITEM;             //中間ページ
         }
 
+        /// <summary>
+        /// 初期化
+        /// </summary>
         public void Initialize()
         {
             itemList = playerItem.BagList();
             InitButton();
         }
 
+        /// <summary>
+        /// Popしているメッセージボックスを閉じる
+        /// </summary>
         public void SwitchOff()
         {
             popUI.PopOff();
@@ -310,6 +316,10 @@ namespace Team27_RougeLike.UI
             }
         }
 
+        /// <summary>
+        /// 現在選択したアイテム
+        /// </summary>
+        /// <returns></returns>
         public Item CurrentItem()
         {
             return currentItem;
@@ -426,15 +436,11 @@ namespace Team27_RougeLike.UI
         /// <param name="alpha">透明値</param>
         public void Draw(float alpha)
         {
-            DrawItemList(alpha);
-
-            DrawPageButton(alpha);
-
-            DrawInfo(alpha);
-
-            DrawHint(alpha);
-
-            DrawPopUI();
+            DrawItemList(alpha);        //アイテムリスト
+            DrawPageButton(alpha);      //ページボタン
+            DrawInfoButton(alpha);      //Infoに表示するボタン
+            DrawHint(alpha);            //カーソルに合わせてヒントを表示
+            DrawPopUI();                //メッセージボックス表示
         }
 
         /// <summary>
@@ -543,7 +549,7 @@ namespace Team27_RougeLike.UI
         /// 選択していないなら表示しない部分
         /// </summary>
         /// <param name="alpha"></param>
-        private void DrawInfo(float alpha)
+        private void DrawInfoButton(float alpha)
         {
             if (currentItem == null)
                 return;

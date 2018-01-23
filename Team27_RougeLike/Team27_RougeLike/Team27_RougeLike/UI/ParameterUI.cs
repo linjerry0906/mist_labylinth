@@ -75,21 +75,21 @@ namespace Team27_RougeLike.UI
         public void Draw(float alpha)
         {
             renderer.DrawTexture(
-                "fade", position + new Vector2(-7, -15), 
+                "fade", position + new Vector2(0, -15), 
                 new Vector2(COLUM_WIDTH * 2.1f, LINE_HEIGHT * 8), alpha * 0.6f);
 
             for(int i = 0; i < parameter.Length; i++)
             {
                 renderer.DrawString(
                     info[i],
-                    position + new Vector2(0, i * LINE_HEIGHT),
+                    position + new Vector2(7, i * LINE_HEIGHT),
                     new Color(1.0f, 1.0f, 1.0f),
                     new Vector2(1.2f, 1.2f),
                     alpha, false, true);
 
                 renderer.DrawString(
                     parameter[i],
-                    position + new Vector2(COLUM_WIDTH, i * LINE_HEIGHT),
+                    position + new Vector2(7 + COLUM_WIDTH, i * LINE_HEIGHT),
                     new Color(1.0f, 1.0f, 1.0f),
                     new Vector2(1.2f, 1.2f),
                     alpha, false, true);

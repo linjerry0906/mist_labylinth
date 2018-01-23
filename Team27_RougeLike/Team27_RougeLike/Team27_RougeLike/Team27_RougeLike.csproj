@@ -170,6 +170,7 @@
     <Compile Include="UI\ItemInfoUI.cs" />
     <Compile Include="UI\ItemUI.cs" />
     <Compile Include="UI\LogText.cs" />
+    <Compile Include="UI\MoneyUI.cs" />
     <Compile Include="UI\ParameterUI.cs" />
     <Compile Include="UI\PauseUI.cs" />
     <Compile Include="UI\PlayerQuestUI.cs" />
