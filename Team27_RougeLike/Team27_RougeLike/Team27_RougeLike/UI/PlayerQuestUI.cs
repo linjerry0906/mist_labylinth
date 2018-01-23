@@ -68,7 +68,7 @@ namespace Team27_RougeLike.UI
         /// </summary>
         public void Update()
         {
-            currentQuest = -1;
+            currentQuest = -1;          //カーソルに合わせたクエスト
 
             Point mousePos = new Point((int)input.GetMousePosition().X, (int)input.GetMousePosition().Y);
             for (int i = 0; i < buttons.Length; i++)
@@ -76,7 +76,7 @@ namespace Team27_RougeLike.UI
                 if (!buttons[i].IsClick(mousePos))
                     continue;
 
-                currentQuest = i;
+                currentQuest = i;       //カーソルに合わせたクエスト更新
                 break;
             }
         }
