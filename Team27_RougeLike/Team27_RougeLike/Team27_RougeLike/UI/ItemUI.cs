@@ -120,7 +120,7 @@ namespace Team27_RougeLike.UI
             }
             if (currentPage == maxPage)     //最後のページ
             {
-                return itemList.Count % PAGE_MAX_ITEM;
+                return itemList.Count - PAGE_MAX_ITEM * (currentPage - 1);
             }
             return PAGE_MAX_ITEM;             //中間ページ
         }
@@ -178,7 +178,7 @@ namespace Team27_RougeLike.UI
                 playerItem.EquipLeftHand(itemIndex);
                 popUI.PopOff();
 
-                if (buttons.Count - 1 < 0 && currentPage > 1)
+                if (buttons.Count - 1 <= 0 && currentPage > 1)
                 {
                     currentPage--;
                 }
@@ -195,7 +195,7 @@ namespace Team27_RougeLike.UI
                 playerItem.EquipRightHand(itemIndex);
                 popUI.PopOff();
 
-                if (buttons.Count - 1 < 0 && currentPage > 1)
+                if (buttons.Count - 1 <= 0 && currentPage > 1)
                 {
                     currentPage--;
                 }
@@ -349,7 +349,7 @@ namespace Team27_RougeLike.UI
                 playerItem.EquipArrow(itemIndex);
             }
 
-            if (buttons.Count - 1 < 0 && currentPage > 1)
+            if (buttons.Count - 1 <= 0 && currentPage > 1)
             {
                 currentPage--;
             }
@@ -384,7 +384,7 @@ namespace Team27_RougeLike.UI
                     return;
             }
 
-            if (buttons.Count - 1 < 0 && currentPage > 1)
+            if (buttons.Count - 1 <= 0 && currentPage > 1)
             {
                 currentPage--;
             }
@@ -490,6 +490,9 @@ namespace Team27_RougeLike.UI
                     name += " + " + ((WeaponItem)itemList[index]).GetReinforcement();
                 if (itemList[index] is ProtectionItem)
                     name += " + " + ((ProtectionItem)itemList[index]).GetReinforcement();
+                if (itemList[index] is ConsumptionItem &&
+                    ((ConsumptionItem)itemList[index]).GetTypeText() == "矢")
+                    name += "（" + ((ConsumptionItem)itemList[index]).GetStack() + "）";
 
                 renderer.DrawString(
                     name,

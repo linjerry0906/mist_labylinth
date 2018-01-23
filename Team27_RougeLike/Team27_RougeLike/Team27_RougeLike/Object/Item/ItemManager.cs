@@ -30,7 +30,7 @@ namespace Team27_RougeLike.Object.Item
         public void LoadAll()
         {
             int equipmentNum = 40;//装備アイテムのIDで一番大きなID
-            int consumptionNum = 44;//消費アイテムのIDで一番大きなID
+            int consumptionNum = 52;//消費アイテムのIDで一番大きなID
 
             int[] equipmentIDs = new int[equipmentNum];
             for(int i = 1; i <= equipmentNum; i++)
@@ -172,28 +172,28 @@ namespace Team27_RougeLike.Object.Item
                 if (type == "recovary")
                 {
                     consumptions[id] = new ConsumptionItem(id, itemName, itemExplanation,
-                        itemPrice, itemRare, itemWeight, amount,
+                        itemPrice, itemRare, itemWeight, amountLimit,
                         ConsumptionItem.ItemEffectType.recovery,
                         new Recovery(amount));
                 }
                 else if (type == "damage")
                 {
                     consumptions[id] = new ConsumptionItem(id, itemName, itemExplanation,
-                        itemPrice, itemRare, itemWeight, amount,
+                        itemPrice, itemRare, itemWeight, amountLimit,
                         ConsumptionItem.ItemEffectType.damage,
                         new Damage(amount));
                 }
                 else if (type == "arrow")
                 {
                     consumptions[id] = ((new ConsumptionItem(id, itemName, itemExplanation,
-                        itemPrice, itemRare, itemWeight, amount,
+                        itemPrice, itemRare, itemWeight, amountLimit,
                         ConsumptionItem.ItemEffectType.arrow,
                         new ArrowEffect(amount))));
                 }
                 else if (type == "noEffect")
                 {
                     consumptions[id] = new ConsumptionItem(id, itemName, itemExplanation,
-                        itemPrice, itemRare, itemWeight, amount,
+                        itemPrice, itemRare, itemWeight, amountLimit,
                         ConsumptionItem.ItemEffectType.noEffect,
                         new NoEffect());
                 }
@@ -345,21 +345,21 @@ namespace Team27_RougeLike.Object.Item
                         if (type == "recovary")
                         {
                             save.Add(new ConsumptionItem(id, itemName, itemExplanation,
-                                itemPrice, itemRare, itemWeight, amount,
+                                itemPrice, itemRare, itemWeight, amountLimit,
                                 ConsumptionItem.ItemEffectType.recovery,
                                 new Recovery(amount)));
                         }
                         else if (type == "damage")
                         {
                             save.Add(new ConsumptionItem(id, itemName, itemExplanation,
-                                itemPrice, itemRare, itemWeight, amount,
+                                itemPrice, itemRare, itemWeight, amountLimit,
                                 ConsumptionItem.ItemEffectType.damage,
                                 new Damage(amount)));
                         }
                         else if (type == "arrow")
                         {
                             ConsumptionItem arrow = ((new ConsumptionItem(id, itemName, itemExplanation,
-                                itemPrice, itemRare, itemWeight, amount,
+                                itemPrice, itemRare, itemWeight, amountLimit,
                                 ConsumptionItem.ItemEffectType.arrow,
                                 new ArrowEffect(amount))));
                             arrow.SetStack(stack);
@@ -368,7 +368,7 @@ namespace Team27_RougeLike.Object.Item
                         else if (type == "noEffect")
                         {
                             save.Add(new ConsumptionItem(id, itemName, itemExplanation,
-                                itemPrice, itemRare, itemWeight, amount,
+                                itemPrice, itemRare, itemWeight, amountLimit,
                                 ConsumptionItem.ItemEffectType.noEffect,
                                 new NoEffect()));
                         }
@@ -511,28 +511,28 @@ namespace Team27_RougeLike.Object.Item
                 if (type == "recovary")
                 {
                     consumption[id] = new ConsumptionItem(id, itemName, itemExplanation,
-                        itemPrice, itemRare, itemWeight, amount,
+                        itemPrice, itemRare, itemWeight, amountLimit,
                         ConsumptionItem.ItemEffectType.recovery,
                         new Recovery(amount));
                 }
                 else if (type == "damage")
                 {
                     consumption[id] = new ConsumptionItem(id, itemName, itemExplanation,
-                        itemPrice, itemRare, itemWeight, amount,
+                        itemPrice, itemRare, itemWeight, amountLimit,
                         ConsumptionItem.ItemEffectType.damage,
                         new Damage(amount));
                 }
                 else if (type == "arrow")
                 {
-                    consumptions[id] = ((new ConsumptionItem(id, itemName, itemExplanation,
-                        itemPrice, itemRare, itemWeight, amount,
+                    consumption[id] = ((new ConsumptionItem(id, itemName, itemExplanation,
+                        itemPrice, itemRare, itemWeight, amountLimit,
                         ConsumptionItem.ItemEffectType.arrow,
                         new ArrowEffect(amount))));
                 }
                 else
                 {
                     consumption[id] = new ConsumptionItem(id, itemName, itemExplanation,
-                        itemPrice, itemRare, itemWeight, amount,
+                        itemPrice, itemRare, itemWeight, amountLimit,
                         ConsumptionItem.ItemEffectType.noEffect,
                         new NoEffect());
                 }

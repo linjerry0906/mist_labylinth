@@ -254,7 +254,7 @@ namespace Team27_RougeLike.UI
                 equips[5] = rightHand.GetItemName() + " + " + rightHand.GetReinforcement();
             }
 
-            if (arrow == null)           //右手に武器がない場合
+            if (arrow == null)                //矢を装備していない場合
             {
                 colors[6] = Color.White;
                 EquipNull(ref equips[6]);
@@ -262,7 +262,7 @@ namespace Team27_RougeLike.UI
             else
             {
                 colors[6] = Color.Lerp(Color.White, Color.Gold, arrow.GetItemRare() / 100.0f);       //レア度で色付け
-                equips[6] = arrow.GetItemName();
+                equips[6] = arrow.GetItemName() + "（" + arrow.GetStack() + "）";
             }
         }
 

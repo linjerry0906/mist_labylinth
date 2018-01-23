@@ -1126,6 +1126,10 @@ with.
         <Start>不</Start>
         <End>不</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>普</Start>
+        <End>普</End>
+      </CharacterRegion>
       <!-- ぶ -->
       <CharacterRegion>
         <Start>武</Start>

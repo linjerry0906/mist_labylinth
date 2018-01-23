@@ -203,6 +203,9 @@ namespace Team27_RougeLike.UI
             info[3] = "重量 " + item.GetItemWeight();
             info[4] = "タイプ " + item.GetTypeText();
             info[5] = item.GetItemExplanation();
+
+            if (item.GetTypeText() == "矢")
+                info[0] += "（" + item.GetStack() + "）";
         }
     }
 }

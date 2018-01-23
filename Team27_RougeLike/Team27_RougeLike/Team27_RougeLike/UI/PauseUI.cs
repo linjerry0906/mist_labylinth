@@ -136,6 +136,10 @@ namespace Team27_RougeLike.UI
         {
             float alpha = backLayer.CurrentAlpha() / LIMIT_ALPHA;       //背景Alphaから逆算
             backLayer.Draw("white");        //背景
+            renderer.DrawTexture("fade",    
+                 backLayer.GetLeftUnder() + new Vector2(45, -120),
+                 new Vector2(670, 105),
+                 alpha * 0.6f);
 
             parameterUI.Draw(alpha);        //能力欄
             moneyUI.Draw(alpha);            //所持金
@@ -143,10 +147,6 @@ namespace Team27_RougeLike.UI
             equipUI.Draw(alpha);            //装備欄
 
             #region Item詳細
-            renderer.DrawTexture("fade",    //詳細背景
-                backLayer.GetLeftUnder() + new Vector2(45, -120),
-                new Vector2(670, 105),
-                alpha * 0.6f);
 
             if (itemUI.CurrentItem() != null)
             {

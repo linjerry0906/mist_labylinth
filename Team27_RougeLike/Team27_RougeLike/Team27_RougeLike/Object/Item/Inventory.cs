@@ -64,8 +64,51 @@ namespace Team27_RougeLike.Object.Item
 
             Item newItem = item.UniqueClone();
             newItem.ResetID(gameDevice.Random.Next(-50, 50));
-            bag.Add(newItem);
+
+            if (!(newItem is ConsumptionItem))
+            {
+                bag.Add(newItem);
+                return true;
+            }
+
+            if (((ConsumptionItem)newItem).GetTypeText() != "矢")
+            {
+                bag.Add(newItem);
+                return true;
+            }
+
+            AddArrow((ConsumptionItem)newItem);
             return true;
+        }
+
+        /// <summary>
+        /// カバン内の弓矢を自動スタック処理
+        /// </summary>
+        /// <param name="arrow"></param>
+        private void AddArrow(ConsumptionItem arrow)
+        {
+            foreach (Item i in bag)
+            {
+                if ((!(i is ConsumptionItem)))
+                    continue;
+
+                if (((ConsumptionItem)i).GetItemID() != arrow.GetItemID())
+                    continue;
+
+                int leftStock = ((ConsumptionItem)i).GetAmountLimit() - ((ConsumptionItem)i).GetStack();
+                if (arrow.GetStack() <= leftStock)
+                {
+                    ((ConsumptionItem)i).AddStack(arrow.GetStack());
+                    return;
+                }
+                else
+                {
+                    ((ConsumptionItem)i).AddStack(leftStock);
+                    arrow.AddStack(-leftStock);
+                }
+            }
+
+            bag.Add(arrow);
         }
 
         /// <summary>
@@ -300,8 +343,17 @@ namespace Team27_RougeLike.Object.Item
 
             foreach (Item i in bag)               //ItemListの重量計算
             {
-                if(i != null)
-                    weight += i.GetItemWeight();
+                if (i != null)
+                {
+                    if (i is ConsumptionItem)
+                    {
+                        weight += i.GetItemWeight() * ((ConsumptionItem)i).GetStack();
+                    }
+                    else
+                    {
+                        weight += i.GetItemWeight();
+                    }
+                }
             }
 
             foreach (ProtectionItem p in armor)   //防具の計算
@@ -327,7 +379,7 @@ namespace Team27_RougeLike.Object.Item
                 weight += rightHand.GetItemWeight();
             }
 
-            if(arrow != null)
+            if (arrow != null)
             {
                 ArrowEffect effect = (ArrowEffect)arrow.GetItemEffect();
                 power += effect.GetPower();
@@ -403,7 +455,7 @@ namespace Team27_RougeLike.Object.Item
 
         public void RemoveArmor(int index)
         {
-            if(bag.Count < MAX_ITEM_COUNT_BAG)
+            if (bag.Count < MAX_ITEM_COUNT_BAG)
             {
                 bag.Add(armor[index]);
                 armor[index] = null;
@@ -421,11 +473,11 @@ namespace Team27_RougeLike.Object.Item
 
         public void RemoveArrow()
         {
-            if (bag.Count < MAX_ITEM_COUNT_BAG)
-            {
-                bag.Add(arrow);
-                arrow = null;
-            }
+            if (bag.Count >= MAX_ITEM_COUNT_BAG)
+                return;
+
+            AddArrow(arrow);
+            arrow = null;
         }
 
         public void RemoveLeftHand()
@@ -485,12 +537,18 @@ namespace Team27_RougeLike.Object.Item
                 itemDepository[id] <= 0)
                 return false;
 
-            Item item = itemManager.GetConsuptionItem(id);
+            ConsumptionItem item = (ConsumptionItem)itemManager.GetConsuptionItem(id);
             itemDepository[id]--;
             if (itemDepository[id] <= 0)
                 itemDepository.Remove(id);
 
-            bag.Add(item);
+            if (item.GetTypeText() != "矢")
+            {
+                bag.Add(item);
+                return true;
+            }
+
+            AddArrow(item);
             return true;
         }
 
@@ -527,12 +585,12 @@ namespace Team27_RougeLike.Object.Item
 
             if (!itemDepository.ContainsKey(bag[bagIndex].GetItemID()))
             {
-                itemDepository.Add(bag[bagIndex].GetItemID(), 1);
+                itemDepository.Add(bag[bagIndex].GetItemID(), ((ConsumptionItem)bag[bagIndex]).GetStack());
                 bag.RemoveAt(bagIndex);
                 return true;
             }
 
-            itemDepository[bag[bagIndex].GetItemID()] += 1;
+            itemDepository[bag[bagIndex].GetItemID()] += ((ConsumptionItem)bag[bagIndex]).GetStack();
             bag.RemoveAt(bagIndex);
             return true;
         }
