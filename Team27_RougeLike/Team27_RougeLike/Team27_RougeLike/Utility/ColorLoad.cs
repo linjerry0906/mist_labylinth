@@ -57,6 +57,8 @@ namespace Team27_RougeLike.Utility
                     return new Color(80, 255, 200);
                 case "LightBrown":
                     return new Color(185, 100, 42);
+                case "DarkBrown":
+                    return new Color(145, 60, 12);
                 default:
                     return Color.White;
             }

@@ -21,3 +21,4 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
 20,enemy_armor,450,50,45,0.8,Fool,7,20,40,êXÇÃÉKÅ[Éh,White
 21,enemy_snake,60,40,10,0.7,Melee,4,30,10,çªîôé÷,LightBrown
 22,Snow,80,45,6,0.3,Totem,5,35,8,çªÇÃê∏,LightBrown
+23,enemy_snake,700,70,60,0.7,Melee,9,30,50,é÷â§,DarkBrown
