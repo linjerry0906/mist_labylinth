@@ -50,8 +50,6 @@ Content\Effect\polygon.xnb
 Content\Effect\depth.xnb
 Content\Sound\slash.xnb
 Content\Sound\sowrd.xnb
-Content\Sound\BGM\m-art_The11thSephirah.xnb
-Content\Sound\BGM\m-art_The11thSephirah.wma
 Content\Sound\BGM\m-art_Candle.xnb
 Content\Sound\BGM\m-art_Candle.wma
 Content\Sound\BGM\m-art_Komorebi.xnb
@@ -78,8 +76,6 @@ Content\Sound\BGM\Battle-Dawn.xnb
 Content\Sound\BGM\Battle-Dawn.wma
 Content\Sound\BGM\m-art_Cristea.xnb
 Content\Sound\BGM\m-art_Cristea.wma
-Content\Sound\BGM\m-art_SnowyNight.xnb
-Content\Sound\BGM\m-art_SnowyNight.wma
 Content\Texture\warning.xnb
 Content\Texture\player.xnb
 Content\Sound\BGM\Ariadne-battle01.xnb
@@ -125,7 +121,10 @@ Content\Sound\BGM\m-art_Witchcraft.wma
 Content\Sound\BGM\over-the-blood.xnb
 Content\Sound\BGM\over-the-blood.wma
 Content\Texture\player_run.xnb
-Content\Sound\BGM\m-art_The11thSephirah.mp3
+Content\Sound\BGM\n51.xnb
+Content\Sound\BGM\n51.wma
+Content\Sound\BGM\n36.xnb
+Content\Sound\BGM\n36.wma
 Content\Sound\BGM\m-art_Candle.mp3
 Content\Sound\BGM\m-art_Komorebi.mp3
 Content\Sound\BGM\n14.mp3
@@ -139,7 +138,6 @@ Content\Sound\BGM\m-art_Testament.mp3
 Content\Sound\BGM\Lost-Emotion.mp3
 Content\Sound\BGM\Battle-Dawn.mp3
 Content\Sound\BGM\m-art_Cristea.mp3
-Content\Sound\BGM\m-art_SnowyNight.mp3
 Content\Sound\BGM\Ariadne-battle01.mp3
 Content\Sound\BGM\Ariadne-Boss.mp3
 Content\Sound\BGM\Ariadne-LastBoss.mp3
@@ -161,9 +159,12 @@ Content\Sound\BGM\caos-and-despair.mp3
 Content\Sound\BGM\m-art_CallMyName.mp3
 Content\Sound\BGM\m-art_Witchcraft.mp3
 Content\Sound\BGM\over-the-blood.mp3
+Content\Sound\BGM\n51.mp3
+Content\Sound\BGM\n36.mp3
 Content\EnemysCSV\Enemy.csv
 Content\ItemCSV\ConsumptionItems.csv
 Content\ItemCSV\EquipmentItems.csv
+Content\ItemCSV\MaterialItem.csv
 Content\PlayerCSV\PlayerExp.csv
 Content\PlayerCSV\PlayerStatus.csv
 Content\QuestCSV\Quest.csv
@@ -185,6 +186,8 @@ Content\StageCSV\Stage_boss.csv
 Content\StageCSV\Stage_boss_1_3.csv
 Content\StageCSV\Stage_boss_2_10.csv
 Content\StageCSV\Stage_boss_2_5.csv
+Content\StageCSV\Stage_boss_3_12.csv
+Content\StageCSV\Stage_boss_3_6.csv
 Content\StageCSV\Stage_boss_4_5.csv
 Content\StoreItemCSV\StoreItem.csv
 Content\BGM使用.txt

@@ -386,7 +386,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-01-21T21:56:37.0758022+09:00</Time>
+      <Time>2018-01-23T23:12:31.280946+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -484,16 +484,6 @@
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\sowrd.xnb</Output>
       <Time>2018-01-19T22:35:44.8776591+09:00</Time>
-    </Item>
-    <Item>
-      <Source>Sound\BGM\m-art_The11thSephirah.mp3</Source>
-      <Name>Sound\BGM\m-art_The11thSephirah</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\BGM\m-art_The11thSephirah.xnb</Output>
-      <Extra>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\BGM\m-art_The11thSephirah.wma</Extra>
-      <Time>2018-01-21T16:08:05.43553+09:00</Time>
     </Item>
     <Item>
       <Source>Sound\BGM\m-art_Candle.mp3</Source>
@@ -624,16 +614,6 @@
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\BGM\m-art_Cristea.xnb</Output>
       <Extra>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\BGM\m-art_Cristea.wma</Extra>
       <Time>2018-01-21T16:08:05.304967+09:00</Time>
-    </Item>
-    <Item>
-      <Source>Sound\BGM\m-art_SnowyNight.mp3</Source>
-      <Name>Sound\BGM\m-art_SnowyNight</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\BGM\m-art_SnowyNight.xnb</Output>
-      <Extra>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\BGM\m-art_SnowyNight.wma</Extra>
-      <Time>2018-01-21T16:08:05.3969258+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -899,6 +879,26 @@
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\player_run.xnb</Output>
       <Time>2018-01-21T21:56:09.9887959+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\BGM\n51.mp3</Source>
+      <Name>Sound\BGM\n51</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\BGM\n51.xnb</Output>
+      <Extra>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\BGM\n51.wma</Extra>
+      <Time>2018-01-23T23:12:31.3455993+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\BGM\n36.mp3</Source>
+      <Name>Sound\BGM\n36</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\BGM\n36.xnb</Output>
+      <Extra>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\BGM\n36.wma</Extra>
+      <Time>2018-01-23T23:12:31.3080057+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

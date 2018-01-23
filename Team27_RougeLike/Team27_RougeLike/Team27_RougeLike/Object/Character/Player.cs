@@ -26,7 +26,7 @@ namespace Team27_RougeLike.Object.Character
         private PlayerStatus status;
         private DungeonUI ui;
         public Player(Vector3 position, PlayerStatus status, GameDevice gameDevice, CharacterManager characterManager, ParticleManager pManager, GameManager gameManager, DungeonUI ui)
-            : base(new CollisionSphere(position, 5.0f), "player", characterManager,"プレイヤー","White")
+            : base(new CollisionSphere(position, 5.0f), "player", characterManager, "プレイヤー", "White")
         {
             tag = "Player";
 
@@ -80,8 +80,17 @@ namespace Team27_RougeLike.Object.Character
                 switch (t.GetWeaponType())
                 {
                     case WeaponItem.WeaponType.Bow:
-                        DBox = new MoveDamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 0.5f), 100, tag, status.GetPower(), attackAngle, pManager, gameDevice);
-                        ui.LogUI.AddLog("弓による攻撃");
+                        if (status.GetInventory().IsArrowEquiped())
+                        {
+                            DBox = new MoveDamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 0.5f), 100, tag, status.GetPower(), attackAngle, pManager, gameDevice);
+                            status.GetInventory().DecreaseArrow();
+                            ui.LogUI.AddLog("弓による攻撃");
+                        }
+                        else
+                        {
+                            ui.LogUI.AddLog("矢を装備していません");
+                            return;
+                        }
                         break;
                     case WeaponItem.WeaponType.Sword:
                         DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 3, 3), 1, tag, status.GetPower(), attackAngle);
@@ -159,7 +168,7 @@ namespace Team27_RougeLike.Object.Character
             {
                 TexChange(string.Empty);
             }
-    collision.Force(velocity, status.GetVelocty() / 2); //ベースを1とするととても速いので半減
+            collision.Force(velocity, status.GetVelocty() / 2); //ベースを1とするととても速いので半減
         }
         public override void TrueDamage(int num)
         {
