@@ -40,6 +40,7 @@ namespace Team27_RougeLike.UI
             input = gameDevice.InputState;
             renderer = gameDevice.Renderer;
             enemyName = gameManager.EnemyName;
+            enemyName.Load();
             itemManager = gameManager.ItemManager;
             playerQuest = gameManager.PlayerQuest;
             playerQuest.UpdateQuestProcess();

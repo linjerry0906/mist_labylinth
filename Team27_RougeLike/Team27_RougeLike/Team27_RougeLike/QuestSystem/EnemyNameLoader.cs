@@ -36,7 +36,8 @@ namespace Team27_RougeLike.QuestSystem
 
                 int id = int.Parse(data[0]);
                 string name = data[10];
-                enemyName.Add(id, name);
+                if(!enemyName.ContainsKey(id))
+                    enemyName.Add(id, name);
             }
 
             sr.Close();

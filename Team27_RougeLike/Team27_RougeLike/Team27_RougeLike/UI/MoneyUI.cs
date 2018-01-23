@@ -28,6 +28,10 @@ namespace Team27_RougeLike.UI
             currentMoney = gameManager.PlayerItem.CurrentMoney();
         }
 
+        /// <summary>
+        /// 描画処理
+        /// </summary>
+        /// <param name="alpha"></param>
         public void Draw(float alpha)
         {
             renderer.DrawTexture("fade",
