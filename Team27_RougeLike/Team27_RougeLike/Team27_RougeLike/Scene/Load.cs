@@ -32,6 +32,8 @@ namespace Team27_RougeLike.Scene
                 {"enemy_light" ,path},
                 {"enemy_mud" ,path},
                 {"enemy_snowman" ,path},
+                {"enemy_armor" ,path},
+                {"enemy_snake" ,path},
                 {"fog" ,path},
                 {"town" ,path},
                 {"guild_rank" ,path},

@@ -6,7 +6,7 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
 5,Snow,20,12,2,0.4,Totem,5,40,7,雪の精,White
 6,test,50,7,2,0.2,Fool,11,20,10,異変の大液体,LightGreen
 7,bat,40,14,2,0.4,Melee,5,30,7,洞窟コウモリ,DarkBlue
-8,bat,100,20,5,0.3,Fool,11,35,15,吸血コウモリ,Red
+8,bat,100,20,5,0.5,Fool,11,35,15,吸血コウモリ,Red
 9,enemy_light,50,16,3,0.3,Ranged,6,50,8,彷徨う灯火,White
 10,enemy_mud,60,20,4,0.2,Fool,7,50,10,泥人形,White
 11,enemy_mud,150,28,8,0.3,Melee,11,60,20,鉱山の主,DarkGray
@@ -18,4 +18,6 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
 17,Snow,500,40,35,0.4,Melee,11,50,35,アイススプライト,LightBlue
 18,test,30,10,3,0.6,Fool,5,60,5,森の液体,DarkGreen
 19,Snow,45,35,10,0.6,Totem,5,50,7,森の精,DarkGreen
-20,enemy_mud,450,50,45,0.8,Fool,9,20,40,森のガード,DarkGreen
+20,enemy_armor,450,50,45,0.8,Fool,7,20,40,森のガード,White
+21,enemy_snake,60,40,10,0.7,Melee,4,30,10,砂漠蛇,LightBrown
+22,Snow,80,45,6,0.3,Totem,5,35,8,砂の精,LightBrown

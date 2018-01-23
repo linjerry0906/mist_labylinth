@@ -540,6 +540,10 @@ with.
         <Start>査</Start>
         <End>査</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>砂</Start>
+        <End>砂</End>
+      </CharacterRegion>
       <!-- さい -->
       <CharacterRegion>
         <Start>最</Start>
@@ -1071,6 +1075,10 @@ with.
         <Start>伐</Start>
         <End>伐</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>漠</Start>
+        <End>漠</End>
+      </CharacterRegion>
       <!-- ばい -->
       <CharacterRegion>
         <Start>買</Start>
@@ -1149,6 +1157,10 @@ with.
       <CharacterRegion>
         <Start>変</Start>
         <End>変</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>蛇</Start>
+        <End>蛇</End>
       </CharacterRegion>
 
       <!-- ほ -->
