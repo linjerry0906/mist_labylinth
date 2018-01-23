@@ -1247,6 +1247,10 @@ with.
         <Start>目</Start>
         <End>目</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>森</Start>
+        <End>森</End>
+      </CharacterRegion>
       <!-- もど -->
       <CharacterRegion>
         <Start>戻</Start>
