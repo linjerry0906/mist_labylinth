@@ -120,7 +120,10 @@ with.
         <Start>：</Start>
         <End>：</End>
       </CharacterRegion>
-
+      <CharacterRegion>
+        <Start>～</Start>
+        <End>～</End>
+      </CharacterRegion>
 
 
       <!-- 漢字 -->
@@ -685,6 +688,10 @@ with.
         <Start>証</Start>
         <End>証</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>奨</Start>
+        <End>奨</End>
+      </CharacterRegion>
 
       <!--じょう -->
       <CharacterRegion>
@@ -721,6 +728,10 @@ with.
       <CharacterRegion>
         <Start>少</Start>
         <End>少</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>推</Start>
+        <End>推</End>
       </CharacterRegion>
 
       <!-- すう -->

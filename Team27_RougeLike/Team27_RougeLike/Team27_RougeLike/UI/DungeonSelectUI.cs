@@ -187,7 +187,7 @@ namespace Team27_RougeLike.UI
         private void DrawDungeons(float constractAlpha)
         {
             renderer.DrawString(
-                "どのダンジョンへ冒険するか",
+                "どのダンジョンへ冒険するか？（推奨ギルドランク）",
                 DUNGEON_OFFSET + new Vector2(10, 5),
                 new Vector2(1.1f, 1.1f), Color.White, backLayer.CurrentAlpha() * constractAlpha);
 
@@ -208,7 +208,7 @@ namespace Team27_RougeLike.UI
                     backLayer.CurrentAlpha());
 
                 renderer.DrawString(
-                    stageInfo[i].name,
+                    stageInfo[i].name + "（" + stageInfo[i].difficulty + "）",
                     DUNGEON_OFFSET + new Vector2(10, 25 * i + 35),
                     new Vector2(1.1f, 1.1f), color, backLayer.CurrentAlpha() * constractAlpha);
             }

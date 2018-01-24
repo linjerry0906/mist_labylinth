@@ -147,7 +147,7 @@ namespace Team27_RougeLike.Scene
                     continue;
 
                 Vector3 bossPosition = map.BossPoint(i);
-                characterManager.AddCharacter(characterManager.Enemys()[id].Clone(bossPosition));
+                characterManager.AddCharacterBossScene(characterManager.Enemys()[id].Clone(bossPosition));
             }
         }
 

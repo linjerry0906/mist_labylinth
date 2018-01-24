@@ -32,6 +32,7 @@ namespace Team27_RougeLike.Scene.Town
         public Vector3 constractColor;  //対比する色
         public bool useParticle;        //環境パーティクル使用する
         public string bgmName;          //Bgmのアセット名
+        public string difficulty;       //推奨難易度
     }
 
     class StageInfoLoader
@@ -90,6 +91,7 @@ namespace Team27_RougeLike.Scene.Town
                 }
                 info.constractColor = new Vector3(int.Parse(data[15]), int.Parse(data[16]), int.Parse(data[17]));
                 info.bgmName = data[18];
+                info.difficulty = data[19];
 
                 stageInfo.Add(info);
             }
