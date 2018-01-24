@@ -19,15 +19,19 @@ namespace Team27_RougeLike.Object.Character
 
         public static EnemyRange Fool()
         {
-            return new EnemyRange(50, 20, 10);
+            return new EnemyRange(80, 20, 10);
         }
         public static EnemyRange Ranged()
         {
-            return new EnemyRange(60, 25, 50);
+            return new EnemyRange(110, 25, 70);
+        }
+        public static EnemyRange AllRangedBoss()
+        {
+            return new EnemyRange(1000, 25, 1000);
         }
         public static EnemyRange Melee()
         {
-            return new EnemyRange(50, 30, 15);
+            return new EnemyRange(100, 30, 15);
         }
         public static EnemyRange Totem()
         {

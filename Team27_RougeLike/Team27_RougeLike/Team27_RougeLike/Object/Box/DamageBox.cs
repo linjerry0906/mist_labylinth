@@ -54,7 +54,7 @@ namespace Team27_RougeLike.Object.Box
         {
             base.Effect(character);
             effectedCharacters.Add(character);
-            character.Damage(attack, angle);
+            character.Damage(attack, angle * 2);
         }
 
         public override void Update()

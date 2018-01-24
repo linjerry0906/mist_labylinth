@@ -49,7 +49,7 @@ namespace Team27_RougeLike.Object.AI
             }
             if (inputState.LeftButtonEnter(ButtonState.Pressed) && attackAi is AttackAi_Wait)
             {
-                SetAttackAi(new AttackAi_Charge(actor, status.GetAttackSpeed() * 10, 1, status.GetAttackSpeed() * 10));
+                SetAttackAi(new AttackAi_Charge(actor, status.GetAttackSpeed() * 10, 1,0));
             }
 
         }

@@ -24,7 +24,7 @@ namespace Team27_RougeLike.Object
         protected string name;          //個体名
         protected string plusalpha;     //ほんとはもっとスマートにできるけど、間に合わせ目的でのもの
         protected Vector3 velocity;     //移動ベクトル0
-        protected Vector3 attackAngle;  //攻撃方向
+        protected Vector3 keepAttackAngle;  //攻撃方向
         protected Vector3 nockback;
         public string Tag { get { return tag; } }
 
@@ -65,8 +65,8 @@ namespace Team27_RougeLike.Object
             n.Y = 0;
             nockback -= n * 0.1f;
             nockback.Y = 0;
-            if (nockback.X < 0.1f) nockback.X = 0;
-            if (nockback.Z < 0.1f) nockback.Z = 0;
+            if (nockback.X < 0.2f) nockback.X = 0;
+            if (nockback.Z < 0.2f) nockback.Z = 0;
         }
         public bool NockBacking()
         {
@@ -75,7 +75,7 @@ namespace Team27_RougeLike.Object
         public abstract void SetAttackAngle();
         public Vector3 GetAttackAngle()
         {
-            return attackAngle;
+            return keepAttackAngle;
         }
         public abstract void Damage(int num, Vector3 nockback);
         public abstract void TrueDamage(int num);

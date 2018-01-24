@@ -7,10 +7,10 @@ using Microsoft.Xna.Framework;
 using Team27_RougeLike.Object.Character;
 namespace Team27_RougeLike.Object.AI
 {
-    class AiManager_Ranged : BaseAiManager, IEnemyAI
+    class AiManager_AllRangedBoss : BaseAiManager, IEnemyAI
     {
 
-        public AiManager_Ranged()
+        public AiManager_AllRangedBoss()
         {
 
         }
@@ -48,7 +48,7 @@ namespace Team27_RougeLike.Object.AI
                 {
                     moveAi = new MoveAi_Chase(actor, player);
                 }
-                
+
             }
 
             #endregion
@@ -73,9 +73,10 @@ namespace Team27_RougeLike.Object.AI
             #region 逃げる範囲
             if (enemyActor.WaitPointCheck(player))
             {
-                if(attackAi is AttackAi_Wait)
+                if (attackAi is AttackAi_Wait)
                 {
-                    moveAi = new MoveAi_Escape(actor,player);
+                    moveAi = new MoveAi_Escape(actor, player);
+                    attackAi = new AttackAi_Charge(actor, enemyActor.GetStatus().Attackspd, 1, enemyActor.GetStatus().Attackspd);
                 }
             }
             #endregion

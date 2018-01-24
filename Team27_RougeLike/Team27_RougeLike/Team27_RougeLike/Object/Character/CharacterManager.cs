@@ -103,10 +103,16 @@ namespace Team27_RougeLike.Object.Character
                 {
                     if (c is EnemyBase)
                     {
-                        ui.LogUI.AddLog(((EnemyBase)c).GetName() + " is Dead");
+                        ui.LogUI.AddLog(((EnemyBase)c).GetName() + "は死亡した");
                         mapItemManager.AddItemByPossibility(c.Collision.Position, 0.65f, 0.4f);     //落ちる確率65％　装備品の確率40%
-                        player.GetPlayerStatus().AddExp(((EnemyBase)c).GetExp());
-                        ui.LogUI.AddLog(((EnemyBase)c).GetExp() + "exp ");
+
+                        ui.LogUI.AddLog(((EnemyBase)c).GetExp() + "の経験値を獲得");
+                        if (player.GetPlayerStatus().AddExp(((EnemyBase)c).GetExp()))
+                        {
+                            ui.LogUI.AddLog("プレイヤーのレベルは"+ player.GetPlayerStatus().GetLevel()+"に上がった");
+                            ui.LogUI.AddLog("体力が全回復した");
+                            player.GetPlayerStatus().Heal(100000);
+                        }
                         gameManager.PlayerQuest.AddKill(((EnemyBase)c).GetID());
                     }
 

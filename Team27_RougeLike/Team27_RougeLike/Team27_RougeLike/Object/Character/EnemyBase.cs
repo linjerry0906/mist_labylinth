@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Team27_RougeLike.Object.AI;
 using Team27_RougeLike.Object.Character;
 using Team27_RougeLike.Utility;
@@ -106,19 +102,22 @@ namespace Team27_RougeLike.Object
             switch (aiManager.ToString())
             {
                 case "Team27_RougeLike.Object.AI.AiManager_Fool":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (attackAngle * collision.Radius), 3), 1, tag, status.BasePower, attackAngle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (keepAttackAngle * collision.Radius), 4), 1, tag, status.BasePower, keepAttackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (attackAngle * collision.Radius), 3), 1, tag, status.BasePower, attackAngle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (keepAttackAngle * collision.Radius), 4), 1, tag, status.BasePower, keepAttackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Totem":
-                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + (attackAngle * collision.Radius), 0.5f), 100, tag, status.BasePower, attackAngle, pManager, gameDevice));
+                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + (AttackAngle() * collision.Radius), 0.5f), 1000, tag, status.BasePower,AttackAngle(), pManager, gameDevice));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + (attackAngle * collision.Radius), 0.5f), 100, tag, status.BasePower, attackAngle, pManager, gameDevice);
+                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + (AttackAngle() * collision.Radius), 0.5f), 1000, tag, status.BasePower,AttackAngle(), pManager, gameDevice);
                     characterManager.AddHitBox(damageBox);
                     pManager = new ParticleManager(gameDevice);
                     pManager.AddParticle(new Bullet(gameDevice, damageBox, new Vector2(10, 10)));
+                    break;
+                case "Team27_RougeLike.Object.AI.AiManager_AllRangedBoss":
+                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + (AttackAngle() * collision.Radius), 0.5f), 1000, tag, status.BasePower, AttackAngle(), pManager, gameDevice));
                     break;
                 default:
                     break;
@@ -142,7 +141,14 @@ namespace Team27_RougeLike.Object
         {
             if (aiManager.GetAttackAi() is AttackAi_Charge)
             {
-                renderer.DrawPolygon("warning", collision.Position + attackAngle * 5, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
+                if (aiManager is AiManager_Ranged || aiManager is AiManager_Totem || aiManager is AiManager_AllRangedBoss)
+                {
+                    renderer.DrawPolygon("warning", collision.Position + AttackAngle() * 5, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
+                }
+                else
+                {
+                    renderer.DrawPolygon("warning", collision.Position + keepAttackAngle * 5, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
+                }
             }
         }
 
@@ -156,7 +162,11 @@ namespace Team27_RougeLike.Object
         public bool WaitPointCheck(Player player) { return Distance(player) < range.waitRange; }
         public override void SetAttackAngle()
         {
-            attackAngle = Angle.CheckAngleVector(characterManager.GetPlayer().GetPosition, collision.Position);
+            keepAttackAngle = Angle.CheckAngleVector(characterManager.GetPlayer().GetPosition, collision.Position);
+        }
+        public Vector3 AttackAngle()
+        {
+            return Angle.CheckAngleVector(characterManager.GetPlayer().GetPosition, collision.Position);
         }
         public EnemyBase Clone(Vector3 position)
         {
@@ -188,6 +198,8 @@ namespace Team27_RougeLike.Object
                     return new AiManager_Totem();
                 case "Escape":
                     return new AiManager_Escape();
+                case "AllRangedBoss":
+                    return new AiManager_AllRangedBoss();
                 default:
                     return new AiManager_Fool();
             }
@@ -210,6 +222,9 @@ namespace Team27_RougeLike.Object
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Escape":
                     range = EnemyRange.Escape();
+                    break;
+                case "Team27_RougeLike.Object.AI.AiManager_AllRangedBoss":
+                    range = EnemyRange.AllRangedBoss();
                     break;
             }
         }

@@ -89,6 +89,8 @@ Content\Sound\BGM\over-the-blood.xnb
 Content\Texture\player_run.xnb
 Content\Sound\BGM\n51.xnb
 Content\Sound\BGM\n36.xnb
+Content\Texture\enemy_armor.xnb
+Content\Texture\enemy_snake.xnb
 Content\Sound\BGM\m-art_Candle.wma
 Content\Sound\BGM\m-art_Komorebi.wma
 Content\Sound\BGM\n14.wma
@@ -189,5 +191,6 @@ Content\StageCSV\Stage_boss_2_5.csv
 Content\StageCSV\Stage_boss_3_12.csv
 Content\StageCSV\Stage_boss_3_6.csv
 Content\StageCSV\Stage_boss_4_5.csv
+Content\StageCSV\Stage_boss_5_10.csv
 Content\StoreItemCSV\StoreItem.csv
 Content\BGM使用.txt
