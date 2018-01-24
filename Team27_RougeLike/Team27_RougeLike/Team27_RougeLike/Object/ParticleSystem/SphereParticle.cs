@@ -21,7 +21,7 @@ namespace Team27_RougeLike.Object.ParticleSystem
         private bool alphaFlag;
 
         public SphereParticle(Vector3 position, Color color,GameDevice gameDevice)
-            :base(gameDevice)
+            :base()
         {
             this.position = position;
             this.gameDevice = gameDevice;
@@ -30,9 +30,9 @@ namespace Team27_RougeLike.Object.ParticleSystem
             Initialize();
         }
 
-        public override void Draw(Renderer renderer)
+        public override void Draw(GameDevice gameDevice)
         {
-            renderer.DrawPolygon("particle", position, size, new Rectangle(0, 0, 16, 16), color, alpha);
+            gameDevice.Renderer.DrawPolygon("particle", position, size, new Rectangle(0, 0, 16, 16), color, alpha);
         }
 
         public override void Initialize()

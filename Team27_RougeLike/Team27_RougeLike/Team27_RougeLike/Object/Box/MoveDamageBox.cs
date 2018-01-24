@@ -13,7 +13,6 @@ namespace Team27_RougeLike.Object.Box
     {
         private int attack;
         private Vector3 angle;
-        private ParticleManager pManager;
         public MoveDamageBox(BoundingSphere collision, int time, int attack, Vector3 angle)
             : base(collision, time)
         {
@@ -26,13 +25,12 @@ namespace Team27_RougeLike.Object.Box
             this.attack = attack;
             this.angle = angle;
         }
-        public MoveDamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle,ParticleManager particleManager, GameDevice gameDevice)
+        public MoveDamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle,ParticleManager particleManager)
             : base(collision, time, tag)
         {
             this.attack = attack;
             this.angle = angle;
-            this.pManager = particleManager;
-            pManager.AddParticle(new Bullet(gameDevice, this,new Vector2(10,10)));
+            particleManager.AddParticle(new Bullet(this,new Vector2(10,10)));
         }
         public MoveDamageBox(BoundingSphere collision, int time, int attack, Vector3 angle,Buff.buff buff)
            : base(collision, time,buff)
@@ -46,13 +44,12 @@ namespace Team27_RougeLike.Object.Box
             this.attack = attack;
             this.angle = angle;
         }
-        public MoveDamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle, ParticleManager particleManager, GameDevice gameDevice,Buff.buff buff)
+        public MoveDamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle, ParticleManager particleManager,Buff.buff buff)
             : base(collision, time, tag,buff)
         {
             this.attack = attack;
             this.angle = angle;
-            this.pManager = particleManager;
-            pManager.AddParticle(new Bullet(gameDevice, this, new Vector2(10, 10)));
+            particleManager.AddParticle(new Bullet(this, new Vector2(10, 10)));
         }
 
         public override void Update()

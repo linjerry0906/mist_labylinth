@@ -42,7 +42,7 @@ namespace Team27_RougeLike.Object.ParticleSystem
         public void Draw()
         {
             foreach (var p in pList)
-                p.Draw(gameDevice.Renderer);
+                p.Draw(gameDevice);
         }
 
         public int Count()

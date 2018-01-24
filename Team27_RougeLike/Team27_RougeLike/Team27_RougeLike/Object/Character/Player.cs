@@ -69,11 +69,11 @@ namespace Team27_RougeLike.Object.Character
         }
         public override void Attack()
         {
-            HitBoxBase DBox;
             var t = status.GetInventory().LeftHand();
+
             if (t == null)
             {
-                DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front * 10, 10), 1, tag, status.GetPower(), keepAttackAngle);
+                attack = new MeleeAttack(characterManager, this, pManager);
             }
             else
             {
@@ -82,7 +82,7 @@ namespace Team27_RougeLike.Object.Character
                     case WeaponItem.WeaponType.Bow:
                         if (status.GetInventory().IsArrowEquiped())
                         {
-                            DBox = new MoveDamageBox(new BoundingSphere(GetPosition + projector.Front, 0.5f), 100, tag, status.GetPower(), keepAttackAngle, pManager, gameDevice);
+                            attack = new RangeAttack(characterManager, this, pManager);
                             status.GetInventory().DecreaseArrow();
                             ui.LogUI.AddLog("弓による攻撃");
                         }
@@ -93,28 +93,23 @@ namespace Team27_RougeLike.Object.Character
                         }
                         break;
                     case WeaponItem.WeaponType.Sword:
-                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 3), 1, tag, status.GetPower(), keepAttackAngle);
+                        attack = new MeleeAttack(characterManager, this, pManager);
                         ui.LogUI.AddLog("剣での攻撃");
                         break;
                     case WeaponItem.WeaponType.Shield:
-                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 3), 1, tag, status.GetPower(), keepAttackAngle);
+                        attack = new MeleeAttack(characterManager, this, pManager);
                         ui.LogUI.AddLog("盾での攻撃");
                         break;
                     case WeaponItem.WeaponType.Dagger:
-                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 3), 1, tag, status.GetPower(), keepAttackAngle);
+                        attack = new MeleeAttack(characterManager, this, pManager);
                         ui.LogUI.AddLog("短剣での攻撃");
                         break;
                     default:
-                        DBox = new DamageBox(new BoundingSphere(GetPosition + projector.Front, 10), 1, tag, status.GetPower(), keepAttackAngle);
+                        attack = new MeleeAttack(characterManager, this, pManager);
                         break;
                 }
             }
-            characterManager.AddHitBox(DBox);
-
-            if (DBox is DamageBox)
-            {
-                pManager.AddParticle(new Slash(gameDevice, this, DBox.Position()));
-            }
+            base.Attack();
         }
         public Projector Projecter
         {
@@ -182,6 +177,15 @@ namespace Team27_RougeLike.Object.Character
         public override int GetDiffence()
         {
             return status.GetDefence();
+        }
+        public override int GetAttack()
+        {
+            return status.GetPower();
+        }
+
+        public override Vector3 GetAttackAngle()
+        {
+            return projector.Front;
         }
     }
 }

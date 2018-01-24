@@ -89,35 +89,29 @@ namespace Team27_RougeLike.Object
             motion.Initialize(new Range(0, 5), new Timer(0.1f));
             aiManager.Initialize(this);
             InitRange();
+            Initialize();
         }
 
 
 
         public override void Initialize()
         {
-
-        }
-        public override void Attack()
-        {
             switch (aiManager.ToString())
             {
                 case "Team27_RougeLike.Object.AI.AiManager_Fool":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (keepAttackAngle * collision.Radius / 2), 4), 1, tag, status.BasePower, keepAttackAngle));
+                    attack = new MeleeAttack(characterManager, this,pManager);
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (keepAttackAngle * collision.Radius / 2), 4), 1, tag, status.BasePower, keepAttackAngle));
+                    attack = new MeleeAttack(characterManager, this,pManager);
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Totem":
-                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + (AttackAngle() * collision.Radius / 2), 0.5f), 1000, tag, status.BasePower, AttackAngle(), pManager, gameDevice));
+                    attack = new RangeAttack(characterManager, this,pManager);
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + (AttackAngle() * collision.Radius / 2), 0.5f), 1000, tag, status.BasePower, AttackAngle(), pManager, gameDevice);
-                    characterManager.AddHitBox(damageBox);
-                    pManager = new ParticleManager(gameDevice);
-                    pManager.AddParticle(new Bullet(gameDevice, damageBox, new Vector2(10, 10)));
+                    attack = new RangeAttack(characterManager, this,pManager);
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_AllRangedBoss":
-                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + (AttackAngle() * collision.Radius), 0.5f), 1000, tag, status.BasePower, AttackAngle(), pManager, gameDevice));
+                    attack = new RangeAttack(characterManager, this,pManager);
                     break;
                 default:
                     break;
@@ -127,6 +121,7 @@ namespace Team27_RougeLike.Object
         {
             aiManager.Update();
             motion.Update(gameTime);
+            pManager.Update(gameTime);
             Move();
         }
 
@@ -134,6 +129,7 @@ namespace Team27_RougeLike.Object
         {
             base.Draw(renderer);
             DrawWarning(renderer);
+            pManager.Draw();
         }
 
 
@@ -143,7 +139,7 @@ namespace Team27_RougeLike.Object
             {
                 if (aiManager is AiManager_Ranged || aiManager is AiManager_Totem || aiManager is AiManager_AllRangedBoss)
                 {
-                    renderer.DrawPolygon("warning", collision.Position + AttackAngle() * 5, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
+                    renderer.DrawPolygon("warning", collision.Position + GetAttackAngle() * 5, new Vector2(collision.Radius), motion.DrawingRange(), Color.White);
                 }
                 else
                 {
@@ -164,7 +160,7 @@ namespace Team27_RougeLike.Object
         {
             keepAttackAngle = Angle.CheckAngleVector(characterManager.GetPlayer().GetPosition, collision.Position);
         }
-        public Vector3 AttackAngle()
+        public override Vector3 GetAttackAngle()
         {
             return Angle.CheckAngleVector(characterManager.GetPlayer().GetPosition, collision.Position);
         }
@@ -298,6 +294,10 @@ namespace Team27_RougeLike.Object
         public override int GetDiffence()
         {
             return status.BaseArmor;
+        }
+        public override int GetAttack()
+        {
+            return status.BasePower;
         }
     }
 }

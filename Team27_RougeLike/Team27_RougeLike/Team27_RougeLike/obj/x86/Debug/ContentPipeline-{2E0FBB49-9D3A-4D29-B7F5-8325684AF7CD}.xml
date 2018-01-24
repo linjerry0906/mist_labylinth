@@ -386,7 +386,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-01-24T11:27:51.8310593+09:00</Time>
+      <Time>2018-01-24T13:14:58.6650056+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -466,24 +466,6 @@
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\depth.xnb</Output>
       <Time>2018-01-21T16:08:04.9624279+09:00</Time>
-    </Item>
-    <Item>
-      <Source>Sound\slash.wav</Source>
-      <Name>Sound\slash</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\slash.xnb</Output>
-      <Time>2018-01-19T22:35:44.8751524+09:00</Time>
-    </Item>
-    <Item>
-      <Source>Sound\sowrd.wav</Source>
-      <Name>Sound\sowrd</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\sowrd.xnb</Output>
-      <Time>2018-01-19T22:35:44.8776591+09:00</Time>
     </Item>
     <Item>
       <Source>Sound\BGM\m-art_Candle.mp3</Source>
@@ -917,6 +899,123 @@
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_snake.xnb</Output>
       <Time>2018-01-24T00:34:11.1619271+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\exp.png</Source>
+      <Name>Texture\exp</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\exp.xnb</Output>
+      <Time>2018-01-24T13:15:06.9010421+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\hp.png</Source>
+      <Name>Texture\hp</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\hp.xnb</Output>
+      <Time>2018-01-24T13:15:06.9025461+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\hp_back.png</Source>
+      <Name>Texture\hp_back</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\hp_back.xnb</Output>
+      <Time>2018-01-24T13:15:06.904553+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\hp_deco.png</Source>
+      <Name>Texture\hp_deco</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\hp_deco.xnb</Output>
+      <Time>2018-01-24T13:15:06.9055544+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\hp_gage.png</Source>
+      <Name>Texture\hp_gage</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\hp_gage.xnb</Output>
+      <Time>2018-01-24T13:15:06.9070588+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\pressspace.png</Source>
+      <Name>Texture\pressspace</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\pressspace.xnb</Output>
+      <Time>2018-01-24T13:15:06.9085628+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\title.png</Source>
+      <Name>Texture\title</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\title.xnb</Output>
+      <Time>2018-01-24T13:15:06.9200939+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\titlelogo.png</Source>
+      <Name>Texture\titlelogo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\titlelogo.xnb</Output>
+      <Time>2018-01-24T13:15:06.9241042+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\SE\press.wav</Source>
+      <Name>Sound\SE\press</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\press.xnb</Output>
+      <Time>2018-01-24T13:15:06.8383778+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\SE\press2.wav</Source>
+      <Name>Sound\SE\press2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\press2.xnb</Output>
+      <Time>2018-01-24T13:15:06.8468989+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\SE\select.wav</Source>
+      <Name>Sound\SE\select</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\select.xnb</Output>
+      <Time>2018-01-24T13:15:06.8484021+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\SE\slash.wav</Source>
+      <Name>Sound\SE\slash</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\slash.xnb</Output>
+      <Time>2018-01-24T13:15:06.9887788+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\SE\sowrd.wav</Source>
+      <Name>Sound\SE\sowrd</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\sowrd.xnb</Output>
+      <Time>2018-01-24T13:15:06.9797525+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
