@@ -69,7 +69,7 @@ namespace Team27_RougeLike.Object.Item
             this.addDefense = addDefense;
             this.reinforcement = reinforcement;
 
-            Initialize();
+            //Initialize();
         }
 
         public void Initialize()
@@ -104,7 +104,7 @@ namespace Team27_RougeLike.Object.Item
         public bool IsLevelMax()
         {
             //条件が成立する場合はTRUE
-            return (reinforcement == reinforcementLimit);
+            return (reinforcement >= reinforcementLimit);
         }
 
         public int GetUpPower()

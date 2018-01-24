@@ -134,11 +134,11 @@ namespace Team27_RougeLike.Scene
             {
                 if (!consumptions.ContainsKey(id))
                 {
-                    consumptions.Add(id, 1);
+                    consumptions.Add(id, depotConsumptions[id]);
                 }
                 else
                 {
-                    consumptions[id]++;
+                    consumptions[id] += depotConsumptions[id];
                 }
             }
 
@@ -186,6 +186,63 @@ namespace Team27_RougeLike.Scene
             leftMaxPage = (leftItems.Count - 1) / 20 + 1;
 
             LeftPage(1);
+        }
+
+        public void Reset()
+        {
+            myMoney = inventory.CurrentMoney();
+            playerItems = inventory.BagList();
+            depotConsumptions = inventory.DepositoryItem();
+            consumptions = new Dictionary<int, int>();
+
+            foreach (Item item in playerItems)
+            {
+                if (item is ConsumptionItem)
+                {
+                    if (!consumptions.ContainsKey(item.GetItemID()))
+                    {
+                        consumptions.Add(item.GetItemID(), 1);
+                    }
+                    else
+                    {
+                        consumptions[item.GetItemID()]++;
+                    }
+                }
+            }
+            foreach (int id in depotConsumptions.Keys)
+            {
+                if (!consumptions.ContainsKey(id))
+                {
+                    consumptions.Add(id, depotConsumptions[id]);
+                }
+                else
+                {
+                    consumptions[id] += depotConsumptions[id];
+                }
+            }
+
+            leftItems = new List<Item>();
+            leftPageItems = new List<Item>();
+            leftButtons = new List<Button>();
+            leftWindows = new List<Window>();
+
+            foreach (Item i in playerItems)
+            {
+                if (i is WeaponItem || i is ProtectionItem)
+                {
+                    leftItems.Add(i);
+                }
+            }
+
+            isSelect = false;
+            isEnough = false;
+            isMoney = false;
+            isBiggest = false;
+            isNotEnoughMessage = false;
+            isNoMoneyMessage = false;
+            isBiggestMessage = false;
+
+            LeftPage(leftPage);
         }
 
         private void UpdateBlurRate()
@@ -257,16 +314,15 @@ namespace Team27_RougeLike.Scene
             FileStream fs = new FileStream(materialFilename, FileMode.Open);
             StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("shift_jis"));
 
-            while (sr.EndOfStream)
+            while (!sr.EndOfStream)
             {
                 string line = sr.ReadLine();
                 string[] csvDate = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                if (csvDate.Length > 10) continue;
 
                 if (type == csvDate[0] && rare == int.Parse(csvDate[1]) && level <= int.Parse(csvDate[2]))
                 {
                     useMoney = int.Parse(csvDate[3]);
-                    for(int i = 4; i < csvDate.Length; i += 2)
+                    for (int i = 4; i < csvDate.Length; i += 2)
                     {
                         if (csvDate[i] == "no")
                         {
@@ -274,9 +330,8 @@ namespace Team27_RougeLike.Scene
                         }
                         materialItems.Add(int.Parse(csvDate[i]), int.Parse(csvDate[i + 1]));
                     }
+                    break;
                 }
-
-
             }
 
             sr.Close();
@@ -322,39 +377,24 @@ namespace Team27_RougeLike.Scene
         //消費したアイテムを消す
         private void RemoveItem(int id, int num)
         {
+            playerItems = inventory.BagList();
             foreach (Item item in playerItems)
             {
-                if (id == item.GetItemID())
+                if (item is ConsumptionItem)
                 {
-                    inventory.RemoveItem(inventory.BagItemIndex(item));
-                    playerItems.Remove(item);
-                    num--;
-                    if (num <= 0)
+                    if (id == item.GetItemID())
                     {
-                        return;
-                    }
-                }
-            }
-            foreach (int depotID in depotConsumptions.Keys)
-            {
-                if (id == depotID)
-                {
-                    while (num <= 0)
-                    {
-                        if (depotConsumptions[id] - 1 <= 0)
-                        {
-                            inventory.RemoveDepositoryItem(id, 1);
-                            depotConsumptions.Remove(id);
-                        }
-                        else
-                        {
-                            inventory.RemoveDepositoryItem(id, 1);
-                            depotConsumptions[id]--;
-                        }
+                        inventory.RemoveItem(inventory.BagItemIndex(item));
+                        playerItems.Remove(item);
                         num--;
+                        if (num <= 0)
+                        {
+                            break;
+                        }
                     }
                 }
             }
+            inventory.RemoveDepositoryItem(id, num);
         }
 
         public void Update(GameTime gameTime)
@@ -500,7 +540,6 @@ namespace Team27_RougeLike.Scene
                 {
                     if (input.IsLeftClick())
                     {
-                        inventory.RemoveItem(inventory.BagItemIndex(selectItem));
                         inventory.SpendMoney(useMoney);
                         if (selectItem is WeaponItem)
                         {
@@ -510,12 +549,11 @@ namespace Team27_RougeLike.Scene
                         {
                             ((ProtectionItem)selectItem).LevelUp();
                         }
-                        inventory.AddItem(selectItem);
                         foreach (int id in materialItems.Keys)
                         {
                             RemoveItem(id, materialItems[id]);
                         }
-                        Initialize(SceneType.UpgradeStore);  //変更予定
+                        Reset();
                     }
                 }
             }
@@ -646,17 +684,15 @@ namespace Team27_RougeLike.Scene
                     foreach (int id in materialItems.Keys)
                     {
                         num++;
-                        renderer.DrawString(itemManager.GetConsuptionItem(id).GetItemName(),
-                            new Vector2(windowWidth / 2 + 64, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
                         if (consumptions.Keys.Contains(id))
                         {
-                            renderer.DrawString("(" + consumptions[id] + "/" + materialItems[id] + ")",
-                                new Vector2(windowWidth / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                            renderer.DrawString(itemManager.GetConsuptionItem(id).GetItemName() + "(" + consumptions[id] + "/" + materialItems[id] + ")",
+                                new Vector2(windowWidth / 2 + 64, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
                         }
                         else
                         {
-                            renderer.DrawString("(0/" + materialItems[id] + ")",
-                                new Vector2(windowWidth / 2 + 160, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
+                            renderer.DrawString(itemManager.GetConsuptionItem(id).GetItemName() + "(0/" + materialItems[id] + ")",
+                                new Vector2(windowWidth / 2 + 64, 160 + 224 + 32 * num), new Vector2(1, 1), Color.White);
                         }
                     }
 

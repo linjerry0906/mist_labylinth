@@ -330,6 +330,7 @@ namespace Team27_RougeLike.Scene
             for (int i = 0; i < leftItems.Count - (page - 1) * 20 && i < 20; i++)
             {
                 AddLeftList(leftItems[i + (page - 1) * 20]);
+                leftWindows[i].SetAlpha(0.5f);
 
             }
         }
@@ -623,11 +624,13 @@ namespace Team27_RougeLike.Scene
                     if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick())
                     {
                         inventory.DepositItem(inventory.BagItemIndex(leftItems[i + (leftPage - 1) * 20]));
-                        if (consumptions[leftItems[i + (leftPage - 1) * 20].GetItemID()] - 1 <= 0)
+                        if (consumptions[leftItems[i + (leftPage - 1) * 20].GetItemID()] - 1 * ((ConsumptionItem)leftItems[i + (leftPage - 1) * 20]).GetStack() <= 0)
+                        {
                             if (rightPageItems.Count < 20)
                             {
                                 AddRightList(leftItems[i + (leftPage - 1) * 20]);
                             }
+                        }
                         rightItems.Add(leftItems[i + (leftPage - 1) * 20]);
                         RemoveLeftList(i);
 
@@ -650,10 +653,23 @@ namespace Team27_RougeLike.Scene
                         {
                             inventory.MoveDepositItemToBag(itemManager, rightItems[i + (rightPage - 1) * 20].GetItemID());
                         }
-                        if (leftPageItems.Count < 20)
-                        {
-                            AddLeftList(playerItems[playerItems.Count - 1]);
-                        }
+                        //if (leftPageItems.Count < 20)
+                        //{
+                        //    if (((ConsumptionItem)playerItems[playerItems.Count - 1]).GetTypeText() != "矢")
+                        //    {
+
+                        //        AddLeftList(playerItems[playerItems.Count - 1]);
+                        //    }
+                        //    else
+                        //    {
+                        //        if (((ConsumptionItem)playerItems[playerItems.Count - 1]).GetStack() <= 1)
+                        //        {
+                        //            AddLeftList(playerItems[playerItems.Count - 1]);
+                        //        }
+                        //    }
+                        //}
+                        //RightPage(rightPage);
+                        LeftPage(leftPage);
 
                         leftMaxPage = (leftItems.Count - 1) / 20 + 1;
                         rightMaxPage = (rightItems.Count - 1) / 20 + 1;
@@ -732,8 +748,25 @@ namespace Team27_RougeLike.Scene
                     leftWindows[i].Draw();
 
                     //アイテム名表示
-                    renderer.DrawString(leftPageItems[i].GetItemName(), leftWindows[i].GetOffsetPosition(),
-                        new Vector2(1, 1), Color.White);
+                    if (leftPageItems[i] is ConsumptionItem)
+                    {
+                        if (((ConsumptionItem)leftPageItems[i]).GetTypeText() != "矢")
+                        {
+                            renderer.DrawString(leftPageItems[i].GetItemName(), leftWindows[i].GetOffsetPosition(),
+                                new Vector2(1, 1), Color.White);
+                        }
+                        else
+                        {
+                            renderer.DrawString(leftPageItems[i].GetItemName() + "x" + ((ConsumptionItem)leftPageItems[i]).GetStack(),
+                                leftWindows[i].GetOffsetPosition(),
+                                new Vector2(1, 1), Color.White);
+                        }
+                    }
+                    else
+                    {
+                        renderer.DrawString(leftPageItems[i].GetItemName(), leftWindows[i].GetOffsetPosition(),
+                            new Vector2(1, 1), Color.White);
+                    }
 
                     //アイテムタイプの表示
                     string type;
