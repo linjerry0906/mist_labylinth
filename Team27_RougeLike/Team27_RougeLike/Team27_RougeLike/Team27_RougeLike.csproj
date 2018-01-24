@@ -82,7 +82,9 @@
     <Compile Include="Object\AI\AiManager\AiManager_Melee.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Player.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Ranged.cs" />
+    <Compile Include="Object\AI\AiManager\AiManager_Summoner.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Totem.cs" />
+    <Compile Include="Object\AI\AiManager\IBoss.cs" />
     <Compile Include="Object\AI\AiManager\IEnemyAi.cs" />
     <Compile Include="Map\MapItemManager.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_PlayerMove.cs" />
@@ -99,8 +101,10 @@
     <Compile Include="Object\Box\iDamageBox.cs" />
     <Compile Include="Object\Box\MoveDamageBox.cs" />
     <Compile Include="Object\Buff.cs" />
+    <Compile Include="Object\Character\Attack\AttackBase.cs" />
     <Compile Include="Object\Character\EnemyLoader.cs" />
     <Compile Include="Object\Character\EnemyRange.cs" />
+    <Compile Include="Object\Character\Attack\MeleeAttack.cs" />
     <Compile Include="Object\Character\Player.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Fool.cs" />
     <Compile Include="Object\AI\AiManager\BaseAiManager.cs" />
@@ -114,7 +118,9 @@
     <Compile Include="Object\AI\MoveAi\MoveAi_Step.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_TargetMove.cs" />
     <Compile Include="Object\AI\MoveAi\MoveAi_Wait.cs" />
+    <Compile Include="Object\Character\Attack\RangeAttack.cs" />
     <Compile Include="Object\Character\Spawner.cs" />
+    <Compile Include="Object\Character\Attack\Summon.cs" />
     <Compile Include="Object\ExpLoader.cs" />
     <Compile Include="Object\FallBlock.cs" />
     <Compile Include="Object\FogBackground.cs" />

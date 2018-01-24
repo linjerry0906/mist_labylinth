@@ -29,8 +29,8 @@ namespace Team27_RougeLike.Object
         /// <param name="aiName"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice,string name,int id,string color)
-            : base(collision, textureName, characterManager,name,color)
+        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice, string name, int id, string color)
+            : base(collision, textureName, characterManager, name, color)
         {
             this.status = status;
             this.aiName = aiName;
@@ -50,8 +50,8 @@ namespace Team27_RougeLike.Object
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
         /// <param name="exp"></param>
-        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp,string name,int id,string color)
-        : base(collision, textureName, characterManager,name,color)
+        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp, string name, int id, string color)
+        : base(collision, textureName, characterManager, name, color)
         {
             this.status = status;
             this.name = name;
@@ -69,8 +69,8 @@ namespace Team27_RougeLike.Object
         /// <param name="manager"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice,string name,int id,string color)
-         : base(collision, textureName, characterManager,name,color)
+        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice, string name, int id, string color)
+         : base(collision, textureName, characterManager, name, color)
         {
             tag = "Enemy";
             this.status = status;
@@ -102,16 +102,16 @@ namespace Team27_RougeLike.Object
             switch (aiManager.ToString())
             {
                 case "Team27_RougeLike.Object.AI.AiManager_Fool":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (keepAttackAngle * collision.Radius), 4), 1, tag, status.BasePower, keepAttackAngle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (keepAttackAngle * collision.Radius / 2), 4), 1, tag, status.BasePower, keepAttackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (keepAttackAngle * collision.Radius), 4), 1, tag, status.BasePower, keepAttackAngle));
+                    characterManager.AddHitBox(new DamageBox(new BoundingSphere(collision.Position + (keepAttackAngle * collision.Radius / 2), 4), 1, tag, status.BasePower, keepAttackAngle));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Totem":
-                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + (AttackAngle() * collision.Radius), 0.5f), 1000, tag, status.BasePower,AttackAngle(), pManager, gameDevice));
+                    characterManager.AddHitBox(new MoveDamageBox(new BoundingSphere(collision.Position + (AttackAngle() * collision.Radius / 2), 0.5f), 1000, tag, status.BasePower, AttackAngle(), pManager, gameDevice));
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + (AttackAngle() * collision.Radius), 0.5f), 1000, tag, status.BasePower,AttackAngle(), pManager, gameDevice);
+                    MoveDamageBox damageBox = new MoveDamageBox(new BoundingSphere(collision.Position + (AttackAngle() * collision.Radius / 2), 0.5f), 1000, tag, status.BasePower, AttackAngle(), pManager, gameDevice);
                     characterManager.AddHitBox(damageBox);
                     pManager = new ParticleManager(gameDevice);
                     pManager.AddParticle(new Bullet(gameDevice, damageBox, new Vector2(10, 10)));
