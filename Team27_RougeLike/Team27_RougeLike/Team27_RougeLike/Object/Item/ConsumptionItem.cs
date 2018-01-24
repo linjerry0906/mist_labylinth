@@ -92,6 +92,11 @@ namespace Team27_RougeLike.Object.Item
             return stack;
         }
 
+        public override int GetItemPrice()
+        {
+            return itemPrice * stack;
+        }
+
         public override Item UniqueClone()
         {
             return Clone();

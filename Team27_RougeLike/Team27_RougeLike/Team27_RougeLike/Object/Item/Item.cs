@@ -43,7 +43,7 @@ namespace Team27_RougeLike.Object.Item
             return itemExplanation;
         }
 
-        public int GetItemPrice()
+        public virtual int GetItemPrice()
         {
             return itemPrice;
         }

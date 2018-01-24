@@ -173,6 +173,10 @@ namespace Team27_RougeLike.Scene.Town
             }
             foreach (Item item in consumptions)
             {
+                if(((ConsumptionItem)item).GetTypeText() == "矢")
+                {
+                    ((ConsumptionItem)item).SetStack(30);
+                }
                 leftItems.Add(item);
             }
 
@@ -349,21 +353,23 @@ namespace Team27_RougeLike.Scene.Town
             //アイテムを買う処理(お金が足りるか、バックにはいるかチェック)
             if (button.IsClick(mousePos))
             {
-                if (maxNum >= currentNum + rightPageItems.Count)
+                if (maxNum >= currentNum + rightItems.Count)
                 {
                     if (totalPrice <= playerInventory.CurrentMoney())
                     {
                         if (input.IsLeftClick())
                         {
-                            foreach (Item items in rightPageItems)
+                            foreach (Item items in rightItems)
                             {
                                 playerInventory.AddItem(items);
                             }
                             playerInventory.SpendMoney(totalPrice);
                             totalPrice = 0;
+                            rightItems = new List<Item>();
                             rightPageItems = new List<Item>();
                             rightButtons = new List<Button>();
                             rightWindows = new List<Window>();
+                            rightMaxPage = 1;
                         }
                     }
                     else
@@ -384,18 +390,74 @@ namespace Team27_RougeLike.Scene.Town
                 //売り物リストから買う物リストに追加する処理(買い物リストが空いているかチェック)
                 if (leftButtons[i].IsClick(mousePos))
                 {
-                    if (rightButtons.Count >= 20)
+                    //if (rightButtons.Count >= 20)
+                    //{
+                    //    isRightListFull = true;
+                    //}
+                    if (input.IsLeftClick())
                     {
-                        isRightListFull = true;
-                    }
-                    else if (input.IsLeftClick())
-                    {
-                        if (rightPageItems.Count < 20)
+                        //    if (leftItems[i + (leftPage - 1) * 20] is ConsumptionItem &&
+                        //        ((ConsumptionItem)leftItems[i + (leftPage - 1) * 20]).GetTypeText() == "矢")
+                        //    {
+                        //        if (rightItems.Count > 0)
+                        //        {
+                        //            foreach (Item item in rightItems)
+                        //            {
+                        //                if (item is ConsumptionItem && item.GetItemID() == leftItems[i + (leftPage - 1) * 20].GetItemID())
+                        //                {
+                        //                    if (((ConsumptionItem)item).GetStack() < 30)
+                        //                    {
+                        //                        ((ConsumptionItem)item).AddStack();
+                        //                        totalPrice += item.GetItemPrice();
+                        //                        break;
+                        //                    }
+                        //                    else
+                        //                    {
+                        //                        return;
+                        //                    }
+                        //                    //else
+                        //                    //{
+                        //                    //    Item newItem = ((ConsumptionItem)leftItems[i + (leftPage - 1) * 20]).UniqueClone();
+                        //                    //    ((ConsumptionItem)newItem).SetStack(1);
+                        //                    //    if (rightPageItems.Count < 20)
+                        //                    //    {
+                        //                    //        AddRightList(newItem);
+                        //                    //    }
+                        //                    //    rightItems.Add(newItem);
+                        //                    //    return;
+                        //                    //}
+                        //                }
+                        //                else
+                        //                {
+                        //                    Item newItem = ((ConsumptionItem)leftItems[i + (leftPage - 1) * 20]).UniqueClone();
+                        //                    ((ConsumptionItem)newItem).SetStack(1);
+                        //                    if (rightPageItems.Count < 20)
+                        //                    {
+                        //                        AddRightList(newItem);
+                        //                    }
+                        //                    rightItems.Add(newItem);
+                        //                    return;
+                        //                }
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        if (rightPageItems.Count < 20)
+                        //        {
+                        //            AddRightList(leftItems[i + (leftPage - 1) * 20]);
+                        //        }
+                        //        rightItems.Add(leftItems[i + (leftPage - 1) * 20]);
+                        //        break;
+                        //    }
+                        //}
+                        //else
                         {
-                            AddRightList(leftItems[i + (leftPage - 1) * 20]);
+                            if (rightPageItems.Count < 20)
+                            {
+                                AddRightList(leftItems[i + (leftPage - 1) * 20]);
+                            }
+                            rightItems.Add(leftItems[i + (leftPage - 1) * 20]);
                         }
-                        rightItems.Add(leftItems[i]);
-
                         rightMaxPage = (rightItems.Count - 1) / 20 + 1;
                     }
                 }
@@ -629,8 +691,26 @@ namespace Team27_RougeLike.Scene.Town
             {
                 leftWindows[i].Draw();
 
-                renderer.DrawString(leftPageItems[i].GetItemName(), 
-                    leftWindows[i].GetOffsetPosition(), new Vector2(1, 1), Color.White);
+                //アイテム名表示
+                if (leftPageItems[i] is ConsumptionItem)
+                {
+                    if (((ConsumptionItem)leftPageItems[i]).GetTypeText() != "矢")
+                    {
+                        renderer.DrawString(leftPageItems[i].GetItemName(), leftWindows[i].GetOffsetPosition(),
+                            new Vector2(1, 1), Color.White);
+                    }
+                    else
+                    {
+                        renderer.DrawString(leftPageItems[i].GetItemName() + "x" + ((ConsumptionItem)leftPageItems[i]).GetStack(),
+                            leftWindows[i].GetOffsetPosition(),
+                            new Vector2(1, 1), Color.White);
+                    }
+                }
+                else
+                {
+                    renderer.DrawString(leftPageItems[i].GetItemName(), leftWindows[i].GetOffsetPosition(),
+                        new Vector2(1, 1), Color.White);
+                }
                 if (modeType == ModeType.Buy)
                 {
                     renderer.DrawString(leftPageItems[i].GetItemPrice().ToString(),
@@ -662,8 +742,25 @@ namespace Team27_RougeLike.Scene.Town
             {
                 rightWindows[i].Draw();
 
-                renderer.DrawString(rightPageItems[i].GetItemName(), 
-                    rightWindows[i].GetOffsetPosition(), new Vector2(1, 1), Color.White);
+                if (rightPageItems[i] is ConsumptionItem)
+                {
+                    if (((ConsumptionItem)rightPageItems[i]).GetTypeText() != "矢")
+                    {
+                        renderer.DrawString(rightPageItems[i].GetItemName(), rightWindows[i].GetOffsetPosition(),
+                            new Vector2(1, 1), Color.White);
+                    }
+                    else
+                    {
+                        renderer.DrawString(rightPageItems[i].GetItemName() + "x" + ((ConsumptionItem)rightPageItems[i]).GetStack(),
+                            rightWindows[i].GetOffsetPosition(),
+                            new Vector2(1, 1), Color.White);
+                    }
+                }
+                else
+                {
+                    renderer.DrawString(rightPageItems[i].GetItemName(), rightWindows[i].GetOffsetPosition(),
+                        new Vector2(1, 1), Color.White);
+                }
                 if (modeType == ModeType.Buy)
                 {
                     renderer.DrawString(rightPageItems[i].GetItemPrice().ToString(), 
