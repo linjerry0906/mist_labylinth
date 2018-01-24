@@ -39,7 +39,7 @@ namespace Team27_RougeLike.Scene
         private float angle;
 
         private DungeonUI ui;             //Popメッセージ
-
+        private int currentFloor;         //現在フロア（描画記録用）
 
         public BossScene(GameManager gameManager, GameDevice gameDevice)
         {
@@ -71,7 +71,9 @@ namespace Team27_RougeLike.Scene
         public void DrawUI()
         {
             renderer.Begin();
+            stageManager.DrawDungeonInfo(currentFloor);
             ui.Draw();
+            gameManager.PlayerInfo.DrawUIStatue();
             renderer.End();
         }
 
@@ -84,6 +86,7 @@ namespace Team27_RougeLike.Scene
                 return;
 
             stageManager = gameManager.StageManager;
+            currentFloor = stageManager.CurrentFloor();
 
             #region Map初期化
             map = gameManager.GetDungeonMap();      //生成したマップを取得

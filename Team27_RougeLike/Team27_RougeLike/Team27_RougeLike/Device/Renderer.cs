@@ -53,7 +53,7 @@ namespace Team27_RougeLike.Device
 
             mainProjector = new Projector();
             miniMapProjector = new Projector(
-                new Viewport(new Rectangle(Def.WindowDef.WINDOW_WIDTH - 300, 100, 200, 200)),   //MiniMapの位置と大きさ設定
+                new Viewport(new Rectangle(Def.WindowDef.WINDOW_WIDTH - 250, 50, 200, 200)),   //MiniMapの位置と大きさ設定
                 new Vector3(0, 100, 0.001f));
             currentProjector = mainProjector;
 

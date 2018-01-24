@@ -149,7 +149,7 @@ namespace Team27_RougeLike.Map
             }
 
             Item item = items[index].GetItem();
-            Color color = Color.Lerp(Color.White, Color.Gold, item.GetItemRare() / 100.0f);       //色調整
+            Color color = Color.Lerp(Color.White, Color.Gold, item.GetItemRare() / 8.0f);       //色調整
             string name = item.GetItemName();
             if (item is WeaponItem)
                 name += " + " + ((WeaponItem)item).GetReinforcement();
