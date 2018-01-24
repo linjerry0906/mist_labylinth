@@ -145,14 +145,14 @@ namespace Team27_RougeLike.Scene
         {
             renderer.DrawString(
                 dungeonName,
-                new Vector2(Def.WindowDef.WINDOW_WIDTH - 150, Def.WindowDef.WINDOW_HEIGHT -  55),
+                new Vector2(Def.WindowDef.WINDOW_WIDTH - 180, Def.WindowDef.WINDOW_HEIGHT -  55),
                 Color.WhiteSmoke,
                 new Vector2(1.4f, 1.4f),
                 0.8f, false, true);
 
             renderer.DrawString(
                 "地下" + currentFloor + "階",
-                new Vector2(Def.WindowDef.WINDOW_WIDTH - 140, Def.WindowDef.WINDOW_HEIGHT - 30),
+                new Vector2(Def.WindowDef.WINDOW_WIDTH - 170, Def.WindowDef.WINDOW_HEIGHT - 30),
                 Color.WhiteSmoke,
                 new Vector2(1.2f, 1.2f),
                 0.8f, false, true);

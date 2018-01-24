@@ -411,12 +411,20 @@ namespace Team27_RougeLike.QuestSystem
                     int amount = currentQuestInfo.CurrentState()[i].RequireAmount;
                     gameManager.PlayerItem.RemoveDepositoryItem(id, amount);
                 }
-                if (currentQuestInfo.AwardItem() != null)
+            }
+
+            if (currentQuestInfo.AwardItem() != null)
+            {
+                for (int i = 0; i < currentQuestInfo.AwardItem().Length; i++)
                 {
-                    for (int i = 0; i < currentQuestInfo.AwardItem().Length; i++)
+                    int id = currentQuestInfo.AwardItem()[i];
+                    if (gameManager.PlayerItem.DepositoryItem().ContainsKey(id))
                     {
-                        int id = currentQuestInfo.AwardItem()[i];
                         gameManager.PlayerItem.DepositoryItem()[id]++;
+                    }
+                    else
+                    {
+                        gameManager.PlayerItem.DepositoryItem().Add(id, 1);
                     }
                 }
             }
