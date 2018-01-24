@@ -23,4 +23,5 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
 22,Snow,80,45,6,0.3,Totem,5,35,8,»‚Ì¸,LightBrown
 23,enemy_snake,700,70,60,0.7,Melee,9,30,50,Ö‰¤,DarkBrown
 24,enemy_snake,120,50,15,0.8,Fool,6,30,10,X‚ÌÖ,DarkGreen
-25,enemy_snake,90,65,10,0.8,Ranged,3,40,12,X‚Ì“ÅÖ,LightGreen
+25,enemy_snake,90,65,10,0.8,Ranged,3,50,12,X‚Ì“ÅÖ,LightGreen
+26,enemy_weak,10,1,0,2.1,Escape,3,10,50,‚È‚ª‚êƒƒ^ƒ‹,White

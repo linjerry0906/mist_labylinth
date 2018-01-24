@@ -52,7 +52,7 @@ namespace Team27_RougeLike.QuestSystem
                 return;
 
             currentExp += exp;
-            if (exp > maxExp[(int)rank])
+            if (currentExp >= maxExp[(int)rank])
             {
                 currentExp -= maxExp[(int)rank];
                 rank++;
