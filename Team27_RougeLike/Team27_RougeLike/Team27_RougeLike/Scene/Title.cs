@@ -26,7 +26,6 @@ namespace Team27_RougeLike.Scene
             input = gameDevice.InputState;
             renderer = gameDevice.Renderer;
             sound = gameDevice.Sound;
-            motion = new Motion();
         }
         public void Draw()
         {
@@ -45,6 +44,7 @@ namespace Team27_RougeLike.Scene
         public void Initialize(SceneType scene)
         {
             endFlag = false;
+            motion = new Motion();
             for (int i = 0; i < 30; i++)
                 motion.Add(i, new Rectangle(170 * 7, 0, 170, 70));
             for (int i = 0; i < 7; i++)
