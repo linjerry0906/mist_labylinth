@@ -99,17 +99,16 @@ namespace Team27_RougeLike.Object
             return weight;
         }
 
-        public void AddExp(int exp)
+        public bool AddExp(int exp)
         {
             this.exp += exp;
             if(expData[GetLevel()] < this.exp)
             {
                 this.exp -= expData[GetLevel()];
                 status.LevelUp();
-                //ui.LogUI.AddLog("LevelUp");
-                //ui.LogUI.AddLog("Player Level is "+ status.Level);
-
+                return true;
             }
+            return false;
         }
 
         public Inventory GetInventory()
