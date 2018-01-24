@@ -152,9 +152,9 @@ namespace Team27_RougeLike.Scene
                 new Vector2(windowWidth / 2 - 128, windowHeight - 160 - 64));
             rightWindow.Initialize();
             rightWindow.SetAlphaLimit(0.6f);
-            messegeWindow = new Window(gameDevice, new Vector2(windowWidth / 2 - 160, windowHeight / 2 - 80), new Vector2(384, 160));
+            messegeWindow = new Window(gameDevice, new Vector2(windowWidth / 2 - 384 / 2 , windowHeight / 2 - 32), new Vector2(384 + 64, 64));
             messegeWindow.Initialize();
-            messegeWindow.SetAlphaLimit(1.0f);
+            messegeWindow.SetAlphaLimit(0.75f);
 
             backButton = new Button(new Vector2(0, windowHeight - 64), 64, 32);
             backWindow = new Window(gameDevice, new Vector2(0, windowHeight - 64), new Vector2(64, 32));
@@ -521,6 +521,42 @@ namespace Team27_RougeLike.Scene
                 }
             }
 
+            if (isSelect && !isBiggest)
+            {
+                //お金が足りているか
+                if (myMoney >= useMoney)
+                {
+                    isMoney = true;
+                }
+                else
+                {
+                    isMoney = false;
+                }
+
+
+                //素材が足りているかどうか
+                foreach (int id in materialItems.Keys)
+                {
+                    if (consumptions.Keys.Contains(id))
+                    {
+                        if (consumptions[id] >= materialItems[id])
+                        {
+                            isEnough = true;
+                        }
+                        else
+                        {
+                            isEnough = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        isEnough = false;
+                        break;
+                    }
+                }
+            }
+
             //強化ボタン
             if (upgradeButton.IsClick(mousePos) && isSelect)
             {
@@ -554,36 +590,6 @@ namespace Team27_RougeLike.Scene
                             RemoveItem(id, materialItems[id]);
                         }
                         Reset();
-                    }
-                }
-            }
-            if (isSelect && !isBiggest)
-            {
-                //お金が足りているか
-                if (myMoney >= useMoney)
-                {
-                    isMoney = true;
-                }
-                else
-                {
-                    isMoney = false;
-                }
-
-
-                //素材が足りているかどうか
-                foreach (int id in materialItems.Keys)
-                {
-                    if (consumptions.Keys.Contains(id))
-                    {
-                        if (consumptions[id] >= materialItems[id])
-                        {
-                            isEnough = true;
-                        }
-                    }
-                    if (!isEnough)
-                    {
-                        isEnough = false;
-                        return;
                     }
                 }
             }
@@ -727,7 +733,7 @@ namespace Team27_RougeLike.Scene
             }
             if (isBiggestMessage)
             {
-                messageText = "選択された装備はレベルマックスです。";
+                messageText = "レベルが最大です。";
             }
 
             if (messageText != "noMessage")

@@ -767,6 +767,10 @@ with.
         <Start>戦</Start>
         <End>戦</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>選</Start>
+        <End>選</End>
+      </CharacterRegion>
       <!-- ぜん -->
       <CharacterRegion>
         <Start>全</Start>
@@ -856,6 +860,11 @@ with.
       <CharacterRegion>
         <Start>退</Start>
         <End>退</End>
+      </CharacterRegion>
+      <!-- たく -->
+      <CharacterRegion>
+        <Start>択</Start>
+        <End>択</End>
       </CharacterRegion>
 
       <!-- たけ -->
