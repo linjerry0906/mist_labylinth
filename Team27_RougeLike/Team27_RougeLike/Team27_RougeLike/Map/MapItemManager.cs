@@ -116,9 +116,9 @@ namespace Team27_RougeLike.Map
             {
                 if (chara.Collision.IsCollision(i.Collisiton))
                 {
-                    
+                    string itemName = i.GetItem().GetItemName();
                     hint.Switch(true);              //当たっていれば表示
-                    hint.SetMessage("Press Space to get item");     //表示するメッセージ
+                    hint.SetMessage("拾う：Space " + itemName);     //表示するメッセージ
                     bool result = false;
                     if (hint.IsPush(Keys.Space))    //拾ったらもらう処理
                     {
@@ -128,7 +128,6 @@ namespace Team27_RougeLike.Map
                     {
                         hint.Switch(false);
                     }
-
                     return;
                 }
                 index++;
