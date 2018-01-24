@@ -18,6 +18,7 @@ namespace Team27_RougeLike.Object
         protected BaseAiManager aiManager;
         protected Motion motion;
         protected Buff buff;
+        protected AttackBase attack;
         protected string color;
         protected string textureName;   //テクスチャ名
         protected string tag;           //敵味方　タグ分け
@@ -43,7 +44,16 @@ namespace Team27_RougeLike.Object
 
         public abstract void Update(GameTime gameTime);
 
-        public abstract void Attack();
+        public virtual void Attack()
+        {
+            attack.Attack();
+        }
+
+        public void AttackChange(AttackBase attack)
+        {
+            this.attack = attack;
+        }
+
         public virtual void Draw(Renderer renderer)
         {
             if (NockBacking())
@@ -73,10 +83,11 @@ namespace Team27_RougeLike.Object
             return nockback != Vector3.Zero;
         }
         public abstract void SetAttackAngle();
-        public Vector3 GetAttackAngle()
+        public Vector3 GetKeepAttackAngle()
         {
             return keepAttackAngle;
         }
+        public abstract Vector3 GetAttackAngle();
         public abstract void Damage(int num, Vector3 nockback);
         public abstract void TrueDamage(int num);
         public abstract bool IsDead();
@@ -114,5 +125,6 @@ namespace Team27_RougeLike.Object
         }
 
         public abstract int GetDiffence();
+        public abstract int GetAttack();
     }
 }

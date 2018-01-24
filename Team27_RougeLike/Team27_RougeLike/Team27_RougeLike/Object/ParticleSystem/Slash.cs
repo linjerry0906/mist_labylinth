@@ -12,14 +12,13 @@ namespace Team27_RougeLike.Object.ParticleSystem
     class Slash : Particle
     {
         private Motion motion;
-        private Player player;
+        private CharacterBase actor;
         private GameDevice gameDevice;
         private Vector3 position1;
 
-        public Slash(GameDevice gameDevice, Player player, Vector3 position1) : base(gameDevice)
+        public Slash(CharacterBase actor, Vector3 position1) : base()
         {
-            this.player = player;
-            this.gameDevice = gameDevice;
+            this.actor = actor;
             this.position1 = position1;
             name = "slash";
             alpha = 1.0f;
@@ -42,10 +41,10 @@ namespace Team27_RougeLike.Object.ParticleSystem
                 isDead = true;
         }
 
-        public override void Draw(Renderer renderer)
+        public override void Draw(GameDevice gameDevice)
         {
             Rectangle rect = motion.DrawingRange();
-            renderer.DrawPolygon(name, position1 + gameDevice.MainProjector.Front * 10, size, motion.DrawingRange(), Color.Red, alpha);
+            gameDevice.Renderer.DrawPolygon(name, position1, size, motion.DrawingRange(), Color.Red, alpha);
         }
 
     }

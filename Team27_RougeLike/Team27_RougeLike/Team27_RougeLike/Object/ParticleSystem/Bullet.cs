@@ -12,12 +12,10 @@ namespace Team27_RougeLike.Object.ParticleSystem
     {
         private Rectangle rect;
         private MoveDamageBox damageBox;
-        private GameDevice gameDevice;
-
-        public Bullet(GameDevice gameDevice,MoveDamageBox damageBox,Vector2 size):base(gameDevice)
+        
+        public Bullet(MoveDamageBox damageBox,Vector2 size):base()
         {
             this.damageBox = damageBox;
-            this.gameDevice = gameDevice;
             this.size = size;
             rect = new Rectangle(0, 0, 1, 1);
             name = "attack";
@@ -36,9 +34,9 @@ namespace Team27_RougeLike.Object.ParticleSystem
             if (damageBox.IsEnd())
                 isDead = true;
         }
-        public override void Draw(Renderer renderer)
+        public override void Draw(GameDevice gameDevice)
         {
-            renderer.DrawPolygon(name, position, size, rect,Color.White);
+            gameDevice.Renderer.DrawPolygon(name, position, size, rect,Color.White);
         }
     }
 }

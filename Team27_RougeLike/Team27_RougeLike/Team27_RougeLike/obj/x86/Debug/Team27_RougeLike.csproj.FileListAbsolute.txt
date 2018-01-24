@@ -121,8 +121,6 @@ C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Te
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image_thomb.xnb
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image_tree.xnb
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Model\map_block.xnb
-C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\slash.xnb
-C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\sowrd.xnb
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\StageCSV\StageInfo.csv
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\StageCSV\StageItem_1.csv
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\StageCSV\StageItem_4.csv
@@ -298,3 +296,16 @@ C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Te
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_armor.xnb
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_snake.xnb
 C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\StageCSV\Stage_boss_5_10.csv
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\exp.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\hp.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\hp_back.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\hp_deco.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\hp_gage.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\pressspace.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\title.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\titlelogo.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\press.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\press2.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\select.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\slash.xnb
+C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\sowrd.xnb
