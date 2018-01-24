@@ -46,14 +46,16 @@ namespace Team27_RougeLike
             IsMouseVisible = false;
             gameDevice = new GameDevice(Content, GraphicsDevice);
             gameManager = new GameManager(gameDevice);
-            
+
             sceneManager = new SceneManager(gameDevice);
             IScene dungeon = new DungeonScene(gameManager, gameDevice);
             IScene boss = new BossScene(gameManager, gameDevice);
+            IScene title = new Title(gameDevice);
             IScene town = new TownScene(gameManager, gameDevice);
             sceneManager.AddScene(SceneType.Load, new Load(gameDevice));
             sceneManager.AddScene(SceneType.Logo, new LogoScene(gameDevice));
             sceneManager.AddScene(SceneType.LoadTown, new LoadTown(gameManager, gameDevice));
+            sceneManager.AddScene(SceneType.Title, new SceneFader(title, gameDevice));
             sceneManager.AddScene(SceneType.Town, new SceneFader(town, gameDevice));
             sceneManager.AddScene(SceneType.UpgradeStore, new UpgradeStore(town, gameManager, gameDevice));
             sceneManager.AddScene(SceneType.ItemShop, new ItemShop(town, gameManager, gameDevice));
@@ -118,7 +120,7 @@ namespace Team27_RougeLike
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || 
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
             // TODO: Add your update logic here

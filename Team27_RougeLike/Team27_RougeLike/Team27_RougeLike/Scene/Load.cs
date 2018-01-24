@@ -62,11 +62,14 @@ namespace Team27_RougeLike.Scene
                 {"Dungeonbutton" ,path},
                 {"Guildtbutton" ,path},
                 {"Shopbutton" ,path},
+                {"title" ,path},
+                {"titlelogo" ,path},
                 {"Upgradebutton" ,path},
                 {"NEEC1280black" ,path},
                 {"warning" ,path},
                 {"player" ,path},
                 {"player_run" ,path},
+                {"pressspace" ,path},
             };
             return list;
         }
@@ -89,11 +92,14 @@ namespace Team27_RougeLike.Scene
         }
         private string[,] SEMList()
         {
-            string path = "./Sound/";
+            string path = "./Sound/SE/";
             string[,] list = new string[,]
             {
                 {"slash",path },
                 {"sowrd",path },
+                {"press",path },
+                {"press2",path },
+                {"select",path }
             };
             return list;
         }
@@ -184,7 +190,7 @@ namespace Team27_RougeLike.Scene
 
         public SceneType Next()
         {
-            return SceneType.Logo;
+            return SceneType.Logo;            
         }
 
         public bool IsEnd()
