@@ -29,6 +29,7 @@ namespace Team27_RougeLike.Device
 
         // 現在再生中のアセット名
         private string currentBGM;
+        private string nextBGM;
         //Fade用Timer
         private Timer fadeTimer;
         private bool isFade;
@@ -54,6 +55,7 @@ namespace Team27_RougeLike.Device
 
             // 何も再生していないのでnull初期化
             currentBGM = null;
+            nextBGM = null;
 
             fadeTimer = new Timer(2.0f);
             fadeTimer.Initialize();
@@ -152,6 +154,9 @@ namespace Team27_RougeLike.Device
         /// </summary>
         public void UpdateVolume()
         {
+            if(nextBGM != null)
+                PlayBGM(nextBGM);
+
             if (isFade)
                 return;
 
@@ -181,6 +186,8 @@ namespace Team27_RougeLike.Device
                 // 同じ曲だったら何もしない
                 return;
             }
+
+            nextBGM = name;
 
             // BGMは再生中か？
             if (IsPlayingBGM())

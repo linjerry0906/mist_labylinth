@@ -186,15 +186,15 @@ namespace Team27_RougeLike.UI
         /// <param name="constractAlpha">透明度</param>
         private void DrawDungeons(float constractAlpha)
         {
-            renderer.DrawString(
-                "どのダンジョンへ冒険するか？（推奨ギルドランク）",
-                DUNGEON_OFFSET + new Vector2(10, 5),
-                new Vector2(1.1f, 1.1f), Color.White, backLayer.CurrentAlpha() * constractAlpha);
-
             renderer.DrawTexture("fade",                                         //背景
                 DUNGEON_OFFSET,
                 new Vector2(280, 330),
                 backLayer.CurrentAlpha() * 0.5f);
+            renderer.DrawString(
+                "どのダンジョンへ冒険するか？\n（推奨ギルドランク）",
+                DUNGEON_OFFSET + new Vector2(10, 5),
+                new Vector2(1.1f, 1.1f), Color.White, backLayer.CurrentAlpha() * constractAlpha);
+
 
             for (int i = 0; i < stageInfo.Count; i++)                            //各ダンジョン
             {
@@ -209,7 +209,7 @@ namespace Team27_RougeLike.UI
 
                 renderer.DrawString(
                     stageInfo[i].name + "（" + stageInfo[i].difficulty + "）",
-                    DUNGEON_OFFSET + new Vector2(10, 25 * i + 35),
+                    buttonPos + new Vector2(10, 0),
                     new Vector2(1.1f, 1.1f), color, backLayer.CurrentAlpha() * constractAlpha);
             }
         }
@@ -277,7 +277,7 @@ namespace Team27_RougeLike.UI
             dungeons = new List<Button>();
             for (int i = 0; i < info.Count; i++)        //Buttonを初期化
             {
-                Vector2 position = DUNGEON_OFFSET + new Vector2(0, 25 * i + 35);
+                Vector2 position = DUNGEON_OFFSET + new Vector2(0, 25 * i + 55);
                 Button button = new Button(position + new Vector2(0, 2), 280, 21);
                 dungeons.Add(button);
             }
