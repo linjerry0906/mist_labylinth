@@ -110,7 +110,11 @@ namespace Team27_RougeLike.Object.Character
                 }
             }
             characterManager.AddHitBox(DBox);
-            pManager.AddParticle(new Slash(gameDevice, this, DBox.Position()));
+
+            if (DBox is DamageBox)
+            {
+                pManager.AddParticle(new Slash(gameDevice, this, DBox.Position()));
+            }
         }
         public Projector Projecter
         {
