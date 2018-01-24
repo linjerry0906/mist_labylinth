@@ -177,7 +177,7 @@ namespace Team27_RougeLike.UI
                 "white", 
                 Vector2.Zero, 
                 new Vector2(Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT), 
-                backLayer.CurrentAlpha() * 0.5f);
+                backLayer.CurrentAlpha() * 0.2f);
         }
 
         /// <summary>

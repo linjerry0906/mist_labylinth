@@ -74,7 +74,7 @@ namespace Team27_RougeLike.Scene
             motion.Update(gameTime);
             fog.Update(1.0f);
 
-            if (input.IsLeftClick())
+            if (input.IsLeftClick() && !endFlag)
             {
                 sound.PlaySE("press");
                 endFlag = true;
