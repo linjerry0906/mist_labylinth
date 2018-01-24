@@ -78,6 +78,7 @@ namespace Team27_RougeLike.Scene
             stageManager.DrawLimitTime();       //残り時間を表示
             stageManager.DrawDungeonInfo(currentFloor);
             ui.Draw();                          //UIの描画
+            gameManager.PlayerInfo.DrawUIStatue();
 
             renderer.End();
         }

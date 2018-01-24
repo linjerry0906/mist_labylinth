@@ -239,7 +239,7 @@ namespace Team27_RougeLike.UI
             }
             else
             {
-                colors[4] = Color.Lerp(Color.White, Color.Gold, leftHand.GetItemRare() / 100.0f);       //レア度で色付け
+                colors[4] = Color.Lerp(Color.White, Color.Gold, leftHand.GetItemRare() / 8.0f);       //レア度で色付け
                 equips[4] = leftHand.GetItemName() + " + " + leftHand.GetReinforcement();
             }
 
@@ -250,7 +250,7 @@ namespace Team27_RougeLike.UI
             }
             else
             {
-                colors[5] = Color.Lerp(Color.White, Color.Gold, rightHand.GetItemRare() / 100.0f);       //レア度で色付け
+                colors[5] = Color.Lerp(Color.White, Color.Gold, rightHand.GetItemRare() / 8.0f);       //レア度で色付け
                 equips[5] = rightHand.GetItemName() + " + " + rightHand.GetReinforcement();
             }
 
@@ -261,7 +261,7 @@ namespace Team27_RougeLike.UI
             }
             else
             {
-                colors[6] = Color.Lerp(Color.White, Color.Gold, arrow.GetItemRare() / 100.0f);       //レア度で色付け
+                colors[6] = Color.Lerp(Color.White, Color.Gold, arrow.GetItemRare() / 8.0f);       //レア度で色付け
                 equips[6] = arrow.GetItemName() + "（" + arrow.GetStack() + "）";
             }
         }
@@ -280,7 +280,7 @@ namespace Team27_RougeLike.UI
             }
             else
             {
-                colors[(int)type] = Color.Lerp(Color.White, Color.Gold, armor[(int)type].GetItemRare() / 100.0f);
+                colors[(int)type] = Color.Lerp(Color.White, Color.Gold, armor[(int)type].GetItemRare() / 8.0f);
                 text = armor[(int)type].GetItemName() + " + " + armor[(int)type].GetReinforcement();
             }
         }

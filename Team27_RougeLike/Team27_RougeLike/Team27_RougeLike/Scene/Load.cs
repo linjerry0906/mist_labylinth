@@ -41,6 +41,11 @@ namespace Team27_RougeLike.Scene
                 {"guild_gage_back" ,path},
                 {"guild_gage_middle" ,path},
                 {"guild_gage_front" ,path},
+                {"exp" ,path},
+                {"hp" ,path},
+                {"hp_back" ,path},
+                {"hp_gage" ,path},
+                {"hp_deco" ,path},
                 {"dungeon_image_tutorial" ,path},
                 {"dungeon_image2" ,path},
                 {"dungeon_image_thomb" ,path},
@@ -69,6 +74,9 @@ namespace Team27_RougeLike.Scene
                 {"warning" ,path},
                 {"player" ,path},
                 {"player_run" ,path},
+                {"title" ,path},
+                {"titlelogo" ,path},
+                {"pressspace" ,path},
             };
             return list;
         }
@@ -91,11 +99,14 @@ namespace Team27_RougeLike.Scene
         }
         private string[,] SEMList()
         {
-            string path = "./Sound/";
+            string path = "./Sound/SE/";
             string[,] list = new string[,]
             {
                 {"slash",path },
                 {"sowrd",path },
+                {"press",path },
+                {"press2",path },
+                {"select",path }
             };
             return list;
         }

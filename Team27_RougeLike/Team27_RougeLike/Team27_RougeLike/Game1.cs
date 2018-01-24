@@ -53,6 +53,7 @@ namespace Team27_RougeLike
             IScene town = new TownScene(gameManager, gameDevice);
             sceneManager.AddScene(SceneType.Load, new Load(gameDevice));
             sceneManager.AddScene(SceneType.Logo, new LogoScene(gameDevice));
+            sceneManager.AddScene(SceneType.Title, new SceneFader(new Title(gameDevice), gameDevice));
             sceneManager.AddScene(SceneType.LoadTown, new LoadTown(gameManager, gameDevice));
             sceneManager.AddScene(SceneType.Town, new SceneFader(town, gameDevice));
             sceneManager.AddScene(SceneType.UpgradeStore, new UpgradeStore(town, gameManager, gameDevice));

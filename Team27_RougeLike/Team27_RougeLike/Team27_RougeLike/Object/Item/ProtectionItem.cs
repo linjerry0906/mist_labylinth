@@ -57,14 +57,14 @@ namespace Team27_RougeLike.Object.Item
         //強化値指定
         public ProtectionItem(int itemID, string itemName, string itemExplanation,
             int itemPrice, int itemRare, float itemWeight, ProtectionType protectionType,
-            int itemPower, int itemDefense, int reinforcement, int reinforcementLimit, int upPower, int upDefense,
-            int addPower, int addDefence)
+            int itemPower, int itemDefense, int reinforcement, int reinforcementLimit,
+            int upPower, int upDefense, int addPower, int addDefence)
             : base(itemID, itemName, itemExplanation, itemPrice, itemRare, itemWeight, 1)
         {
             this.protectionType = protectionType;
 
             effect = new EquipmentEffect(itemPower, itemDefense, reinforcementLimit,
-                upPower, upDefense, addPower, addDefence);
+                upPower, upDefense, addPower, addDefence, reinforcement);
         }
 
         //コピーコンストラクタ
@@ -137,12 +137,8 @@ namespace Team27_RougeLike.Object.Item
             ProtectionItem newItem = new ProtectionItem(itemID, itemName, itemExplanation,
             itemPrice, itemRare, itemWeight, protectionType,
             effect.GetPower() - effect.GetAddPower(), effect.GetDefense() - effect.GetAddDefense(), 
-            GetReinforcement(), effect.GetReinforcementLimit(), effect.GetUpPower(), effect.GetUpDefence(),
+            effect.GetReinforcement(), effect.GetReinforcementLimit(), effect.GetUpPower(), effect.GetUpDefence(),
             effect.GetAddPower(), effect.GetAddDefense());
-
-            effect = new EquipmentEffect(effect.GetPower() - effect.GetAddPower(), effect.GetDefense() - effect.GetAddDefense(),
-                effect.GetReinforcementLimit(), effect.GetUpPower(), effect.GetUpDefence(),
-                effect.GetAddPower(), effect.GetAddDefense(), GetReinforcement());
 
             return newItem;
         }

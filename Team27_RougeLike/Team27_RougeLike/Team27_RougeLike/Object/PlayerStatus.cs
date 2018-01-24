@@ -5,7 +5,8 @@ using System.Text;
 using System.Diagnostics;
 using Team27_RougeLike.Object.Item;
 using Team27_RougeLike.Device;
-using Team27_RougeLike.UI;
+using Microsoft.Xna.Framework;
+
 namespace Team27_RougeLike.Object
 {
     class PlayerStatus
@@ -16,6 +17,7 @@ namespace Team27_RougeLike.Object
         private ExpLoader loader;
         private Dictionary<int, int> expData;
         private GameDevice gamedevice;
+        private Renderer renderer;
         private int exp;
         private int addPower;
         private int addDefence;
@@ -25,6 +27,7 @@ namespace Team27_RougeLike.Object
         {
             this.baseStatus = status;
             this.gamedevice = gameDevice;
+            renderer = gameDevice.Renderer;
             loader = new ExpLoader();
             expData = loader.LoadExp();
             inventory = new Inventory(gameDevice);
@@ -111,6 +114,31 @@ namespace Team27_RougeLike.Object
         public Inventory GetInventory()
         {
             return inventory;
+        }
+
+        public void DrawUIStatue()
+        {
+            Vector2 gagePos = new Vector2(40, 45);
+            float hpRate = GetHP() * 1.0f / GetMaxHP();
+            float expRate = exp * 1.0f / expData[GetLevel()];
+            renderer.DrawTexture(
+                "hp_back", gagePos);
+            renderer.DrawTexture(
+                "hp", gagePos,
+                new Rectangle(0, 0, (int)(384 * hpRate), 64));
+            renderer.DrawTexture(
+                "exp", gagePos,
+                new Rectangle(0, 0, (int)(384 * expRate), 64));
+            renderer.DrawString(
+                GetLevel().ToString(),
+                gagePos + new Vector2(35, 30),
+                new Color(25, 180, 255), 
+                new Vector2(1.5f, 1.5f) ,1.0f,
+                true, true);
+            renderer.DrawTexture(
+                "hp_gage", gagePos);
+            renderer.DrawTexture(
+                "hp_deco", gagePos);
         }
     }
 }

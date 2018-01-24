@@ -51,7 +51,7 @@ namespace Team27_RougeLike.Scene
 
         public SceneType Next()
         {
-            return SceneType.LoadTown;
+            return SceneType.Title;
         }
 
         public void ShutDown()
