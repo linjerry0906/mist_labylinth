@@ -196,7 +196,10 @@ with.
         <Start>受</Start>
         <End>受</End>
       </CharacterRegion>
-
+      <CharacterRegion>
+        <Start>噂</Start>
+        <End>噂</End>
+      </CharacterRegion>
       <CharacterRegion>
         <Start>海</Start>
         <End>海</End>
@@ -295,7 +298,10 @@ with.
         <Start>貨</Start>
         <End>貨</End>
       </CharacterRegion>
-
+      <CharacterRegion>
+        <Start>狩</Start>
+        <End>狩</End>
+      </CharacterRegion>
       <CharacterRegion>
         <Start>買</Start>
         <End>買</End>
@@ -311,6 +317,10 @@ with.
       <CharacterRegion>
         <Start>鍛</Start>
         <End>鍛</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>各</Start>
+        <End>各</End>
       </CharacterRegion>
 
       <!-- かい -->
@@ -1522,7 +1532,10 @@ with.
         <Start>麗</Start>
         <End>麗</End>
       </CharacterRegion>
-
+      <CharacterRegion>
+        <Start>霊</Start>
+        <End>霊</End>
+      </CharacterRegion>
 
       <!-- ろ -->
       <CharacterRegion>
