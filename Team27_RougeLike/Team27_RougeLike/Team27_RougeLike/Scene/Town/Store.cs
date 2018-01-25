@@ -58,7 +58,6 @@ namespace Team27_RougeLike.Scene.Town
         private int rightMaxPage;               //右の最大ページ
 
         private int totalPrice;
-        private bool isRightListFull;
         private bool isInventoryFullMessege;
         private bool isNoMoney;
         private Window messegeWindow;
@@ -88,7 +87,6 @@ namespace Team27_RougeLike.Scene.Town
 
             totalPrice = 0;
             isInventoryFullMessege = false;
-            isRightListFull = false;
             isNoMoney = false;
 
             windowWidth = Def.WindowDef.WINDOW_WIDTH;
@@ -119,7 +117,6 @@ namespace Team27_RougeLike.Scene.Town
             rightWindows = new List<Window>();
 
             isInventoryFullMessege = false;
-            isRightListFull = false;
             isNoMoney = false;
             messegeWindow.Initialize();
             messegeWindow.SetAlphaLimit(0.8f);
@@ -223,7 +220,7 @@ namespace Team27_RougeLike.Scene.Town
             leftPageRightWindow.Update();
             leftPageLeftWindow.Update();
 
-            if (isRightListFull || isInventoryFullMessege  || isNoMoney)
+            if (isInventoryFullMessege  || isNoMoney)
             {
                 if (!messegeWindow.CurrentState())
                 {
@@ -345,8 +342,7 @@ namespace Team27_RougeLike.Scene.Town
         {
 
             playerInventory.BagItemCount(ref currentNum, ref maxNum);
-
-            isRightListFull = false;
+            
             isNoMoney = false;
             isInventoryFullMessege = false;
 
@@ -390,67 +386,8 @@ namespace Team27_RougeLike.Scene.Town
                 //売り物リストから買う物リストに追加する処理(買い物リストが空いているかチェック)
                 if (leftButtons[i].IsClick(mousePos))
                 {
-                    //if (rightButtons.Count >= 20)
-                    //{
-                    //    isRightListFull = true;
-                    //}
                     if (input.IsLeftClick())
                     {
-                        //    if (leftItems[i + (leftPage - 1) * 20] is ConsumptionItem &&
-                        //        ((ConsumptionItem)leftItems[i + (leftPage - 1) * 20]).GetTypeText() == "矢")
-                        //    {
-                        //        if (rightItems.Count > 0)
-                        //        {
-                        //            foreach (Item item in rightItems)
-                        //            {
-                        //                if (item is ConsumptionItem && item.GetItemID() == leftItems[i + (leftPage - 1) * 20].GetItemID())
-                        //                {
-                        //                    if (((ConsumptionItem)item).GetStack() < 30)
-                        //                    {
-                        //                        ((ConsumptionItem)item).AddStack();
-                        //                        totalPrice += item.GetItemPrice();
-                        //                        break;
-                        //                    }
-                        //                    else
-                        //                    {
-                        //                        return;
-                        //                    }
-                        //                    //else
-                        //                    //{
-                        //                    //    Item newItem = ((ConsumptionItem)leftItems[i + (leftPage - 1) * 20]).UniqueClone();
-                        //                    //    ((ConsumptionItem)newItem).SetStack(1);
-                        //                    //    if (rightPageItems.Count < 20)
-                        //                    //    {
-                        //                    //        AddRightList(newItem);
-                        //                    //    }
-                        //                    //    rightItems.Add(newItem);
-                        //                    //    return;
-                        //                    //}
-                        //                }
-                        //                else
-                        //                {
-                        //                    Item newItem = ((ConsumptionItem)leftItems[i + (leftPage - 1) * 20]).UniqueClone();
-                        //                    ((ConsumptionItem)newItem).SetStack(1);
-                        //                    if (rightPageItems.Count < 20)
-                        //                    {
-                        //                        AddRightList(newItem);
-                        //                    }
-                        //                    rightItems.Add(newItem);
-                        //                    return;
-                        //                }
-                        //        }
-                        //    }
-                        //    else
-                        //    {
-                        //        if (rightPageItems.Count < 20)
-                        //        {
-                        //            AddRightList(leftItems[i + (leftPage - 1) * 20]);
-                        //        }
-                        //        rightItems.Add(leftItems[i + (leftPage - 1) * 20]);
-                        //        break;
-                        //    }
-                        //}
-                        //else
                         {
                             if (rightPageItems.Count < 20)
                             {
@@ -660,7 +597,7 @@ namespace Team27_RougeLike.Scene.Town
             if (modeType == ModeType.Buy)
             {
                 renderer.DrawString("バッグ(" + currentNum + "/" + maxNum + ")", new Vector2(windowWidth - 240, 64), new Vector2(1, 1), Color.White);
-                renderer.DrawString("所持金 : " + playerInventory.CurrentMoney(), new Vector2(windowWidth / 2 + 120, windowHeight - 128 + 32), new Vector2(1, 1), Color.White);
+                renderer.DrawString("所持金 : " + playerInventory.CurrentMoney(), new Vector2(windowWidth / 2 + 120, windowHeight - 128 + 6), new Vector2(1, 1), Color.White);
             }
 
             renderer.DrawString("ページ(" + leftPage + "/" + leftMaxPage + ")", new Vector2(windowWidth / 4 - 48, windowHeight - 96), new Vector2(1, 1), Color.White);
@@ -788,10 +725,6 @@ namespace Team27_RougeLike.Scene.Town
             }
 
             messegeWindow.Draw();
-            if (isRightListFull)
-            {
-                renderer.DrawString("買う物リストがいっぱいです。", new Vector2(320, windowHeight / 2), new Vector2(2, 2), Color.Red);
-            }
             if (isInventoryFullMessege)
             {
                 renderer.DrawString("バッグにはいりきりません。", new Vector2(320, windowHeight / 2), new Vector2(2, 2), Color.Red);
@@ -801,7 +734,7 @@ namespace Team27_RougeLike.Scene.Town
                 renderer.DrawString("所持金が足りません。", new Vector2(320, windowHeight / 2), new Vector2(2, 2), Color.Red);
             }
 
-            renderer.DrawString("合計金額 : " + totalPrice, new Vector2(windowWidth - 240, windowHeight - 128 + 32), new Vector2(1, 1), Color.White);
+            renderer.DrawString("合計金額 : " + totalPrice, new Vector2(windowWidth - 240, windowHeight - 128 + 6), new Vector2(1, 1), Color.White);
         }
     }
 }
