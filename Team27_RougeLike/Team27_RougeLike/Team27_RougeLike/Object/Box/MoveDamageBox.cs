@@ -55,7 +55,7 @@ namespace Team27_RougeLike.Object.Box
         public override void Update()
         {
             base.Update();
-            collision.Center += angle * 1.3f;
+            collision.Center += angle * 1.5f;
         }
 
         public override void Effect(CharacterBase character)

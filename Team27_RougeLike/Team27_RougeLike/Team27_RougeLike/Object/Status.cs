@@ -43,8 +43,8 @@ namespace Team27_RougeLike.Object
         /// </summary>
         public int Attackspd { get { return attackspd; } }
         public float Movespeed { get { return speed; } }
-        public int BasePower { get { return basePower + (level - 1) * 2; } }
-        public int BaseArmor { get { return baseDiffence + (level - 1) * 2; } }
+        public int BasePower { get { return basePower + (level - 1) * 1; } }
+        public int BaseArmor { get { return baseDiffence + (level - 1) * 1; } }
         public int Level { get { return level; } }
         public int Health
         {
@@ -53,7 +53,7 @@ namespace Team27_RougeLike.Object
         }
         public int MaxHealth
         {
-            get { return maxhealth + (level - 1) * 4; }
+            get { return maxhealth + (level - 1) * 2; }
         }
         public void LevelUp()
         {

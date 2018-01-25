@@ -33,7 +33,14 @@ namespace Team27_RougeLike.Object.AI
         {
             velocity = player.Collision.Position - actor.Collision.Position;
             velocity.Normalize();
-            actor.Velocity = -velocity;
+            if (actor.AiManager() is AiManager_Melee)
+            {
+                actor.Velocity =  new Vector3(-velocity.X / 2 ,0, -velocity.Z / 2);
+            }
+            else
+            {
+                actor.Velocity = -velocity;
+            }
         }
     }
 }

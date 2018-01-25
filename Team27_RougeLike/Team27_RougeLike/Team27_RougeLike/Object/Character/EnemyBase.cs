@@ -99,19 +99,19 @@ namespace Team27_RougeLike.Object
             switch (aiManager.ToString())
             {
                 case "Team27_RougeLike.Object.AI.AiManager_Fool":
-                    attack = new MeleeAttack(characterManager, this,pManager);
+                    attack = new MeleeAttack(characterManager, this, pManager);
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                    attack = new MeleeAttack(characterManager, this,pManager);
+                    attack = new MeleeAttack(characterManager, this, pManager);
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Totem":
-                    attack = new RangeAttack(characterManager, this,pManager);
+                    attack = new RangeAttack(characterManager, this, pManager);
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    attack = new RangeAttack(characterManager, this,pManager);
+                    attack = new RangeAttack(characterManager, this, pManager);
                     break;
                 case "Team27_RougeLike.Object.AI.AiManager_AllRangedBoss":
-                    attack = new RangeAttack(characterManager, this,pManager);
+                    attack = new RangeAttack(characterManager, this, pManager);
                     break;
                 default:
                     break;
@@ -154,7 +154,17 @@ namespace Team27_RougeLike.Object
         }
         public int Distance(Player player) { return (int)Vector2.Distance(new Vector2(player.Collision.Position.X, player.Collision.Position.Z), new Vector2(collision.Position.X, collision.Position.Z)); }
         public bool SearchCheck(Player player) { return Distance(player) < range.searchRange; }
-        public bool AttackCheck(Player player) { return Distance(player) < range.attackRange; }
+        public bool AttackCheck(Player player)
+        {
+            if (aiManager is AiManager_Melee || aiManager is AiManager_Fool)
+            {
+                return Distance(player) < collision.Radius*2;
+            }
+            else
+            {
+                return Distance(player) < range.attackRange;
+            }
+        }
         public bool WaitPointCheck(Player player) { return Distance(player) < range.waitRange; }
         public override void SetAttackAngle()
         {
@@ -230,6 +240,10 @@ namespace Team27_RougeLike.Object
             if (damage > 0)
             {
                 status.Health -= damage;
+            }
+            else
+            {
+                status.Health -= 1;
             }
             if (!buff.GetBuff(Buff.buff.IRONBODY))
             {

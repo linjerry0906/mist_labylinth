@@ -107,7 +107,12 @@ namespace Team27_RougeLike.Scene
                 {"sowrd",path },
                 {"press",path },
                 {"press2",path },
-                {"select",path }
+                {"select",path },
+                {"attack1",path },
+                {"damage1",path },
+                {"damage7",path },
+                {"damage5",path },
+                {"powerup10",path }
             };
             return list;
         }

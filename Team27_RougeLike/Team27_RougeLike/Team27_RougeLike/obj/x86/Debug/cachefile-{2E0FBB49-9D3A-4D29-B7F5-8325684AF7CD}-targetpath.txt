@@ -138,6 +138,12 @@ Content\Sound\SE\press2.xnb
 Content\Sound\SE\select.xnb
 Content\Sound\SE\slash.xnb
 Content\Sound\SE\sowrd.xnb
+Content\Texture\enemy_weak.xnb
+Content\Sound\SE\attack1.xnb
+Content\Sound\SE\damage1.xnb
+Content\Sound\SE\damage5.xnb
+Content\Sound\SE\powerup10.xnb
+Content\Sound\SE\damage7.xnb
 Content\Sound\BGM\m-art_Candle.mp3
 Content\Sound\BGM\m-art_Komorebi.mp3
 Content\Sound\BGM\n14.mp3
