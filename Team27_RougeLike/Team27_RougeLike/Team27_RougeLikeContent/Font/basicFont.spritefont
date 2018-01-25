@@ -242,6 +242,10 @@ with.
         <Start>奥</Start>
         <End>奥</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>尾</Start>
+        <End>尾</End>
+      </CharacterRegion>
       <!-- か -->
       <CharacterRegion>
         <Start>開</Start>
