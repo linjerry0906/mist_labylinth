@@ -300,17 +300,17 @@ namespace Team27_RougeLike.Scene
         /// </summary>
         private void CheckEnd()
         {
-            ////Debug
-            //if (gameDevice.InputState.GetKeyTrigger(Keys.N))
-            //{
-            //    endFlag = true;
-            //    nextScene = SceneType.LoadMap;
-            //    gameManager.UpdateDungeonProcess();     //攻略状況更新
-            //    stageManager.NextFloor();
-            //    if (stageManager.IsBoss())
-            //        nextScene = SceneType.LoadBoss;
-            //    return;
-            //}
+            //Debug
+            if (gameDevice.InputState.GetKeyTrigger(Keys.N))
+            {
+                endFlag = true;
+                nextScene = SceneType.LoadMap;
+                gameManager.UpdateDungeonProcess();     //攻略状況更新
+                stageManager.NextFloor();
+                if (stageManager.IsBoss())
+                    nextScene = SceneType.LoadBoss;
+                return;
+            }
 
             //Pause機能
             if (gameDevice.InputState.GetKeyTrigger(Keys.P))

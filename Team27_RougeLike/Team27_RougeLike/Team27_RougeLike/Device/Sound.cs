@@ -159,7 +159,7 @@ namespace Team27_RougeLike.Device
         /// </summary>
         public void UpdateVolume()
         {
-            if(nextBGM != null)
+            if(nextBGM != null && bgms.ContainsKey(nextBGM))
                 PlayBGM(nextBGM);
 
             if (isFade)

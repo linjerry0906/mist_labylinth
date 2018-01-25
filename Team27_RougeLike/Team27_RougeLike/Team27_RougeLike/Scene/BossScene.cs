@@ -186,6 +186,9 @@ namespace Team27_RougeLike.Scene
 
         public void Update(GameTime gameTime)
         {
+            if (endFlag)
+                return;
+
             if(!map.IsOver())
                 stageManager.PlayBossBGM();
 
