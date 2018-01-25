@@ -137,7 +137,7 @@ namespace Team27_RougeLike.Scene
             {
                 if (ui.Next() == DungeonSelectUI.DungeonSelectButtonEnum.ダンジョン)
                 {
-                    gameDevice.Sound.PlaySE("press2");
+                    gameDevice.Sound.PlaySE("press2",0.4f);
                     nextScene = SceneType.LoadMap;
                     ui.InitStage();
                 }
