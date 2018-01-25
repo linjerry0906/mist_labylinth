@@ -44,13 +44,17 @@ namespace Team27_RougeLike.Scene.Town
                 int dataDungeon = int.Parse(data[1]);   //ダンジョン番号
                 int dataFloor = int.Parse(data[2]);     //階層を読み取る
 
-                //攻略したことのないダンジョン以降のアイテムを読み込む必要がない
-                if (!dungeonProcess.HasKey(dataDungeon))
-                    continue;
+                if (dataDungeon != 0 && dataFloor != 0)
+                {
+                    //攻略したことのないダンジョン以降のアイテムを読み込む必要がない
+                    if (!dungeonProcess.HasKey(dataDungeon))
+                        continue;
 
-                //到達していない階層のアイテムを読み込む必要がない
-                if (dataFloor > dungeonProcess.GetProcess()[dataDungeon])
-                    continue;
+                    //到達していない階層のアイテムを読み込む必要がない
+                    if (dataFloor > dungeonProcess.GetProcess()[dataDungeon])
+                        continue;
+                }
+
 
                 int id = int.Parse(data[4]);            //IDを読み取る
                 if (data[3] == "equipment")             //装備アイテムの場合
