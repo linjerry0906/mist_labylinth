@@ -161,11 +161,11 @@ namespace Team27_RougeLike.Scene
             hintUI.SetSpeed(0.07f);
 
             hint = new string[(int)ButtonEnum.NULL];
-            hint[(int)ButtonEnum.Dungeonbutton] = "ダンジョンへ冒険する";
-            hint[(int)ButtonEnum.Guildtbutton] = "ギルトで依頼を受ける";
-            hint[(int)ButtonEnum.Shopbutton] = "ショップはアイテムを売買できる";
-            hint[(int)ButtonEnum.Upgradebutton] = "鍛冶屋は武器や防具の強化ができる";
-            hint[(int)ButtonEnum.Depotbutton] = "倉庫にアイテムを保存できる";
+            hint[(int)ButtonEnum.Dungeonbutton] = "ダンジョン：ダンジョンへ冒険する";
+            hint[(int)ButtonEnum.Guildtbutton] = "ギルド：ギルドから依頼を受ける";
+            hint[(int)ButtonEnum.Shopbutton] = "ショップ：アイテムを売買できる";
+            hint[(int)ButtonEnum.Upgradebutton] = "鍛冶屋：武器や防具の強化ができる";
+            hint[(int)ButtonEnum.Depotbutton] = "倉庫：アイテムを保存できる";
         }
 
         public bool IsEnd()
