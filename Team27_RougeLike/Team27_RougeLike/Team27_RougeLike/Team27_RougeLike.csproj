@@ -80,9 +80,9 @@
     <Compile Include="Object\AI\AiManager\AiManager_AllRangedBoss.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Escape.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Melee.cs" />
+    <Compile Include="Object\AI\AiManager\AiManager_MeleeBoss.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Player.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Ranged.cs" />
-    <Compile Include="Object\AI\AiManager\AiManager_Summoner.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Totem.cs" />
     <Compile Include="Object\AI\AiManager\IBoss.cs" />
     <Compile Include="Object\AI\AiManager\IEnemyAi.cs" />

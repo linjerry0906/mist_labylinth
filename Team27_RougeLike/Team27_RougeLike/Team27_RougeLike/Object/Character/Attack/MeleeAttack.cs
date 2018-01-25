@@ -17,8 +17,9 @@ namespace Team27_RougeLike.Object
 
         public override void Attack()
         {
-            var box = new DamageBox(new BoundingSphere(new Vector3(actor.Collision.Position.X, characterManager.GetPlayer().Collision.Position.Y, actor.Collision.Position.Z) + (actor.GetKeepAttackAngle() * actor.Collision.Radius / 2), 3), 1, actor.Tag, actor.GetAttack(), actor.GetKeepAttackAngle());
+            var box = new DamageBox(new BoundingSphere(new Vector3(actor.Collision.Position.X, characterManager.GetPlayer().Collision.Position.Y, actor.Collision.Position.Z) + (actor.GetKeepAttackAngle() * actor.Collision.Radius / 2), actor.Collision.Radius), 1, actor.Tag, actor.GetAttack(), actor.GetKeepAttackAngle());
             characterManager.AddHitBox(box);
+            actor.Sound("attack1");
             particleManager.AddParticle(new Slash(actor, box.collision.Center));
         }
     }

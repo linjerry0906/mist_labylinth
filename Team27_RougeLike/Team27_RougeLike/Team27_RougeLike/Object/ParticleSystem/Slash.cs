@@ -27,7 +27,7 @@ namespace Team27_RougeLike.Object.ParticleSystem
             motion = new Motion();
             for (int i = 0; i < 7; i++)
                 motion.Add(i, new Rectangle(256 * i, 0, 256, 256));
-            motion.Initialize(new Range(0, 6), new Timer(0.02f));
+            motion.Initialize(new Range(0, 6), new Timer(0.015f));
         }
 
         public override void Initialize()

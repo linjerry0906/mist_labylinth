@@ -126,5 +126,10 @@ namespace Team27_RougeLike.Object
 
         public abstract int GetDiffence();
         public abstract int GetAttack();
+
+        public void Sound(string name)
+        {
+            characterManager.Sound(name);
+        }
     }
 }

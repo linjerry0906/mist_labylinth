@@ -85,8 +85,10 @@ namespace Team27_RougeLike.Object.Character
                             //それが攻撃だった場合の判定
                             if (h is iDamageBox)
                             {
-                                int damage = ((iDamageBox)h).Damage() - c.GetDiffence() < 0 ?  0: ((iDamageBox)h).Damage() - c.GetDiffence();
+                                int damage = ((iDamageBox)h).Damage() - c.GetDiffence() < 0 ?  1: ((iDamageBox)h).Damage() - c.GetDiffence();
                                 ui.LogUI.AddLog(c.GetName() + "に" + damage  + "のダメージ");
+                                //Sound("damage1");
+                                Sound("damage5");
                             }
                         }
                     }
@@ -111,6 +113,7 @@ namespace Team27_RougeLike.Object.Character
                             ui.LogUI.AddLog("プレイヤーのレベルは"+ player.GetPlayerStatus().GetLevel()+"に上がった");
                             ui.LogUI.AddLog("ステータスが上昇した");
                             ui.LogUI.AddLog("体力が全回復した");
+                            Sound("powerup10");
                             player.GetPlayerStatus().Heal(100000);
                         }
                         gameManager.PlayerQuest.AddKill(((EnemyBase)c).GetID());
@@ -237,6 +240,11 @@ namespace Team27_RougeLike.Object.Character
                     c.TrueDamage(num);
                 }
             });
+        }
+
+        public void Sound(string name)
+        {
+            gameDevice.Sound.PlaySE(name);
         }
     }
 }

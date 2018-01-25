@@ -74,6 +74,7 @@ namespace Team27_RougeLike.Object.Character
             if (t == null)
             {
                 attack = new MeleeAttack(characterManager, this, pManager);
+                ui.LogUI.AddLog("手での攻撃");
             }
             else
             {
@@ -125,6 +126,10 @@ namespace Team27_RougeLike.Object.Character
             if (damage > 0)
             {
                 status.Damage(damage);
+            }
+            else
+            {
+                status.Damage(1);
             }
             if (!buff.GetBuff(Buff.buff.IRONBODY))
             {

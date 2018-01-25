@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image2.xnb</Output>
-      <Time>2018-01-19T22:35:44.91576+09:00</Time>
+      <Time>2018-01-25T12:58:34.9585603+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\dungeon_image_ice.png</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image_ice.xnb</Output>
-      <Time>2018-01-19T22:35:44.9217756+09:00</Time>
+      <Time>2018-01-25T12:58:34.9675866+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\dungeon_image_thomb.png</Source>
@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image_thomb.xnb</Output>
-      <Time>2018-01-19T22:35:44.9267894+09:00</Time>
+      <Time>2018-01-25T12:58:34.9810867+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\dungeon_image_tree.png</Source>
@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image_tree.xnb</Output>
-      <Time>2018-01-19T22:35:44.9333071+09:00</Time>
+      <Time>2018-01-25T12:58:35.0021774+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\attack.png</Source>
@@ -98,7 +98,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\dungeon_image_tutorial.xnb</Output>
-      <Time>2018-01-19T22:35:44.944336+09:00</Time>
+      <Time>2018-01-25T12:58:35.0146744+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\fog.png</Source>
@@ -350,7 +350,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\guild_background.xnb</Output>
-      <Time>2018-01-21T16:08:05.4746324+09:00</Time>
+      <Time>2018-01-25T12:58:35.0332241+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\enemy_light.png</Source>
@@ -386,7 +386,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-01-24T13:14:58.6650056+09:00</Time>
+      <Time>2018-01-25T12:58:34.924939+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -1016,6 +1016,60 @@
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\sowrd.xnb</Output>
       <Time>2018-01-24T13:15:06.9797525+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_weak.png</Source>
+      <Name>Texture\enemy_weak</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_weak.xnb</Output>
+      <Time>2018-01-25T12:58:35.017181+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\SE\attack1.wav</Source>
+      <Name>Sound\SE\attack1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\attack1.xnb</Output>
+      <Time>2018-01-25T13:11:42.8133666+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\SE\damage1.wav</Source>
+      <Name>Sound\SE\damage1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\damage1.xnb</Output>
+      <Time>2018-01-25T13:11:43.5514169+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\SE\damage5.wav</Source>
+      <Name>Sound\SE\damage5</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\damage5.xnb</Output>
+      <Time>2018-01-25T13:11:44.364283+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\SE\powerup10.wav</Source>
+      <Name>Sound\SE\powerup10</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\powerup10.xnb</Output>
+      <Time>2018-01-25T13:11:45.0691253+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Sound\SE\damage7.wav</Source>
+      <Name>Sound\SE\damage7</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\damage7.xnb</Output>
+      <Time>2018-01-25T13:38:51.9280521+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
