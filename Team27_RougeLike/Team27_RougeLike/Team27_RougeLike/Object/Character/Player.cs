@@ -94,7 +94,7 @@ namespace Team27_RougeLike.Object.Character
                         }
                         break;
                     case WeaponItem.WeaponType.Sword:
-                        attack = new MeleeAttack(characterManager, this, pManager);
+                        attack = new SwordAttack(characterManager, this, pManager);
                         ui.LogUI.AddLog("剣での攻撃");
                         break;
                     case WeaponItem.WeaponType.Shield:
@@ -102,7 +102,7 @@ namespace Team27_RougeLike.Object.Character
                         ui.LogUI.AddLog("盾での攻撃");
                         break;
                     case WeaponItem.WeaponType.Dagger:
-                        attack = new MeleeAttack(characterManager, this, pManager);
+                        attack = new DaggerAttack(characterManager, this, pManager);
                         ui.LogUI.AddLog("短剣での攻撃");
                         break;
                     default:

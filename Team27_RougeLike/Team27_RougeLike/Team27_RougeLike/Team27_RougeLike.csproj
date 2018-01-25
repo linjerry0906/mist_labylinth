@@ -80,7 +80,6 @@
     <Compile Include="Object\AI\AiManager\AiManager_AllRangedBoss.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Escape.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Melee.cs" />
-    <Compile Include="Object\AI\AiManager\AiManager_MeleeBoss.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Player.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Ranged.cs" />
     <Compile Include="Object\AI\AiManager\AiManager_Totem.cs" />
@@ -102,6 +101,8 @@
     <Compile Include="Object\Box\MoveDamageBox.cs" />
     <Compile Include="Object\Buff.cs" />
     <Compile Include="Object\Character\Attack\AttackBase.cs" />
+    <Compile Include="Object\Character\Attack\DaggerAttack.cs" />
+    <Compile Include="Object\Character\Attack\SwordAttack.cs" />
     <Compile Include="Object\Character\EnemyLoader.cs" />
     <Compile Include="Object\Character\EnemyRange.cs" />
     <Compile Include="Object\Character\Attack\MeleeAttack.cs" />
