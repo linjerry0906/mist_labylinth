@@ -271,6 +271,20 @@ namespace Team27_RougeLike.Device
         }
 
         /// <summary>
+        /// 単純SE再生(音量調整用)
+        /// </summary>
+        /// <param name="name">アッセト名</param>
+        /// <param name="volume">ボリューム</param>
+        public void PlaySE(string name,float volume)
+        {
+            // WAV用ディクショナリをチェック
+            Debug.Assert(soundEffects.ContainsKey(name), ErrorMessage(name));
+
+            soundEffects[name].Play(volume, 0, 0);
+        }
+
+
+        /// <summary>
         /// InstanceSE再生
         /// （音は重ならない。ループの指定可能。再生リストを使って停止可能にする。）
         /// </summary>
