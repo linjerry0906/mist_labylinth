@@ -73,7 +73,7 @@ namespace Team27_RougeLike.Object
 
         public int GetAttackSpeed()
         {
-            return status.Attackspd + (int)(weight / 10 / status.BasePower);
+            return status.Attackspd + (int)(weight / status.BasePower);
         }
 
         public void Damage(int damage)
@@ -90,7 +90,7 @@ namespace Team27_RougeLike.Object
         public float GetVelocty()
         {
             CaculateStatus();
-            return status.Movespeed - weight / 100 / status.BasePower;
+            return status.Movespeed - weight / 5 / (status.BasePower / 0.5f);
         }
 
         public float GetWeight()
