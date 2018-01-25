@@ -378,14 +378,14 @@ namespace Team27_RougeLike.Scene
         private void RemoveItem(int id, int num)
         {
             playerItems = inventory.BagList();
+            List<int> removeItems = new List<int>();
             foreach (Item item in playerItems)
             {
                 if (item is ConsumptionItem)
                 {
                     if (id == item.GetItemID())
                     {
-                        inventory.RemoveItem(inventory.BagItemIndex(item));
-                        playerItems.Remove(item);
+                        removeItems.Add(inventory.BagItemIndex(item));
                         num--;
                         if (num <= 0)
                         {
@@ -394,7 +394,12 @@ namespace Team27_RougeLike.Scene
                     }
                 }
             }
+            for (int i = removeItems.Count - 1; i >= 0; i--)
+            {
+                inventory.RemoveItem(removeItems[i]);
+            }
             inventory.RemoveDepositoryItem(id, num);
+
         }
 
         public void Update(GameTime gameTime)

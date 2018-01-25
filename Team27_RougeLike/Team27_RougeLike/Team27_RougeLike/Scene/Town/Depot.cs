@@ -653,6 +653,16 @@ namespace Team27_RougeLike.Scene
                         {
                             inventory.MoveDepositItemToBag(itemManager, rightItems[i + (rightPage - 1) * 20].GetItemID());
                         }
+
+                        playerItems = inventory.BagList();
+                        leftItems = new List<Item>();
+                        foreach (Item item in playerItems)
+                        {
+                            if (item is ConsumptionItem)
+                            {
+                                leftItems.Add(item);
+                            }
+                        }
                         LeftPage(leftPage);
 
                         leftMaxPage = (leftItems.Count - 1) / 20 + 1;
