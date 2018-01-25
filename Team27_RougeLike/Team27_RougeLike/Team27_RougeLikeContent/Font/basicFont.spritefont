@@ -252,6 +252,10 @@ with.
         <End>開</End>
       </CharacterRegion>
       <CharacterRegion>
+        <Start>乾</Start>
+        <End>乾</End>
+      </CharacterRegion>
+      <CharacterRegion>
         <Start>果</Start>
         <End>果</End>
       </CharacterRegion>
@@ -1160,6 +1164,10 @@ with.
       <CharacterRegion>
         <Start>値</Start>
         <End>値</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>熱</Start>
+        <End>熱</End>
       </CharacterRegion>
       <!-- ねん -->
       <CharacterRegion>
