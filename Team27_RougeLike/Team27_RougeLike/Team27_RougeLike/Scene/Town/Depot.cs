@@ -132,11 +132,11 @@ namespace Team27_RougeLike.Scene
             backButton = new Button(new Vector2(0, windowHeight - 64), 64, 32);
             backWindow = new Window(gameDevice, new Vector2(0, windowHeight - 64), new Vector2(64, 32));
 
-            equipmentButton = new Button(new Vector2(windowWidth / 2 - 160, windowHeight / 2 + 80 + 32), 64, 32);
-            consumptionButton = new Button(new Vector2(windowWidth / 2 + 160 - 64, windowHeight / 2 + 80 + 32), 64, 32);
-            equipmentWindow = new Window(gameDevice, new Vector2(windowWidth / 2 - 160, windowHeight / 2 + 80 + 32), new Vector2(64, 32));
+            equipmentButton = new Button(new Vector2(windowWidth / 2 - 160, windowHeight / 2 + 80 + 32), 96, 32);
+            consumptionButton = new Button(new Vector2(windowWidth / 2 + 160 - 64 - 32, windowHeight / 2 + 80 + 32), 96, 32);
+            equipmentWindow = new Window(gameDevice, new Vector2(windowWidth / 2 - 160, windowHeight / 2 + 80 + 32), new Vector2(96, 32));
             equipmentWindow.Initialize();
-            consumptionWindow = new Window(gameDevice, new Vector2(windowWidth / 2 + 160 - 64, windowHeight / 2 + 80 + 32), new Vector2(64, 32));
+            consumptionWindow = new Window(gameDevice, new Vector2(windowWidth / 2 + 160 - 64 - 32, windowHeight / 2 + 80 + 32), new Vector2(96, 32));
             consumptionWindow.Initialize();
 
             leftItems = new List<Item>();
@@ -653,22 +653,6 @@ namespace Team27_RougeLike.Scene
                         {
                             inventory.MoveDepositItemToBag(itemManager, rightItems[i + (rightPage - 1) * 20].GetItemID());
                         }
-                        //if (leftPageItems.Count < 20)
-                        //{
-                        //    if (((ConsumptionItem)playerItems[playerItems.Count - 1]).GetTypeText() != "矢")
-                        //    {
-
-                        //        AddLeftList(playerItems[playerItems.Count - 1]);
-                        //    }
-                        //    else
-                        //    {
-                        //        if (((ConsumptionItem)playerItems[playerItems.Count - 1]).GetStack() <= 1)
-                        //        {
-                        //            AddLeftList(playerItems[playerItems.Count - 1]);
-                        //        }
-                        //    }
-                        //}
-                        //RightPage(rightPage);
                         LeftPage(leftPage);
 
                         leftMaxPage = (leftItems.Count - 1) / 20 + 1;
@@ -704,6 +688,8 @@ namespace Team27_RougeLike.Scene
 
             if (mode == DepotModeType.select)
             {
+                renderer.DrawString("どっちに用があるんだい？", messegeWindow.GetCenter(), 
+                    Color.White, new Vector2(1, 1), 1.0f, true, true);
                 renderer.DrawString("装備品", equipmentButton.ButtonCenterVector(),
                     Color.White, new Vector2(1, 1), 1.0f, true, true);
                 renderer.DrawString("消費アイテム", consumptionButton.ButtonCenterVector(),
