@@ -99,6 +99,11 @@ namespace Team27_RougeLike.Device
         /// <param name="name">アセット名</param>
         public void UnLoadBGM(string name)
         {
+            if (currentBGM == name)
+            {
+                currentBGM = null;
+                MediaPlayer.Stop();
+            }
             bgms.Remove(name);
         }
 
