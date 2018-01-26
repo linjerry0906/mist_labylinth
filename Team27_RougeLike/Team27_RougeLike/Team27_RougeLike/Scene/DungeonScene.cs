@@ -343,7 +343,7 @@ namespace Team27_RougeLike.Scene
             {
                 //ヒント文字を出す
                 ui.HintUI.Switch(true);
-                ui.HintUI.SetMessage("Press Space to go next");
+                ui.HintUI.SetMessage("次へ：Space");
                 if (!ui.HintUI.IsPush(Keys.Space))
                     return;
 

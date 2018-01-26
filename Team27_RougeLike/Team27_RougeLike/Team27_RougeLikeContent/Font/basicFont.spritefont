@@ -1073,6 +1073,10 @@ with.
         <Start>冷</Start>
         <End>冷</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>次</Start>
+        <End>次</End>
+      </CharacterRegion>
 
       <!-- つう -->
       <CharacterRegion>
