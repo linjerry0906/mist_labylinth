@@ -59,8 +59,6 @@ namespace Team27_RougeLike.Object.Character
             }
             foreach (var c1 in characters)
             {
-                c1.Update(gameTime);
-
                 if (c1 is EnemyBase)
                 {
                     //敵の距離によってアップデートを分けた
@@ -69,6 +67,7 @@ namespace Team27_RougeLike.Object.Character
                         ((EnemyBase)c1).NearUpdate(player, gameTime);
                     }
                 }
+                c1.Update(gameTime);
             }
             foreach (var h in hitBoxs)
             {

@@ -25,16 +25,24 @@ namespace Team27_RougeLike.Object.AI
             //敵専用ＡＩなので事前に変換しておく
             EnemyBase enemyActor = (EnemyBase)actor;
             #region 索敵範囲
-            if (enemyActor.SearchCheck(player) && !(moveAi is MoveAi_Escape))
+            if (!Confuse())
             {
-                moveAi = new MoveAi_Escape(actor, player);
-            }
-            else
-            {
-                if (moveAi is MoveAi_Search) return;
-                moveAi = new MoveAi_Search(actor);
+                if (enemyActor.SearchCheck(player) && !(moveAi is MoveAi_Escape))
+                {
+                    moveAi = new MoveAi_Escape(actor, player);
+                }
+                else
+                {
+                    if (moveAi is MoveAi_Search) return;
+                    moveAi = new MoveAi_Search(actor);
+                }
             }
             #endregion
+
+            if(Confuse() && !(moveAi is MoveAi_Search))
+            {
+                moveAi = new MoveAi_Search(actor);
+            }
         }
         public override void Update()
         {

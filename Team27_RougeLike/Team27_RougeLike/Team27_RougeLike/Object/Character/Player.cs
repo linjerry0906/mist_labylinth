@@ -53,6 +53,7 @@ namespace Team27_RougeLike.Object.Character
             gameDevice.Renderer.MiniMapProjector.Trace(collision.Position);
             motion.Update(gameTime);
             aiManager.Update();
+            buff.Update();
             Move();
         }
 
@@ -70,7 +71,6 @@ namespace Team27_RougeLike.Object.Character
         public override void Attack()
         {
             var t = status.GetInventory().LeftHand();
-
             if (t == null)
             {
                 attack = new MeleeAttack(characterManager, this, pManager);
@@ -131,7 +131,7 @@ namespace Team27_RougeLike.Object.Character
             {
                 status.Damage(1);
             }
-            if (!buff.GetBuff(Buff.buff.IRONBODY))
+            if (!buff.GetBuff(Buff.buff.剛体化))
             {
                 this.nockback = nockback;
             }
@@ -186,6 +186,11 @@ namespace Team27_RougeLike.Object.Character
         public override int GetAttack()
         {
             return status.GetPower();
+        }
+
+        public override int GetHealth()
+        {
+            return status.GetHP();
         }
 
         public override Vector3 GetAttackAngle()

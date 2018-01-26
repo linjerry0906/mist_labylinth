@@ -25,18 +25,20 @@ namespace Team27_RougeLike.Object.AI
             //敵専用ＡＩなので事前に変換しておく
             EnemyBase enemyActor = (EnemyBase)actor;
             #region 索敵範囲
-
-            if (enemyActor.SearchCheck(player))
+            if (!Confuse())
             {
-                if ((moveAi is MoveAi_Wait || moveAi is MoveAi_Escape) && attackAi is AttackAi_Wait)
+                if (enemyActor.SearchCheck(player))
                 {
-                    moveAi = new MoveAi_Chase(actor, player);
+                    if ((moveAi is MoveAi_Wait || moveAi is MoveAi_Escape) && attackAi is AttackAi_Wait)
+                    {
+                        moveAi = new MoveAi_Chase(actor, player);
+                    }
                 }
-            }
-            else
-            {
-                if (moveAi is MoveAi_Search) return;
-                moveAi = new MoveAi_Search(actor);
+                else
+                {
+                    if (moveAi is MoveAi_Search) return;
+                    moveAi = new MoveAi_Search(actor);
+                }
             }
             #endregion
 
@@ -44,11 +46,11 @@ namespace Team27_RougeLike.Object.AI
 
             if (enemyActor.SearchCheck(player) && !enemyActor.AttackCheck(player))
             {
-                if (moveAi is MoveAi_Escape)
+                if (moveAi is MoveAi_Escape && !Confuse())
                 {
                     moveAi = new MoveAi_Chase(actor, player);
                 }
-                
+
             }
 
             #endregion
@@ -57,9 +59,12 @@ namespace Team27_RougeLike.Object.AI
 
             if (enemyActor.AttackCheck(player) && !enemyActor.WaitPointCheck(player))
             {
-                if (moveAi is MoveAi_Chase)
+                if (!Confuse())
                 {
-                    moveAi = new MoveAi_Wait(actor);
+                    if (moveAi is MoveAi_Chase)
+                    {
+                        moveAi = new MoveAi_Wait(actor);
+                    }
                 }
 
                 if (attackAi is AttackAi_Wait)
@@ -73,12 +78,16 @@ namespace Team27_RougeLike.Object.AI
             #region 逃げる範囲
             if (enemyActor.WaitPointCheck(player))
             {
-                if(attackAi is AttackAi_Wait)
+                if (attackAi is AttackAi_Wait && !Confuse())
                 {
-                    moveAi = new MoveAi_Escape(actor,player);
+                    moveAi = new MoveAi_Escape(actor, player);
                 }
             }
             #endregion
+            if (Confuse() && !(moveAi is MoveAi_Search))
+            {
+                moveAi = new MoveAi_Search(actor);
+            }
         }
         public override void Update()
         {

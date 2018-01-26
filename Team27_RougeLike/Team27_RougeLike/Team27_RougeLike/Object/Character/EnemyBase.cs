@@ -122,6 +122,7 @@ namespace Team27_RougeLike.Object
             aiManager.Update();
             motion.Update(gameTime);
             pManager.Update(gameTime);
+            buff.Update();
             Move();
         }
 
@@ -245,7 +246,7 @@ namespace Team27_RougeLike.Object
             {
                 status.Health -= 1;
             }
-            if (!buff.GetBuff(Buff.buff.IRONBODY))
+            if (!buff.GetBuff(Buff.buff.剛体化))
             {
                 this.nockback = nockback;
             }
@@ -313,5 +314,10 @@ namespace Team27_RougeLike.Object
         {
             return status.BasePower;
         }
+        public override int GetHealth()
+        {
+            return status.Health;
+        }
+
     }
 }
