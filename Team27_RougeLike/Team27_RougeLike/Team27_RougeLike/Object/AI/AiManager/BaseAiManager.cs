@@ -39,6 +39,11 @@ namespace Team27_RougeLike.Object.AI
         public void SetStateAi(BaseAi stateAi) { this.stateAi = stateAi; }
         public BaseAi GetStateAi() { return stateAi; }
         public BaseAi GetAttackAi() { return attackAi; }
+        public BaseAi GetMoveAi() { return moveAi; }
 
+        protected bool Confuse()
+        {
+            return actor.GetBuffs().GetBuff(Buff.buff.混乱);
+        }
     }
 }

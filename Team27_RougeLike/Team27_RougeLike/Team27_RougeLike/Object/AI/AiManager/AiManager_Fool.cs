@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework;
 using Team27_RougeLike.Object.Character;
 namespace Team27_RougeLike.Object.AI
 {
-    class AiManager_Fool : BaseAiManager,IEnemyAI
+    class AiManager_Fool : BaseAiManager, IEnemyAI
     {
-       
+
         public AiManager_Fool()
         {
 
@@ -22,23 +22,27 @@ namespace Team27_RougeLike.Object.AI
 
         public void NearUpdate(Player player)
         {
+
             //敵専用ＡＩなので事前に変換しておく
-            EnemyBase enemyActor = (EnemyBase)actor;    
+            EnemyBase enemyActor = (EnemyBase)actor;
             #region 索敵範囲
-            if (enemyActor.SearchCheck(player))
+            if (!Confuse())
             {
-                if (!(moveAi is MoveAi_Chase) && attackAi is AttackAi_Wait)
+                if (enemyActor.SearchCheck(player))
                 {
-                    moveAi = new MoveAi_Chase(actor,player);
+                    if (!(moveAi is MoveAi_Chase) && attackAi is AttackAi_Wait)
+                    {
+                        moveAi = new MoveAi_Chase(actor, player);
+                    }
+                }
+                else
+                {
+                    if (moveAi is MoveAi_Search) return;
+                    moveAi = new MoveAi_Search(actor);
                 }
             }
-            else
-            {
-                if (moveAi is MoveAi_Search) return;
-                moveAi = new MoveAi_Search(actor);
-            }
             #endregion
-            
+
             #region 攻撃範囲
             if (enemyActor.AttackCheck(player))
             {
@@ -48,12 +52,17 @@ namespace Team27_RougeLike.Object.AI
                     attackAi = new AttackAi_Charge(actor, enemyActor.GetStatus().Attackspd, 1, enemyActor.GetStatus().Attackspd);
                 }
 
-                if(moveAi is MoveAi_Chase)
+                if (moveAi is MoveAi_Chase && !Confuse())
                 {
                     moveAi = new MoveAi_Wait(actor);
                 }
             }
             #endregion
+            if (Confuse() && !(moveAi is MoveAi_Search))
+            {
+                moveAi = new MoveAi_Search(actor);
+            }
+
         }
         public override void Update()
         {

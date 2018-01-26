@@ -230,6 +230,10 @@ with.
         <End>多</End>
       </CharacterRegion>
       <CharacterRegion>
+        <Start>治</Start>
+        <End>治</End>
+      </CharacterRegion>
+      <CharacterRegion>
         <Start>落</Start>
         <End>落</End>
       </CharacterRegion>
@@ -325,6 +329,10 @@ with.
       <CharacterRegion>
         <Start>華</Start>
         <End>華</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>加</Start>
+        <End>加</End>
       </CharacterRegion>
 
       <!-- かい -->
@@ -602,6 +610,10 @@ with.
       <CharacterRegion>
         <Start>痕</Start>
         <End>痕</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>混</Start>
+        <End>混</End>
       </CharacterRegion>
 
       <!-- ご -->
@@ -938,6 +950,12 @@ with.
         <End>倉</End>
       </CharacterRegion>
 
+      <!-- そく -->
+      <CharacterRegion>
+        <Start>速</Start>
+        <End>速</End>
+      </CharacterRegion>
+
       <!-- た -->
       <CharacterRegion>
         <Start>達</Start>
@@ -1094,6 +1112,12 @@ with.
         <End>使</End>
       </CharacterRegion>
 
+      <!-- つよ -->
+      <CharacterRegion>
+        <Start>剛</Start>
+        <End>剛</End>
+      </CharacterRegion>
+
       <!-- て -->
       <CharacterRegion>
         <Start>手</Start>
@@ -1180,6 +1204,11 @@ with.
         <End>窟</End>
       </CharacterRegion>
 
+      <!-- どく -->
+      <CharacterRegion>
+        <Start>毒</Start>
+        <End>毒</End>
+      </CharacterRegion>
       <!-- な -->
 
       <CharacterRegion>
@@ -1561,6 +1590,10 @@ with.
         <Start>藍</Start>
         <End>藍</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>乱</Start>
+        <End>乱</End>
+      </CharacterRegion>
       <!-- り -->
       <CharacterRegion>
         <Start>理</Start>
@@ -1629,6 +1662,10 @@ with.
       <CharacterRegion>
         <Start>割</Start>
         <End>割</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>患</Start>
+        <End>患</End>
       </CharacterRegion>
       <!-- を -->
       <!-- ん -->
