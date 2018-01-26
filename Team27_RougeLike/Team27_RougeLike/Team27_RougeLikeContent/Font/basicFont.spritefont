@@ -338,6 +338,10 @@ with.
         <Start>賭</Start>
         <End>賭</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>堅</Start>
+        <End>堅</End>
+      </CharacterRegion>
 
       <!-- かい -->
       <CharacterRegion>
@@ -714,6 +718,10 @@ with.
         <Start>汁</Start>
         <End>汁</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>資</Start>
+        <End>資</End>
+      </CharacterRegion>
 
       <!-- じ -->
       <CharacterRegion>
@@ -863,6 +871,10 @@ with.
       <CharacterRegion>
         <Start>進</Start>
         <End>進</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>鋭</Start>
+        <End>鋭</End>
       </CharacterRegion>
 
       <!-- すう -->
@@ -1357,6 +1369,10 @@ with.
       <CharacterRegion>
         <Start>部</Start>
         <End>部</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>分</Start>
+        <End>分</End>
       </CharacterRegion>
       <!-- ふく -->
       <CharacterRegion>
