@@ -300,7 +300,7 @@ namespace Team27_RougeLike.Scene
         /// </summary>
         private void CheckEnd()
         {
-            //Debug
+#if DEBUG
             if (gameDevice.InputState.GetKeyTrigger(Keys.N))
             {
                 endFlag = true;
@@ -311,6 +311,7 @@ namespace Team27_RougeLike.Scene
                     nextScene = SceneType.LoadBoss;
                 return;
             }
+#endif
 
             //Pause機能
             if (gameDevice.InputState.GetKeyTrigger(Keys.P))

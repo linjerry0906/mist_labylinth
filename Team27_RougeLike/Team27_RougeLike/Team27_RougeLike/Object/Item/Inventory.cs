@@ -362,14 +362,14 @@ namespace Team27_RougeLike.Object.Item
                     continue;
                 power += p.GetPower();
                 defence += p.GetDefense();
-                weight += p.GetItemWeight() * 1.5f;
+                weight += p.GetItemWeight() * 1.2f;
             }
 
             if (leftHand != null)                 //左手のものを計算
             {
-                float increaseRate = 1.5f;
+                float increaseRate = 1.2f;
                 if (leftHand.GetWeaponType() == WeaponItem.WeaponType.Dagger)
-                    increaseRate = 0.6f;
+                    increaseRate = -1.2f;
 
                 power += leftHand.GetPower();
                 defence += leftHand.GetDefense();
@@ -378,9 +378,9 @@ namespace Team27_RougeLike.Object.Item
 
             if (rightHand != null)              　//右手のものを計算
             {
-                float increaseRate = 1.5f;
+                float increaseRate = 1.2f;
                 if (rightHand.GetWeaponType() == WeaponItem.WeaponType.Dagger)
-                    increaseRate = 0.6f;
+                    increaseRate = -1.2f;
 
                 power += rightHand.GetPower();
                 defence += rightHand.GetDefense();
@@ -393,6 +393,9 @@ namespace Team27_RougeLike.Object.Item
                 power += effect.GetPower();
                 weight += arrow.GetItemWeight() * arrow.GetStack();
             }
+
+            if (weight < 0)                        //ダガーのスピード増加に対応
+                weight = 0;
         }
 
         /// <summary>

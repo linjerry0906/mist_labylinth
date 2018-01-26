@@ -163,10 +163,11 @@ namespace Team27_RougeLike.QuestSystem
 
             for (int i = 0; i < (int)QuestRank.NULL; i++)
             {
-                if (randomQuest[i].Count < MAX_QUEST)
+                if (randomQuest[i].Count <= MAX_QUEST)
                     continue;
 
-                for (int amount = 0; amount < randomQuest[i].Count - MAX_QUEST; amount++)
+                int count = randomQuest[i].Count - MAX_QUEST;
+                for (int amount = 0; amount < count; amount++)
                 {
                     int removeIndex = gameDevice.Random.Next(0, randomQuest[i].Count);
                     randomQuest[i].RemoveAt(removeIndex);

@@ -205,11 +205,15 @@ namespace Team27_RougeLike.QuestSystem
 
                     Vector2 numPos = position + (10.5f + i * 0.5f) * line;
                     numPos.X = rightBackLayer.GetCenter().X + 120;
+                    string requireText =
+                        string.Format("{0,2} / {1,2}",
+                        currentQuestInfo.CurrentState()[i].CurrentAmount,
+                        currentQuestInfo.CurrentState()[i].RequireAmount);
                     renderer.DrawString(
-                        currentQuestInfo.CurrentState()[i].CurrentAmount + " / " +
-                        currentQuestInfo.CurrentState()[i].RequireAmount,
-                        numPos, fontSize,
-                        Color.White, constractAlpha * currentAlpha);
+                        requireText,
+                        numPos, Color.White,
+                        fontSize, constractAlpha * currentAlpha,
+                        true);
                 }
                 else if (currentQuestInfo is BattleQuest)
                 {
@@ -221,11 +225,15 @@ namespace Team27_RougeLike.QuestSystem
 
                     Vector2 numPos = position + (10.5f + i * 0.5f) * line;
                     numPos.X = rightBackLayer.GetCenter().X + 120;
+                    string requireText =
+                        string.Format("{0,2} / {1,2}",
+                        currentQuestInfo.CurrentState()[i].CurrentAmount,
+                        currentQuestInfo.CurrentState()[i].RequireAmount);
                     renderer.DrawString(
-                        currentQuestInfo.CurrentState()[i].CurrentAmount + " / " +
-                        currentQuestInfo.CurrentState()[i].RequireAmount,
-                        numPos, fontSize,
-                        Color.White, constractAlpha * currentAlpha);
+                        requireText,
+                        numPos, Color.White,
+                        fontSize, constractAlpha * currentAlpha,
+                        true);
                 }
             }
         }
@@ -418,13 +426,19 @@ namespace Team27_RougeLike.QuestSystem
                 for (int i = 0; i < currentQuestInfo.AwardItem().Length; i++)
                 {
                     int id = currentQuestInfo.AwardItem()[i];
+                    int amount = 1;
+                    Item award = itemManager.GetConsumption(id);
+                    if(award is ConsumptionItem && ((ConsumptionItem)award).GetTypeText() == "矢")
+                    {
+                        amount = ((ConsumptionItem)award).GetAmountLimit();
+                    }
                     if (gameManager.PlayerItem.DepositoryItem().ContainsKey(id))
                     {
-                        gameManager.PlayerItem.DepositoryItem()[id]++;
+                        gameManager.PlayerItem.DepositoryItem()[id]+=amount;
                     }
                     else
                     {
-                        gameManager.PlayerItem.DepositoryItem().Add(id, 1);
+                        gameManager.PlayerItem.DepositoryItem().Add(id, amount);
                     }
                 }
             }

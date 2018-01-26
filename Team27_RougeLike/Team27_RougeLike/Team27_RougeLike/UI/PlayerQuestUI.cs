@@ -63,6 +63,24 @@ namespace Team27_RougeLike.UI
             }
         }
 
+        private void InitCurrentInfo()
+        {
+            Quest currentQuestInfo = playerQuest.CurrentQuest()[currentQuest];
+            if (currentQuestInfo is CollectQuest)
+            {
+                for (int i = 0; i < currentQuestInfo.RequireID().Length; i++)
+                {
+                    int id = currentQuestInfo.RequireID()[i];
+                    int amount = 0;
+                    if (gameManager.PlayerItem.DepositoryItem().ContainsKey(id))
+                        amount += gameManager.PlayerItem.DepositoryItem()[id];
+
+                    currentQuestInfo.SetItemAmount(id, amount);
+                }
+            }
+            currentQuestInfo.CheckClear();
+        }
+
         /// <summary>
         /// 更新処理
         /// </summary>
@@ -77,6 +95,7 @@ namespace Team27_RougeLike.UI
                     continue;
 
                 currentQuest = i;       //カーソルに合わせたクエスト更新
+                InitCurrentInfo();
                 break;
             }
         }
@@ -167,11 +186,15 @@ namespace Team27_RougeLike.UI
 
                     Vector2 numPos = position + (10.5f + i * 0.5f) * line;
                     numPos.X += 350;
+                    string requireText = 
+                        string.Format("{0,2} / {1,2}",
+                        currentQuestInfo.CurrentState()[i].CurrentAmount,
+                        currentQuestInfo.CurrentState()[i].RequireAmount);
                     renderer.DrawString(
-                        currentQuestInfo.CurrentState()[i].CurrentAmount + " / " +
-                        currentQuestInfo.CurrentState()[i].RequireAmount,
-                        numPos, fontSize,
-                        Color.White, alpha);
+                        requireText,
+                        numPos, Color.White, 
+                        fontSize, alpha,
+                        true);
                 }
                 else if (currentQuestInfo is BattleQuest)
                 {
@@ -183,11 +206,15 @@ namespace Team27_RougeLike.UI
 
                     Vector2 numPos = position + (10.5f + i * 0.5f) * line;
                     numPos.X += 350;
+                    string requireText =
+                        string.Format("{0,2} / {1,2}",
+                        currentQuestInfo.CurrentState()[i].CurrentAmount,
+                        currentQuestInfo.CurrentState()[i].RequireAmount);
                     renderer.DrawString(
-                        currentQuestInfo.CurrentState()[i].CurrentAmount + " / " +
-                        currentQuestInfo.CurrentState()[i].RequireAmount,
-                        numPos, fontSize,
-                        Color.White, alpha);
+                        requireText,
+                        numPos, Color.White,
+                        fontSize, alpha,
+                        true);
                 }
             }
         }
