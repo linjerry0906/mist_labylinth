@@ -1,6 +1,6 @@
 Start,ƒ_ƒ“ƒWƒ‡ƒ“–¼,‘ŠK‘w,Šî–{ƒTƒCƒY,BossŠÔŠu,§ŒÀŠÔ,Itemƒtƒ@ƒCƒ‹”Ô†,ƒCƒ[ƒW–¼,Šg‘å‚·‚é‘¬‚³,’n–ÊTexture,•ÇTexture,FogF@R,G,B,UseParticle,‘Î”äF@R,G,B,DungeonMusic,„§ƒMƒ‹ƒgƒ‰ƒ“ƒN
 1,‰‰Kê,3,15,3,300,1,dungeon_image_tutorial,1,ground_tutorial,wall_tutorial,0.36,0.3,0.2,FALSE,255,255,255,n36,F`E
-2,ƒ‚ƒSƒ‹ƒNzR,10,25,5,300,2,dungeon_image2,-1,cubeTest,wall_default,0.1,0.1,0.15,TRUE,240,220,60,m-art_Candle,E`D
+2,ƒ‚ƒSƒ‹ƒNzR,10,25,5,480,2,dungeon_image2,-1,cubeTest,wall_default,0.1,0.1,0.15,TRUE,240,220,60,m-art_Candle,E`D
 3,•X‚Ì‹{“a,30,27,6,480,3,dungeon_image_ice,0,ground_ice,wall_ice,0.99,0.99,0.99,FALSE,80,200,230,n51,D`B
 4,÷ŠCƒGƒ“ƒ‹ƒxƒ‹,50,25,5,600,4,dungeon_image_tree,0,ground_tree,wall_tree,0.3,0.7,0.3,TRUE,210,250,30,m-art_Komorebi,D`A
 5,–³ŒÀ‰ñ˜L,100,15,10,600,5,dungeon_image_thomb,0,ground_infinite,wall_infinite,0.18,0.12,0.1,FALSE,255,20,20,n14,C`S

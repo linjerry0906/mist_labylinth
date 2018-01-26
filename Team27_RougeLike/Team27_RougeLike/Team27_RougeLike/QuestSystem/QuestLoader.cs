@@ -95,12 +95,17 @@ namespace Team27_RougeLike.QuestSystem
                 if (data[8] != "null")
                     count++;
                 int[] award = null;
+                string[] awardType = null;
                 if (count > 0)
                 {
                     award = new int[count];
+                    awardType = new string[count];
                     for (int i = 0; i < count; i++)
                     {
-                        award[i] = int.Parse(data[6 + i]);
+                        awardType[i] = data[6 + i][0].ToString();
+                        char[] awardID = new char[data[6 + i].Length - 1];
+                        data[6 + i].CopyTo(1, awardID, 0, data[6 + i].Length - 1);
+                        award[i] = int.Parse(new string(awardID));
                     }
                 }
                 #endregion
@@ -128,14 +133,14 @@ namespace Team27_RougeLike.QuestSystem
                 if (type == "Collection")
                 {
                     Quest collectionQuest = new CollectQuest(
-                        id, name, info, difficulty, money, award,
+                        id, name, info, difficulty, money, award, awardType,
                         requires, dungeonNo, floor, exp);
                     activeQuest.Add(collectionQuest);
                 }
                 else if (type == "Battle")
                 {
                     Quest battleQuest = new BattleQuest(
-                        id, name, info, difficulty, money, award,
+                        id, name, info, difficulty, money, award, awardType,
                         requires, dungeonNo, floor, exp);
                     activeQuest.Add(battleQuest);
                 }

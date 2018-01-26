@@ -10,7 +10,7 @@ namespace Team27_RougeLike.QuestSystem
     {
         private QuestLoader.QuestRank rank;
         private int currentExp;
-        private static readonly int[] maxExp = { 50, 250, 450, 800, 1550, 3000};
+        private static readonly int[] maxExp = { 30, 70, 250, 600, 1200, 3000};
 
         public PlayerGuildRank()
         {

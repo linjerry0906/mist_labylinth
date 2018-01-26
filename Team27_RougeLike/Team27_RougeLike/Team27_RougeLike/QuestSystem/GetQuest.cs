@@ -177,7 +177,12 @@ namespace Team27_RougeLike.QuestSystem
             {
                 for (int i = 0; i < currentInfo.AwardItem().Length; i++)
                 {
-                    Item item = itemManager.GetConsumption(currentInfo.AwardItem()[i]);
+                    Item item = null;
+                    if (currentInfo.AwardType()[i] == "i")
+                        item = itemManager.GetConsumption(currentInfo.AwardItem()[i]);
+                    else if (currentInfo.AwardType()[i] == "e")
+                        item = itemManager.GetEquipment(currentInfo.AwardItem()[i]);
+
                     renderer.DrawString(
                         item.GetItemName(), position + (8 + i * 0.5f) * line + 2 * offsetX, fontSize,
                         Color.White, constractAlpha * currentAlpha);

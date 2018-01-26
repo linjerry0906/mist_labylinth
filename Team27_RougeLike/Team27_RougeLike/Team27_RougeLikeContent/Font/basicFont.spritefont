@@ -156,6 +156,10 @@ with.
         <Start>甘</Start>
         <End>甘</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>与</Start>
+        <End>与</End>
+      </CharacterRegion>
       <!-- い -->
       <CharacterRegion>
         <Start>依</Start>
@@ -203,6 +207,10 @@ with.
       <CharacterRegion>
         <Start>海</Start>
         <End>海</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>運</Start>
+        <End>運</End>
       </CharacterRegion>
 
       <!-- え -->
@@ -325,6 +333,10 @@ with.
       <CharacterRegion>
         <Start>華</Start>
         <End>華</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>賭</Start>
+        <End>賭</End>
       </CharacterRegion>
 
       <!-- かい -->
@@ -597,6 +609,10 @@ with.
         <Start>効</Start>
         <End>効</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>幸</Start>
+        <End>幸</End>
+      </CharacterRegion>
 
       <!-- こん -->
       <CharacterRegion>
@@ -796,7 +812,14 @@ with.
         <Start>奨</Start>
         <End>奨</End>
       </CharacterRegion>
-
+      <CharacterRegion>
+        <Start>象</Start>
+        <End>象</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>商</Start>
+        <End>商</End>
+      </CharacterRegion>
       <!--じょう -->
       <CharacterRegion>
         <Start>上</Start>
@@ -1055,6 +1078,10 @@ with.
       <CharacterRegion>
         <Start>帳</Start>
         <End>帳</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>徴</Start>
+        <End>徴</End>
       </CharacterRegion>
       <!-- つ -->
       <CharacterRegion>
@@ -1452,6 +1479,10 @@ with.
       <CharacterRegion>
         <Start>名</Start>
         <End>名</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>命</Start>
+        <End>命</End>
       </CharacterRegion>
 
       <!-- も -->

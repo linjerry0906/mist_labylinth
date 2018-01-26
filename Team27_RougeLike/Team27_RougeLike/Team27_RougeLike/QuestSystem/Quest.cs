@@ -20,13 +20,15 @@ namespace Team27_RougeLike.QuestSystem
         protected int difficulty;           //難易度
         protected int gainMoney;            //報酬のお金
         protected int[] awardItemID;        //報酬のアイテムID
+        protected string[] awardType;       //報酬のタイプ
 
         protected int dungeonProcess;       //ClearDungeon(出現条件)
         protected int floorProcess;         //ClearFloor(出現条件)
 
         public Quest(
             int id, string name, string explanation, 
-            int difficulty, int gainMoney, int[] awardID,
+            int difficulty, int gainMoney, 
+            int[] awardID, string[] awardType,
             int dungeonProcess, int dungeonFloor,
             int guildExp)
         {
@@ -36,6 +38,7 @@ namespace Team27_RougeLike.QuestSystem
             this.difficulty = difficulty;
             this.gainMoney = gainMoney;
             this.awardItemID = awardID;
+            this.awardType = awardType;
             this.dungeonProcess = dungeonProcess;
             this.floorProcess = dungeonFloor;
             this.guildExp = guildExp;
@@ -115,12 +118,21 @@ namespace Team27_RougeLike.QuestSystem
         public abstract List<Requirement> CurrentState();
 
         /// <summary>
-        /// 報酬アイテム（消費品限定）
+        /// 報酬アイテム
         /// </summary>
         /// <returns></returns>
         public int[] AwardItem()
         {
             return awardItemID;
+        }
+
+        /// <summary>
+        /// 報酬アイテムか、装備か
+        /// </summary>
+        /// <returns></returns>
+        public string[] AwardType()
+        {
+            return awardType;
         }
 
         /// <summary>

@@ -16,9 +16,11 @@ namespace Team27_RougeLike.QuestSystem
 
         public CollectQuest(
             int id, string name, string explanation,
-            int difficulty, int gainMoney, int[] awardID, List<Requirement> requires,
+            int difficulty, int gainMoney, int[] awardID, string[] awardType,
+            List<Requirement> requires,
             int dungeonProcess, int dungeonFloor, int guildExp)
-            : base(id, name, explanation, difficulty, gainMoney, awardID, dungeonProcess, dungeonFloor, guildExp)
+            : base(id, name, explanation, difficulty, gainMoney, awardID, awardType,
+                  dungeonProcess, dungeonFloor, guildExp)
         {
             this.requires = requires;
         }
@@ -55,7 +57,8 @@ namespace Team27_RougeLike.QuestSystem
             }
 
             List<Requirement> require = new List<Requirement>(requires);
-            return new CollectQuest(questID, name, explanation, difficulty, gainMoney, award, requires, dungeonProcess, floorProcess, guildExp);
+            return new CollectQuest(questID, name, explanation, difficulty, gainMoney, award, awardType,
+                requires, dungeonProcess, floorProcess, guildExp);
         }
 
         public override List<Requirement> CurrentState()

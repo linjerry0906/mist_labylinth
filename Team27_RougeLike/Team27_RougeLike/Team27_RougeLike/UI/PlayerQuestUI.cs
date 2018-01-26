@@ -164,7 +164,12 @@ namespace Team27_RougeLike.UI
             {
                 for (int i = 0; i < currentQuestInfo.AwardItem().Length; i++)
                 {
-                    Item item = itemManager.GetConsumption(currentQuestInfo.AwardItem()[i]);
+                    Item item = null;
+                    if (currentQuestInfo.AwardType()[i] == "i")
+                        item = itemManager.GetConsumption(currentQuestInfo.AwardItem()[i]);
+                    else if (currentQuestInfo.AwardType()[i] == "e")
+                        item = itemManager.GetEquipment(currentQuestInfo.AwardItem()[i]);
+
                     renderer.DrawString(
                         item.GetItemName(), position + (8 + i * 0.5f) * line + 2 * offsetX, fontSize,
                         Color.White, alpha);

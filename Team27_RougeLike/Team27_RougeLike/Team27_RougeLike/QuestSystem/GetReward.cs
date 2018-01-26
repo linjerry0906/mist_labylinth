@@ -183,7 +183,12 @@ namespace Team27_RougeLike.QuestSystem
             {
                 for (int i = 0; i < currentQuestInfo.AwardItem().Length; i++)
                 {
-                    Item item = itemManager.GetConsumption(currentQuestInfo.AwardItem()[i]);
+                    Item item = null;
+                    if(currentQuestInfo.AwardType()[i] == "i")
+                        item = itemManager.GetConsumption(currentQuestInfo.AwardItem()[i]);
+                    else if (currentQuestInfo.AwardType()[i] == "e")
+                        item = itemManager.GetEquipment(currentQuestInfo.AwardItem()[i]);
+
                     renderer.DrawString(
                         item.GetItemName(), position + (8 + i * 0.5f) * line + 2 * offsetX, fontSize,
                         Color.White, constractAlpha * currentAlpha);
@@ -427,18 +432,30 @@ namespace Team27_RougeLike.QuestSystem
                 {
                     int id = currentQuestInfo.AwardItem()[i];
                     int amount = 1;
-                    Item award = itemManager.GetConsumption(id);
-                    if(award is ConsumptionItem && ((ConsumptionItem)award).GetTypeText() == "矢")
+                    Item award = null;
+                    if (currentQuestInfo.AwardType()[i] == "i")
+                        award = itemManager.GetConsumption(id);
+                    else if (currentQuestInfo.AwardType()[i] == "e")
+                        award = itemManager.GetEquipment(id);
+
+                    if (award is ConsumptionItem)
                     {
-                        amount = ((ConsumptionItem)award).GetAmountLimit();
-                    }
-                    if (gameManager.PlayerItem.DepositoryItem().ContainsKey(id))
-                    {
-                        gameManager.PlayerItem.DepositoryItem()[id]+=amount;
+                        if(((ConsumptionItem)award).GetTypeText() == "矢")
+                            amount = ((ConsumptionItem)award).GetAmountLimit();
+
+                        if (gameManager.PlayerItem.DepositoryItem().ContainsKey(id))
+                        {
+                            gameManager.PlayerItem.DepositoryItem()[id] += amount;
+                        }
+                        else
+                        {
+                            gameManager.PlayerItem.DepositoryItem().Add(id, amount);
+                        }
                     }
                     else
                     {
-                        gameManager.PlayerItem.DepositoryItem().Add(id, amount);
+                        Item addItem = award.Clone();
+                        gameManager.PlayerItem.BagList().Add(addItem);
                     }
                 }
             }
