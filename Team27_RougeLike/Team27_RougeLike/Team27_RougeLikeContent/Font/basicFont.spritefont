@@ -563,6 +563,10 @@ with.
         <Start>撃</Start>
         <End>撃</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>劇</Start>
+        <End>劇</End>
+      </CharacterRegion>
 
       <!-- げつ -->
 
