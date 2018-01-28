@@ -56,6 +56,11 @@
       <Name>Enemy</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Font\timerFont.spritefont">
+      <Name>timerFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="ItemCSV\ConsumptionItems.csv">
       <Name>ConsumptionItems</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -129,13 +129,28 @@ namespace Team27_RougeLike.Scene
         {
             int min = (int)CurrentTime() / 60;
             int sec = (int)CurrentTime() - min * 60;
+
+            if (min <= 1)           //一分以下の場合は点滅で注意をかける
+            {
+                if (limitTime.Now() % 20 < 7)
+                    return;
+            }
+
             string timeString = string.Format("{0:00} : {1:00}", min, sec);
             renderer.DrawString(
                 timeString,
-                new Vector2(Def.WindowDef.WINDOW_WIDTH / 2, 60),
-                new Color(1, 0.2f, 0.2f),
+                new Vector2(Def.WindowDef.WINDOW_WIDTH / 2 + 3, 63),
+                new Color(0.25f, 0.1f, 0.1f),
                 new Vector2(2, 2),
-                0.8f, true, true);
+                0.8f, true, true,
+                "timerFont");
+            renderer.DrawString(
+                timeString,
+                new Vector2(Def.WindowDef.WINDOW_WIDTH / 2, 60),
+                new Color(1.0f, 0.2f, 0.2f),
+                new Vector2(2, 2),
+                0.5f, true, true,
+                "timerFont");
         }
 
         /// <summary>

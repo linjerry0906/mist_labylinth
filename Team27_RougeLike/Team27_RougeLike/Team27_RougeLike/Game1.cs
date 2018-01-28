@@ -81,6 +81,7 @@ namespace Team27_RougeLike
 
             // TODO: use this.Content to load your game content here
             gameDevice.Renderer.LoadFont("basicFont", "./Font/");
+            gameDevice.Renderer.LoadFont("timerFont", "./Font/");
             gameDevice.Renderer.LoadModel("ItemModel", "./Model/");
             gameDevice.Renderer.LoadModel("map_block", "./Model/");
             gameDevice.Renderer.LoadModel("B_01", "./Model/");
