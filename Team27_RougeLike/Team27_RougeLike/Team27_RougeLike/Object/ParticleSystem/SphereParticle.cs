@@ -54,13 +54,13 @@ namespace Team27_RougeLike.Object.ParticleSystem
         {
             if (alphaFlag)
             {
-                alpha += 0.007f;
+                alpha += 0.005f;
                 if (alpha >= 1.0f)
                     alphaFlag = false;
             }
             else
             {
-                alpha -= 0.007f;
+                alpha -= 0.005f;
                 if (alpha <= 0.2f)
                     isDead = true;
             }

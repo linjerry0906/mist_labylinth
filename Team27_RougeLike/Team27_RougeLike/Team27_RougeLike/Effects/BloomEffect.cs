@@ -118,17 +118,17 @@ namespace Team27_RougeLike.Effects
 
             graphicsDevice.SetRenderTargets(blurLightPart1);    //一回目ぼかし
             graphicsDevice.Clear(clearColor);
-            blurEffect.Update(0.5f);
+            blurEffect.Update(0.3f);
             blurEffect.Draw(renderer);
 
             graphicsDevice.SetRenderTargets(blurLightPart2);    //二回目ぼかし
             graphicsDevice.Clear(clearColor);
-            blurEffect.Update(0.3f);
+            blurEffect.Update(0.2f);
             blurEffect.Draw(renderer, blurLightPart1);
 
             graphicsDevice.SetRenderTargets(blurLightPart3);    //三回目ぼかし
             graphicsDevice.Clear(clearColor);
-            blurEffect.Update(0.1f);
+            blurEffect.Update(0.2f);
             blurEffect.Draw(renderer, blurLightPart2);
 
 

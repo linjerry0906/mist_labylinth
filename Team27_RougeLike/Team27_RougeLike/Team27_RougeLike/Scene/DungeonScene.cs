@@ -272,7 +272,7 @@ namespace Team27_RougeLike.Scene
                     gameDevice.Random.Next(-tileSize * 45, tileSize * 45 + 1) / 100.0f,
                     0,
                     gameDevice.Random.Next(-tileSize * 45, tileSize * 45 + 1) / 100.0f);
-                position.Y = 10;
+                position.Y = tileSize / 2;
                 pManager.AddParticle(new TransportParticle(position, stageManager.ConstactColor(), gameDevice));
             }
 
@@ -282,14 +282,14 @@ namespace Team27_RougeLike.Scene
 
             if (pManager.Count() < 2000)
             {
-                for (int i = 0; i < 25; i++)
+                for (int i = 0; i < 30; i++)
                 {
                     Vector3 position = characterManager.GetPlayer().GetPosition;
                     position += new Vector3(
                         gameDevice.Random.Next(-30000, 30001) / 100.0f,
                         0,
                         gameDevice.Random.Next(-30000, 30001) / 100.0f);
-                    position.Y = 10;
+                    position.Y = tileSize / 2;
                     pManager.AddParticle(new SphereParticle(position, stageManager.ConstactColor(), gameDevice));
                 }
             }
