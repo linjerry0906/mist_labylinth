@@ -4,7 +4,7 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
 3,test,10,7,1,0.4,Fool,5,90,3,‚¤‚²‚ß‚­¬‰t‘Ì,LightGray
 4,test,200,8,1,0.4,Melee,9,20,5,‚¤‚²‚ß‚­‘å‰t‘Ì,LightGray
 5,Snow,20,20,2,0.4,Totem,5,60,6,á‚Ì¸,LightGray
-6,test,70,10,3,0.4,Fool,13,50,10,ˆÙ•Ï‚Ì‘å‰t‘Ì,DarkGreen
+6,test,70,10,3,0.4,Fool,13,50,10,ˆÙ•Ï‚Ì‘å‰t‘Ì,LightGreen
 7,bat,40,14,2,0.4,Melee,5,30,7,“´ŒAƒRƒEƒ‚ƒŠ,DarkBlue
 8,bat,100,18,5,0.5,Fool,11,35,9,‹zŒŒƒRƒEƒ‚ƒŠ,Red
 9,enemy_light,40,13,3,0.3,Ranged,6,70,8,œfœr‚¤“”‰Î,White
@@ -16,7 +16,7 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color
 15,enemy_snowman,70,25,8,0.5,Fool,6,30,9,ƒXƒm[ƒ}ƒ“,LightGray
 16,enemy_light,60,35,5,0.4,Ranged,5,45,8,á‚Ì°,DarkBlue
 17,Snow,500,40,35,0.4,Melee,11,50,35,ƒAƒCƒXƒXƒvƒ‰ƒCƒg,LightBlue
-18,test,30,10,3,0.6,Fool,5,60,3,X‚Ì‰t‘Ì,DarkGreen
+18,test,30,10,3,0.6,Fool,5,60,3,X‚Ì‰t‘Ì,LightGreen
 19,Snow,45,25,10,0.6,Totem,5,50,5,X‚Ì¸,DarkGreen
 20,enemy_armor,450,50,45,0.8,Fool,7,20,40,X‚ÌƒK[ƒfƒBƒAƒ“,LightGray
 21,enemy_snake,60,40,10,0.7,Melee,4,30,6,»”™Ö,LightBrown

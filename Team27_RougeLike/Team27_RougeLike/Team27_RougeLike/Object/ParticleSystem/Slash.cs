@@ -44,7 +44,7 @@ namespace Team27_RougeLike.Object.ParticleSystem
         public override void Draw(GameDevice gameDevice)
         {
             Rectangle rect = motion.DrawingRange();
-            gameDevice.Renderer.DrawPolygon(name, position1, size, motion.DrawingRange(), Color.Red, alpha);
+            gameDevice.Renderer.DrawPolygon(name, position1, size, motion.DrawingRange(), Color.White, alpha);
         }
 
     }

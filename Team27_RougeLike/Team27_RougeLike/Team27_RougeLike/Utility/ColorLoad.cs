@@ -52,7 +52,7 @@ namespace Team27_RougeLike.Utility
                 case "LightGray":
                     return new Color(155, 155, 155);
                 case "DarkGreen":
-                    return new Color(60, 240, 120);
+                    return new Color(20, 120, 40);
                 case "LightBlue":
                     return new Color(120, 180, 255);
                 case "LightGreen":

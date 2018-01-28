@@ -72,8 +72,8 @@ namespace Team27_RougeLike.Map
                     {
                         case (int)MapDef.BlockDef.Wall:
                             c = new Cube(
-                                new Vector3(x * MapDef.TILE_SIZE, MapDef.TILE_SIZE, y * MapDef.TILE_SIZE),
-                                new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE * 2, MapDef.TILE_SIZE / 2.0f),
+                                new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
+                                new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE * 2.5f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
                             c.SetTexture(blockDef[MapDef.BlockDef.Wall]);
                             c.SetMiniMapWallColor(Color.Gray);
@@ -90,8 +90,8 @@ namespace Team27_RougeLike.Map
                             break;
                         case (int)MapDef.BlockDef.Fall:
                             c = new FallBlock(
-                                new Vector3(x * MapDef.TILE_SIZE, -MapDef.TILE_SIZE / 2 - 5, y * MapDef.TILE_SIZE),
-                                new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 2.0f),
+                                new Vector3(x * MapDef.TILE_SIZE, 0, y * MapDef.TILE_SIZE),
+                                new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE / 6.0f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
                             mapBlocks.Add(c);
                             break;

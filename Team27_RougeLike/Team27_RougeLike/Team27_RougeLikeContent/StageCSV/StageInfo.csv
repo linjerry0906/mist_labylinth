@@ -2,6 +2,6 @@ Start,ƒ_ƒ“ƒWƒ‡ƒ“–¼,‘ŠK‘w,Šî–{ƒTƒCƒY,BossŠÔŠu,§ŒÀŠÔ,Itemƒtƒ@ƒCƒ‹”Ô†,ƒCƒ[ƒW
 1,‰‰Kê,3,15,3,300,1,dungeon_image_tutorial,1,ground_tutorial,wall_tutorial,0.4,0.35,0.2,FALSE,255,255,255,n36,F`E
 2,ƒ‚ƒSƒ‹ƒNzR,10,25,5,480,2,dungeon_image2,-1,cubeTest,wall_default,0.07,0.07,0.22,TRUE,250,230,100,m-art_Candle,E`D
 3,•X‚Ì‹{“a,30,27,6,480,3,dungeon_image_ice,0,ground_ice,wall_ice,0.55,0.55,0.55,FALSE,100,220,250,n51,D`B
-4,÷ŠCƒGƒ“ƒ‹ƒxƒ‹,50,25,5,600,4,dungeon_image_tree,0,ground_tree,wall_tree,0.2,0.6,0.2,TRUE,225,255,120,m-art_Komorebi,D`A
+4,÷ŠCƒGƒ“ƒ‹ƒxƒ‹,50,25,5,600,4,dungeon_image_tree,0,ground_tree,wall_tree,0.15,0.5,0.15,TRUE,225,255,120,m-art_Komorebi,D`A
 5,–³ŒÀ‰ñ˜L,100,15,10,600,5,dungeon_image_thomb,0,ground_infinite,wall_infinite,0.18,0.12,0.08,FALSE,255,150,150,n14,C`S
 End,,,,,,,,,,,,,,,,,,,
