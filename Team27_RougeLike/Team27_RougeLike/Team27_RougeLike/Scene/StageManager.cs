@@ -30,7 +30,7 @@ namespace Team27_RougeLike.Scene
 
         private static readonly float FAREST_FOG = 600;
         private static readonly float NEAREST_FOG = 400;
-        private static readonly float FOG_RANGE = 200;
+        private static readonly float FOG_RANGE = 120;
         private float farFog;
 
         private Vector3 constractColor; //対比色
@@ -130,7 +130,7 @@ namespace Team27_RougeLike.Scene
             int min = (int)CurrentTime() / 60;
             int sec = (int)CurrentTime() - min * 60;
 
-            if (min <= 1)           //一分以下の場合は点滅で注意をかける
+            if (min <= 0)           //一分以下の場合は点滅で注意をかける
             {
                 if (limitTime.Now() % 20 < 5)
                     return;

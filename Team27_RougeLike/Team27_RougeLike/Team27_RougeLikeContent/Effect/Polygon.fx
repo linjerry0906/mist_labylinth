@@ -7,6 +7,13 @@ texture Texture0;
 float alpha;
 float4 color;
 
+float3 cameraPos;
+
+bool fogEnable;
+float4 fogColor;
+float fogNear;
+float fogFar;
+
 sampler MainSampler : register(s0) = sampler_state
 {
 	Texture = <Texture0>;
@@ -25,6 +32,7 @@ struct VertexShaderOutput
 {
 	float4 Position : POSITION0;
 	float2 TexUV0 : TEXCOORD0;
+	float Distance : TEXCOORD1;
 
 	// TODO: add vertex shader outputs such as colors and texture
 	// coordinates here. These values will automatically be interpolated
@@ -40,6 +48,7 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 	output.Position = mul(viewPosition, Projection);
 	output.TexUV0 = input.TexUV;
 
+	output.Distance = length(worldPosition - cameraPos);
 	// TODO: add your vertex shader code here.
 
 	return output;
@@ -50,10 +59,17 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 	// TODO: add your pixel shader code here.
 	float4 tex = tex2D(MainSampler, input.TexUV0) * alpha;
 
-	if (tex.a < 0.1f)		//“§–¾“x‚ª0.1ˆÈ‰º‚Ìê‡‚Í•úŠü
+	if (tex.a < 0.11f)		//“§–¾“x‚ª0.11ˆÈ‰º‚Ìê‡‚Í•úŠü
 		discard;
 
 	tex *= color;
+	if (fogEnable)
+	{
+		float l = saturate((input.Distance - fogNear) / (fogFar - fogNear));
+
+		return lerp(tex, fogColor, l);
+	}
+
 	return tex;
 }
 

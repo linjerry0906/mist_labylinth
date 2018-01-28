@@ -42,7 +42,7 @@ namespace Team27_RougeLike.Object.Item
 
         public void Draw()
         {
-            renderer.DrawModel("ItemModel", position, size, new Color(1.0f, 1.0f, 0.0f));
+            renderer.DrawModel("ItemModel", position, size, new Color(1.0f, 1.0f, 0.5f));
         }
     }
 }

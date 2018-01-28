@@ -240,7 +240,7 @@ namespace Team27_RougeLike.Device
                 foreach (BasicEffect e in m.Effects)
                 {
                     e.TextureEnabled = true;
-                    e.Texture = textures["cubeTest"];
+                    e.Texture = textures["wall_ice"];
                     e.DiffuseColor = color.ToVector3();
                     e.FogEnabled = fogManager.IsActive();
                     e.FogStart = fogManager.Near;
@@ -401,7 +401,7 @@ namespace Team27_RougeLike.Device
         /// <param name="rect">アセットのUV</param>
         /// <param name="color">ポリゴンの色</param>
         /// <param name="alpha">アルファ値</param>
-        public void DrawPolygon(string name, Vector3 position, Vector2 size, Rectangle rect, Color color, float alpha = 1)
+        public void DrawPolygon(string name, Vector3 position, Vector2 size, Rectangle rect, Color color, float alpha = 1, bool useFog = true)
         {
             graphicsDevice.DepthStencilState = DepthStencilState.Default;
             graphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
@@ -444,6 +444,12 @@ namespace Team27_RougeLike.Device
             effectManager.GetPolygonEffect().View.SetValue(currentProjector.LookAt);
             effectManager.GetPolygonEffect().Projection.SetValue(currentProjector.Projection);
             effectManager.GetPolygonEffect().Color.SetValue(color.ToVector4());
+            effectManager.GetPolygonEffect().CameraPos.SetValue(currentProjector.Position);
+            effectManager.GetPolygonEffect().FogEnable.SetValue(useFog);
+            effectManager.GetPolygonEffect().FogNear.SetValue(fogManager.Near);
+            effectManager.GetPolygonEffect().FogFar.SetValue(fogManager.Far);
+            Vector4 fogColor = fogManager.CurrentColor().ToVector4();
+            effectManager.GetPolygonEffect().FogColor.SetValue(fogColor);
             foreach (var effect in effectManager.GetPolygonEffect().GetEffect().CurrentTechnique.Passes)
             {
                 effect.Apply();

@@ -280,9 +280,9 @@ namespace Team27_RougeLike.Scene
             if (!stageManager.UseParticle())
                 return;
 
-            if (pManager.Count() < 2000)
+            if (pManager.Count() < 1500)
             {
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < 20; i++)
                 {
                     Vector3 position = characterManager.GetPlayer().GetPosition;
                     position += new Vector3(

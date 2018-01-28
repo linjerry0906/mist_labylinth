@@ -23,6 +23,12 @@ namespace Team27_RougeLike.Effects
         private EffectParameter alpha;              //透明度
         private EffectParameter color;              //色
 
+        private EffectParameter cameraPos;
+        private EffectParameter fogEnable;
+        private EffectParameter fogColor;
+        private EffectParameter fogNear;
+        private EffectParameter fogFar;
+
         public PolygonEffect(Effect effect)
         {
             this.effect = effect;
@@ -37,6 +43,12 @@ namespace Team27_RougeLike.Effects
             texture = effect.Parameters["Texture0"];         //Texture
             alpha = effect.Parameters["alpha"];              //透明度
             color = effect.Parameters["color"];
+
+            cameraPos = effect.Parameters["cameraPos"];
+            fogEnable = effect.Parameters["fogEnable"];
+            fogColor = effect.Parameters["fogColor"];
+            fogNear = effect.Parameters["fogNear"];
+            fogFar = effect.Parameters["fogFar"];
         }
 
         public EffectParameter World
@@ -63,6 +75,31 @@ namespace Team27_RougeLike.Effects
         public EffectParameter Color
         {
             get { return color; }
+        }
+
+        public EffectParameter CameraPos
+        {
+            get { return cameraPos; }
+        }
+
+        public EffectParameter FogEnable
+        {
+            get { return fogEnable; }
+        }
+
+        public EffectParameter FogColor
+        {
+            get { return fogColor; }
+        }
+
+        public EffectParameter FogNear
+        {
+            get { return fogNear; }
+        }
+
+        public EffectParameter FogFar
+        {
+            get { return fogFar; }
         }
 
         public Effect GetEffect()

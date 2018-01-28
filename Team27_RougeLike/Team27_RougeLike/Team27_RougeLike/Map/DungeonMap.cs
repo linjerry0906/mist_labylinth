@@ -76,7 +76,7 @@ namespace Team27_RougeLike.Map
                                 new Vector3(MapDef.TILE_SIZE / 2.0f, MapDef.TILE_SIZE * 2.5f, MapDef.TILE_SIZE / 2.0f),
                                 gameDevice);
                             c.SetTexture(blockDef[MapDef.BlockDef.Wall]);
-                            c.SetMiniMapWallColor(Color.Gray);
+                            c.SetMiniMapWallColor(new Color(0.25f, 0.25f, 0.25f));
                             mapBlocks.Add(c);
                             break;
                         case (int)MapDef.BlockDef.Space:

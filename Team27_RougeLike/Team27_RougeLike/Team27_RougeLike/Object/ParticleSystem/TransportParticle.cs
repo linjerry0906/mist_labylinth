@@ -30,7 +30,7 @@ namespace Team27_RougeLike.Object.ParticleSystem
 
         public override void Draw(GameDevice gameDevice)
         {
-            gameDevice.Renderer.DrawPolygon("particle", position, size, new Rectangle(0, 0, 16, 16), color, alpha);
+            gameDevice.Renderer.DrawPolygon("particle", position, size, new Rectangle(0, 0, 16, 16), color, alpha, false);
         }
 
         public override void Initialize()
