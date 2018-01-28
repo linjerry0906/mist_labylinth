@@ -132,7 +132,7 @@ namespace Team27_RougeLike.Scene
 
             if (min <= 1)           //一分以下の場合は点滅で注意をかける
             {
-                if (limitTime.Now() % 20 < 7)
+                if (limitTime.Now() % 20 < 5)
                     return;
             }
 
