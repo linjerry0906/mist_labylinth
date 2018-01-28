@@ -109,6 +109,17 @@ namespace Team27_RougeLike.Effects
 
             renderer.End();
         }
+
+        public void Draw(Renderer renderer, RenderTarget2D renderTarget)
+        {
+            renderer.Begin(effect);
+
+            texture.SetValue(renderTarget);                   //RenderTarget設定
+            renderer.DrawTexture(renderTarget, Vector2.Zero);
+
+            renderer.End();
+        }
+
         /// <summary>
         /// 現在のRenderTargetを解放
         /// </summary>

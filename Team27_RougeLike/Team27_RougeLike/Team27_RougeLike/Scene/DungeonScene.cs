@@ -52,17 +52,18 @@ namespace Team27_RougeLike.Scene
 
         public void Draw()
         {
-            renderer.EffectManager.GetDepthEffect().WriteRenderTarget(renderer.FogManager.CurrentColor());
+            renderer.EffectManager.GetBloomEffect().WriteRendererTarget(renderer.FogManager.CurrentColor());
 
             map.Draw();                 //Mapの描画
-
             mapItemManager.Draw();      //アイテムの描画
+
             characterManager.Draw();
             pManager.Draw();
-            background.Draw(renderer.FogManager.CurrentColor());
 
-            renderer.EffectManager.GetDepthEffect().ReleaseRenderTarget();
-            renderer.EffectManager.GetDepthEffect().Draw(renderer);
+            renderer.EffectManager.GetBloomEffect().ReleaseRenderTarget();
+            renderer.EffectManager.GetBloomEffect().Draw(renderer);
+
+            background.Draw(renderer.FogManager.CurrentColor());
 
             map.DrawMiniMap();          //MiniMapの描画
             DrawUI();                   //UIを描画

@@ -30,6 +30,7 @@ namespace Team27_RougeLike.Device
         private BlurEffect blurEffect;          //BlurEffect
         private PolygonEffect polygonEffect;    //透明のポリゴン用のEffect
         private DepthEffect depthEffect;        //DepthEffect
+        private BloomEffect bloomEffect;        //BloomEffect
 
         /// <summary>
         /// Effectを管理するクラス
@@ -56,8 +57,16 @@ namespace Team27_RougeLike.Device
                 contents.Load<Effect>("./Effect/polygon"));
 
             depthEffect = new DepthEffect(
-                graphicsDevice, 
+                graphicsDevice,
                 contents.Load<Effect>("./Effect/depth"));
+
+            bloomEffect = new BloomEffect(
+                graphicsDevice,
+                contents.Load<Effect>("./Effect/hightLight"),
+                contents.Load<Effect>("./Effect/bloom"),
+                new BlurEffect(
+                    graphicsDevice,
+                    contents.Load<Effect>("./Effect/blur")));
         }
 
         /// <summary>
@@ -104,12 +113,17 @@ namespace Team27_RougeLike.Device
         }
 
         /// <summary>
-        /// Depthを書き出すEffectを取得
+        /// Depthを書き出すEffectを取得(機能していない)
         /// </summary>
         /// <returns></returns>
         public DepthEffect GetDepthEffect()
         {
             return depthEffect;
+        }
+
+        public BloomEffect GetBloomEffect()
+        {
+            return bloomEffect;
         }
     }
 }

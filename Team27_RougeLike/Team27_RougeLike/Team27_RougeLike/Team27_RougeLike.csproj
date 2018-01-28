@@ -70,6 +70,7 @@
     <Compile Include="Device\SELoader.cs" />
     <Compile Include="Device\Sound.cs" />
     <Compile Include="Device\TextureLoader.cs" />
+    <Compile Include="Effects\BloomEffect.cs" />
     <Compile Include="Effects\BlurEffect.cs" />
     <Compile Include="Effects\DepthEffect.cs" />
     <Compile Include="Effects\PolygonEffect.cs" />
