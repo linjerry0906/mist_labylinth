@@ -243,7 +243,7 @@ namespace Team27_RougeLike.Scene
             //時間やFog処理の更新
             stageManager.Update();
 
-            AddSphereParticle();
+            AddParticle();
 
             //Camera Shake仮実装 ToDo:Class化
             if (gameDevice.InputState.IsLeftClick())
@@ -258,19 +258,36 @@ namespace Team27_RougeLike.Scene
             CheckEnd();                         //プレイ終了をチェック
         }
 
-        private void AddSphereParticle()
+        private void AddParticle()
         {
+            //出口の粒子
+            int tileSize = (int)MapDef.TILE_SIZE;
+            for (int i = 0; i < 1; i++)
+            {
+                Vector3 position = new Vector3(
+                    map.EndPoint.X * tileSize, 
+                    0, 
+                    map.EndPoint.Y * tileSize);
+                position += new Vector3(
+                    gameDevice.Random.Next(-tileSize * 45, tileSize * 45 + 1) / 100.0f,
+                    0,
+                    gameDevice.Random.Next(-tileSize * 45, tileSize * 45 + 1) / 100.0f);
+                position.Y = 10;
+                pManager.AddParticle(new TransportParticle(position, stageManager.ConstactColor(), gameDevice));
+            }
+
+            //以下は浮遊粒子
             if (!stageManager.UseParticle())
                 return;
 
             if (pManager.Count() < 2000)
             {
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 25; i++)
                 {
                     Vector3 position = characterManager.GetPlayer().GetPosition;
                     position += new Vector3(
                         gameDevice.Random.Next(-30000, 30001) / 100.0f,
-                        gameDevice.Random.Next(-30000, 30001) / 100.0f,
+                        0,
                         gameDevice.Random.Next(-30000, 30001) / 100.0f);
                     position.Y = 10;
                     pManager.AddParticle(new SphereParticle(position, stageManager.ConstactColor(), gameDevice));

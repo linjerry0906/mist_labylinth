@@ -61,7 +61,7 @@ namespace Team27_RougeLike.Object.ParticleSystem
             else
             {
                 alpha -= 0.007f;
-                if (alpha <= 0.0f)
+                if (alpha <= 0.2f)
                     isDead = true;
             }
 

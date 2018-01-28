@@ -229,7 +229,7 @@ namespace Team27_RougeLike.Scene
 
             if (pManager.Count() < 1500)
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 25; i++)
                 {
                     Vector3 position = characterManager.GetPlayer().GetPosition;
                     position += new Vector3(
@@ -239,6 +239,25 @@ namespace Team27_RougeLike.Scene
                     position.Y = 10;
                     pManager.AddParticle(new SphereParticle(position, stageManager.ConstactColor(), gameDevice));
                 }
+            }
+        }
+
+        private void AddTransportParticle()
+        {
+            //出口の粒子
+            int tileSize = (int)MapDef.TILE_SIZE;
+            for (int i = 0; i < 1; i++)
+            {
+                Vector3 position = new Vector3(
+                    map.EndPoint.X * tileSize,
+                    0,
+                    map.EndPoint.Y * tileSize);
+                position += new Vector3(
+                    gameDevice.Random.Next(-tileSize * 45, tileSize * 45 + 1) / 100.0f,
+                    0,
+                    gameDevice.Random.Next(-tileSize * 45, tileSize * 45 + 1) / 100.0f);
+                position.Y = 10;
+                pManager.AddParticle(new TransportParticle(position, stageManager.ConstactColor(), gameDevice));
             }
         }
 
@@ -267,6 +286,7 @@ namespace Team27_RougeLike.Scene
 
             //Boss倒したら出現
             map.SwitchDrawExit(true);
+            AddTransportParticle();
             gameManager.StageManager.RemoveFog();
             gameDevice.Sound.PlayBGM("n17");
 
