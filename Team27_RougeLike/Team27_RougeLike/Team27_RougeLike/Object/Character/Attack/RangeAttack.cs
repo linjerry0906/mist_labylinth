@@ -10,16 +10,40 @@ namespace Team27_RougeLike.Object
 {
     class RangeAttack : AttackBase
     {
-        public RangeAttack(CharacterManager manager, CharacterBase actor, ParticleManager particleManager)
-            : base(manager, actor, particleManager)
+        public RangeAttack(float size, string textureName, Buff.buff buffType, string seName, float startRange, CharacterManager characterManager)
+            : base(size, textureName, buffType, seName, startRange, characterManager)
         {
         }
-
+        public RangeAttack(float size, string textureName, Buff.buff buffType, string seName, float startRange, CharacterManager characterManager, CharacterBase actor, ParticleManager particle)
+            : base(size, textureName, buffType, seName, startRange, characterManager, actor, particle)
+        {
+        }
         public override void Attack()
         {
-            var box = new MoveDamageBox(new BoundingSphere(new Vector3(actor.Collision.Position.X,characterManager.GetPlayer().Collision.Position.Y,actor.Collision.Position.Z)+ (actor.GetAttackAngle() * actor.Collision.Radius / 2), 3), 10000, actor.Tag, actor.GetAttack(), actor.GetAttackAngle(),particleManager);
+            var box = new MoveDamageBox(
+                new BoundingSphere(new Vector3(actor.Collision.Position.X, characterManager.GetPlayer().Collision.Position.Y, actor.Collision.Position.Z) + (actor.GetAttackAngle() * ((actor.Collision.Radius / 2) + startRange)), 3),
+                10000,
+                actor.Tag,
+                actor.GetAttack(),
+                actor.GetAttackAngle(),
+                buffType);
             characterManager.AddHitBox(box);
-            characterManager.Sound("damage7");
+            characterManager.Sound(seName);
+            particleManager.AddParticle(new Bullet(box, new Vector2(10, 10), textureName));
+        }
+        public override AttackBase Clone(CharacterBase actor, ParticleManager particleManager)
+        {
+            return new RangeAttack
+                (
+                size,
+                textureName,
+                buffType,
+                seName,
+                startRange,
+                characterManager,
+                actor,
+                particleManager
+                );
         }
     }
 }

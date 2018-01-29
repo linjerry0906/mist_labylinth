@@ -11,14 +11,38 @@ namespace Team27_RougeLike.Object
     {
         protected ParticleManager particleManager;
         protected CharacterManager characterManager;
-        protected CharacterBase  actor;
+        protected CharacterBase actor;
 
-        public AttackBase(CharacterManager manager,CharacterBase actor,ParticleManager particleManager)
+        protected string seName;
+        protected string textureName;
+        protected float size;
+        protected Buff.buff buffType;
+        protected float startRange;
+
+        public AttackBase(float size, string textureName, Buff.buff buffType, string seName,float startRange, CharacterManager characterManager)
         {
-            this.particleManager = particleManager;
-            this.characterManager = manager;
-            this.actor = actor;
+            this.characterManager = characterManager;
+            this.textureName = textureName;
+            this.buffType = buffType;
+            this.size = size;
+            this.seName = seName;
+            this.startRange = startRange;
         }
-        public abstract void Attack();        
+
+        public AttackBase(float size, string textureName, Buff.buff buffType, string seName,float startRange, CharacterManager characterManager,CharacterBase actor,ParticleManager particleManager)
+        {
+            this.characterManager = characterManager;
+            this.textureName = textureName;
+            this.buffType = buffType;
+            this.size = size;
+            this.seName = seName;
+            this.particleManager = particleManager;
+            this.actor = actor;
+            this.startRange = startRange;
+        }
+
+        public abstract AttackBase Clone(CharacterBase actor, ParticleManager particleManager);
+
+        public abstract void Attack();
     }
 }

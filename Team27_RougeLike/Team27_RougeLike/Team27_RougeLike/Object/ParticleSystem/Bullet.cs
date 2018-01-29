@@ -13,12 +13,12 @@ namespace Team27_RougeLike.Object.ParticleSystem
         private Rectangle rect;
         private MoveDamageBox damageBox;
         
-        public Bullet(MoveDamageBox damageBox,Vector2 size):base()
+        public Bullet(MoveDamageBox damageBox,Vector2 size,string name):base()
         {
             this.damageBox = damageBox;
             this.size = size;
             rect = new Rectangle(0, 0, 1, 1);
-            name = "attack";
+            this.name =name;
             position = damageBox.Position();
         }
 

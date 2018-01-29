@@ -73,7 +73,7 @@ namespace Team27_RougeLike.Object.Character
             var t = status.GetInventory().LeftHand();
             if (t == null)
             {
-                attack = new MeleeAttack(characterManager, this, pManager);
+                attack = characterManager.GetAttack(1).Clone(this, pManager);
                 ui.LogUI.AddLog("手での攻撃");
             }
             else
@@ -83,7 +83,7 @@ namespace Team27_RougeLike.Object.Character
                     case WeaponItem.WeaponType.Bow:
                         if (status.GetInventory().IsArrowEquiped())
                         {
-                            attack = new RangeAttack(characterManager, this, pManager);
+                            attack = characterManager.GetAttack(2).Clone(this, pManager);
                             status.GetInventory().DecreaseArrow();
                             ui.LogUI.AddLog("弓による攻撃");
                         }
@@ -94,19 +94,19 @@ namespace Team27_RougeLike.Object.Character
                         }
                         break;
                     case WeaponItem.WeaponType.Sword:
-                        attack = new SwordAttack(characterManager, this, pManager);
+                        attack = characterManager.GetAttack(1).Clone(this, pManager);
                         ui.LogUI.AddLog("剣での攻撃");
                         break;
                     case WeaponItem.WeaponType.Shield:
-                        attack = new MeleeAttack(characterManager, this, pManager);
+                        attack = characterManager.GetAttack(1).Clone(this, pManager);
                         ui.LogUI.AddLog("盾での攻撃");
                         break;
                     case WeaponItem.WeaponType.Dagger:
-                        attack = new DaggerAttack(characterManager, this, pManager);
+                        attack = characterManager.GetAttack(1).Clone(this, pManager);
                         ui.LogUI.AddLog("短剣での攻撃");
                         break;
                     default:
-                        attack = new MeleeAttack(characterManager, this, pManager);
+                        attack = characterManager.GetAttack(1).Clone(this, pManager);
                         break;
                 }
             }

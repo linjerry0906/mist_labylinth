@@ -386,7 +386,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-01-26T20:32:41.116733+09:00</Time>
+      <Time>2018-01-27T10:15:30.9920536+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -456,7 +456,7 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\polygon.xnb</Output>
-      <Time>2018-01-19T22:35:44.837051+09:00</Time>
+      <Time>2018-01-29T20:45:20.6155428+09:00</Time>
     </Item>
     <Item>
       <Source>Effect\depth.fx</Source>
@@ -465,7 +465,7 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\depth.xnb</Output>
-      <Time>2018-01-21T16:08:04.9624279+09:00</Time>
+      <Time>2018-01-29T20:45:20.6190414+09:00</Time>
     </Item>
     <Item>
       <Source>Sound\BGM\m-art_Candle.mp3</Source>
@@ -1070,6 +1070,42 @@
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Sound\SE\damage7.xnb</Output>
       <Time>2018-01-26T12:25:23.5076918+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_griffon.png</Source>
+      <Name>Texture\enemy_griffon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_griffon.xnb</Output>
+      <Time>2018-01-27T10:15:31.0130863+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Font\timerFont.spritefont</Source>
+      <Name>Font\timerFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\timerFont.xnb</Output>
+      <Time>2018-01-29T20:45:20.6225484+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Effect\hightLight.fx</Source>
+      <Name>Effect\hightLight</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\hightLight.xnb</Output>
+      <Time>2018-01-29T20:45:20.6200441+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Effect\bloom.fx</Source>
+      <Name>Effect\bloom</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\bloom.xnb</Output>
+      <Time>2018-01-29T23:35:13.3808246+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

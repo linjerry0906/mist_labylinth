@@ -1,0 +1,4 @@
+ID,名前,サイズ,テクスチャ名,バフ,攻撃タイプ,SE,開始位置(どれぐらい離れているか)
+1,tempMelee,2,slash,無,Melee,attack1,5
+2,tempRanged,0.5,attack,無,Ranged,damage7,1
+3,tempRanged,1.5,attack,毒,Ranged,damage7,1

@@ -13,24 +13,6 @@ namespace Team27_RougeLike.Object.Box
     {
         private int attack;
         private Vector3 angle;
-        public DamageBox(BoundingSphere collision, int time, int attack, Vector3 angle)
-            : base(collision, time)
-        {
-            this.attack = attack;
-            this.angle = angle;
-        }
-        public DamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle)
-            : base(collision, time, tag)
-        {
-            this.attack = attack;
-            this.angle = angle;
-        }
-        public DamageBox(BoundingSphere collision, int time, List<string> tags, int attack, Vector3 angle)
-            : base(collision, time, tags)
-        {
-            this.attack = attack;
-            this.angle = angle;
-        }
         public DamageBox(BoundingSphere collision, int time, int attack, Vector3 angle,Buff.buff buff)
             : base(collision, time,buff)
         {

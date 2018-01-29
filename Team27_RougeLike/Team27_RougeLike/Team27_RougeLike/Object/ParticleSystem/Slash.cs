@@ -16,11 +16,11 @@ namespace Team27_RougeLike.Object.ParticleSystem
         private GameDevice gameDevice;
         private Vector3 position1;
 
-        public Slash(CharacterBase actor, Vector3 position1) : base()
+        public Slash(CharacterBase actor, Vector3 position1,string name) : base()
         {
             this.actor = actor;
             this.position1 = position1;
-            name = "slash";
+            this.name = name;
             alpha = 1.0f;
             size = new Vector2(10, 10);
 

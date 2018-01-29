@@ -161,7 +161,7 @@ namespace Team27_RougeLike.Object.Box
         }
         public virtual void Effect(CharacterBase character)
         {
-            if (buff != Buff.buff.START)
+            if (buff != Buff.buff.無)
             {
                 character.GetBuffs().AddBuff(buff);
             }

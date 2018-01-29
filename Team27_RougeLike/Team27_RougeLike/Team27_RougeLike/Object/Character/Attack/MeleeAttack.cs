@@ -10,17 +10,46 @@ namespace Team27_RougeLike.Object
 {
     class MeleeAttack : AttackBase
     {
-        public MeleeAttack(CharacterManager manager, CharacterBase actor, ParticleManager particleManager)
-            : base(manager, actor, particleManager)
+        
+        public MeleeAttack(float size, string textureName, Buff.buff buffType, string seName,float startRange, CharacterManager characterManager)
+            : base(size,textureName,buffType,seName,startRange,characterManager)
+        {
+        }
+        public MeleeAttack(float size, string textureName, Buff.buff buffType, string seName,float startRange, CharacterManager characterManager, CharacterBase actor,ParticleManager particle)
+            : base(size, textureName, buffType, seName, startRange,characterManager, actor,particle)
         {
         }
 
         public override void Attack()
         {
-            var box = new DamageBox(new BoundingSphere(new Vector3(actor.Collision.Position.X, characterManager.GetPlayer().Collision.Position.Y, actor.Collision.Position.Z) + (actor.GetKeepAttackAngle() * actor.Collision.Radius / 2), actor.Collision.Radius), 1, actor.Tag, actor.GetAttack(), actor.GetKeepAttackAngle());
+            var box = new DamageBox(
+                new BoundingSphere(new Vector3(actor.Collision.Position.X, characterManager.GetPlayer().Collision.Position.Y, actor.Collision.Position.Z) + (actor.GetKeepAttackAngle() * ((actor.Collision.Radius / 2)+startRange))
+                , actor.Collision.Radius)
+                ,1
+                , actor.Tag
+                , actor.GetAttack()
+                , actor.GetKeepAttackAngle()
+                ,buffType
+                );
+            
             characterManager.AddHitBox(box);
-            actor.Sound("attack1");
-            particleManager.AddParticle(new Slash(actor, box.collision.Center));
+            actor.Sound(seName);
+            particleManager.AddParticle(new Slash(actor, box.collision.Center,textureName));
+        }
+
+        public override AttackBase Clone(CharacterBase actor, ParticleManager particleManager)
+        {
+            return new MeleeAttack
+                (
+                size,
+                textureName,
+                buffType,
+                seName,
+                startRange,
+                characterManager,
+                actor,
+                particleManager
+                );
         }
     }
 }

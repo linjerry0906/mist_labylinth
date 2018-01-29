@@ -20,6 +20,7 @@ namespace Team27_RougeLike.Object
         private ParticleManager pManager;
         private GameDevice gameDevice;
         protected bool infinity;
+        protected int attackID;
 
         /// <summary>
         /// オリジナル
@@ -29,7 +30,7 @@ namespace Team27_RougeLike.Object
         /// <param name="aiName"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice, string name, int id, string color)
+        public EnemyBase(Status status, CollisionSphere collision, string aiName, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice, string name, int id, string color,int attackID)
             : base(collision, textureName, characterManager, name, color)
         {
             this.status = status;
@@ -38,6 +39,7 @@ namespace Team27_RougeLike.Object
             this.exp = exp;
             this.gameDevice = gameDevice;
             this.id = id;
+            this.attackID = attackID;
         }
 
 
@@ -69,7 +71,7 @@ namespace Team27_RougeLike.Object
         /// <param name="manager"></param>
         /// <param name="textureName"></param>
         /// <param name="characterManager"></param>
-        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice, string name, int id, string color)
+        public EnemyBase(Status status, CollisionSphere collision, BaseAiManager manager, string textureName, CharacterManager characterManager, int exp, GameDevice gameDevice, string name, int id, string color,int attackID)
          : base(collision, textureName, characterManager, name, color)
         {
             tag = "Enemy";
@@ -78,6 +80,7 @@ namespace Team27_RougeLike.Object
             this.name = name;
             this.gameDevice = gameDevice;
             this.id = id;
+            this.attackID = attackID;
             aiManager = manager;
             motion = new Motion();
             pManager = new ParticleManager(gameDevice);
@@ -96,26 +99,7 @@ namespace Team27_RougeLike.Object
 
         public override void Initialize()
         {
-            switch (aiManager.ToString())
-            {
-                case "Team27_RougeLike.Object.AI.AiManager_Fool":
-                    attack = new MeleeAttack(characterManager, this, pManager);
-                    break;
-                case "Team27_RougeLike.Object.AI.AiManager_Melee":
-                    attack = new MeleeAttack(characterManager, this, pManager);
-                    break;
-                case "Team27_RougeLike.Object.AI.AiManager_Totem":
-                    attack = new RangeAttack(characterManager, this, pManager);
-                    break;
-                case "Team27_RougeLike.Object.AI.AiManager_Ranged":
-                    attack = new RangeAttack(characterManager, this, pManager);
-                    break;
-                case "Team27_RougeLike.Object.AI.AiManager_AllRangedBoss":
-                    attack = new RangeAttack(characterManager, this, pManager);
-                    break;
-                default:
-                    break;
-            }
+              attack = characterManager.GetAttack(attackID).Clone(this, pManager);
         }
         public override void Update(GameTime gameTime)
         {
@@ -188,7 +172,8 @@ namespace Team27_RougeLike.Object
                 gameDevice,
                 name,
                 id,
-                color
+                color,
+                attackID
                 );
         }
         private BaseAiManager SwitchAi()

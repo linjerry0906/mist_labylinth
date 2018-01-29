@@ -19,6 +19,10 @@ namespace Team27_RougeLike.Object.Character
             return enemys;
         }
 
+        /// <summary>
+        /// 元々クエスト用に用意したものだけれど使ってないなら消しても大丈夫かな　:飯泉
+        /// </summary>
+        /// <param name="charactermanager"></param>
         public void Initialize(CharacterManager charactermanager)
         {
             enemyFilename = @"Content/" + "EnemysCSV/Enemy.csv";
@@ -46,6 +50,7 @@ namespace Team27_RougeLike.Object.Character
                 var exp = int.Parse(data[9]);
                 var name = data[10];
                 var color = data[11];
+                var attackId = int.Parse(data[12]);
                 enemys.Add
                     (
                     id,
@@ -66,6 +71,7 @@ namespace Team27_RougeLike.Object.Character
             enemDate.Close();
             datefs.Close();
         }
+
         public void Initialize(CharacterManager charactermanager, GameDevice gamedevice)
         {
             enemyFilename = @"Content/" + "EnemysCSV/Enemy.csv";
@@ -93,6 +99,7 @@ namespace Team27_RougeLike.Object.Character
                 var exp = int.Parse(data[9]);
                 var name = data[10];
                 var color = data[11];
+                var attackId = int.Parse(data[12]);
                 enemys.Add
                     (
                     id,
@@ -107,7 +114,8 @@ namespace Team27_RougeLike.Object.Character
                         gamedevice,
                         name,
                         id,
-                        color
+                        color,
+                        attackId
                         )
                     );
             }

@@ -13,25 +13,6 @@ namespace Team27_RougeLike.Object.Box
     {
         private int attack;
         private Vector3 angle;
-        public MoveDamageBox(BoundingSphere collision, int time, int attack, Vector3 angle)
-            : base(collision, time)
-        {
-            this.attack = attack;
-            this.angle = angle;
-        }
-        public MoveDamageBox(BoundingSphere collision, int time, List<string> tags, int attack, Vector3 angle)
-            : base(collision, time, tags)
-        {
-            this.attack = attack;
-            this.angle = angle;
-        }
-        public MoveDamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle,ParticleManager particleManager)
-            : base(collision, time, tag)
-        {
-            this.attack = attack;
-            this.angle = angle;
-            particleManager.AddParticle(new Bullet(this,new Vector2(10,10)));
-        }
         public MoveDamageBox(BoundingSphere collision, int time, int attack, Vector3 angle,Buff.buff buff)
            : base(collision, time,buff)
         {
@@ -44,14 +25,13 @@ namespace Team27_RougeLike.Object.Box
             this.attack = attack;
             this.angle = angle;
         }
-        public MoveDamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle, ParticleManager particleManager,Buff.buff buff)
+        public MoveDamageBox(BoundingSphere collision, int time, string tag, int attack, Vector3 angle,Buff.buff buff)
             : base(collision, time, tag,buff)
         {
             this.attack = attack;
             this.angle = angle;
-            particleManager.AddParticle(new Bullet(this, new Vector2(10, 10)));
         }
-
+        
         public override void Update()
         {
             base.Update();

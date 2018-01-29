@@ -20,6 +20,7 @@ namespace Team27_RougeLike.Object
             剛体化,
             混乱,
             加速,
+            無,
             END
         }
         private Dictionary<buff, int> reduceBuffTime = new Dictionary<buff, int>();

@@ -24,7 +24,8 @@ namespace Team27_RougeLike.Object.Character
         private List<Spawner> spawners = new List<Spawner>();
         private List<HitBoxBase> hitBoxs = new List<HitBoxBase>();
         private Player player;
-        private EnemyLoader loader;
+        private EnemyLoader enemyLoader;
+        private AttackLoader attackLoader;
 
         private Dictionary<int, EnemyBase> enemys = new Dictionary<int, EnemyBase>();
 
@@ -36,8 +37,10 @@ namespace Team27_RougeLike.Object.Character
         public CharacterManager(GameDevice gameDevice, GameManager gameManager)
         {
             this.gameDevice = gameDevice;
-            loader = new EnemyLoader();
-            loader.Initialize(this, gameDevice);
+            enemyLoader = new EnemyLoader();
+            enemyLoader.Initialize(this, gameDevice);
+            attackLoader = new AttackLoader();
+            attackLoader.Initialize(this);
             this.gameDevice = gameDevice;
             this.gameManager = gameManager;
         }
@@ -208,12 +211,17 @@ namespace Team27_RougeLike.Object.Character
 
         public Dictionary<int, EnemyBase> Enemys()
         {
-            return loader.Enemys();
+            return enemyLoader.Enemys();
         }
 
         public List<HitBoxBase> GetHitBoxs()
         {
             return hitBoxs;
+        }
+
+        public AttackBase GetAttack(int ID)
+        {
+            return attackLoader.GetAttack(ID);
         }
 
         public bool DiedCharacters()

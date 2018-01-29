@@ -52,6 +52,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="AttackCSV\Attack.csv">
+      <Name>Attack</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="EnemysCSV\Enemy.csv">
       <Name>Enemy</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
