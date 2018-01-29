@@ -130,6 +130,7 @@ namespace Team27_RougeLike.UI
                         playerItem.RemoveArmor(i);
                         currentItem = null;
                         itemUI.Initialize();
+                        Initialize();
                         return;
                     }
                     if (i == 4)
@@ -137,6 +138,7 @@ namespace Team27_RougeLike.UI
                         playerItem.RemoveLeftHand();
                         currentItem = null;
                         itemUI.Initialize();
+                        Initialize();
                         return;
                     }
                     if (i == 5)
@@ -151,6 +153,7 @@ namespace Team27_RougeLike.UI
                         currentItem = null;
                         itemUI.Initialize();
                     }
+                    Initialize();
                     return;
                 }
             }
