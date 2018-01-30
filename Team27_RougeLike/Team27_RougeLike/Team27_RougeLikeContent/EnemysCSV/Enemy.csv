@@ -17,12 +17,12 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color,Attack
 16,enemy_light,60,35,5,0.2,Ranged,5,150,8,雪の魂,DarkBlue,2
 17,Snow,500,40,35,0.4,Melee,11,50,35,アイススプライト,LightBlue,1
 18,test,30,10,3,0.6,Fool,5,60,3,森の液体,LightGreen,1
-19,Snow,45,25,10,0.6,Totem,5,180,5,森の精,DarkGreen,2
-20,enemy_armor,450,50,45,0.8,Fool,7,70,40,森のガーディアン,LightGray,1
+19,Snow,45,25,10,0.6,Totem,5,180,7,森の精,DarkGreen,2
+20,enemy_armor,400,50,45,0.7,Fool,7,70,40,森のガーディアン,LightGray,1
 21,enemy_snake,60,40,10,0.7,Melee,4,45,6,砂漠蛇,LightBrown,1
 22,Snow,80,45,6,0.3,Totem,5,180,6,砂の精,LightBrown,2
 23,enemy_snake,700,70,60,0.7,Melee,9,50,50,蛇王,DarkBrown,1
-24,enemy_snake,120,50,15,0.8,Fool,6,50,8,森の蛇,DarkGreen,1
-25,enemy_snake,90,65,10,0.8,Ranged,3,150,6,森の毒蛇,LightGreen,2
+24,enemy_snake,120,45,15,0.8,Fool,6,50,8,森の蛇,DarkGreen,1
+25,enemy_snake,90,50,10,0.8,Ranged,3,150,6,森の毒蛇,LightGreen,2
 26,enemy_weak,10,1,0,2.1,Escape,3,10,50,ながれメタル,LightGray,1
-27,enemy_griffon,550,55,35,0.7,Melee,12,80,50,グリフォン,LightGray,1
+27,enemy_griffon,550,55,35,0.8,Melee,12,80,50,グリフォン,LightGray,1

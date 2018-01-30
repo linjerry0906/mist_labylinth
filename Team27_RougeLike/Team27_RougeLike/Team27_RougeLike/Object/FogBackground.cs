@@ -61,7 +61,7 @@ namespace Team27_RougeLike.Object
         /// <summary>
         /// 描画
         /// </summary>
-        public void Draw(Color color, float alpha = 0.25f)
+        public void Draw(Color color, float alpha = 0.3f)
         {
             renderer.Begin();
             renderer.ChangeBlendState(BlendState.Additive);

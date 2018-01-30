@@ -29,7 +29,7 @@ namespace Team27_RougeLike.Map
         private Point entryPoint;           //入口
         private Point exitPoint;            //出口
         private List<Point> bossPoint;
-        private int radius = 16;            //描画半径
+        private int radius = 15;            //描画半径
 
         private bool drawExit;              //出口の印を描画するか
         private EndPoint exitEffect;        //出口の印

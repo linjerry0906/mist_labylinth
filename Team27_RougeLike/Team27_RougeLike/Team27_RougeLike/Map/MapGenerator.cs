@@ -26,6 +26,7 @@ namespace Team27_RougeLike.Map
             CheckMapSize,       //マップサイズを確定
             WriteToArray,       //書き出し
             SetEventPoint,      //入口や出口などの設置
+            ReleaseData,        //要らないデータを削除
             End,                //処理完了
         }
 
@@ -118,6 +119,9 @@ namespace Team27_RougeLike.Map
                     break;
                 case GenerateState.SetEventPoint:       //ランダムで特殊なマスを設置
                     UpdateSetEventPoint();
+                    break;
+                case GenerateState.ReleaseData:
+                    UpdateRelease();
                     break;
                 case GenerateState.End:
                     break;
@@ -398,7 +402,7 @@ namespace Team27_RougeLike.Map
             mapChip[entryPoint.Y, entryPoint.X] = (int)MapDef.BlockDef.Entry;
             mapChip[exitPoint.Y, exitPoint.X] = (int)MapDef.BlockDef.Exit;
 
-            currentState = GenerateState.End;
+            currentState = GenerateState.ReleaseData;
         }
 
         public void LoadFormFile(int dungeonNum, int floor)
@@ -459,6 +463,24 @@ namespace Team27_RougeLike.Map
         public int[,] MapChip
         {
             get { return mapChip; }
+        }
+
+        private void UpdateRelease()
+        {
+            Release();
+            currentState = GenerateState.End;
+        }
+
+        private void Release()
+        {
+            rooms.Clear();
+            rooms = null;
+            mainRoom.Clear();
+            mainRoom = null;
+            halls.Clear();
+            halls = null;
+            edges.Clear();
+            edges = null;
         }
 
         /// <summary>

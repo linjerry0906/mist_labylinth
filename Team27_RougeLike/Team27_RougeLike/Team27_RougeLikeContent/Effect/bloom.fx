@@ -2,10 +2,10 @@ float4x4 World;
 float4x4 View;
 float4x4 Projection;
 
-float BloomIntensity = 2.0;			//Lightの明るさ
-float OriginalIntensity = 0.75;		//元の明るさ
+float BloomIntensity = 3.0;			//Lightの明るさ
+float OriginalIntensity = 0.8;		//元の明るさ
 float BloomSaturation = 1.0;		//灰色調Lerp用
-float OriginalSaturation = 0.8;		//灰色調Lerp用
+float OriginalSaturation = 1.0;		//灰色調Lerp用
 
 sampler BloomSampler : register(s0);
 texture OriginColor;

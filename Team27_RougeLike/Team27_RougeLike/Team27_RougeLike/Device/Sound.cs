@@ -177,9 +177,11 @@ namespace Team27_RougeLike.Device
         /// <param name="name">アセット名</param>
         public void PlayBGM(string name)
         {
+#if DEBUG
             Debug.Assert(bgms.ContainsKey(name), ErrorMessage(name));
+#endif
 
-            
+
             if (MediaPlayer.Volume < 0.7f && !isFade)
             {
                 MediaPlayer.Volume += 0.003f;
@@ -253,11 +255,12 @@ namespace Team27_RougeLike.Device
             {
                 return;
             }
-
+#if DEBUG
             // WAV用ディクショナリに登録されていないと無理
             Debug.Assert(
                 soundEffects.ContainsKey(name),
                 "先に" + name + "の読み込み処理をしてください");
+#endif
 
             // WAVデータのインスタンス生成し、登録
             seInstances.Add(name, soundEffects[name].CreateInstance());
@@ -269,8 +272,10 @@ namespace Team27_RougeLike.Device
         /// <param name="name">アセット名</param>
         public void PlaySE(string name)
         {
+#if DEBUG
             // WAV用ディクショナリをチェック
             Debug.Assert(soundEffects.ContainsKey(name), ErrorMessage(name));
+#endif
 
             soundEffects[name].Play();
         }
@@ -282,8 +287,10 @@ namespace Team27_RougeLike.Device
         /// <param name="volume">ボリューム</param>
         public void PlaySE(string name,float volume)
         {
+#if DEBUG
             // WAV用ディクショナリをチェック
             Debug.Assert(soundEffects.ContainsKey(name), ErrorMessage(name));
+#endif
 
             soundEffects[name].Play(volume, 0, 0);
         }
@@ -297,8 +304,10 @@ namespace Team27_RougeLike.Device
         /// <param name="loopFlag">ループするかどうか</param>
         public void PlaySEInstance(string name, bool loopFlag = false)
         {
+#if DEBUG
             // WAVインスタンス用ディクショナリをチェック
             Debug.Assert(seInstances.ContainsKey(name), ErrorMessage(name));
+#endif
 
             // SEInstancesから再生SEを取り出す
             var data = seInstances[name];
