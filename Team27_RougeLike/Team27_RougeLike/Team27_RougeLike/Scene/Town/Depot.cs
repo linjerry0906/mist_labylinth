@@ -392,12 +392,14 @@ namespace Team27_RougeLike.Scene
                 {
                     mode = DepotModeType.equipment;
                     EquipmentModeInitialize();
+                    return;
                 }
 
                 if (consumptionButton.IsClick(mousePos) && input.IsLeftClick())
                 {
                     mode = DepotModeType.consumption;
                     ConsumptionModeInitialize();
+                    return;
                 }
                 if (backButton.IsClick(mousePos) && input.IsLeftClick())
                 {
