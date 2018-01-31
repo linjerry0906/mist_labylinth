@@ -378,6 +378,10 @@ namespace Team27_RougeLike.UI
             {
                 playerItem.EquipArmor(itemIndex);
             }
+            else if (currentItem is AccessaryItem)
+            {
+                playerItem.EquipAccessary(itemIndex);
+            }
             else
             {
                 if (!EquipWeapon())
@@ -569,7 +573,7 @@ namespace Team27_RougeLike.UI
                     alpha, true, true);
 
             string buttonString = "使用";
-            if (currentItem is WeaponItem || currentItem is ProtectionItem)
+            if (currentItem is WeaponItem || currentItem is ProtectionItem || currentItem is AccessaryItem)
             {
                 buttonString = "装備";
             }

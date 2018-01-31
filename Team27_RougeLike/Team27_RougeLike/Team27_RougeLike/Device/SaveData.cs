@@ -5,7 +5,6 @@ using System.Text;
 using System.IO;
 using Microsoft.Xna.Framework;
 using Team27_RougeLike.Scene;
-using Team27_RougeLike.Object;
 using Team27_RougeLike.Object.Item;
 using Team27_RougeLike.QuestSystem;
 
@@ -47,7 +46,8 @@ namespace Team27_RougeLike.Device
             armor = playerInventory.CurrentArmor();
             leftHand = playerInventory.LeftHand();
             rightHand = playerInventory.RightHand();
-            //arrowをInventoruから受け取る処理
+            arrow = playerInventory.Arrow();
+            accessary = playerInventory.Accessary();
             quest = new List<Quest>();
             questLoader = gameManager.QuestManager;
             guildRank = gameManager.GuildInfo;
@@ -65,7 +65,8 @@ namespace Team27_RougeLike.Device
             armor = playerInventory.CurrentArmor();
             leftHand = playerInventory.LeftHand();
             rightHand = playerInventory.RightHand();
-            //arrowをInventoruから受け取る処理
+            arrow = playerInventory.Arrow();
+            accessary = playerInventory.Accessary();
             depotEquipment = playerInventory.EquipDepository();
             depotConsumption = playerInventory.DepositoryItem();
             questLoader = gameManager.QuestManager;
@@ -129,6 +130,7 @@ namespace Team27_RougeLike.Device
             sw.WriteLine("leftHand," + ItemSaveString(leftHand));
             sw.WriteLine("rightHand," + ItemSaveString(rightHand));
             sw.WriteLine("arrow," + ItemSaveString(arrow));
+            sw.WriteLine("accessary," + ItemSaveString(accessary));
             foreach (Item item in armor)
             {
                 sw.WriteLine("armor," + ItemSaveString(item));
@@ -417,6 +419,16 @@ namespace Team27_RougeLike.Device
         public WeaponItem GetRightHand()
         {
             return rightHand;
+        }
+
+        public ConsumptionItem GetArrow()
+        {
+            return arrow;
+        }
+
+        public AccessaryItem GetAccessary()
+        {
+            return accessary;
         }
 
         public List<Item> GetBagList()

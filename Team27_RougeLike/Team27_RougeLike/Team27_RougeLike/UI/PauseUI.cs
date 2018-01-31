@@ -59,7 +59,7 @@ namespace Team27_RougeLike.UI
 
             #region EquipUI
             equipUI = new EquipUI(
-                backLayer.GetRightUnder() + new Vector2(-360, -220),
+                backLayer.GetRightUnder() + new Vector2(-360, -250),
                 gameManager, gameDevice);
             #endregion
 

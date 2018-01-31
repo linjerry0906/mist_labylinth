@@ -28,8 +28,8 @@ namespace Team27_RougeLike.UI
         private string[] equips;    //装備文字
         private Color[] colors;     //色付け
 
-        private readonly Vector2 cellSize = new Vector2(62, 25);            //部位欄の大きさ
-        private readonly Vector2 equipCellSize = new Vector2(250, 25);      //装備表示欄の大きさ
+        private readonly Vector2 cellSize = new Vector2(72, 25);            //部位欄の大きさ
+        private readonly Vector2 equipCellSize = new Vector2(240, 25);      //装備表示欄の大きさ
 
         private Button[] buttons;
         private Button removeButton;            //外すボタン
@@ -44,7 +44,7 @@ namespace Team27_RougeLike.UI
             input = gameDevice.InputState;
             playerItem = gameManager.PlayerItem;
 
-            parts = new string[7];
+            parts = new string[8];
             parts[0] = "兜";
             parts[1] = "鎧";
             parts[2] = "籠手";
@@ -52,10 +52,11 @@ namespace Team27_RougeLike.UI
             parts[4] = "左手";
             parts[5] = "右手";
             parts[6] = "弓矢";
+            parts[7] = "装飾品";
 
-            colors = new Color[7];
+            colors = new Color[8];
 
-            buttons = new Button[7];
+            buttons = new Button[8];
             for (int i = 0; i < buttons.Length; i++)
             {
                 Vector2 drawPos = position + new Vector2(0, i * (cellSize.Y + 5));      //描画位置
@@ -73,7 +74,8 @@ namespace Team27_RougeLike.UI
             WeaponItem leftHand = playerItem.LeftHand();            //左手
             WeaponItem rightHand = playerItem.RightHand();          //右手
             ConsumptionItem arrow = playerItem.Arrow();
-            items = new Item[7];
+            AccessaryItem accessary = playerItem.Accessary();
+            items = new Item[8];
             for (int i = 0; i < armor.Length; i++)
             {
                 items[i] = armor[i];
@@ -81,6 +83,7 @@ namespace Team27_RougeLike.UI
             items[4] = leftHand;
             items[5] = rightHand;
             items[6] = arrow;
+            items[7] = accessary;
 
             currentItem = null;
         }
@@ -150,6 +153,12 @@ namespace Team27_RougeLike.UI
                     if (i == 6)
                     {
                         playerItem.RemoveArrow();
+                        currentItem = null;
+                        itemUI.Initialize();
+                    }
+                    if(i == 7)
+                    {
+                        playerItem.RemoveAccessary();
                         currentItem = null;
                         itemUI.Initialize();
                     }
@@ -227,8 +236,9 @@ namespace Team27_RougeLike.UI
             WeaponItem leftHand = playerItem.LeftHand();            //左手
             WeaponItem rightHand = playerItem.RightHand();          //右手
             ConsumptionItem arrow = playerItem.Arrow();
+            AccessaryItem accessary = playerItem.Accessary();
 
-            equips = new string[7];                                 //装備文字初期化
+            equips = new string[8];                                 //装備文字初期化
             for (int i = 0; i < 4; i++)                              //防具文字を設定
             {
                 colors[i] = Color.White;
@@ -266,6 +276,17 @@ namespace Team27_RougeLike.UI
             {
                 colors[6] = Color.Lerp(Color.White, Color.Gold, arrow.GetItemRare() / 8.0f);       //レア度で色付け
                 equips[6] = arrow.GetItemName() + "（" + arrow.GetStack() + "）";
+            }
+
+            if(accessary == null)
+            {
+                colors[7] = Color.White;
+                EquipNull(ref equips[7]);
+            }
+            else
+            {
+                colors[7] = Color.Lerp(Color.White, Color.Gold, accessary.GetItemRare() / 8.0f);       //レア度で色付け
+                equips[7] = accessary.GetItemName() + " + " + accessary.GetItemRare();
             }
         }
 

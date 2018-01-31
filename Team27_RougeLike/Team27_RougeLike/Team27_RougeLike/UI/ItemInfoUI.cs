@@ -149,7 +149,7 @@ namespace Team27_RougeLike.UI
         private void ArmorInfo(ProtectionItem armor)
         {
             info = new string[8];
-            ProtectionItem currentArmor = playerItem.CurrentArmor()[(int)armor.GetProtectionType()];
+            ProtectionItem currentArmor = playerItem.CurrentArmor()[(int)armor.GetProtectionType() - (int)(ProtectionItem.ProtectionType.Helm)];
             int[] diff = new int[2];            //現在装備しているアーマーとの差を取得
             if (currentArmor != null)
             {

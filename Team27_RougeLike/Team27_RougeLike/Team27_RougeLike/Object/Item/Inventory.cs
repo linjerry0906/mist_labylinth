@@ -27,6 +27,7 @@ namespace Team27_RougeLike.Object.Item
         private WeaponItem rightHand;               　//右手
         private WeaponItem leftHand;                　//左手
         private ConsumptionItem arrow;                //弓矢
+        private AccessaryItem accessary;              //装飾品
 
         private int money;                            //所持金
 
@@ -45,6 +46,7 @@ namespace Team27_RougeLike.Object.Item
             rightHand = null;
             leftHand = null;
             arrow = null;
+            accessary = null;
         }
 
         #region カバン関連
@@ -162,6 +164,8 @@ namespace Team27_RougeLike.Object.Item
                     leftHand = null;
                 if (rightHand != null && rightHand.GetUniqueID() == temp.GetUniqueID())
                     rightHand = null;
+                if (accessary != null && accessary.GetUniqueID() == temp.GetUniqueID())
+                    accessary = null;
             }
 
             tempBag.Clear();
@@ -193,6 +197,7 @@ namespace Team27_RougeLike.Object.Item
             }
             rightHand = null;
             leftHand = null;
+            accessary = null;
         }
 
         /// <summary>
@@ -320,6 +325,22 @@ namespace Team27_RougeLike.Object.Item
             return true;
         }
 
+        public bool EquipAccessary(int bagIndex)
+        {
+            Item item = bag[bagIndex];
+            if (!(item is AccessaryItem))             //エラー対策
+                return false;
+
+            if (accessary != null)                 //装備している状態
+            {
+                bag.Add(accessary);                //バッグに戻す
+            }
+
+            accessary = (AccessaryItem)item;          //装備する
+            bag.RemoveAt(bagIndex);
+            return true;
+        }
+
         /// <summary>
         /// バッグ内のアイテム
         /// </summary>
@@ -394,6 +415,11 @@ namespace Team27_RougeLike.Object.Item
                 weight += arrow.GetItemWeight() * arrow.GetStack();
             }
 
+            if (accessary != null)
+            {
+                weight += accessary.GetItemWeight();
+            }
+
             if (weight < 0)                        //ダガーのスピード増加に対応
                 weight = 0;
         }
@@ -453,6 +479,11 @@ namespace Team27_RougeLike.Object.Item
             return rightHand;
         }
 
+        public AccessaryItem Accessary()
+        {
+            return accessary;
+        }
+
         /// <summary>
         /// カバンにアイテム数量と最大値を取得
         /// </summary>
@@ -497,6 +528,15 @@ namespace Team27_RougeLike.Object.Item
             {
                 bag.Add(leftHand);
                 leftHand = null;
+            }
+        }
+
+        public void RemoveAccessary()
+        {
+            if (bag.Count < MAX_ITEM_COUNT_BAG)
+            {
+                bag.Add(accessary);
+                accessary = null;
             }
         }
 
@@ -686,6 +726,8 @@ namespace Team27_RougeLike.Object.Item
             armor = saveData.GetArmor();
             leftHand = saveData.GetLeftHand();
             rightHand = saveData.GetRightHand();
+            accessary = saveData.GetAccessary();
+            arrow = saveData.GetArrow();
             money = saveData.GetMoney();
             bag = saveData.GetBagList();
             equipDepository = saveData.GetDepotEquipment();

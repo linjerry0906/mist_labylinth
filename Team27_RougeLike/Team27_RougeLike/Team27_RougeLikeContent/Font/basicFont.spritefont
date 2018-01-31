@@ -862,6 +862,10 @@ with.
         <Start>職</Start>
         <End>職</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>飾</Start>
+        <End>飾</End>
+      </CharacterRegion>
 
       <!-- しょう -->
       <CharacterRegion>
