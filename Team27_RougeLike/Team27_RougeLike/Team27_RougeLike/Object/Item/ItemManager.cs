@@ -11,20 +11,26 @@ namespace Team27_RougeLike.Object.Item
     {
         private Dictionary<int, Item> equipments;
         private Dictionary<int, Item> consumptions;
+        private Dictionary<int, Item> accessarys;
         private Dictionary<int, Item> equipment;
         private Dictionary<int, Item> consumption;
+        private Dictionary<int, Item> accessary;
         private string equipmentFilename;
         private string consuptionFilename;
+        private string accessaryFilename;
 
         public ItemManager()
         {
             equipments = new Dictionary<int, Item>();
             consumptions = new Dictionary<int, Item>();
+            accessarys = new Dictionary<int, Item>();
             equipment = new Dictionary<int, Item>();
             consumption = new Dictionary<int, Item>();
+            accessary = new Dictionary<int, Item>();
 
             equipmentFilename = @"Content/" + "ItemCSV/EquipmentItems.csv";
             consuptionFilename = @"Content/" + "ItemCSV/ConsumptionItems.csv";
+            accessaryFilename = @"Content/" + "ItemCSV/AccessaryItems.csv";
         }
 
         public void LoadAll()
@@ -200,6 +206,42 @@ namespace Team27_RougeLike.Object.Item
             }
             consuptionDate.Close();
             datefs.Close();
+
+            //アクセサリーアイテム読み込み
+            //datefs = new FileStream(accessaryFilename, FileMode.Open);
+            //StreamReader accessaryDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
+
+            //while (!accessaryDate.EndOfStream)
+            //{
+            //    string line = accessaryDate.ReadLine();
+            //    string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            //    if (items.Length != 9) continue;
+
+            //    int id = int.Parse(items[0]);
+
+            //    if (!accessaryIDs.Contains(id)) continue;
+
+            //    string itemName = items[1];
+            //    string itemExplanation = items[2];
+            //    itemExplanation = itemExplanation.Replace("nl", "\n");
+            //    int itemPrice = int.Parse(items[3]);
+            //    int itemRare = int.Parse(items[4]);
+            //    float itemWeight = float.Parse(items[5]);
+            //    int amountLimit = int.Parse(items[6]);
+            //    string type = items[7];
+            //    int intType = -1;
+
+            //    //アクセサリーアイテムの種類を追加したらここにif文を追加する。
+            //    if (type == "Earring")
+            //    {
+            //        intType = 0;
+            //    }
+
+            //    accessarys[id] = (new AccessaryItem(id, itemName, itemExplanation, itemPrice, itemRare, itemWeight, amountLimit, intType));
+            //}
+            //accessaryDate.Close();
+            //datefs.Close();
+
         }
 
         //セーブデータからアイテム再現
@@ -376,6 +418,43 @@ namespace Team27_RougeLike.Object.Item
                     consuptionDate.Close();
                     datefs.Close();
                 }
+                else if (kind == "Accessary")
+                {
+                    //アクセサリーアイテム読み込み
+                    FileStream datefs = new FileStream(accessaryFilename, FileMode.Open);
+                    StreamReader accessaryDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
+
+                    while(!accessaryDate.EndOfStream)
+                    {
+                        string line = accessaryDate.ReadLine();
+                        string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (items.Length != 9) continue;
+
+                        int id = int.Parse(items[0]);
+
+                        if (saveID != id) continue;
+
+                        string itemName = items[1];
+                        string itemExplanation = items[2];
+                        itemExplanation = itemExplanation.Replace("nl", "\n");
+                        int itemPrice = int.Parse(items[3]);
+                        int itemRare = int.Parse(items[4]);
+                        float itemWeight = float.Parse(items[5]);
+                        int amountLimit = int.Parse(items[6]);
+                        string type = items[7];
+                        int intType = -1;
+
+                        //アクセサリーアイテムの種類を追加したらここにif文を追加する。
+                        if (type == "Earring")
+                        {
+                            intType = 0;
+                        }
+
+                        save.Add(new AccessaryItem(id, itemName, itemExplanation, itemPrice, itemRare, itemWeight, amountLimit, intType));
+                    }
+                    accessaryDate.Close();
+                    datefs.Close();
+                }
             }
 
             return save;
@@ -482,8 +561,6 @@ namespace Team27_RougeLike.Object.Item
         
         public void LoadConsumption(int selectID)
         {
-
-
             //消費アイテム読み込み
             FileStream datefs = new FileStream(consuptionFilename, FileMode.Open);
             StreamReader consuptionDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
@@ -541,6 +618,45 @@ namespace Team27_RougeLike.Object.Item
             datefs.Close();
         }
 
+        public void LoadAccessary(int selectID)
+        {
+            //消費アイテム読み込み
+            FileStream datefs = new FileStream(consuptionFilename, FileMode.Open);
+            StreamReader consuptionDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
+
+            while (!consuptionDate.EndOfStream)
+            {
+                string line = consuptionDate.ReadLine();
+                string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (items.Length != 9) continue;
+
+                int id = int.Parse(items[0]);
+
+                if (selectID != id) continue;
+
+                string itemName = items[1];
+                string itemExplanation = items[2];
+                itemExplanation = itemExplanation.Replace("nl", "\n");
+                int itemPrice = int.Parse(items[3]);
+                int itemRare = int.Parse(items[4]);
+                float itemWeight = float.Parse(items[5]);
+                int amountLimit = int.Parse(items[6]);
+                string type = items[7];
+                int amount = int.Parse(items[8]);
+
+                int intType = -1;
+                if (type == "Earring")
+                {
+                    intType = 0;
+                }
+
+                accessary[id] = new AccessaryItem(id, itemName, itemExplanation,
+                    itemPrice, itemRare, itemWeight, amountLimit, intType);
+            }
+            consuptionDate.Close();
+            datefs.Close();
+        }
+
         //Dictionary初期化
         public void Clear()
         {
@@ -558,6 +674,12 @@ namespace Team27_RougeLike.Object.Item
         public Item GetConsuptionItem(int id)
         {
             return consumptions[id].Clone();
+        }
+
+        //指定された装飾品アイテムを送る
+        public Item GetAccessaryItem(int id)
+        {
+            return accessarys[id].Clone();
         }
 
         //Dictionary内からランダムに装備アイテムを送る
@@ -605,6 +727,17 @@ namespace Team27_RougeLike.Object.Item
             return consumptionList;
         }
 
+        public List<Item> GetAccessaryList()
+        {
+            List<Item> accessaryList = new List<Item>();
+            foreach(var page in accessarys)
+            {
+                accessaryList.Add(page.Value);
+            }
+
+            return accessaryList;
+        }
+
         public Item GetConsumption(int id)
         {
             if (consumption.ContainsKey(id))
@@ -625,6 +758,15 @@ namespace Team27_RougeLike.Object.Item
             return equipment[id];
         }
 
+        public Item GetAccessary(int id)
+        {
+            if (accessary.ContainsKey(id))
+            {
+                return accessary[id];
+            }
+            LoadAccessary(id);
+            return accessary[id];
+        }
 
 
         public void Debug()

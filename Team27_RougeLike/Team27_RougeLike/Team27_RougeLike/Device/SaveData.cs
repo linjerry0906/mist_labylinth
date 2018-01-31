@@ -24,6 +24,7 @@ namespace Team27_RougeLike.Device
         private WeaponItem leftHand;                    //左手装備
         private WeaponItem rightHand;                   //右手装備
         private ConsumptionItem arrow;                  //矢
+        private AccessaryItem accessary;                //アクセサリー
         private List<Item> depotEquipment;              //倉庫の装備アイテム
         private Dictionary<int, int> depotConsumption;  //倉庫の消費アイテム
         private List<Quest> quest;                      //受けているクエスト
@@ -97,6 +98,11 @@ namespace Team27_RougeLike.Device
                     item.GetItemID() + "," +
                     ((ConsumptionItem)item).GetStack();
             }
+            else if (item is AccessaryItem)
+            {
+                return "Accessary" + "," +
+                    item.GetItemID() + ",";
+            }
             else
             {
                 return "no";
@@ -127,6 +133,10 @@ namespace Team27_RougeLike.Device
             {
                 sw.WriteLine("armor," + ItemSaveString(item));
             }
+            //foreach (Item item in //アクセサリー)
+            //{
+            //    sw.WriteLine("accessary," + ItemSaveString(item));
+            //}
             foreach (Item item in bag)
             {
                 sw.WriteLine("bag," + ItemSaveString(item));
@@ -272,6 +282,10 @@ namespace Team27_RougeLike.Device
                         {
                             itemDates.Add(null);
                         }
+                    }
+                    else if (strings[0] == "accessary")
+                    {
+
                     }
                     else if (strings[0] == "bag")
                     {

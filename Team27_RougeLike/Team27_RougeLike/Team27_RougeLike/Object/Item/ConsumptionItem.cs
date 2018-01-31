@@ -10,7 +10,7 @@ namespace Team27_RougeLike.Object.Item
     {
         public enum ItemEffectType
         {
-            noEffect,
+            noEffect = 0,
             recovery,
             damage,
             arrow,
