@@ -183,7 +183,7 @@ namespace Team27_RougeLike.Scene
             mode = DepotModeType.equipment;
             foreach(Item i in playerItems)
             {
-                if(i is WeaponItem || i is ProtectionItem)
+                if(i is WeaponItem || i is ProtectionItem || i is AccessaryItem)
                 {
                     leftItems.Add(i);
                 }
@@ -279,6 +279,7 @@ namespace Team27_RougeLike.Scene
             foreach (Item item in copyLeftItems)
             {
                 AddLeftList(item);
+                leftWindows[leftWindows.Count - 1].SetAlpha(0.5f);
             }
             if (leftItems.Count >= leftPage * 20)
             {
@@ -315,6 +316,7 @@ namespace Team27_RougeLike.Scene
             foreach (Item item in copyRightItems)
             {
                 AddRightList(item);
+                rightWindows[rightWindows.Count - 1].SetAlpha(0.5f);
             }
             if (rightItems.Count >= rightPage * 20)
             {
@@ -415,6 +417,7 @@ namespace Team27_RougeLike.Scene
                     rightPageLeftWindow.CurrentState();
                 if (rightPageRightWindow.CurrentState())
                     rightPageRightWindow.Switch();
+                return;
             }
             else if (mode != DepotModeType.end) //セレクト外共通処理
             {
