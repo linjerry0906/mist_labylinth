@@ -311,11 +311,6 @@ namespace Team27_RougeLike.Device
                     e.Texture = textures[textureName];
                     e.Alpha = alpha;
                     e.DiffuseColor = color.ToVector3();
-                    //Fog設定
-                    e.FogEnabled = fogManager.IsActive();
-                    e.FogStart = fogManager.Near;
-                    e.FogEnd = fogManager.Far;
-                    e.FogColor = fogManager.CurrentColor().ToVector3();
                     //3D空間設定
                     e.View = currentProjector.LookAt;
                     e.Projection = currentProjector.Projection;

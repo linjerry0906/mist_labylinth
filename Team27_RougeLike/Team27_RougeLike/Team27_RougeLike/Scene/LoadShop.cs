@@ -1,7 +1,7 @@
 ﻿//--------------------------------------------------------------------------------------------------
 // 作成者：林　佳叡
-// 作成日：2017.12.13
-// 内容  ：村シーンのものを読み込む
+// 作成日：2018.1.31
+// 内容  ：ショップものを読み込む
 //--------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
@@ -10,41 +10,39 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Team27_RougeLike.Device;
 using Team27_RougeLike.Scene.Town;
-using Team27_RougeLike.QuestSystem;
 
 namespace Team27_RougeLike.Scene
 {
-    class LoadTown : IScene
+    class LoadShop : IScene
     {
         private GameDevice gameDevice;
         private Renderer renderer;
         private GameManager gameManager;
 
-        private QuestLoader questManager;
+        private IScene townScene;
+
+        private TownInfoLoader townInfoLoader;
 
         private bool endFlag;
 
-        public LoadTown(GameManager gameManager, GameDevice gameDevice)
+        public LoadShop(IScene town, GameManager gameManager, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
             this.gameManager = gameManager;
+            townScene = town;
             renderer = gameDevice.Renderer;
         }
-
         public void Draw()
         {
-            renderer.Begin();
-            Vector2 screenSize = new Vector2(Def.WindowDef.WINDOW_WIDTH, Def.WindowDef.WINDOW_HEIGHT);
-            renderer.DrawTexture("fade", Vector2.Zero, screenSize);
-            renderer.End();
+            townScene.Draw();
         }
 
         public void Initialize(SceneType scene)
         {
             endFlag = false;
 
-            questManager = gameManager.QuestManager;
-            questManager.Initialize();
+            townInfoLoader = new TownInfoLoader();
+            townInfoLoader.Initialize();
         }
 
         public bool IsEnd()
@@ -54,26 +52,24 @@ namespace Team27_RougeLike.Scene
 
         public SceneType Next()
         {
-            return SceneType.Town;
+            return SceneType.ItemShop;
         }
 
         public void ShutDown()
         {
+            townInfoLoader = null;
         }
 
         public void Update(GameTime gameTime)
         {
-            if (!questManager.IsLoad())
+            if (!townInfoLoader.IsItemLoad())
             {
-                questManager.Load(
+                //攻略状況により、ショップのアイテムも変わる
+                townInfoLoader.LoadStoreItem(
+                    gameManager.ItemManager,
                     gameManager.DungeonProcess);
-                questManager.RandomQuest(
-                    gameDevice, 
-                    gameManager.GuildInfo);
                 return;
             }
-
-            gameManager.PlayerQuest.UpdateQuestProcess();
 
             endFlag = true;
         }

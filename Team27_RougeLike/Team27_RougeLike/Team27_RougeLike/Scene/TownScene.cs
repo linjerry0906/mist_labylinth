@@ -281,7 +281,7 @@ namespace Team27_RougeLike.Scene
                     nextScene = SceneType.Quest;
                     break;
                 case ButtonEnum.Shopbutton:
-                    nextScene = SceneType.ItemShop;
+                    nextScene = SceneType.LoadShop;
                     break;
                 case ButtonEnum.Upgradebutton:
                     nextScene = SceneType.UpgradeStore;

@@ -14,6 +14,7 @@ namespace Team27_RougeLike.Scene
         LoadTown,
         Town,
         UpgradeStore,
+        LoadShop,
         ItemShop,
         Depot,
         Quest,

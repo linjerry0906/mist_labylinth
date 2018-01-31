@@ -38,6 +38,7 @@ namespace Team27_RougeLike.Scene
         private bool NoFadeIn(SceneType lastScene)
         {
             if (lastScene == SceneType.Pause ||
+                lastScene == SceneType.LoadShop ||
                 lastScene == SceneType.ItemShop ||
                 lastScene == SceneType.Depot ||
                 lastScene == SceneType.Town ||
@@ -57,6 +58,7 @@ namespace Team27_RougeLike.Scene
         private bool NoFadeOut(SceneType nextScene)
         {
             if (nextScene == SceneType.Pause ||
+                nextScene == SceneType.LoadShop ||
                 nextScene == SceneType.ItemShop ||
                 nextScene == SceneType.Depot ||
                 nextScene == SceneType.Town ||
