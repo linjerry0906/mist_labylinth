@@ -10,10 +10,10 @@ namespace Team27_RougeLike.Object.Item
         //武器の種類
         public enum WeaponType
         {
-            Sword, //剣
-            Bow, //弓
-            Dagger, //短剣
-            Shield, //盾
+            Sword = 0,  //剣
+            Bow = 1,    //弓
+            Dagger = 2, //短剣
+            Shield = 3, //盾
         }
         private WeaponType weaponType;
         private EquipmentEffect effect;

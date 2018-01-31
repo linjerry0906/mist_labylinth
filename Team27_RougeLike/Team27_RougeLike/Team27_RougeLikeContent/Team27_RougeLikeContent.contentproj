@@ -65,6 +65,10 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
+    <None Include="ItemCSV\AccessaryItem.csv">
+      <Name>AccessaryItem</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="ItemCSV\ConsumptionItems.csv">
       <Name>ConsumptionItems</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

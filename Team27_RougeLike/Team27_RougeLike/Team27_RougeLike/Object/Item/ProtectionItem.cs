@@ -11,10 +11,10 @@ namespace Team27_RougeLike.Object.Item
         //防具の種類
         public enum ProtectionType
         {
-            Helm, //頭
-            Armor,　//鎧
-            Glove,　//手
-            Shoes, //靴
+            Helm = 4,   //頭
+            Armor,      //鎧
+            Glove,      //手
+            Shoes,      //靴
         }
         private ProtectionType protectionType;
         private EquipmentEffect effect;
