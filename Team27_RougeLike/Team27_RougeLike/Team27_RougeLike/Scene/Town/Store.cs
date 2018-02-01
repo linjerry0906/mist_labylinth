@@ -71,6 +71,10 @@ namespace Team27_RougeLike.Scene.Town
         private Window buttonWindow;
         private Button button;
 
+        private ItemInfoUI hintInfo;
+        private bool isHintDraw;
+        private Item hintItem;
+
         private int windowWidth;
         private int windowHeight;
 
@@ -99,6 +103,8 @@ namespace Team27_RougeLike.Scene.Town
             buttonPosition = new Vector2(windowWidth - 64, windowHeight - 64);
             buttonWindow = new Window(gameDevice, buttonPosition, new Vector2(64, 32));
             button = new Button(buttonPosition, 64, 32);
+            
+            hintInfo = new ItemInfoUI(Vector2.Zero, gameManager, gameDevice);
         }
 
         public void Initialize()
@@ -420,6 +426,9 @@ namespace Team27_RougeLike.Scene.Town
 
         public void SellUpdate(Point mousePos)
         {
+            isHintDraw = false;
+            hintItem = null;
+            hintInfo.Position = input.GetMousePosition() + new Vector2(35, 50);
 
             //アイテムを売る処理
             if (button.IsClick(mousePos))
@@ -446,6 +455,9 @@ namespace Team27_RougeLike.Scene.Town
                 //持ち物を売る物リストに移動
                 if (leftButtons[i].IsClick(mousePos))
                 {
+                    hintItem = leftPageItems[i];
+                    isHintDraw = true;
+
                     if (input.IsLeftClick())
                     {
                         if (rightPageItems.Count < 20)
@@ -724,6 +736,20 @@ namespace Team27_RougeLike.Scene.Town
                 renderer.DrawString(type, rightWindows[i].GetOffsetPosition() + new Vector2(256, 0), new Vector2(1, 1), Color.White);
             }
 
+            //アイテムの詳細表示
+            if (modeType == ModeType.Sell)
+            {
+                if (isHintDraw)
+                {
+                    renderer.DrawTexture("fade", hintInfo.Position + new Vector2(-10, -15),
+                        new Vector2(420, 100), 0.75f);
+
+                    hintInfo.Draw(hintItem, 1.0f);
+                }
+            }
+
+
+            //メッセージ関連
             messegeWindow.Draw();
             if (isInventoryFullMessege)
             {
