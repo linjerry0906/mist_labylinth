@@ -88,6 +88,10 @@ namespace Team27_RougeLike.Scene
         private bool isDepotMax;                //倉庫がいっぱいかどうか
         private bool isDepotMaxMessaga;         //倉庫がいっぱいというメッセージ表示
 
+        private ItemInfoUI hintInfo;
+        private bool isHintDraw;
+        private Item hintItem;
+
         private int windowWidth;
         private int windowHeight;
 
@@ -106,6 +110,8 @@ namespace Team27_RougeLike.Scene
             
             windowWidth = Def.WindowDef.WINDOW_WIDTH;
             windowHeight = Def.WindowDef.WINDOW_HEIGHT;
+
+            hintInfo = new ItemInfoUI(Vector2.Zero, gameManager, gameDevice);
         }
 
         public void Initialize(SceneType scene)
@@ -520,6 +526,15 @@ namespace Team27_RougeLike.Scene
                     }
                 }
 
+                isHintDraw = false;
+                if (input.GetMousePosition().X + 35 + 416 > windowWidth)
+                {
+                    hintInfo.Position = new Vector2(windowWidth - 416, input.GetMousePosition().Y + 50);
+                }
+                else
+                {
+                    hintInfo.Position = input.GetMousePosition() + new Vector2(35, 50);
+                }
 
                 //メッセージ関連
                 isBagMax = false;
@@ -570,35 +585,47 @@ namespace Team27_RougeLike.Scene
                 //バッグ側
                 for (int i = 0; i < leftButtons.Count; i++)
                 {
-                    if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isDepotMax)
+                    if (leftButtons[i].IsClick(mousePos))
                     {
-                        if (rightPageItems.Count < 20)
-                        {
-                            AddRightList(leftItems[i + (leftPage - 1) * 20]);
-                        }
-                        inventory.DepositEquip(inventory.BagItemIndex(leftItems[i + (leftPage - 1) * 20]));
-                        rightItems.Add(leftItems[i + (leftPage - 1) * 20]);
-                        RemoveLeftList(i);
+                        isHintDraw = true;
+                        hintItem = leftPageItems[i];
 
-                        leftMaxPage = (leftItems.Count - 1) / 20 + 1;
-                        rightMaxPage = (rightItems.Count - 1) / 20 + 1;
+                        if (input.IsLeftClick() && !isDepotMax)
+                        {
+                            if (rightPageItems.Count < 20)
+                            {
+                                AddRightList(leftItems[i + (leftPage - 1) * 20]);
+                            }
+                            inventory.DepositEquip(inventory.BagItemIndex(leftItems[i + (leftPage - 1) * 20]));
+                            rightItems.Add(leftItems[i + (leftPage - 1) * 20]);
+                            RemoveLeftList(i);
+
+                            leftMaxPage = (leftItems.Count - 1) / 20 + 1;
+                            rightMaxPage = (rightItems.Count - 1) / 20 + 1;
+                        }
                     }
                 }
 
                 //倉庫側
                 for (int i = 0; i < rightButtons.Count; i++)
                 {
-                    if (rightButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isBagMax)
+                    if (rightButtons[i].IsClick(mousePos))
                     {
-                        if (leftPageItems.Count < 20)
-                        {
-                            AddLeftList(rightItems[i + (rightPage - 1) * 20]);
-                        }
-                        inventory.MoveDepositEquipToBag(inventory.DepositEquipIndex(rightItems[i + (rightPage - 1) * 20]));
-                        RemoveRightList(i);
+                        isHintDraw = true;
+                        hintItem = rightPageItems[i];
 
-                        leftMaxPage = (leftItems.Count - 1) / 20 + 1;
-                        rightMaxPage = (rightItems.Count - 1) / 20 + 1;
+                        if (input.IsLeftClick() && !isDepotMax)
+                        {
+                            if (leftPageItems.Count < 20)
+                            {
+                                AddLeftList(rightItems[i + (rightPage - 1) * 20]);
+                            }
+                            inventory.MoveDepositEquipToBag(inventory.DepositEquipIndex(rightItems[i + (rightPage - 1) * 20]));
+                            RemoveRightList(i);
+
+                            leftMaxPage = (leftItems.Count - 1) / 20 + 1;
+                            rightMaxPage = (rightItems.Count - 1) / 20 + 1;
+                        }
                     }
                 }
             }
@@ -626,52 +653,64 @@ namespace Team27_RougeLike.Scene
                 //バッグ側
                 for (int i = 0; i < leftButtons.Count; i++)
                 {
-                    if (leftButtons[i].IsClick(mousePos) && input.IsLeftClick())
+                    if (leftButtons[i].IsClick(mousePos))
                     {
-                        inventory.DepositItem(inventory.BagItemIndex(leftItems[i + (leftPage - 1) * 20]));
-                        if (consumptions[leftItems[i + (leftPage - 1) * 20].GetItemID()] - 1 * ((ConsumptionItem)leftItems[i + (leftPage - 1) * 20]).GetStack() <= 0)
-                        {
-                            if (rightPageItems.Count < 20)
-                            {
-                                AddRightList(leftItems[i + (leftPage - 1) * 20]);
-                            }
-                        }
-                        rightItems.Add(leftItems[i + (leftPage - 1) * 20]);
-                        RemoveLeftList(i);
+                        isHintDraw = true;
+                        hintItem = leftPageItems[i];
 
-                        leftMaxPage = (leftItems.Count - 1) / 20 + 1;
-                        rightMaxPage = (rightItems.Count - 1) / 20 + 1;
+                        if (input.IsLeftClick())
+                        {
+                            inventory.DepositItem(inventory.BagItemIndex(leftItems[i + (leftPage - 1) * 20]));
+                            if (consumptions[leftItems[i + (leftPage - 1) * 20].GetItemID()] - 1 * ((ConsumptionItem)leftItems[i + (leftPage - 1) * 20]).GetStack() <= 0)
+                            {
+                                if (rightPageItems.Count < 20)
+                                {
+                                    AddRightList(leftItems[i + (leftPage - 1) * 20]);
+                                }
+                            }
+                            rightItems.Add(leftItems[i + (leftPage - 1) * 20]);
+                            RemoveLeftList(i);
+
+                            leftMaxPage = (leftItems.Count - 1) / 20 + 1;
+                            rightMaxPage = (rightItems.Count - 1) / 20 + 1;
+                        }
                     }
                 }
 
                 //倉庫側
                 for (int i = 0; i < rightButtons.Count; i++)
                 {
-                    if (rightButtons[i].IsClick(mousePos) && input.IsLeftClick() && !isBagMax)
+                    if (rightButtons[i].IsClick(mousePos))
                     {
-                        if (consumptions[rightItems[i + (rightPage - 1) * 20].GetItemID()] - 1 <= 0)
-                        {
-                            inventory.MoveDepositItemToBag(itemManager, rightItems[i + (rightPage - 1) * 20].GetItemID());
-                            RemoveRightList(i + (rightPage - 1));
-                        }
-                        else
-                        {
-                            inventory.MoveDepositItemToBag(itemManager, rightItems[i + (rightPage - 1) * 20].GetItemID());
-                        }
+                        isHintDraw = true;
+                        hintItem = rightPageItems[i];
 
-                        playerItems = inventory.BagList();
-                        leftItems = new List<Item>();
-                        foreach (Item item in playerItems)
+                        if (input.IsLeftClick())
                         {
-                            if (item is ConsumptionItem)
+                            if (consumptions[rightItems[i + (rightPage - 1) * 20].GetItemID()] - 1 <= 0)
                             {
-                                leftItems.Add(item);
+                                inventory.MoveDepositItemToBag(itemManager, rightItems[i + (rightPage - 1) * 20].GetItemID());
+                                RemoveRightList(i + (rightPage - 1));
                             }
-                        }
-                        LeftPage(leftPage);
+                            else
+                            {
+                                inventory.MoveDepositItemToBag(itemManager, rightItems[i + (rightPage - 1) * 20].GetItemID());
+                            }
 
-                        leftMaxPage = (leftItems.Count - 1) / 20 + 1;
-                        rightMaxPage = (rightItems.Count - 1) / 20 + 1;
+                            playerItems = inventory.BagList();
+                            leftItems = new List<Item>();
+                            foreach (Item item in playerItems)
+                            {
+                                if (item is ConsumptionItem)
+                                {
+                                    leftItems.Add(item);
+                                }
+                            }
+                            LeftPage(leftPage);
+
+                            leftMaxPage = (leftItems.Count - 1) / 20 + 1;
+                            rightMaxPage = (rightItems.Count - 1) / 20 + 1;
+                        }
                     }
                 }
             }
@@ -825,6 +864,16 @@ namespace Team27_RougeLike.Scene
                     }
                 }
 
+                //アイテムの詳細表示
+                if (isHintDraw)
+                {
+                    renderer.DrawTexture("fade", hintInfo.Position + new Vector2(-10, -15),
+                        new Vector2(420, 100), 0.75f);
+
+                    hintInfo.Draw(hintItem, 1.0f);
+                }
+
+                //メッセージ関連
                 if (isBagMaxMessaga)
                     renderer.DrawString("バッグがいっぱいです。", new Vector2(320, windowHeight / 2), new Vector2(2, 2), Color.Red);
 
