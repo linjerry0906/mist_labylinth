@@ -29,3 +29,4 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color,Attack
 28,enemy_wasp,90,45,10,0.7,Melee,6,50,10,オオスズメバチ,LightGray,1
 29,enemy_shadow,120,45,7,0.9,Melee,5,40,10,シャドー,White,1
 30,enemy_wasp,100,50,15,0.7,Melee,7,50,15,殺人バチ,LightBrown,1
+31,enemy_skeleton,750,60,45,0.6,Melee,7,60,45,クリスタルヘッド,LightGray,1
