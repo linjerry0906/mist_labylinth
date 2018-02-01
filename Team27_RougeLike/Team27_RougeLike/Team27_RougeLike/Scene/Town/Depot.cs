@@ -414,7 +414,7 @@ namespace Team27_RougeLike.Scene
                 if (leftPageRightWindow.CurrentState())
                     leftPageRightWindow.Switch();
                 if (rightPageLeftWindow.CurrentState())
-                    rightPageLeftWindow.CurrentState();
+                    rightPageLeftWindow.Switch();
                 if (rightPageRightWindow.CurrentState())
                     rightPageRightWindow.Switch();
                 return;
