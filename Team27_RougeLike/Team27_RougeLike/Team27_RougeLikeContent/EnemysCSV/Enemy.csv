@@ -33,3 +33,4 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color,Attack
 32,enemy_rabbit,80,40,15,0.6,Melee,5,70,5,雪ウサギ,LightGray,1
 33,enemy_worm,130,50,20,0.4,Fool,8,90,10,雪ワーム,LightGray,1
 34,enemy_worm,130,50,20,0.4,Fool,8,90,10,砂漠ワーム,LightBrown,1
+35,enemy_eye,120,55,17,0.5,Ranged,7,145,15,雪一つ目,LightBlue,2
