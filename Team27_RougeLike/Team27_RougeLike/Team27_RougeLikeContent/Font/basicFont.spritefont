@@ -551,6 +551,10 @@ with.
         <Start>獣</Start>
         <End>獣</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>毛</Start>
+        <End>毛</End>
+      </CharacterRegion>
 
       <!-- けい -->
       <CharacterRegion>
@@ -790,6 +794,10 @@ with.
       <CharacterRegion>
         <Start>支</Start>
         <End>支</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>質</Start>
+        <End>質</End>
       </CharacterRegion>
 
       <!-- じ -->
