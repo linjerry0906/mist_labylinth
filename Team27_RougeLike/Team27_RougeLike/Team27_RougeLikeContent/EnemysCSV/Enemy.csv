@@ -29,8 +29,10 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color,Attack
 28,enemy_wasp,90,45,10,0.7,Melee,6,50,10,オオスズメバチ,LightGray,1
 29,enemy_shadow,120,45,7,0.9,Melee,5,40,10,シャドー,White,1
 30,enemy_wasp,100,50,15,0.7,Melee,7,50,15,殺人バチ,LightBrown,1
-31,enemy_skeleton,750,60,45,0.6,Melee,7,60,45,クリスタルヘッド,LightGray,1
+31,enemy_skeleton,550,60,45,0.6,Melee,7,65,45,クリスタルヘッド,LightGray,1
 32,enemy_rabbit,80,40,15,0.6,Melee,5,70,5,雪ウサギ,LightGray,1
 33,enemy_worm,130,50,20,0.4,Fool,8,90,10,雪ワーム,LightGray,1
 34,enemy_worm,130,50,20,0.4,Fool,8,90,10,砂漠ワーム,LightBrown,1
 35,enemy_eye,120,55,17,0.5,Ranged,7,145,15,雪一つ目,LightBlue,2
+36,enemy_eye,350,62,47,0.45,Melee,10,100,40,森の監視者,LightGreen,1
+37,enemy_flower,120,47,12,0.1,Totem,7,170,12,不思議な花,LightGray,2

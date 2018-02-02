@@ -434,6 +434,10 @@ with.
         <Start>関</Start>
         <End>関</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>監</Start>
+        <End>監</End>
+      </CharacterRegion>
       <!-- き -->
       <CharacterRegion>
         <Start>木</Start>
@@ -886,6 +890,10 @@ with.
       <CharacterRegion>
         <Start>信</Start>
         <End>信</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>視</Start>
+        <End>視</End>
       </CharacterRegion>
       <!-- じ -->
       <CharacterRegion>
@@ -1548,6 +1556,10 @@ with.
       <CharacterRegion>
         <Start>話</Start>
         <End>話</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>花</Start>
+        <End>花</End>
       </CharacterRegion>
       <!-- ば -->
       <CharacterRegion>
