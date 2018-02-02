@@ -48,6 +48,11 @@ namespace Team27_RougeLike.Object.Character
                     attacks.Add(id, new RangeAttack(size, texName, buff, seName,startRange,characterManager));
                     continue;
                 }
+                if (attackType == "Three")
+                {
+                    attacks.Add(id, new ThreeRangedAttack(size, texName, buff, seName, startRange, characterManager));
+                    continue;
+                }
             }
         }
     }
