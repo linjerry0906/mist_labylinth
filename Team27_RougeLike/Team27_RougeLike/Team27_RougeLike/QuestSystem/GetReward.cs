@@ -255,7 +255,7 @@ namespace Team27_RougeLike.QuestSystem
 
             rightBackLayer = new Window(
                 gameDevice,
-                new Vector2(WindowDef.WINDOW_WIDTH / 2 + 100, 60),
+                new Vector2(WindowDef.WINDOW_WIDTH / 2 + 140, 60),
                 new Vector2(WindowDef.WINDOW_WIDTH / 2 - 200, WindowDef.WINDOW_HEIGHT - 120));
             rightBackLayer.Initialize();
             rightBackLayer.Switch(true);

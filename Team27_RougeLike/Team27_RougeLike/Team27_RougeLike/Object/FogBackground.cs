@@ -32,7 +32,7 @@ namespace Team27_RougeLike.Object
 
             timer = new Timer(7.0f);
             timer.Initialize();
-            timer2 = new Timer(10.0f);
+            timer2 = new Timer(15.0f);
             timer2.Initialize();
         }
 
@@ -94,7 +94,7 @@ namespace Team27_RougeLike.Object
         public void Draw(Color color, float alpha = 0.35f)
         {
             float rate = MathHelper.Clamp(Math.Abs(timer.Rate() * 2 - 1) * 2, 0.8f, 1.2f);
-            float rate2 = MathHelper.Clamp(Math.Abs(timer2.Rate() * 2 - 1), 0.7f, 0.9f);
+            float rate2 = MathHelper.Clamp(Math.Abs(timer2.Rate() * 2 - 1), 0.8f, 1.1f);
             renderer.Begin();
             renderer.ChangeBlendState(BlendState.Additive);
             renderer.DrawTexture("fog", position, new Vector2(4, 4), color, alpha * rate);
