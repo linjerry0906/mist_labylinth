@@ -386,7 +386,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-01-27T10:15:30.9920536+09:00</Time>
+      <Time>2018-02-02T09:29:39.3981647+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -1105,7 +1105,43 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Effect\bloom.xnb</Output>
-      <Time>2018-01-29T23:35:13.3808246+09:00</Time>
+      <Time>2018-01-31T14:12:47.4654412+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_shadow.png</Source>
+      <Name>Texture\enemy_shadow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_shadow.xnb</Output>
+      <Time>2018-02-02T09:29:25.3102237+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_wasp.png</Source>
+      <Name>Texture\enemy_wasp</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_wasp.xnb</Output>
+      <Time>2018-02-02T09:29:25.34232+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_skeleton.png</Source>
+      <Name>Texture\enemy_skeleton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_skeleton.xnb</Output>
+      <Time>2018-02-02T09:29:39.4207389+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_rabbit.png</Source>
+      <Name>Texture\enemy_rabbit</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_rabbit.xnb</Output>
+      <Time>2018-02-02T09:29:39.41972+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

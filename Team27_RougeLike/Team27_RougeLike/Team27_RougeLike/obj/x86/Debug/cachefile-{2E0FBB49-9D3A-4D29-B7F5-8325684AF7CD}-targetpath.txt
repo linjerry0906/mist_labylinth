@@ -148,6 +148,10 @@ Content\Texture\enemy_griffon.xnb
 Content\Font\timerFont.xnb
 Content\Effect\hightLight.xnb
 Content\Effect\bloom.xnb
+Content\Texture\enemy_shadow.xnb
+Content\Texture\enemy_wasp.xnb
+Content\Texture\enemy_skeleton.xnb
+Content\Texture\enemy_rabbit.xnb
 Content\Sound\BGM\m-art_Candle.mp3
 Content\Sound\BGM\m-art_Komorebi.mp3
 Content\Sound\BGM\n14.mp3
@@ -186,6 +190,7 @@ Content\Sound\BGM\n51.mp3
 Content\Sound\BGM\n36.mp3
 Content\AttackCSV\Attack.csv
 Content\EnemysCSV\Enemy.csv
+Content\ItemCSV\AccessaryItem.csv
 Content\ItemCSV\ConsumptionItems.csv
 Content\ItemCSV\EquipmentItems.csv
 Content\ItemCSV\MaterialItem.csv

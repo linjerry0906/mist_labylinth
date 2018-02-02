@@ -87,9 +87,8 @@ namespace Team27_RougeLike.Object.Character
                             //それが攻撃だった場合の判定
                             if (h is iDamageBox)
                             {
-                                int damage = ((iDamageBox)h).Damage() - c.GetDiffence() < 0 ?  1: ((iDamageBox)h).Damage() - c.GetDiffence();
-                                ui.LogUI.AddLog(c.GetName() + "に" + damage  + "のダメージ");
-                                //Sound("damage1");
+                                int damage = ((iDamageBox)h).Damage() - c.GetDiffence() <= 0 ? 1 : ((iDamageBox)h).Damage() - c.GetDiffence();
+                                ui.LogUI.AddLog(c.GetName() + "に" + damage + "のダメージ");
                                 Sound("damage5");
                             }
                         }
@@ -112,7 +111,7 @@ namespace Team27_RougeLike.Object.Character
                         ui.LogUI.AddLog(((EnemyBase)c).GetExp() + "の経験値を獲得");
                         if (player.GetPlayerStatus().AddExp(((EnemyBase)c).GetExp()))
                         {
-                            ui.LogUI.AddLog("プレイヤーのレベルは"+ player.GetPlayerStatus().GetLevel()+"に上がった");
+                            ui.LogUI.AddLog("プレイヤーのレベルは" + player.GetPlayerStatus().GetLevel() + "に上がった");
                             ui.LogUI.AddLog("ステータスが上昇した");
                             ui.LogUI.AddLog("体力が全回復した");
                             Sound("powerup10");
@@ -239,13 +238,10 @@ namespace Team27_RougeLike.Object.Character
         }
         public void AreaDamage(int num)
         {
-            characters.ForEach(c => 
+            characters.ForEach(c =>
             {
-                if (!(c is Player))
-                {
-                    Log(c.GetName() + "に" + num + "のダメージ");
-                    c.TrueDamage(num);
-                }
+                Log(c.GetName() + "に" + num + "のダメージ");
+                c.TrueDamage(num);
             });
         }
 
