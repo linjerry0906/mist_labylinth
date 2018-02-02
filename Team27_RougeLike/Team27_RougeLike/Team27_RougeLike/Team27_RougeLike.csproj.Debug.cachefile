@@ -116,6 +116,10 @@ Content\Texture\enemy_shadow.xnb
 Content\Texture\enemy_wasp.xnb
 Content\Texture\enemy_skeleton.xnb
 Content\Texture\enemy_rabbit.xnb
+Content\Texture\enemy_worm.xnb
+Content\Texture\enemy_eye.xnb
+Content\Texture\enemy_flower.xnb
+Content\Texture\enemy_sword.xnb
 Content\Sound\BGM\m-art_Candle.wma
 Content\Sound\BGM\m-art_Komorebi.wma
 Content\Sound\BGM\n14.wma
@@ -216,8 +220,10 @@ Content\StageCSV\Stage_boss_1_3.csv
 Content\StageCSV\Stage_boss_2_10.csv
 Content\StageCSV\Stage_boss_2_5.csv
 Content\StageCSV\Stage_boss_3_12.csv
+Content\StageCSV\Stage_boss_3_18.csv
 Content\StageCSV\Stage_boss_3_6.csv
 Content\StageCSV\Stage_boss_4_10.csv
+Content\StageCSV\Stage_boss_4_15.csv
 Content\StageCSV\Stage_boss_4_5.csv
 Content\StageCSV\Stage_boss_5_10.csv
 Content\StoreItemCSV\StoreItem.csv

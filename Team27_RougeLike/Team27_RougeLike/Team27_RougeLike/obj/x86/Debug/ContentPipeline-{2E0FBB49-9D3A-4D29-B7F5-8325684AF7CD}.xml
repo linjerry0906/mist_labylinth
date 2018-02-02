@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\test.xnb</Output>
-      <Time>2018-02-02T11:44:11.7724106+09:00</Time>
+      <Time>2018-02-02T19:32:20.9671841+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\bat.png</Source>
@@ -188,7 +188,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\Snow.xnb</Output>
-      <Time>2018-01-19T22:35:44.9012217+09:00</Time>
+      <Time>2018-02-02T19:32:20.8140935+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\town.png</Source>
@@ -386,7 +386,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-02-02T11:00:40.4578265+09:00</Time>
+      <Time>2018-02-02T19:32:20.6293407+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -1024,7 +1024,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_weak.xnb</Output>
-      <Time>2018-01-25T12:58:35.017181+09:00</Time>
+      <Time>2018-02-02T19:32:20.9536516+09:00</Time>
     </Item>
     <Item>
       <Source>Sound\SE\attack1.wav</Source>
@@ -1142,6 +1142,42 @@
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_rabbit.xnb</Output>
       <Time>2018-02-02T09:29:39.41972+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_worm.png</Source>
+      <Name>Texture\enemy_worm</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_worm.xnb</Output>
+      <Time>2018-02-02T19:32:20.9546508+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_eye.png</Source>
+      <Name>Texture\enemy_eye</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_eye.xnb</Output>
+      <Time>2018-02-02T19:32:20.8927834+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_flower.png</Source>
+      <Name>Texture\enemy_flower</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_flower.xnb</Output>
+      <Time>2018-02-02T19:32:20.9204179+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_sword.png</Source>
+      <Name>Texture\enemy_sword</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_sword.xnb</Output>
+      <Time>2018-02-02T19:32:20.9214249+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

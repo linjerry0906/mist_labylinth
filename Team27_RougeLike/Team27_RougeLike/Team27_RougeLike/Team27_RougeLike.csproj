@@ -103,6 +103,7 @@
     <Compile Include="Object\Buff.cs" />
     <Compile Include="Object\Character\Attack\AttackBase.cs" />
     <Compile Include="Object\Character\Attack\AttackLoader.cs" />
+    <Compile Include="Object\Character\Attack\ThreeRangedAttack.cs" />
     <Compile Include="Object\Character\EnemyLoader.cs" />
     <Compile Include="Object\Character\EnemyRange.cs" />
     <Compile Include="Object\Character\Attack\MeleeAttack.cs" />
