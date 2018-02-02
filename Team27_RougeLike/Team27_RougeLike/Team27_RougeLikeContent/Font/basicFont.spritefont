@@ -471,6 +471,11 @@ with.
         <End>級</End>
       </CharacterRegion>
 
+      <!-- きょ -->
+      <CharacterRegion>
+        <Start>巨</Start>
+        <End>巨</End>
+      </CharacterRegion>
       <!-- きょう -->
       <CharacterRegion>
         <Start>強</Start>
