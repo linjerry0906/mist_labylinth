@@ -197,6 +197,14 @@ with.
         <Start>嫌</Start>
         <End>嫌</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>炒</Start>
+        <End>炒</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>行</Start>
+        <End>行</End>
+      </CharacterRegion>
 
       <!-- いし -->
       <CharacterRegion>
@@ -520,6 +528,10 @@ with.
       <CharacterRegion>
         <Start>議</Start>
         <End>議</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>儀</Start>
+        <End>儀</End>
       </CharacterRegion>
       <!-- ぎん -->
       <CharacterRegion>
@@ -1304,6 +1316,10 @@ with.
         <Start>次</Start>
         <End>次</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>漬</Start>
+        <End>漬</End>
+      </CharacterRegion>
 
       <!-- つう -->
       <CharacterRegion>
@@ -1505,7 +1521,14 @@ with.
         <Start>刃</Start>
         <End>刃</End>
       </CharacterRegion>
-
+      <CharacterRegion>
+        <Start>配</Start>
+        <End>配</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>針</Start>
+        <End>針</End>
+      </CharacterRegion>
       <CharacterRegion>
         <Start>発</Start>
         <End>発</End>
@@ -1718,6 +1741,10 @@ with.
         <Start>民</Start>
         <End>民</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>見</Start>
+        <End>見</End>
+      </CharacterRegion>
       <!-- む -->
       <CharacterRegion>
         <Start>村</Start>
@@ -1734,6 +1761,10 @@ with.
       <CharacterRegion>
         <Start>群</Start>
         <End>群</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>妙</Start>
+        <End>妙</End>
       </CharacterRegion>
 
       <!-- め -->
@@ -1827,6 +1858,10 @@ with.
         <End>野</End>
       </CharacterRegion>
       <!-- び -->
+      <CharacterRegion>
+        <Start>微</Start>
+        <End>微</End>
+      </CharacterRegion>
 
       <!-- ゆ -->
       <CharacterRegion>
