@@ -43,6 +43,7 @@ namespace Team27_RougeLike.Scene
                 {"enemy_worm" ,path},
                 {"enemy_eye" ,path},
                 {"enemy_flower" ,path},
+                {"enemy_sword" ,path},
                 {"fog" ,path},
                 {"town" ,path},
                 {"guild_rank" ,path},

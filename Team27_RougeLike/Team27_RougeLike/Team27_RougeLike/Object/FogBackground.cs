@@ -93,8 +93,8 @@ namespace Team27_RougeLike.Object
         /// </summary>
         public void Draw(Color color, float alpha = 0.35f)
         {
-            float rate = MathHelper.Clamp(Math.Abs(timer.Rate() * 2 - 1) * 2, 0.6f, 1.0f);
-            float rate2 = MathHelper.Clamp(Math.Abs(timer2.Rate() * 2 - 1), 0.3f, 0.8f);
+            float rate = MathHelper.Clamp(Math.Abs(timer.Rate() * 2 - 1) * 2, 0.8f, 1.2f);
+            float rate2 = MathHelper.Clamp(Math.Abs(timer2.Rate() * 2 - 1), 0.7f, 0.9f);
             renderer.Begin();
             renderer.ChangeBlendState(BlendState.Additive);
             renderer.DrawTexture("fog", position, new Vector2(4, 4), color, alpha * rate);

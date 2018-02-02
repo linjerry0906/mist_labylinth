@@ -21,7 +21,7 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color,Attack
 20,enemy_armor,400,50,45,0.7,Fool,7,70,40,森のガーディアン,LightGray,1
 21,enemy_snake,60,40,10,0.7,Melee,4,45,10,砂漠蛇,LightBrown,1
 22,Snow,80,45,6,0.3,Totem,5,180,12,砂の精,LightBrown,2
-23,enemy_snake,700,65,60,0.6,Melee,9,60,50,蛇王,DarkBrown,1
+23,enemy_snake,600,65,45,0.6,Melee,9,60,50,蛇王,DarkBrown,1
 24,enemy_snake,80,45,15,0.8,Fool,6,50,8,森の蛇,DarkGreen,1
 25,enemy_snake,70,50,10,0.8,Ranged,3,150,6,森の毒蛇,LightGreen,2
 26,enemy_weak,10,1,0,2.1,Escape,3,10,50,ながれメタル,LightGray,1
@@ -36,3 +36,5 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color,Attack
 35,enemy_eye,120,55,17,0.5,Ranged,7,145,15,雪一つ目,LightBlue,2
 36,enemy_eye,350,62,47,0.45,Melee,10,100,40,森の監視者,LightGreen,1
 37,enemy_flower,120,47,12,0.1,Totem,7,170,12,不思議な花,LightGray,2
+38,enemy_sword,500,60,50,0.6,Melee,8,70,50,魔剣,LightGray,1
+39,enemy_armor,650,70,45,0.6,Melee,8,90,55,デュラハン,DarkGray,1
