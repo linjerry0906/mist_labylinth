@@ -42,3 +42,4 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color,Attack
 41,enemy_sword,130,50,20,0.3,Fool,5,80,12,剣の魂,LightBlue,1
 42,enemy_metal,650,65,50,0.4,Fool,7,80,50,メタルヒューマン,White,1
 43,enemy_wolf_boss,700,70,60,0.6,Melee,8,60,65,フェンリル,White,1
+44,enemy_wolf,250,50,25,0.65,Fool,5,70,15,狂気な狼,LightGray,1

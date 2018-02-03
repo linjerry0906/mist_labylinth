@@ -297,6 +297,10 @@ with.
         <Start>己</Start>
         <End>己</End>
       </CharacterRegion>
+      <CharacterRegion>
+        <Start>狼</Start>
+        <End>狼</End>
+      </CharacterRegion>
       <!-- か -->
       <CharacterRegion>
         <Start>辛</Start>
@@ -524,12 +528,16 @@ with.
         <Start>巨</Start>
         <End>巨</End>
       </CharacterRegion>
+      
       <!-- きょう -->
       <CharacterRegion>
         <Start>強</Start>
         <End>強</End>
       </CharacterRegion>
-
+      <CharacterRegion>
+        <Start>狂</Start>
+        <End>狂</End>
+      </CharacterRegion>
       <!-- きん -->
       <CharacterRegion>
         <Start>金</Start>
