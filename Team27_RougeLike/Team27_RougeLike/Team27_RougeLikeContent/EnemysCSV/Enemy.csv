@@ -41,3 +41,4 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color,Attack
 40,enemy_cristal,200,60,35,0.1,Totem,8,180,12,クリスタル,White,2
 41,enemy_sword,130,50,20,0.3,Fool,5,80,12,剣の魂,LightBlue,1
 42,enemy_metal,650,65,50,0.4,Fool,7,80,50,メタルヒューマン,White,1
+43,enemy_wolf,700,70,60,0.6,Melee,8,60,65,フェンリル,DarkGray,1
