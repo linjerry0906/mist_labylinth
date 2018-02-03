@@ -38,3 +38,6 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color,Attack
 37,enemy_flower,120,47,12,0.1,Totem,7,170,12,不思議な花,LightGray,2
 38,enemy_sword,500,60,50,0.6,Melee,8,70,50,魔剣,LightGray,1
 39,enemy_armor,650,70,45,0.6,Melee,8,90,55,デュラハン,DarkGray,1
+40,enemy_cristal,200,60,35,0.1,Totem,8,180,12,クリスタル,White,2
+41,enemy_sword,130,50,20,0.3,Fool,5,80,12,剣の魂,LightBlue,1
+42,enemy_metal,650,65,50,0.4,Fool,7,80,50,メタルヒューマン,White,1
