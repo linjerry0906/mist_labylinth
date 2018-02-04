@@ -197,6 +197,10 @@
       <Name>Stage_boss_3_24</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="StageCSV\Stage_boss_3_30.csv">
+      <Name>Stage_boss_3_30</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="StageCSV\Stage_boss_3_6.csv">
       <Name>Stage_boss_3_6</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

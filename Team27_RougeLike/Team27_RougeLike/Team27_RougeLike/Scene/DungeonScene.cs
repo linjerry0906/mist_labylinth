@@ -141,7 +141,7 @@ namespace Team27_RougeLike.Scene
             int spawnerAmount =
                 stageManager.StageSize() / 3 +              //サイズ補正
                 //stageManager.CurrentFloor() / 5 +         //Floor補正（難しいのでコメントアウト）
-                stageManager.CurrentDungeonNum() / 2;   　  //ダンジョンの難易度補正
+                stageManager.CurrentDungeonNum() / 3;   　  //ダンジョンの難易度補正
 
             GenerateSpawner(spawnerAmount);
             #region カメラ初期化
