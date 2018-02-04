@@ -13,6 +13,7 @@ using Team27_RougeLike.Device;
 using Team27_RougeLike.UI;
 using Team27_RougeLike.Effects;
 using Team27_RougeLike.Utility;
+using Team27_RougeLike.Object;
 
 namespace Team27_RougeLike.Scene
 {
@@ -46,6 +47,8 @@ namespace Team27_RougeLike.Scene
         private DungeonHintUI hintUI;       //HintUI
         private string[] hint;              //Hint文字
 
+        private FogBackground fog;
+
         public TownScene(GameManager gameManager, GameDevice gameDevice)
         {
             this.gameDevice = gameDevice;
@@ -62,6 +65,7 @@ namespace Team27_RougeLike.Scene
             renderer.DrawTexture("town", Vector2.Zero);
             renderer.End();
 
+            fog.Draw(Color.White, 0.2f);
             DrawUI();
 
             townEffect.ReleaseRenderTarget();
@@ -115,6 +119,7 @@ namespace Team27_RougeLike.Scene
             InitHint();
 
             gameManager.PlayerItem.RemoveTemp();       //一時的なアイテムを削除
+            fog = new FogBackground(gameDevice);
         }
 
         /// <summary>
@@ -186,9 +191,11 @@ namespace Team27_RougeLike.Scene
         {
             gameDevice.Sound.PlayBGM("Voyage_SE");
 
+            fog.Update(1.0f);
             UpdateEffect();
             if (!effectTimer.IsTime())      //Effect中は他の操作できない
                 return;
+
 
             CheckButton();
 
