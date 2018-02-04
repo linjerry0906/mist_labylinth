@@ -213,11 +213,12 @@ namespace Team27_RougeLike.Object.Item
             }
 
             ProtectionItem.ProtectionType type = ((ProtectionItem)item).GetProtectionType();
-            if (armor[(int)type] != null)                 //装備している状態
+            int typeIndex = type - ProtectionItem.ProtectionType.Helm;
+            if (armor[typeIndex] != null)                 //装備している状態
             {
-                bag.Add(armor[(int)type]);                //バッグに戻す
+                bag.Add(armor[typeIndex]);                //バッグに戻す
             }
-            armor[(int)type] = (ProtectionItem)item;      //装備する
+            armor[typeIndex] = (ProtectionItem)item;      //装備する
             bag.RemoveAt(bagIndex);
         }
 
