@@ -18,6 +18,7 @@ namespace Team27_RougeLike.Object
             START,
             毒,
             剛体化,
+            鈍足,
             混乱,
             加速,
             無,
@@ -103,6 +104,9 @@ namespace Team27_RougeLike.Object
                     break;
                 case buff.毒:
                     actor.Log(actor.GetName() + "は毒を患った");
+                    break;
+                case buff.鈍足:
+                    actor.Log(actor.GetName() + "は足が重くなった");
                     break;
             }
             reduceBuffTime[buffname] = buffTime;

@@ -321,7 +321,7 @@ with.
         <Start>狼</Start>
         <End>狼</End>
       </CharacterRegion>
-       <CharacterRegion>
+      <CharacterRegion>
         <Start>折</Start>
         <End>折</End>
       </CharacterRegion>
@@ -575,7 +575,7 @@ with.
         <Start>巨</Start>
         <End>巨</End>
       </CharacterRegion>
-      
+
       <!-- きょう -->
       <CharacterRegion>
         <Start>強</Start>
@@ -917,6 +917,10 @@ with.
 
       <!-- し -->
       <CharacterRegion>
+        <Start>書</Start>
+        <End>書</End>
+      </CharacterRegion>
+      <CharacterRegion>
         <Start>使</Start>
         <End>使</End>
       </CharacterRegion>
@@ -984,7 +988,7 @@ with.
         <Start>白</Start>
         <End>白</End>
       </CharacterRegion>
-      
+
       <!-- じ -->
       <CharacterRegion>
         <Start>兜</Start>
@@ -1190,6 +1194,10 @@ with.
       </CharacterRegion>
 
       <!-- せ -->
+      <CharacterRegion>
+        <Start>正</Start>
+        <End>正</End>
+      </CharacterRegion>
       <CharacterRegion>
         <Start>生</Start>
         <End>生</End>
@@ -1478,7 +1486,7 @@ with.
         <Start>伝</Start>
         <End>伝</End>
       </CharacterRegion>
-       <CharacterRegion>
+      <CharacterRegion>
         <Start>柄</Start>
         <End>柄</End>
       </CharacterRegion>
@@ -1583,7 +1591,10 @@ with.
         <Start>土</Start>
         <End>土</End>
       </CharacterRegion>
-
+      <CharacterRegion>
+        <Start>鈍</Start>
+        <End>鈍</End>
+      </CharacterRegion>
 
       <!-- どう -->
       <CharacterRegion>

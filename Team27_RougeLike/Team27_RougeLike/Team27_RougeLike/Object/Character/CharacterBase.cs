@@ -27,6 +27,7 @@ namespace Team27_RougeLike.Object
         protected Vector3 velocity;     //移動ベクトル0
         protected Vector3 keepAttackAngle;  //攻撃方向
         protected Vector3 nockback;
+        protected bool mob = true;
         public string Tag { get { return tag; } }
 
         public CharacterBase(CollisionSphere collision, string textureName, CharacterManager characterManager, string name, string color)
@@ -83,10 +84,7 @@ namespace Team27_RougeLike.Object
             return nockback != Vector3.Zero;
         }
         public abstract void SetAttackAngle();
-        public Vector3 GetKeepAttackAngle()
-        {
-            return keepAttackAngle;
-        }
+        public abstract Vector3 GetKeepAttackAngle();
         public abstract Vector3 GetAttackAngle();
         public abstract void Damage(int num, Vector3 nockback);
         public abstract void TrueDamage(int num);
@@ -113,24 +111,29 @@ namespace Team27_RougeLike.Object
         {
             characterManager.Log(log);
         }
-
-        public string GetName()
-        {
-            return name;
-        }
-
         public void TexChange(string plusalpha)
         {
             this.plusalpha = plusalpha;
         }
-
+        public string GetName()
+        {
+            return name;
+        }
         public abstract int GetDiffence();
         public abstract int GetAttack();
         public abstract int GetHealth();
-
         public void Sound(string name)
         {
             characterManager.Sound(name);
+        }
+        public void UnMob() { mob = false; }
+        public bool IsMob() { return mob; }
+
+        public Vector3 BuffCheckVector(Vector3 vector)
+        {
+            if (buff.GetBuff(Buff.buff.加速)) { vector *= 1.5f; }
+            if (buff.GetBuff(Buff.buff.鈍足)) { vector *= 0.8f; }
+            return vector;
         }
     }
 }

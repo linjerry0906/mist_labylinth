@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\attack.xnb</Output>
-      <Time>2018-01-19T22:35:44.9027257+09:00</Time>
+      <Time>2018-02-06T23:21:12.708157+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\cubeTest.png</Source>
@@ -386,7 +386,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-02-06T18:01:26.2141846+09:00</Time>
+      <Time>2018-02-07T00:19:41.3216207+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -1222,7 +1222,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\test_run.xnb</Output>
-      <Time>2018-02-02T21:15:29.3076751+09:00</Time>
+      <Time>2018-02-06T22:32:06.6952464+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -94,9 +94,6 @@ namespace Team27_RougeLike.Object
             InitRange();
             Initialize();
         }
-
-
-
         public override void Initialize()
         {
               attack = characterManager.GetAttack(attackID).Clone(this, pManager);
@@ -259,8 +256,7 @@ namespace Team27_RougeLike.Object
             var v = velocity;
             v.Y = 0;
             velocity -= v * 0.1f;
-
-            collision.Force(velocity, status.Movespeed);//移動
+            collision.Force(BuffCheckVector(velocity), status.Movespeed);//移動
         }
         public Status GetStatus()
         {
@@ -303,6 +299,9 @@ namespace Team27_RougeLike.Object
         {
             return status.Health;
         }
-
+        public override Vector3 GetKeepAttackAngle()
+        {
+            return keepAttackAngle;
+        }
     }
 }

@@ -57,7 +57,7 @@ namespace Team27_RougeLike.Object.Character
             aiManager.Update();
             buff.Update();
             Move();
-            textureName = status.GetInventory().Accessary() != null ? status.GetInventory().Accessary().GetAccessaryType() == AccessaryItem.Type.Pet ? "test" :  "player" : "player";
+            textureName = status.GetInventory().Accessary() != null ? status.GetInventory().Accessary().GetAccessaryType() == AccessaryItem.Type.Pet ? "test" : "player" : "player";
         }
 
         public override void SetAttackAngle()
@@ -76,7 +76,7 @@ namespace Team27_RougeLike.Object.Character
             var lefthand = status.GetInventory().LeftHand();
             var accesary = status.GetInventory().Accessary();
             WeaponItem.WeaponType weapontype = lefthand == null ? WeaponItem.WeaponType.Dagger : lefthand.GetWeaponType();
-            AccessaryItem.Type accsesarytype = accesary == null ? AccessaryItem.Type.NONE : accesary.GetAccessaryType();
+            string accesaryName = accesary == null ? string.Empty : accesary.GetItemName();
 
             while (true)
             {
@@ -86,7 +86,7 @@ namespace Team27_RougeLike.Object.Character
                     case WeaponItem.WeaponType.Bow:
                         if (status.GetInventory().IsArrowEquiped())
                         {
-                            attacknum = accsesarytype == AccessaryItem.Type.Book ? 3 : 6;
+                            attacknum = accesaryName == "小綺麗な経典" ? 3 : 6;
                         }
                         else
                         {
@@ -106,11 +106,12 @@ namespace Team27_RougeLike.Object.Character
                     default:
                         break;
                 }
-                if (accsesarytype == AccessaryItem.Type.Sheath) attacknum++;
-                if (accsesarytype == AccessaryItem.Type.Necklace) characterManager.AreaDamage(status.GetPower() / 3);
+                if (accesaryName == "呪われた鞘") attacknum++;
+                if (accesaryName == "開かない古書") attacknum += 2;
+                if (accesaryName == "狂戦士の首飾り") characterManager.AreaDamage(status.GetPower() / 3);
                 attack = characterManager.GetAttack(attacknum).Clone(this, pManager);
                 base.Attack();
-                if (accsesarytype == AccessaryItem.Type.Amulet && rand.Next(0, 5) == 0) continue;
+                if (accesaryName == "四葉のクローバー" && rand.Next(0, 3) == 0) continue;
                 if (weapontype == WeaponItem.WeaponType.Bow) status.GetInventory().DecreaseArrow();
                 break;
             }
@@ -175,7 +176,8 @@ namespace Team27_RougeLike.Object.Character
             {
                 TexChange(string.Empty);
             }
-            collision.Force(velocity, status.GetVelocty() / 2); //ベースを1とするととても速いので半減
+
+            collision.Force(BuffCheckVector(velocity), status.GetVelocty() / 2);//移動
         }
         public override void TrueDamage(int num)
         {
@@ -197,6 +199,10 @@ namespace Team27_RougeLike.Object.Character
         }
 
         public override Vector3 GetAttackAngle()
+        {
+            return projector.Front;
+        }
+        public override Vector3 GetKeepAttackAngle()
         {
             return projector.Front;
         }

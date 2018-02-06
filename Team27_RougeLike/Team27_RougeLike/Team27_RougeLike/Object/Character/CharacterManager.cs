@@ -161,6 +161,7 @@ namespace Team27_RougeLike.Object.Character
         public CharacterBase AddCharacterBossScene(CharacterBase character)
         {
             ((EnemyBase)character).InfintyRange();
+            character.UnMob();
             characters.Add(character);
             return character;
         }
@@ -177,6 +178,7 @@ namespace Team27_RougeLike.Object.Character
                 gamemanager,
                 ui
                 );
+            player.UnMob();
             characters.Add(player);
         }
 
@@ -240,8 +242,16 @@ namespace Team27_RougeLike.Object.Character
         {
             characters.ForEach(c =>
             {
+                if(c is EnemyBase)
+                {
                 Log(c.GetName() + "に" + num + "のダメージ");
                 c.TrueDamage(num);
+                }
+                if (c is Player)
+                {
+                    player.TrueDamage(player.GetPlayerStatus().GetMaxHP() / 5);
+                    Log(c.GetName() + "は"　+ player.GetPlayerStatus().GetMaxHP() / 5 +"のダメージ");
+                }
             });
         }
 

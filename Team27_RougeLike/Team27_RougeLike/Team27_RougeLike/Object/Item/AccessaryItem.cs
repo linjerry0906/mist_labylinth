@@ -15,7 +15,7 @@ namespace Team27_RougeLike.Object.Item
             Book,
             Pet,
             Sheath,
-            Amulet
+            Amulet,
         }
 
         private Type type;

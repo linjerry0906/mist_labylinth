@@ -17,7 +17,7 @@ namespace Team27_RougeLike.Object.ParticleSystem
         {
             this.damageBox = damageBox;
             this.size = size;
-            rect = new Rectangle(0, 0, 1, 1);
+            rect = new Rectangle(0, 0, 100, 100);
             this.name =name;
             position = damageBox.Position();
         }

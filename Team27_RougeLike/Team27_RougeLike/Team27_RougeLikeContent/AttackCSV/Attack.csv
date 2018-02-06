@@ -4,7 +4,10 @@ ID,名前,サイズ,テクスチャ名,バフ,攻撃タイプ,SE,開始位置(どれぐらい離れているか)
 3,3Way,0.5,attack,無,Three,damage7,1
 4,Sword,2,slash,無,Melee,attack1,5
 5,PoisonSword,2,slash,毒,Melee,attack1,5
-6,Bow,0.5,attack,無,Ranged,damage7,1
-7,PoisonBow,0.5,attack,毒,Ranged,damage7,1
-8,Dagger,2,slash,無,Melee,attack1,2
-9,PoisonDagger,2,slash,毒,Melee,attack1,2
+6,SlowSword,3,slash,鈍足,Melee,attack1,5
+7,Bow,0.5,attack,無,Ranged,damage7,1
+8,PoisonBow,0.5,attack,毒,Ranged,damage7,1
+9,SlowBow,0.5,attack,鈍足,Ranged,damage7,1
+10,Dagger,2,slash,無,Melee,attack1,2
+11,PoisonDagger,2,slash,毒,Melee,attack1,2
+12,SlowDagger,2,slash,鈍足,Melee,attack1,2
