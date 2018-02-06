@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\test.xnb</Output>
-      <Time>2018-02-02T19:32:20.9671841+09:00</Time>
+      <Time>2018-02-02T21:15:29.3076751+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\bat.png</Source>
@@ -197,7 +197,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\town.xnb</Output>
-      <Time>2018-01-19T22:35:44.9704058+09:00</Time>
+      <Time>2018-02-06T18:01:26.2527857+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\wall_default.png</Source>
@@ -386,7 +386,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Font\basicFont.xnb</Output>
-      <Time>2018-02-02T19:32:20.6293407+09:00</Time>
+      <Time>2018-02-06T18:01:26.2141846+09:00</Time>
     </Item>
     <Item>
       <Source>Model\ItemModel.fbx</Source>
@@ -961,7 +961,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\title.xnb</Output>
-      <Time>2018-01-24T13:15:06.9200939+09:00</Time>
+      <Time>2018-02-06T18:01:26.2422577+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\titlelogo.png</Source>
@@ -1024,7 +1024,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_weak.xnb</Output>
-      <Time>2018-02-02T19:32:20.9536516+09:00</Time>
+      <Time>2018-02-02T21:15:29.3056694+09:00</Time>
     </Item>
     <Item>
       <Source>Sound\SE\attack1.wav</Source>
@@ -1150,7 +1150,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_worm.xnb</Output>
-      <Time>2018-02-02T19:32:20.9546508+09:00</Time>
+      <Time>2018-02-02T21:15:29.3066744+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\enemy_eye.png</Source>
@@ -1159,7 +1159,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_eye.xnb</Output>
-      <Time>2018-02-02T19:32:20.8927834+09:00</Time>
+      <Time>2018-02-02T21:15:29.3026626+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\enemy_flower.png</Source>
@@ -1168,7 +1168,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_flower.xnb</Output>
-      <Time>2018-02-02T19:32:20.9204179+09:00</Time>
+      <Time>2018-02-02T21:15:29.3036921+09:00</Time>
     </Item>
     <Item>
       <Source>Texture\enemy_sword.png</Source>
@@ -1177,7 +1177,52 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_sword.xnb</Output>
-      <Time>2018-02-02T19:32:20.9214249+09:00</Time>
+      <Time>2018-02-02T21:15:29.3046659+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_cristal.png</Source>
+      <Name>Texture\enemy_cristal</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_cristal.xnb</Output>
+      <Time>2018-02-03T15:19:31.3526635+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_metal.png</Source>
+      <Name>Texture\enemy_metal</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_metal.xnb</Output>
+      <Time>2018-02-03T15:19:31.3536657+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_wolf.png</Source>
+      <Name>Texture\enemy_wolf</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_wolf.xnb</Output>
+      <Time>2018-02-03T15:19:31.3546842+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\enemy_wolf_boss.png</Source>
+      <Name>Texture\enemy_wolf_boss</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\enemy_wolf_boss.xnb</Output>
+      <Time>2018-02-06T18:01:26.2357581+09:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\test_run.png</Source>
+      <Name>Texture\test_run</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Me\Desktop\1nian-hou-qi-chimu27ban\Team27_RougeLike\Team27_RougeLike\Team27_RougeLike\bin\x86\Debug\Content\Texture\test_run.xnb</Output>
+      <Time>2018-02-02T21:15:29.3076751+09:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

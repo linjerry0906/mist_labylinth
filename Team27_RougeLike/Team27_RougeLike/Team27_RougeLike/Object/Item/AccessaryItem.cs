@@ -11,8 +11,11 @@ namespace Team27_RougeLike.Object.Item
         public enum Type
         {
             NONE = -1,
-            Earring,
-
+            Necklace,
+            Book,
+            Pet,
+            Sheath,
+            Amulet
         }
 
         private Type type;

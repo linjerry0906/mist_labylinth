@@ -27,6 +27,7 @@ namespace Team27_RougeLike.Scene
                 {"slash" ,path},
                 {"cubeTest" ,path},
                 {"test" ,path},
+                {"test_run" ,path},
                 {"bat" ,path},
                 {"Snow" ,path},
                 {"enemy_light" ,path},

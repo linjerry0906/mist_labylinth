@@ -25,6 +25,7 @@ namespace Team27_RougeLike.Object.Character
         private GameManager gameManager;
         private PlayerStatus status;
         private DungeonUI ui;
+        private Random rand;
         public Player(Vector3 position, PlayerStatus status, GameDevice gameDevice, CharacterManager characterManager, ParticleManager pManager, GameManager gameManager, DungeonUI ui)
             : base(new CollisionSphere(position, 5.0f), "player", characterManager, "プレイヤー", "White")
         {
@@ -40,6 +41,7 @@ namespace Team27_RougeLike.Object.Character
             aiManager = new AiManager_Player(gameDevice.InputState, status);
             aiManager.Initialize(this);
             motion = new Motion();
+            rand = new Random();
             for (int i = 0; i < 6; i++)
             {
                 motion.Add(i, new Rectangle(i * 64, 0, 64, 64));
@@ -55,6 +57,7 @@ namespace Team27_RougeLike.Object.Character
             aiManager.Update();
             buff.Update();
             Move();
+            textureName = status.GetInventory().Accessary() != null ? status.GetInventory().Accessary().GetAccessaryType() == AccessaryItem.Type.Pet ? "test" :  "player" : "player";
         }
 
         public override void SetAttackAngle()
@@ -70,22 +73,20 @@ namespace Team27_RougeLike.Object.Character
         }
         public override void Attack()
         {
-            var t = status.GetInventory().LeftHand();
-            if (t == null)
+            var lefthand = status.GetInventory().LeftHand();
+            var accesary = status.GetInventory().Accessary();
+            WeaponItem.WeaponType weapontype = lefthand == null ? WeaponItem.WeaponType.Dagger : lefthand.GetWeaponType();
+            AccessaryItem.Type accsesarytype = accesary == null ? AccessaryItem.Type.NONE : accesary.GetAccessaryType();
+
+            while (true)
             {
-                attack = characterManager.GetAttack(1).Clone(this, pManager);
-                ui.LogUI.AddLog("手での攻撃");
-            }
-            else
-            {
-                switch (t.GetWeaponType())
+                var attacknum = 1;
+                switch (weapontype)
                 {
                     case WeaponItem.WeaponType.Bow:
                         if (status.GetInventory().IsArrowEquiped())
                         {
-                            attack = characterManager.GetAttack(2).Clone(this, pManager);
-                            status.GetInventory().DecreaseArrow();
-                            ui.LogUI.AddLog("弓による攻撃");
+                            attacknum = accsesarytype == AccessaryItem.Type.Book ? 3 : 6;
                         }
                         else
                         {
@@ -94,23 +95,25 @@ namespace Team27_RougeLike.Object.Character
                         }
                         break;
                     case WeaponItem.WeaponType.Sword:
-                        attack = characterManager.GetAttack(1).Clone(this, pManager);
-                        ui.LogUI.AddLog("剣での攻撃");
+                        attacknum = 4;
                         break;
                     case WeaponItem.WeaponType.Shield:
-                        attack = characterManager.GetAttack(1).Clone(this, pManager);
-                        ui.LogUI.AddLog("盾での攻撃");
+                        attacknum = 1;
                         break;
                     case WeaponItem.WeaponType.Dagger:
-                        attack = characterManager.GetAttack(1).Clone(this, pManager);
-                        ui.LogUI.AddLog("短剣での攻撃");
+                        attacknum = 8;
                         break;
                     default:
-                        attack = characterManager.GetAttack(1).Clone(this, pManager);
                         break;
                 }
+                if (accsesarytype == AccessaryItem.Type.Sheath) attacknum++;
+                if (accsesarytype == AccessaryItem.Type.Necklace) characterManager.AreaDamage(status.GetPower() / 3);
+                attack = characterManager.GetAttack(attacknum).Clone(this, pManager);
+                base.Attack();
+                if (accsesarytype == AccessaryItem.Type.Amulet && rand.Next(0, 5) == 0) continue;
+                if (weapontype == WeaponItem.WeaponType.Bow) status.GetInventory().DecreaseArrow();
+                break;
             }
-            base.Attack();
         }
         public Projector Projecter
         {
