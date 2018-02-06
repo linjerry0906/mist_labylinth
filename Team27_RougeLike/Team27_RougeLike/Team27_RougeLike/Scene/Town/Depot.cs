@@ -569,7 +569,7 @@ namespace Team27_RougeLike.Scene
                 leftItems = new List<Item>();
                 foreach (Item i in playerItems)
                 {
-                    if (i is WeaponItem || i is ProtectionItem)
+                    if (i is WeaponItem || i is ProtectionItem || i is AccessaryItem)
                     {
                         leftItems.Add(i);
                     }
@@ -818,6 +818,10 @@ namespace Team27_RougeLike.Scene
                     {
                         type = ((ProtectionItem)leftPageItems[i]).GetProtectionType().ToString();
                     }
+                    else if (leftPageItems[i] is AccessaryItem)
+                    {
+                        type = "装飾品";
+                    }
                     else
                     {
                         type = ((ConsumptionItem)leftPageItems[i]).GetTypeText();
@@ -844,6 +848,10 @@ namespace Team27_RougeLike.Scene
                     else if (rightItems[i + (rightPage - 1) * 20] is ProtectionItem)
                     {
                         type = ((ProtectionItem)rightItems[i + (rightPage - 1) * 20]).GetProtectionType().ToString();
+                    }
+                    else if (rightItems[i + (rightPage - 1) * 20] is AccessaryItem)
+                    {
+                        type = "装飾品";
                     }
                     else
                     {

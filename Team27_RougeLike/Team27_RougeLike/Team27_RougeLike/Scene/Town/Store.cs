@@ -679,6 +679,10 @@ namespace Team27_RougeLike.Scene.Town
                 {
                     type = ((ProtectionItem)leftPageItems[i]).GetProtectionType().ToString();
                 }
+                else if (leftPageItems[i] is AccessaryItem)
+                {
+                    type = "装飾品";
+                }
                 else
                 {
                     type = ((ConsumptionItem)leftPageItems[i]).GetTypeText();
@@ -728,6 +732,10 @@ namespace Team27_RougeLike.Scene.Town
                 else if (rightPageItems[i] is ProtectionItem)
                 {
                     type = ((ProtectionItem)rightPageItems[i]).GetProtectionType().ToString();
+                }
+                else if (rightPageItems[i] is AccessaryItem)
+                {
+                    type = "装飾品";
                 }
                 else
                 {

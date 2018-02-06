@@ -334,6 +334,16 @@ namespace Team27_RougeLike.Device
                         {
                             depotConsumption.Add(int.Parse(strings[2]), int.Parse(strings[3]));
                         }
+                        else if (strings[1] == "Accessary")
+                        {
+                            depotNum++;
+                            string[] itemDate = new string[]
+                            {
+                            strings[1],
+                            strings[2],
+                            };
+                            itemDates.Add(itemDate);
+                        }
                         else
                         {
                             depotNum++;
