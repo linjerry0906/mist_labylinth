@@ -182,6 +182,8 @@ namespace Team27_RougeLike.QuestSystem
                         item = itemManager.GetConsumption(currentInfo.AwardItem()[i]);
                     else if (currentInfo.AwardType()[i] == "e")
                         item = itemManager.GetEquipment(currentInfo.AwardItem()[i]);
+                    else if (currentInfo.AwardType()[i] == "a")
+                        item = itemManager.GetAccessary(currentInfo.AwardItem()[i]);
 
                     renderer.DrawString(
                         item.GetItemName(), position + (8 + i * 0.5f) * line + 2 * offsetX, fontSize,

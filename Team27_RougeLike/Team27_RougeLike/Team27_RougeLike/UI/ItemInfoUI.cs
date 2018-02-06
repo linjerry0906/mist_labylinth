@@ -106,6 +106,12 @@ namespace Team27_RougeLike.UI
                 return;
             }
 
+            if (item is AccessaryItem)
+            {
+                AccessaryInfo((AccessaryItem)item);
+                return;
+            }
+
             ConsumptionInfo((ConsumptionItem)item);
         }
 
@@ -206,6 +212,22 @@ namespace Team27_RougeLike.UI
 
             if (item.GetTypeText() == "矢")
                 info[0] += "（" + item.GetStack() + "）";
+        }
+
+        /// <summary>
+        /// 装飾品の詳細設定
+        /// </summary>
+        /// <param name="item">アイテム</param>
+        private void AccessaryInfo(AccessaryItem item)
+        {
+            info = new string[6];
+
+            info[0] = item.GetItemName();
+            info[1] = "レア度 " + item.GetItemRare();
+            info[2] = "買値 " + item.GetItemPrice();
+            info[3] = "重量 " + item.GetItemWeight();
+            info[4] = "タイプ 装飾品";
+            info[5] = item.GetItemExplanation();
         }
     }
 }

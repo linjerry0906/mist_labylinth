@@ -30,7 +30,7 @@ namespace Team27_RougeLike.Object.Item
 
             equipmentFilename = @"Content/" + "ItemCSV/EquipmentItems.csv";
             consuptionFilename = @"Content/" + "ItemCSV/ConsumptionItems.csv";
-            accessaryFilename = @"Content/" + "ItemCSV/AccessaryItems.csv";
+            accessaryFilename = @"Content/" + "ItemCSV/AccessaryItem.csv";
         }
 
         public void LoadAll()
@@ -428,7 +428,7 @@ namespace Team27_RougeLike.Object.Item
                     {
                         string line = accessaryDate.ReadLine();
                         string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        if (items.Length != 9) continue;
+                        if (items.Length == 9) continue;
 
                         int id = int.Parse(items[0]);
 
@@ -445,9 +445,25 @@ namespace Team27_RougeLike.Object.Item
                         int intType = -1;
 
                         //アクセサリーアイテムの種類を追加したらここにif文を追加する。
-                        if (type == "Earring")
+                        if (type == "Necklace")
                         {
-                            intType = 0;
+                            intType = (int)AccessaryItem.Type.Necklace;
+                        }
+                        else if (type == "Book")
+                        {
+                            intType = (int)AccessaryItem.Type.Book;
+                        }
+                        else if (type == "Pet")
+                        {
+                            intType = (int)AccessaryItem.Type.Pet;
+                        }
+                        else if (type == "Sheath")
+                        {
+                            intType = (int)AccessaryItem.Type.Sheath;
+                        }
+                        else if (type == "Amulet")
+                        {
+                            intType = (int)AccessaryItem.Type.Amulet;
                         }
 
                         save.Add(new AccessaryItem(id, itemName, itemExplanation, itemPrice, itemRare, itemWeight, amountLimit, intType));
@@ -621,14 +637,14 @@ namespace Team27_RougeLike.Object.Item
         public void LoadAccessary(int selectID)
         {
             //消費アイテム読み込み
-            FileStream datefs = new FileStream(consuptionFilename, FileMode.Open);
+            FileStream datefs = new FileStream(accessaryFilename, FileMode.Open);
             StreamReader consuptionDate = new StreamReader(datefs, Encoding.GetEncoding("shift_jis"));
 
             while (!consuptionDate.EndOfStream)
             {
                 string line = consuptionDate.ReadLine();
                 string[] items = line.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                if (items.Length != 9) continue;
+                if (items.Length == 9) continue;
 
                 int id = int.Parse(items[0]);
 
@@ -642,12 +658,27 @@ namespace Team27_RougeLike.Object.Item
                 float itemWeight = float.Parse(items[5]);
                 int amountLimit = int.Parse(items[6]);
                 string type = items[7];
-                int amount = int.Parse(items[8]);
 
                 int intType = -1;
-                if (type == "Earring")
+                if (type == "Necklace")
                 {
-                    intType = 0;
+                    intType = (int)AccessaryItem.Type.Necklace;
+                }
+                else if (type == "Book")
+                {
+                    intType = (int)AccessaryItem.Type.Book;
+                }
+                else if (type == "Pet")
+                {
+                    intType = (int)AccessaryItem.Type.Pet;
+                }
+                else if (type == "Sheath")
+                {
+                    intType = (int)AccessaryItem.Type.Sheath;
+                }
+                else if (type == "Amulet")
+                {
+                    intType = (int)AccessaryItem.Type.Amulet;
                 }
 
                 accessary[id] = new AccessaryItem(id, itemName, itemExplanation,

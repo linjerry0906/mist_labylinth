@@ -29,8 +29,9 @@ namespace Team27_RougeLike.Scene.Town
         {
             FileStream fs = new FileStream(@"Content/" + "StoreItemCSV/StoreItem.csv", FileMode.Open);      //設定ファイルを開く
             StreamReader sr = new StreamReader(fs);
-            List<int> equipList = new List<int>();              //落ちる可能性のある装備リスト
-            List<int> consuptionList = new List<int>();         //落ちる可能性のある使用アイテムリスト
+            List<int> equipList = new List<int>();
+            List<int> consuptionList = new List<int>();
+            List<int> accessaryList = new List<int>();
 
             while (!sr.EndOfStream)                     //最後まで読み込む
             {
@@ -66,11 +67,19 @@ namespace Team27_RougeLike.Scene.Town
                 {
                     consuptionList.Add(id);
                 }
+                if (data[3] == "accessary")
+                {
+                    accessaryList.Add(id);
+                }
             }
             sr.Close();                                 //読み終わったらファイルをClose
             fs.Close();
 
             itemManager.Load(equipList.ToArray(), consuptionList.ToArray());        //Listを渡してDictionaryを作ってくれる
+            for (int i = 0; i < accessaryList.Count; i++)
+            {
+                itemManager.LoadAccessary(accessaryList[i]);
+            }
             isItemLoad = true;                                                      //読み終わった
         }
 

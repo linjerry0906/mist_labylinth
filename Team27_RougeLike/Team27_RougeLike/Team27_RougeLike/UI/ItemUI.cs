@@ -649,7 +649,7 @@ namespace Team27_RougeLike.UI
                 return;
 
             renderer.DrawTexture("fade", hintInfo.Position + new Vector2(-10, -15), 
-                new Vector2(420, 100), alpha * 0.8f);
+                new Vector2(440, 100), alpha * 0.8f);
 
             hintInfo.Draw(
                 itemList[hintIndex], alpha);

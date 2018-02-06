@@ -286,7 +286,7 @@ namespace Team27_RougeLike.UI
             else
             {
                 colors[7] = Color.Lerp(Color.White, Color.Gold, accessary.GetItemRare() / 8.0f);       //レア度で色付け
-                equips[7] = accessary.GetItemName() + " + " + accessary.GetItemRare();
+                equips[7] = accessary.GetItemName();
             }
         }
 

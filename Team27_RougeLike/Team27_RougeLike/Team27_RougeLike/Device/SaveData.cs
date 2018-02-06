@@ -192,6 +192,8 @@ namespace Team27_RougeLike.Device
                 clearDungen = new Dictionary<int, int>();
                 armor = new ProtectionItem[4];
                 bag = new List<Item>();
+                int accessaryID = 0;
+
                 depotEquipment = new List<Item>();
                 depotConsumption = new Dictionary<int, int>();
 
@@ -287,7 +289,8 @@ namespace Team27_RougeLike.Device
                     }
                     else if (strings[0] == "accessary")
                     {
-
+                        if (strings[1] != "no")
+                            accessaryID = int.Parse(strings[2]);
                     }
                     else if (strings[0] == "bag")
                     {
@@ -300,6 +303,15 @@ namespace Team27_RougeLike.Device
                             strings[1],
                             strings[2],
                             strings[3],
+                            };
+                            itemDates.Add(itemDate);
+                        }
+                        else if (strings[1] == "Accessary")
+                        {
+                            string[] itemDate = new string[]
+                            {
+                            strings[1],
+                            strings[2],
                             };
                             itemDates.Add(itemDate);
                         }
@@ -357,6 +369,8 @@ namespace Team27_RougeLike.Device
                 sr.Close();
 
                 List<Item> items = itemManager.LoadSaveItem(itemDates);
+                if (accessaryID != 0)
+                    accessary = (AccessaryItem)itemManager.GetAccessary(accessaryID);
                 leftHand = (WeaponItem)items[0];
                 rightHand = (WeaponItem)items[1];
                 arrow = (ConsumptionItem)items[2];
