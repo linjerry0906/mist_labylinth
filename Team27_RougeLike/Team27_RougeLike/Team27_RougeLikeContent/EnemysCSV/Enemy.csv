@@ -7,7 +7,7 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color,Attack
 6,test,70,10,3,0.4,Fool,13,50,10,異変の大液体,LightGreen,1
 7,bat,40,14,2,0.4,Melee,5,45,7,洞窟コウモリ,DarkBlue,1
 8,bat,100,18,5,0.5,Fool,11,40,9,吸血コウモリ,Red,1
-9,enemy_light,30,13,3,0.15,Ranged,6,180,8,彷徨う灯火,White,2
+9,enemy_light,30,13,3,0.15,Ranged,6,180,8,彷徨う灯火,White,3
 10,enemy_mud,50,18,4,0.2,Fool,7,50,9,泥人形,White,1
 11,enemy_mud,150,28,8,0.3,Melee,11,60,20,鉱山の主,DarkGray,1
 12,bat,45,15,3,0.3,Melee,6,45,7,氷コウモリ,LightBlue,1
@@ -41,5 +41,5 @@ ID,Name,Health,Attack,Diffence,Speed,AIType,Size,AttackSpd,EXP,Name,Color,Attack
 40,enemy_cristal,200,60,35,0.1,Totem,8,180,12,クリスタル,White,3
 41,enemy_sword,130,50,20,0.3,Fool,5,80,12,剣の魂,LightBlue,4
 42,enemy_metal,650,65,50,0.4,Fool,7,80,50,メタルヒューマン,White,10
-43,enemy_wolf_boss,700,70,60,0.6,Melee,8,60,65,フェンリル,White,10
+43,enemy_wolf_boss,700,70,60,0.6,Ranged,8,60,65,フェンリル,White,3
 44,enemy_wolf,250,50,25,0.65,Fool,5,70,15,狂気な狼,LightGray,10

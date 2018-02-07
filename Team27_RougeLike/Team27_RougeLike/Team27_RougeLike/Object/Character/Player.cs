@@ -80,13 +80,13 @@ namespace Team27_RougeLike.Object.Character
 
             while (true)
             {
-                var attacknum = 1;
+                var attacknum = 10;
                 switch (weapontype)
                 {
                     case WeaponItem.WeaponType.Bow:
                         if (status.GetInventory().IsArrowEquiped())
                         {
-                            attacknum = accesaryName == "小綺麗な経典" ? 3 : 6;
+                            attacknum = accesaryName == "小綺麗な経典" ? 3 : 7;
                         }
                         else
                         {
@@ -98,10 +98,10 @@ namespace Team27_RougeLike.Object.Character
                         attacknum = 4;
                         break;
                     case WeaponItem.WeaponType.Shield:
-                        attacknum = 1;
+                        attacknum = 10;
                         break;
                     case WeaponItem.WeaponType.Dagger:
-                        attacknum = 8;
+                        attacknum = 10;
                         break;
                     default:
                         break;
