@@ -383,6 +383,10 @@ with.
         <End>化</End>
       </CharacterRegion>
       <CharacterRegion>
+        <Start>慣</Start>
+        <End>慣</End>
+      </CharacterRegion>
+      <CharacterRegion>
         <Start>方</Start>
         <End>方</End>
       </CharacterRegion>
@@ -1010,6 +1014,10 @@ with.
       <CharacterRegion>
         <Start>者</Start>
         <End>者</End>
+      </CharacterRegion>
+      <CharacterRegion>
+        <Start>邪</Start>
+        <End>邪</End>
       </CharacterRegion>
       <CharacterRegion>
         <Start>射</Start>
@@ -2109,8 +2117,8 @@ with.
       </CharacterRegion>
       <!-- よ -->
       <CharacterRegion>
-        <Start>用</Start>
-        <End>用</End>
+        <Start>余</Start>
+        <End>余</End>
       </CharacterRegion>
       <CharacterRegion>
         <Start>鎧</Start>
@@ -2120,12 +2128,16 @@ with.
         <Start>四</Start>
         <End>四</End>
       </CharacterRegion>
+
+      <!-- よう -->
       <CharacterRegion>
         <Start>養</Start>
         <End>養</End>
       </CharacterRegion>
-
-      <!-- よう -->
+      <CharacterRegion>
+        <Start>用</Start>
+        <End>用</End>
+      </CharacterRegion>
       <CharacterRegion>
         <Start>要</Start>
         <End>要</End>
